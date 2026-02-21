@@ -265,7 +265,7 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 | 18 | Yale Environment 360 | 🔬  Science & Research | [RSS](https://e360.yale.edu/feed) |
 | 19 | Carbon Brief (Science tag) | 🔬  Science & Research | [RSS](https://www.carbonbrief.org/tag/science/feed) |
 
-> **19 sources** across **6 categories** - edit `config/sources.py` to add more.
+> **19 sources** across **6 categories** — edit `config/sources.py` to add more.
 
 <!-- AUTO:SOURCES_END -->
 
