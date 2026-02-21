@@ -20,10 +20,10 @@
 
 ## 🎯 Project Overview
 
-ClimateIQ is a **production-deployed, end-to-end automated news intelligence system** built entirely in Python. Every day — with zero human input — it:
+ClimateIQ is a **production-deployed, end-to-end automated news intelligence system** built entirely in Python. Every day, with zero human input, it:
 
 1. Wakes up via **GitHub Actions** on a cron schedule
-2. Scrapes **13+ RSS feeds** from the world's top climate publications
+2. Scrapes **10+ RSS feeds** from the world's top climate publications
 3. Uses **Google Gemini AI** to classify and summarize each article
 4. Scores the **sentiment and emotional tone** of the day's coverage
 5. Generates and emails a **beautiful HTML digest** to subscribers
@@ -73,7 +73,7 @@ Scrapes 13+ trusted sources including Carbon Brief, Bloomberg Green, The Guardia
 
 ### ⚙️ Fully Automated Pipeline
 - **GitHub Actions** triggers the full pipeline daily on a cron schedule
-- Runs entirely in the cloud — no local machine needed
+- Runs entirely in the cloud - no local machine needed
 - Deployed on **Render** for 24/7 availability
 
 ---
@@ -301,9 +301,9 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 
 > *"I built ClimateIQ because staying on top of climate news across dozens of sources takes hours. I wanted an AI to do the reading for me — and deliver only what matters, every morning."*
 
-- 🐙 GitHub: [@yourusername](https://github.com/yourusername)
-- 💼 LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
-- 📧 Email: your@email.com
+- 🐙 GitHub: [@yourusername](https://github.com/Faith-Wambui)
+- 💼 LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/ms-faith-wambui)
+- 📧 Email: wambuifaith2@gmail.com
 
 ---
 
@@ -317,6 +317,5 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 **⭐ If you found this project interesting, please give it a star!**
 
-*Built with 🌱 and a passion for climate intelligence.*
 
 </div>
