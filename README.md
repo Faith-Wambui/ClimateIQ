@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ClimateIQ Logo](screenshots/logo.png)
+<img src="screenshots/logo.png" alt="ClimateIQ Logo" width="200"/>
 
 **A fully automated AI pipeline that scrapes, classifies, summarizes, and delivers daily climate news - powered by Google Gemini AI.**
 
