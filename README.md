@@ -52,7 +52,7 @@ ClimateIQ is a **production-deployed, end-to-end automated news intelligence sys
 ### 🤖 AI-Powered Intelligence
 - **Google Gemini AI** classifies every article into 6 climate themes
 - AI-generated **3-sentence summaries** for each top story
-- Smart deduplication — the same story is never repeated across sources
+- Smart deduplication - the same story is never repeated across sources
 
 ### 📡 Multi-Source Aggregation
 Scrapes 13+ trusted sources including Carbon Brief, Bloomberg Green, The Guardian, Reuters Climate, BBC Climate & Science, NASA Earth, Yale Environment 360, and more.
@@ -99,7 +99,7 @@ Timezone         Africa/Nairobi (EAT, UTC+3)
 ```
 climateiq/
 │
-├── 📂 scrapers/          # RSS feed scrapers — one per source
+├── 📂 scrapers/          # RSS feed scrapers - one per source
 ├── 📂 processors/        # Gemini AI classification, summarization & sentiment
 ├── 📂 database/          # SQLite connection, schema, deduplication
 ├── 📂 mailer/            # HTML email template + SMTP delivery
@@ -182,10 +182,10 @@ RECIPIENT_EMAIL=recipient@email.com
 
 ### 5. Run a test
 ```bash
-# Dry run — scrapes but doesn't send email
+# Dry run - scrapes but doesn't send email
 python -m scheduler.runner --dry-run
 
-# Full run — scrapes, classifies, and sends digest
+# Full run - scrapes, classifies, and sends digest
 python -m scheduler.runner --now
 ```
 
@@ -265,7 +265,7 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 | 18 | Yale Environment 360 | 🔬  Science & Research | [RSS](https://e360.yale.edu/feed) |
 | 19 | Carbon Brief (Science tag) | 🔬  Science & Research | [RSS](https://www.carbonbrief.org/tag/science/feed) |
 
-> **19 sources** across **6 categories** — edit `config/sources.py` to add more.
+> **19 sources** across **6 categories** - edit `config/sources.py` to add more.
 
 <!-- AUTO:SOURCES_END -->
 
@@ -289,7 +289,7 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 - Integrating **LLM APIs** (Gemini) for real-world classification and summarization
 - Building **production-ready Flask apps** with proper routing and templating
 - **Cloud deployment** on Render with environment-based configuration
-- Using **GitHub Actions** for fully automated scheduling — no server required
+- Using **GitHub Actions** for fully automated scheduling - no server required
 - Handling **timezone-aware datetime** across systems (UTC → EAT)
 - Writing resilient scrapers that handle inconsistent RSS feed formats
 
@@ -299,7 +299,7 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 
 **Faith Wambui**
 
-> *"I built ClimateIQ because staying on top of climate news across dozens of sources takes hours. I wanted an AI to do the reading for me — and deliver only what matters, every morning."*
+> *"I built ClimateIQ because staying on top of climate news across dozens of sources takes hours. I wanted an AI to do the reading for me - and deliver only what matters, every morning."*
 
 - 🐙 GitHub: [@Faith-Wambui](https://github.com/Faith-Wambui)
 - 💼 LinkedIn: [linkedin.com/in/ms-faith-wambui](https://linkedin.com/in/ms-faith-wambui)
@@ -309,7 +309,7 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
