@@ -301,8 +301,8 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 
 > *"I built ClimateIQ because staying on top of climate news across dozens of sources takes hours. I wanted an AI to do the reading for me — and deliver only what matters, every morning."*
 
-- 🐙 GitHub: [@yourusername](https://github.com/Faith-Wambui)
-- 💼 LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/ms-faith-wambui)
+- 🐙 GitHub: [@Faith-Wambui](https://github.com/Faith-Wambui)
+- 💼 LinkedIn: [linkedin.com/in/ms-faith-wambui](https://linkedin.com/in/ms-faith-wambui)
 - 📧 Email: wambuifaith2@gmail.com
 
 ---
