@@ -1,10 +1,10 @@
-# 🌍 ClimateIQ — Automated AI Climate News Intelligence
+# 🌍 ClimateIQ : Automated AI Climate News Intelligence
 
 <div align="center">
 
 ![ClimateIQ Logo](screenshots/logo.png)
 
-**A fully automated AI pipeline that scrapes, classifies, summarizes, and delivers daily climate news — powered by Google Gemini AI.**
+**A fully automated AI pipeline that scrapes, classifies, summarizes, and delivers daily climate news - powered by Google Gemini AI.**
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Gemini AI](https://img.shields.io/badge/Google_Gemini-AI-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev)
