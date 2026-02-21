@@ -1,6 +1,6 @@
 # processors/gpt_processor.py
 """
-Uses Google Gemini (gemini-1.5-flash) to:
+Uses Google Gemini (gemini-2.5-flash) to:
   1. Categorize each article into one of the predefined themes.
   2. Generate a concise 2-3 sentence summary.
   3. Produce the overall digest headline & intro paragraph.
@@ -34,7 +34,7 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-lite")
+MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
 
 SUMMARY_MAX_TOKENS = int(os.getenv("SUMMARY_MAX_TOKENS", 200))
 
