@@ -273,18 +273,6 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 
 ---
 
-## 🗺️ Roadmap
-
-- [ ] Migrate to PostgreSQL for persistent cloud storage
-- [ ] Add category trend charts to dashboard
-- [ ] Multi-recipient subscription management
-- [ ] WhatsApp / Slack digest delivery
-- [ ] Source credibility scoring
-- [ ] Docker containerization
-- [ ] Public API endpoint for digest data
-
----
-
 ## 💡 What I Learned Building This
 
 - Designing and orchestrating a **multi-stage automated pipeline** from scratch
