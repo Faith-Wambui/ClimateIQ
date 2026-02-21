@@ -2,7 +2,7 @@ name: Daily Climate Digest
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # 6AM UTC = 9AM EAT daily
+    - cron: '0 5 * * *'  # 5AM UTC = 8AM EAT daily
   workflow_dispatch:       # allows manual trigger from GitHub
 
 jobs:
