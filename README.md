@@ -40,7 +40,7 @@ ClimateIQ is a **production-deployed, end-to-end automated news intelligence sys
 
 | Web Dashboard | Email Digest | Mood-O-Meter |
 |:---:|:---:|:---:|
-| ![Dashboard](screenshots/dashboard.png) | ![Email](screenshots/email_digest.png) | ![Mood](screenshots/mood_meter.png) |
+| ![Dashboard](screenshots/dashboard.png) | ![Email](screenshots/email_digest.png) | ![Mood](screenshots/mood.png) |
 | Browse articles by category | Daily HTML digest in your inbox | Sentiment tracking across sources |
 
 </div>
