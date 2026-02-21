@@ -12,7 +12,7 @@
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 [![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://render.com)
 
-[🌐 Live Dashboard](<img src="screenshots/dashboard.png" alt="dashboard" width="50"/>) · [📬 Sample Digest](<img src="screenshots/html.png" alt="html" width="50"/>) · [📖 Documentation](<img src="screenshots/digest.txt" alt="digestLogo" ="50"/>)
+[🌐 Live Dashboard](https://climateiq-dashboard.onrender.com) · [📬 Sample Digest](<img src="screenshots/html.png" alt="html" width="50"/>) · [📖 Documentation](<img src="screenshots/digest.txt" alt="digestLogo" ="50"/>)
 
 </div>
 
