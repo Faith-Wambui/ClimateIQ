@@ -19,7 +19,7 @@ from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=False)
 
 log = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # Load API key with fallback error message
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = os.environ.get("GEMINI_API_KEY")
 if not api_key:
     raise ValueError("GEMINI_API_KEY not found — check your .env file exists and contains GEMINI_API_KEY=your-key-here")
 
