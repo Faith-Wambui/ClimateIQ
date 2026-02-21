@@ -225,6 +225,16 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 
 ## 📊 Categories Tracked
 <!-- AUTO:CATEGORIES_START -->
+
+| # | Category | Sources | Example Topics |
+|---|---|---|---|
+| 1 | 🏛️  Policy & Regulation | African Climate Wire, Carbon Brief, E&E News (Climate) | Government policy, legislation, international agreements, treaties, regulations, COP summits |
+| 2 | ⚡  Clean Technology | CleanTechnica, Electrek, PV Magazine +1 more | Renewable energy, EV, battery storage, carbon capture, green hydrogen, clean tech startups |
+| 3 | 💰  Climate Finance | Bloomberg Green (RSS), GreenBiz | ESG investing, carbon markets, green bonds, climate risk, sustainable finance, net-zero pledges |
+| 4 | 🌪️  Disasters & Extreme Weather | NASA Climate, NOAA News, ReliefWeb (Climate) | Floods, wildfires, droughts, hurricanes, heatwaves, sea level rise, extreme weather events |
+| 5 | 🔬  Science & Research | Nature Climate Change, Yale Environment 360, Carbon Brief (Science tag) | Climate research, IPCC reports, emissions data, ocean temperatures, ice melt, scientific studies |
+| 6 | 🌐  General Climate News | Climate Home News, Inside Climate News, Reuters Climate +1 more | Any climate-related news that doesn't fit the above categories |
+
 <!-- AUTO:CATEGORIES_END -->
 
 ---
@@ -232,6 +242,31 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 ## 📡 Sources
 
 <!-- AUTO:SOURCES_START -->
+
+| # | Source | Category | Feed URL |
+|---|---|---|---|
+| 1 | African Climate Wire | 🏛️  Policy & Regulation | [RSS](https://africanclimatewire.org/feed/) |
+| 2 | Carbon Brief | 🏛️  Policy & Regulation | [RSS](https://www.carbonbrief.org/feed) |
+| 3 | Climate Home News | 🌐  General Climate News | [RSS](https://www.climatechangenews.com/feed/) |
+| 4 | Inside Climate News | 🌐  General Climate News | [RSS](https://insideclimatenews.org/feed/) |
+| 5 | E&E News (Climate) | 🏛️  Policy & Regulation | [RSS](https://www.eenews.net/rss/climate) |
+| 6 | CleanTechnica | ⚡  Clean Technology | [RSS](https://cleantechnica.com/feed/) |
+| 7 | Electrek | ⚡  Clean Technology | [RSS](https://electrek.co/feed/) |
+| 8 | PV Magazine | ⚡  Clean Technology | [RSS](https://www.pv-magazine.com/feed/) |
+| 9 | Carbon Brief (Energy tag) | ⚡  Clean Technology | [RSS](https://www.carbonbrief.org/tag/energy/feed) |
+| 10 | Bloomberg Green (RSS) | 💰  Climate Finance | [RSS](https://feeds.bloomberg.com/green/news.rss) |
+| 11 | Reuters Climate | 🌐  General Climate News | [RSS](https://feeds.reuters.com/reuters/environmentNews) |
+| 12 | GreenBiz | 💰  Climate Finance | [RSS](https://www.greenbiz.com/feeds/news) |
+| 13 | NASA Climate | 🌪️  Disasters & Extreme Weather | [RSS](https://climate.nasa.gov/news/rss.xml) |
+| 14 | NOAA News | 🌪️  Disasters & Extreme Weather | [RSS](https://www.noaa.gov/news/feed) |
+| 15 | ReliefWeb (Climate) | 🌪️  Disasters & Extreme Weather | [RSS](https://reliefweb.int/updates/rss.xml?primary_country=0&source=0&theme=4590) |
+| 16 | Nature Climate Change | 🔬  Science & Research | [RSS](https://www.nature.com/nclimate.rss) |
+| 17 | The Guardian – Climate | 🌐  General Climate News | [RSS](https://www.theguardian.com/environment/climate-crisis/rss) |
+| 18 | Yale Environment 360 | 🔬  Science & Research | [RSS](https://e360.yale.edu/feed) |
+| 19 | Carbon Brief (Science tag) | 🔬  Science & Research | [RSS](https://www.carbonbrief.org/tag/science/feed) |
+
+> **19 sources** across **6 categories** — edit `config/sources.py` to add more.
+
 <!-- AUTO:SOURCES_END -->
 
 ---
