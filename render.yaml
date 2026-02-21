@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: climateiq-dashboard
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python dashboard/app.py
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: EMAIL_SENDER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: EMAIL_RECIPIENTS
+        sync: false
+      - key: DB_PATH
+        value: climate_history.db
+
+  - type: worker
+    name: climateiq-pipeline
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m scheduler.runner
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: EMAIL_SENDER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: EMAIL_RECIPIENTS
+        sync: false
+
+  
