@@ -224,15 +224,15 @@ To trigger manually: **Actions tab → Daily Climate Digest → Run workflow**
 ---
 
 ## 📊 Categories Tracked
+<!-- AUTO:CATEGORIES_START -->
+<!-- AUTO:CATEGORIES_END -->
 
-| # | Category | Example Topics |
-|---|---|---|
-| 1 | 🏛️ Policy & Regulation | Climate agreements, carbon pricing, legislation |
-| 2 | 🔬 Science & Research | IPCC reports, temperature records, new studies |
-| 3 | ⚡ Energy Transition | Solar, wind, EVs, fossil fuel phase-out |
-| 4 | 🌪️ Extreme Weather | Floods, wildfires, heatwaves, droughts |
-| 5 | 🌿 Biodiversity | Ecosystems, species loss, conservation |
-| 6 | 💡 Technology | Carbon capture, climate tech, innovation |
+---
+
+## 📡 Sources
+
+<!-- AUTO:SOURCES_START -->
+<!-- AUTO:SOURCES_END -->
 
 ---
 
