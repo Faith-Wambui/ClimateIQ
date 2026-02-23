@@ -23,7 +23,7 @@ HTML_TEMPLATE = """\
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/Climate IQ.png"/>
+  <link rel="icon" type="image/png" href="Climate IQ.png"/>
   <title>{title}</title>
   <style>
     /* Reset */
@@ -227,7 +227,7 @@ HTML_TEMPLATE = """\
   <!-- Header -->
   <div class="header">
     <div class="logo">
-      <img src="/logo.png" alt="Logo" class="logo-img"/>
+      <img src="logo.png" alt="Logo" class="logo-img"/>
     </div>
     <h1>{title}</h1>
     <div class="date">{date_str}</div>
