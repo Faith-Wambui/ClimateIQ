@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">Climate Intelligence</div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, February 17, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">30</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-the-challenges-in-projecting-future-global-sea-levels/" target="_blank">Guest post: The challenges in projecting future global sea levels</a></div>
+  <div class="article-summary">It is well understood that human-caused climate change is causing sea levels to rise around the world.
+
+Since 1901, global sea levels have risen by at least 20cm – accelerating from around 1mm a year for much of the 20th century to 4mm a year over 20…</div>
+  <div class="article-meta">Feb 17, 2026  08:00 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-does-trumps-repeal-of-us-endangerment-finding-mean-for-climate-action/" target="_blank">Q&A: What does Trump’s repeal of US ‘endangerment finding’ mean for climate action?</a></div>
+  <div class="article-summary">On 12 February, US president Donald Trump revoked the “endangerment finding”, the bedrock of federal climate policy.
+
+The 2009 finding concluded that six key greenhouse gases, including carbon dioxide (CO2), were a threat to human health – triggering…</div>
+  <div class="article-meta">Feb 16, 2026  15:11 UTC</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/02/17/guatemala-peg-5-tender-draws-51-bidders-for-4-7-gw-of-capacity/" target="_blank">Guatemala PEG-5 tender draws 51 bidders for 4.7 GW of capacity</a></div>
+  <div class="article-summary">From pv magazine LatAm
+
+Guatemala’s PEG-5 electricity tender has attracted 51 companies offering nearly 4.7 GW of capacity – more than three times the 1,400 MW sought. Around 2,000 MW of the proposals are solar projects, including hybrid systems with…</div>
+  <div class="article-meta">Feb 17, 2026  09:14 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/02/17/what-happens-when-type-c-cracks-strike-photovoltaic-modules/" target="_blank">What happens when type-C cracks strike photovoltaic modules</a></div>
+  <div class="article-summary">An international research team used high-resolution electroluminescence imaging to quantify type-C cracks in 100 PV modules after 11 years of operation, linking crack distribution to real-world power loss. Concentrated cracks within individual cells…</div>
+  <div class="article-meta">Feb 17, 2026  08:55 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/02/17/chinese-academy-of-sciences-unveils-101-mw-compressor-for-compressed-air-energy-storage/" target="_blank">Chinese Academy of Sciences unveils 101 MW compressor for compressed air energy storage</a></div>
+  <div class="article-summary">The Institute of Engineering Thermophysics of the Chinese Academy of Sciences (CAS) has unveiled a new type of compressor for applications in compressed air energy storage (CAES).
+
+Described as the world’s most powerful single-unit CAES compressor, t…</div>
+  <div class="article-meta">Feb 17, 2026  08:20 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/02/17/brightspot-automation-launches-large-area-pv-photoluminescence-testing-tool/" target="_blank">Brightspot Automation launches large-area PV photoluminescence testing tool</a></div>
+  <div class="article-summary">U.S.-based inspection equipment manufacturer Brightspot Automation has launched Plus-Spot, a non-contact photoluminescence (PL) imaging tool to reveal defects, such as cell cracks, thin-film shunts in panels, and other non-uniformities. It is suitabl…</div>
+  <div class="article-meta">Feb 17, 2026  08:08 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/02/17/why-ai-matters-for-scaling-perovskite-solar-modules/" target="_blank">Why AI matters for scaling perovskite solar modules</a></div>
+  <div class="article-summary">According to GCL Optoelectronics, these perovskite modules have been tested over a two-year period and have shown no measurable degradation. The next step is to ensure comparable stability under scaled-up production conditions and higher manufacturin…</div>
+  <div class="article-meta">Feb 17, 2026  07:41 UTC</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-17/india-s-solar-manufacturing-excesses-turn-a-boom-into-a-glut" target="_blank">India’s Solar Manufacturing Excesses Turn a Boom Into a Glut</a></div>
+  <div class="article-summary">India’s solar manufacturing industry is becoming a victim of its own success.…</div>
+  <div class="article-meta">Feb 17, 2026  07:54 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-16/landmark-greenwashing-case-against-gas-producer-santos-dismissed" target="_blank">Landmark Greenwashing Case Against Gas Firm Santos Dismissed</a></div>
+  <div class="article-summary">A judge dismissed a long-running legal challenge against Santos Ltd., which had accused the Australian oil and gas producer of misleading investors over its climate strategy.…</div>
+  <div class="article-meta">Feb 16, 2026  23:12 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-16/edf-warns-solar-wind-surge-straining-nuclear-fleet-costs" target="_blank">EDF Warns Solar, Wind Surge Straining Nuclear Fleet Costs</a></div>
+  <div class="article-summary">Electricite de France SA said growing solar and wind generation was increasing equipment wear and maintenance costs at its nuclear reactors, which are forced to reduce output when power demand is insufficient.…</div>
+  <div class="article-meta">Feb 16, 2026  15:33 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-16/eu-will-pitch-green-steel-as-key-pillar-of-industrial-revival" target="_blank">EU Will Pitch Green Steel as Key Pillar of Industrial Revival</a></div>
+  <div class="article-summary">The European Union will put so-called green steel at the center of its pitch to revive the continent’s industrial fortunes as it comes under pressure to stay competitive with the US and China.…</div>
+  <div class="article-meta">Feb 16, 2026  14:06 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-16/catastrophe-bond-risk-premia-drop-to-levels-not-seen-since-2022" target="_blank">Catastrophe-Bond Risk Premia Drop to Rates Last Seen in 2022</a></div>
+  <div class="article-summary">Investors in catastrophe bonds are seeing a decline in risk premia to levels not seen since before Hurricane Ian hit Florida in 2022, as a surge in fresh capital drives down potential returns.…</div>
+  <div class="article-meta">Feb 16, 2026  13:00 UTC</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/technology/2026/feb/17/tech-companies-traditional-ai-generative-climate-breakdown-report" target="_blank">Claims that AI can help fix climate dismissed as greenwashing</a></div>
+  <div class="article-summary">Industry using ‘diversionary’ tactics, says analyst, as energy-hungry complex functions such as video generation and deep research proliferateTech companies are conflating traditional artificial intelligence with generative AI when claiming the energ…</div>
+  <div class="article-meta">Feb 17, 2026  05:00 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/feb/17/santos-greenwashing-court-case-dismissed" target="_blank">‘Landmark’ greenwashing case against Australian gas giant Santos dismissed by federal court</a></div>
+  <div class="article-summary">Legal bid by shareholder advocacy group over alleged misleading ‘net zero’ and ‘clean energy’ claims failsFollow our Australia news live blog for latest updatesSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereGas…</div>
+  <div class="article-meta">Feb 17, 2026  04:41 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/feb/16/europe-climate-advisory-board-3c-global-heating" target="_blank">‘Daunting but doable’: Europe urged to prepare for 3C of global heating</a></div>
+  <div class="article-summary">Advisory board member says Europe already paying price for lack of preparation but  adapting is ‘not rocket science’Keeping Europe safe from extreme weather “is not rocket science”, a top researcher has said, as the EU’s climate advisory board urges…</div>
+  <div class="article-meta">Feb 16, 2026  23:01 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/feb/16/cyprus-appeals-reduce-water-use-reservoirs-record-lows-drought" target="_blank">Cyprus appeals to residents to cut water use by two minutes a day amid drought</a></div>
+  <div class="article-summary">Island’s reservoirs hit record lows even before tourist season starts as Cypriots are warned ‘every drop counts’Europe live – latest updatesAuthorities in Cyprus have urged residents to reduce their water intake by 10% – the equivalent of two minutes…</div>
+  <div class="article-meta">Feb 16, 2026  14:49 UTC</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/02/16/trumps-repeal-of-climate-finding-is-self-inflicted-wound/" target="_blank">As China builds the future, Trump’s repeal of climate finding is self-inflicted wound</a></div>
+  <div class="article-summary">Eliot Whittington is Executive Director of Cambridge Institute for Sustainability Leadership.
+
+Last week, the Trump Administration reversed the critical finding that greenhouse gases threaten the public health and welfare of current and future genera…</div>
+  <div class="article-meta">Feb 16, 2026  11:23 UTC</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>AI Climate News Aggregator — Powered by OpenAI GPT</p>
+    <p>Generated on Tuesday, February 17, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

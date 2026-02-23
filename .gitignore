@@ -3,6 +3,7 @@ venv/
 __pycache__/
 *.pyc
 *.log
-output/*.html
-output/*.txt
+!output/
+!output/*.html
+!output/*.txt
 .DS_Store
