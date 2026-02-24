@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="logo.png" alt="Logo" class="logo-img"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, February 24, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">59</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">11</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 0 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 59 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/02/can-south-africa-legally-walk-back-its-carbon-tax/" target="_blank">Can South Africa Legally Walk Back its Carbon Tax?</a></div>
+  <div class="article-summary">One of the first in Africa to adopt an explicit price on carbon, South Africa’s carbon tax, has long been the flagship of national mitigation policy after it was introduced in 2019. Since then, several other African countries have mooted an explicit…</div>
+  <div class="article-meta">Feb 24, 2026  16:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/dangerous-heat-for-tour-de-france-riders-only-a-question-of-time/" target="_blank">Dangerous heat for Tour de France riders only a ‘question of time’</a></div>
+  <div class="article-summary">Rising temperatures across France since the mid-1970s are putting Tour de France competitors at “high risk”, according to new research.
+
+The study, published in Scientific Reports, uses 50 years of climate data to calculate the potential heat stress…</div>
+  <div class="article-meta">Feb 24, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/24/toyota-is-finally-determined-to-sell-more-bevs-in-the-us/" target="_blank">Toyota Is (Finally) Determined To Sell More BEVs In The US</a></div>
+  <div class="article-summary">Toyota is finally pushing more battery electric vehicles (BEVs) in the US, launching the C-HR EV and partnering with Treehouse for home charging solutions to boost sales. This move matters as it signals a shift towards electrification from a major automaker, potentially accelerating the adoption of cleaner transportation and reducing emissions.</div>
+  <div class="article-meta">Feb 24, 2026  19:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/24/electric-buses-were-56-of-eu-city-bus-market-in-2025/" target="_blank">Electric Buses Were 56% Of EU City Bus Market In 2025</a></div>
+  <div class="article-summary">At an electric vehicle ride and drive event for consumers, it seemed pretty clear the people who drove EVs themselves liked them and were interested or very interested. The decision-making process for everyday people involves much online research and…</div>
+  <div class="article-meta">Feb 24, 2026  19:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/02/24/solid-state-ev-batteries-debut-in-china-nearing-1000-miles-range/" target="_blank">Solid-state EV batteries are rolling out in China, promising nearly 1,000 miles of range</a></div>
+  <div class="article-summary">Chinese battery manufacturers already account for well over 50% of the global market, but new battery types, including solid-state, are rolling out, promising to be safer, more efficient, and safer.
+
+Solid-state EV batteries set to launch in China in…</div>
+  <div class="article-meta">Feb 24, 2026  18:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/02/24/tesla-eu-registrations-crash-january-2026-bev-growth/" target="_blank">Tesla registrations crash 17% in Europe as BEV market surges 14%</a></div>
+  <div class="article-summary">New data from the European Automobile Manufacturers’ Association (ACEA) confirms that Tesla registered just 8,075 vehicles across the EU, EFTA, and UK in January 2026, a 17% decline from the same month last year.The drop is particularly damaging beca…</div>
+  <div class="article-meta">Feb 24, 2026  18:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/24/chinese-group-chery-accelerates-rollout-of-new-models-in-south-africa/" target="_blank">Chinese Group Chery Accelerates Rollout of New Models In South Africa</a></div>
+  <div class="article-summary">Chinese automaker Chery is aggressively expanding its model lineup in South Africa, signaling a significant shift in the local automotive market. This surge in new internal combustion engine vehicle sales, driven by Chery and its associated brands, directly contributes to increased tailpipe emissions and hinders progress towards South Africa's climate goals.</div>
+  <div class="article-meta">Feb 24, 2026  17:56 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-02-24/why-private-equity-firms-are-redesigning-london-offices" target="_blank">Why Private Equity Firms Are Redesigning London Offices</a></div>
+  <div class="article-summary">Green upgrades are becoming must-haves.…</div>
+  <div class="article-meta">Feb 24, 2026  17:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-24/private-equity-flexes-muscle-in-race-to-overhaul-london-offices" target="_blank">Private Equity Ratchets Up Its Bet on London Office Refurbs</a></div>
+  <div class="article-summary">Private equity cash has emerged as a rapidly growing force in reshaping the look of London’s offices, more than tripling its footprint over the past three years to 13% of the total, according to fresh data obtained by Bloomberg.…</div>
+  <div class="article-meta">Feb 24, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-24/europe-s-biggest-business-lobby-calls-for-carbon-market-overhaul" target="_blank">Europe’s Biggest Business Lobby Calls for Carbon Market Overhaul</a></div>
+  <div class="article-summary">Europe’s largest business lobby called for reforms to the region’s multi-billion euro carbon market to better support industry, piling on more pressure to amend the bloc’s main emissions-cutting tool.…</div>
+  <div class="article-meta">Feb 24, 2026  09:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-climate-vulnerability-assessment-round-3-december-2025" target="_blank">Afghanistan Climate Vulnerability Assessment - Round 3 (December 2025)</a></div>
+  <div class="article-summary">Country: AfghanistanSource: International Organization for MigrationPlease refer to the attached file.In November and December 2024, IOM DTM Afghanistan conducted the inaugural round of the Afghanistan Climate Vulnerability Assessment (ACVA), a natio…</div>
+  <div class="article-meta">Feb 24, 2026  16:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/ukraine/ukraine-cwg-technical-working-group-19-february-2026-meeting-minutes" target="_blank">Ukraine CWG Technical Working Group, 19 February 2026 [Meeting Minutes]</a></div>
+  <div class="article-summary">Country: UkraineSource: Ukraine Cash Working GroupPlease refer to the attached file.…</div>
+  <div class="article-meta">Feb 24, 2026  13:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/mozambique/mozambique-humanitarian-operational-presence-hnrp-and-non-hrnp-whos-doing-what-where-3w-province-cabo-delgado-31-december-2025" target="_blank">Mozambique: Humanitarian Operational Presence (HNRP and Non-HRNP), Who's doing, What, Where (3W) - Province of Cabo Delgado, as of 31 December 2025</a></div>
+  <div class="article-summary">Country: MozambiqueSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Feb 24, 2026  13:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/ukraine/ukraine-emergency-four-years-2026-update" target="_blank">Ukraine Emergency Four Years On 2026 Update</a></div>
+  <div class="article-summary">Countries: Ukraine, Bulgaria, Czechia, Hungary, Moldova, Poland, Romania, SlovakiaSource: UN High Commissioner for RefugeesPlease refer to the attached file.UNHCR 2025 RESPONSE INSIDE UKRAINEUNHCR has been working in Ukraine since 1994. When the full…</div>
+  <div class="article-meta">Feb 24, 2026  12:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/iraq/unhcr-iraq-update-november-2025-ar" target="_blank">UNHCR Iraq Update November 2025 [AR]</a></div>
+  <div class="article-summary">Countries: Iraq, Syrian Arab RepublicSource: UN High Commissioner for RefugeesPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Feb 24, 2026  12:03 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02556-6" target="_blank">Weighting for net zero</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 24 February 2026;doi:10.1038/s41558-026-02556-6Policy and planning increasingly depend on large ensembles of climate and energy scenarios, but these collections can be biased and hard to interpret. A new weigh…</div>
+  <div class="article-meta">Feb 24, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02573-5" target="_blank">The hard road back from overshoot</a></div>
+  <div class="article-summary">Thank you for visiting nature.com. You are using a browser version with limited support for CSS. To obtain the best experience, we recommend you use a more up to date browser (or turn off compatibility mode in Internet Explorer). In the meantime, to…</div>
+  <div class="article-meta">Feb 24, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02570-8" target="_blank">Emotional responses to state repression predict collective climate action intentions</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 24 February 2026;doi:10.1038/s41558-026-02570-8As climate activists escalate disruptive protest, authorities respond by intensifying restrictions on protest. This study examines how protest repression shapes c…</div>
+  <div class="article-meta">Feb 24, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02565-5" target="_blank">A weighting framework to improve the use of emissions scenario ensembles of opportunity</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 24 February 2026;doi:10.1038/s41558-026-02565-5Scenario ensembles are widely used in climate change research, while their opportunistic nature could lead to biased outcomes in following analysis. Focusing on r…</div>
+  <div class="article-meta">Feb 24, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/02/24/rush-for-critical-minerals-tests-europes-resolve-to-protect-nature/" target="_blank">Rush for critical minerals tests Europe’s resolve to protect nature</a></div>
+  <div class="article-summary">A Climate Home News investigation found that more than half of the EU’s “strategic” mineral projects lie on, or within a kilometre, of protected Natura 2000 sitesThe postRush for critical minerals tests Europe’s resolve to protect natureappeared firs…</div>
+  <div class="article-meta">Feb 24, 2026  18:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/commentisfree/2026/feb/25/australia-fuel-tax-credit-scheme-government-anti-climate-policy-under-pressure" target="_blank">Australia’s most costly anti-climate policy hits taxpayers for $30m a day as calls mount to wind back fuel tax credits | Adam Morton</a></div>
+  <div class="article-summary">The government will hand over $10.8bn this financial year under the scheme that makes it cheaper for miners and other industries to use diesel and petrolWant to get this in your inbox when it publishes?Sign up for the Clear Air Australia newsletter h…</div>
+  <div class="article-meta">Feb 24, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/feb/24/trump-climate-endangerment-repeal-oil-lawsuits" target="_blank">How Trump’s big climate finding repeal could actually hurt big oil</a></div>
+  <div class="article-summary">Without federal climate regulation, fossil fuel industry may be more vulnerable to local lawsuitsTheTrump administration’srepealof a foundational climate determination could clear a path for new litigation and policies targeting big oil, legal expert…</div>
+  <div class="article-meta">Feb 24, 2026  15:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24022026/seafood-industry-fraud-united-nations/" target="_blank">One in Five Fish Products Tied to Fraud</a></div>
+  <div class="article-summary">From Los Angeles’ luxurious sushi restaurants to Latin America’s roadside ceviche stands, consumers are being lied to. The canned tuna sold on supermarket shelves in Europe or the tiger prawns grilled on Australian barbecues aren’t always what they c…</div>
+  <div class="article-meta">Feb 24, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24022026/southern-environmental-law-center-challenges-dominion-gas-plant-approval/" target="_blank">Environmental, Community Groups to Challenge Regulators’ Approval of Dominion’s Gas Plant</a></div>
+  <div class="article-summary">RICHMOND, Va.—Three climate and justice nonprofits filed a notice before the Virginia Supreme Court on Tuesday that they would appeal a state regulator’s approval of a new Dominion Energy natural gas plant in Chesterfield County.  Filed by Appalachia…</div>
+  <div class="article-meta">Feb 24, 2026  12:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, February 24, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
