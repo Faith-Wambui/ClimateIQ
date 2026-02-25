@@ -64,6 +64,10 @@ def _call_gemini(prompt: str, temperature: float = 0.3, max_tokens: int = 300) -
                 raise
     return ""
 
+def _strip_json_fences(text: str) -> str:
+    """Remove markdown code fences that Gemini sometimes wraps around JSON."""
+    return text.replace("```json", "").replace("```", "").strip()
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Category classification
 # ──────────────────────────────────────────────────────────────────────────────
