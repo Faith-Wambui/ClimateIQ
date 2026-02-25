@@ -8,10 +8,24 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    # Get filter parameter (default: today)
+    from flask import request
+    days = request.args.get('days', 'today')
+    
+    if days == 'today':
+        date_filter = "DATE(scraped_at) = DATE('now')"
+    elif days == 'week':
+        date_filter = "scraped_at >= datetime('now', '-7 days')"
+    elif days == 'month':
+        date_filter = "scraped_at >= datetime('now', '-30 days')"
+    else:
+        date_filter = "1=1"  # all time
+    
     with get_connection() as conn:
-        articles = conn.execute("""
+        articles = conn.execute(f"""
             SELECT * FROM articles
-            ORDER BY scraped_at DESC LIMIT 100
+            WHERE {date_filter}
+            ORDER BY scraped_at DESC
         """).fetchall()
         digests = conn.execute("""
             SELECT * FROM digests ORDER BY date DESC LIMIT 30
@@ -99,6 +113,16 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
 
 <h2>📰 Recent Articles</h2>
+<div style="margin-bottom:12px">
+  <select onchange="window.location.href='/?days='+this.value" 
+          style="background:#161b22;color:#e8e8f0;border:1px solid #30363d;
+                 padding:6px 12px;border-radius:4px;font-size:13px">
+    <option value="today">Today</option>
+    <option value="week">Last 7 days</option>
+    <option value="month">Last 30 days</option>
+    <option value="all">All time</option>
+  </select>
+</div>
 <table>
   <tr><th>Title</th><th>Source</th><th>Category</th><th>Sentiment</th><th>Date</th></tr>
   {% for a in articles %}
