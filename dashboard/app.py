@@ -76,7 +76,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ClimateIQ Dashboard</title>
-<link rel="image" href="ClimateIQ.png">
+<link rel="icon" href="static/ClimateIQ.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   body{font-family:Georgia,serif;background:#0f1117;color:#e8e8f0;margin:0;padding:24px}
