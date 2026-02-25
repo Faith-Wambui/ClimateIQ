@@ -227,7 +227,7 @@ HTML_TEMPLATE = """\
   <!-- Header -->
   <div class="header">
     <div class="logo">
-      <img src="logo.png" alt="Logo" class="logo-img"/>
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
     </div>
     <h1>{title}</h1>
     <div class="date">{date_str}</div>

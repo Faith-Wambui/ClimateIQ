@@ -61,7 +61,9 @@ def view_digest(date):
 DASHBOARD_HTML = """<!DOCTYPE html>
 <html><head>
 <meta charset="UTF-8"/>
-<title>Climate Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ClimateIQ Dashboard</title>
+<link rel="image" href="ClimateIQ.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   body{font-family:Georgia,serif;background:#0f1117;color:#e8e8f0;margin:0;padding:24px}
@@ -87,7 +89,7 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 </style>
 </head><body>
 
-<h1>🌍 Climate News Dashboard</h1>
+<h1>ClimateIQ Dashboard</h1>
 <p style="color:#6b6b85">Real-time view of your aggregated climate news</p>
 
 <div class="stats">
