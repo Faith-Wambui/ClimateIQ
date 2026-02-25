@@ -1,17 +1,17 @@
-from flask import Flask, render_template_string, jsonify
-import os, json
+from flask import Flask, render_template_string, jsonify, request
+import os
 from database.db import get_connection, get_category_trends
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 # ── Routes ────────────────────────────────────────────
 
 @app.route("/")
 def index():
     # Get filter parameter (default: today)
-    from flask import request
     days = request.args.get('days', 'today')
     
+    # Build date filter based on selection
     if days == 'today':
         date_filter = "DATE(scraped_at) = DATE('now')"
     elif days == 'week':
@@ -22,14 +22,24 @@ def index():
         date_filter = "1=1"  # all time
     
     with get_connection() as conn:
+        # Get filtered articles
         articles = conn.execute(f"""
             SELECT * FROM articles
             WHERE {date_filter}
             ORDER BY scraped_at DESC
         """).fetchall()
+        
+        # Debug output to console
+        print(f"🔍 Filter: {days} | Query: {date_filter} | Results: {len(articles)} articles")
+        
+        # Get digests
         digests = conn.execute("""
-            SELECT * FROM digests ORDER BY date DESC LIMIT 30
+            SELECT * FROM digests 
+            ORDER BY date DESC 
+            LIMIT 30
         """).fetchall()
+        
+        # Get overall stats (not filtered)
         stats = conn.execute("""
             SELECT
               COUNT(*) as total,
@@ -37,10 +47,14 @@ def index():
               COUNT(DISTINCT source) as sources
             FROM articles
         """).fetchone()
-    return render_template_string(DASHBOARD_HTML,
+    
+    return render_template_string(
+        DASHBOARD_HTML,
         articles=[dict(a) for a in articles],
         digests=[dict(d) for d in digests],
-        stats=dict(stats))
+        stats=dict(stats),
+        days=days  # Pass selected filter to template
+    )
 
 
 @app.route("/api/trends")
@@ -55,7 +69,6 @@ def view_digest(date):
         with open(path) as f:
             return f.read()
     return "Digest not found", 404
-
 
 # ── Dashboard HTML template ───────────────────────────
 DASHBOARD_HTML = """<!DOCTYPE html>
