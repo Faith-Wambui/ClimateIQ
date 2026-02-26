@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, February 26, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">60</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 50 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-25-february-2026-food-inflation-strikes-el-nino-looms-biodiversity-talks-stagnate/" target="_blank">Cropped 25 February 2026: Food inflation strikes | El Niño looms | Biodiversity talks stagnate</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">Feb 25, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-25/china-to-tighten-air-quality-rules-that-have-helped-slash-smog" target="_blank">China to Tighten Air Quality Rules That Have Helped Slash Smog</a></div>
+  <div class="article-summary">China is set to significantly tighten its national air quality standards, building on a successful campaign that has already dramatically reduced smog. This move signals a continued commitment to environmental protection, crucial for global climate progress.</div>
+  <div class="article-meta">Feb 25, 2026  13:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/02/25/bolivia-creates-net-metering-scheme-for-medium-voltage-distributed-generation/" target="_blank">Bolivia creates net metering scheme for medium-voltage distributed generation</a></div>
+  <div class="article-summary">Bolivia has launched a new net metering scheme for medium-scale distributed generation (1-6 MW), allowing private entities to connect solar and other renewable projects directly to the grid and receive compensation for surplus energy. This move is a significant step towards increasing renewable energy's share in the national electricity market and decentralizing power generation, crucial for Bolivia's climate transition goals.</div>
+  <div class="article-meta">Feb 25, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-25/eskom-backtracks-on-pollution-pledge-risking-world-bank-angst" target="_blank">Eskom Backtracks on Pollution Pledge, Risking World Bank Ire</a></div>
+  <div class="article-summary">Eskom Holdings SOC Ltd., the world’s biggest emitter of the toxin sulfur dioxide, presented a study that argues against the cost of installing equipment to limit emissions, risking a breach of a World Bank loan agreement and riling environmental acti…</div>
+  <div class="article-meta">Feb 25, 2026  09:54 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/25/ai-search-is-rewriting-the-cleantech-buyers-journey-and-many-brands-arent-ready/" target="_blank">AI Search is Rewriting the Cleantech Buyer’s Journey — and Many Brands Aren’t Ready</a></div>
+  <div class="article-summary">By Melissa Baldwin For more than a decade, cleantech marketing has revolved around a steady playbook: rank on Google, drive website traffic, show up at events, and convert clicks to leads. Today, that playbook must evolve to square with the rapid ado…</div>
+  <div class="article-meta">Feb 26, 2026  07:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/25/brazil-ev-sales-report-as-local-production-ramps-up-the-latin-american-giant-has-started-2026-at-9-8-ev-market-share/" target="_blank">Brazil EV Sales Report: As Local Production Ramps Up, The Latin American Giant Has Started 2026 At 9.8% EV Market Share</a></div>
+  <div class="article-summary">It’s been a while since we did an article on Brazil. Last time we checked in was in May 2025, when total EV sales soared to 14,600 units and market share rose to 6.5%. In the next few months, sales grew slightly and market share mostly stayed between…</div>
+  <div class="article-meta">Feb 26, 2026  06:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/25/wayve-attracts-fresh-investments-from-nvidia-microsoft-uber-mercedes/" target="_blank">Wayve Attracts Fresh Investments From NVIDIA, Microsoft, Uber, & Mercedes</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+Wayve, a UK based autonomous driving company, announced on February 25, 2026, that it has raised $1.2 billion in a Series D investment round, bringing its post-money valuatio…</div>
+  <div class="article-meta">Feb 26, 2026  05:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/25/relaunch-of-net-zero-asset-managers-initiative/" target="_blank">Relaunch of Net Zero Asset Managers Initiative</a></div>
+  <div class="article-summary">NEW YORK — The Net Zero Asset Managers initiative (NZAM) announced today that it has relaunched the initiative, in a move that comes almost exactly one year after NZAM suspended activities in the wake of the departure of one of its biggest members, B…</div>
+  <div class="article-meta">Feb 26, 2026  04:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/25/sierra-club-statement-on-confirmation-hearing-on-nomination-of-steve-pearce-to-lead-blm/" target="_blank">Sierra Club Statement on Confirmation Hearing on Nomination of Steve Pearce to Lead BLM</a></div>
+  <div class="article-summary">WASHINGTON, D.C. — Today, the Senate Committee on Energy and Natural Resources held a confirmation hearing on Donald Trump’s nomination of Steve Pearce to run the Bureau of Land Management. During the hearing, Pearce was peppered with questions about…</div>
+  <div class="article-meta">Feb 26, 2026  04:46 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/02/26/uns-new-carbon-market-delivers-first-credits-through-myanmar-cookstove-project/" target="_blank">UN’s new carbon market delivers first credits through Myanmar cookstove project</a></div>
+  <div class="article-summary">The UN's new carbon market has finally issued its first credits, stemming from a cookstove project in Myanmar that aims to reduce emissions from household cooking fuel. This milestone, a decade in the making since the Paris Agreement, is significant as it marks a crucial step in operationalizing market-based mechanisms to incentivize climate action, though questions remain about the integrity of older, similar projects.</div>
+  <div class="article-meta">Feb 26, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-25/norway-s-2-2-trillion-wealth-fund-weighs-in-on-retracted-report" target="_blank">Norway’s $2.2 Trillion Wealth Fund Weighs In on Retracted Report</a></div>
+  <div class="article-summary">Back in December, the retraction of a key climate report was seen as proof that the economic cost of global warming had been overstated. Now, Norway’s wealth fund says its own analysis indicates that would be the wrong conclusion to draw.…</div>
+  <div class="article-meta">Feb 25, 2026  21:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-02-25/how-connecticut-is-trying-to-fix-flood-risk-maps" target="_blank">How Connecticut Is Trying to Fix Flood Risk Maps</a></div>
+  <div class="article-summary">Also: China tightens its air pollution rules…</div>
+  <div class="article-meta">Feb 25, 2026  20:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-02-25/what-is-my-flood-risk-connecticut-updates-homeowners-on-climate-exposure" target="_blank">Many State Flood Maps Are Not Up to Date. Connecticut Is Trying to Fix That</a></div>
+  <div class="article-summary">A new tool offers the public detailed estimates of their flood exposure, but some worry risk disclosure will impact home values.…</div>
+  <div class="article-meta">Feb 25, 2026  14:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-25/cleaning-up-potomac-river-sewer-spill-could-take-months" target="_blank">Cleaning Up Potomac River Sewer Spill Could Take Months</a></div>
+  <div class="article-summary">The federal government is now playing a bigger role in river restoration after Trump criticized the local response.…</div>
+  <div class="article-meta">Feb 25, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/nepal/nepal-drought-response-2025-mdrnp019-lessons-learning-and-reflection-workshop-report" target="_blank">Nepal Drought Response 2025 (MDRNP019): Lessons, Learning, and Reflection Workshop Report</a></div>
+  <div class="article-summary">Country: NepalSources: International Federation of Red Cross and Red Crescent Societies, Nepal Red Cross SocietyPlease refer to the attached file.1. Background and ContextIn July 2025, Nepal experienced a severe drought affecting eight districts of M…</div>
+  <div class="article-meta">Feb 26, 2026  02:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/colombia/ficha-situacional-de-respuesta-y-capacidades-inundaciones-por-lluvias-atipicas-24022026" target="_blank">Colombia: Ficha Situacional de Respuesta y Capacidades - Inundaciones por lluvias atípicas (24/02/2026)</a></div>
+  <div class="article-summary">Country: ColombiaSources: 3iS, El Equipo Humanitario País Colombia, UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.CAPACIDAD DE RESPUESTA LOCAL PARA CÓRDOBA - Equipo Local Coordinación de Córdoba (ELC)E…</div>
+  <div class="article-meta">Feb 26, 2026  01:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/haiti-tableau-de-bord-humanitaire-janvier-decembre-2025-au-31-decembre-2025" target="_blank">Haiti: Haïti : Tableau de bord humanitaire (janvier - décembre 2025), au 31 décembre 2025</a></div>
+  <div class="article-summary">A robust response is required to avoid a humanitarian catastrophe. The plan aims to immediately and rapidly scale-up operations and to increase the provision of protection and life-saving assistance.…</div>
+  <div class="article-meta">Feb 26, 2026  00:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/sudan/sudan-community-consultation-community-driven-hnrp-2026" target="_blank">Sudan: Community Consultation for a Community Driven HNRP 2026</a></div>
+  <div class="article-summary">Country: SudanSource: UN Children's FundPlease refer to the attached file.For the 2026 HNRP, the AAP WG led an extensive community consultation process, bringing together feedback from more than 3,400 community members and 145 community-based organiz…</div>
+  <div class="article-meta">Feb 25, 2026  22:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/imawg-haiti-compte-rendu-de-reunion-en-ligne-25-fevrier-2026-meeting-minutes" target="_blank">Haiti: IMAWG Haïti : Compte rendu de réunion, en ligne, 25 février 2026 [Meeting Minutes]</a></div>
+  <div class="article-summary">Country: HaitiSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.…</div>
+  <div class="article-meta">Feb 25, 2026  20:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/feb/25/chronic-ocean-heating-fuels-staggering-loss-marine-life-study" target="_blank">Chronic ocean heating fuels ‘staggering’ loss of marine life, study finds</a></div>
+  <div class="article-summary">New research reveals that chronic ocean warming, even at a modest 0.1°C per decade, is causing a significant 7.2% decline in fish populations across the Northern Hemisphere. This sustained heating, distinct from temporary marine heatwaves, is leading to a "staggering" loss of marine life, with biomass drops reaching nearly 20% in some areas annually, directly impacting global fisheries and ocean ecosystems.</div>
+  <div class="article-meta">Feb 25, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/feb/26/recent-mediterranean-storms-tragedies-spain-portugal-morocco" target="_blank">‘A devastating force’: how recent Mediterranean storms turned to tragedies</a></div>
+  <div class="article-summary">Atmospheric machine-gun has fired storm after deadly storm at the region this year, leaving a trail of widespread destructionFor Andrés Sánchez Barea, in Spain, it was the fear that arose when water started to spurt from plug sockets. For Nelson Duar…</div>
+  <div class="article-meta">Feb 26, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/feb/26/ancient-stepwells-brought-back-india-run-out-water-day-zero" target="_blank">Ancient stepwells brought back to life as India begins to run out of water</a></div>
+  <div class="article-summary">Centuries-old wells restored to provide drinking water as parts of the country head towards “day zero” when no water will be availableA loud cheer and sounds of clapping reverberated around Bansilalpet, a neighbourhood in Hyderabad, when the first tr…</div>
+  <div class="article-meta">Feb 26, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25022026/north-carolina-denies-army-corps-engineers-wilmington-dredging/" target="_blank">North Carolina Regulators Nix $1.2 Billion Federal Proposal to Dredge Wilmington Harbor</a></div>
+  <div class="article-summary">The U.S. Army Corps of Engineers can’t dredge 28 miles of the Wilmington Harbor as planned, after North Carolina environmental regulators determined the billion-dollar proposal would be inconsistent with the state’s coastal management policies. Tancr…</div>
+  <div class="article-meta">Feb 26, 2026  03:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25022026/west-coast-whale-entanglements-heatwaves/" target="_blank">Whale Entanglements in Fishing Gear Surge Off U.S. West Coast During Marine Heatwaves</a></div>
+  <div class="article-summary">Each spring, humpback whales start to feed off the coast of California and Oregon on dense schools of anchovies, sardines and krill—prey sustained by cool, nutrient-rich water that seasonal winds draw up from the deep ocean.  That process, known as c…</div>
+  <div class="article-meta">Feb 26, 2026  00:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/feb/25/tropical-plants-flower-shifted-months-climate-breakdown-aoe" target="_blank">Tropical plants flowering months earlier or later because of climate crisis – study</a></div>
+  <div class="article-summary">Changes threaten ecosystems as flowering falls out of sync with fruit-eating, seed-dispersing animals and pollinatorsTropical flowers are blooming months earlier or later than they used to because of climate breakdown, with potentially “cascading imp…</div>
+  <div class="article-meta">Feb 25, 2026  22:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, February 26, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
