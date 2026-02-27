@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, February 27, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">49</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 0 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 49 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/02/au-summit-underscores-industrialisation-climate-security-and-trade-nexus/" target="_blank">AU Summit Underscores Industrialisation, Climate, Security and Trade Nexus</a></div>
+  <div class="article-summary">The recent AU Summit highlighted the centrality of African regional integration, the AfCFTA, industrialisation, local value, and integrated climate and industrial policy, with momentum behind climate and security measures.The postAU Summit Underscore…</div>
+  <div class="article-meta">Feb 26, 2026  11:18 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/26/why-is-hong-kong-ending-ev-tax-breaks-does-it-make-sense/" target="_blank">Why Is Hong Kong Ending EV Tax Breaks? Does It Make Sense?</a></div>
+  <div class="article-summary">Hong Kong has a sizable tax break available for electric vehicle purchases, comparable to what the US had before Donald Trump took office and Republicans took control of the US Congress on the low end. It is HK$58,500 (US$7,477), or a whopping HK$172…</div>
+  <div class="article-meta">Feb 27, 2026  07:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/26/geely-xiaomi-shine-in-china-january-ev-sales-report-2/" target="_blank">Geely & Xiaomi Shine In China — January EV Sales Report</a></div>
+  <div class="article-summary">After the usual December EV record sales peak in China, which coincided with an end-of-incentive sales rush (NEVs are no longer exempt from purchase tax this year), the year started with an expected sales slump, down by 20%, which sounds like a lot,…</div>
+  <div class="article-meta">Feb 27, 2026  05:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/26/from-mine-to-recovery-the-case-for-nickel-recycling-in-europe/" target="_blank">From Mine to Recovery: The Case for Nickel Recycling in Europe</a></div>
+  <div class="article-summary">A new study examines the carbon footprint benefits of recycling the critical metal in Europe. Scaling battery recycling in Europe will be key to securing a resilient and clean supply of raw materials needed for clean tech in Europe. With significant…</div>
+  <div class="article-meta">Feb 27, 2026  05:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/02/26/rivian-has-a-new-performance-division-but-for-crazy-off-road-adventures/" target="_blank">Rivian has a new performance division but for crazy off-road adventures</a></div>
+  <div class="article-summary">Rivian just announced a new division within the company focused on feats of performance, but with a uniquely Rivian twist, aiming for extreme off-road stunts instead of your standard circuit racing.
+
+There is a long tradition within the automotive in…</div>
+  <div class="article-meta">Feb 27, 2026  05:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/02/26/energy-department-loans-money-for-georgia-powers-gas-fleet/" target="_blank">Energy Department Loans Money For Georgia Power’s Gas Fleet</a></div>
+  <div class="article-summary">ATLANTA — The Department of Energy announced it will give a $26.5 billion loan to Southern Company to build the largest, most expensive gas fleet in the nation. The loan will pay for Southern Company’s subsidiary, Georgia Power, plans to build a mass…</div>
+  <div class="article-meta">Feb 27, 2026  05:18 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-27/clp-more-selective-on-china-renewables-as-it-eyes-other-markets" target="_blank">CLP More Selective on China Renewables as It Eyes Other Markets</a></div>
+  <div class="article-summary">CLP Holdings Ltd. will be more selective with renewable energy projects in mainland China while exploring opportunities in Taiwan and Southeast Asia.…</div>
+  <div class="article-meta">Feb 27, 2026  05:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-26/us-climate-forecaster-to-be-absorbed-in-weather-agency-reshuffle" target="_blank">US Climate Forecaster to Be Absorbed in Weather Agency Reshuffle</a></div>
+  <div class="article-summary">The US climate forecasting service will be absorbed into other federal departments as part of a re-organization announced to staff Thursday.…</div>
+  <div class="article-meta">Feb 27, 2026  02:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-26/heavy-rains-kill-dozens-in-southeast-brazil-as-flood-risks-mount" target="_blank">Heavy Rains Kill Dozens in Southeast Brazil as Flood Risks Mount</a></div>
+  <div class="article-summary">Heavy rains that began Monday night have left dozens dead and caused widespread destruction in southeastern Brazil, exposing a longstanding structural problem of housing in high-risk areas vulnerable to seasonal downpours.…</div>
+  <div class="article-meta">Feb 26, 2026  21:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-02-26/debate-over-europe-s-emissions-trading-system-heats-up" target="_blank">Debate Over Europe’s Carbon Market Heats Up</a></div>
+  <div class="article-summary">Also: Tom Steyer on his run for California governor and plan to lower energy prices…</div>
+  <div class="article-meta">Feb 26, 2026  16:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-02-26/trump-s-fema-dismantled-programs-to-prepare-americans-for-disasters" target="_blank">How Trump's FEMA Secretly Dismantled Program to Prepare Americans For Disasters</a></div>
+  <div class="article-summary">The administration last year closed a division that helped individuals get ready for emergencies.…</div>
+  <div class="article-meta">Feb 26, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/audio/2026-02-27/who-chief-tedros-on-covid-china-and-texting-rfk-jr" target="_blank">WHO Chief Tedros on Covid, China and Texting RFK Jr</a></div>
+  <div class="article-summary">WHO Director-General Tedros Adhanom Ghebreyesus highlights how a fractured global response, exemplified by pandemic divisions, leaves us more susceptible to future health crises. This vulnerability extends to climate change, where international cooperation is paramount for effective mitigation and adaptation strategies.</div>
+  <div class="article-meta">Feb 27, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/26022026/us-government-accelerates-pacific-coral-reef-collapse/" target="_blank">US Government Is Accelerating Coral Reef Collapse, Scientists Warn</a></div>
+  <div class="article-summary">Ritidian Point, at the northern tip of Guam, is home to an ancient limestone forest with panoramic vistas of warm Pacific waters. Stand here in early spring and you might just be lucky enough to witness a breaching humpback whale as they migrate past…</div>
+  <div class="article-meta">Feb 26, 2026  21:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/feb/26/us-bullying-could-scupper-carbon-levy-shipping" target="_blank">US ‘bullying’ could scupper carbon levy on shipping, warn experts</a></div>
+  <div class="article-summary">Panama joins smaller nations in dropping support for policy aimed at cutting maritime emissionsUS “bullying” over a proposed carbon levy on shipping appears to be paying off, experts have said, after Panama reversed its support for the measure.In a l…</div>
+  <div class="article-meta">Feb 26, 2026  17:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/02/26/curbing-methane-is-the-fastest-way-to-slow-warming-but-were-off-the-pace/" target="_blank">Curbing methane is the fastest way to slow warming – but we’re off the pace</a></div>
+  <div class="article-summary">Scientific assessments show that the technical potential exists to meet a global pledge to cut methane emissions 30% by 2030 - the gap lies in implementationThe postCurbing methane is the fastest way to slow warming – but we’re off the paceappeared f…</div>
+  <div class="article-meta">Feb 26, 2026  13:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/02/26/world-leaders-invited-to-see-pacific-climate-destruction-before-cop31/" target="_blank">World leaders invited to see Pacific climate destruction before COP31</a></div>
+  <div class="article-summary">Pre-COP meetings will be held in Fiji and Tuvalu in October with a separate event in Palau in AugustThe postWorld leaders invited to see Pacific climate destruction before COP31appeared first onClimate Home News.…</div>
+  <div class="article-meta">Feb 26, 2026  13:37 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, February 27, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
