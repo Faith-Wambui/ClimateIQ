@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, March 04, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">45</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:47%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 38 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03032026/todays-climate-national-park-service-job-cuts-change/" target="_blank">The National Park Service Saw Major Job Losses in the Last Year. More Changes Loom.</a></div>
+  <div class="article-summary">The Trump administration's drastic staff cuts at the National Park Service last year, despite a federal judge's order to rehire, have left the agency in flux. This disruption threatens the preservation of vital natural and cultural resources, directly impacting our ability to protect biodiversity and historical sites crucial for climate resilience.</div>
+  <div class="article-meta">Mar 04, 2026  03:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03032026/texas-school-district-rejects-lng-tax-deal/" target="_blank">Tiny Texas School District Rejects Tax Deal with $6 Billion LNG Project</a></div>
+  <div class="article-summary">The Point Isabel Independent School District on Monday rejected a multi-million dollar tax break for a proposed $5.7 billion liquefied natural gas (LNG) project on the Texas Gulf Coast, finding the facility would not “align” with the community’s valu…</div>
+  <div class="article-meta">Mar 04, 2026  03:18 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/03/the-three-wheeled-solar-enabled-ev-from-aptera-is-baaaaaack/" target="_blank">The Three-Wheeled, Solar-Enabled EV From Aptera Is Baaaaaack</a></div>
+  <div class="article-summary">Aptera has successfully launched its validation assembly line, marking a critical step toward producing its unique solar-powered, three-wheeled electric vehicle. This milestone is significant for the climate as it brings a novel, energy-independent EV closer to market, potentially accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Mar 04, 2026  04:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/03/lithium-shortages-could-hit-by-2028-as-ev-demand-surges/" target="_blank">Lithium shortages could hit by 2028 as EV demand surges</a></div>
+  <div class="article-summary">Electric vehicle demand, projected to hit 95% of global sales by 2040 in net-zero scenarios, could trigger critical lithium shortages as early as 2028, according to Wood Mackenzie. This supply crunch threatens to derail ambitious climate goals, as the world will need an estimated 8.5 million tonnes of additional lithium by 2050 to power the clean energy transition.</div>
+  <div class="article-meta">Mar 04, 2026  03:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/03/report-shows-progress-towards-even-cleaner-ev-supply-chains-tesla-leads/" target="_blank">Report shows progress towards even cleaner EV supply chains, Tesla leads</a></div>
+  <div class="article-summary">A new report produced by a coalition of environmental and social advocacy groups details forward progress being made across the industry towards more sustainable supply chains, with Tesla leading the pack and Chinese brands standing out as making the…</div>
+  <div class="article-meta">Mar 04, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/03/over-3000-one-megawatt-ev-charging-stations-planned-by-byd-for-europe/" target="_blank">Over 3,000 One-Megawatt EV Charging Stations Planned By BYD For Europe</a></div>
+  <div class="article-summary">Sometimes ultrafast chargers turn out to be about 180 kW to 350 kW, but these new BYD chargers are actually ultrafast, providing 1,000 kW, or 1 MW, of power capacity. Now, that may sound great because an EV might, in theory, be able to receive over 2…</div>
+  <div class="article-meta">Mar 04, 2026  01:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/03/costco-discount-on-polestar-chevy-ev-models/" target="_blank">Costco rolls out a stackable discount on Polestar, Chevy EV models</a></div>
+  <div class="article-summary">If you’ve been thinking about driving electric, Costco is back with another limited-time deal, and this time it’s on Polestar and Chevy EV models.
+
+The Costco Auto Program has launched an early-spring EV promotion that runs through April 30, 2026. El…</div>
+  <div class="article-meta">Mar 04, 2026  01:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-04/barclays-bankers-warn-distressed-valuations-can-hit-clean-energy" target="_blank">Barclays Bankers Warn Distressed Valuations Can Hit Clean Energy</a></div>
+  <div class="article-summary">Barclays bankers are flagging that renewable energy assets, often seen as a safe bet, now face distressed valuations due to global economic headwinds like war and inflation. This underestimation of risk could significantly slow the pace of investment needed to transition away from fossil fuels.</div>
+  <div class="article-meta">Mar 04, 2026  08:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/03/elons-dirty-deals-teslas-credit-losses-and-electric-semi-trucks-save-big-money/" target="_blank">Elon’s dirty deals, Tesla’s credit losses, and electric semi trucks save BIG money</a></div>
+  <div class="article-summary">Elon Musk's AI ventures are reportedly generating significant pollution, undermining Tesla's decarbonization efforts, while the company also faces billions in losses as major buyers like Toyota and Stellantis exit its carbon credit program. Meanwhile, the electric vehicle sector shows promise with Hyundai's record sales and real-world data confirming electric semi-trucks can save fleets nearly $160,000 per vehicle.</div>
+  <div class="article-meta">Mar 04, 2026  03:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-03/china-s-big-battery-lead-includes-energy-storage-that-can-last-for-days" target="_blank">How China Built a Big Lead in Global Race for Batteries That Last for Days</a></div>
+  <div class="article-summary">Long-duration storage is yet another area where Beijing is charging ahead of other countries.…</div>
+  <div class="article-meta">Mar 03, 2026  21:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-03/china-s-five-year-plan-climate-change-policy-preview" target="_blank">A Climate Policy Preview of China’s Five-Year Plan</a></div>
+  <div class="article-summary">Also: how the war in Iran is impacting solar stocks and ESG investors…</div>
+  <div class="article-meta">Mar 03, 2026  16:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-03/tech-developer-syzygy-signs-deals-targeting-huge-boost-in-sustainable-jet-fuel" target="_blank">Tech Developer Syzygy Signs Deals Targeting Massive Boost in Sustainable Jet Fuel Supply</a></div>
+  <div class="article-summary">Technology developer Syzygy Plasmonics made a series of preliminary deals aimed at building out production of low-emission jet fuel across the Americas.…</div>
+  <div class="article-meta">Mar 03, 2026  09:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/03/how-mass-distortion-of-reality-occurs/" target="_blank">How Mass Distortion of Reality Occurs</a></div>
+  <div class="article-summary">This article, referencing historical distortions in the US and Philippines, highlights how anti-democratic movements manipulate public perception. Such tactics are crucial to understand as they can be employed to undermine climate action and delay necessary policy changes, impacting global efforts to address the climate crisis.</div>
+  <div class="article-meta">Mar 04, 2026  07:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03032026/montana-bull-mountains-coal-mine-expansion-lawsuit/" target="_blank">New Lawsuit Aims to Halt Expansion of a Montana Coal Mine Blamed for Drying up the Land Above It</a></div>
+  <div class="article-summary">ROUNDUP, Mont.—Environmental groups sued Tuesday to halt an expansion of the Bull Mountains Mine, claiming that the “energy emergency” underpinning its revival is nonexistent and that regulators have been aware for decades that underground coal minin…</div>
+  <div class="article-meta">Mar 04, 2026  01:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03032026/california-elephant-seals-bird-flu/" target="_blank">First Confirmed Cases of Bird Flu in California Elephant Seals Stoke Fear As Virus Surges Worldwide</a></div>
+  <div class="article-summary">Last week, a day that ecologists and virologists in California have feared for years finally arrived.  Officials confirmed seven weaned northern elephant seal pups tested positive for highly pathogenic avian influenza (H5N1) amid a national surge of…</div>
+  <div class="article-meta">Mar 03, 2026  23:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03032026/scientific-reference-manual-for-judges-erased/" target="_blank">Scientists, Engineers and Legal Experts Condemn Partisan Attack on Scientific Reference Manual for Judges</a></div>
+  <div class="article-summary">Scientists, engineers, lawyers, statisticians and other experts sounded the alarm Monday about the recent decision to remove a chapter on climate science from an influential reference manual designed to help judges understand complex scientific evide…</div>
+  <div class="article-meta">Mar 03, 2026  22:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/03/eu-carbon-credits-could-supercharge-worlds-clean-cooking-push-france-says/" target="_blank">EU carbon credits could supercharge world’s clean cooking push, France says</a></div>
+  <div class="article-summary">The country’s top climate envoy says he discussed using cookstove carbon credits with TotalEnergies, which is working to expand the use of LPG cooking in AfricaThe postEU carbon credits could supercharge world’s clean cooking push, France saysappeare…</div>
+  <div class="article-meta">Mar 03, 2026  19:42 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, March 04, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
