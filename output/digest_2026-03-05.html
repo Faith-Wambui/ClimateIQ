@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, March 05, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">52</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 46 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-05/china-backs-paris-agreement-aims-to-lead-climate-governance" target="_blank">China Backs Paris Agreement, Aims to Lead Climate Governance</a></div>
+  <div class="article-summary">China has signaled its intent to actively lead global climate governance, a move that directly supports the Paris Agreement's objectives. This commitment from the world's largest emitter carries significant weight for international climate action and the planet's future.</div>
+  <div class="article-meta">Mar 05, 2026  08:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04032026/new-york-city-congestion-pricing-continues/" target="_blank">Judge Rejects Trump Administration’s Plan to End NYC Congestion Pricing</a></div>
+  <div class="article-summary">A federal judge ruled Tuesday that the Trump administration’s efforts to shut down New York’s congestion pricing program are unlawful. U.S. District Judge Lewis Liman, an appointee of President Donald Trump, handed down the decision. Liman also grant…</div>
+  <div class="article-meta">Mar 04, 2026  19:34 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/05/donut-lab-battery-works-at-100-celsius/" target="_blank">Donut Lab Battery Works at 100° Celsius, Proves More Skeptics Wrong</a></div>
+  <div class="article-summary">Independent lab tests confirm Donut Lab's battery operates at a scorching 100° Celsius, debunking skepticism and challenging assumptions about lithium-based technology. This breakthrough, despite membrane breaches in testing, suggests a significant advancement in high-temperature battery performance, crucial for electrifying challenging environments and expanding renewable energy applications.</div>
+  <div class="article-meta">Mar 05, 2026  08:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/04/donut-lab-survives-100o-c-test-is-that-good-enough/" target="_blank">Donut Lab Survives 100º C Test. Is That Good Enough?</a></div>
+  <div class="article-summary">Donut Lab's new battery data, showing functionality at 100º C, continues to face scrutiny despite claims of double the energy density of lithium-ion cells. This technology's potential to drastically improve electric vehicle range and charging times, while reducing reliance on rare earth materials, remains a critical factor in accelerating the transition to clean energy.</div>
+  <div class="article-meta">Mar 05, 2026  06:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/04/a-backup-battery-for-the-rest-of-us/" target="_blank">A Backup Battery For The Rest Of Us</a></div>
+  <div class="article-summary">The Bluetti Elite 400 battery offers a portable and powerful solution for reliable backup power, a critical step in decentralizing energy and reducing reliance on fossil fuels. This technology empowers individuals to store renewable energy, bolstering grid resilience and accelerating the transition to a cleaner energy future.</div>
+  <div class="article-meta">Mar 05, 2026  06:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/04/strong-demand-for-volvo-ex60-leads-to-volvo-cars-expanding-production/" target="_blank">Strong Demand for Volvo EX60 Leads to Volvo Cars Expanding Production</a></div>
+  <div class="article-summary">Volvo Cars is significantly expanding production of its EX60 electric SUV due to overwhelming customer demand, a stark contrast to many automakers struggling with EV sales targets. This move signals a growing market appetite for compelling electric vehicles, accelerating the transition away from fossil fuel-powered cars and contributing to emissions reductions.</div>
+  <div class="article-meta">Mar 05, 2026  06:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/04/interview-its-all-solar-all-the-time-with-emily-from-energysage/" target="_blank">Interview: it’s all solar, all the time with Emily from EnergySage</a></div>
+  <div class="article-summary">Home solar installations saw a massive 205% surge leading up to a tax credit cut, fundamentally altering the residential energy market. This shift, coupled with growing interest in EV charging and whole-home electrification, signals a significant acceleration in consumer adoption of renewable energy solutions.</div>
+  <div class="article-meta">Mar 05, 2026  04:29 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-05/china-aims-to-cut-carbon-emissions-per-unit-of-gdp-17-by-2030" target="_blank">China Sets Cautious Climate Target as Carbon Deadline Looms</a></div>
+  <div class="article-summary">China, the world’s top polluter, set a cautious new climate target for the rest of the decade, frustrating hopes for tighter policy that would accelerate the nation’s work to curb emissions.…</div>
+  <div class="article-meta">Mar 05, 2026  03:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-04/trump-s-alaska-oil-gas-lease-sale-draws-zero-bids-from-drillers" target="_blank">Trump’s Alaska Oil, Gas Lease Sale Draws Zero Bids From Drillers</a></div>
+  <div class="article-summary">The Trump administration’s first oil and gas lease sale in Alaska’s Cook Inlet received no bids, according to the US Interior Department, indicating tepid interest from drillers in that region.…</div>
+  <div class="article-meta">Mar 05, 2026  00:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-04/california-developers-are-designing-hoas-that-protect-from-wildfires" target="_blank">How to Fireproof a Neighborhood</a></div>
+  <div class="article-summary">In wildfire-prone California, one developer is using an HOA model to incorporate prevention across the whole community’s design.…</div>
+  <div class="article-meta">Mar 04, 2026  19:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-04/war-with-iran-is-a-nightmare-for-oil-and-gas-how-will-it-impact-clean-energy" target="_blank">War with Iran Is a Nightmare for Oil and Gas. How Will it Impact Clean Energy?</a></div>
+  <div class="article-summary">Jason Bordoff, a climate and energy expert, joins Zero to talk about how the conflict in the Middle East could affect the transition to green energy.…</div>
+  <div class="article-meta">Mar 04, 2026  18:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-04/barclays-stranded-asset-warning-bottlenecks-threaten-renewables-growth" target="_blank">Why Barclays Is Warning of Stranded Renewable Energy Assets</a></div>
+  <div class="article-summary">Also: Bloomberg Economics models what the war in Iran could mean for inflation…</div>
+  <div class="article-meta">Mar 04, 2026  17:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/mar/05/europe-clean-green-cities-resurgent-industry-fantasy-creative" target="_blank">A Europe of clean, green cities and resurgent industry is a fantasy – unless we get really creative | Hans Larsson</a></div>
+  <div class="article-summary">Europe's industrial past, exemplified by the heavily polluted GDR town of Bitterfeld, highlights the stark trade-offs between heavy industry and environmental health. Achieving a "Made in Europe" resurgence requires confronting the reality that cleaner production often means a less pristine industrial landscape, demanding innovative solutions to reconcile economic growth with climate goals.</div>
+  <div class="article-meta">Mar 05, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/04/renewables-and-fossil-fuels-in-times-of-war/" target="_blank">Renewables And Fossil Fuels In Times Of War</a></div>
+  <div class="article-summary">Escalating US/Israel conflict with Iran is disrupting energy markets, forcing a critical re-evaluation of whether a mixed renewable and fossil fuel energy strategy enhances or jeopardizes national security. This geopolitical instability highlights the urgent need for energy independence, making the transition to renewables a paramount concern for global stability and climate resilience.</div>
+  <div class="article-meta">Mar 05, 2026  07:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04032026/trump-data-center-power-costs-pledge/" target="_blank">Big Tech Signs Trump Pledge to Pay Data-Center Power Costs. Fulfilling It Is the Hard Part.</a></div>
+  <div class="article-summary">In an effort to quell blowback on data centers, President Donald Trump announced at a White House roundtable on Wednesday the “Ratepayer Protection Pledge,” a set of nonbinding promises that Big Tech companies signed to keep household utility bills f…</div>
+  <div class="article-meta">Mar 05, 2026  04:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04032026/google-attempts-to-annex-iowa-county-land-for-data-center/" target="_blank">Google’s Response to An Iowa County’s New Data Center Requirements? Annex The Land.</a></div>
+  <div class="article-summary">Google is seeking to bypass data center zoning rules recently adopted by Linn County, Iowa, by annexing the land for its proposed campus into a city two miles away. If approved by city officials in Palo, the move would free Google from the water-use…</div>
+  <div class="article-meta">Mar 05, 2026  03:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/04/gulf-oil-and-gas-crisis-sparks-calls-for-renewable-invesment/" target="_blank">Gulf oil and gas crisis sparks calls for renewable investment</a></div>
+  <div class="article-summary">Energy analysts and some politicians say the Iran war's effect on oil and gas prices shows renewables are the path to energy securityThe postGulf oil and gas crisis sparks calls for renewable investmentappeared first onClimate Home News.…</div>
+  <div class="article-meta">Mar 04, 2026  20:29 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, March 05, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
