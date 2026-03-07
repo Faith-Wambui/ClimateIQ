@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, March 07, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 43 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06032026/florida-alligator-alcatraz-detention-site-pollution/" target="_blank">Documents Raise New Concerns Over Alligator Alcatraz’s Air and Climate Pollution</a></div>
+  <div class="article-summary">New state documents reveal over 200 generators at the Alligator Alcatraz migrant detention site are a significant source of air and climate pollution in the Everglades. This pollution poses a direct threat to the fragile ecosystem and its vital role in carbon sequestration.</div>
+  <div class="article-meta">Mar 07, 2026  02:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06032026/trump-epa-staffing-lows/" target="_blank">EPA Hits 40-Year Lows in Staffing After Trump Targets Its Public Health Experts</a></div>
+  <div class="article-summary">The EPA is currently experiencing its lowest staffing levels in 40 years, a direct result of targeted cuts to public health experts initiated during the Trump administration. This drastic reduction in personnel, particularly in crucial scientific and regulatory roles, significantly undermines the agency's capacity to enforce environmental protections and address pressing climate challenges.</div>
+  <div class="article-meta">Mar 07, 2026  02:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/06/us-customs-delays-force-solar-giant-qcells-to-furlough-1000-workers/" target="_blank">US Customs delays force solar giant Qcells to furlough 1,000 workers [update]</a></div>
+  <div class="article-summary">Solar giant Qcells has resumed normal production after a four-month disruption that forced it to furlough 1,000 workers, a setback directly linked to US Customs delays. This prolonged interruption highlights the fragility of clean energy supply chains and the significant economic and climate implications when they falter.</div>
+  <div class="article-meta">Mar 07, 2026  01:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06032026/pacific-island-vanuatu-un-climate-justice/" target="_blank">An Island Nation in the South Pacific Leads the Latest Push for Climate Justice at the UN</a></div>
+  <div class="article-summary">Led by the South Pacific island nation of Vanuatu, a coalition of countries are introducing a resolution at the United Nations General Assembly that could reinforce countries’ legal obligations under international climate laws and treaties. The resol…</div>
+  <div class="article-meta">Mar 07, 2026  01:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/heatwaves-driving-recent-surge-in-compound-drought-and-heat-extremes/" target="_blank">Heatwaves driving recent ‘surge’ in compound drought and heat extremes</a></div>
+  <div class="article-summary">Drought and heatwaves occurring together – known as “compound” events – have “surged” across the world since the early 2000s, a new study shows.
+
+Compound drought and heat events (CDHEs) can have devastating effects, creating the ideal conditions for…</div>
+  <div class="article-meta">Mar 06, 2026  22:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/06/donald-trump-americas-greatest-ev-salesman/" target="_blank">Donald Trump: America’s Greatest EV Salesman</a></div>
+  <div class="article-summary">Former President Trump's vocal opposition and policy rollbacks on electric vehicles have inadvertently fueled EV adoption by galvanizing environmentalists and consumers who want to counter his agenda. This surge in demand, driven by a desire to defy Trump's climate skepticism, is accelerating the transition away from fossil fuels, a critical step in mitigating climate change.</div>
+  <div class="article-meta">Mar 07, 2026  07:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/06/energy-security-makes-us-less-secure-renewables-are-the-answer/" target="_blank">“Energy Security” Makes Us Less Secure. Renewables Are The Answer</a></div>
+  <div class="article-summary">The U.S. spends over $81 billion annually to secure global oil supplies, a hidden cost buried in the defense budget that makes fossil fuels appear cheaper than they are. This massive expenditure, coupled with the trillions in healthcare and disaster relief costs linked to pollution and climate change, demonstrates that fossil fuels are fundamentally expensive, making a transition to renewable energy crucial for both economic and national security.</div>
+  <div class="article-meta">Mar 07, 2026  06:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/06/us-battery-makers-gave-up-waaaaay-too-soon-on-ev-sales-but-they-have-a-backup-plan/" target="_blank">US Battery Makers Gave Up Waaaaay Too Soon On EV Sales (But They Have A Backup Plan)</a></div>
+  <div class="article-summary">US battery makers faced a sharp downturn in electric vehicle sales after federal tax credits ended last September, but the sector is finding new momentum in stationary energy storage and renewable energy projects. This pivot demonstrates resilience in the zero-emission electrification trend, ensuring continued progress despite the EV market's temporary stall.</div>
+  <div class="article-meta">Mar 07, 2026  05:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/06/germanys-hydrogen-refueling-network-looks-impressive-until-you-do-the-math/" target="_blank">Germany’s Hydrogen Refueling Network Looks Impressive Until You Do The Math</a></div>
+  <div class="article-summary">Germany's H2 Mobility network projects a seemingly impressive rise in hydrogen dispensed, reaching 59 tons monthly by early 2026, but this growth is dwarfed by the scale needed to meaningfully impact climate goals. This limited rollout highlights the significant gap between current hydrogen infrastructure and the vast quantities required for decarbonizing transportation and industry.</div>
+  <div class="article-meta">Mar 07, 2026  05:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/06/wind-on-o%ca%bbahu-a-modest-but-valuable-complement-to-solar/" target="_blank">Wind on Oʻahu: A Modest but Valuable Complement to Solar</a></div>
+  <div class="article-summary">Any serious discussion of renewable energy on Oʻahu should begin with a clear understanding of how much electricity the island actually needs once fossil fuel end uses are electrified. Earlier analysis constructed a fully electrified civilian energy…</div>
+  <div class="article-meta">Mar 07, 2026  00:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-06/energy-secretary-wright-calls-to-reopen-indian-point-nuke-plant" target="_blank">Energy Secretary Wright Calls to Reopen Indian Point Nuclear Plant</a></div>
+  <div class="article-summary">The US energy secretary and a congressman are calling to restart a shuttered nuclear plant north of New York City, saying it’s needed to meet surging demand for power.…</div>
+  <div class="article-meta">Mar 06, 2026  22:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-06/new-research-shows-earth-is-warning-more-quickly" target="_blank">Global Warming Has Significantly Accelerated</a></div>
+  <div class="article-summary">Also: what happens to FEMA after Kristi Noem?…</div>
+  <div class="article-meta">Mar 06, 2026  20:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-06/earth-is-warming-faster-than-previously-estimated-new-study-shows" target="_blank">Earth Is Warming Faster Than Previously Estimated, New Study Shows</a></div>
+  <div class="article-summary">Researchers found the first statistically significant evidence that global warming is accelerating.…</div>
+  <div class="article-meta">Mar 06, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-06/germany-s-solar-boom-eases-power-costs-as-gas-price-jumps" target="_blank">Germany’s Solar Boom Eases Power Costs as Gas Price Jumps</a></div>
+  <div class="article-summary">Germany is seeing unusually strong solar power output in March, helping to cap electricity prices even as the conflict in the Middle East drives up the cost of energy worldwide.…</div>
+  <div class="article-meta">Mar 06, 2026  13:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-06/what-kristi-noem-s-firing-means-for-the-future-of-fema" target="_blank">Three Big Questions Facing FEMA With Kristi Noem Out</a></div>
+  <div class="article-summary">The Department of Homeland Security oversees the nation’s main disaster response agency, which has undergone turmoil under Noem.…</div>
+  <div class="article-meta">Mar 06, 2026  13:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/06/deep-divisions-persist-as-plastics-treaty-talks-restart-at-informal-meeting/" target="_blank">Deep divisions persist as plastics treaty talks restart at informal meeting</a></div>
+  <div class="article-summary">The US hits out at EU and Pacific island nations over efforts to reduce soaring plastic production, highlighting the challenges ahead for the troubled negotiationsThe postDeep divisions persist as plastics treaty talks restart at informal meetingappe…</div>
+  <div class="article-meta">Mar 06, 2026  19:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/06/humanity-heating-planet-faster-than-ever-before-study-finds" target="_blank">Humanity heating planet faster than ever before, study finds</a></div>
+  <div class="article-summary">Researchers identify sharp rise to about 0.35C every decade, after excluding natural fluctuations such as El NiñoHumanity is heating the planet faster than ever before,a study has found.Climate breakdown is occurring more rapidly with the heating rat…</div>
+  <div class="article-meta">Mar 06, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/06/how-women-transformed-a-community-in-vanuatu-with-off-grid-solar/" target="_blank">How women transformed a Vanuatu community with off-grid solar</a></div>
+  <div class="article-summary">Stories coming out of Vanuatu tend to focus on the adverse impacts of the climate crisis - but amid the disasters, a powerful narrative of resilience is being written, led by womenThe postHow women transformed a Vanuatu community with off-grid solara…</div>
+  <div class="article-meta">Mar 06, 2026  14:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06032026/illinois-comed-ev-rebate-funding/" target="_blank">Illinois Utility Announces New Round of Electric Vehicle Rebate Funding for Residents and Businesses</a></div>
+  <div class="article-summary">After a year in which the Trump administration rolled back electric-vehicle rebates and funding programs, the largest electric utility in Illinois announced an additional rebate program of nearly $70 million to fund electric-vehicle infrastructure pr…</div>
+  <div class="article-meta">Mar 06, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06032026/american-farmers-climate-cost-health-care/" target="_blank">On the Farm, the Hidden Climate Cost of the Broken U.S. Health Care System</a></div>
+  <div class="article-summary">Samantha Kemnah looked out the foggy window of her home in New Berlin, New York, at the 150-acre dairy farm she and her husband, Chris, bought last year. This winter, an unprecedented cold front brought snowstorms and ice to the region.  Over the pas…</div>
+  <div class="article-meta">Mar 06, 2026  12:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, March 07, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
