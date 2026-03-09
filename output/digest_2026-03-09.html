@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, March 09, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">23</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:57%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 16 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/09/a-better-way-to-compare-gas-electric-prices/" target="_blank">A Better Way To Compare Gas & Electric Prices</a></div>
+  <div class="article-summary">Drivers often struggle to directly compare the cost of fueling an EV versus a gasoline car due to disparate pricing units. A new method allows for a more accurate, apples-to-apples comparison, revealing that EVs can be significantly cheaper to operate, a crucial factor in accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Mar 09, 2026  08:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/08/is-byds-flash-charging-revolutionary/" target="_blank">Is BYD’s Flash Charging Revolutionary?</a></div>
+  <div class="article-summary">A few days ago, Larry Evans introduced us to BYD’s hot new “Flash Charging,” which is the quickest charging we’ve seen for passenger electric vehicles. In fact, it is a very big deal for multiple reasons. Jennifer Sensiba followed up earlier today to…</div>
+  <div class="article-meta">Mar 09, 2026  06:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-09/china-keeps-pushing-nuclear-power-with-ambitious-growth-target" target="_blank">China Keeps Pushing Nuclear Power With Ambitious Growth Target</a></div>
+  <div class="article-summary">Beijing is pushing its nuclear power sector to build more reactors with an ambitious new target, despite a history of project delays. This accelerated nuclear build-out is a critical component of China's strategy to decarbonize its massive energy consumption and meet its climate goals.</div>
+  <div class="article-meta">Mar 09, 2026  05:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-03-08/japan-s-fukushima-clean-up-offers-a-blueprint-for-nuclear-recovery" target="_blank">Japan’s Fukushima Clean-Up Offers a Blueprint for Nuclear Recovery</a></div>
+  <div class="article-summary">Engineers at Japan's Fukushima Daiichi plant have successfully removed spent nuclear fuel from Reactor 3, a critical step in the decades-long decommissioning process following the 2011 disaster. This achievement offers valuable lessons and a potential blueprint for safely dismantling other aging nuclear facilities worldwide, crucial for managing the long-term legacy of nuclear power.</div>
+  <div class="article-meta">Mar 09, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/08/struggling-vinfast-doubles-down-with-two-new-rolls-royce-level-luxe-models/" target="_blank">Struggling VinFast doubles down with TWO new, Rolls-Royce level luxe models</a></div>
+  <div class="article-summary">VinFast, despite US market struggles, is launching two new ultra-luxury electric vehicles to compete with top-tier global brands. This aggressive expansion signals a significant push for high-end EV adoption, potentially accelerating the transition to electric mobility in the premium segment.</div>
+  <div class="article-meta">Mar 09, 2026  01:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-08/tehran-engulfed-in-fire-smoke-and-acid-rain-following-strikes" target="_blank">Tehran Engulfed in Fire, Smoke and Acid Rain Following Strikes</a></div>
+  <div class="article-summary">Tehran’s residents woke up to a skyline shrouded in black smoke and acid rain clouds after Israeli airstrikes set ablaze key fuel depots serving one of the Middle East’s largest cities.…</div>
+  <div class="article-meta">Mar 08, 2026  17:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-08/green-investors-told-to-sit-tight-through-war-fueled-turmoil" target="_blank">Iran War Tests Whether Clean Tech Learned Any Lessons From 2022</a></div>
+  <div class="article-summary">For green investors, the current war-fueled surge in oil and gas prices conjures up painful memories of 2022, when renewables were gripped by a selloff that lasted into 2025. But at Jefferies, clients are being urged to double down on a bold upbeat c…</div>
+  <div class="article-meta">Mar 08, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-08/uk-banks-slammed-by-flood-re-s-ceo-for-ignoring-mortgage-risks" target="_blank">UK Banks Slammed by Flood Re’s CEO for ‘Ignoring’ Mortgage Risks</a></div>
+  <div class="article-summary">The UK’s flood insurer of last resort says the country’s mortgage banks aren’t doing enough to prepare for the risks facing homeowners across Britain.…</div>
+  <div class="article-meta">Mar 08, 2026  10:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/08/spring-forward-fall-back-are-time-changes-bad-for-your-health/" target="_blank">Spring Forward, Fall Back. Are Time Changes Bad For Your Health?</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+My cantankerous old Irish grandfather never changed his clocks when daylight savings began and ended. He preferred what he called “sun time.” There was one clock that always…</div>
+  <div class="article-meta">Mar 08, 2026  23:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/mar/08/trump-epa-rollbacks-vermont-new-york-climate-suits" target="_blank">How Trump’s EPA rollbacks give US states new tools in climate suits</a></div>
+  <div class="article-summary">Vermont and New York face high stakes to protect climate superfund laws as it faces attacks from Trump’s DoJSign up for the Breaking News US email to get newsletter alerts in your inboxBy rolling back a bedrockclimatelegal determination, theTrump adm…</div>
+  <div class="article-meta">Mar 08, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/08/womens-leadership-is-central-to-unlocking-the-global-phaseout-of-fossil-fuels/" target="_blank">Why women’s leadership is central to unlocking the global phaseout of fossil fuels</a></div>
+  <div class="article-summary">Women the world over are stopping energy projects that harm the climate and environment, and building regenerative futuresThe postWhy women’s leadership is central to unlocking the global phaseout of fossil fuelsappeared first onClimate Home News.…</div>
+  <div class="article-meta">Mar 08, 2026  12:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08032026/after-a-decade-of-missteps-a-texas-city-careens-toward-a-water-shortage-catastrophe/" target="_blank">After a Decade of Missteps, a Texas City Careens Toward a Water-Shortage Catastrophe</a></div>
+  <div class="article-summary">CORPUS CHRISTI, Texas—The imminent depletion of water supplies in Corpus Christi threatens to cut off the flow of jet fuel to Texas airports and other oil exports from one of the nation’s largest petroleum ports, triggering potential shockwaves throu…</div>
+  <div class="article-meta">Mar 08, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08032026/environmental-activists-fbi-visits/" target="_blank">Is the FBI Investigating Environmental Activists?</a></div>
+  <div class="article-summary">NEW YORK CITY—The group in the Brooklyn studio seemed harmless. There was a graduate student, a Yiddish teacher, a hairdresser. Fifteen people had gathered on a Wednesday night for a training offered by Extinction Rebellion NYC and Climate Defiance,…</div>
+  <div class="article-meta">Mar 08, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, March 09, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
