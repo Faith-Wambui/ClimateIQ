@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, March 10, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">☀️ Solar Surges & Hail of a Warming World: Today's Climate Dispatch</div>
+    <p>Record solar capacity additions underscore the unstoppable momentum of clean energy, even as extreme weather events like larger hailstones serve as stark reminders of our warming planet's escalating dangers. Meanwhile, global discussions on fossil fuel transitions gain new urgency, while critical mineral supply chains present both opportunities and potential equity challenges for a sustainable future.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 28 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09032026/north-carolina-cafo-complaint-systems/" target="_blank">North Carolina Created Complaint Systems for Its Industrialized Farms. They Don’t Work Very Well.</a></div>
+  <div class="article-summary">ROWLAND, N.C.—Brenda Schwab stopped her 16-year-old Ford pickup truck on Gaddy’s Mill Road and pointed to a chocolate-colored ridge about 30 feet long and 5 feet high, resting in a field and close to the road. A cold downpour had turned the air clamm…</div>
+  <div class="article-meta">Mar 09, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/09/43-gw-solar-tops-new-us-power-for-the-5th-year-in-a-row/" target="_blank">43 GW: Solar tops new US power for the 5th year in a row</a></div>
+  <div class="article-summary">In 2025, the US added a record 43 GW of new solar capacity, making it the dominant source of new power for the fifth consecutive year, with solar and storage comprising 79% of all new electricity generation. This continued economic advantage and rapid deployment of solar, even in historically conservative states, is crucial for meeting surging electricity demand, particularly from data centers, and mitigating climate change.</div>
+  <div class="article-meta">Mar 10, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/09/geely-weride-planning-2000-robotaxis-for-this-year/" target="_blank">Geely & WeRide Planning 2,000 Robotaxis for This Year</a></div>
+  <div class="article-summary">This may well end up being the year of the robotaxi. Several companies are trying to scale up robotaxi service significantly after early testing and initial rollout. You can count Chinese auto giant Geely and self-driving partner WeRide in that group…</div>
+  <div class="article-meta">Mar 10, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/09/in-alaska-a-data-center-inside-a-power-plant-inside-a-microgrid/" target="_blank">In Alaska, a Data Center Inside a Power Plant, Inside a Microgrid</a></div>
+  <div class="article-summary">The U.S. Department of Energy Helped Cordova With Its Local Microgrid. Now the Remote City Is Localizing Its Data Too. For years, the Cordova Electric Cooperative in Alaska has worked to source its energy closer to home. Hydropower and battery energy…</div>
+  <div class="article-meta">Mar 10, 2026  06:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/09/duke-merger-settlement-agreement-reached-in-south-carolina/" target="_blank">Duke Merger Settlement Agreement Reached in South Carolina</a></div>
+  <div class="article-summary">Following North Carolina Approval, Stage Set for Final Merger COLUMBIA, S.C. — A settlement agreement was reached by groups, including the Sierra Club, with Duke Energy on its proposed merger of its subsidiaries in South Carolina. A Sierra Club prior…</div>
+  <div class="article-meta">Mar 10, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/09/boosting-aviation-decarbonisation-through-the-revision-of-the-eu-ets/" target="_blank">Boosting Aviation Decarbonisation Through the Revision of the EU ETS</a></div>
+  <div class="article-summary">The EU ETS revision, effective July 2026, will expand its scope, generate revenue, and mandate Sustainable Aviation Fuel (SAF) use, directly impacting aviation's climate footprint. This move is crucial for meeting Paris Agreement targets by incentivizing cleaner flight operations and driving down emissions in a sector vital to global decarbonization efforts.</div>
+  <div class="article-meta">Mar 10, 2026  06:07 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-09/jefferies-makes-the-case-to-double-down-on-clean-tech-investments" target="_blank">Jefferies Makes the Case to Double Down on Clean Tech Investments</a></div>
+  <div class="article-summary">Why the bank is telling clients to stick with renewables despite supply chain and inflation risks.…</div>
+  <div class="article-meta">Mar 09, 2026  18:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-09/kenya-s-capital-worst-affected-as-floods-kill-at-least-37-people" target="_blank">Kenya’s Capital Worst Affected as Floods Kill at Least 37 People</a></div>
+  <div class="article-summary">At least 37 people died in flooding after heavy rains in several parts of Kenya on Friday night.…</div>
+  <div class="article-meta">Mar 09, 2026  15:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-09/eu-to-pitch-infrastructure-fund-to-drive-green-energy-transition" target="_blank">EU to Pitch Infrastructure Fund to Drive Green-Energy Transition</a></div>
+  <div class="article-summary">The European Union will launch a new investment fund to help deliver the trillions of euros of spending that will be needed over the next 15 years for the bloc’s green-energy transition.…</div>
+  <div class="article-meta">Mar 09, 2026  15:02 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09032026/warming-intensifies-hail-thunderstorms/" target="_blank">A Warmer Climate Means Bigger Hail</a></div>
+  <div class="article-summary">Human-caused warming is now directly linked to larger hailstones, a finding confirmed by new research examining a single severe thunderstorm. This means regions like the Midwestern U.S., already prone to extreme weather, face an increased risk of damaging hail events as the climate continues to warm.</div>
+  <div class="article-meta">Mar 10, 2026  03:05 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09032026/states-blast-federal-playbook-of-potential-colorado-river-options/" target="_blank">States Blast Federal Playbook of Potential Colorado River Options</a></div>
+  <div class="article-summary">The sluggish Colorado River negotiations have entered a new phase: Long and fiery letter writing. Politicians, water negotiators and environmental groups recently submitted hundreds of pages of comments on the Interior Department’s playbook for how t…</div>
+  <div class="article-meta">Mar 09, 2026  22:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/09/new-summit-in-colombia-seeks-to-revive-stalled-un-talks-on-fossil-fuel-transition/" target="_blank">New summit in Colombia seeks to revive stalled UN talks on fossil fuel transition</a></div>
+  <div class="article-summary">Colombia will host the first conference on transitioning away from fossil fuels, after more than 80 countries pushed at COP30 for an end to coal, oil and gasThe postNew summit in Colombia seeks to revive stalled UN talks on fossil fuel transitionappe…</div>
+  <div class="article-meta">Mar 09, 2026  20:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/09/the-uss-critical-minerals-club-threatens-an-equitable-clean-energy-transition/" target="_blank">The US’s critical minerals club threatens an equitable clean energy transition</a></div>
+  <div class="article-summary">Washington's minerals trading bloc will shore up supplies for the US's digital and military sectors and risks diverting resources away from cleantechThe postThe US’s critical minerals club threatens an equitable clean energy transitionappeared first…</div>
+  <div class="article-meta">Mar 09, 2026  20:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09032026/iran-conflict-gasoline-oil-price-shock-familiar-warning/" target="_blank">The Oil Price Shock Is Here. Its Arrival Provides a Familiar Warning.</a></div>
+  <div class="article-summary">Oil prices shot up on Monday as disruptions related to the war in Iran sent shockwaves through financial markets, underscoring the risks for countries that have been slow to diversify beyond fossil fuels. Brent crude oil, the benchmark for a majority…</div>
+  <div class="article-meta">Mar 09, 2026  19:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09032026/ohio-village-water-contaminants-extreme-weather-aging-infrastructure/" target="_blank">How Extreme Weather and Aging Infrastructure Led to Months of ‘Musty’ Water in One Ohio Village</a></div>
+  <div class="article-summary">The Allegheny Front covers the environment in Pennsylvania and eastern Ohio. Sign up for their newsletter here. Listen to the radio version of the piece below. Stacey Greer started filling and dating gallon-sized jugs with tap water last summer, when…</div>
+  <div class="article-meta">Mar 09, 2026  15:03 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, March 10, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
