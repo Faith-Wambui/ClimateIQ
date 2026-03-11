@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, March 11, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">45</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 6 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:47%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 36 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/10/toxic-coal-pollution-spikes-to-25-year-high-under-trump/" target="_blank">Toxic Coal Pollution Spikes to 25-Year High Under Trump</a></div>
+  <div class="article-summary">Under the Trump administration, pollution from coal-fired power plants has surged to a 25-year high, driven by deregulation and exemptions from emission standards. This alarming increase directly undermines efforts to combat climate change by releasing more greenhouse gases into the atmosphere.</div>
+  <div class="article-meta">Mar 11, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/10/lawsuit-challenges-trumps-massive-public-lands-giveaway-in-alaska/" target="_blank">Lawsuit Challenges Trump’s Massive Public Lands Giveaway in Alaska</a></div>
+  <div class="article-summary">The Trump administration has opened 2 million acres of vital Alaskan public lands, previously protected, to industrial development, including the controversial Ambler Road project. This decision, now facing a lawsuit from environmental groups, risks significant damage to carbon sinks and critical wildlife habitats, undermining climate goals.</div>
+  <div class="article-meta">Mar 11, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/ccc-net-zero-will-protect-uk-from-fossil-fuel-price-shocks/" target="_blank">CCC: Net-zero will protect UK from fossil-fuel price shocks</a></div>
+  <div class="article-summary">The “cost” of cutting UK emissions to net-zero is less than the cost of a single fossil-fuel price shock, according to a new report from the Climate Change Committee (CCC).
+
+Moreover, a net-zero economy would be almost completely protected from fossi…</div>
+  <div class="article-meta">Mar 11, 2026  03:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-does-the-iran-war-mean-for-the-energy-transition-and-climate-action/" target="_blank">Q&A: What does the Iran war mean for the energy transition and climate action?</a></div>
+  <div class="article-summary">The US and Israel’s war on Iran has caused oil and gas prices to soar, with the world now preparing for the possibility of another energy crisis.
+
+The conflict, which has seen Iran respond with missile strikes across the region, has killed more than…</div>
+  <div class="article-meta">Mar 10, 2026  19:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-10/eu-made-a-mistake-in-phasing-out-nuclear-von-der-leyen-says" target="_blank">EU Made ‘Mistake’ in Phasing Out Nuclear, Von Der Leyen Says</a></div>
+  <div class="article-summary">European Commission President Ursula von der Leyen declared the EU's move away from nuclear power a "strategic mistake," implicitly criticizing Germany's reactor phase-out. This shift away from a significant low-carbon energy source jeopardizes the bloc's ability to meet its ambitious climate targets.</div>
+  <div class="article-meta">Mar 10, 2026  14:49 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/10/buffering-batteries-the-grid-enhancing-technology-no-one-calls-a-get/" target="_blank">Buffering Batteries: The Grid Enhancing Technology No One Calls A GET</a></div>
+  <div class="article-summary">Buffering batteries placed near transmission constraints are rarely listed among grid enhancing technologies. The usual list includes advanced conductors, dynamic line rating, and power flow control devices. All of those technologies increase the ins…</div>
+  <div class="article-meta">Mar 11, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/10/a-deluge-of-solar-power-crushes-a-hollow-victory-for-coal/" target="_blank">A Deluge Of Solar Power Crushes A Hollow Victory For Coal</a></div>
+  <div class="article-summary">Solar power is still coming in hot in Texas, despite a lawsuit aimed at throttling back investment in renewable energy, brought against three leading investment firms by Texas State Attorney General Ken Paxton.The postA Deluge Of Solar Power Crushes…</div>
+  <div class="article-meta">Mar 11, 2026  06:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/10/byd-song-ultra-in-market-context-value-next-generation-capability/" target="_blank">BYD Song Ultra In Market Context: Value & Next-Generation Capability</a></div>
+  <div class="article-summary">There has been a lot of discussion around the launch of BYD’s next-generation Flash Charging and Blade Battery. There has also been some confusion, which can be clarified with a little context. “Flash charging” is BYD’s terminology for MW+ fast charg…</div>
+  <div class="article-meta">Mar 11, 2026  06:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/10/geoengineering-the-gulf-of-maine/" target="_blank">Geoengineering The Gulf Of Maine</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+According to Chemistry World, the ocean is the largest carbon sink on Earth, holding about 38,000 gigatons of carbon. That’s 40 times more than in the atmosphere and 15 to 20…</div>
+  <div class="article-meta">Mar 11, 2026  05:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/10/ev-prices-fall-again-gap-gas-cars-shrinks-6500-february/" target="_blank">EV prices fall again – and the gap with gas cars shrinks to $6,500</a></div>
+  <div class="article-summary">EV prices edged down in February, while gas-powered car prices crept up, narrowing the gap between the two, according to new estimates from Kelley Blue Book.
+
+The average transaction price (ATP) for a new EV in February was $55,300. That’s down 1.4%…</div>
+  <div class="article-meta">Mar 11, 2026  01:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/10/financial-sponsors-increasingly-back-european-battery-storage-platforms/" target="_blank">Financial sponsors increasingly back European battery storage platforms</a></div>
+  <div class="article-summary">From ESS News
+
+Large utilities including Enel, RWE and Iberdrola were the first movers in European BESS more than a decade ago for strategic and technical reasons, not commercial ones. These companies utilized their significant corporate balance shee…</div>
+  <div class="article-meta">Mar 10, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-10/a-2-billion-bond-fund-shuns-green-gilt-sale-over-nuclear-risk" target="_blank">A £2 Billion Fund Shuns New UK Green Bonds Funding Nuclear</a></div>
+  <div class="article-summary">The UK’s decision to use the proceeds of its green gilt sale on nuclear energy has emerged as a dealbreaker for Rathbones Asset Management’s flagship bond fund.…</div>
+  <div class="article-meta">Mar 10, 2026  10:11 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-10/middle-east-among-places-extreme-heat-is-becoming-unlivable" target="_blank">Where Climate Change Is Making Extreme Heat Unbearable</a></div>
+  <div class="article-summary">Extreme heat is already making parts of the world, like the Persian Gulf, uninhabitable for significant portions of the year, with temperatures exceeding human physiological limits. This escalating climate crisis poses a direct threat to human life and global stability, forcing mass displacement and impacting economic activity.</div>
+  <div class="article-meta">Mar 10, 2026  16:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-10/around-the-world-unbearably-hot-days-are-multiplying" target="_blank">Extreme Heat Is Making Life Increasingly Unlivable</a></div>
+  <div class="article-summary">Extreme heat has doubled the number of hours per year where outdoor conditions are unsafe for human activity since 1950, directly impacting global habitability. This escalating trend highlights the urgent need for climate action as rising temperatures make more regions increasingly unlivable.</div>
+  <div class="article-meta">Mar 10, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/mar/10/coffee-farming-el-salvador-honduras-adaptation-cost-central-americas-small-coffee-growers-crisis-global-economy" target="_blank">‘Everyone feels like they are being scammed’: can Central America’s small coffee growers survive as global prices fall?</a></div>
+  <div class="article-summary">Central American coffee farmers in El Salvador and Honduras are facing devastating losses due to unpredictable weather patterns and rising production costs, with yields and quality plummeting. This crisis threatens the livelihoods of smallholder farmers and highlights the urgent need for climate adaptation in a sector critical to global coffee supply.</div>
+  <div class="article-meta">Mar 10, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10032026/trumps-epa-claims-strong-enforcement/" target="_blank">Trump’s EPA Claims Strong Enforcement. But the Data Tells a Different Story.</a></div>
+  <div class="article-summary">For over a decade, Hino Motors Ltd. imported and sold more than 105,000 vehicles and engines with misleading or fabricated emissions data, until testing by the Environmental Protection Agency revealed the emissions-fraud scheme.  The case would lead…</div>
+  <div class="article-meta">Mar 11, 2026  02:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10032026/todays-climate-kenya-floods-climate-whiplash/" target="_blank">Following Months of Drought, Floods in Kenya Kill More Than 40 People</a></div>
+  <div class="article-summary">After months of intense drought conditions, Kenya was inundated by rain late last week, triggering severe flooding that killed more than 40 people. In the country’s capital city, Nairobi, a month’s worth of rain fell in 24 hours. “The ongoing floodin…</div>
+  <div class="article-meta">Mar 10, 2026  23:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/10/extreme-heat-study-global-warming-physical-activity" target="_blank">‘A sobering preview’: extreme heat now affects one in three people globally, study finds</a></div>
+  <div class="article-summary">Rising temperatures making it hard even for young, healthy people to safely do normal physical tasks in many regionsClimate breakdown is shrinking the amount of time that people can safely go about their lives, according to a study that shows a third…</div>
+  <div class="article-meta">Mar 10, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/10/we-must-invest-in-early-warning-systems-to-tackle-crises-like-kenyas-drought/" target="_blank">We must invest in early-warning systems to tackle crises like Kenya’s drought</a></div>
+  <div class="article-summary">With more than 3 million people facing acute hunger in Kenya, better mechanisms are needed to help communities reduce the devastation caused by future drought cyclesThe postWe must invest in early-warning systems to tackle crises like Kenya’s drought…</div>
+  <div class="article-meta">Mar 10, 2026  12:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10032026/ecuador-freezes-environmental-defenders-bank-accounts/" target="_blank">The Latest Tactic for Silencing Ecuador’s Environmental Defenders: Shuttering Their Bank Accounts</a></div>
+  <div class="article-summary">It was a sweltering January afternoon in the Amazonian town of Puyo when Andrés Tapia realized his daughter’s public school fees were due. Like many Ecuadorians, he reached for his phone to make a mobile transfer.  Carrying cash is too risky these da…</div>
+  <div class="article-meta">Mar 10, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, March 11, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
