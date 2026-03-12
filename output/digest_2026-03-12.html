@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, March 12, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 45 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-why-clean-energy-will-cut-uk-gas-imports-by-more-than-north-sea-drilling/" target="_blank">Analysis: Why clean energy will cut UK gas imports by more than North Sea drilling</a></div>
+  <div class="article-summary">New analysis reveals that expanding renewables like wind and solar, securing 15 GW in a single auction, will slash UK LNG imports by 78 tankers annually by 2030, a far greater impact than any marginal increase from new North Sea drilling. This shift to clean energy is crucial for bolstering the UK's energy security and reducing reliance on volatile global gas markets, especially as North Sea production is set to plummet 99% by 2050.</div>
+  <div class="article-meta">Mar 11, 2026  20:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/11/eu-auditors-warn-energy-community-targets-outpace-reality/" target="_blank">EU auditors warn energy community targets outpace reality</a></div>
+  <div class="article-summary">EU energy community targets are significantly lagging reality, with only 27% of larger municipalities hosting one and projected contributions to renewable capacity slashed from 21% to just 4%. This slow progress, exacerbated by regulatory confusion and grid delays, jeopardizes the EU's ambitious 2050 climate-neutrality goals.</div>
+  <div class="article-meta">Mar 11, 2026  18:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/11/setting-the-stage-for-us-energy-storage/" target="_blank">Setting the stage for US energy storage</a></div>
+  <div class="article-summary">From the magazine
+
+US energy storage caught glimpses of a clear sky in 2025, though dark clouds remain on the horizon. President Donald Trump’s changes to energy policy have transformed domestic manufacturing from a preference to a necessity, forcing…</div>
+  <div class="article-meta">Mar 11, 2026  16:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/11/did-gm-just-use-the-ev1-to-troll-ford-again-or-tesla-or-both/" target="_blank">Did GM Just Use The EV1 To Troll Ford, Again? Or Tesla? Or Both?</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+When the Ford Motor Company hit the brakes on its electrification plan last fall, General Motors was quick to remind everyone of its own commitment to electric cars. “Electri…</div>
+  <div class="article-meta">Mar 12, 2026  06:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/11/plugin-vehicles-achieve-19-penetration-in-australian-auto-market-in-february/" target="_blank">Plugin Vehicles Achieve 19% Penetration in Australian Auto Market in February</a></div>
+  <div class="article-summary">Our February update on EV sales shows: Australian plugin penetration grew from 16% in January 2026 to about 19% in February. That is a sales total of 11,100 battery electric vehicles (BEVs) and 5,854 plugin hybrid EVs (PHEVs). Almost 17,000 Australia…</div>
+  <div class="article-meta">Mar 12, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/11/gulf-environment-groups-respond-to-public-waters-sell-off-to-oil-industry/" target="_blank">Gulf & Environment Groups Respond To Public Waters Sell-off To Oil Industry</a></div>
+  <div class="article-summary">Amid Soaring Energy & Gas Prices, Trump Admin Draws Far Fewer Bids Than Dec. Sale NEW ORLEANS — Gulf and environmental groups responded to the Trump administration’s latest large-scale sell-off of public waters to the oil-and-gas industry in the Gulf…</div>
+  <div class="article-meta">Mar 12, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/11/electric-car-average-price-falls-by-e1800-as-carmakers-release-affordable-models-to-meet-eu-target-analysis/" target="_blank">Electric Car Average Price Falls by €1,800 as Carmakers Release Affordable Models to Meet EU Target — Analysis</a></div>
+  <div class="article-summary">But weakening carmakers’ next target in 2030 is likely to delay EVs reaching price parity with combustion vehicles. The average price of an electric car in the EU has fallen for the first time since 2020, driven by the release of more affordable mode…</div>
+  <div class="article-meta">Mar 12, 2026  06:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/11/how-to-fix-greenwashing-risks-in-the-eus-next-long-term-budget/" target="_blank">How to Fix Greenwashing Risks in the EU’s Next Long-Term Budget</a></div>
+  <div class="article-summary">T&E and partner NGOs have published guidance on the Performance Regulation — a key law shaping how climate and environmental spending will be tracked in the next EU budget. The ‘technical reference document’ was developed together with WWF, CEE Bankw…</div>
+  <div class="article-meta">Mar 12, 2026  05:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-12/massachusetts-green-cement-startup-slashes-staff-after-trump-cuts-support" target="_blank">Green Cement Startup Slashes Staff After Trump Cuts Support</a></div>
+  <div class="article-summary">Massachusetts-based Sublime Systems has cut two-thirds of its current workforce, casting doubt on a deal to supply Microsoft with low-carbon material.…</div>
+  <div class="article-meta">Mar 12, 2026  03:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-11/foresight-to-acquire-nz-clean-energy-and-invest-360-million" target="_blank">Foresight to Acquire NZ Clean Energy and Invest $360 Million</a></div>
+  <div class="article-summary">The Australian arm of London-based investment manager Foresight Group Holdings Ltd. will acquire New Zealand renewables developer NZ Clean Energy, with plans to invest A$500 million ($360 million) over the next twelve months.…</div>
+  <div class="article-meta">Mar 11, 2026  21:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-11/kenya-plans-2-9-billion-gas-power-plant-near-mombasa-port" target="_blank">Kenya Plans $2.9 Billion Gas Power Plant Near Mombasa Port</a></div>
+  <div class="article-summary">Kenya plans to build a 1,200-megawatt gas-fired power plant on its east coast as it ramps up electricity output to meet growing demand.…</div>
+  <div class="article-meta">Mar 11, 2026  15:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-11/gas-dominates-uk-capacity-auction-despite-push-for-clean-power" target="_blank">Gas Dominates UK Capacity Auction Despite Push for Clean Power</a></div>
+  <div class="article-summary">Gas-fired plants secured almost 60% of capacity in the UK’s latest market auction, underscoring their central role in the energy system even as the country pushes for cleaner power.…</div>
+  <div class="article-meta">Mar 11, 2026  14:04 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-11/los-angeles-set-to-see-record-heat-with-temperatures-near-100f" target="_blank">Record Heat Set to Roast Los Angeles and the Southwest</a></div>
+  <div class="article-summary">Los Angeles and the Southwest are bracing for record-breaking heat, threatening to melt California's vital snowpack and significantly increase the risk of drought returning to the region. This extreme heatwave directly impacts water availability and agricultural output, with cascading economic consequences for businesses reliant on these resources.</div>
+  <div class="article-meta">Mar 11, 2026  19:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-11/record-march-heat-to-scorch-los-angeles-us-southwest" target="_blank">Record March Heat to Scorch Los Angeles, US Southwest</a></div>
+  <div class="article-summary">Los Angeles and the US Southwest are bracing for an unprecedented March heatwave, with temperatures expected to soar. This early, intense heat threatens California's critical snowpack, jeopardizing vital water resources for millions.</div>
+  <div class="article-meta">Mar 11, 2026  18:13 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-12/climate-fiction-prize-winner-abi-dare-on-her-bestselling-novel" target="_blank">‘Everywhere I Looked, Climate Change Bled’: Abi Daré on Writing Climate Fiction</a></div>
+  <div class="article-summary">Novelist Abi Daré, winner of the Climate Fiction Prize, found climate change so pervasive in Nigeria that it "bled" into every aspect of her storytelling about young girls. Her work highlights how the climate crisis is not a distant threat but a present reality deeply impacting communities and lives, demanding urgent attention.</div>
+  <div class="article-meta">Mar 12, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/mar/12/quit-fossil-fuels-to-stem-deadly-floods-in-brazils-coffee-heartland-say-scientists" target="_blank">Quit fossil fuels to stem deadly floods in Brazil’s coffee heartland, say scientists</a></div>
+  <div class="article-summary">Global heating linked to rising risk of extreme rain that causes devastating landslides and rising coffee pricesThe record floods that have brought death and destruction to the heartland of Brazil’s coffee industry are expected to intensify if people…</div>
+  <div class="article-meta">Mar 12, 2026  06:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11032026/iran-war-oil-prices-renewable-energy/" target="_blank">The Iran War Is Making the Case for Renewable Energy, Experts Argue</a></div>
+  <div class="article-summary">The war between the United States, Israel and Iran has triggered the largest disruption to global oil supplies in the history of the modern oil market, with Brent crude prices currently hovering around $100 a barrel, sending economic shockwaves acros…</div>
+  <div class="article-meta">Mar 12, 2026  02:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11032026/middle-east-desalination-plant-attacks-fossil-fuel-water-dependence/" target="_blank">Attacks on Middle East Desalination Plants Highlight Risks of Near-Total Dependence on ‘Fossil Fuel Water’</a></div>
+  <div class="article-summary">Recent attacks in the Middle East on desalination plants, facilities that remove salt from seawater, raise the potential for a humanitarian crisis if the region’s freshwater production facilities are subjected to more widespread destruction. The atta…</div>
+  <div class="article-meta">Mar 12, 2026  01:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11032026/south-portland-maine-petroleum-storage-tanks-emissions/" target="_blank">There’s Something in the Air in South Portland, Maine</a></div>
+  <div class="article-summary">SOUTH PORTLAND—It’s one of Maine’s most desirable locations—home to a vibrant and diverse community, nearby beaches, and close proximity to Portland’s downtown. But for years, residents in South Portland have wondered: With 120 massive petroleum stor…</div>
+  <div class="article-meta">Mar 12, 2026  00:34 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, March 12, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
