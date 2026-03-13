@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, March 13, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 39 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/12/rivian-introduces-r2-lineup-sharing-full-trims-pricing/" target="_blank">Rivian Introduces R2 Lineup, Sharing Full Trims & Pricing</a></div>
+  <div class="article-summary">` The soul of a Rivian, sized for every adventure Today, American automaker and technology company Rivian announced full trims and pricing¹ for the all-new R2, a mid-size electric SUV that brings Rivian’s design, performance and technology to a signi…</div>
+  <div class="article-meta">Mar 13, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/12/why-are-ev-prices-only-coming-down-now-the-answer-is-more-political-than-you-think/" target="_blank">Why Are EV Prices Only Coming Down Now? The Answer Is More Political Than You Think</a></div>
+  <div class="article-summary">High upfront prices remain the biggest barrier to drivers switching to electric cars. After years of steady increases, that trend has finally reversed. This shift did not happen by accident. Why BEV prices kept rising despite cheaper batteries For ye…</div>
+  <div class="article-meta">Mar 13, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/12/conflict-in-middle-east-could-cost-europes-drivers-an-extra-e150-million-a-day/" target="_blank">Conflict in Middle East Could Cost Europe’s Drivers an Extra €150 Million a Day</a></div>
+  <div class="article-summary">European drivers paid a €55bn ‘geopolitical premium’ at the pump in 2022 when oil prices last averaged $100 a barrel. Dependence on imported fossil fuels continues to leave Europe vulnerable to volatility. Europeans are set to pay a ‘geopolitical pre…</div>
+  <div class="article-meta">Mar 13, 2026  06:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/12/europes-oil-dependency-the-geopolitical-premium/" target="_blank">Europe’s Oil Dependency: The Geopolitical Premium</a></div>
+  <div class="article-summary">Europeans will pay a high ‘geopolitical premium’ as oil passes $100 a barrel. In late February 2026, the United States and Israel carried out extensive coordinated strikes on Iran, prompting Iran to retaliate with drone and missile attacks against ta…</div>
+  <div class="article-meta">Mar 13, 2026  06:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/12/advocates-call-for-investigation-into-ai-campaign-that-used-residents-identities-without-consent-to-target-air-regulators/" target="_blank">Advocates Call for Investigation into AI Campaign that Used Residents’ Identities Without Consent to Target Air Regulators</a></div>
+  <div class="article-summary">SAN FRANCISCO — Bay Area advocates are calling on California Attorney General Rob Bonta and San Francisco, Alameda County, and Santa Clara County District Attorneys Brooke Jenkins, Ursula Jones Dickson, and Jeff Rosen investigate an AI-powered astrot…</div>
+  <div class="article-meta">Mar 13, 2026  06:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-13/china-s-new-law-signals-xi-won-t-curb-environmental-ambitions" target="_blank">China’s New Law Signals Xi Won’t Curb Environmental Ambitions</a></div>
+  <div class="article-summary">China’s legislators approved a sweeping new environmental law that’s seen as supporting President Xi Jinping’s ambition to strengthen ecological and climate protections while also ensuring economic growth.…</div>
+  <div class="article-meta">Mar 13, 2026  06:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-03-12/manila-s-pasig-river-clean-up-is-crucial-front-in-fight-against-marine-plastics" target="_blank">Manila’s Trash-Choked River Holds Key to Fight Against Ocean Plastics</a></div>
+  <div class="article-summary">Past leaders have tried and failed to rehabilitate the Pasig River, but President Ferdinand Marcos Jr. is taking on the task with renewed enthusiasm.…</div>
+  <div class="article-meta">Mar 13, 2026  01:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-12/heat-wave-shatters-march-temperature-records-in-cape-town" target="_blank">Heat Wave Shatters March Temperature Records in Cape Town</a></div>
+  <div class="article-summary">Cape Town and other areas of South Africa’s Western Cape Province saw record temperatures for March as a heat wave sears a region that’s vulnerable to both drought and wildfires.…</div>
+  <div class="article-meta">Mar 12, 2026  16:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-12/planet-warming-el-nino-to-form-by-september-us-forecasters-say" target="_blank">Planet-Warming El Niño to Form by September, US Forecasters Say</a></div>
+  <div class="article-summary">US forecasters say an El Niño is favored to emerge in the Pacific Ocean by September, threatening to drive global temperatures higher and disrupt crops in the months ahead.…</div>
+  <div class="article-meta">Mar 12, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-12/iran-war-how-the-water-crisis-is-getting-worse" target="_blank">How War Is Making Iran’s Water Crisis Worse</a></div>
+  <div class="article-summary">Also: Green cement startup Sublime Systems lays off two-thirds of its workers.…</div>
+  <div class="article-meta">Mar 12, 2026  15:54 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/13/australia-nt-floods-dog-helicopter-rescue-hero-ben-parfitt" target="_blank">NT cop Ben Parfitt rescued two dozen school kids from a flooded caravan park. Then he made headlines for saving a dog</a></div>
+  <div class="article-summary">Northern Territory police officer Ben Parfitt rescued two dozen school children and a family with their dog from waist-deep floodwaters in Katherine, a town experiencing its worst inundation since the 1990s. This dramatic rescue highlights the increasing frequency and severity of extreme weather events driven by climate change, impacting communities across northern Australia.</div>
+  <div class="article-meta">Mar 13, 2026  08:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-12/dhs-shutdown-puts-high-profile-report-on-fema-in-limbo" target="_blank">DHS Shutdown Puts High-Profile Report on FEMA in Limbo</a></div>
+  <div class="article-summary">The US Department of Homeland Security's shutdown has stalled a critical report aimed at revamping FEMA, the nation's primary disaster response agency. This delay jeopardizes crucial reforms needed to bolster our preparedness and resilience against escalating climate-driven disasters.</div>
+  <div class="article-meta">Mar 12, 2026  18:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12032026/virginia-democrats-fail-to-reach-compromise-on-data-center-tax-exemption/" target="_blank">Virginia Democrats Fail to Reach Compromise on Data Center Tax Exemption</a></div>
+  <div class="article-summary">RICHMOND, Va.—Virginia lawmakers under Democratic control failed to produce a budget on schedule Thursday because of heightened debates over a tax exemption for data centers. Lawmakers from both chambers adjourned without passing a budget draft neede…</div>
+  <div class="article-meta">Mar 13, 2026  05:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12032026/alabama-public-service-commission-utility-regulation-electric-bills/" target="_blank">Alabama Poised to Drastically Overhaul Utility Regulation. Will It Lower Electric Bills?</a></div>
+  <div class="article-summary">MONTGOMERY, Ala.—High electricity costs have been the talk of the session in the Alabama Legislature, and the state seems poised to totally revamp its utility regulatory process.  But which changes will be made and how effective those changes will be…</div>
+  <div class="article-meta">Mar 13, 2026  03:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12032026/trump-brownsville-texas-oil-refinery/" target="_blank">Trump Claims Indian Investment Will Make Long-Standing Plans for Brownsville Refinery a Reality</a></div>
+  <div class="article-summary">Trump claimed a “massive win” this week when he announced that the Indian private energy company Reliance Industries is investing in a proposed oil refinery in Brownsville, Texas. Trump took to his social media platform Truth Social to announce the “…</div>
+  <div class="article-meta">Mar 13, 2026  01:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12032026/warming-waters-threaten-seafood-supply/" target="_blank">Warming Waters Threaten Seafood Supply</a></div>
+  <div class="article-summary">In the world’s waters, fish are making a quiet, biological retreat. The once simple rules of the ocean—grow larger than potential predators—are being rewritten as temperatures reach record highs. Desperate to survive, fish are hitting the fast-forwar…</div>
+  <div class="article-meta">Mar 12, 2026  21:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12032026/inside-clean-energy-hydropower-potential/" target="_blank">Can Hydropower Ride the Wave of the Energy Boom?</a></div>
+  <div class="article-summary">The International Energy Agency’s executive director has called hydropower a “forgotten giant,” and has urged governments to do more to remember it. U.S. President Donald Trump has said hydropower is “fantastic,” a sharp contrast to his disdain for w…</div>
+  <div class="article-meta">Mar 12, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, March 13, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
