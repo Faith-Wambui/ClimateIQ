@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, March 15, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">21</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 0 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 21 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/14/trumps-offshore-wind-nightmare-has-become-reality/" target="_blank">Trump’s Offshore Wind Nightmare Has Become Reality</a></div>
+  <div class="article-summary">Despite past presidential efforts to halt it, the 800-megawatt Vineyard Wind farm off Massachusetts is now fully installed, marking a significant victory for US offshore wind. This project, along with four other Atlantic Coast wind farms, is poised to deliver gigawatts of clean power, underscoring the growing momentum of renewable energy development.</div>
+  <div class="article-meta">Mar 15, 2026  06:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/14/why-is-the-tesla-semi-still-in-pilot-program-stage/" target="_blank">Why Is The Tesla Semi Still In Pilot Program Stage?</a></div>
+  <div class="article-summary">Despite a decade-long wait, Tesla's electric Semi truck is still in a pilot program, with companies like Mone Transport now testing the vehicles. This slow rollout is critical for decarbonizing freight, a sector responsible for a significant portion of global emissions, and delays hinder the urgent transition away from diesel.</div>
+  <div class="article-meta">Mar 15, 2026  06:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/14/lucid-investor-day-report-we-are-building-for-the-future/" target="_blank">Lucid Investor Day Report: “We Are Building for the Future”</a></div>
+  <div class="article-summary">During its March 12 investor day in New York, Lucid Group announced a sweeping financial and product strategy that signals a departure from its status as a niche luxury manufacturer. CleanTechnica attended the event’s webcast live. Marc Winterhoff, t…</div>
+  <div class="article-meta">Mar 15, 2026  02:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/14/vingroup-shielding-filipino-motorists-from-historic-fuel-price-hikes-with-campaign/" target="_blank">Vingroup Shielding Filipino Motorists from Historic Fuel Price Hikes with Campaign</a></div>
+  <div class="article-summary">Following what the Department of Energy (DOE) has described as the highest fuel price jump in the country’s history, with pump prices rising by as much as P24 (~$0.55) per liter this week due to global supply disruptions, Vingroup has launched its “T…</div>
+  <div class="article-meta">Mar 15, 2026  01:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/14/humanoid-robots-get-to-work-at-german-bmw-factory-video/" target="_blank">Humanoid robots get to work at German BMW factory [video]</a></div>
+  <div class="article-summary">After successfully piloting humanoid robots at its Spartanburg, SC plant last year, BMW is putting AI-powered machines to work building EVs at its Leipzig iFACTORY.
+
+While other companies trade on promises and plans, BMW has been quietly testing huma…</div>
+  <div class="article-meta">Mar 15, 2026  01:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-14/iran-war-strikes-on-oil-infrastructure-create-pollution-risk-for-millions" target="_blank">Iran War-Fueled Pollution Put Millions at Risk</a></div>
+  <div class="article-summary">Tehran already had polluted air, but it’s being made worse by Israeli and US airstrikes on oil infrastructure.…</div>
+  <div class="article-meta">Mar 14, 2026  20:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-14/iran-war-reignites-ev-interest-in-us-markets" target="_blank">Surging Gas Prices Reignite EV Interest</a></div>
+  <div class="article-summary">Although electric vehicle sales have been down, analysts and consultants say $4 gas prices are the tipping point for drivers to make the switch.…</div>
+  <div class="article-meta">Mar 14, 2026  16:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-14/german-minister-urges-boost-in-renewables-to-aid-energy-security" target="_blank">German Minister Urges Boost in Renewables to Aid Energy Security</a></div>
+  <div class="article-summary">Germany’s environment minister urged the country to accelerate adoption of renewable power sources as a way to boost its energy security and reduce its reliance on fossil fuel.…</div>
+  <div class="article-meta">Mar 14, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-03-14/iran-war-s-toxic-pollution-will-spread-and-last-for-decades" target="_blank">Toxic Pollution From Iran War Will Spread and Last for Decades</a></div>
+  <div class="article-summary">Exploding fuel infrastructure and missiles have released contaminants that put the health of millions of people at risk.…</div>
+  <div class="article-meta">Mar 14, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/mar/14/germany-misses-climate-targets-as-emissions-barely-fall-in-2025" target="_blank">Germany misses climate targets as emissions barely fall in 2025</a></div>
+  <div class="article-summary">Greenhouse gases dropped just 0.1% last year as environment minister criticises lack of improvementGreenhouse gas emissions in Germany have again missed targets set by the Climate Protection Act and barely fell at all in 2025.Emissions decreased by j…</div>
+  <div class="article-meta">Mar 14, 2026  16:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/14/my-ideas-are-a-little-revolutionary-ecologist-suzanne-simard-on-intelligent-forests-the-climate-and-her-critics" target="_blank">‘My ideas are a little revolutionary’: ecologist Suzanne Simard on intelligent forests, the climate and her critics</a></div>
+  <div class="article-summary">Her research popularised the idea of the wood wide web, but the scientific backlash was brutal. As the author of The Mother Tree returns to the forest in a new book, she discusses her battle to reimagine our relationship with natureIn 2018, the ecolo…</div>
+  <div class="article-meta">Mar 14, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14032026/pacific-northwest-salmon-habitat-loss-tribes/" target="_blank">Habitat Loss Is Eroding Tribal Sovereignty</a></div>
+  <div class="article-summary">Spanning seven U.S. states and one Canadian province, the Columbia River Basin was once the largest salmon-producing river system in the world. Yet, with four of the 16 salmon and steelhead trout species now extinct and another seven endangered or th…</div>
+  <div class="article-meta">Mar 14, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14032026/republican-legislation-shielding-polluters-from-climate-lawsuits/" target="_blank">The Latest Front in the Battle Over Climate Lawsuits: Bills Wiping Out Liability</a></div>
+  <div class="article-summary">Republican lawmakers in multiple states and Congress are advancing proposals to shield polluters from climate accountability and prevent any type of liability for climate change harms—even as these harms and their associated costs continue to mount.…</div>
+  <div class="article-meta">Mar 14, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14032026/data-center-development-energy/" target="_blank">A New Era of Data Center Development Is Like a Second Industrial Revolution</a></div>
+  <div class="article-summary">For its first three decades, the data center industry was not used to the limelight, quietly building server closets in office basements and later the infrastructure to power credit cards, digital health records, social media and streaming services.…</div>
+  <div class="article-meta">Mar 14, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, March 15, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
