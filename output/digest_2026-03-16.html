@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, March 16, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">18</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 12 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/16/un-climate-chief-to-use-iran-crisis-to-hit-out-at-delusional-fossil-fuel-supporters/" target="_blank">‘Completely delusional’: UN climate chief warns against fossil fuel push after Iran crisis</a></div>
+  <div class="article-summary">Following the Gulf crisis and soaring fossil fuel prices, UN Climate Chief Simon Stiell declared any push for more oil and gas "completely delusional." He stressed that this volatility underscores the urgent need to accelerate renewable energy adoption and break free from fossil fuel dependency to secure a stable climate future.</div>
+  <div class="article-meta">Mar 16, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/15/foia-documents-reveal-trump-administration-ordered-fish-wildlife-service-to-change-materials-about-indigenous-peoples/" target="_blank">FOIA Documents Reveal Trump Administration Ordered Fish & Wildlife Service to Change Materials About Indigenous Peoples</a></div>
+  <div class="article-summary">Trump administration officials directed the Fish and Wildlife Service to alter materials concerning Indigenous peoples, potentially obscuring their historical and ongoing connections to conservation lands. This move raises concerns about the suppression of vital perspectives that are crucial for effective, equitable climate adaptation and biodiversity protection strategies.</div>
+  <div class="article-meta">Mar 16, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/15/cupra-tavascan-ev-exempted-from-eu-tariffs-on-chinese-evs/" target="_blank">CUPRA Tavascan EV Exempted from EU Tariffs on Chinese EVs</a></div>
+  <div class="article-summary">The EU has exempted the CUPRA Tavascan EV, manufactured in China, from its new tariffs on Chinese electric vehicles. This decision, while seemingly a loophole, highlights the complex and potentially contradictory nature of the EU's trade policies as it navigates the global EV market and its climate goals.</div>
+  <div class="article-meta">Mar 16, 2026  04:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/15/us-fast-charging-needs-to-focus-on-moving-faster/" target="_blank">US Fast Charging Needs to Focus on Moving Faster</a></div>
+  <div class="article-summary">A recent freeze on NEVI funding, initiated by the Trump administration, has stalled progress on US fast-charging infrastructure. This disruption highlights how the program's slow rollout made it susceptible to political interference, jeopardizing crucial climate goals.</div>
+  <div class="article-meta">Mar 16, 2026  00:07 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/15/will-the-next-disruptive-plane-be-european/" target="_blank">Will the Next Disruptive Plane Be European?</a></div>
+  <div class="article-summary">Europe is poised to lead the next aviation revolution with its focus on sustainable fuel and electric aircraft development, aiming to slash emissions from a sector notoriously difficult to decarbonize. This push is critical as air travel accounts for roughly 2.5% of global CO2 emissions, a figure projected to grow significantly without such innovations.</div>
+  <div class="article-meta">Mar 16, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/15/when-fossil-fuel-supplies-falter-interest-in-renewables-increases/" target="_blank">When Fossil Fuel Supplies Falter, Interest In Renewables Increases</a></div>
+  <div class="article-summary">Cuba, facing oil supply disruptions due to US sanctions, has rapidly tripled its solar power generation to over 20% of its electricity in just one year, installing 49 new solar farms with over 1,000 MW of capacity. This swift transition, supported by China, demonstrates how geopolitical pressures can accelerate renewable energy adoption, offering a vital pathway to energy independence and climate resilience.</div>
+  <div class="article-meta">Mar 16, 2026  04:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/15/generac-home-battery-system-wins-the-2025-good-design-award/" target="_blank">Generac home battery system wins the 2025 GOOD DESIGN award</a></div>
+  <div class="article-summary">Generac's new PWRcell 2 home battery system has won a 2025 GOOD DESIGN award, highlighting its functionality and sustainability. This award signals a significant move by a major generator company into the renewable energy storage market, crucial for grid resilience and maximizing solar power utilization, especially as utility policies shift.</div>
+  <div class="article-meta">Mar 15, 2026  18:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/15/e-quipment-highlight-trova-e-spotter-electric-terminal-truck-video/" target="_blank">E-quipment highlight: Trova E-Spotter electric terminal truck [video]</a></div>
+  <div class="article-summary">Instead of electrifying an existing HD truck platform, Dublin, Virginia-based Trova developed its all-electric E-Spotter terminal tractor from the ground up for durability, driver comfort, and low-maintenance operation.
+
+Whether you call them termina…</div>
+  <div class="article-meta">Mar 15, 2026  17:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/15/total-mess-at-elon-musks-xai-not-built-right-and-being-rebuilt-while-polluting-enormously/" target="_blank">Total Mess at Elon Musk’s xAI, “Not Built Right” and “Being Rebuilt” — While Polluting Enormously</a></div>
+  <div class="article-summary">Everything is wonderful and perfect and industry leading at Elon Musk companies … until it is not. We’ve seen it time and time again at Tesla, where we find out about insanely stupid decisions and distractions long after the company scrambled to fix…</div>
+  <div class="article-meta">Mar 15, 2026  17:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-15/california-insurance-crisis-hits-even-homes-facing-lower-wildfire-risk" target="_blank">Even Low-Risk Homes Are Caught Up in California’s Climate Insurance Crisis</a></div>
+  <div class="article-summary">The state’s insurer of last resort is meant for high fire risk properties but homeowners in areas unlikely to burn are now being forced into the plan.…</div>
+  <div class="article-meta">Mar 15, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-15/canada-nordics-deepen-arctic-security-ties-back-greenland-sovereignty" target="_blank">Canada, Nordics Deepen Arctic Security Ties, Back Greenland Sovereignty</a></div>
+  <div class="article-summary">Canada and the Nordic countries agreed to ramp up defense production and deepen security cooperation to counter Russia in the Arctic and push back against US pressure on Greenland.…</div>
+  <div class="article-meta">Mar 15, 2026  16:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-15/italy-explores-nuclear-return-after-40-years-as-energy-costs-hit" target="_blank">Italy Explores Nuclear Return After 40 Years as Energy Costs Hit</a></div>
+  <div class="article-summary">Giorgia Meloni has long pitched nuclear energy as a cure for Italy’s wilting economy. Now her government is plotting how to actually resurrect the banned technology.…</div>
+  <div class="article-meta">Mar 15, 2026  10:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/15/air-pollution-causes-social-instability-in-ant-colonies/" target="_blank">Air Pollution Causes Social Instability in Ant Colonies</a></div>
+  <div class="article-summary">Ozone pollution is disrupting ant colonies by destroying their crucial scent signals, leading to aggressive attacks between nestmates. This breakdown of communication, caused by ozone's reaction with alkenes, highlights how even subtle environmental changes can destabilize complex social systems, with implications for broader ecosystem health.</div>
+  <div class="article-meta">Mar 15, 2026  23:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15032026/arizona-south32-hermosa-critical-minerals-mine/" target="_blank">Nation’s First Critical Minerals Mine Nears Approval in Biodiversity Hotspot</a></div>
+  <div class="article-summary">PATAGONIA,  Ariz.—The U.S. Forest Service on March 5 announced it plans to soon approve the nation’s first critical minerals mine, South32’s Hermosa project, when it released the final environmental impact statement, which was permitted under a strea…</div>
+  <div class="article-meta">Mar 15, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15032026/new-mexico-climate-religious-pilgrimage/" target="_blank">A New Mexico Religious Pilgrimage Rode a Global Wave Hoping for Ripple Effects for the Environment</a></div>
+  <div class="article-summary">Three faith-motivated environmentalists completed a 328-mile pilgrimage from Carlsbad, New Mexico, to the state capitol, walking past oil and gas wells to highlight the climate impact of fossil fuel extraction. Their journey aimed to draw attention to the urgent need for climate action by connecting spiritual values with environmental stewardship.</div>
+  <div class="article-meta">Mar 15, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15032026/icn-sunday-morning-fbi-investigating-climate-activists/" target="_blank">Is the FBI Investigating Climate Activists?</a></div>
+  <div class="article-summary">An FBI agent arrived at the door of a former member of Extinction Rebellion NYC last month, saying she had questions about the environmental advocacy group.  It wasn’t the first time climate activists have drawn scrutiny from the FBI. But the visit a…</div>
+  <div class="article-meta">Mar 15, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, March 16, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
