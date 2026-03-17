@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, March 17, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">41</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:57%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 11 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 27 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/16/what-do-multiple-arrests-in-indonesia-mean-for-europes-biofuels-policy/" target="_blank">What Do Multiple Arrests in Indonesia Mean for Europe’s Biofuels Policy?</a></div>
+  <div class="article-summary">Indonesian authorities have arrested ten individuals, including a high-ranking customs official, for alleged palm oil fraud, casting serious doubt on the integrity of waste biofuel supplies destined for Europe. This scandal threatens to undermine Europe's ambitious renewable energy targets by potentially allowing unsustainable palm oil to be falsely certified as waste-based biofuel, thereby contributing to deforestation and greenhouse gas emissions.</div>
+  <div class="article-meta">Mar 17, 2026  06:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/16/sierra-club-sues-trump-administration-for-failing-americans-public-health-from-gas-plant-pollution/" target="_blank">Sierra Club Sues Trump Administration for Failing Americans’ Public Health from Gas Plant Pollution</a></div>
+  <div class="article-summary">The Sierra Club is suing the Trump administration's EPA in federal court, alleging the agency is failing to protect public health by setting weak Clean Air Act standards for gas plant pollution. This legal challenge highlights the EPA's refusal to consider public health impacts in its decision-making, directly threatening air quality and the well-being of communities nationwide.</div>
+  <div class="article-meta">Mar 17, 2026  06:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/16/uk-brings-forward-cfd-auction-commits-to-balcony-solar-in-response-to-middle-east-conflict/" target="_blank">UK brings forward CfD auction, backs balcony solar in Middle East response</a></div>
+  <div class="article-summary">The UK is fast-tracking its renewable energy auction and legalizing plug-in solar for homes, a move driven by Middle East conflict to accelerate the transition away from fossil fuels. This policy shift aims to significantly boost solar deployment, pushing expensive natural gas off the grid and supporting the UK's goal of 45 GW of solar by 2030.</div>
+  <div class="article-meta">Mar 16, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-16/statkraft-ceo-against-power-market-changes-that-threaten-renewables" target="_blank">Statkraft CEO Against Power Market Changes That Threaten Renewables</a></div>
+  <div class="article-summary">Statkraft, Europe's leading renewable power producer, warns regulators against altering electricity pricing mechanisms, fearing it could jeopardize crucial investments in clean energy projects. Such changes risk undermining the momentum needed to meet ambitious climate targets and transition away from fossil fuels.</div>
+  <div class="article-meta">Mar 16, 2026  14:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-17/surprise-solar-uptake-in-pakistan-cushions-mideast-energy-shock" target="_blank">Surprise Solar Uptake in Pakistan Cushions Mideast Energy Shock</a></div>
+  <div class="article-summary">Pakistan's swift embrace of solar energy is significantly mitigating the economic blow of soaring fossil fuel costs, a direct consequence of the Middle East conflict. This unexpected surge in renewable adoption demonstrates a crucial pathway for developing nations to build energy resilience and reduce their reliance on volatile global markets.</div>
+  <div class="article-meta">Mar 17, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/16/my-zeekr-7x-decision/" target="_blank">My Zeekr 7X Decision</a></div>
+  <div class="article-summary">Australia's burgeoning EV market saw the Zeekr 7X snag third place in February BEV sales, signaling strong consumer adoption of electric vehicles beyond established players. This surge in BEV popularity, with models like the Zeekr 7X gaining traction, directly contributes to reducing transport emissions and accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Mar 17, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/16/hyundai-motor-kia-nvidia-expand-strategic-partnership-for-next-generation-autonomous-driving-technology/" target="_blank">Hyundai Motor, Kia, & NVIDIA Expand Strategic Partnership for Next-Generation Autonomous Driving Technology</a></div>
+  <div class="article-summary">Hyundai and Kia are deepening their partnership with NVIDIA, integrating advanced AI for faster development of their next-generation autonomous driving systems. This move is crucial for accelerating the adoption of safer, scalable self-driving technology, a key component in reducing emissions from the transportation sector.</div>
+  <div class="article-meta">Mar 17, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/16/lets-not-pour-cold-water-on-the-eu-car-industrys-ev-momentum/" target="_blank">Let’s Not Pour Cold Water on the EU Car Industry’s EV Momentum</a></div>
+  <div class="article-summary">European lawmakers are considering weakening the 2030 emissions targets for car manufacturers, a move that risks undermining the significant investment already flowing into electric vehicle production. This potential rollback jeopardizes the EU's climate goals by slowing the transition away from fossil fuel-powered vehicles.</div>
+  <div class="article-meta">Mar 17, 2026  06:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/16/this-mine-put-100-autonomous-electric-haul-trucks-to-work-heres-how-it-went/" target="_blank">This mine put 100 autonomous electric haul trucks to work – here’s how it went</a></div>
+  <div class="article-summary">Inner Mongolia's Yimin coal mine deployed 100 autonomous, electric haul trucks, exceeding diesel truck performance by 20% and setting new records for payload and speed. This breakthrough demonstrates how AI and electrification can dramatically boost mining efficiency, with implications for both productivity and potentially accelerating the transition away from fossil fuels by making operations cleaner and safer.</div>
+  <div class="article-meta">Mar 17, 2026  04:13 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-16/brazil-doubles-down-on-conserving-forests-in-revised-climate-plan" target="_blank">Brazil Doubles Down on Conserving Forests in Revised Climate Plan</a></div>
+  <div class="article-summary">Brazil on Monday unveiled an updated national climate plan, the first time since 2008 the country has revised its main policy to curb carbon-dioxide emissions and adapt to global warming.…</div>
+  <div class="article-meta">Mar 17, 2026  01:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-16/us-plans-first-new-coal-fired-power-plant-since-2013-in-alaska" target="_blank">US Planning First New Coal Power Plant Since 2013 in Alaska</a></div>
+  <div class="article-summary">Terra Energy Center is pouring $1 billion into a deal for a planned coal project in Alaska, marking the first investment in new US coal power in more than a decade.…</div>
+  <div class="article-meta">Mar 16, 2026  21:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-16/gas-prices-rise-fueling-new-interest-in-electric-vehicles" target="_blank">As Gas Prices Climb, EVs Are Becoming a More Attractive Option</a></div>
+  <div class="article-summary">Drivers are looking for ways to spend less at the pump.…</div>
+  <div class="article-meta">Mar 16, 2026  20:37 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-16/storm-threatens-washington-with-high-winds-cuts-power-across-us" target="_blank">NYC to Chicago Flights Grounded by Potential ‘Bomb’ Cyclone</a></div>
+  <div class="article-summary">A powerful bomb cyclone is disrupting air travel across the eastern US, grounding flights from NYC to Chicago and beyond. This severe weather event, fueled by climate change, highlights the increasing frequency and intensity of extreme weather impacting critical infrastructure and daily life.</div>
+  <div class="article-meta">Mar 16, 2026  16:58 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/mar/17/which-oscar-winning-movie-best-reflects-our-reality" target="_blank">Which Oscar-winning movie best reflects our reality? | Fiona Katauskas</a></div>
+  <div class="article-summary">See more ofFiona Katauskas’s cartoons here…</div>
+  <div class="article-meta">Mar 17, 2026  02:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/16/reduced-physical-activity-due-to-global-heating-rise-health-issues-study" target="_blank">Reduced physical activity due to global heating will lead to rise in health issues, study says</a></div>
+  <div class="article-summary">Researchers project that reduced activity could contribute to half a million additional premature deaths annually by 2050Rising temperatures are making physical activity undesirable and even dangerous in many parts of the world, and as global heating…</div>
+  <div class="article-meta">Mar 17, 2026  02:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16032026/un-climate-chief-iran-war-fossil-fuel-dependency/" target="_blank">Iran War Shows That Doubling Down on Fossil Fuels Is ‘Delusional,’ UN Climate Chief Says</a></div>
+  <div class="article-summary">The Iran war’s disruption to the global energy market should be a wake-up call for countries that continue to rely on fossil fuels, said United Nations climate chief Simon Stiell in a speech on Monday. Addressing a European audience at the Green Grow…</div>
+  <div class="article-meta">Mar 17, 2026  00:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16032026/new-york-city-induction-stoves-energy-efficiency/" target="_blank">New York Cooks Up a Plan to Boost Energy Efficiency in Public Housing</a></div>
+  <div class="article-summary">Facing each other, two appliance installers strapped a 350-pound stove to their bodies, with thick black cords wrapped around their backs to support it. One of the workers walked up the stairs backwards as they carefully maneuvered up the narrow stai…</div>
+  <div class="article-meta">Mar 16, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, March 17, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
