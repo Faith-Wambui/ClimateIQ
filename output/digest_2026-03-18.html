@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, March 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 36 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/17/europe-must-not-let-airlines-sabotage-clean-aviation-fuels/" target="_blank">Europe Must Not Let Airlines Sabotage Clean Aviation Fuels</a></div>
+  <div class="article-summary">Major European airlines like Lufthansa are actively lobbying against ambitious targets for Sustainable Aviation Fuels (SAFs), threatening to derail crucial efforts to decarbonize the aviation sector. This resistance jeopardizes Europe's energy security and its commitment to climate goals by potentially delaying the widespread adoption of cleaner aviation technologies.</div>
+  <div class="article-meta">Mar 18, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/17/energy-dept-keeps-demanding-a-coal-plant-stay-open-thats-not-even-running/" target="_blank">Energy Dept keeps demanding a coal plant stay open that’s not even running</a></div>
+  <div class="article-summary">The Department of Energy has issued a second emergency order forcing the closure of Washington's last coal plant to be delayed for another 90 days, despite the plant owner and ample hydropower resources making it unnecessary. This continued operation of a non-functioning coal plant unnecessarily prolongs emissions and health impacts for central Washington.</div>
+  <div class="article-meta">Mar 17, 2026  19:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/17/us-says-china-not-undercutting-domestic-battery-anode-makers/" target="_blank">US says China not undercutting domestic battery anode makers</a></div>
+  <div class="article-summary">In a vote held on March 12, the US International Trade Commission (ITC) ruled against the implementation of tariffs on graphite anode imports from China. The decision effectively kills the anti-dumping and countervailing duty (AD/CVD) orders that wou…</div>
+  <div class="article-meta">Mar 17, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-17/alaska-could-be-site-of-first-new-us-coal-plant-since-2013" target="_blank">The Billion-Dollar Deal to Build a New Coal Plant in Alaska</a></div>
+  <div class="article-summary">The Trump administration is backing a $1.3 billion coal plant in Alaska, potentially marking the first new US coal facility in over a decade. This move directly contradicts global climate goals and will lock in decades of significant carbon emissions.</div>
+  <div class="article-meta">Mar 17, 2026  17:16 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/17/greece-risks-becoming-trumps-trojan-horse-in-the-fight-to-decarbonise-shipping/" target="_blank">Greece Risks Becoming Trump’s Trojan Horse in the Fight to Decarbonise Shipping</a></div>
+  <div class="article-summary">Green shipping can ensure that Europe’s leading shipping industry remains on top. Originally published on Lloyd’s List As anyone knows, any great Greek tragedy is defined by an act of betrayal. Back in November, as the International Maritime Organiza…</div>
+  <div class="article-meta">Mar 18, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/17/industry-civil-society-groups-call-for-a-new-european-investment-plan/" target="_blank">Industry & Civil Society Groups Call for a New European investment Plan</a></div>
+  <div class="article-summary">Today’s challenges demand a new European investment plan. Dear President von der Leyen, Dear President Costa, Europe faces a historic moment. The scale of the economic, geopolitical, climate and technological challenges before us cannot be met with i…</div>
+  <div class="article-meta">Mar 18, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/17/iran-conflict-set-to-hit-petrol-drivers-5-times-harder-than-ev-drivers-analysis/" target="_blank">Iran Conflict Set to Hit Petrol Drivers 5 Times Harder than EV Drivers — Analysis</a></div>
+  <div class="article-summary">As EU Environment Ministers meet to discuss electric vehicle targets, new research shows EVs are the best way to protect drivers from oil shocks. The EU spent €67 bn on oil imports for cars last year Accelerating the roll-out of EVs would cut oil imp…</div>
+  <div class="article-meta">Mar 18, 2026  06:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/17/how-electric-cars-cut-oil-dependence-drive-energy-security/" target="_blank">How Electric Cars Cut Oil Dependence & Drive Energy Security</a></div>
+  <div class="article-summary">As the Middle East conflict sends energy prices surging, new analysis finds electric cars can significantly protect the EU economy and drivers. This short briefing highlights the benefits of accelerating vehicle electrification in the context of the…</div>
+  <div class="article-meta">Mar 18, 2026  06:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/17/op-ed-what-china-did-right-and-what-india-is-doing-differently/" target="_blank">Op-Ed: What China Did Right—And What India Is Doing Differently</a></div>
+  <div class="article-summary">For much of the past decade, China has been the global reference case for electric vehicle (EV) adoption. It scaled faster, built deeper supply chains, and turned industrial policy into market dominance. By contrast, India’s EV journey has been slowe…</div>
+  <div class="article-meta">Mar 18, 2026  05:34 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-18/major-tropical-cyclone-threatens-mine-region-in-north-australia" target="_blank">Major Tropical Cyclone Threatens Mine Region in North Australia</a></div>
+  <div class="article-summary">A major storm is strengthening off Australia’s northern coast, threatening to bring destructive winds and heavy rains as it heads for landfall in the North Queensland mining region later this week.…</div>
+  <div class="article-meta">Mar 18, 2026  05:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-18/electric-vehicles-avoided-use-of-2-3-million-barrels-of-oil-daily-in-2025" target="_blank">EVs Avoided the Use of 2.3 Million Barrels of Oil Per Day in 2025</a></div>
+  <div class="article-summary">With gas prices climbing due to the Iran War, interest in electrified transportation is on the rise.…</div>
+  <div class="article-meta">Mar 18, 2026  03:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-17/chile-s-kast-halts-green-decrees-in-rush-to-undo-boric-legacy" target="_blank">Chile’s Kast Halts Green Decrees in Rush to Undo Boric Legacy</a></div>
+  <div class="article-summary">Chile’s new government moved to withdraw dozens of environmental decrees issued under the previous administration, a sweeping move that threatens to damage the Latin American nation’s green credentials as it looks to boost investment.…</div>
+  <div class="article-meta">Mar 17, 2026  23:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/17/surfing-breaks-climate-crisis-insurance-el-salvador-waves" target="_blank">Surfing’s big break: how climate crisis insurance may save El Salvador’s waves</a></div>
+  <div class="article-summary">Oriente Salvaje, a surf tourism hub in El Salvador, is launching the first climate crisis insurance policy to safeguard its world-class waves and surrounding biodiverse ecosystem. This innovative move aims to protect local livelihoods and the delicate environment from the impacts of extreme weather, a growing threat to coastal tourism globally.</div>
+  <div class="article-meta">Mar 17, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/17/pexapark-registers-30-european-ppas-for-2-2-gw-in-february/" target="_blank">Pexapark registers 30 European PPAs for 2.2 GW in February</a></div>
+  <div class="article-summary">European developers inked 30 power purchase agreements totaling 2.2 GW in February, a significant uptick driven by corporate buyers, underscoring growing demand for renewable energy. This surge, coupled with a 6.4% drop in PPA prices across Europe, signals a more accessible and potentially faster transition to clean energy sources.</div>
+  <div class="article-meta">Mar 17, 2026  16:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-17/los-angeles-us-west-brace-for-second-bout-of-record-march-heat" target="_blank">Los Angeles, US West Brace for Second Bout of Record March Heat</a></div>
+  <div class="article-summary">Los Angeles and the US Southwest are bracing for a second record-breaking heat wave this March, with temperatures expected to soar. This extreme heat poses a significant threat, potentially overwhelming electric grids, accelerating snowpack melt, and increasing health risks across the region.</div>
+  <div class="article-meta">Mar 17, 2026  18:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17032026/corpus-christi-cuts-timeline-to-disaster-as-abbott-issues-emergency-orders/" target="_blank">Corpus Christi Cuts Timeline to Disaster as Abbott Issues Emergency Orders</a></div>
+  <div class="article-summary">City officials in Corpus Christi on Tuesday released modeling that showed emergency cuts to water demand could be required as soon as May as reservoir levels continue to decline.  That means the region’s complex of refineries and chemical plants coul…</div>
+  <div class="article-meta">Mar 18, 2026  03:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17032026/todays-climate-tornadoes-severe-weather-storms/" target="_blank">Are There Climate Fingerprints in Tornado Activity?</a></div>
+  <div class="article-summary">It’s been a weird few weeks for weather across the United States.  While the West braces for the peak of a record-breaking heat wave, massive snowstorms and hail pummel several states in the Midwest. Meanwhile, communities in the Southeast and along…</div>
+  <div class="article-meta">Mar 18, 2026  00:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/17/as-trumps-attacks-on-science-escalate-big-oil-moves-to-avoid-legal-accountability/" target="_blank">As Trump’s attacks on science escalate, Big Oil moves to avoid legal accountability</a></div>
+  <div class="article-summary">A case being heard in the US Supreme Court is pivotal to a longtime push by fossil fuel firms to prevent state courts considering the industry's role in the climate crisisThe postAs Trump’s attacks on science escalate, Big Oil moves to avoid legal ac…</div>
+  <div class="article-meta">Mar 17, 2026  15:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17032026/trump-interior-department-staffing-cuts/" target="_blank">After Trump’s Interior Secretary Transferred Thousands of Staff to His Office, Chaos Followed, Former Workers Say</a></div>
+  <div class="article-summary">One year into President Donald Trump’s second term, the Department of the Interior is in turmoil, hobbling many of the agencies overseeing the country’s public lands and waters.  Not only has Interior lost some 11,000 employees, or more than 17 perce…</div>
+  <div class="article-meta">Mar 17, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17032026/corpus-christi-water-shortage/" target="_blank">Water Shortage May Hit Corpus Christi Within Weeks</a></div>
+  <div class="article-summary">EDNA, Texas—Water shortages could hit Corpus Christi within weeks when contract terms mandate a 10 percent reduction in the city’s draw from its largest remaining reservoir, the equivalent of 7 million gallons a day, according to local officials. Cit…</div>
+  <div class="article-meta">Mar 17, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, March 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
