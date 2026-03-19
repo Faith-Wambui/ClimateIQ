@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, March 19, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">59</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 53 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/18/dems-propose-bill-to-cut-energy-costs-that-republicans-hiked/" target="_blank">Dems propose bill to cut energy costs that republicans hiked</a></div>
+  <div class="article-summary">House Democrats have introduced the Energy Bills Relief Act, aiming to reinstate cost-saving incentives for homeowners and utilities that Republicans repealed last year. This move seeks to counter rising energy costs and reliance on fossil fuels, which the bill argues are exacerbated by Republican policies that have increased gas prices and reduced access to affordable energy.</div>
+  <div class="article-meta">Mar 18, 2026  20:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/18/earthjustice-sierra-club-blast-trump-administration-order-to-keep-washingtons-last-coal-plant-open/" target="_blank">Earthjustice & Sierra Club Blast Trump Administration Order to Keep Washington’s Last Coal Plant Open</a></div>
+  <div class="article-summary">Washington residents deserve cleaner air and more affordable, reliable, clean energy. Seattle, WA — Last night, the Department of Energy (DOE) renewed an emergency order forcing the TransAlta coal plant in Centralia to remain open, despite a challeng…</div>
+  <div class="article-meta">Mar 19, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/18/sierra-club-partners-challenge-trump-administrations-illegal-efforts-to-block-the-retirement-of-indiana-coal-plants/" target="_blank">Sierra Club & Partners Challenge Trump Administration’s Illegal Efforts to Block the Retirement of Indiana Coal Plants</a></div>
+  <div class="article-summary">Washington, D.C. — Sierra Club and partners filed a challenge in the United States Court of Appeals for the D.C. Circuit to overturn Trump’s illegal “emergency” orders issued by the U.S. Department of Energy (DOE), forcing two coal-fired power plants…</div>
+  <div class="article-meta">Mar 19, 2026  06:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/18/groups-take-trump-administration-to-court-over-illegal-craig-coal-plant-extension/" target="_blank">Groups Take Trump Administration to Court Over Illegal Craig Coal Plant Extension</a></div>
+  <div class="article-summary">Washington, DC – Public interest organizations today filed a challenge in federal court to overturn the Trump administration’s illegal emergency order extending the life of Colorado’s Craig Unit 1, a coal-burning power plant. By unnecessarily keeping…</div>
+  <div class="article-meta">Mar 19, 2026  06:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/18/sierra-club-statement-on-western-arctic-oil-gas-lease-sale/" target="_blank">Sierra Club Statement on Western Arctic Oil & Gas Lease Sale</a></div>
+  <div class="article-summary">The Trump administration leased over 1.3 million acres in the Western Arctic for oil and gas drilling, a move that directly contradicts climate goals by opening up a vital ecosystem to fossil fuel extraction. This decision locks in future emissions and threatens the fragile Arctic environment, a critical region for global climate stability.</div>
+  <div class="article-meta">Mar 19, 2026  06:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/18/california-lawmakers-urge-attorney-general-to-investigate-ai-astroturf-campaign-targeting-clean-air-rules/" target="_blank">California Lawmakers Urge Attorney General to Investigate AI Astroturf Campaign Targeting Clean Air Rules</a></div>
+  <div class="article-summary">22 state and local officials ask for probe into flood of more than 20,000 AI-generated comments. OAKLAND — Twenty-two California state and local elected officials are calling on Attorney General Rob Bonta and four district attorneys to open a formal…</div>
+  <div class="article-meta">Mar 19, 2026  06:34 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-18/oil-giants-bid-163-million-in-trump-s-record-alaska-lease-sale" target="_blank">Oil Giants Bid $163 Million in Trump’s Record Alaska Lease Sale</a></div>
+  <div class="article-summary">ConocoPhillips and Exxon Mobil Corp. were among oil companies that snapped up drilling leases in northern Alaska’s mammoth petroleum reserve in a record auction that drew $163 million in high bids.…</div>
+  <div class="article-meta">Mar 19, 2026  02:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-18/meeting-surging-demand-for-ai-memory-chips-has-a-climate-cost" target="_blank">Meeting Surging Demand for AI Memory Chips Has a Climate Cost</a></div>
+  <div class="article-summary">The rush to boost production of memory chips to meet fast accelerating demand from artificial intelligence will add to the semiconductor sector’s climate footprint and risks lifting costs of managing emissions.…</div>
+  <div class="article-meta">Mar 19, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-18/uk-german-consumers-seek-out-solar-evs-heat-pumps-due-to-iran-war" target="_blank">European Consumers Seek Out Solar, EVs as Energy Prices Surge</a></div>
+  <div class="article-summary">Companies in the UK and Germany say they have received more inquiries for green technologies since the Iran war started.…</div>
+  <div class="article-meta">Mar 18, 2026  18:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-18/bmw-s-best-selling-model-is-getting-an-electric-reboot" target="_blank">BMW’s Best-Selling Model Is Getting an Electric Reboot</a></div>
+  <div class="article-summary">For decades, it’s been BMW AG’s most popular model, a symbol of professional success that allowed owners to show off to their neighbors. Now, the 3-Series sedan is being remade for the electric age.…</div>
+  <div class="article-meta">Mar 18, 2026  13:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-18/ai-boom-drives-us-to-build-enough-battery-systems-for-domestic-demand" target="_blank">AI Boom Drives US to Build Enough Battery Systems for Domestic Demand</a></div>
+  <div class="article-summary">The US now has the production capacity to supply 100% of its energy-storage systems domestically, a key milestone in the push to boost American battery manufacturing and decrease the nation’s reliance on Chinese imports.…</div>
+  <div class="article-meta">Mar 18, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/mar/19/tropical-cyclone-narelle-qld-storm-tracker-path-tracking-map-bom" target="_blank">Tropical Cyclone Narelle to make landfall in far north Qld on Friday as category four storm, bringing 200km/h winds</a></div>
+  <div class="article-summary">Severe Tropical Cyclone Narelle, a Category 5 storm fueled by warm Coral Sea waters, is set to make landfall in far north Queensland on Friday with destructive winds exceeding 225 km/h. This powerful cyclone underscores the increasing intensity of tropical storms in the region, a direct consequence of a warming climate.</div>
+  <div class="article-meta">Mar 19, 2026  08:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/map/madagascar/madagascar-cyclone-gezani-menages-sinistres-selon-les-donnees-des-maires-16-mars-2026" target="_blank">Madagascar - Cyclone Gezani : Ménages sinistrés selon les données des maires (16 mars 2026)</a></div>
+  <div class="article-summary">Country: MadagascarSources: CCCM Cluster, International Organization for Migration, Shelter Cluster, UN High Commissioner for RefugeesPlease refer to the attached Map.…</div>
+  <div class="article-meta">Mar 19, 2026  07:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/lebanon/unfpa-situation-report-lebanon-crisis-10-17-march-2026" target="_blank">UNFPA Situation Report: Lebanon Crisis (10 - 17 March 2026)</a></div>
+  <div class="article-summary">Country: LebanonSource: United Nations Population FundPlease refer to the attached file.Triggered by escalating hostilities across the country, the humanitarian situation in Lebanon continues to deteriorate, resulting in mass displacement and casualt…</div>
+  <div class="article-meta">Mar 19, 2026  04:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/nigeria/unicef-nigeria-humanitarian-situation-report-no-3-end-year-31-december-2025" target="_blank">UNICEF Nigeria Humanitarian Situation Report No. 3 (End of Year), 31 December 2025</a></div>
+  <div class="article-summary">Country: NigeriaSource: UN Children's FundPlease refer to the attached file.HighlightsIn 2025, Nigeria’s humanitarian crisis deepened as conflict, displacement, flooding and disease outbreaks converged with economic strain and reduced funding. An est…</div>
+  <div class="article-meta">Mar 19, 2026  03:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/madagascar/unicef-madagascar-humanitarian-flash-update-no-4-cyclones-fytia-and-gezani-12-march-2026" target="_blank">UNICEF Madagascar Humanitarian Flash Update No. 4 (Cyclones FYTIA and GEZANI), 12 March 2026</a></div>
+  <div class="article-summary">Country: MadagascarSource: UN Children's FundPlease refer to the attached file.Situation OverviewFYTIA:Cyclone FYTIA made landfall near Soalala, in Boeny Region on January 31, crossing the island and causing widespread flooding and destruction across…</div>
+  <div class="article-meta">Mar 19, 2026  03:46 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/18/no-kings-rally-ii-march-28-2026-we-need-every-american-to-show-up/" target="_blank">No Kings Rally II March 28, 2026. We Need Every American To Show Up!</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+Last October, millions of Americans turned out for the first ever No Kings protest, whose purpose was to demonstrate opposition to the madman currently occupying the White Ho…</div>
+  <div class="article-meta">Mar 19, 2026  01:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18032026/house-democrats-propose-clean-energy-tax-credits-legislation/" target="_blank">House Democrats Want Clean Energy Tax Credits Back</a></div>
+  <div class="article-summary">U.S. House Democrats proposed legislation on Wednesday to restore clean energy tax credits revoked by Republicans last year through the One Big Beautiful Bill Act.  The “Energy Bills Relief Act,” signed by more than half of House Democrats, 122 in al…</div>
+  <div class="article-meta">Mar 19, 2026  00:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/map/venezuela-bolivarian-republic/venezuela-mapa-de-cobertura-de-implementacion-cluster-de-proteccion-y-areas-de-responsabilidad-enero-2026" target="_blank">Venezuela: Mapa de Cobertura de implementación. Clúster de Protección y Áreas de Responsabilidad (Enero 2026)</a></div>
+  <div class="article-summary">A new map from Venezuela's Protection Cluster, developed with UNHCR, details implementation coverage for January 2026. This mapping is crucial for understanding the reach of climate adaptation and protection efforts across the country, informing targeted interventions to safeguard vulnerable populations from escalating climate impacts.</div>
+  <div class="article-meta">Mar 18, 2026  23:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/picture-rounds-2026/" target="_blank">Carbon Brief Quiz 2026: Picture Round 1 and 2</a></div>
+  <div class="article-summary">This content is a placeholder and does not contain an article to summarize.</div>
+  <div class="article-meta">Mar 18, 2026  20:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/18/iran-scientist-exile-wins-stockholm-water-prize-kaveh-madani" target="_blank">‘They called me a water terrorist’: exiled Iranian scientist wins global prize</a></div>
+  <div class="article-summary">Exiled Iranian scientist Kaveh Madani has won the prestigious Stockholm Water Prize for his groundbreaking work in water management, a field where he faced accusations of sabotage and espionage in his home country. His recognition highlights the critical, often dangerous, intersection of environmental stewardship and political complexity, underscoring the global urgency of sustainable water solutions.</div>
+  <div class="article-meta">Mar 18, 2026  19:15 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, March 19, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
