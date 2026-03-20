@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, March 20, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">57</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 49 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/19/japan-sets-fit-terms-for-small-pv-rooftop-solar-as-large-scale-auctions-end/" target="_blank">Japan sets FIT terms for small PV, rooftop solar as large-scale auctions end</a></div>
+  <div class="article-summary">Japan is phasing out large-scale solar auctions by fiscal year 2027, shifting support to smaller residential and commercial rooftop solar projects with new tiered FIT rates. This strategic pivot signals a move towards distributed solar generation, potentially accelerating decarbonization efforts by encouraging smaller, more accessible renewable energy installations across the country.</div>
+  <div class="article-meta">Mar 19, 2026  19:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/19/uk-cuts-support-for-climate-action-abroad-to-fund-military-instead/" target="_blank">UK cuts support for climate action abroad to fund military instead</a></div>
+  <div class="article-summary">The UK has slashed its international climate finance, redirecting funds to bolster its military budget to its largest increase since the Cold War. This decision undermines global efforts to combat climate change, particularly in developing nations that rely on such support to adapt and mitigate the crisis.</div>
+  <div class="article-meta">Mar 19, 2026  18:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/china-briefing-19-march-2026-china-joins-nuclear-pledge-energy-approach-vindicated-new-ecological-code/" target="_blank">China Briefing 19 March 2026: China joins nuclear pledge | Energy approach ‘vindicated’ | New ecological code</a></div>
+  <div class="article-summary">China's 15th Five-Year Plan solidifies renewable energy at the core of its strategy and commits to tripling global nuclear capacity by 2050, demonstrating a stable, long-term approach to climate governance that influences global emissions targets. This commitment to a robust energy transition, integrating renewables and nuclear power, is crucial for achieving global climate goals and ensuring energy security.</div>
+  <div class="article-meta">Mar 19, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-how-changes-to-coal-mining-have-affected-chinas-methane-emissions/" target="_blank">Guest post: How changes to coal mining have affected China’s methane emissions</a></div>
+  <div class="article-summary">Methane, a potent greenhouse gas, is responsible for about 30% of the global temperature increase observed since the industrial revolution.
+
+China accounts for more than 10% of annual global human methane emissions, in large part due to unintended re…</div>
+  <div class="article-meta">Mar 19, 2026  16:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/03/unfccc-finance-committee-still-unable-to-make-clear-climate-finance-findings/" target="_blank">UNFCCC Finance Committee Still Unable to Make Clear Climate Finance Findings</a></div>
+  <div class="article-summary">With a new COP30 Climate Finance Work Programme created, the importance of good data to feed into negotiations has never been higher. But the SCF still can’t agree on what counts.The postUNFCCC Finance Committee Still Unable to Make Clear Climate Fin…</div>
+  <div class="article-meta">Mar 19, 2026  16:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/19/cadillac-enters-brazil-with-3-electric-suvs/" target="_blank">Cadillac Enters Brazil … With 3 Electric SUVs</a></div>
+  <div class="article-summary">Cadillac has launched in Brazil with a lineup of three all-electric SUVs, marking a significant shift for the historic luxury automaker. This move signals a growing global commitment to electrification within the premium automotive sector, directly contributing to the transition away from fossil fuels in transportation.</div>
+  <div class="article-meta">Mar 20, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/19/chinese-electric-truckmakers-eyeing-europe/" target="_blank">Chinese Electric Truckmakers Eyeing Europe</a></div>
+  <div class="article-summary">Europe may not be perfect, but it’s focused much more than most other places on lowering its CO2 emissions. That includes electrifying transport. While passenger cars get most of the attention in that regard, heavy-duty trucking causes a huge amount…</div>
+  <div class="article-meta">Mar 20, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/19/be-careful-what-you-wish-for-albertas-gas-price-shift/" target="_blank">Be Careful What You Wish For: Alberta’s Gas Price Shift</a></div>
+  <div class="article-summary">Alberta has spent years arguing that natural gas was undervalued because it was trapped in a basin with too few outlets. That argument was always partly right. The Alberta Energy Regulator says the average AECO-C price was only $1.45/GJ in 2024, down…</div>
+  <div class="article-meta">Mar 20, 2026  06:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/19/diesel-at-5-clean-transport-advocates-call-on-truck-manufacturers-to-help-u-s-trucking-switch-to-electric/" target="_blank">Diesel at $5: Clean Transport Advocates Call on Truck Manufacturers to Help U.S. Trucking Switch to Electric</a></div>
+  <div class="article-summary">Diesel prices have surged even faster than gasoline, the national average hit $5.10 per gallon on March 19. Higher diesel means higher costs for trucking, shipping, and groceries; a full supply chain hit. Truck manufacturers must step up to help the…</div>
+  <div class="article-meta">Mar 20, 2026  04:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/19/joint-position-paper-on-the-decarbonisation-of-the-fleets-of-large-companies/" target="_blank">Joint Position Paper on the Decarbonisation of the Fleets of Large Companies</a></div>
+  <div class="article-summary">The EU has opted for the right instrument — this should be safeguarded by the co-legislators. We, European businesses, major cities, and civil society, express our strong support for the EU Clean Corporate Vehicles Regulation. This initiative represe…</div>
+  <div class="article-meta">Mar 20, 2026  03:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-20/australia-s-new-south-wales-state-to-prohibit-new-coal-mines" target="_blank">Australia’s New South Wales State Bans Future Coal Mines</a></div>
+  <div class="article-summary">New South Wales, Australia’s second-biggest coal-producing state, will ban new mine applications for the fossil fuel and impose rules to reduce methane emissions from existing projects.…</div>
+  <div class="article-meta">Mar 20, 2026  03:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-19/tropical-cyclone-narelle-strikes-northern-australia-mine-region" target="_blank">Cyclone Forces Mine Closures as High Winds Hit North Australia</a></div>
+  <div class="article-summary">Tropical cyclone Narelle struck Australia’s northern Queensland coast on Friday, lashing the region with destructive winds and heavy rains that forced Rio Tinto Group to shut two bauxite mines.…</div>
+  <div class="article-meta">Mar 20, 2026  01:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-19/fervo-plans-ipo-as-geothermal-avoids-trump-attacks" target="_blank">Fervo Plans IPO as Geothermal Escapes Trump’s Clean Energy Attacks</a></div>
+  <div class="article-summary">The startup’s rise has mirrored rising energy demand, driven by the data center boom.…</div>
+  <div class="article-meta">Mar 19, 2026  23:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-19/states-take-trump-epa-to-court-over-endangerment-finding-repeal" target="_blank">States Take Trump EPA to Court Over Endangerment Finding Repeal</a></div>
+  <div class="article-summary">More than 20 states are legally challenging the Trump administration’s decision to roll back a landmark scientific determination that greenhouse gases threaten human health, which underpins various federal climate rules.…</div>
+  <div class="article-meta">Mar 19, 2026  23:14 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-19/zenobe-acquires-california-electric-fleet-manager-despite-trump-s-attacks" target="_blank">KKR-Backed Company Bets on Electric Trucks Despite Political Headwinds</a></div>
+  <div class="article-summary">Following its entry in California, Zenobe is shopping for electric truck assets in states including Illinois, New York and Massachusetts.…</div>
+  <div class="article-meta">Mar 19, 2026  18:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/mar/20/tropical-cyclone-narelle-poised-to-hit-far-north-queensland-as-high-end-category-four-storm" target="_blank">Tropical Cyclone Narelle hits far north Queensland as 250km/h winds tear off roofs and fell trees</a></div>
+  <div class="article-summary">Authorities warn of strong winds, heavy rain, flooding and coastal storm surges as cyclone makes landfall in far north QueenslandLive updates: Severe Tropical Cyclone Narelle – latest newsCyclone Narelle path tracking mapHow did global heating fuel T…</div>
+  <div class="article-meta">Mar 20, 2026  05:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/mar/20/disasters-climate-crisis-northern-territory-australia" target="_blank">Five disasters in a single wet season show the climate crisis is here and now in the Northern Territory | Kirsty Howey</a></div>
+  <div class="article-summary">The Northern Territory endured five separate national disaster declarations in a single wet season, culminating in Tropical Cyclone Narelle's approach. This unprecedented frequency of extreme weather events underscores the immediate and escalating impact of the climate crisis on Australian communities.</div>
+  <div class="article-meta">Mar 20, 2026  04:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/20/uk-public-support-net-zero-rightwing-media-rories-reform-analysis" target="_blank">Rightwing narrative fuelling false belief UK public oppose net zero, study finds</a></div>
+  <div class="article-summary">Reform, Tory and some media rhetoric runs contrary to poll showing far more voters for net zero than against itPolitical elites are out of step with the public appetite for net zero, according to analysis that identifies rightwing media narratives as…</div>
+  <div class="article-meta">Mar 20, 2026  03:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19032026/senator-whitehouse-permian-basin-methane-pollution-investigation/" target="_blank">Senator Launches Investigation Into Methane Pollution in the Permian Basin</a></div>
+  <div class="article-summary">U.S. Sen. Sheldon Whitehouse (D-RI) launched an investigation into the discrepancy between reported and observed methane pollution from the Permian Basin—the largest-producing oil field in the United States and one of the largest in the world.  The i…</div>
+  <div class="article-meta">Mar 20, 2026  01:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19032026/trump-administration-arctic-oil-drilling-auction/" target="_blank">Trump Administration Auctions Contested Arctic Lands for Oil Drilling</a></div>
+  <div class="article-summary">Oil companies won the right to drill on more than 1.3 million acres across the Alaskan Arctic on Wednesday, including areas that local Alaska Native leaders consider critical to wildlife and subsistence hunting and land set aside for conservation.  I…</div>
+  <div class="article-meta">Mar 20, 2026  00:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, March 20, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
