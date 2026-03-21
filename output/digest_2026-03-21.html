@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, March 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-20-march-2026-energy-crisis-deepens-brazils-new-climate-plan-new-zealand-climate-case/" target="_blank">DeBriefed 20 March 2026: Energy crisis deepens | Brazil’s new climate plan | New Zealand climate case</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+Iran war fallout continues
+
+WORK FROM HOME: The International Energy Agency has advised its member countries to take 10 st…</div>
+  <div class="article-meta">Mar 20, 2026  17:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/the-carbon-brief-quiz-2026/" target="_blank">The Carbon Brief Quiz 2026</a></div>
+  <div class="article-summary">Around 300 scientists, civil servants, journalists and climate experts took part in the 11th annual Carbon Brief quiz on Wednesday 18 March 2026.
+
+For the second time, this year’s quiz was hosted by Octopus Energy at its headquarters in central Londo…</div>
+  <div class="article-meta">Mar 20, 2026  17:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-englands-new-land-use-framework-means-for-climate-nature-and-food/" target="_blank">Q&A: What England’s new ‘land-use framework’ means for climate, nature and food</a></div>
+  <div class="article-summary">England's new land-use framework reveals that just 1% of land is needed for renewables to meet 2050 climate goals, dispelling the notion of "false choices" between energy and agriculture. This integrated approach aims to balance climate targets, nature restoration, food production, and housing, marking a significant step towards optimizing land for multiple benefits.</div>
+  <div class="article-meta">Mar 20, 2026  16:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/20/e4900-electric-car-catching-on-in-europe/" target="_blank">€4,900 Electric Car Catching On In Europe</a></div>
+  <div class="article-summary">A new €4,900 electric car, the Citroën Ami, is gaining traction across Europe by offering basic, no-frills transportation. This affordable EV makes electric mobility accessible to a wider demographic, potentially accelerating the transition away from fossil fuel-powered vehicles and reducing urban emissions.</div>
+  <div class="article-meta">Mar 21, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/20/xpeng-records-positive-net-profit-in-4th-quarter/" target="_blank">XPENG Records Positive Net Profit In 4th Quarter</a></div>
+  <div class="article-summary">The Company achieved a positive net profit of RMB0.38 billion in the fourth quarter of 2025, recorded a positive net profit for a single quarter for the first time. Cash position[i] was RMB47.66 billion (US$6.81 billion) as of December 31, 2025 Quart…</div>
+  <div class="article-meta">Mar 21, 2026  05:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/20/why-hvdc-export-cables-are-an-underappreciated-risk-in-offshore-wind/" target="_blank">Why HVDC Export Cables Are An Underappreciated Risk In Offshore Wind</a></div>
+  <div class="article-summary">An Irish energy client was speaking with governmental contacts recently, and HVDC risk came up. Not the usual high-level question of whether HVDC is needed for long-distance offshore transmission, because that answer is often yes once projects get la…</div>
+  <div class="article-meta">Mar 21, 2026  03:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/20/ballards-500-fuel-cell-deal-meets-a-hydrogen-bus-market-that-never-arrived/" target="_blank">Ballard’s 500 Fuel Cell Deal Meets A Hydrogen Bus Market That Never Arrived</a></div>
+  <div class="article-summary">Ballard Power and New Flyer announced what sounds at first like a market-making agreement, a commercial arrangement for 500 fuel cell engines, or about 50 MW of modules, for hydrogen transit buses starting in 2026. On the surface, that reads like the…</div>
+  <div class="article-meta">Mar 21, 2026  02:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/20/a-24-7-solar-farm-building-robot-just-hit-the-market/" target="_blank">A 24/7 solar farm-building robot just hit the market</a></div>
+  <div class="article-summary">The US needs a lot more electricity fast, and one company thinks robots can help build it quicker.Berkeley, California-basedTerabase Energysays its next-gen Terafab automated solar construction system has finished field testing and is now ready to sh…</div>
+  <div class="article-meta">Mar 21, 2026  00:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-20/hochul-moves-to-weaken-aggressive-new-york-state-climate-law" target="_blank">Hochul Moves to Weaken Aggressive New York State Climate Law</a></div>
+  <div class="article-summary">The governor said meeting the current timeline to reduce emissions is “costly and unattainble.”…</div>
+  <div class="article-meta">Mar 20, 2026  17:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-03-20/architect-bjarke-ingels-misses-working-on-big-budget-projects" target="_blank">Architect Bjarke Ingels Says Modern Buildings Are So Boring</a></div>
+  <div class="article-summary">A favorite of eco-friendly urban planners and the technocrat class, the Danish designer has been getting by on government and donor-subsidized projects as shareholders keep purse strings tight.…</div>
+  <div class="article-meta">Mar 20, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20032026/iran-war-reveals-fossil-fuel-propaganda/" target="_blank">How the Iran War Reveals the Extent of Fossil Fuel Propaganda</a></div>
+  <div class="article-summary">As oil prices continue to rise in the shadow of the war with Iran, Americans can expect the cost of all kinds of products to slowly increase, according to experts. By Friday, crude oil prices were approaching and for Brent crude exceeding $100 a barr…</div>
+  <div class="article-meta">Mar 21, 2026  01:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20032026/new-york-gov-kathy-hochul-delays-climate-law-key-portion/" target="_blank">New York’s Governor Pushes to Delay a Key Portion of the State’s Climate Law</a></div>
+  <div class="article-summary">New York Gov. Kathy Hochul announced plans to roll back parts of the state’s Climate Act, which established aggressive targets for reducing greenhouse gas pollution. Using 1990 as a baseline, the law requires a 40 percent reduction in greenhouse gas…</div>
+  <div class="article-meta">Mar 21, 2026  00:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20032026/virginia-fluvanna-gas-plant-land-approval/" target="_blank">A Gas Plant Proposal for Rural Virginia Gets Local Land Use Approval</a></div>
+  <div class="article-summary">PALMYRA, Va.—In rural Fluvanna County, between Monticello and Richmond in the middle of Virginia, there’s a clear divide over a natural gas power plant. Brian Faulknier, 54, a grandfather, speaks for many supporters when he said in an interview that…</div>
+  <div class="article-meta">Mar 21, 2026  00:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/mar/20/arizona-march-temperature-record" target="_blank">Arizona desert town breaks record for hottest March temperature in US history</a></div>
+  <div class="article-summary">Martinez Lake, about 145 miles west of Phoenix, reached 110F (43.3C) on Thursday amid scorching south-west heatSign up for the Breaking News US email to get newsletter alerts in your inboxA small community in the Arizona desert has broken a record fo…</div>
+  <div class="article-meta">Mar 20, 2026  21:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20032026/peru-dengue-fever-record-outbreak-climate-driven-weather/" target="_blank">A New Study Links a Record-Breaking Tropical Disease Outbreak in Peru to Climate-Driven Extreme Weather</a></div>
+  <div class="article-summary">Every year, mosquitoes in mostly tropical and subtropical countries cause millions of cases of dengue fever, a virus that induces potentially lethal flu-like symptoms. Cases surged in 2019, after rising for decades, making dengue one of the World Hea…</div>
+  <div class="article-meta">Mar 20, 2026  21:18 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, March 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
