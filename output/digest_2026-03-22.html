@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, March 22, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">20</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 1 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 19 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/21/coppers-battery-equipped-induction-range-makes-electrification-storage-accessible/" target="_blank">Copper’s Battery-Equipped Induction Range Makes Electrification & Storage Accessible</a></div>
+  <div class="article-summary">While exploring booths at New York Build Expo, Copper’s electric range stood out. In a show targeting professionals, there were not a lot of home cooking appliances. The design was simple and attractive. But the battery within the base of the range w…</div>
+  <div class="article-meta">Mar 22, 2026  05:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/21/gray-hydrogen-high-costs-and-the-real-emissions-of-sunlines-fuel-cell-fleet/" target="_blank">Gray Hydrogen, High Costs, and the Real Emissions of SunLine’s Fuel Cell Fleet</a></div>
+  <div class="article-summary">SunLine Transit Agency's ambitious 25-year hydrogen bus program, centered in western California, is now facing scrutiny for its reliance on "gray hydrogen" and its actual climate impact. Despite significant investment, the agency's fuel cell fleet is producing substantial greenhouse gas emissions, undermining its environmental goals and highlighting the critical need for truly green hydrogen solutions.</div>
+  <div class="article-meta">Mar 22, 2026  02:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/21/mahindra-reveals-batman-be-6-ev-and-its-kind-of-amazing/" target="_blank">Mahindra reveals Batman BE 6 EV – and it’s kind of amazing [update]</a></div>
+  <div class="article-summary">Indian ag and automakerMahindrahas launched a limited-run Batman Edition of its BE 6 Electric Origin SUV, calling it, “a production car that brings to life a rare fusion of cinematic heritage and modern luxury, inspired by Christopher Nolan’s critica…</div>
+  <div class="article-meta">Mar 22, 2026  02:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/21/zenobe-acquires-revolvs-100-unit-electric-delivery-van-fleet/" target="_blank">Zenobē acquires Revolv’s 100 unit electric delivery van fleet</a></div>
+  <div class="article-summary">UK-based Zenobē backed up its ambitions of fleet electrification leadership by closing on its acquisition of California-based Revolv, signaling the company’s continued confidence in North America’s commercial EV market.
+
+Zenobē’s approach to the US m…</div>
+  <div class="article-meta">Mar 22, 2026  02:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/21/who-should-pay-for-trumps-war-on-iran/" target="_blank">Who Should Pay For Trump’s War On Iran?</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+This week, the US government told Congress it will need $200 billion more to continue bombing Iran back to the Stone Age. Readers may recall that “bombing the Afghans back to…</div>
+  <div class="article-meta">Mar 22, 2026  00:12 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-21/hawaii-hit-with-more-flooding-as-heat-tops-records-in-west" target="_blank">Hawaii Hit With More Flooding as Heat Tops Records in West</a></div>
+  <div class="article-summary">Heavy rains were being dragged across Hawaii by a “Kona low” for the second time in two weeks, prompting residents to flee their homes and closing roads across the island chain.
+
+Evacuations were ordered in the Waialua and Haleiwa sections of northwe…</div>
+  <div class="article-meta">Mar 21, 2026  17:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-21/new-york-governor-kathy-hochul-proposes-weakening-state-climate-law" target="_blank">Why Governor Kathy Hochul Wants to Water Down New York’s Climate Law</a></div>
+  <div class="article-summary">New York’s governor has a complicated relationship with the climate. On the one hand, she wants to build more carbon-free nuclear power, and she (eventually) backed New York City’s congestion pricing. On the other, she just put out a proposal to upen…</div>
+  <div class="article-meta">Mar 21, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-21/eu-tells-member-states-not-to-wait-to-fill-up-gas-storage" target="_blank">EU Tells Member States Not to Wait to Fill Up Gas Storage</a></div>
+  <div class="article-summary">The European Union’s energy chief has told member states to start filling gas storage early in order to avoid competition for supplies that could cause a spike in prices over the summer, as the bloc seeks to mitigate the fallout from the Iran war.
+
+G…</div>
+  <div class="article-meta">Mar 21, 2026  12:22 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/mar/21/middle-east-iran-conflict-environment-climate" target="_blank">5m tonnes of CO2 emitted in just 14 days of US war on Iran, analysis finds</a></div>
+  <div class="article-summary">Exclusive: War in the Middle East is draining the global carbon budget faster than 84 countries combinedThe US-Israel war on Iran is a disaster for the climate, according to an analysis that finds it is draining the global carbon budget faster than 8…</div>
+  <div class="article-meta">Mar 21, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/21/lincolnshire-solar-farm-controversy-british-countryside" target="_blank">‘It was our little idyll – until the solar farm landed’: the battle raging in the heart of the British countryside</a></div>
+  <div class="article-summary">In one corner, clean energy champion Ed Miliband. In the other, residents – and Reform politicians – outraged at plans for more large-scale solar farms in Lincolnshire than anywhere else in the UKAs night descends on the grand offices of Lincolnshire…</div>
+  <div class="article-meta">Mar 21, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21032026/alabama-mine-explosion-regulation-under-trump/" target="_blank">Two Years After Fatal Explosion, Alabama Mine Regulator ‘Letting the Fox Guard the Henhouse’</a></div>
+  <div class="article-summary">OAK GROVE, Ala.—It’s been a long two years for Lisa Lindsay.  And every day since her neighbor’s home exploded above an expanding coal mine in March 2024, she’s been reminded of how far her community still has to go.  February’s meeting of the Alabam…</div>
+  <div class="article-meta">Mar 21, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21032026/maine-senator-susan-collins-climate-action/" target="_blank">Susan Collins and Climate Change: ‘The Silence is Deafening’</a></div>
+  <div class="article-summary">Last August, when reports emerged that the Environmental Protection Agency (EPA) planned to cancel $7 billion in grants for solar panels for low-income households, including an estimated 20,000 households in Maine, Sen. Susan Collins seemed to defend…</div>
+  <div class="article-meta">Mar 21, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21032026/venezuela-offshore-wind-opportunity/" target="_blank">Yes, Venezuela Has a Ton of Oil—But Its Biggest Opportunity Is Offshore Wind</a></div>
+  <div class="article-summary">From our collaborating partner Living on Earth, public radio’s environmental news magazine, an interview by Jenni Doering with Paasha Mahdavi, an associate professor of political science at the University of California, Santa Barbara.  Since the U.S.…</div>
+  <div class="article-meta">Mar 21, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, March 22, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
