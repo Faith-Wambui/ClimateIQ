@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, March 24, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">45</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 8 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:49%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 31 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/23/truck-lobbying-group-seeks-to-join-lawsuit-in-support-of-trump-epas-rollback-of-vehicle-standards-repeal-of-endangerment-finding/" target="_blank">Truck Lobbying Group Seeks to Join Lawsuit In Support of Trump EPA’s Rollback of Vehicle Standards & Repeal of Endangerment Finding</a></div>
+  <div class="article-summary">The Truck and Engine Manufacturers Association (EMA) is now backing the Trump administration's rollback of vehicle emission standards and repeal of the endangerment finding by seeking to join a lawsuit against the EPA. This move by a major industry group signals continued opposition to stricter climate regulations, potentially hindering progress on reducing transportation sector emissions, a significant contributor to global warming.</div>
+  <div class="article-meta">Mar 24, 2026  05:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/23/totalenergies-milks-trump-for-1-billion-offshore-wind-payout-gets-last-laugh/" target="_blank">TotalEnergies Milks Trump For $1 Billion Offshore Wind Payout, Gets Last Laugh</a></div>
+  <div class="article-summary">The Trump administration paid French energy giant TotalEnergies nearly $1 billion to abandon offshore wind projects in the New York Bight, a move that effectively subsidizes fossil fuels and hinders renewable energy development. This decision to redirect capital away from wind and towards natural gas undermines climate goals by discouraging investment in clean energy infrastructure.</div>
+  <div class="article-meta">Mar 24, 2026  04:39 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/23/china-flexes-its-global-green-hydrogen-muscles-trump-or-no-trump/" target="_blank">China Flexes Its Global Green Hydrogen Muscles, Trump Or No Trump</a></div>
+  <div class="article-summary">China's green hydrogen industry is surging, with companies like Sungrow Hydrogen now exporting electrolyzer systems to key markets like Italy, Brazil, and Oman. This rapid expansion is critical as it provides a pathway for nations to decarbonize major sectors like fertilizer production and oil refining, which are heavily reliant on fossil fuels.</div>
+  <div class="article-meta">Mar 24, 2026  06:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/23/iran-crisis-shows-why-automakers-are-wrong-to-cancel-ev-plans/" target="_blank">Iran Crisis Shows Why Automakers Are Wrong To Cancel EV Plans</a></div>
+  <div class="article-summary">Following the recent attack on Iran, searches for electric vehicles have surged 20% in the US and 40% in Europe as consumers seek refuge from volatile gas prices. This renewed interest underscores automakers' short-sightedness in scaling back EV plans, as volatile fossil fuel costs highlight the climate and economic benefits of electrification.</div>
+  <div class="article-meta">Mar 24, 2026  05:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/23/manila-welcomes-locally-engineered-electric-tram-to-the-walled-city/" target="_blank">Manila Welcomes Locally Engineered Electric “Tram” to the Walled City</a></div>
+  <div class="article-summary">Manila has reintroduced electric trams to its historic Intramuros district, a move that revives a mode of transport last seen in the city during the Spanish colonial era. This initiative is crucial for the climate as it offers a zero-emission alternative to fossil fuel-dependent vehicles, directly reducing air pollution and carbon emissions in a densely populated urban center.</div>
+  <div class="article-meta">Mar 24, 2026  04:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/23/donald-trump-kneecaps-offshore-wind-amidst-renewable-victories/" target="_blank">Donald Trump Kneecaps Offshore Wind Amidst Renewable Victories</a></div>
+  <div class="article-summary">Washington, D.C. — Today, Donald Trump’s Department of the Interior and TotalEnergies agreed to redirect $1 billion in offshore wind investments towards dirty, expensive fossil fuels instead. This announcement comes 10 days after a slew of victories…</div>
+  <div class="article-meta">Mar 24, 2026  04:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/23/harbinger-ceo-john-harris-stops-by-to-talk-trucks-batteries-and-more/" target="_blank">Harbinger CEO John Harris stops by to talk trucks, batteries, and more</a></div>
+  <div class="article-summary">On today’s portentous episode of Quick Charge, we’ve got Harbinger CEO John Harris on-hand to talk through the brand’s new low cab forward EV and EREV trucks, the industry-first battery deal with Airstream, and a whole lot more!
+
+Harbinger says its a…</div>
+  <div class="article-meta">Mar 24, 2026  03:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-23/iran-war-s-climate-toll-methane-plumes-rise-from-oil-and-gas-facilities" target="_blank">Satellites Reveal Hidden Climate Toll of the Iran War</a></div>
+  <div class="article-summary">Gas infrastructure is spewing methane and carbon dioxide into the atmosphere as airstrikes intensify and the Strait of Hormuz remains closed.…</div>
+  <div class="article-meta">Mar 23, 2026  21:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-23/iran-war-missile-attack-on-ras-laffan-spurs-increased-flaring-satellites-show" target="_blank">Middle East War Spurs Emissions From Oil and Gas Sites, Satellites Show</a></div>
+  <div class="article-summary">Experts have detected increased flaring at some facilities, highlighting the increase in greenhouse gases from the conflict.…</div>
+  <div class="article-meta">Mar 23, 2026  20:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-23/us-warns-eu-of-severe-energy-crisis-unless-it-eases-green-rules" target="_blank">US Presses EU to Ease Methane Rules, Warns of Energy Supply Risk</a></div>
+  <div class="article-summary">The US reiterated its criticism of the European Union’s rules to curb methane emissions from its oil and gas imports, saying that the supply crunch caused by Iran’s attacks on Qatari facilities means the bloc can’t afford to be too strict.…</div>
+  <div class="article-meta">Mar 23, 2026  19:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/mar/23/australia-generation-alpha-faces-185k-bill-over-lifetime-without-urgent-action-on-climate-crisis-report-finds" target="_blank">Australia’s generation Alpha faces $185k bill over lifetime without urgent action on climate crisis, report finds</a></div>
+  <div class="article-summary">Australia's Generation Alpha faces a staggering $185,000 lifetime cost due to inaction on the climate crisis, with Millennials and Gen Z projected to bear bills of $130,000 and $165,000 respectively. This economic burden underscores the urgent need for decisive climate action to mitigate future financial devastation.</div>
+  <div class="article-meta">Mar 23, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24032026/wildfires-dust-storms-air-pollution-risks/" target="_blank">Climate-Fueled Wildfires and Dust Storms Drove Up Air Pollution Around the World Last Year</a></div>
+  <div class="article-summary">Climate-fueled wildfires and dust storms pushed global air pollution to unhealthy levels for most of the world's population last year. This surge, detailed in a new IQAir report, directly exacerbates respiratory illnesses and highlights the escalating health consequences of a warming planet.</div>
+  <div class="article-meta">Mar 24, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-24/cyclone-set-to-threaten-lng-iron-ore-operations-in-australia" target="_blank">Cyclone Set to Threaten Australia LNG, Iron Ore Operations</a></div>
+  <div class="article-summary">Cyclone Seroja, which battered Western Australia last week, is now poised to impact the Pilbara region, a critical hub for Australian LNG and iron ore exports. This storm poses a significant risk to vital infrastructure, potentially disrupting global supply chains for energy and key industrial materials.</div>
+  <div class="article-meta">Mar 24, 2026  06:39 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-24/global-air-quality-worsened-in-2025-and-poses-threat-to-growth" target="_blank">Global Air Quality Worsened in 2025 and Poses Threat to Growth</a></div>
+  <div class="article-summary">In 2025, global air quality took a nosedive, largely due to escalating severe wildfires and emissions from fossil fuels and agriculture, pushing more cities below international health standards. This deterioration is not just a health crisis; it signals a significant threat to economic growth, as poor air quality directly impacts productivity and increases healthcare burdens.</div>
+  <div class="article-meta">Mar 24, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-23/el-nino-forecasters-must-beware-of-spring-predictions" target="_blank">Predicting El Niño Can Be Perilous During Springtime</a></div>
+  <div class="article-summary">The US National Oceanic and Atmospheric Administration (NOAA) forecasts an 80% chance of an El Niño developing in the equatorial Pacific this year, but a phenomenon known as the "spring barrier" significantly reduces the accuracy of these predictions during this crucial period. This uncertainty is critical because El Niño events are strongly linked to global weather patterns, including droughts and floods, which can have substantial economic and climate-related impacts.</div>
+  <div class="article-meta">Mar 23, 2026  16:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-co2-from-uk-data-centres-could-be-hundreds-of-times-higher-than-thought/" target="_blank">Analysis: CO2 from UK data centres could be ‘hundreds of times’ higher than thought</a></div>
+  <div class="article-summary">New analysis suggests UK data centres powering the AI revolution could emit hundreds of times more CO2 than government figures predict, potentially jeopardizing the nation's climate goals. This surge in emissions, driven by massive electricity demand and the potential reliance on gas power, could significantly undermine the UK's transition to a clean energy system.</div>
+  <div class="article-meta">Mar 23, 2026  14:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/23/countries-critical-food-insecurity-global-heating" target="_blank">Far more countries face critical food insecurity if world heats up by 2C, analysis shows</a></div>
+  <div class="article-summary">Exclusive: Food systems of low-income nations projected to deteriorate seven times as fast as those of wealthy onesThe number of countries falling into critical food insecurity could almost triple to 24 if global temperatures increase by 2C, research…</div>
+  <div class="article-meta">Mar 23, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23032026/colorado-river-negotiations-resume-with-focus-on-stopgap-measures/" target="_blank">Colorado River Negotiations Resume With Focus on Stopgap Measures</a></div>
+  <div class="article-summary">Critical negotiations about the future of the Colorado River took a two-week hiatus last month after the seven states in the basin missed a key Valentine’s Day deadline for striking a deal, New Mexico’s water negotiator said Thursday. Estevan López s…</div>
+  <div class="article-meta">Mar 24, 2026  00:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23032026/wmo-report-highlights-global-emergency/" target="_blank">Report Shows Earth’s Climate is Out of Balance, as Indicators Hit New Extremes</a></div>
+  <div class="article-summary">The world is in a state of climate emergency, the head of the United Nations declared Sunday, following the release of the latest State of the Global Climate report from the World Meteorological Organization.   “Earth is being pushed beyond its limit…</div>
+  <div class="article-meta">Mar 23, 2026  19:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23032026/texas-rio-grande-border-buoy-environmental-risks/" target="_blank">Border Communities Remain in the Dark About Federal Government’s Billion-Dollar Buoy Project</a></div>
+  <div class="article-summary">Reporting supported by the Water Desk at the University of Colorado, Boulder. BROWNSVILLE, Texas—An experiment unfolding at the southernmost tip of this state could irrevocably change the iconic Rio Grande and the communities it sustains. Contractors…</div>
+  <div class="article-meta">Mar 23, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23032026/replacing-toxic-lead-pipes-could-drive-job-creation-in-illinois-report-finds/" target="_blank">Replacing Toxic Lead Pipes Could Drive Job Creation in Illinois, Report Finds</a></div>
+  <div class="article-summary">This story is a partnership between Inside Climate News, Grist and WBEZ, a public radio station serving the Chicago metropolitan region. Illinois is in the midst of a public health crisis. Nearly 1.5 million service lines—the pipes that carry drinkin…</div>
+  <div class="article-meta">Mar 23, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23032026/antarctic-ice-retreat-evidence/" target="_blank">Scientists See Converging Evidence of Antarctic Ice Retreat</a></div>
+  <div class="article-summary">Drilling through 500 feet of floating ice into the Antarctic Ocean floor, climate scientists have retrieved a rare 23-million-year record of sediments that helps demonstrate why the planet’s southern ice shield could determine the fate of distant low…</div>
+  <div class="article-meta">Mar 23, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, March 24, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
