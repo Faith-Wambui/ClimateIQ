@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, March 25, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">56</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 49 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/24/france-proposes-linking-solar-subsidies-to-storage-as-prices-turn-negative/" target="_blank">France proposes linking solar subsidies to storage as prices turn negative</a></div>
+  <div class="article-summary">France's energy regulator is proposing to link solar subsidies for large installations to the inclusion of energy storage, a move designed to combat falling solar prices and grid instability. This policy shift is crucial for integrating more renewables efficiently, as it directly addresses the growing problem of negative electricity prices caused by oversupply.</div>
+  <div class="article-meta">Mar 24, 2026  19:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/24/byd-plans-20-canadian-dealerships-toronto-first/" target="_blank">BYD plans 20 Canadian dealerships within a year as 6.1% tariff deal opens the floodgates</a></div>
+  <div class="article-summary">BYD, the world's largest EV maker, is set to launch 20 Canadian dealerships within a year, a move directly enabled by Canada's recent reduction of tariffs on Chinese-built EVs from 100% to just 6.1%. This significant policy shift opens the floodgates for Chinese automakers, accelerating the availability of electric vehicles and potentially reshaping the Canadian automotive landscape.</div>
+  <div class="article-meta">Mar 24, 2026  18:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/24/the-latest-world-climate-report-is-grim-but-its-not-the-end-of-the-story/" target="_blank">The Latest World Climate Report Is Grim, But It’s Not The End Of The Story</a></div>
+  <div class="article-summary">It’s no secret our planet is heating up. And here’s the evidence: we’ve just experienced the 11 hottest years on record, with 2025 being the second or third warmest in global history. The annual State of the Climate report, published today by the Wor…</div>
+  <div class="article-meta">Mar 25, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/24/zoox-hits-big-milestone/" target="_blank">Zoox Hits Big Milestone</a></div>
+  <div class="article-summary">Zoox has hit a milestone moment, by far our largest to date. Today, we are announcing our plans for service expansions across multiple markets, as well as introducing new product and service features. We are gearing up to expand our service in San Fr…</div>
+  <div class="article-meta">Mar 25, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/24/more-u-s-homes-used-leds-over-other-bulb-types-for-indoor-lighting-in-2024/" target="_blank">More U.S. Homes Used LEDs Over Other Bulb Types For Indoor Lighting In 2024</a></div>
+  <div class="article-summary">Although homes can have a mix of bulbs for indoor lighting, 90% of U.S. households reported using light-emitting diode (LED) bulbs, according to the most recent results of the Residential Energy Consumption Survey (RECS). Over one-third of households…</div>
+  <div class="article-meta">Mar 25, 2026  04:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/24/waymo-13x-lower-rate-of-serious-injury-or-fatality/" target="_blank">Waymo: 13x Lower Rate of Serious Injury or Fatality</a></div>
+  <div class="article-summary">Waymo’s biggest argument for why it should exist and why it needs to grow is that it protects human life. While you can claim Waymo hasn’t logged enough miles to prove anything, it does have nearly 200 million fully autonomous miles under its belt an…</div>
+  <div class="article-meta">Mar 25, 2026  03:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/24/battery-equipped-induction-stoves-a-new-path-to-clean-home-electrification/" target="_blank">Battery-Equipped Induction Stoves: A New Path to Clean Home Electrification</a></div>
+  <div class="article-summary">Induction stoves have been one of our favorite technologies these past few years. In the latest episode of Cleantech Talk, Copper founder & CEO Sam Calisch joined Scott Cooney to discuss how battery-equipped induction stoves are redefining what it me…</div>
+  <div class="article-meta">Mar 25, 2026  03:28 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/development-lender-aims-to-speed-post-war-shift-to-clean-energy" target="_blank">Development Lender Aims to Speed Post-War Shift to Clean Energy</a></div>
+  <div class="article-summary">The Asian Infrastructure Investment Bank aims to help the region accelerate adoption of cleaner power as nations respond to energy shocks from the Iran war by seeking greater self-sufficiency.
+
+“We will do whatever we can to speed up the transition t…</div>
+  <div class="article-meta">Mar 25, 2026  06:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/energy-shocks-will-slow-global-climate-action-key-bhp-executive-says" target="_blank">Energy Shocks Will Slow Climate Action, Top Mining Executive Says</a></div>
+  <div class="article-summary">Ongoing energy disruptions will set back efforts to curb greenhouse gas emissions as nations prioritize supply security, according to one of the most senior executives at the world’s top mining company, BHP Group.
+
+“Geopolitical fragmentation has rep…</div>
+  <div class="article-meta">Mar 25, 2026  05:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-24/prominent-researcher-exits-nasa-citing-us-attacks-on-science" target="_blank">Prominent Researcher Exits NASA, Citing US Attacks on Science</a></div>
+  <div class="article-summary">Kate Marvel, a high-profile NASA climate scientist, resigned from the space agency’s Earth research division Tuesday, citing in a resignation letter the Trump administration’s attacks on science and “upheavals of the past year.”
+
+“I never expected th…</div>
+  <div class="article-meta">Mar 25, 2026  01:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/24/secs-top-cop-quit-when-white-house-wanted-her-not-to-punish-musk/" target="_blank">What $288M can buy: SEC’s top cop quit as White House seeks Musk wrist-slap</a></div>
+  <div class="article-summary">SEC enforcement chief Margaret Ryan resigned amid pressure to go easy on financial backers of Donald Trump, including Elon Musk. This internal conflict at the U.S. financial regulator raises concerns about the agency's ability to hold powerful figures accountable for potential climate-related financial risks.</div>
+  <div class="article-meta">Mar 24, 2026  19:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-24/form-energy-sells-batteries-to-crusoe-to-power-new-data-centers" target="_blank">Crusoe Buys Batteries That Last for Days to Power New Data Centers</a></div>
+  <div class="article-summary">Form Energy Inc. has reached an agreement to sell batteries that rely on rust and last for days to data center developer Crusoe, as technology companies rush to find resources to meet the growing power needs of artificial intelligence.
+
+The battery s…</div>
+  <div class="article-meta">Mar 24, 2026  15:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/24/targeting-of-energy-facilities-turned-iran-war-into-worst-case-scenario-for-gulf-states/" target="_blank">Targeting of Energy Facilities Turned Iran War into Worst‑Case Scenario for Gulf States</a></div>
+  <div class="article-summary">The U.S.-Israeli military campaign against Iran took a dangerous turn on March 18, 2026, with tit-for-tat strikes on critical energy infrastructure that amount to the most serious regional escalation since the conflict began. First, an Israeli drone…</div>
+  <div class="article-meta">Mar 25, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-esnfi-cluster-operational-presence-february-2026" target="_blank">Afghanistan: ES/NFI Cluster Operational Presence (as of February 2026)</a></div>
+  <div class="article-summary">Country: AfghanistanSources: International Organization for Migration, Shelter Cluster, UN High Commissioner for RefugeesPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Mar 25, 2026  03:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-esnfi-cluster-winterization-capacity-15-march-2026" target="_blank">Afghanistan: ES/NFI Cluster Winterization Capacity (as of 15 March 2026)</a></div>
+  <div class="article-summary">Country: AfghanistanSources: International Organization for Migration, Shelter Cluster, UN High Commissioner for RefugeesPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Mar 25, 2026  03:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-winterization-response-dashboard-15-march-2026" target="_blank">Afghanistan: Winterization Response Dashboard (As of 15 March 2026)</a></div>
+  <div class="article-summary">Country: AfghanistanSources: International Organization for Migration, Shelter Cluster, UN High Commissioner for RefugeesPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Mar 25, 2026  03:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/colombia/colombia-briefing-departamental-cauca-enero-diciembre-de-2025" target="_blank">Colombia: Briefing Departamental - Cauca, enero a diciembre de 2025</a></div>
+  <div class="article-summary">Country: ColombiaSources: El Equipo Humanitario País Colombia, UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.MENSAJES CLAVESEn 2025, el Cauca enfrentó un deterioro sostenido de las condiciones humanitarias de…</div>
+  <div class="article-meta">Mar 24, 2026  22:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/future-heat-danger-differs-starkly-for-rich-and-poor-countries" target="_blank">Future Heat Danger Differs Starkly for Rich and Poor Countries</a></div>
+  <div class="article-summary">A new Climate Impact Lab analysis reveals that poorer nations face a tenfold greater risk of heat-related deaths compared to wealthier countries, a stark consequence of accelerating global warming. This disparity highlights how climate change disproportionately impacts vulnerable populations, demanding urgent, targeted adaptation strategies for cities worldwide.</div>
+  <div class="article-meta">Mar 25, 2026  07:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24032026/todays-climate-storms-hawaii-western-heat-wave/" target="_blank">As Storms Pummel Hawaii, the Western U.S. Continues to Bake Amid Record-Breaking Heat Wave</a></div>
+  <div class="article-summary">Communities across the Western United States are in for another week of unusually high temperatures amid an ongoing and historic early-season heat wave. It has broken March temperature records in nearly 180 cities, including Phoenix, which hit 105 de…</div>
+  <div class="article-meta">Mar 25, 2026  00:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/24/early-warning-systems-are-saving-lives-in-central-asia/" target="_blank">Early warning systems are saving lives in Central Asia</a></div>
+  <div class="article-summary">Across Asia, the installation of early warning systems, alongside community involvement, is now viewed as a key response to the ever-present threat of climate disasters.The postEarly warning systems are saving lives in Central Asiaappeared first onCl…</div>
+  <div class="article-meta">Mar 24, 2026  23:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24032026/energy-secretary-chris-wright-ceraweek-oil-production/" target="_blank">White House’s ‘Drill Baby Drill’ Wartime Mandate Meets Volatile Market Reality</a></div>
+  <div class="article-summary">Energy Secretary Chris Wright, a long-time apostle of fossil fuel expansion, issued a blunt directive to the world’s largest oil and gas producers on Monday: Produce more, and do it now. The call came in Houston at the “Super Bowl” of energy conferen…</div>
+  <div class="article-meta">Mar 24, 2026  22:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/25/if-one-nation-wants-to-be-a-serious-political-player-barnaby-joyce-needs-to-get-his-facts-straight-on-the-climate-crisis" target="_blank">The fuel crisis shows the energy future has arrived. All Barnaby Joyce and One Nation have to offer is bluster | Adam Morton</a></div>
+  <div class="article-summary">It’s worth comparing the One Nation MP’s views with those of an expert – the executive director of the International Energy AgencySign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereBarnaby Joyce is not what most pe…</div>
+  <div class="article-meta">Mar 24, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/24/ofcom-complaints-climate-change-denial-talktv-talk-radio" target="_blank">Ofcom to investigate complaints of climate change denial for first time since 2017</a></div>
+  <div class="article-summary">Exclusive: UK regulator makes U-turn over TalkTV and TalkRadio complaints after claims it let some broadcasters ‘spout dangerous climate lies’A U-turn by the UK’s broadcasting regulator Ofcom means it will investigate complaints of climate change den…</div>
+  <div class="article-meta">Mar 24, 2026  16:46 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, March 25, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
