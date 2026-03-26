@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, March 26, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">54</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 45 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-indias-co2-emissions-in-2025-grew-at-slowest-rate-in-two-decades/" target="_blank">Analysis: India’s CO2 emissions in 2025 grew at slowest rate in two decades</a></div>
+  <div class="article-summary">India’s carbon dioxide (CO2) emissions grew by 0.5% in the second half of 2025 and by just 0.7% in the year as a whole, the slowest rate in more than two decades.
+
+This is a sharp slowdown from the growth of 4-11% in the preceding four years and mark…</div>
+  <div class="article-meta">Mar 26, 2026  03:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/25/california-regulator-confirms-tesla-not-operating-autonomous-vehicle-service/" target="_blank">California regulator confirms Tesla is ‘not operating an autonomous vehicle service’</a></div>
+  <div class="article-summary">California regulators have definitively stated Tesla is not running an autonomous vehicle service, but rather a standard chauffeur-driven operation, despite its advanced driver-assist technology. This distinction matters because Tesla avoids the stringent safety reporting and transparency mandates applied to true robotaxi companies like Waymo, raising questions about oversight of its public road testing.</div>
+  <div class="article-meta">Mar 25, 2026  21:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/25/india-sets-achievable-green-electricity-and-emissions-instensity-targets/" target="_blank">India sets achievable green electricity and emissions intensity targets</a></div>
+  <div class="article-summary">India has committed to sourcing 50% of its electricity from non-fossil fuels by 2030 and achieving net-zero emissions intensity by 2035. These ambitious targets, while lauded by many, are seen by some analysts as potentially too modest given India's current rapid progress in renewable energy deployment.</div>
+  <div class="article-meta">Mar 25, 2026  20:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/green-leader-polanski-says-the-uk-shouldn-t-strangle-business" target="_blank">Green Leader Polanski Says the UK Shouldn’t ‘Strangle’ Business</a></div>
+  <div class="article-summary">Green Party leader Zack Polanski is signaling a more business-friendly approach, arguing the government shouldn't stifle companies and that businesses are key to driving climate innovation. This shift comes as the party aims to capitalize on rising poll numbers in upcoming local elections, suggesting a pragmatic push to integrate climate action with economic growth.</div>
+  <div class="article-meta">Mar 25, 2026  20:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/factcheck-nine-false-or-misleading-myths-about-north-sea-oil-and-gas/" target="_blank">Factcheck: Nine false or misleading myths about North Sea oil and gas</a></div>
+  <div class="article-summary">The Iran war has triggered another fossil-fuel energy crisis, with surging global prices and increasing concerns over energy security.
+
+In the UK, many newspapers, opposition politicians and other public figures have used the crisis to argue in favou…</div>
+  <div class="article-meta">Mar 25, 2026  19:10 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-03-26/war-oil-price-shock-sparks-new-interest-in-green-tech-around-the-world" target="_blank">Iran War Is Pushing Consumers to Break Up With Fossil Fuels</a></div>
+  <div class="article-summary">Escalating tensions in Iran have sent oil prices soaring, pushing U.S. consumers back towards electric vehicles as gasoline hits $6.81 a gallon. This surge in demand for EVs, even used models under $30,000, signals a potential shift away from fossil fuels driven by immediate economic concerns, with implications for future emissions reductions.</div>
+  <div class="article-meta">Mar 26, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/25/the-bluetti-fridgepower-real-world-review/" target="_blank">The BLUETTI FridgePower — Real-World Review</a></div>
+  <div class="article-summary">I recently received BLUETTI’s newest product, a very interesting one that is quite different from the normal portable power station lineup. The BLUETTI FridgePower* is designed specifically for use with refrigerators. Rather than trying to be a broad…</div>
+  <div class="article-meta">Mar 26, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/25/sierra-club-celebrates-as-the-coastal-virginia-offshore-wind-project-powers-on/" target="_blank">Sierra Club Celebrates as the Coastal Virginia Offshore Wind Project Powers On</a></div>
+  <div class="article-summary">CVOW Is On Track to Be the Largest Offshore Wind Project in the United States HAMPTON ROADS, Va. — This week, the Coastal Virginia Offshore Wind Project (CVOW) began delivering affordable, reliable, and renewable offshore wind power to Virginia. When…</div>
+  <div class="article-meta">Mar 26, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/25/groups-challenge-pscs-approval-of-massive-georgia-power-gas-expansion/" target="_blank">Groups Challenge PSC’s Approval of Massive Georgia Power Gas Expansion</a></div>
+  <div class="article-summary">ATLANTA, GA— Environmental organizations and faith communities filed an appeal today asking a Fulton County Superior Court to review the Georgia Public Service Commission’s December decision to approve Georgia Power’s proposal to add an additional 10…</div>
+  <div class="article-meta">Mar 26, 2026  06:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/25/from-forklifts-to-the-future-why-my-switch-to-an-mg-s5-just-makes-sense/" target="_blank">From Forklifts to the Future: Why My Switch to an MG S5 Just Makes Sense</a></div>
+  <div class="article-summary">My friend Peter Tranter has recently made some big changes in life, moving from a medium sized property to a retirement village and also purchasing an MG S5 electric SUV. CleanTechnica readers were introduced to the MG S5 8 months ago here. I asked h…</div>
+  <div class="article-meta">Mar 26, 2026  06:18 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/cyclone-narelle-set-to-lash-australian-lng-iron-ore-ports" target="_blank">Cyclone Narelle Strengthens and Nears Australian LNG Plants</a></div>
+  <div class="article-summary">Severe Tropical Cyclone Narelle strengthened and is threatening to disrupt gas and iron ore operations on Australia’s west coast, after leaving mine closures and evacuations in its wake along the north shore over the past week.
+
+The storm’s top susta…</div>
+  <div class="article-meta">Mar 26, 2026  00:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/canada-alberta-agree-in-principle-to-lower-methane-emissions" target="_blank">Alberta and Canada Reach Deal on Oil and Gas Methane Emissions</a></div>
+  <div class="article-summary">The Alberta and Canadian governments have reached a deal to reduce methane emissions, the latest in a series of energy negotiations setting the stage for a new pipeline to the Pacific coast.
+
+An agreement in principle to cut methane emissions in the…</div>
+  <div class="article-meta">Mar 25, 2026  19:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-25/this-is-where-global-warming-poses-the-most-deadly-risks" target="_blank">This Is Where Global Warming Poses the Most Deadly Risks</a></div>
+  <div class="article-summary">The world is getting hotter, and the consequences could be deadly. New research quantifies the risks if the world fails to curb emissions and adapt to warming in the pipeline.
+
+Today’s newsletter looks at the locations most vulnerable to rising tempe…</div>
+  <div class="article-meta">Mar 25, 2026  18:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/growing-number-of-esg-focused-funds-are-liquidated-in-us" target="_blank">Wave of ESG Fund Closures Builds in US With Few New Launches</a></div>
+  <div class="article-summary">ESG & Investing
+
+Wave of ESG Fund Closures Builds in US With Few New Launches
+
+The market for ESG-focused funds keeps shrinking.
+
+Ninety-one US-based funds shut down last year, compared with the launch of just nine new offerings, according to data co…</div>
+  <div class="article-meta">Mar 25, 2026  16:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-25/singapore-delays-carbon-levy-on-flights-citing-middle-east-war" target="_blank">Singapore Delays World First Green Flight Levy on Iran War</a></div>
+  <div class="article-summary">Singapore is delaying a sustainable aviation fuel levy that airline customers were meant to start paying next month, citing the surge in fuel costs spurred by the Iran war.
+
+Additional charges will now begin Oct. 1 as a result of the “impact of the o…</div>
+  <div class="article-meta">Mar 25, 2026  15:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25032026/iowa-environmental-risk-factors-contribute-to-cancer-crisis/" target="_blank">Iowa’s Cancer Crisis Linked to Pesticides, PFAS, Fertilizer and Radon, Report Says</a></div>
+  <div class="article-summary">A new report links rising cancer rates in Iowa, a leading corn producer, to environmental exposures including high pesticide and fertilizer use, alongside PFAS contamination. This highlights a critical, localized public health crisis driven by agricultural and industrial pollution, underscoring the urgent need for policy changes to protect both human health and the environment.</div>
+  <div class="article-meta">Mar 25, 2026  21:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25032026/epa-approves-higher-ethanol-blends-in-gasoline/" target="_blank">As Prices Soar, EPA Greenlights Higher Ethanol Blends in Gasoline</a></div>
+  <div class="article-summary">The Trump administration handed farmers and the ethanol industry a win on Wednesday by issuing a waiver that will allow the use of higher corn-based ethanol blends in gas tanks this summer. Environmental Protection Agency Administrator Lee Zeldin mad…</div>
+  <div class="article-meta">Mar 26, 2026  02:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/mar/26/whats-the-current-crisis-telling-us-about-our-fossil-fuel-future" target="_blank">What’s the current crisis telling us about our fossil fuel future? | Fiona Katauskas</a></div>
+  <div class="article-summary">See more ofFiona Katauskas’s cartoons here…</div>
+  <div class="article-meta">Mar 26, 2026  02:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/25/us-climate-damage-research" target="_blank">US has caused $10tn worth of climate damage since 1990, research finds</a></div>
+  <div class="article-summary">US, top carbon emitter in history, has ‘a lot of responsibility’ for causing ‘substantial’ harm globally, scientist saysThe US has caused an eye-watering $10tn in global damages to the world over the past three decades through its vast planet-heating…</div>
+  <div class="article-meta">Mar 25, 2026  19:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/25/iran-war-boost-fossil-fuel-phase-out-push-colombia-minister/" target="_blank">Iran war could boost fossil fuel phase-out push, says Colombian minister</a></div>
+  <div class="article-summary">Colombia's environment minister Irene Vélez Torres said she hopes that a new fossil fuel phase out summit in Santa Marta can cement a coalition of countriesThe postIran war could boost fossil fuel phase-out push, says Colombian ministerappeared first…</div>
+  <div class="article-meta">Mar 25, 2026  18:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/mar/25/flowers-heated-2c-meadow-climate-crisis-experiment-rocky-mountains-aoe" target="_blank">‘It’s like flowers on steroids’: what happened when scientists heated a Rocky Mountain wildlife meadow by 2C?</a></div>
+  <div class="article-summary">A 30-year experiment in Colorado's Rocky Mountains revealed that a 2°C warming, simulating unchecked climate change, devastated native wildflowers and grasses, transforming lush meadows into a desert-like scrubland. This alarming outcome demonstrates how rapidly even moderate warming can fundamentally alter fragile ecosystems, with cascading impacts on biodiversity and soil health.</div>
+  <div class="article-meta">Mar 25, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, March 26, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
