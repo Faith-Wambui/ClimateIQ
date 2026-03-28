@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, March 28, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">54</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 49 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-27-mach-2026-north-sea-myths-debunked-indias-climate-plan-ipcc-and-indigenous-knowledge/" target="_blank">DeBriefed 27 Mach 2026: North Sea myths debunked | India’s climate plan | IPCC and Indigenous knowledge</a></div>
+  <div class="article-summary">Disruptions to Strait of Hormuz oil and gas flows are forcing Asian nations back to coal, while the UK is boosting renewables and clean energy installations to counter energy security threats. This global fossil fuel volatility underscores the urgent need for diversified, clean energy sources to stabilize markets and meet climate goals.</div>
+  <div class="article-meta">Mar 27, 2026  18:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/03/how-can-we-avoid-carbon-lock-in-within-west-africas-mineral-value-chains/" target="_blank">How can we avoid carbon lock-in within West Africa’s Mineral Value Chains?</a></div>
+  <div class="article-summary">Swathes of critical mineral commitments in West Africa signal a profound expansion in production capacity and emissions, requiring decarbonization technologies, green finance and a new social contract to prevent carbon lock-in.The postHow can we avoi…</div>
+  <div class="article-meta">Mar 27, 2026  15:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/very-alarming-winter-sees-arctic-sea-ice-hit-record-low-for-second-year-running/" target="_blank">‘Very alarming’ winter sees Arctic sea ice hit record-low for second year running</a></div>
+  <div class="article-summary">Arctic sea ice has reached its peak extent for this winter, clocking in as the joint-smallest in a satellite record going back almost half a century.
+
+Provisional data from the US National Snow and Ice Data Center (NSIDC) shows that sea ice extent pe…</div>
+  <div class="article-meta">Mar 27, 2026  15:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-does-indias-new-paris-agreement-pledge-mean-for-climate-action/" target="_blank">Q&A: What does India’s new Paris Agreement pledge mean for climate action?</a></div>
+  <div class="article-summary">India has set a new target to reduce its “emissions intensity” – greenhouse gas emissions per unit of economic output – to 47% below 2005 levels by 2035.
+
+The much-awaited announcement comes within India’s delayed new nationally determined contributi…</div>
+  <div class="article-meta">Mar 27, 2026  15:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-uk-is-halving-its-climate-finance-for-developing-countries/" target="_blank">Analysis: UK is ‘halving’ its climate finance for developing countries</a></div>
+  <div class="article-summary">The UK is roughly halving the climate aid it allocates to developing countries, when accounting changes and inflation are factored in, according to new analysis by Carbon Brief.
+
+On 19 March, the government announced that the UK would provide “around…</div>
+  <div class="article-meta">Mar 27, 2026  11:44 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/27/brightdrop-died-in-america-while-china-made-electric-vans-normal/" target="_blank">BrightDrop Died in America, While China Made Electric Vans Normal</a></div>
+  <div class="article-summary">General Motors' BrightDrop electric delivery van venture has ceased operations in the U.S., a stark contrast to China where electric vans are now commonplace. This shift highlights a critical divergence in the global transition to electric vehicles, with significant implications for reducing transportation emissions and achieving climate goals.</div>
+  <div class="article-meta">Mar 28, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/27/iran-conflict-costing-shipping-industry-e340-million-a-day/" target="_blank">Iran Conflict Costing Shipping Industry €340 Million A Day</a></div>
+  <div class="article-summary">Green measures would reduce the shipping industry’s exposure to fuel price shocks in future, says T&E. €4.6 billion in additional fuel costs since the start of the conflict The cost gap between fossil fuels and e-fuels has narrowed. Efficiency measur…</div>
+  <div class="article-meta">Mar 28, 2026  03:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/27/environmental-advocates-launch-nc-pipeline-watch/" target="_blank">Environmental Advocates Launch NC Pipeline Watch</a></div>
+  <div class="article-summary">Environmental advocates have launched NC Pipeline Watch to monitor the construction of the Southeast Supply Enhancement Project pipeline in North Carolina. This initiative aims to ensure the project, which will transport natural gas, adheres to environmental regulations, a critical step in preventing potential methane leaks and safeguarding local water resources amidst ongoing fossil fuel infrastructure development.</div>
+  <div class="article-meta">Mar 28, 2026  03:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/27/new-york-city-first-home-battery-storage-system/" target="_blank">New York City finally gets its first home battery storage system</a></div>
+  <div class="article-summary">For the first time, a home battery is live on a New York City rooftop, opening the door for residential energy storage across the five boroughs.
+
+Brooklyn SolarWorks installed a 19.6-kilowatt-hour residential battery energy storage system (BESS) on a…</div>
+  <div class="article-meta">Mar 28, 2026  00:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/27/shipping-at-risk-in-the-strait-of-hormuz/" target="_blank">Shipping at Risk in the Strait of Hormuz</a></div>
+  <div class="article-summary">The current crisis is costing shipping millions per day, highlighting why we must accelerate the sector’s decarbonisation. The Hormuz Strait crisis is costing the shipping industry €340 million a day,  demonstrating the industry’s vulnerability to oi…</div>
+  <div class="article-meta">Mar 28, 2026  00:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-27/why-china-is-investigating-us-green-tariffs-ahead-of-trump-visit" target="_blank">Why China Is Investigating US Green Tariffs Ahead of Trump’s Visit</a></div>
+  <div class="article-summary">After years of tariffs on Chinese clean technology, experts say Beijing’s move is meant to send a signal to the US.…</div>
+  <div class="article-meta">Mar 28, 2026  01:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-27/totalenergies-drops-net-zero-citing-slower-green-shift-eu-rules" target="_blank">TotalEnergies Drops Net Zero Citing Slower Green Shift, EU Rules</a></div>
+  <div class="article-summary">French energy giant TotalEnergies SE said it will no longer aim to reach net zero emission targets by 2050, citing nations’ slower-than-expected shift away from fossil fuels and more stringent European Union regulations.…</div>
+  <div class="article-meta">Mar 27, 2026  22:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-27/trump-officials-in-talks-with-wind-developers-to-buy-back-leases" target="_blank">Trump Officials in Talks With Wind Developers to Buy Back Leases</a></div>
+  <div class="article-summary">The Trump administration is talking with some offshore wind developers about buying back the leases they purchased from the federal government years ago to develop energy projects along the US coast.…</div>
+  <div class="article-meta">Mar 27, 2026  21:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-27/france-seeks-eu-fertilizer-carbon-tax-pause-as-war-raises-prices" target="_blank">France Seeks EU Fertilizer Carbon Tax Pause as War Raises Prices</a></div>
+  <div class="article-summary">France will ask the European Union to offer assistance to farmers struggling with soaring costs of fertilizer caused by the Middle East war.…</div>
+  <div class="article-meta">Mar 27, 2026  21:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-27/jpmorgan-s-institutional-clients-are-asking-about-climate-tipping-points" target="_blank">JPMorgan’s Institutional Clients Are Asking About Climate Tipping Points</a></div>
+  <div class="article-summary">JPMorgan Chase & Co.’s institutional clients have started paying more attention to so-called tipping points, with a particular focus on the extent to which weaker Atlantic currents might be making winters in northwestern Europe colder.…</div>
+  <div class="article-meta">Mar 27, 2026  21:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/syrian-arab-republic/syrian-arab-republic-flash-update-no-1-flooding-north-and-east-syria-27-march-2026" target="_blank">Syrian Arab Republic: Flash Update No. 1 - Flooding in North and East Syria (as of 27 March 2026)</a></div>
+  <div class="article-summary">Country: Syrian Arab RepublicSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.HIGHLIGHTSHeavy rains beginning on 14 March triggered widespread flooding across northern Syria, impacting rural communities…</div>
+  <div class="article-meta">Mar 27, 2026  22:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/cuba/latinoamerica-y-el-caribe-resumen-de-situacion-semanal-al-27-de-marzo-2026" target="_blank">Cuba: Latinoamérica y El Caribe Resumen de Situación Semanal al 27 de marzo 2026</a></div>
+  <div class="article-summary">Countries: Cuba, Colombia, Ecuador, Guatemala, HondurasSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.CIFRAS CLAVE$94M Plan de Acción lanzado en Cuba por crisis de energía y Huracán Melissa6,2K persona…</div>
+  <div class="article-meta">Mar 27, 2026  21:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/cuba/latin-america-caribbean-weekly-situation-update-27-march-2026" target="_blank">Cuba: Latin America & The Caribbean Weekly Situation Update as of 27 March 2026</a></div>
+  <div class="article-summary">Countries: Cuba, Ecuador, Guatemala, Honduras, Venezuela (Bolivarian Republic of)Source: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.KEY FIGURES$94M Plan of Action launched in Cuba for energy crisis and Hur…</div>
+  <div class="article-meta">Mar 27, 2026  21:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/map/cyprus/cyprus-foot-and-mouth-disease-outbreak-and-eu-response-dg-echo-daily-map-27032026" target="_blank">Cyprus | Foot and Mouth Disease Outbreak and EU Response - DG ECHO Daily Map | 27/03/2026</a></div>
+  <div class="article-summary">A Foot and Mouth Disease outbreak in Cyprus, confirmed on March 27, 2026, has triggered an urgent EU response. This animal disease poses a significant threat to livestock populations, with potential for widespread economic disruption and indirect impacts on food security and agricultural emissions.</div>
+  <div class="article-meta">Mar 27, 2026  19:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/cameroon/cameroun-en-un-coup-doeil-besoins-et-plan-de-reponse-humanitaires-2026" target="_blank">Cameroon: Cameroun : En un coup d'œil | Besoins et Plan de Réponse Humanitaires 2026</a></div>
+  <div class="article-summary">Country: CameroonSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Mar 27, 2026  16:35 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/27/middle-east-crude-oil-tanker-rates-reached-a-multi-decade-high-in-march/" target="_blank">Middle East Crude Oil Tanker Rates Reached A Multi-Decade High In March</a></div>
+  <div class="article-summary">Iran's closure of the Strait of Hormuz in March 2026 sent Middle East to Asia crude oil tanker rates to a multi-decade high, the highest since data began in 2005. This disruption highlights the vulnerability of global oil supply chains and the potential for geopolitical events to significantly impact energy markets, underscoring the urgency of transitioning to more resilient and diversified energy sources to mitigate climate risks.</div>
+  <div class="article-meta">Mar 28, 2026  05:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27032026/trump-god-squad-gulf-oil-drilling-endangered-species/" target="_blank">Trump’s ‘God Squad’ Will Weigh Gulf Oil Drilling Against the Survival of Endangered Whales and Turtles</a></div>
+  <div class="article-summary">The Trump administration is turning to the nuclear option on endangered-species protections in the name of national security. A rarely tapped panel nicknamed the “God Squad” will meet Tuesday to discuss whether overriding Endangered Species Act regul…</div>
+  <div class="article-meta">Mar 28, 2026  02:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27032026/us-wildfires-already-setting-records-this-year/" target="_blank">This Year’s US Wildfires Have Already Set Records That Could Foreshadow a Smoky, Fiery Summer</a></div>
+  <div class="article-summary">As the Western United States limps away from one of the warmest and driest winters on record, wildfires have burned over 127 percent more acreage so far in 2026 than the 10-year average, potentially setting the stage for a long, fiery summer. Updated…</div>
+  <div class="article-meta">Mar 28, 2026  00:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/mar/27/germany-autobahn-no-speed-limits-energy-crisis" target="_blank">‘Tempolimit? Nein, danke!’: why German petrolheads won’t slow down – despite the energy crisis</a></div>
+  <div class="article-summary">Driving fast is in ‘the German DNA’, say lovers of the speed-limit free Autobahn, but support in the country for a restriction is growingDeath-defying thrills are not what draws Lutz Leif Linden to zip down the Autobahn faster than a plane taking off…</div>
+  <div class="article-meta">Mar 27, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27032026/florida-data-center-costs-legislation/" target="_blank">Legislation Aims to Protect Floridians From Data Center Costs, but Will It?</a></div>
+  <div class="article-summary">Legislation awaiting Gov. Ron DeSantis’ signature is aimed at ensuring hyper-scale data centers in Florida bear the full financial burden of powering their own facilities and that costs do not fall to average Floridians.  The bill, approved by legisl…</div>
+  <div class="article-meta">Mar 27, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, March 28, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
