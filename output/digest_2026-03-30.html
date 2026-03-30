@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, March 30, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">21</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:59%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 9 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 7 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/29/trumps-criminal-regime-goes-after-electric-school-bus-money/" target="_blank">Trump’s Criminal Regime Goes After Electric School Bus Money</a></div>
+  <div class="article-summary">The Trump administration's EPA is reportedly withholding funds designated for electric school buses under the Bipartisan Infrastructure Law, a move that prioritizes fossil fuels over clean transportation. This decision directly undermines efforts to reduce school bus emissions, which disproportionately impact children's health and contribute to climate change.</div>
+  <div class="article-meta">Mar 29, 2026  17:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/30/beware-of-cleaning-photovoltaic-panels-with-dishwashing-detergent/" target="_blank">Beware of cleaning photovoltaic panels with dishwashing detergent</a></div>
+  <div class="article-summary">Researchers at the University of Turku in Finland have investigated whether household cleaning products can be used to clean solar panels, finding that most – including glass cleaner and isopropanol – are suitable and do not affect module glass light…</div>
+  <div class="article-meta">Mar 30, 2026  09:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/30/diy-plug-in-solar-shows-0-65-w-potential-in-us-market/" target="_blank">DIY plug-in solar shows $0.65/W potential in US market</a></div>
+  <div class="article-summary">DIY plug-in solar systems are emerging in the US, offering a $0.65/W potential and a crucial pathway for renters to access solar power. This development is significant as over a third of US households lack rooftop solar access, and with 28 states considering related legislation, plug-in solar could unlock substantial clean energy adoption and cost savings.</div>
+  <div class="article-meta">Mar 30, 2026  09:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/30/byd-2025-annual-report-in-context/" target="_blank">BYD 2025 Annual Report In Context</a></div>
+  <div class="article-summary">BYD cemented its position in 2025 as the world's leading producer of electric vehicles (PHEVs, BEVs, and NEVs combined) and battery storage systems, while also dominating China's auto market and BEV bus exports. This surge in production by a single, massive manufacturer signifies a critical acceleration in the global transition away from fossil fuels in transportation and energy.</div>
+  <div class="article-meta">Mar 30, 2026  08:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/03/29/which-early-ev-will-become-the-first-classic-car-of-the-electric-era/" target="_blank">Which early EV will become the first classic car of the electric era?</a></div>
+  <div class="article-summary">The automotive world is searching for its first true electric classic, a vehicle that will transcend its technical specs to become a cultural icon of the EV revolution. As electric vehicles mature, the question arises: which early model will capture the imagination and become a beloved collectible, much like its gasoline-powered predecessors?</div>
+  <div class="article-meta">Mar 29, 2026  23:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/29/james-bond-links-up-with-byds-premium-ev-brand-denza/" target="_blank">“James Bond” Links Up With BYD’s Premium EV Brand, DENZA</a></div>
+  <div class="article-summary">BYD's premium EV brand, DENZA, is partnering with the James Bond franchise, a move that could significantly boost the visibility of electric vehicles among a global audience. This high-profile collaboration aims to leverage the iconic spy's appeal to accelerate the adoption of sustainable transportation, a critical step in combating climate change.</div>
+  <div class="article-meta">Mar 29, 2026  21:46 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-29/private-capital-funds-defy-markdowns-with-halo-energy-bets" target="_blank">These Private Capital Funds Are Defying Markdowns With HALO Energy Bets</a></div>
+  <div class="article-summary">Private capital funds are bucking market downturns by aggressively investing in HALO Energy, a company focused on energy transition technologies. This strategic pivot highlights a growing investor confidence in the profitability of climate solutions, signaling a significant shift in capital allocation towards a sustainable future.</div>
+  <div class="article-meta">Mar 29, 2026  16:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-29/chevron-says-damage-to-wheatstone-gas-facility-to-affect-restart" target="_blank">Weeks-Long Australian LNG Outage Will Further Tighten Supply</a></div>
+  <div class="article-summary">A weeks-long outage at a major Australian liquefied natural gas export plant has dealt a further blow to a global market still reeling from the halt of operations in Qatar.…</div>
+  <div class="article-meta">Mar 29, 2026  12:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-29/russian-north-caucasus-region-declares-emergency-amid-flooding" target="_blank">Russian North Caucasus Regions Declare Emergency Amid Floods</a></div>
+  <div class="article-summary">Dagestan, Russia, has declared a state of emergency due to severe flooding that knocked out power to an estimated 500,000 residents. This extreme weather event highlights the increasing vulnerability of regions like the North Caucasus to climate change impacts, underscoring the urgent need for adaptation and mitigation strategies.</div>
+  <div class="article-meta">Mar 29, 2026  12:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/mar/29/hawaii-farm-recovery-after-storm-flood" target="_blank">‘I’ve never seen anything like it’: Hawaii’s small farmers begin recovery after catastrophic flooding</a></div>
+  <div class="article-summary">Two kona low storms dumped up to 50in of rain on Oahu, flooding fields and submerging equipmentEddie Oroyan’s farm was thriving when the storms hit. He and his wife had started LewaTerra Farm last year on a gorgeous stretch of land on the north shore…</div>
+  <div class="article-meta">Mar 29, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29032026/papua-new-guinea-mass-marine-die-off-public-health/" target="_blank">Toxic Ocean Crisis in Papua New Guinea Sparks Mass Marine Die-Off and Public Health Emergency</a></div>
+  <div class="article-summary">It started in December, when dead fish began washing ashore New Ireland—a mountainous island in Papua New Guinea’s New Ireland Province, flanked by the Pacific Ocean and the Bismarck Sea.  At first, just a few fish scattered the beaches—mostly small…</div>
+  <div class="article-meta">Mar 29, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/29/no-kings-iii-protesters-argue-that-we-must-protect-the-planet/" target="_blank">No Kings III Protesters Argue That We Must Protect The Planet</a></div>
+  <div class="article-summary">On March 28, 2026, global "No Kings III" protests highlighted the urgent need for planetary protection, specifically targeting legal proceedings that may hinder climate action. These demonstrations underscore a growing public demand for accountability and decisive environmental policy, particularly in light of judicial decisions that could impact climate justice.</div>
+  <div class="article-meta">Mar 30, 2026  03:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-29/iran-war-s-gas-supply-shock-pushes-top-consumers-back-to-coal" target="_blank">Iran War’s Gas Supply Shock Pushes Top Consumers Back to Coal</a></div>
+  <div class="article-summary">Escalating conflict in the Persian Gulf has disrupted gas supplies, forcing major consumers to revert to coal, the dirtiest fossil fuel. This shift risks reversing recent progress in decarbonization efforts and could significantly increase global greenhouse gas emissions.</div>
+  <div class="article-meta">Mar 30, 2026  01:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/29/progressive-funders-need-to-reassess-the-breakthrough-institute/" target="_blank">Progressive Funders Need to Reassess the Breakthrough Institute</a></div>
+  <div class="article-summary">Progressive funders are being urged to reconsider their support for the Breakthrough Institute, which has shifted from its original pro-technology environmentalism to advocating for policies that could undermine climate action. This pivot is significant because it risks diverting crucial resources and intellectual capital away from effective climate solutions.</div>
+  <div class="article-meta">Mar 29, 2026  22:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/29/no-kings-in-words-and-pictures/" target="_blank">No Kings In Words And Pictures</a></div>
+  <div class="article-summary">Millions of Americans, including Senator Bernie Sanders, rallied nationwide on March 28, 2026, for "No Kings Day" to protest perceived authoritarianism and economic inequality. This massive demonstration underscores a growing public demand for a more equitable and democratic future, directly challenging policies that exacerbate climate risks through unchecked corporate power and wealth concentration.</div>
+  <div class="article-meta">Mar 29, 2026  20:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29032026/icn-sunday-morning-earth-energy-imbalance/" target="_blank">Earth’s Energy Imbalance</a></div>
+  <div class="article-summary">“Earth is being pushed beyond its limits while every key climate indicator is flashing red,” warned U.N. Secretary-General António Guterres after the release of the latest State of the Global Climate report from the World Meteorological Organization.…</div>
+  <div class="article-meta">Mar 29, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, March 30, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
