@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, March 31, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">43</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:56%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 10 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 30 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/31/bhutan-opens-rooftop-ground-mounted-solar-tender/" target="_blank">Bhutan opens rooftop, ground-mounted solar tender</a></div>
+  <div class="article-summary">Bhutan is launching a tender for private developers to build 100 MW of new solar capacity, aiming to significantly boost its current 3 MW of installed solar power. This initiative, supported by green financing, is a crucial step for Bhutan to meet its ambitious goal of 1 GW of solar by 2030, underscoring the nation's commitment to climate action through renewable energy expansion.</div>
+  <div class="article-meta">Mar 31, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/31/jinkosolar-abandons-plans-to-build-solar-manufacturing-complex-in-vietnam/" target="_blank">JinkoSolar drops Vietnam solar manufacturing project</a></div>
+  <div class="article-summary">JinkoSolar has formally terminated its $294 million solar cell and module manufacturing project in Vietnam, citing unfavorable economics for exporting to the U.S. market following new anti-dumping duties. This decision underscores how escalating trade tensions and tariffs are directly impacting global renewable energy supply chains and investment strategies.</div>
+  <div class="article-meta">Mar 31, 2026  08:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/31/u-s-national-laboratories-lead-multi-agency-push-for-solar-cybersecurity-standards/" target="_blank">U.S. national laboratories lead multi-agency push for solar cybersecurity standards</a></div>
+  <div class="article-summary">Standardization is critical as solar energy moves toward providing a projected 45% of the U.S. electric supply by 2050, requiring a shift from reactive security measures to a proactive, standardized defense posture.
+
+The program also focuses on the c…</div>
+  <div class="article-meta">Mar 31, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/03/31/premier-energies-commissions-5-6-gw-solar-module-facility-in-india/" target="_blank">Premier Energies commissions 5.6 GW solar module facility in India</a></div>
+  <div class="article-summary">From pv magazine India
+
+Premier Energies Ltd has commenced trial production at its 5.6 GW solar module manufacturing facility in Seetharampur, Telangana. The plant produces G12R TOPCon modules with zero-busbar (0BB) architecture.
+
+With this new facto…</div>
+  <div class="article-meta">Mar 31, 2026  07:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/03/30/oil-companies-set-to-make-e24-billion-in-excess-profits-from-european-drivers-this-year/" target="_blank">Oil Companies Set to Make €24 Billion in Excess Profits from European Drivers This Year</a></div>
+  <div class="article-summary">T&E calls for a temporary tax on oil companies’ super-profits. Oil majors are set to make a €24 billion¹ windfall from European drivers off the back of the latest conflict in the Middle East, a new T&E tracker shows². Oil companies have already made…</div>
+  <div class="article-meta">Mar 31, 2026  06:53 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-31/japan-s-top-polluters-face-new-rules-as-carbon-market-advances" target="_blank">Japan’s Top Polluters Face New Rules as Carbon Market Advances</a></div>
+  <div class="article-summary">Major companies in Japan face mandatory new rules on climate reporting under the next phase in the country’s planned national emissions trading system.…</div>
+  <div class="article-meta">Mar 31, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-31/china-steel-mills-could-boost-profits-with-green-push-crea-says" target="_blank">China Steel Mills Could Boost Profits With Green Push, CREA Says</a></div>
+  <div class="article-summary">A shift toward greener steel production could help China’s mills to restore profitability that’s been eroded by years of overcapacity and weak domestic demand, according to a think tank.…</div>
+  <div class="article-meta">Mar 31, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/30/green-climate-fund-picks-locations-five-developing-country-hubs/" target="_blank">Green Climate Fund picks locations for five developing country hubs</a></div>
+  <div class="article-summary">The UN's climate fund says new offices will boost developing nations' access to climate finance as board accredits first Palestinian entity for direct access to fundsThe postGreen Climate Fund picks locations for five developing country hubsappeared…</div>
+  <div class="article-meta">Mar 30, 2026  19:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-03-30/trump-administration-god-squad-set-to-meet-over-gulf-of-mexico-exemption" target="_blank">The Group That Decides Endangered Species’ Fate</a></div>
+  <div class="article-summary">The so-called “God Squad” is set to weigh an exemption that would allow oil and gas production in the Gulf of Mexico to sidestep environmental protections.…</div>
+  <div class="article-meta">Mar 30, 2026  18:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-03-30/germany-warns-eu-methane-rules-risk-hindering-gas-imports" target="_blank">Germany Warns EU Methane Rules Risk Hindering Gas Imports</a></div>
+  <div class="article-summary">Germany warned the European Union’s rules to curb methane emissions from oil and gas imports risk impeding crucial LNG purchases just as the country seeks to diversify suppliers and cushion the Middle East war’s impact on energy prices.…</div>
+  <div class="article-meta">Mar 30, 2026  18:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30032026/fema-skips-national-hurricane-conference/" target="_blank">FEMA Skips National Hurricane Conference Amid DHS Shutdown</a></div>
+  <div class="article-summary">ORLANDO, Fla.—A major conference to help communities prepare for hurricane season kicked off Monday without the agency that coordinates federal disaster response. Federal Emergency Management Agency representatives attributed their absence at the Nat…</div>
+  <div class="article-meta">Mar 31, 2026  01:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30032026/new-mexico-mount-cristo-rey-destruction-border-wall/" target="_blank">Blasting Begins For Border Wall On Cherished New Mexico Mountain</a></div>
+  <div class="article-summary">Editor’s note: This story was co-published with Puente News Collaborative in partnership with Inside Climate News. Puente News Collaborative is a bilingual nonprofit newsroom and funder dedicated to high-quality, fact-based news and information from…</div>
+  <div class="article-meta">Mar 31, 2026  01:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30032026/ecuador-leatherback-sea-turtle-tracking-ocean-protection/" target="_blank">Scientists Deploy First Satellite Tag on a Leatherback Sea Turtle in Ecuador to Better Reveal Gaps in Ocean Protection</a></div>
+  <div class="article-summary">Just after 3 a.m. on a recent Friday morning, a 4.5-foot-long leatherback sea turtle covered her freshly dug nest with sand, sweeping and packing it into place with steady strokes of her flippers just above the high tide along a remote, rugged stretc…</div>
+  <div class="article-meta">Mar 31, 2026  00:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/03/30/island-nations-fight-to-save-cultural-heritage-from-climate-change/" target="_blank">Island nations fight to save cultural heritage from climate change</a></div>
+  <div class="article-summary">The climate crisis is putting human heritage in the firing line. In response, small island states are learning how to adaptThe postIsland nations fight to save cultural heritage from climate changeappeared first onClimate Home News.…</div>
+  <div class="article-meta">Mar 30, 2026  13:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30032026/maine-wabanaki-basketmakers-help-save-ash-trees/" target="_blank">The Wabanaki Basketmakers’ Plans to Save Maine’s Ash Trees</a></div>
+  <div class="article-summary">Each strip of wood in Richard Silliboy’s hands started as a year of an ash tree’s life. Silliboy, 79, is a member of the Mi’kmaq tribe and a master basketmaker. His blue eyes are kind and frequently crinkle into a smile, and his hands are constantly…</div>
+  <div class="article-meta">Mar 30, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, March 31, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
