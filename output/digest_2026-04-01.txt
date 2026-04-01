@@ -1,0 +1,173 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Wednesday, April 01, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (3 articles)
+============================================================
+
+▸ Car Labelling Revision: Using Real-World Information to Empower Consumers
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/03/31/car-labelling-revision-using-real-world-information-to-empower-consumers/
+  Date   : Apr 01, 2026  05:52 EAT
+  Summary: The EU is revising its car labelling rules to incorporate real-world emissions and fuel consumption data, aiming to empower consumers to make more sustainable choices. This shift is crucial because current labels often misrepresent a vehicle's true environmental impact, hindering progress towards climate goals.
+
+
+▸ Hydrogen Trucks In China Are A Policy Side Bet, Not A Market Winner
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/03/31/hydrogen-trucks-in-china-are-a-policy-side-bet-not-a-market-winner/
+  Date   : Apr 01, 2026  05:05 EAT
+  Summary: Despite ongoing policy pushes and headlines touting hydrogen trucking in northern China, the sector remains a government side bet rather than a market-driven success. This reliance on subsidies and mandates, rather than genuine demand, signals a potentially inefficient allocation of resources that could slow broader decarbonization efforts in the heavy transport sector.
+
+
+▸ How wildfires and storms drove insurance losses in 2025 – in three charts
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/how-wildfires-and-storms-drove-insurance-losses-in-2025-in-three-charts/
+  Date   : Mar 31, 2026  17:26 EAT
+  Summary: Extreme weather events around the world, such as wildfires and storms, were the major driver behind $107bn in insured losses in 2025, according to industry data.
+
+The Los Angeles wildfires alone caused record-high $40bn in insured losses from fires,…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ US small-scale solar hits record 1.9 GW in Q4 2025
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/01/us-small-scale-solar-hits-record-1-9-gw-in-q4-2025/
+  Date   : Apr 01, 2026  09:45 EAT
+  Summary: US small-scale solar installations hit a record 1.9 GW in Q4 2025, driven by homeowners rushing to claim expiring tax credits. This surge in distributed energy, coupled with significant energy storage deployment, signals a growing challenge to the traditional centralized utility model and bolsters US energy resilience by bypassing transmission bottlenecks.
+
+
+▸ Ion beam technology offers pathway to low-defect silicon solar cells
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/01/ion-beam-technology-offers-pathway-to-low-defect-silicon-solar-cells/
+  Date   : Apr 01, 2026  09:39 EAT
+  Summary: Researchers in India demonstrated that ion beam implantation enables precise boron doping in silicon solar cells, reducing defects and improving charge transport. The proposed approach could support more efficient and reproducible p–n junctions, offe…
+
+
+▸ How States Are Powering America’s Clean Energy Future
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/03/31/how-states-are-powering-americas-clean-energy-future/
+  Date   : Apr 01, 2026  06:57 EAT
+  Summary: In this episode of CleanTech Talk, Dylan McDowell, CEO of the National Caucus of Environmental Legislators (NCEL), and Hawai‘i State Senator Chris Lee break down why state action matters now more than ever in the clean energy transition, how hands‑on…
+
+
+▸ Waymo Visits Japan
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/03/31/waymo-visits-japan/
+  Date   : Apr 01, 2026  06:51 EAT
+  Summary: Waymo recently hosted an event in Tokyo to share more about our autonomous driving technology and our progress in Tokyo to the local media specializing in automotive technology. As the original pioneer in the autonomous driving technology industry, W…
+
+
+▸ Meloni-Backed Biofuels Project Under Scrutiny Following New Investigation
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/03/31/meloni-backed-biofuels-project-under-scrutiny-following-new-investigation/
+  Date   : Apr 01, 2026  05:39 EAT
+  Summary: An investigation into Italy's Eni biofuels project in Kenya reveals it's failing to produce non-edible crops on designated poor land, undermining its climate goals. This project, backed by the Meloni government, highlights the risks of greenwashing and the need for rigorous oversight in climate investments.
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ EU Weighs Ukraine Crisis Strategy to Calm High Energy Prices
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-03-31/eu-weighs-ukraine-crisis-strategy-to-calm-high-energy-prices
+  Date   : Mar 31, 2026  20:56 EAT
+  Summary: The European Union will consider reopening a set energy measures used after Russia’s 2022 invasion of Ukraine as the bloc seeks to contain a fresh price shock tied to the Iran war.…
+
+
+▸ How a Wind Turbine Blessing Turned Into a Nightmare in Texas
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-03-31/texas-wind-turbine-recycling-operation-faces-ken-paxton-lawsuit
+  Date   : Mar 31, 2026  17:56 EAT
+  Summary: A company promised to recycle old blades. It failed to deliver, leaving a small town to figure out what to do next.…
+
+
+▸ India Set for Searing Summer as Iran War Strains Energy Supplies
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-03-31/india-set-for-searing-summer-as-iran-war-strains-energy-supplies
+  Date   : Mar 31, 2026  16:04 EAT
+  Summary: Most of India is forecast to experience higher than normal heat wave days through June, raising the risk of power shortages as the South Asian nation grapples with energy strains worsened by the Middle East conflict.…
+
+
+▸ Thousands of Dumped Wind-Turbine Blades Prompt Crackdown in Texas
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/features/2026-03-31/texas-battles-wind-turbine-recycler-over-thousands-of-dumped-blades
+  Date   : Mar 31, 2026  13:30 EAT
+  Summary: Residents of Sweetwater, Texas, are frustrated that the old blades have sat in the town for years. Authorities have stepped up efforts to hold someone responsible.…
+
+
+▸ Vietnam LNG Power Project Eyes Green Pivot on Soaring Gas Prices
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-03-31/vietnam-lng-power-project-eyes-green-pivot-on-soaring-gas-prices
+  Date   : Mar 31, 2026  12:06 EAT
+  Summary: Vingroup JSC has asked the Vietnamese government to allow it to replace a large liquefied natural gas power project with renewable energy, citing surging fuel prices linked to the Middle East conflict.…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (2 articles)
+============================================================
+
+▸ Water-Use Restrictions Follow Snow Drought and Heat Wave in the Western U.S.
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/31032026/todays-climate-water-use-restrictions-snow-drought-western-us/
+  Date   : Apr 01, 2026  01:33 EAT
+  Summary: A historic snow drought in the Western U.S., exacerbated by an early-season heat wave, has forced officials to implement water-use restrictions across the region. This critical water shortage directly impacts millions, highlighting the accelerating climate reality of reduced snowpack and intensified heat.
+
+
+▸ Australia’s superb fairywren could be extinct within decades due to climate crisis, researchers say
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/australia-news/2026/apr/01/australia-superb-fairywren-bird-climate-crisis-extinction-risk-within-decades-scientists-warn
+  Date   : Apr 01, 2026  01:00 EAT
+  Summary: Australia's common superb fairywren faces extinction within 30-40 years, as nearly three decades of research in Canberra's botanic gardens reveal climate change's devastating impact on the species. This decline highlights how even familiar wildlife is vulnerable to escalating weather shifts, signaling broader ecological instability.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ ‘Harrowing’: Cyclone Narelle leaves graveyard of turtles, dolphins and seabirds in Western Australia
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/australia-news/2026/apr/01/western-australia-cyclone-narelle-damage-wildlife
+  Date   : Apr 01, 2026  07:50 EAT
+  Summary: Exmouth local says devastating impact on wildlife along the coastline is ‘hard to put into words’Follow our Australia news live blog for latest updatesSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereAs the flood…
+
+
+▸ The Trump Administration’s New Biofuels Targets Threaten Carbon-Rich Rainforests
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/31032026/trump-biofuels-targets-threaten-rainforests/
+  Date   : Mar 31, 2026  22:17 EAT
+  Summary: President Donald Trump stood on the Truman Balcony at the White House during the “Great American Agriculture Celebration” last week and announced what he called a “historic” boost to the nation’s farmers. The Environmental Protection Agency, Trump sa…
+
+
+▸ Major oil producers among 46 nations joining fossil fuel phase-out summit
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/03/31/major-oil-producers-among-46-nations-joining-fossil-fuel-phase-out-summit/
+  Date   : Mar 31, 2026  19:19 EAT
+  Summary: Canada, Australia, Brazil and Norway are set to attend the Santa Marta summit, but the world’s biggest fossil fuel producers are missing from the listThe postMajor oil producers among 46 nations joining fossil fuel phase-out summitappeared first onCl…
+
+
+▸ UK’s smallest bird of prey among 200 species at risk of extinction, study finds
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/mar/31/uk-smallest-bird-prey-among-species-risk-extinction-study-finds
+  Date   : Mar 31, 2026  18:00 EAT
+  Summary: Merlin could disappear in worst-case scenario, with British isles facing ecological ‘point of no return’The merlin, Britain’s smallest bird of prey, is one of more than 200 species that will become extinct in the UK if action is not taken to curb emi…
+
+
+▸ Trump’s Iran war and drilling push show ‘dangerous volatility’ of fossil fuel era
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/mar/31/trump-iran-war-fossil-fuel-policy-environment
+  Date   : Mar 31, 2026  15:00 EAT
+  Summary: Critics say president is locking into 20th-century energy systems even as his ‘bet’ on oil and gas ‘isn’t going so well’By attacking Iran and threatening to seize its oil while taking extraordinary measures to block clean energy back in the US, Donal…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 47  |  Sources: 8  |  Topics: 5
