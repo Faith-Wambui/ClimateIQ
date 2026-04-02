@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, April 02, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">52</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:48%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 44 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/01/key-takeaways-from-chiles-re-cono-sur/" target="_blank">Key takeaways from Chile’s Re+ Cono sur</a></div>
+  <div class="article-summary">Chile's Energy Minister Ximena Rincón urged a shift from passive renewable energy adoption to proactive acceleration in storage, electromobility, and efficiency at the RE+ Southern Cone Summit in Santiago. This strategic push is crucial for Chile to solidify its regional leadership in renewables, overcome system losses, and leverage its resources for large-scale, climate-friendly projects like renewable-powered data centers.</div>
+  <div class="article-meta">Apr 01, 2026  18:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/ipcc-frustrating-and-disappointing-meeting-leaves-ar7-timeline-in-deadlock/" target="_blank">IPCC: ‘Frustrating and disappointing’ meeting leaves AR7 timeline in deadlock</a></div>
+  <div class="article-summary">Governments remain deadlocked on the timeline for the IPCC's next major climate assessment, AR7, with disagreements over report publication dates delaying crucial scientific input for global climate action. This stalemate, particularly concerning whether reports precede or follow the 2028 global stocktake, risks undermining the urgency and clarity needed to inform national climate goals and the Paris Agreement's effectiveness.</div>
+  <div class="article-meta">Apr 01, 2026  18:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/04/agn-meets-in-ghana-to-refine-climate-strategy/" target="_blank">AGN Meets in Ghana to Refine Climate Strategy</a></div>
+  <div class="article-summary">The AGN is hosting a three day strategic meeting in Ghana to refine its climate priorities and build a firm strategy that navigates and responds to geopolitics, energy security, industrial competition and finance developments.The postAGN Meets in Gha…</div>
+  <div class="article-meta">Apr 01, 2026  13:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/04/wto-ministerial-sees-incremental-climate-progress-with-new-climate-and-trade-body-geared-to-bridge-the-divide/" target="_blank">WTO Ministerial Sees Incremental Climate Progress, with New Climate and Trade Body Geared to Bridge the Divide</a></div>
+  <div class="article-summary">At the WTO’s Ministerial Conference, the Integrated Forum on Climate Change and Trade lamented the limitations of the current regimes and proffered a space for trade and climate ministers to work together.The postWTO Ministerial Sees Incremental Clim…</div>
+  <div class="article-meta">Apr 01, 2026  12:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/04/wto-reform-agenda-takes-a-dive-at-mc14/" target="_blank">WTO Reform Agenda takes a Dive at MC14</a></div>
+  <div class="article-summary">The latest WTO talks in Cameroon ended in a stalemate on how to reform and revitalize the organisation in a time of heightened trade tensions and questions regarding the body’s relevance. In this analysis, trade expert Shimukunku Manchishi unpacks th…</div>
+  <div class="article-meta">Apr 01, 2026  12:34 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/01/general-motors-slaps-down-trumps-war-on-evs/" target="_blank">General Motors Slaps Down Trump’s War On EVs</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+File this one under “H” for “How To Shoot Yourself In The Foot.” US President Donald Trump set out to wage war against the vehicle electrification movement upon taking office…</div>
+  <div class="article-meta">Apr 02, 2026  06:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/01/major-spp-western-expansion-opens-clean-energy-opportunities-across-region/" target="_blank">Major SPP Western Expansion Opens Clean Energy Opportunities Across Region</a></div>
+  <div class="article-summary">DENVER — Today the Southwest Power Pool (SPP) officially expanded, connecting western and eastern electric grids and providing increased access to clean energy for major utilities across the West and Great Plains in Colorado, Wyoming, Nebraska, Utah,…</div>
+  <div class="article-meta">Apr 02, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/01/middle-east-energy-crisis-comparing-operating-costs-for-diesel-vs-electric-trucks/" target="_blank">Middle East Energy Crisis: Comparing Operating Costs for Diesel vs Electric Trucks</a></div>
+  <div class="article-summary">As energy prices keep rising, new analysis highlights the benefits of truck electrification Only weeks after the EU Parliament approved a weakening of the HDV CO2 standards, this emerging energy crisis should serve as a stark reminder that Europe’s o…</div>
+  <div class="article-meta">Apr 02, 2026  05:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/01/nio-sales-grow-136-year-over-year/" target="_blank">NIO Sales Grow 136% Year Over Year</a></div>
+  <div class="article-summary">While some other EV automakers have had a hard — or very hard — start to the year, NIO was absolutely popping in March. The company scored 35,486 deliveries in March, which was a whopping 136% increase year over year. Compared to February, it was a 7…</div>
+  <div class="article-meta">Apr 02, 2026  03:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/01/the-world-added-692-gw-of-renewables-in-2025-heres-what-it-means/" target="_blank">The world added 692 GW of renewables in 2025 – here’s what it means</a></div>
+  <div class="article-summary">The world added a massive 692 gigawatts (GW) of renewable power in 2025, pushing total global capacity to 5,149 GW, according to a new report from the International Renewable Energy Agency (IRENA).
+
+That’s a 15.5% jump in just one year, and renewable…</div>
+  <div class="article-meta">Apr 02, 2026  01:04 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-04-02/norway-s-driest-winter-in-years-threatens-europe-s-power-market" target="_blank">A Winter Without Snow Depletes Europe’s Clean Energy Reservoir</a></div>
+  <div class="article-summary">Norway's driest winter in decades has depleted its hydropower reservoirs, a critical source of clean energy exports to Europe, leading to soaring electricity prices. This reduction in a major renewable energy supply chain highlights Europe's vulnerability to climate-induced weather extremes and the urgent need for diversified clean energy solutions.</div>
+  <div class="article-meta">Apr 02, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-02/how-koko-networks-collapse-is-denting-trust-in-carbon-markets-again" target="_blank">How a Company Collapse Is Denting Trust in Carbon Markets – Again</a></div>
+  <div class="article-summary">This year was supposed to be a turning point for carbon markets, with the United Nations’ long-delayed country-to-country trading system coming into force and airlines preparing to enter a mandatory program to offset their emissions.…</div>
+  <div class="article-meta">Apr 02, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-02/climate-tech-is-making-europe-more-resilient-to-energy-shocks" target="_blank">Climate Tech is Making Europe More Resilient to Energy Shocks</a></div>
+  <div class="article-summary">The world is facing a second energy crisis in less than five years. Is it better prepared this time? Investor Aurore Belfrage joins the Zero podcast to discuss.…</div>
+  <div class="article-meta">Apr 02, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-02/fund-sees-significant-opportunity-in-india-s-new-climate-plan" target="_blank">Fund Sees ‘Significant’ Opportunity in India’s New Climate Plan</a></div>
+  <div class="article-summary">India’s new emissions-reduction plans offer significant investment opportunities in sectors related to grid upgrades and storage batteries, according to one of the country’s largest climate-focused funds.…</div>
+  <div class="article-meta">Apr 02, 2026  06:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/01/bbdf-2026-how-financing-standalone-vs-co-located-projects-really-works/" target="_blank">BBDF 2026: How financing standalone vs. co-located projects really works</a></div>
+  <div class="article-summary">From ESS News
+
+The opening session of BBDF day two brought project completion into focus, with discussion centering on the very real work required to get a ready-to-build project across the line.
+
+Industry experts detailed the complex negotiations th…</div>
+  <div class="article-meta">Apr 01, 2026  17:39 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/2026/apr/02/arctic-ice-loss-dual-heatwaves-europe-eastern-asia" target="_blank">Arctic ice loss brings dual heatwaves to Europe and eastern Asia</a></div>
+  <div class="article-summary">Record ice loss in the Barents Sea is directly fueling concurrent summer heatwaves across Europe and eastern Asia, a phenomenon amplified since 2000. This stark connection underscores how seemingly distant Arctic changes now have immediate and significant impacts on global weather patterns, posing a growing threat to climate stability.</div>
+  <div class="article-meta">Apr 02, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/01/funding-gap-threatens-next-round-of-ipcc-climate-science-reports-chair-warns/" target="_blank">Funding gap threatens next round of IPCC climate science reports, chair warns</a></div>
+  <div class="article-summary">The Intergovernmental Panel on Climate Change (IPCC) faces a significant funding shortfall that jeopardizes the timely release of its crucial assessment reports, as warned by its chair following the recent Bangkok session. This financial uncertainty could delay vital scientific updates, hindering policymakers' ability to make informed decisions on climate action.</div>
+  <div class="article-meta">Apr 01, 2026  19:27 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01042026/ipcc-global-climate-panel-potential-problems/" target="_blank">Global Climate Panel Faces Strife, Potential Funding Crunch</a></div>
+  <div class="article-summary">At a time when cascading climate shocks are unfolding faster than scientists can track them, the UN’s scientific body that assesses global warming risks and response options is mired in procedural gridlock and staring at a potential budget crunch. Th…</div>
+  <div class="article-meta">Apr 02, 2026  00:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01042026/wyoming-dry-winter-fire-forecast/" target="_blank">The Warm, Dry Winter Has Left Firefighters in Wyoming Nervous</a></div>
+  <div class="article-summary">On the heels of one of the warmest and driest winters on record, parts of Wyoming show “significant fire potential” this spring and summer, according to a national forecast released on April 1. The U.S. has set or is approaching records for the numbe…</div>
+  <div class="article-meta">Apr 02, 2026  00:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/01/nigerians-bet-on-solar-as-global-oil-shock-hits-wallets-and-power-supplies/" target="_blank">Nigerians bet on solar as global oil shock hits wallets and power supplies</a></div>
+  <div class="article-summary">Nigeria is experiencing a surge in solar adoption as homes and businesses, battered by rising fuel costs and power outages, seek reliable alternatives to fossil fuels. This shift away from generators, fueled by the global oil shock, represents a critical move towards cleaner energy and reduced carbon emissions in Africa's most populous nation.</div>
+  <div class="article-meta">Apr 01, 2026  17:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/apr/01/trump-iran-oil-fossil-fuel-imperialism" target="_blank">‘Fossil-fuel imperialism’: Trump’s hankering for Iranian oil runs deep</a></div>
+  <div class="article-summary">Experts say the US believes it is entitled to resources it desires – a perspective president has supported for decadesDonald Trump said this past weekend he wants to “take the oil in Iran” by seizing control of a key export hub, echoing a refrain he…</div>
+  <div class="article-meta">Apr 01, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01042026/after-chemical-industry-lobbying-epa-considers-dropping-clean-air-protections-for-plastic-waste-recycling/" target="_blank">After Chemical Industry Lobbying, EPA Considers Dropping Clean Air Protections for Plastic Waste Recycling</a></div>
+  <div class="article-summary">When former top Environmental Protection Agency official Judith Enck noticed a cavalcade of chemical and plastics industry lobbyists visiting the agency’s Washington headquarters in February, she wondered what could be up. An answer came weeks later:…</div>
+  <div class="article-meta">Apr 01, 2026  16:45 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, April 02, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
