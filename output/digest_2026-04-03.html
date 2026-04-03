@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, April 03, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 40 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-2-april-2026/" target="_blank">DeBriefed 2 April 2026: Countries ‘revive’ energy-crisis measures | Record UK renewables | Plug-in solar savings</a></div>
+  <div class="article-summary">Global energy markets are tightening due to escalating conflicts, prompting the EU and nations like France to revive crisis measures and even delay coal phase-outs, while the US sees record LNG exports. This scramble for energy security, particularly for gas-reliant economies like the UK and Italy, risks undermining climate goals and prolonging fossil fuel dependence.</div>
+  <div class="article-meta">Apr 02, 2026  18:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/02/france-introduces-cybersecurity-sustainability-requirements-in-solar-tenders/" target="_blank">France introduces cybersecurity, sustainability requirements in solar tenders</a></div>
+  <div class="article-summary">France is now requiring cybersecurity and European manufacturing support in its upcoming 2026 solar tenders, allocating 288 MW for smaller projects and 925 MW for larger ones. This move strengthens grid resilience against cyber threats and aims to boost the continent's solar supply chain, accelerating a more secure and sustainable energy transition.</div>
+  <div class="article-meta">Apr 02, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/china-briefing-2-april-2026-ev-profits-rise-ming-yang-rejected-iran-war/" target="_blank">China Briefing 2 April 2026: EV profits rise | Ming Yang rejected | Iran war</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s China Briefing.
+
+China Briefing handpicks and explains the most important climate and energy stories from China over the past fortnight. Subscribe for free here.
+
+Key developments
+
+Climate on agenda at post-two sessions foru…</div>
+  <div class="article-meta">Apr 02, 2026  17:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-how-plug-in-solar-can-save-uk-homes-1100-on-energy-bills/" target="_blank">Analysis: How ‘plug-in solar’ can save UK homes £1,100 on energy bills</a></div>
+  <div class="article-summary">Plug-in solar panels could save a typical UK household £1,100 over their 15-year lifetime, according to Carbon Brief analysis.
+
+In response to the ongoing energy crisis, the UK government announced on 15 March a package of clean-energy measures to “b…</div>
+  <div class="article-meta">Apr 02, 2026  15:28 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/02/lectric-heads-north-canadians-get-access-to-the-uss-best-selling-e-bikes/" target="_blank">Lectric heads north – Canadians get access to the US’s best-selling e-bikes</a></div>
+  <div class="article-summary">Lectric eBikes is officially rolling into Canada, setting the stage to shape the future of cycling north of the border.
+
+The Arizona-based brand, which has become one of the most recognizable names in the North American e-bike market, announced a new…</div>
+  <div class="article-meta">Apr 03, 2026  08:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/02/the-trump-administrations-attempt-to-expand-drilling-at-chaco-canyon/" target="_blank">The Trump Administration’s Attempt to Expand Drilling at Chaco Canyon</a></div>
+  <div class="article-summary">ALBUQUERQUE — This week, the Trump administration advanced the process of increasing oil and gas drilling on a landscape considered sacred by Pueblos and Tribes. On Tuesday, the Trump administration began a 7-day Public Scoping period, the next step…</div>
+  <div class="article-meta">Apr 03, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/02/two-options-for-the-strait-of-hormuz-in-a-decarbonized-world/" target="_blank">Two Options for the Strait of Hormuz in a Decarbonized World</a></div>
+  <div class="article-summary">The most useful way to think about the Strait of Hormuz in a decarbonized future is not as an oil story that fades away as the energy transition advances. It is a systems story about where risk sits in the architecture of the economy. In the fossil e…</div>
+  <div class="article-meta">Apr 03, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/02/rivian-beats-wall-street-sales-expectations-but-still-niche/" target="_blank">Rivian Beats Wall Street Sales Expectations, But Still Niche</a></div>
+  <div class="article-summary">Rivian ended up delivering 10,365 vehicles to customers in the first quarter of 2026. That was around 700 units above Wall Street estimates (9,678 according to Visible Alpha). Still, naturally, 10,365 vehicle sales in one quarter is very niche. For c…</div>
+  <div class="article-meta">Apr 03, 2026  06:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/02/labor-unions-community-and-climate-groups-demand-hyundai-answers-on-louisiana-steel-mill/" target="_blank">Labor Unions, Community, and Climate Groups Demand Hyundai Answers on Louisiana Steel Mill</a></div>
+  <div class="article-summary">ASCENSION PARISH, LA — A coalition of labor unions, community and climate groups have written to the Hyundai CEO asking the company to ensure its proposed $5.8 billion steel mill in Donaldsonville meets strong health and environmental standards, whil…</div>
+  <div class="article-meta">Apr 03, 2026  04:48 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-02/norway-hydropower-potential-sapped-by-dry-winter" target="_blank">Dry Winter Saps Norway’s Hydropower Potential</a></div>
+  <div class="article-summary">The country acts as Europe’s battery, but it doesn’t have enough charge after below-normal snowfall.…</div>
+  <div class="article-meta">Apr 02, 2026  14:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-02/neoen-to-build-france-s-largest-battery-amid-strained-power-grid" target="_blank">Neoen to Build France’s Largest Battery Amid Strained Power Grid</a></div>
+  <div class="article-summary">Renewable energy developer Neoen will build France’s largest battery, helping to store rising solar and wind generation and ease strain on the country’s grid.…</div>
+  <div class="article-meta">Apr 02, 2026  11:58 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/apr/03/friday-briefing-why-does-your-easter-egg-feel-smaller-because-it-is" target="_blank">Friday briefing: Why does your Easter egg feel smaller? Because it is</a></div>
+  <div class="article-summary">Cocoa prices have surged due to climate shocks and conflicts, leading to shrinkflation in Easter eggs and making chocolate significantly more expensive. This price hike reflects the real-world impact of climate instability on global supply chains and consumer goods.</div>
+  <div class="article-meta">Apr 03, 2026  08:46 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-why-the-standoff-between-nations-over-the-next-ipcc-reports-matters/" target="_blank">Q&A: Why the standoff between nations over the next IPCC reports matters</a></div>
+  <div class="article-summary">Nations are deadlocked over the timeline for the next IPCC climate assessment reports, potentially delaying crucial scientific findings needed for the 2028 Global Stocktake under the Paris Agreement. This standoff risks weakening international climate action by decoupling vital scientific input from policy-setting moments.</div>
+  <div class="article-meta">Apr 02, 2026  16:53 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/03/colombia-pledges-to-exit-investment-protection-system-after-fossil-fuel-lawsuits/" target="_blank">Colombia pledges to exit investment protection system after fossil fuel lawsuits</a></div>
+  <div class="article-summary">Colombia is exiting the Investor-State Dispute Settlement (ISDS) system, a move spurred by a surge in lawsuits from fossil fuel companies challenging climate policies. This decision signals a significant shift, as Colombia aims to prioritize climate action over protecting foreign investments in polluting industries, potentially emboldening other nations to take similar steps.</div>
+  <div class="article-meta">Apr 03, 2026  08:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/02/the-greenwashing-of-war/" target="_blank">The Greenwashing of War</a></div>
+  <div class="article-summary">Or 47 ways to say the “w-word” Over 13,000 kilometers (~8,500 miles) away from Washington and we here in the Philippines feel the effects of the White House’s war on Iran. Oh! It’s that word! It’s that deplorable word — a banned word, in the same lea…</div>
+  <div class="article-meta">Apr 03, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02042026/forest-service-reorganization-ahead-of-wildfire-season/" target="_blank">Forest Service Shake-Up Comes As Risky Wildfire Season Looms</a></div>
+  <div class="article-summary">In announcing one of the largest reorganizations in the 120-year history of the U.S. Forest Service, the Trump administration declared that there would be “no interruption or change” to the agency’s firefighting force. But critics say the upheaval co…</div>
+  <div class="article-meta">Apr 03, 2026  02:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02042026/texas-state-parks-border-wall-construction/" target="_blank">Feds Seek Access to Three Texas State Parks for Border Wall</a></div>
+  <div class="article-summary">Federal officials have already traced a path for a border barrier through multiple Texas state parks, according to documents obtained by Inside Climate News. A top Border Patrol official wrote to leaders of the Texas Parks & Wildlife Department (TPWD…</div>
+  <div class="article-meta">Apr 03, 2026  01:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/technology/2026/apr/02/google-ai-datacenter" target="_blank">Google to tap into gas plant for AI datacenter in sharp turn from climate goals</a></div>
+  <div class="article-summary">Texas power plant would emit 4.5m tons of carbon dioxide per year, more than that of the entire city of San FranciscoGoogle’s plan for a partnership with a natural gas power plant that could provide energy for one of its datacenters inTexaswas uneart…</div>
+  <div class="article-meta">Apr 02, 2026  21:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, April 03, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
