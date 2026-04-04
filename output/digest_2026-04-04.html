@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, April 04, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">36</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 30 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/03/zambia-tenders-300-mw-of-solar-under-feed-in-premium-program/" target="_blank">Zambia tenders 300 MW of solar</a></div>
+  <div class="article-summary">Zambia is launching a new Carbon Feed In Premium Program to tender 300 MW of large-scale solar projects, each between 30-100 MW and including battery storage. This initiative, backed by Norway, will significantly boost the country's renewable energy capacity, directly contributing to global emissions reduction targets.</div>
+  <div class="article-meta">Apr 03, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/apr/03/drill-oil-north-sea-further-exploitation-climate-emergency" target="_blank">Of course we shouldn’t drill for more oil in the North Sea – we cancelled further exploitation for a reason | Bill McGuire</a></div>
+  <div class="article-summary">The UK government faces renewed pressure to exploit remaining North Sea oil and gas reserves, but this is a dangerous misstep.  Continuing fossil fuel extraction, even from mature fields, directly undermines global efforts to meet emissions targets and exacerbates the climate crisis.</div>
+  <div class="article-meta">Apr 03, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/03/sierra-club-statement-on-donald-trumps-fy2027-budget-proposal/" target="_blank">Sierra Club Statement on Donald Trump’s FY2027 Budget Proposal</a></div>
+  <div class="article-summary">Washington, DC — Today, Donald Trump released his proposed budget for fiscal year 2027, which seeks to increase defense spending to a massive $1.5 trillion while slashing non-defense discretionary spending by more than $73 billion, including a 52 per…</div>
+  <div class="article-meta">Apr 04, 2026  06:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/03/sierra-club-wisconsin-slams-we-energies-for-rate-increase-and-once-again-delaying-oak-creek-coal-plant-retirement/" target="_blank">Sierra Club Wisconsin Slams We Energies for Rate Increase and Once Again Delaying Oak Creek Coal Plant Retirement</a></div>
+  <div class="article-summary">This week, We Energies has announced that it will once again delay closing its Oak Creek coal plant and that it intends to raise residential and small business rates by 4.7% in 2027 and 4.5% in 2028. The Oak Creek power plant was originally scheduled…</div>
+  <div class="article-meta">Apr 04, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/03/top-selling-electric-vehicles-in-the-world-february-2026/" target="_blank">Top Selling Electric Vehicles in the World — February 2026</a></div>
+  <div class="article-summary">Global electric vehicle sales plunged 11% in February 2026, marking the steepest decline since the COVID-19 pandemic, primarily due to the rollback of government incentives. This slowdown, with nearly 1.1 million units registered, signals a potential hurdle for climate goals as consumer adoption falters without financial support.</div>
+  <div class="article-meta">Apr 04, 2026  06:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/03/evs-sweep-2026-world-car-awards/" target="_blank">EVs Sweep 2026 World Car Awards</a></div>
+  <div class="article-summary">On Wednesday, April 1, the 22nd World Car Awards announced the winners for 2026. EVs swept every category. Every year, a panel of journalists from around the world votes on finalists and winners in each category. While the test drives happen in Calif…</div>
+  <div class="article-meta">Apr 04, 2026  03:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/03/ohio-solar-farm-powered-by-ohio-made-panels/" target="_blank">This new Ohio solar farm is powered by Ohio-made panels</a></div>
+  <div class="article-summary">A new utility-scale solar farm just came online in Ohio, and it’s generating power with panels manufactured in-state.
+
+Geronimo Power has switched on its 117-megawatt (MW) Dodson Creek Solar Project in Highland County, Ohio. The project feeds electri…</div>
+  <div class="article-meta">Apr 04, 2026  00:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-03/us-seeks-to-streamline-offshore-management-in-regulator-overhaul" target="_blank">US Seeks to Streamline Offshore Management in Regulator Overhaul</a></div>
+  <div class="article-summary">The US Interior Department said it’s merging two oversight agencies to create a Marine Minerals Administration and move toward a “more modern, coordinated approach” to managing offshore resources, including critical minerals.…</div>
+  <div class="article-meta">Apr 04, 2026  02:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-03/clean-cookstove-bankruptcy-roils-a-key-carbon-market" target="_blank">What a Clean Cookstove Company’s Bankruptcy Means for Carbon Markets</a></div>
+  <div class="article-summary">Prices on Corsia, a marketplace for airlines, have fallen in the months following Koko’s collapse.…</div>
+  <div class="article-meta">Apr 03, 2026  18:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/03/heat-dome-and-high-pressure-boost-southern-us-solar-as-polar-vortex-clouds-the-north/" target="_blank">Heat dome and high pressure boost southern US solar as polar vortex clouds the north</a></div>
+  <div class="article-summary">A powerful heat dome supercharged solar irradiance by 20-25% across the southern US and Mexico last month, while a polar vortex brought persistent clouds and below-average solar conditions to the northern US and Canada. This stark regional disparity highlights how extreme weather patterns, driven by climate change, can significantly impact renewable energy generation across North America.</div>
+  <div class="article-meta">Apr 03, 2026  15:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/04/birds-butterflies-britain-shows-signs-of-earliest-spring-on-record" target="_blank">From early birds to emerging butterflies: UK shows signs of earliest spring on record</a></div>
+  <div class="article-summary">Britain is experiencing its earliest spring on record, with citizen science data showing flowers blooming, birds nesting, and insects emerging weeks ahead of schedule. This accelerated seasonal change, driven by accelerating global heating, signals a significant disruption to natural cycles.</div>
+  <div class="article-meta">Apr 04, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03042026/virginia-gas-costs-tax-relief-electric-vehicles/" target="_blank">Virginia Republicans Want Tax Relief to Ease Gas Costs. There’s Also Electric Vehicles.</a></div>
+  <div class="article-summary">Republican state lawmakers want a temporary pause on Virginia’s 32 cent per gallon gas tax to help offset rising prices at the pump resulting from President Donald Trump’s ill-defined and unpopular war in Iran.  They remained cool to, and to some ext…</div>
+  <div class="article-meta">Apr 04, 2026  00:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03042026/epa-microplastics-water-contaminant-candidate-list/" target="_blank">EPA Flags Microplastics as ‘Priority’ Water Contaminants, but the Move Doesn’t Guarantee Regulation</a></div>
+  <div class="article-summary">Citing the Trump administration’s promise to “Make America Healthy Again,” the U.S. Environmental Protection Agency placed microplastics and pharmaceuticals on a draft list of contaminants maintained by the agency. The Sixth Contaminant Candidate Lis…</div>
+  <div class="article-meta">Apr 03, 2026  22:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03042026/craig-watts-fights-poultry-farming-system/" target="_blank">Critics Call the Poultry Farming System Rigged. Craig Watts Is Fighting to Overturn It.</a></div>
+  <div class="article-summary">FAIRMONT, N.C.—Craig Watts unlocked a small room made of plywood, flipped on the lights and tapped the photos he had taped to the fuse box.  Tap, tap, tap. One for every child. Watts, a contract farmer for the poultry giant Perdue Farms, swung open a…</div>
+  <div class="article-meta">Apr 03, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03042026/maui-mental-health-clinic-staffing-cuts/" target="_blank">Maui Mental Health Providers Face Stress and Uncertainty About State Jobs</a></div>
+  <div class="article-summary">This story is a partnership between Inside Climate News and Honolulu Civil Beat. Nancy Sidun has been counseling disaster survivors at a state-run mental health clinic in Lahaina, Hawaii, since just after the devastating wildfires in August 2023. Now…</div>
+  <div class="article-meta">Apr 03, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03042026/florida-power-and-light-highest-profit-margins-nationwide/" target="_blank">Florida Power & Light Profit Margins Top Other Utilities’ Nationwide, Report Says</a></div>
+  <div class="article-summary">Florida Power & Light’s profit margins consistently ranked among the highest in the nation over the past five years and topped other utilities’ in 2024 and 2025, with 27 cents of every dollar in revenue last year retained as profit, according to a ne…</div>
+  <div class="article-meta">Apr 03, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, April 04, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
