@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, April 06, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">17</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😊</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:66%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 10 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Cautiously Optimistic — 4 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/05/how-should-progressive-us-midterm-candidates-frame-their-arguments-about-climate-change/" target="_blank">How Should Progressive US Midterm Candidates Frame Their Arguments About Climate Change?</a></div>
+  <div class="article-summary">Progressive candidates are prioritizing climate change as a key election issue in the 2026 midterms, framing it as integral to their strategy to counter a potential Trump presidency. The outcome of this election is critical for climate policy, as it will directly influence the direction of environmental regulations and investments in the coming years.</div>
+  <div class="article-meta">Apr 05, 2026  18:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05042026/trump-interior-proposal-cancels-bison-grazing-leases-public-land/" target="_blank">Trump Administration Targets Bison on Federal Grazing Lands</a></div>
+  <div class="article-summary">The Trump administration is proposing to cancel federal grazing leases for American bison in Phillips County, Montana, at the behest of cattle ranchers and local politicians. This move directly undermines efforts to restore these keystone species and their role in maintaining healthy prairie ecosystems, which are vital for carbon sequestration and biodiversity.</div>
+  <div class="article-meta">Apr 05, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05042026/vermont-defends-climate-superfund-law/" target="_blank">As Vermont Defends Its Law to Make Fossil Fuel Firms Pay for Climate Adaptation, the Bill Is Already Coming Due</a></div>
+  <div class="article-summary">Vermont is actively defending its groundbreaking "climate superfund" law, which aims to hold fossil fuel companies financially responsible for climate adaptation costs. This legal battle is crucial because, for the first time, a U.S. state is directly challenging the industry's liability for climate change damages, potentially setting a precedent for future climate adaptation funding nationwide.</div>
+  <div class="article-meta">Apr 05, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/06/neoen-unveils-large-scale-battery-projects-in-france-japan/" target="_blank">Neoen unveils large-scale battery projects in France, Japan</a></div>
+  <div class="article-summary">Neoen is deploying two major battery storage projects, including France's largest at 248 MW in Vernou-la-Celle-sur-Seine and its first in Japan at 100 MW in Hyogo prefecture. These significant investments in grid-scale batteries are crucial for integrating renewable energy and stabilizing power grids, directly supporting the transition to a low-carbon economy.</div>
+  <div class="article-meta">Apr 06, 2026  09:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/06/new-zealand-car-yards-empty-as-electric-vehicle-sales-surge/" target="_blank">New Zealand Car Yards Empty As Electric Vehicle Sales Surge</a></div>
+  <div class="article-summary">New Zealand's car yards are facing empty lots as demand for electric vehicles (EVs) outstrips supply, with second-hand and demo models rapidly selling out. This surge signals a significant shift in consumer preference, accelerating the transition away from fossil fuel-powered vehicles and contributing to reduced transport emissions.</div>
+  <div class="article-meta">Apr 06, 2026  09:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/05/the-scottish-home-hydrogen-trial-and-the-ethics-of-delay/" target="_blank">The Scottish Home Hydrogen Trial And The Ethics Of Delay</a></div>
+  <div class="article-summary">Scotland's Fife hydrogen trial, slated for Easter 2026, faces ethical scrutiny as it pushes forward despite ongoing debate over hydrogen's climate viability. This project's delay and the questions surrounding its effectiveness highlight the critical need for decisive action and honest assessment in the transition away from fossil fuels.</div>
+  <div class="article-meta">Apr 06, 2026  03:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/05/agrivoltaics-can-save-us-farmers-in-more-ways-than-one/" target="_blank">Agrivoltaics Can Save US Farmers In More Ways Than One</a></div>
+  <div class="article-summary">New research from Cornell University reveals that agrivoltaic systems, combining solar panels and agriculture, can significantly reduce wind erosion, which costs U.S. farmers over $9 billion annually. This innovation offers a dual benefit, protecting valuable farmland and crops while simultaneously generating clean energy.</div>
+  <div class="article-meta">Apr 05, 2026  23:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/05/proton-evs-sell-well-in-malaysia-where-fuel-is-subsidized-cheap/" target="_blank">Proton EVs Sell Well In Malaysia, Where Fuel Is Subsidized & Cheap</a></div>
+  <div class="article-summary">Proton, Malaysia's national carmaker, just posted its best first-quarter sales since 2004, with 49,140 units delivered, a 40.1% year-on-year jump. This surge in demand for Proton vehicles, including its EVs, is happening despite a contracting overall Malaysian auto market and cheap, subsidized fuel, highlighting a significant shift in consumer preference towards cleaner transportation.</div>
+  <div class="article-meta">Apr 05, 2026  22:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-05/russia-says-dagestan-region-sees-blackouts-after-severe-storms" target="_blank">Russia Says Dagestan Region Sees Blackouts After Severe Storms</a></div>
+  <div class="article-summary">A severe storm in Russia's Dagestan region has knocked out power to dozens of villages, damaging critical energy infrastructure. This disruption highlights the growing vulnerability of essential services to extreme weather events, a direct consequence of a changing climate.</div>
+  <div class="article-meta">Apr 05, 2026  14:53 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/05/fossil-fuel-fud-is-targeting-your-children/" target="_blank">Fossil Fuel FUD Is Targeting Your Children</a></div>
+  <div class="article-summary">A Swedish geothermal investor, Baseload Capital, has published a children's book featuring a sympathetic fossil fuel character, Fossi, who explains his historical contributions to modern society. This tactic, criticized as akin to tobacco industry marketing, aims to shape young minds about energy transition, potentially masking the industry's historical opposition to climate action and its continued influence through entities like Chevron and Baker Hughes.</div>
+  <div class="article-meta">Apr 05, 2026  19:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05042026/icn-sunday-morning-ecuador-ecosystem-paramedics/" target="_blank">Paramedics for Ecosystems</a></div>
+  <div class="article-summary">In the copper-rich mountains of southeastern Ecuador, residents working as “paraecologists” are documenting the biodiversity of their territory – home to endangered species, waterfalls, and medicinal plants – not simply for the record, but to protect…</div>
+  <div class="article-meta">Apr 05, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/apr/05/germany-patisserie-johanna-orth-bereaved-parents-ahr-valley-floods" target="_blank">How a mother turned her drowned daughter’s passion into a thriving patisserie</a></div>
+  <div class="article-summary">This article is not about climate change. It is about a mother who opened a patisserie in Hamburg in memory of her daughter, Johanna, who loved to bake. The shop has become a place of comfort for grieving parents.</div>
+  <div class="article-meta">Apr 05, 2026  10:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, April 06, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
