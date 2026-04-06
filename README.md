@@ -13,7 +13,7 @@
 [![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://render.com)
 
 [![Live Dashboard](https://img.shields.io/badge/Live-Dashboard-1800ad?style=for-the-badge&logo=render&logoColor=white)](https://climateiq-dashboard.onrender.com)
-[![Sample Digest](https://img.shields.io/badge/Sample-Digest-f76c00?style=for-the-badge&logo=html5&logoColor=white)](screenshots/html.png)
+[![Sample Digest](https://img.shields.io/badge/Sample-Digest-f76c00?style=for-the-badge&logo=html5&logoColor=white)](screenshots/digest.html)
 [![Documentation](https://img.shields.io/badge/Read-Documentation-111144?style=for-the-badge&logo=markdown&logoColor=white)](screenshots/digest.txt)
 
 </div>
