@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, April 07, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">41</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 33 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-06/state-lawmakers-weigh-weakening-climate-laws-as-iran-war-drives-up-energy-prices" target="_blank">States Are Weighing Whether to Soften Climate Laws Amid High Energy Prices</a></div>
+  <div class="article-summary">Amidst soaring energy prices, several US states are considering weakening their climate laws, a move experts caution may not effectively lower consumer costs. This potential rollback of environmental regulations, driven by immediate economic pressures, risks undermining long-term climate goals and the transition to cleaner energy sources.</div>
+  <div class="article-meta">Apr 06, 2026  20:44 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/07/tbea-unveils-grid-forming-converter-for-large-scale-storage-renewables/" target="_blank">TBEA unveils grid-forming converter for large-scale storage, renewables</a></div>
+  <div class="article-summary">Chinese power transformer manufacturer TBEA introduced a grid-forming string power conversion system (PCS) for utility-scale storage, renewable energy base projects, and weak-grid applications. The TE435/392K-HV-BL high-power converter focuses on imp…</div>
+  <div class="article-meta">Apr 07, 2026  09:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/07/tigo-launches-modular-battery-for-residential-pv/" target="_blank">Tigo releases modular battery for residential PV</a></div>
+  <div class="article-summary">US-based DC power optimizer technology provider Tigo Energy has unveiled a new energy storage system for residential use.
+
+“The Tigo GO Battery serves European market demand with an optimized modular architecture built on 3.68 kWh battery units that…</div>
+  <div class="article-meta">Apr 07, 2026  08:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/07/indian-startup-launches-plug-and-play-hydrogen-cooking-unit/" target="_blank">Indian startup launches plug-and-play hydrogen cooking unit</a></div>
+  <div class="article-summary">Indian clean-tech startup Greenvize has launched a compact hydrogen-based cooking system designed for residential and commercial kitchens. The system integrates a proton exchange membrane (PEM) electrolyser directly into a cooking unit, enabling on-s…</div>
+  <div class="article-meta">Apr 07, 2026  08:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/07/maxeon-files-for-restructuring-in-singapore/" target="_blank">Maxeon files for restructuring in Singapore</a></div>
+  <div class="article-summary">From pv magazine USA
+
+In a recent Form 6-K filing posted to its corporate website, solar cell and module manufacturer Maxeon Solar Technologies, Ltd. revealed it has applied to be placed under judicial management in its home country of Singapore.
+
+In…</div>
+  <div class="article-meta">Apr 07, 2026  08:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/06/in-china-for-china-4-world-premieres-and-the-latest-ai-powered-systems-make-their-debut-at-the-volkswagen-group-night-in-beijing/" target="_blank">“In China, for China”: 4 World Premieres and the Latest AI-Powered Systems Make Their Debut at the Volkswagen Group Night in Beijing</a></div>
+  <div class="article-summary">With its largest-ever product campaign for electric vehicles, the Volkswagen Group is consistently implementing its “In China, for China” strategy—starting with “Auto China 2026” in Beijing. Under the motto “Rise Up”, the Volkswagen Group will presen…</div>
+  <div class="article-meta">Apr 07, 2026  06:32 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-07/india-monsoon-rains-seen-below-normal-private-forecaster-says" target="_blank">India Monsoon Rains Seen Below Normal, Private Forecaster Says</a></div>
+  <div class="article-summary">Monsoon rains in India are likely to be below the long-term average this year, as an expected El Niño weather pattern during the four-month season could reduce precipitation, according to a private forecaster.…</div>
+  <div class="article-meta">Apr 07, 2026  08:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/06/we-need-to-tax-billionaires-at-2-economist-gabriel-zucman-just-explained-exactly-how/" target="_blank">We Need To Tax Billionaires At 2%, & Economist Gabriel Zucman Just Explained Exactly How</a></div>
+  <div class="article-summary">The most talked-about economics book of 2026 fits in your jacket pocket. Here are the five things you need to know. Gabriel Zucman is having a moment. The Paris-born Berkeley economist who coined the term “tax haven” and mapped the hidden wealth of n…</div>
+  <div class="article-meta">Apr 06, 2026  18:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-06/state-climate-laws-targeted-around-us-as-iran-war-spikes-gas-prices" target="_blank">State Climate Laws Targeted Around US as Iran War Spikes Gas Prices</a></div>
+  <div class="article-summary">Experts say the laws have little impact on gasoline costs and are the cheapest way to meet rising electricity demand.…</div>
+  <div class="article-meta">Apr 06, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06042026/europe-forests-heat-emissions-study/" target="_blank">How Forests Start to Fail, One Leaf at a Time</a></div>
+  <div class="article-summary">Intensifying heatwaves and droughts are pushing European oak and beech forests towards failure, beginning with subtle leaf stress. This widespread forest decline threatens crucial carbon sinks, accelerating climate change by reducing the planet's capacity to absorb atmospheric CO2.</div>
+  <div class="article-meta">Apr 06, 2026  22:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/07/iran-war-global-dependence-fossil-fuels-biggest-emitters-reaping-rewards" target="_blank">As Iran war exposes global dependence on fossil fuels, the biggest emitters are reaping the rewards</a></div>
+  <div class="article-summary">Worst polluters hold world’s future in their hands as they benefit from higher fossil fuel prices, but global trends favour renewablesOil stands at about $110 a barrel and some forecastshave predicted it could reach $150. Food prices are on the rise…</div>
+  <div class="article-meta">Apr 07, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06042026/trump-budget-proposes-epa-noaa-fema-cuts/" target="_blank">Trump’s Budget Proposes Massive Cuts for Climate and Environmental Programs</a></div>
+  <div class="article-summary">President Trump’s annual budget request to Congress continues his administration’s defunding of climate change programs, environmental protection and renewable energy, slashing the budgets of the Environmental Protection Agency, the National Oceanic…</div>
+  <div class="article-meta">Apr 07, 2026  02:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/06/ai-environmental-assessments-robodebt-style-failures" target="_blank">Using AI to speed up Australia’s environmental approvals risks ‘robodebt-style’ failures, scientists say</a></div>
+  <div class="article-summary">Conservationists say move could push species closer to extinction and clearer environmental rules are needed insteadFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastConservationists and scie…</div>
+  <div class="article-meta">Apr 06, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/06/live-on-april-9-santa-marta-fossil-fuel-transition-in-an-unstable-world/" target="_blank">LIVE on April 9 | Santa Marta: fossil fuel transition in an unstable world</a></div>
+  <div class="article-summary">Transitioning away from fossil fuels in an unstable world: how can Santa Marta deliver?The post<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">LIVE on April 9</mark> | Santa Marta: fossil fuel transition i…</div>
+  <div class="article-meta">Apr 06, 2026  16:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/apr/06/utah-fossil-fuels-legal-shield" target="_blank">‘A surrender to special interests’: alarm as Utah shields fossil-fuel companies</a></div>
+  <div class="article-summary">New legislation comes amid push from big oil, as critics warn polluters’ profits prioritized over Americans’ healthUtahhas made it nearly impossible for residents to holdfossil fuelcompanies legally accountable for climate damages in a move one advoc…</div>
+  <div class="article-meta">Apr 06, 2026  14:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, April 07, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
