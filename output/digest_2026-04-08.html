@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, April 08, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 39 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/apr/07/dhs-secretary-state-fema-disaster-response" target="_blank">DHS secretary calls for US states to lead disaster response instead of Fema</a></div>
+  <div class="article-summary">Homeland Security Secretary Markwayne Mullin, after surveying Hurricane Helene recovery in Asheville, is advocating for states, not FEMA, to spearhead disaster response, positioning the federal agency as a support system. This proposed shift matters for climate resilience by potentially accelerating aid and tailoring recovery efforts to local needs, crucial as extreme weather events intensify.</div>
+  <div class="article-meta">Apr 07, 2026  23:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/07/trump-is-losing-the-war-on-evs-as-new-incentives-kick-in/" target="_blank">Trump Is Losing The War On EVs As New Incentives Kick In</a></div>
+  <div class="article-summary">Major companies like Uber, Honda, and Kia are now offering thousands in incentives to offset the loss of federal EV tax credits, a move that could reverse a sales slump triggered by policy changes. This surge in private sector support, coupled with rising global fuel prices, signals a potential pivot towards electric vehicles, crucial for reducing emissions amid geopolitical instability.</div>
+  <div class="article-meta">Apr 07, 2026  20:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-how-chinese-media-is-covering-the-iran-energy-crisis/" target="_blank">Analysis: How Chinese media is covering the Iran energy crisis</a></div>
+  <div class="article-summary">As the closure of the Strait of Hormuz wreaks havoc on fossil-fuel supplies across the world, a prominent narrative in western media has been that low-carbon energy has helped mitigate the worst of the impact on China.
+
+While Chinese-language media h…</div>
+  <div class="article-meta">Apr 07, 2026  16:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/introducing-carbon-briefs-2026-cohort-of-contributing-editors/" target="_blank">Introducing Carbon Brief’s 2026 cohort of contributing editors</a></div>
+  <div class="article-summary">Carbon Brief’s editorial team is supported by an international group of academics, each specialising in various areas of climate science, biodiversity, energy and policy.
+
+As contributing editors, they help to keep Carbon Brief up-to-date with the la…</div>
+  <div class="article-meta">Apr 07, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/08/inpow-unveils-587-ah-semi-solid-state-storage-cell/" target="_blank">Inpow unveils 587 Ah semi-solid-state storage cell</a></div>
+  <div class="article-summary">Inpow Battery and NAESIC have launched a 587 Ah semi-solid-state battery cell in Beijing, aiming for enhanced safety without the high cost of fully solid-state alternatives. This development is crucial for scaling up grid-level energy storage, a key enabler for integrating more renewable energy and decarbonizing the power sector.</div>
+  <div class="article-meta">Apr 08, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/apr/08/turkey-ahead-eu-battery-storage-fossil-fuel-crisis" target="_blank">Turkey to race ahead of EU on battery storage amid fossil fuel crisis</a></div>
+  <div class="article-summary">More than 33GW of battery capacity approved for Turkish grid since 2022 compared with 12-13GW in GermanyTurkey has given the green light to more batteries to buffer its electricity grid than any EU member state, areporthas found, in a further sign of…</div>
+  <div class="article-meta">Apr 08, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/07/cummins-alstom-and-the-long-tail-of-hydrogen-mistakes/" target="_blank">Cummins, Alstom, and the Long Tail of Hydrogen Mistakes</a></div>
+  <div class="article-summary">Both Cummins and Alstom lost with hydrogen, but they lost in different ways, and that difference matters. Cummins spread capital and management attention across a broad set of hydrogen pathways, including fuel cells and electrolyzers, then ran into t…</div>
+  <div class="article-meta">Apr 08, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/07/chevy-equinox-ev-sales-almost-hold-up-but-blazer-ev-sales-crash/" target="_blank">Chevy Equinox EV Sales Almost Hold Up, But Blazer EV Sales Crash</a></div>
+  <div class="article-summary">As I wrote earlier today, Cadillac bucked the EV sales downtrend and showed again that it’s leading the EV transition among legacy automakers in the US, but sibling Chevrolet did not perform as well. Chevrolet’s top selling electric vehicles, one of…</div>
+  <div class="article-meta">Apr 08, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/07/waymo-launches-in-nashville/" target="_blank">Waymo Launches in Nashville</a></div>
+  <div class="article-summary">Add another city to the list. Waymo’s electric robotaxi service has launched in another city, Nashville, Tennessee. People interested in using the robotaxi service can now download the app and try to catch a ride. Waymo is inviting members of the pub…</div>
+  <div class="article-meta">Apr 08, 2026  06:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-07/battery-giant-catl-taps-zijin-founder-as-advisor-for-mining-arm" target="_blank">Battery Giant CATL Taps Zijin Founder as Advisor for Mining Arm</a></div>
+  <div class="article-summary">Top electric-vehicle battery maker Contemporary Amperex Technology Co. Ltd. has tapped the founder and ex-chairman of Zijin Mining Group Co. Ltd. as an advisor for its growing mining business, according to people familiar with the matter.…</div>
+  <div class="article-meta">Apr 07, 2026  09:48 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/07/crude-oil-petroleum-product-prices-increased-sharply-in-the-first-quarter-of-2026/" target="_blank">Crude Oil & Petroleum Product Prices Increased Sharply in the First Quarter of 2026</a></div>
+  <div class="article-summary">Crude oil and petroleum product prices increased significantly in the first quarter of 2026 (1Q26), particularly following military action in the Middle East on February 28 and the subsequent de facto closure of the Strait of Hormuz. In this quarterl…</div>
+  <div class="article-meta">Apr 08, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07042026/global-energy-supply-strait-of-hormuz/" target="_blank">The Global Energy Supply in a Decade ‘Is Not a World We’re Going to Recognize’</a></div>
+  <div class="article-summary">The United States’ war on Iran could fundamentally alter how countries consume and generate energy and hamper international progress in combating climate change, a panel of energy experts said today. Resources for the Future, a nonpartisan natural re…</div>
+  <div class="article-meta">Apr 08, 2026  02:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/society/ng-interactive/2026/apr/08/world-held-hostage-reliance-fossil-fuels-health-christiana-figueres" target="_blank">World held hostage by reliance on fossil fuels, Christiana Figueres warns – and climate health impacts are ‘mother of all injustices’</a></div>
+  <div class="article-summary">Exclusive:Former UN climate chief to co-chair Lancet Commission examining how sea-level rise is reshaping health, wellbeing and inequalityWhat are the health impacts of sea-level rise, and who should pay?Christiana Figueres: Sea-level rise is a healt…</div>
+  <div class="article-meta">Apr 08, 2026  01:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/apr/07/sea-level-rise-health-crisis-christiana-figueres" target="_blank">Sea-level rise is a health crisis and we must hold polluters accountable | Christiana Figueres</a></div>
+  <div class="article-summary">Those facing the earliest and harshest consequences are, overwhelmingly, those who did the least to create themWorld held hostage by reliance on fossil fuels, Christiana Figueres warnsWhat are the health impacts of sea-level rise, and who should pay?…</div>
+  <div class="article-meta">Apr 08, 2026  01:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07042026/senators-investigate-cheniere-energy-irs-payout/" target="_blank">US Senators Investigate $370 Million IRS Payout to Cheniere Energy</a></div>
+  <div class="article-summary">Seven Democratic U.S. senators have launched a probe into a $370 million “alternative fuel” payout to Cheniere Energy, made earlier this year by the IRS, that critics say the liquefied natural gas export company never should have received. An earlier…</div>
+  <div class="article-meta">Apr 08, 2026  01:11 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, April 08, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
