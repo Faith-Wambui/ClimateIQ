@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, April 09, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">56</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 47 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-anticipatory-action-framework-drought-march-2026" target="_blank">Afghanistan: Anticipatory Action Framework for Drought (March 2026)</a></div>
+  <div class="article-summary">Afghanistan is refining its drought anticipatory action framework, building on a 2025 pilot to pre-emptively deliver aid to vulnerable populations in five key provinces before spring droughts hit. This proactive approach, involving humanitarian partners and UN leadership, is crucial for mitigating climate-induced food insecurity and displacement in a region highly susceptible to extreme weather.</div>
+  <div class="article-meta">Apr 08, 2026  20:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/iran-war-analysis-how-60-nations-have-responded-to-the-global-energy-crisis/" target="_blank">Iran war analysis: How 60 nations have responded to the global energy crisis</a></div>
+  <div class="article-summary">One month into the US and Israel’s war on Iran, at least 60 countries have taken emergency measures in response to the subsequent global energy crisis, according to analysis by Carbon Brief.
+
+So far, these countries have announced nearly 200 policies…</div>
+  <div class="article-meta">Apr 08, 2026  17:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-8-april-2026-iran-war-drives-up-food-prices-two-nature-talks-conclude-return-of-uks-tallest-bird/" target="_blank">Cropped 8 April 2026: Iran war drives up food prices | Two nature talks conclude | Return of UK’s tallest bird</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">Apr 08, 2026  16:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/08/cpuc-wastes-a-golden-opportunity-to-right-wrongs-of-previous-community-solar-decisions-that-harm-californians-with-lower-incomes/" target="_blank">CPUC Wastes a Golden Opportunity to Right Wrongs of Previous Community Solar Decisions that Harm Californians with Lower Incomes</a></div>
+  <div class="article-summary">The California Public Utilities Commission has effectively killed community solar development with a proposed decision, just as energy prices are soaring. This decision abandons a crucial opportunity to provide affordable, clean energy to low-income Californians, exacerbating existing inequities and hindering climate progress.</div>
+  <div class="article-meta">Apr 09, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/08/the-electrified-future-is-already-here-canada-just-needs-to-build-it/" target="_blank">The Electrified Future Is Already Here. Canada Just Needs to Build It</a></div>
+  <div class="article-summary">This transcript, lightly edited, is a recorded conversation with a Canadian citizens action group where I walked through a practical, systems-level view of Canada’s decarbonization pathway, grounded in technologies that already work at scale. I focus…</div>
+  <div class="article-meta">Apr 09, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/08/kia-ev2-production-begins-in-europe/" target="_blank">Kia EV2 Production Begins in Europe</a></div>
+  <div class="article-summary">Kia is now producing two electric vehicles in Europe for Europe. The company recently started producing the EV2 in Slovakia — in Žilina, to be precise. The EV2 is a small (B-segment) SUV. I know … what’s an SUV versus not an SUV has changed a lot ove…</div>
+  <div class="article-meta">Apr 09, 2026  06:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/08/electric-trucks-go-mainstream-in-europe/" target="_blank">Electric Trucks Go Mainstream in Europe</a></div>
+  <div class="article-summary">Why an early revision of the EU CO2 standards for truckmakers is not justified and would endanger Europe’s automotive future. First introduced in 2019, and then revised in 2024, the EU CO2 standards for heavy-duty vehicles (HDVs) set specific emissio…</div>
+  <div class="article-meta">Apr 09, 2026  06:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/08/e-saf-made-in-europe-a-source-of-jobs-growth-and-energy-security/" target="_blank">E-SAF Made in Europe — A Source of Jobs, Growth, and Energy Security</a></div>
+  <div class="article-summary">E-SAF can play a key role in reducing European aviation emissions. While the climate benefits of e-SAF are well understood, much less attention has been paid to what scaling up European production could mean for Europe’s economic growth, jobs and ene…</div>
+  <div class="article-meta">Apr 09, 2026  06:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-09/iran-war-s-fuel-shock-will-reshape-the-future-of-energy" target="_blank">Iran War’s Fuel Shock Will Reshape the Future of Energy</a></div>
+  <div class="article-summary">The escalating conflict in Iran has triggered a significant fuel shock, threatening to disrupt global energy markets and potentially push Asian nations back towards coal power. This crisis highlights the urgent need to accelerate the transition to renewable energy sources to avoid a climate setback and ensure long-term energy security.</div>
+  <div class="article-meta">Apr 09, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-08/lee-zeldin-touts-epa-rollbacks-at-washington-dc-climate-denial-conference" target="_blank">Lee Zeldin Touts EPA Rollbacks at Climate Denial Conference</a></div>
+  <div class="article-summary">The EPA administrator urged attendees to “celebrate vindication” amid the Trump administration’s deregulatory push.…</div>
+  <div class="article-meta">Apr 09, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-08/india-withdraws-bid-to-host-2028-un-climate-talks-reuters-says" target="_blank">India Withdraws Bid to Host 2028 UN Climate Talks</a></div>
+  <div class="article-summary">India has withdrawn its bid to host the 2028 United Nations-backed climate summit, a setback for the diplomatic process to combat global warming under the Paris Agreement.…</div>
+  <div class="article-meta">Apr 08, 2026  18:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-08/us-ev-fast-charging-network-grows-amid-high-gas-prices" target="_blank">US EV Fast-Charging Network Grows Amid High Gas Prices</a></div>
+  <div class="article-summary">From truck stops to cities, infrastructure is spreading across the US.…</div>
+  <div class="article-meta">Apr 08, 2026  14:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-08/us-charging-networks-expand-as-iran-war-sparks-ev-interest" target="_blank">US Charging Networks Race to Keep Up as Gas Prices Boost EVs</a></div>
+  <div class="article-summary">Despite a rapid buildup, the US still has more EVs per charger than other rich countries.…</div>
+  <div class="article-meta">Apr 08, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/lebanon/lebanon-middle-east-escalation-global-ltc-teleconference-telecoms-area-04-date-07-april-2026-time-1200-utc" target="_blank">Lebanon: Middle East Escalation - Global LTC Teleconference (Telecoms Area) #04 (Date: 07 April 2026, Time: 12:00 UTC)</a></div>
+  <div class="article-summary">A robust response is required to avoid a humanitarian catastrophe. The plan aims to immediately and rapidly scale-up operations and to increase the provision of protection and life-saving assistance.…</div>
+  <div class="article-meta">Apr 09, 2026  05:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/world/iom-knowledge-management-impact-report-2024-2025" target="_blank">World: IOM Knowledge Management Impact Report 2024–2025</a></div>
+  <div class="article-summary">Country: WorldSource: International Organization for MigrationPlease refer to the attached file.In 2024, IOM introduced itsKnowledge Management Strategy 2024–2028, setting a bold direction for how the Organization harnesses knowledge to strengthen it…</div>
+  <div class="article-meta">Apr 09, 2026  03:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/burundi/burundi-busuma-flash-update-mise-jour-operationnelle-jusquau-03-avril-2026" target="_blank">Burundi : Busuma Flash Update - Mise à jour opérationnelle jusqu’au 03 avril 2026</a></div>
+  <div class="article-summary">Countries: Burundi, Democratic Republic of the CongoSource: UN High Commissioner for RefugeesPlease refer to the attached file.ENREGISTREMENT NIVEAU 2 (L2)Depuis le 16 mars 2026, l’enregistrement de Niveau 2 (L2) est en cours au site de Busuma. Après…</div>
+  <div class="article-meta">Apr 08, 2026  20:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/imawg-haiti-compte-rendu-de-reunion-en-ligne-8-avril-2026-meeting-minutes" target="_blank">Haiti: IMAWG Haïti : Compte rendu de réunion, en ligne, 8 avril 2026 [Meeting Minutes]</a></div>
+  <div class="article-summary">Country: HaitiSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.…</div>
+  <div class="article-meta">Apr 08, 2026  18:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/mozambique/mozambique-2026-flood-humanitarian-response-8-april-2026-enpt" target="_blank">Mozambique 2026 Flood Humanitarian Response - as of 8 April 2026 [EN/PT]</a></div>
+  <div class="article-summary">Country: MozambiqueSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.SITUATION OVERVIEWIn mid-December, severe and prolonged flooding affected large parts of southern and central Mozambique. Rivers…</div>
+  <div class="article-meta">Apr 08, 2026  16:11 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08042026/california-bill-could-ban-pfas-pesticides/" target="_blank">California Bill Aims to Keep Toxic PFAS off Its Crops</a></div>
+  <div class="article-summary">California Assemblymember Nick Schultz is leading an effort to phase out the use of pesticides containing toxic “forever chemicals” to safeguard the nation’s produce.  Schultz, D-Burbank, introduced A.B. 1603 earlier this year to ban the use, sale an…</div>
+  <div class="article-meta">Apr 09, 2026  02:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08042026/zeldin-celebrates-endangerment-finding-repeal-conference/" target="_blank">Zeldin Celebrates Endangerment Finding Repeal With Climate Skeptics</a></div>
+  <div class="article-summary">WASHINGTON—Addressing a conference of scientists and other experts skeptical of climate change, Environmental Protection Agency Administrator Lee Zeldin on Wednesday celebrated his decision to repeal what is known as the “endangerment finding,” which…</div>
+  <div class="article-meta">Apr 08, 2026  23:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/apr/08/epa-chief-zeldin-climate-denying-group-event" target="_blank">Trump’s EPA chief Zeldin gives keynote speech at climate-denying group’s event</a></div>
+  <div class="article-summary">Lee Zeldin opens conference for Heartland Institute, which once compared climate advocates to the UnabomberSign up for the Breaking News US email to get newsletter alerts in your inboxLee Zeldin, the administrator of the US Environmental Protection A…</div>
+  <div class="article-meta">Apr 08, 2026  18:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/08/charging-worries-high-prices-put-brakes-on-ev-growth-in-bangladesh/" target="_blank">Charging worries, high prices put brakes on EV growth in Bangladesh</a></div>
+  <div class="article-summary">Sales of e-bikes and rickshaws are up amid queues at fuel stations, but a lack of charging infrastructure and high prices still deter many Bangladeshis from going electricThe postCharging worries, high prices put brakes on EV growth in Bangladeshappe…</div>
+  <div class="article-meta">Apr 08, 2026  18:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/08/extreme-weather-heatwaves-breaching-human-survival-limits-study-finds" target="_blank">‘Non-survivable’: heatwaves are already breaching human limits, with worse to come, study finds</a></div>
+  <div class="article-summary">Analysis of six extreme heatwaves found when temperature and humidity were accounted for, all were potentially deadly for older peopleExtreme heat is already creating “non-survivable” conditions for humans in heatwaves that have killed thousands and…</div>
+  <div class="article-meta">Apr 08, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, April 09, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
