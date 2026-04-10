@@ -1,0 +1,160 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Friday, April 10, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (4 articles)
+============================================================
+
+▸ California community solar proposal ‘virtually ensures’ no new projects
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/10/california-community-solar-proposal-virtually-ensures-no-new-projects/
+  Date   : Apr 10, 2026  09:45 EAT
+  Summary: California's proposed community solar rules, rejecting a market-based tariff for a lower, volatile utility-centric rate, will likely halt new project development, jeopardizing access to clean energy for low-income residents and undermining state climate goals. This decision, favoring utility interests over private investment and federal grants, represents a missed opportunity to expand solar access and lower energy costs during a period of record-high prices.
+
+
+▸ Donald Trump Guts Public Health Protection to Bolster Big Coal
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/09/donald-trump-guts-public-health-protection-to-bolster-big-coal/
+  Date   : Apr 10, 2026  06:30 EAT
+  Summary: The Trump administration is dismantling vital safeguards against toxic coal ash pollution, a move that directly endangers hundreds of American communities. This rollback of environmental protections will allow more dangerous waste from coal-fired power plants to contaminate water sources, exacerbating climate risks and public health crises.
+
+
+▸ Clean Energy Candidates Win Majority in SRP Board Election
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/09/clean-energy-candidates-win-majority-in-srp-board-election/
+  Date   : Apr 10, 2026  05:35 EAT
+  Summary: Clean energy advocates have won a majority on the Salt River Project (SRP) board in Phoenix, Arizona, overcoming significant opposition and driving record voter turnout. This shift is crucial as it empowers a board more likely to prioritize renewable energy development, directly impacting Arizona's transition away from fossil fuels and its contribution to climate change mitigation.
+
+
+▸ Cross-State Coalition Disappointed in PUC Decision to Delay Cancellation of Agreements for Minnesota Power’s NTEC Gas Proposal
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/09/cross-state-coalition-disappointed-in-puc-decision-to-delay-cancellation-of-agreements-for-minnesota-powers-ntec-gas-proposal/
+  Date   : Apr 10, 2026  05:26 EAT
+  Summary: ST. PAUL, Minnesota — In a meeting this morning, the Minnesota Public Utilities Commission (PUC) delayed a decision that would protect Minnesota Power customers from higher bills tied to the Nemadji Trail Energy Center (NTEC) gas plant project. Inste…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Internet-of-Things could bring solar module water cooling closer to commercial viability
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/10/internet-of-things-could-bring-solar-module-water-cooling-closer-to-commercial-viability/
+  Date   : Apr 10, 2026  09:30 EAT
+  Summary: Czech researchers have developed an IoT system that can boost solar panel energy yield by 7.38% through intelligent water cooling, demonstrating a positive energy return on investment. This breakthrough offers a scalable, wireless solution to optimize solar performance in dynamic weather, directly impacting the efficiency and economic viability of renewable energy generation.
+
+
+▸ U.S. scientists build copper-contacted TOPCon solar cell with 24.3% efficiency
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/10/u-s-scientists-build-copper-contacted-topcon-solar-cell-with-24-3-efficiency/
+  Date   : Apr 10, 2026  09:00 EAT
+  Summary: U.S. researchers have developed a new TOPCon solar cell using copper rear contacts that achieves a competitive 24.3% efficiency, matching silver-based cells. This breakthrough is significant because it offers a more sustainable and potentially cheaper alternative to current solar technology, paving the way for wider adoption and faster decarbonization.
+
+
+▸ Merino Energy Comes Out Of Stealth With $3,800 Heat Pump System
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/10/merino-energy-comes-out-of-stealth-with-3800-heat-pump-system/
+  Date   : Apr 10, 2026  08:36 EAT
+  Summary: San Francisco-based Merino Energy has launched its professional-grade Merino Mono heat pump system, priced at $3,800. This innovation offers a more accessible and efficient alternative to traditional heating and cooling, directly impacting residential carbon footprints and accelerating the transition away from fossil fuels.
+
+
+▸ New tech reduces silver use in TOPCon solar cells by a factor of 10
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/10/new-tech-reduces-silver-use-in-topcon-solar-cells-by-a-factor-of-10/
+  Date   : Apr 10, 2026  08:00 EAT
+  Summary: Fraunhofer ISE researchers have slashed silver use in TOPCon solar cells by 90%, down to 1.1 mg/Wp, through a novel electrodeposition process. This breakthrough significantly reduces manufacturing costs and dependence on volatile silver markets, bolstering the economic viability and climate impact of the dominant solar technology.
+
+
+▸ GOTRAX Elo Electric Bike: A Simple, No-Stress Way To Get Around
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/09/gotrax-elo-electric-bike-a-simple-no-stress-way-to-get-around/
+  Date   : Apr 10, 2026  06:35 EAT
+  Summary: The GOTRAX Elo electric bike offers a straightforward, affordable solution for urban commuting. By providing an accessible e-bike option, it encourages a shift away from carbon-intensive transportation, contributing to reduced emissions and cleaner air.
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ Most U.S. Public Pensions Underuse Proxy Voting to Manage Climate Risk, New Report Finds
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/09/most-u-s-public-pensions-underuse-proxy-voting-to-manage-climate-risk-new-report-finds/
+  Date   : Apr 10, 2026  05:48 EAT
+  Summary: A new Sierra Club report reveals that most of the 33 largest U.S. public pension funds are significantly underusing their proxy voting power to address climate risk. This failure to engage with companies on climate issues means these massive investment pools are missing a critical opportunity to drive corporate decarbonization and protect long-term financial stability from climate-related threats.
+
+
+▸ Battery Recycler Ascend Elements Files for Bankruptcy
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-10/massachusetts-based-ascend-elements-files-for-bankrupty
+  Date   : Apr 10, 2026  03:00 EAT
+  Summary: The climate tech company boomed during the Biden years but has struggled amid a drop in EV interest.…
+
+
+▸ Wildfires Race Across US as Drought Spans Half the Nation
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-09/wildfires-race-across-us-as-drought-spans-half-the-nation
+  Date   : Apr 09, 2026  16:46 EAT
+  Summary: A record-breaking hot and snowless winter has ignited a ferocious spring wildfire season across the US, with drought now gripping half the nation. This alarming trend directly exacerbates climate change by releasing vast amounts of carbon into the atmosphere and destroying vital carbon sinks like forests.
+
+
+▸ How China Stands to Benefit From the Iran War
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-04-09/how-china-stands-to-benefit-from-the-iran-war
+  Date   : Apr 09, 2026  16:26 EAT
+  Summary: As countries turn to renewable sources to bolster their energy security, a lot of that equipment will come from China.…
+
+
+▸ El Niño Set to Form by August With Rising Heat and Crop Risks
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-09/el-nino-set-to-form-by-august-with-rising-heat-and-crop-risks
+  Date   : Apr 09, 2026  16:00 EAT
+  Summary: A planet-heating El Niño is favored to emerge by August, with rising odds of an unusually powerful event that threatens record-breaking temperatures during the Northern Hemisphere’s summer.…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ UK imports of “green” jet fuel linked to Amazon deforestation
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/04/10/uk-imports-of-green-jet-fuel-linked-to-amazon-deforestation/
+  Date   : Apr 10, 2026  09:21 EAT
+  Summary: British and EU imports of "green" jet fuel are being tainted by deforestation, as a Texas refinery supplying the fuel has sourced beef tallow linked to illegal cattle purchases in the Amazon. This raises serious questions about the sustainability of so-called "green" fuels and their true climate impact.
+
+
+▸ Is the Keystone XL Pipeline Back?
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/09042026/canada-us-oil-pipeline-proposal/
+  Date   : Apr 10, 2026  01:34 EAT
+  Summary: No project better embodies the nation’s wild swings in climate and energy policy than the Keystone XL pipeline. Proposed in 2008 to carry Canadian oil to the U.S. Gulf Coast, the conduit was killed by President Barack Obama and then revived by Donald…
+
+
+▸ Meeting Climate Targets Requires Humanity to Reorient Its Relationship With Nature, New Study Says
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/09042026/yellowstone-to-yukon-conservation-climate-targets/
+  Date   : Apr 10, 2026  01:26 EAT
+  Summary: Governments cannot reach their climate goals without rethinking humanity’s relationship to the Earth.  That is the overarching takeaway from a new paper published today in Frontiers in Science by a global team of scientists, conservationists and Indi…
+
+
+▸ Severe Exposure to ‘Forever Chemicals’ During Pregnancy Could Lead to Childhood Asthma
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/09042026/severe-exposure-to-forever-chemicals-during-pregnancy-could-lead-to-childhood-asthma/
+  Date   : Apr 09, 2026  21:21 EAT
+  Summary: Exposure to “forever chemicals” during pregnancy could increase the risk of childhood asthma, according to new research from Sweden. Researchers from Lund University found that prenatal exposure to very high levels of per- and polyfluoroalkyl substan…
+
+
+▸ Iran Energy Shock Tests Limits of Trump’s Vision of US Energy Dominance
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/09042026/iran-energy-shock-tests-us-dominance/
+  Date   : Apr 09, 2026  19:31 EAT
+  Summary: In President Donald Trump’s telling, the United States has fuel enough to hover above the chaos that his attack on Iran has triggered in global energy markets. “We’re in great shape for the future,” Trump said in a speech last week, asserting that th…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 48  |  Sources: 7  |  Topics: 4

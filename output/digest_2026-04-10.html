@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, April 10, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">48</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 39 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/10/california-community-solar-proposal-virtually-ensures-no-new-projects/" target="_blank">California community solar proposal ‘virtually ensures’ no new projects</a></div>
+  <div class="article-summary">California's proposed community solar rules, rejecting a market-based tariff for a lower, volatile utility-centric rate, will likely halt new project development, jeopardizing access to clean energy for low-income residents and undermining state climate goals. This decision, favoring utility interests over private investment and federal grants, represents a missed opportunity to expand solar access and lower energy costs during a period of record-high prices.</div>
+  <div class="article-meta">Apr 10, 2026  09:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/09/donald-trump-guts-public-health-protection-to-bolster-big-coal/" target="_blank">Donald Trump Guts Public Health Protection to Bolster Big Coal</a></div>
+  <div class="article-summary">The Trump administration is dismantling vital safeguards against toxic coal ash pollution, a move that directly endangers hundreds of American communities. This rollback of environmental protections will allow more dangerous waste from coal-fired power plants to contaminate water sources, exacerbating climate risks and public health crises.</div>
+  <div class="article-meta">Apr 10, 2026  06:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/09/clean-energy-candidates-win-majority-in-srp-board-election/" target="_blank">Clean Energy Candidates Win Majority in SRP Board Election</a></div>
+  <div class="article-summary">Clean energy advocates have won a majority on the Salt River Project (SRP) board in Phoenix, Arizona, overcoming significant opposition and driving record voter turnout. This shift is crucial as it empowers a board more likely to prioritize renewable energy development, directly impacting Arizona's transition away from fossil fuels and its contribution to climate change mitigation.</div>
+  <div class="article-meta">Apr 10, 2026  05:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/09/cross-state-coalition-disappointed-in-puc-decision-to-delay-cancellation-of-agreements-for-minnesota-powers-ntec-gas-proposal/" target="_blank">Cross-State Coalition Disappointed in PUC Decision to Delay Cancellation of Agreements for Minnesota Power’s NTEC Gas Proposal</a></div>
+  <div class="article-summary">ST. PAUL, Minnesota — In a meeting this morning, the Minnesota Public Utilities Commission (PUC) delayed a decision that would protect Minnesota Power customers from higher bills tied to the Nemadji Trail Energy Center (NTEC) gas plant project. Inste…</div>
+  <div class="article-meta">Apr 10, 2026  05:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/10/internet-of-things-could-bring-solar-module-water-cooling-closer-to-commercial-viability/" target="_blank">Internet-of-Things could bring solar module water cooling closer to commercial viability</a></div>
+  <div class="article-summary">Czech researchers have developed an IoT system that can boost solar panel energy yield by 7.38% through intelligent water cooling, demonstrating a positive energy return on investment. This breakthrough offers a scalable, wireless solution to optimize solar performance in dynamic weather, directly impacting the efficiency and economic viability of renewable energy generation.</div>
+  <div class="article-meta">Apr 10, 2026  09:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/10/u-s-scientists-build-copper-contacted-topcon-solar-cell-with-24-3-efficiency/" target="_blank">U.S. scientists build copper-contacted TOPCon solar cell with 24.3% efficiency</a></div>
+  <div class="article-summary">U.S. researchers have developed a new TOPCon solar cell using copper rear contacts that achieves a competitive 24.3% efficiency, matching silver-based cells. This breakthrough is significant because it offers a more sustainable and potentially cheaper alternative to current solar technology, paving the way for wider adoption and faster decarbonization.</div>
+  <div class="article-meta">Apr 10, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/10/merino-energy-comes-out-of-stealth-with-3800-heat-pump-system/" target="_blank">Merino Energy Comes Out Of Stealth With $3,800 Heat Pump System</a></div>
+  <div class="article-summary">San Francisco-based Merino Energy has launched its professional-grade Merino Mono heat pump system, priced at $3,800. This innovation offers a more accessible and efficient alternative to traditional heating and cooling, directly impacting residential carbon footprints and accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Apr 10, 2026  08:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/10/new-tech-reduces-silver-use-in-topcon-solar-cells-by-a-factor-of-10/" target="_blank">New tech reduces silver use in TOPCon solar cells by a factor of 10</a></div>
+  <div class="article-summary">Fraunhofer ISE researchers have slashed silver use in TOPCon solar cells by 90%, down to 1.1 mg/Wp, through a novel electrodeposition process. This breakthrough significantly reduces manufacturing costs and dependence on volatile silver markets, bolstering the economic viability and climate impact of the dominant solar technology.</div>
+  <div class="article-meta">Apr 10, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/09/gotrax-elo-electric-bike-a-simple-no-stress-way-to-get-around/" target="_blank">GOTRAX Elo Electric Bike: A Simple, No-Stress Way To Get Around</a></div>
+  <div class="article-summary">The GOTRAX Elo electric bike offers a straightforward, affordable solution for urban commuting. By providing an accessible e-bike option, it encourages a shift away from carbon-intensive transportation, contributing to reduced emissions and cleaner air.</div>
+  <div class="article-meta">Apr 10, 2026  06:35 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/09/most-u-s-public-pensions-underuse-proxy-voting-to-manage-climate-risk-new-report-finds/" target="_blank">Most U.S. Public Pensions Underuse Proxy Voting to Manage Climate Risk, New Report Finds</a></div>
+  <div class="article-summary">A new Sierra Club report reveals that most of the 33 largest U.S. public pension funds are significantly underusing their proxy voting power to address climate risk. This failure to engage with companies on climate issues means these massive investment pools are missing a critical opportunity to drive corporate decarbonization and protect long-term financial stability from climate-related threats.</div>
+  <div class="article-meta">Apr 10, 2026  05:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-10/massachusetts-based-ascend-elements-files-for-bankrupty" target="_blank">Battery Recycler Ascend Elements Files for Bankruptcy</a></div>
+  <div class="article-summary">The climate tech company boomed during the Biden years but has struggled amid a drop in EV interest.…</div>
+  <div class="article-meta">Apr 10, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-09/wildfires-race-across-us-as-drought-spans-half-the-nation" target="_blank">Wildfires Race Across US as Drought Spans Half the Nation</a></div>
+  <div class="article-summary">A record-breaking hot and snowless winter has ignited a ferocious spring wildfire season across the US, with drought now gripping half the nation. This alarming trend directly exacerbates climate change by releasing vast amounts of carbon into the atmosphere and destroying vital carbon sinks like forests.</div>
+  <div class="article-meta">Apr 09, 2026  16:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-09/how-china-stands-to-benefit-from-the-iran-war" target="_blank">How China Stands to Benefit From the Iran War</a></div>
+  <div class="article-summary">As countries turn to renewable sources to bolster their energy security, a lot of that equipment will come from China.…</div>
+  <div class="article-meta">Apr 09, 2026  16:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-09/el-nino-set-to-form-by-august-with-rising-heat-and-crop-risks" target="_blank">El Niño Set to Form by August With Rising Heat and Crop Risks</a></div>
+  <div class="article-summary">A planet-heating El Niño is favored to emerge by August, with rising odds of an unusually powerful event that threatens record-breaking temperatures during the Northern Hemisphere’s summer.…</div>
+  <div class="article-meta">Apr 09, 2026  16:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/10/uk-imports-of-green-jet-fuel-linked-to-amazon-deforestation/" target="_blank">UK imports of “green” jet fuel linked to Amazon deforestation</a></div>
+  <div class="article-summary">British and EU imports of "green" jet fuel are being tainted by deforestation, as a Texas refinery supplying the fuel has sourced beef tallow linked to illegal cattle purchases in the Amazon. This raises serious questions about the sustainability of so-called "green" fuels and their true climate impact.</div>
+  <div class="article-meta">Apr 10, 2026  09:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09042026/canada-us-oil-pipeline-proposal/" target="_blank">Is the Keystone XL Pipeline Back?</a></div>
+  <div class="article-summary">No project better embodies the nation’s wild swings in climate and energy policy than the Keystone XL pipeline. Proposed in 2008 to carry Canadian oil to the U.S. Gulf Coast, the conduit was killed by President Barack Obama and then revived by Donald…</div>
+  <div class="article-meta">Apr 10, 2026  01:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09042026/yellowstone-to-yukon-conservation-climate-targets/" target="_blank">Meeting Climate Targets Requires Humanity to Reorient Its Relationship With Nature, New Study Says</a></div>
+  <div class="article-summary">Governments cannot reach their climate goals without rethinking humanity’s relationship to the Earth.  That is the overarching takeaway from a new paper published today in Frontiers in Science by a global team of scientists, conservationists and Indi…</div>
+  <div class="article-meta">Apr 10, 2026  01:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09042026/severe-exposure-to-forever-chemicals-during-pregnancy-could-lead-to-childhood-asthma/" target="_blank">Severe Exposure to ‘Forever Chemicals’ During Pregnancy Could Lead to Childhood Asthma</a></div>
+  <div class="article-summary">Exposure to “forever chemicals” during pregnancy could increase the risk of childhood asthma, according to new research from Sweden. Researchers from Lund University found that prenatal exposure to very high levels of per- and polyfluoroalkyl substan…</div>
+  <div class="article-meta">Apr 09, 2026  21:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09042026/iran-energy-shock-tests-us-dominance/" target="_blank">Iran Energy Shock Tests Limits of Trump’s Vision of US Energy Dominance</a></div>
+  <div class="article-summary">In President Donald Trump’s telling, the United States has fuel enough to hover above the chaos that his attack on Iran has triggered in global energy markets. “We’re in great shape for the future,” Trump said in a speech last week, asserting that th…</div>
+  <div class="article-meta">Apr 09, 2026  19:31 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, April 10, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
