@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, April 13, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">20</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:58%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 12 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/13/solar-leads-global-additions-in-2025-as-wind-growth-accelerates/" target="_blank">Solar leads global additions in 2025 as wind growth accelerates</a></div>
+  <div class="article-summary">Global solar capacity surged by 647 GW in 2025, with wind additions accelerating significantly, now capable of displacing over a seventh of global gas generation and saving an estimated $138 billion annually. This rapid expansion of renewables is crucial for strengthening energy independence and insulating economies from volatile fossil fuel prices, though absolute fossil fuel generation remains near record highs.</div>
+  <div class="article-meta">Apr 13, 2026  09:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/13/worlds-largest-pv-csp-plant-under-construction-in-china/" target="_blank">World’s largest PV-CSP plant under construction in China</a></div>
+  <div class="article-summary">China Energy Engineering Corp. has begun construction on the world's largest single-phase solar-thermal-storage project in Hami, Xinjiang, a 1.5 GW hybrid PV-CSP plant designed for round-the-clock power generation. This ambitious undertaking, featuring a 219-meter tower and molten-salt storage, signals a major step forward in scaling integrated renewable energy solutions to provide firm, dispatchable power and crucial grid services.</div>
+  <div class="article-meta">Apr 13, 2026  08:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/12/why-does-western-media-keep-failing-on-the-royal-enfield-electric-motorcycle-launch/" target="_blank">Why does Western media keep failing on the Royal Enfield electric motorcycle launch?</a></div>
+  <div class="article-summary">Western media is misrepresenting Royal Enfield's new electric motorcycle, the Flying Flea C6, by overstating its range and understating its price in the Indian market. This failure to contextualize the bike's true cost and capabilities, which is more than double typical Indian commuter bikes, distorts the perception of EV affordability and adoption in crucial emerging markets.</div>
+  <div class="article-meta">Apr 13, 2026  08:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/13/u-s-startup-debuts-low-cost-plug-and-play-indoor-heat-pump-for-residential-use/" target="_blank">U.S. startup debuts low-cost, plug-and-play indoor heat pump for residential use</a></div>
+  <div class="article-summary">San Francisco startup has launched the Merino Mono, a $3,800 plug-and-play indoor heat pump that installs in under an hour, eliminating the need for outdoor units and complex retrofits. This innovation significantly lowers the barrier to entry for efficient heating and cooling in millions of apartments and urban homes, directly addressing a major gap in the market for decarbonizing residential spaces.</div>
+  <div class="article-meta">Apr 13, 2026  08:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/12/some-weird-things-are-happening-and-the-grid-may-never-be-the-same/" target="_blank">Some Weird Things Are Happening And The Grid May Never Be The Same</a></div>
+  <div class="article-summary">Redwood Materials, a battery recycling firm, successfully piloted a 12 MWh grid-scale energy storage system using repurposed EV batteries to power Crusoe's data centers near Reno, Nevada, even through a severe blizzard. This development is significant as it demonstrates a viable path to utilize up to 80% of remaining capacity in end-of-life EV batteries, potentially supplying over half the energy storage market by 2030 and offering a more sustainable alternative to traditional recycling.</div>
+  <div class="article-meta">Apr 13, 2026  05:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-12/stegra-secures-crucial-funding-as-wallenbergs-step-up-di-says" target="_blank">Stegra Secures Crucial Funding as Wallenbergs Step Up, DI Says</a></div>
+  <div class="article-summary">Ailing Swedish startup Stegra AB has secured funding commitments from the influential Wallenberg family in a rescue package that will help the company complete the world’s biggest green-steel plant and ensure it stays in business, Dagens Industri rep…</div>
+  <div class="article-meta">Apr 12, 2026  20:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-12/hedge-fund-money-is-reshaping-a-180-year-old-insurance-model" target="_blank">Hedge Fund Money Is Reshaping a 180-Year-Old Insurance Model</a></div>
+  <div class="article-summary">Alternative investment managers are pouring unprecedented sums of money into the market for property cover, and reshaping a 180-year-old reinsurance model in the process.…</div>
+  <div class="article-meta">Apr 12, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/commentisfree/2026/apr/13/iran-war-trump-nuclear-climate-threat-australia-role-responsibility" target="_blank">The Iran war has heightened the nuclear and climate threat. Australia must help the world step back from the brink | Chris Barrie</a></div>
+  <div class="article-summary">The escalating conflict with Iran has dramatically amplified both nuclear war fears and the urgent need to address climate change, exposing a global failure to confront these intertwined existential threats. Australia, as a regional power, must now step up and implement concrete actions to de-escalate the immediate nuclear danger and accelerate climate solutions.</div>
+  <div class="article-meta">Apr 13, 2026  04:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12042026/diane-wilson-dow-chemical-texas-hunger-strike/" target="_blank">A Hunger Strike Ends, but an ‘Unreasonable’ Woman’s Battle Against Corporate Polluters Marches On</a></div>
+  <div class="article-summary">The Resistance, Part 1: With an army of lawyers, an activist legend squares off against polluting industries along the Texas coast she calls home.  SEADRIFT, Texas—All day, Diane Wilson sat in a ditch outside a chemical plant here on the Gulf Coast o…</div>
+  <div class="article-meta">Apr 12, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12042026/cancer-rates-higher-near-livestock-operations-study-finds/" target="_blank">Cancer Rates Are Higher Near Large Livestock Feeding Operations in 3 States, a New Study Finds</a></div>
+  <div class="article-summary">People in three states living near large livestock feeding operations experience higher rates of cancer, a new analysis found. The study, published in the Environmental Research journal, focused on California, Iowa and Texas because of the availabili…</div>
+  <div class="article-meta">Apr 12, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12042026/inside-climate-talks-ed-yong/" target="_blank">The Extraordinary Sensory Worlds of Animals</a></div>
+  <div class="article-summary">Watch as Ed Yong, Pulitzer-winning science journalist and author of An Immense World, speaks with ICN executive editor Vernon Loeb about the extraordinary sensory worlds of animals, and the concept of the Umwelt, or the parts of an animal’s surroundi…</div>
+  <div class="article-meta">Apr 12, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, April 13, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
