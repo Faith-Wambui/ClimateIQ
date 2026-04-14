@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, April 14, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/13/leaked-car-industrys-latest-demands-could-cost-eu-extra-e74-billion-in-oil-imports/" target="_blank">Leaked: Car Industry’s Latest Demands Could Cost EU Extra €74 Billion In Oil Imports</a></div>
+  <div class="article-summary">The European car industry is lobbying to weaken CO2 targets, a move that could force the EU to import an additional €74 billion in oil. This demand comes as consumer interest in electric vehicles is surging, potentially hindering the transition away from fossil fuels and exacerbating climate change.</div>
+  <div class="article-meta">Apr 14, 2026  06:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/13/shawnee-county-open-for-business-in-3-0-vote-on-utility-solar-batteries/" target="_blank">Shawnee County “Open for Business” in 3-0 Vote on Utility Solar & Batteries</a></div>
+  <div class="article-summary">Shawnee County has cleared the path for utility-scale solar and battery storage projects with a decisive 3-0 commission vote, ending a moratorium and establishing a permitting framework. This move unlocks significant clean energy development, promising job creation, improved public health, and more affordable electricity for the region.</div>
+  <div class="article-meta">Apr 14, 2026  06:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/14/cyber-threats-for-pv-what-are-ransomware-attacks-and-how-do-they-work/" target="_blank">Cyber threats for PV: What are ransomware attacks and how do they work</a></div>
+  <div class="article-summary">Ransomware attacks are now targeting photovoltaic (PV) systems, encrypting critical data and control platforms to extort payment from operators. This poses a significant climate threat by disrupting clean energy production and potentially compromising grid stability.</div>
+  <div class="article-meta">Apr 14, 2026  09:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/14/india-adds-heterojunction-cell-tech-to-approved-solar-manufacturers-list/" target="_blank">India adds heterojunction cell tech to approved solar manufacturers list</a></div>
+  <div class="article-summary">From pv magazine India
+
+Reliance Industries Ltd has become the first company to secure inclusion of heterojunction (HJT) solar cells in the Approved List of Models and Manufacturers (ALMM) issued by India’s Ministry of New and Renewable Energy (MNRE)…</div>
+  <div class="article-meta">Apr 14, 2026  09:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/14/rhoss-unveils-propane-air-to-water-heat-pump-for-residential-small-commercial-applications/" target="_blank">Rhoss unveils propane air-to-water heat pump for residential, small commercial applications</a></div>
+  <div class="article-summary">The Italian manufacturer has launched a compact range of propane air-to-water heat pumps for heating, cooling, and domestic hot water in residential and light commercial applications, offering up to 15.5 kW heating capacity, a seasonal coefficient of…</div>
+  <div class="article-meta">Apr 14, 2026  09:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/14/reduced-graphene-oxide-boosts-stability-in-perovskite-solar-modules/" target="_blank">Reduced graphene oxide boosts stability in perovskite solar modules</a></div>
+  <div class="article-summary">Indian researchers have developed perovskite solar mini-modules using reduced graphene oxide, reaching 16.6% efficiency and maintaining stability for over 1,300 hours. This breakthrough significantly enhances perovskite solar cell durability and performance, paving the way for more reliable and scalable solar energy solutions.</div>
+  <div class="article-meta">Apr 14, 2026  08:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/13/mercedes-benz-new-eqs-926-km-range-800v-steer-by-wire/" target="_blank">Mercedes-Benz unveils new EQS with 926 km range, 800V charging, steer-by-wire</a></div>
+  <div class="article-summary">Mercedes-Benz has unveiled a heavily overhauled EQS electric sedan with a WLTP range of up to 926 km (575 miles), a 13% improvement over the outgoing model. The update represents the biggest upgrade to the flagship EV since it launched in 2021.The ne…</div>
+  <div class="article-meta">Apr 14, 2026  04:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-14/stegra-gets-1-4-billion-from-wallenberg-led-group-to-save-plant" target="_blank">Stegra Gets €1.4 Billion From Wallenberg-Led Group to Save Plant</a></div>
+  <div class="article-summary">Swedish startup Stegra AB has secured a crucial €1.4 billion investment from the Wallenberg-led group, enabling it to finalize construction of the world's largest green-steel plant. This facility's completion is a significant step towards decarbonizing the steel industry, a major contributor to global emissions.</div>
+  <div class="article-meta">Apr 14, 2026  09:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-13/energy-chemical-sectors-urge-eu-to-ease-imminent-emission-rules" target="_blank">Energy, Chemical Sectors Urge EU to Ease Imminent Emission Rules</a></div>
+  <div class="article-summary">A coalition of energy companies, chemical makers and trade associations are asking the European Union to urgently consider changes to the bloc’s upcoming regulations on methane emissions.…</div>
+  <div class="article-meta">Apr 14, 2026  00:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-13/kobold-says-congo-lithium-exploration-campaign-world-s-biggest" target="_blank">KoBold Says Congo Lithium Exploration Campaign ‘World’s Biggest’</a></div>
+  <div class="article-summary">KoBold Metals Co. has begun exploring for lithium in the Democratic Republic of Congo, in what the US firm described as the largest-ever campaign for the battery metal.…</div>
+  <div class="article-meta">Apr 13, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-13/microsoft-staff-say-carbon-removal-deals-paused-in-program-shakeup" target="_blank">Microsoft Staff Tell Some Carbon Capture Companies It’s Pausing Deals</a></div>
+  <div class="article-summary">It’s the world’s biggest carbon removal program.…</div>
+  <div class="article-meta">Apr 13, 2026  15:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-13/prediction-markets-like-kalshi-polymarket-could-improve-weather-forecasting" target="_blank">Booming Weather Prediction Markets Could Improve Forecasting</a></div>
+  <div class="article-summary">Increasingly popular prediction markets like Kalshi and Polymarket may improve forecasting by aggregating knowledge…</div>
+  <div class="article-meta">Apr 13, 2026  15:07 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/14/how-solar-farms-shape-local-climate-and-vegetation-in-arid-regions/" target="_blank">How solar farms shape local climate and vegetation in arid regions</a></div>
+  <div class="article-summary">Chinese solar farms are creating localized "cool islands" in arid regions, with the cooling effect and its impact on surrounding vegetation varying significantly by season, location, and the specific design of the solar panels. This phenomenon, driven primarily by the physical structure of the solar installations, demonstrates a tangible, on-the-ground climate alteration with direct consequences for local ecosystems.</div>
+  <div class="article-meta">Apr 14, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/14/african-scientists-fungal-conservation-movement-aoe" target="_blank">African scientists hail mushrooming global interest in conserving fungi</a></div>
+  <div class="article-summary">African scientists are spotlighting the critical, yet often overlooked, role of fungi in ecosystems, particularly their significant contribution to carbon storage. This growing global recognition of "funga" conservation is vital as these organisms underpin 90% of terrestrial plant life, making their preservation essential for Earth's very existence.</div>
+  <div class="article-meta">Apr 14, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-14/shark-net-plan-sparks-furor-at-first-club-med-south-africa-resort" target="_blank">Shark Nets Spark Furor at Club Med’s First South African Resort</a></div>
+  <div class="article-summary">Club Med's new $120 million resort in South Africa is facing backlash over its decision to install shark nets, a move conservationists warn could decimate marine life. This controversy highlights the growing tension between tourism development and the urgent need to protect vulnerable ocean ecosystems.</div>
+  <div class="article-meta">Apr 14, 2026  07:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13042026/michigan-trump-tax-refunds-energy-affordability-crisis/" target="_blank">Trump’s Tax Refunds Do Little to Stem the Affordability Crisis, Michigan Democrats Say</a></div>
+  <div class="article-summary">Ann Siegle used to spend anywhere from $150 to $280 monthly on her power bill. Since installing solar panels on the roof of her East Lansing, Michigan, home in 2023, she said her monthly bill has dropped to as low as $6 per month.
+
+The initial cost o…</div>
+  <div class="article-meta">Apr 14, 2026  02:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/13/el-nino-explainer" target="_blank">Are we heading for ‘super El Niño’ – and what could we expect?</a></div>
+  <div class="article-summary">Experts say climate pattern could supercharge extreme weather events and push temperatures to record highsThere is a high likelihood that the phenomenon known as “El Niño” will emerge this summer – and it could be exceptionally strong. A so-called “s…</div>
+  <div class="article-meta">Apr 13, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13042026/texas-oil-billionaires-back-bo-french-for-railroad-commission/" target="_blank">Oil Tycoon Funds Far-Right Candidate Challenging Texas Oilfield Regulator</a></div>
+  <div class="article-summary">Jim Wright ran for the Railroad Commission of Texas six years ago as a reformer. But his reforms drew the ire of powerful oil tycoons who are now trying to unseat him. Wright championed the first overhaul of oilfield waste rules in 40 years at the Ra…</div>
+  <div class="article-meta">Apr 13, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13042026/georgia-data-center-boom/" target="_blank">Data Center Boom Reaches West Georgia, Raising Questions Amid Mounting Opposition</a></div>
+  <div class="article-summary">COLUMBUS, Ga.—At the corner of McKee and Macon Road, a rock has long carried the language of a community—birthdays, graduations, small celebrations left in paint, shared between neighbors.  This time, the message was different: “No Data Center.” Kim…</div>
+  <div class="article-meta">Apr 13, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, April 14, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

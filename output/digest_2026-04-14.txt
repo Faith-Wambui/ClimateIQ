@@ -1,0 +1,168 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Tuesday, April 14, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (2 articles)
+============================================================
+
+▸ Leaked: Car Industry’s Latest Demands Could Cost EU Extra €74 Billion In Oil Imports
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/13/leaked-car-industrys-latest-demands-could-cost-eu-extra-e74-billion-in-oil-imports/
+  Date   : Apr 14, 2026  06:49 EAT
+  Summary: The European car industry is lobbying to weaken CO2 targets, a move that could force the EU to import an additional €74 billion in oil. This demand comes as consumer interest in electric vehicles is surging, potentially hindering the transition away from fossil fuels and exacerbating climate change.
+
+
+▸ Shawnee County “Open for Business” in 3-0 Vote on Utility Solar & Batteries
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/13/shawnee-county-open-for-business-in-3-0-vote-on-utility-solar-batteries/
+  Date   : Apr 14, 2026  06:25 EAT
+  Summary: Shawnee County has cleared the path for utility-scale solar and battery storage projects with a decisive 3-0 commission vote, ending a moratorium and establishing a permitting framework. This move unlocks significant clean energy development, promising job creation, improved public health, and more affordable electricity for the region.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Cyber threats for PV: What are ransomware attacks and how do they work
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/14/cyber-threats-for-pv-what-are-ransomware-attacks-and-how-do-they-work/
+  Date   : Apr 14, 2026  09:54 EAT
+  Summary: Ransomware attacks are now targeting photovoltaic (PV) systems, encrypting critical data and control platforms to extort payment from operators. This poses a significant climate threat by disrupting clean energy production and potentially compromising grid stability.
+
+
+▸ India adds heterojunction cell tech to approved solar manufacturers list
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/14/india-adds-heterojunction-cell-tech-to-approved-solar-manufacturers-list/
+  Date   : Apr 14, 2026  09:37 EAT
+  Summary: From pv magazine India
+
+Reliance Industries Ltd has become the first company to secure inclusion of heterojunction (HJT) solar cells in the Approved List of Models and Manufacturers (ALMM) issued by India’s Ministry of New and Renewable Energy (MNRE)…
+
+
+▸ Rhoss unveils propane air-to-water heat pump for residential, small commercial applications
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/14/rhoss-unveils-propane-air-to-water-heat-pump-for-residential-small-commercial-applications/
+  Date   : Apr 14, 2026  09:25 EAT
+  Summary: The Italian manufacturer has launched a compact range of propane air-to-water heat pumps for heating, cooling, and domestic hot water in residential and light commercial applications, offering up to 15.5 kW heating capacity, a seasonal coefficient of…
+
+
+▸ Reduced graphene oxide boosts stability in perovskite solar modules
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/14/reduced-graphene-oxide-boosts-stability-in-perovskite-solar-modules/
+  Date   : Apr 14, 2026  08:46 EAT
+  Summary: Indian researchers have developed perovskite solar mini-modules using reduced graphene oxide, reaching 16.6% efficiency and maintaining stability for over 1,300 hours. This breakthrough significantly enhances perovskite solar cell durability and performance, paving the way for more reliable and scalable solar energy solutions.
+
+
+▸ Mercedes-Benz unveils new EQS with 926 km range, 800V charging, steer-by-wire
+  Source : Electrek
+  Link   : https://electrek.co/2026/04/13/mercedes-benz-new-eqs-926-km-range-800v-steer-by-wire/
+  Date   : Apr 14, 2026  04:41 EAT
+  Summary: Mercedes-Benz has unveiled a heavily overhauled EQS electric sedan with a WLTP range of up to 926 km (575 miles), a 13% improvement over the outgoing model. The update represents the biggest upgrade to the flagship EV since it launched in 2021.The ne…
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ Stegra Gets €1.4 Billion From Wallenberg-Led Group to Save Plant
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-14/stegra-gets-1-4-billion-from-wallenberg-led-group-to-save-plant
+  Date   : Apr 14, 2026  09:16 EAT
+  Summary: Swedish startup Stegra AB has secured a crucial €1.4 billion investment from the Wallenberg-led group, enabling it to finalize construction of the world's largest green-steel plant. This facility's completion is a significant step towards decarbonizing the steel industry, a major contributor to global emissions.
+
+
+▸ Energy, Chemical Sectors Urge EU to Ease Imminent Emission Rules
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-13/energy-chemical-sectors-urge-eu-to-ease-imminent-emission-rules
+  Date   : Apr 14, 2026  00:57 EAT
+  Summary: A coalition of energy companies, chemical makers and trade associations are asking the European Union to urgently consider changes to the bloc’s upcoming regulations on methane emissions.…
+
+
+▸ KoBold Says Congo Lithium Exploration Campaign ‘World’s Biggest’
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-13/kobold-says-congo-lithium-exploration-campaign-world-s-biggest
+  Date   : Apr 13, 2026  16:00 EAT
+  Summary: KoBold Metals Co. has begun exploring for lithium in the Democratic Republic of Congo, in what the US firm described as the largest-ever campaign for the battery metal.…
+
+
+▸ Microsoft Staff Tell Some Carbon Capture Companies It’s Pausing Deals
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-04-13/microsoft-staff-say-carbon-removal-deals-paused-in-program-shakeup
+  Date   : Apr 13, 2026  15:33 EAT
+  Summary: It’s the world’s biggest carbon removal program.…
+
+
+▸ Booming Weather Prediction Markets Could Improve Forecasting
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-04-13/prediction-markets-like-kalshi-polymarket-could-improve-weather-forecasting
+  Date   : Apr 13, 2026  15:07 EAT
+  Summary: Increasingly popular prediction markets like Kalshi and Polymarket may improve forecasting by aggregating knowledge…
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (2 articles)
+============================================================
+
+▸ How solar farms shape local climate and vegetation in arid regions
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/14/how-solar-farms-shape-local-climate-and-vegetation-in-arid-regions/
+  Date   : Apr 14, 2026  09:00 EAT
+  Summary: Chinese solar farms are creating localized "cool islands" in arid regions, with the cooling effect and its impact on surrounding vegetation varying significantly by season, location, and the specific design of the solar panels. This phenomenon, driven primarily by the physical structure of the solar installations, demonstrates a tangible, on-the-ground climate alteration with direct consequences for local ecosystems.
+
+
+▸ African scientists hail mushrooming global interest in conserving fungi
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/apr/14/african-scientists-fungal-conservation-movement-aoe
+  Date   : Apr 14, 2026  07:00 EAT
+  Summary: African scientists are spotlighting the critical, yet often overlooked, role of fungi in ecosystems, particularly their significant contribution to carbon storage. This growing global recognition of "funga" conservation is vital as these organisms underpin 90% of terrestrial plant life, making their preservation essential for Earth's very existence.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Shark Nets Spark Furor at Club Med’s First South African Resort
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-14/shark-net-plan-sparks-furor-at-first-club-med-south-africa-resort
+  Date   : Apr 14, 2026  07:15 EAT
+  Summary: Club Med's new $120 million resort in South Africa is facing backlash over its decision to install shark nets, a move conservationists warn could decimate marine life. This controversy highlights the growing tension between tourism development and the urgent need to protect vulnerable ocean ecosystems.
+
+
+▸ Trump’s Tax Refunds Do Little to Stem the Affordability Crisis, Michigan Democrats Say
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/13042026/michigan-trump-tax-refunds-energy-affordability-crisis/
+  Date   : Apr 14, 2026  02:18 EAT
+  Summary: Ann Siegle used to spend anywhere from $150 to $280 monthly on her power bill. Since installing solar panels on the roof of her East Lansing, Michigan, home in 2023, she said her monthly bill has dropped to as low as $6 per month.
+
+The initial cost o…
+
+
+▸ Are we heading for ‘super El Niño’ – and what could we expect?
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/apr/13/el-nino-explainer
+  Date   : Apr 13, 2026  14:00 EAT
+  Summary: Experts say climate pattern could supercharge extreme weather events and push temperatures to record highsThere is a high likelihood that the phenomenon known as “El Niño” will emerge this summer – and it could be exceptionally strong. A so-called “s…
+
+
+▸ Oil Tycoon Funds Far-Right Candidate Challenging Texas Oilfield Regulator
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/13042026/texas-oil-billionaires-back-bo-french-for-railroad-commission/
+  Date   : Apr 13, 2026  12:00 EAT
+  Summary: Jim Wright ran for the Railroad Commission of Texas six years ago as a reformer. But his reforms drew the ire of powerful oil tycoons who are now trying to unseat him. Wright championed the first overhaul of oilfield waste rules in 40 years at the Ra…
+
+
+▸ Data Center Boom Reaches West Georgia, Raising Questions Amid Mounting Opposition
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/13042026/georgia-data-center-boom/
+  Date   : Apr 13, 2026  11:55 EAT
+  Summary: COLUMBUS, Ga.—At the corner of McKee and Macon Road, a rock has long carried the language of a community—birthdays, graduations, small celebrations left in paint, shared between neighbors.  This time, the message was different: “No Data Center.” Kim…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 44  |  Sources: 6  |  Topics: 5
