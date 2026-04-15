@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, April 15, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">60</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 51 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/15/tunisia-launches-200-mw-call-for-pv-projects-under-new-licensing-scheme/" target="_blank">Tunisia launches 200 MW call for PV projects under new licensing scheme</a></div>
+  <div class="article-summary">Tunisia is launching a 200 MW call for private solar projects, building on recent expansions that have pushed its operational solar capacity to nearly 730 MW. This move is crucial for the country's decarbonization efforts, accelerating its transition away from fossil fuels and contributing to global climate goals.</div>
+  <div class="article-meta">Apr 15, 2026  09:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-15/turkey-demands-decisive-climate-action-ahead-of-new-global-talks" target="_blank">Turkey Demands Decisive Climate Action Ahead of New Global Talks</a></div>
+  <div class="article-summary">Turkey is pushing for concrete climate commitments at upcoming Pacific talks, signaling a critical moment before the next UN summit. This push highlights the urgent need for global cooperation to address escalating climate impacts.</div>
+  <div class="article-meta">Apr 15, 2026  09:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/14/governor-spanberger-delivers-on-energy-affordability-blazing-a-path-for-state-leaders-nationwide/" target="_blank">Governor Spanberger Delivers on Energy Affordability, Blazing a Path for State Leaders Nationwide</a></div>
+  <div class="article-summary">Virginia Governor Abigail Spanberger just signed legislation to boost solar and storage deployment, aiming to lower electricity bills and improve grid reliability. This move directly supports increased renewable energy capacity, a critical step in reducing the state's carbon footprint.</div>
+  <div class="article-meta">Apr 15, 2026  06:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/15/tuvalu-cop-31-summer-leaders-meeting" target="_blank">Tuvalu, tiny Pacific nation at the forefront of climate crisis, to host world leaders before Cop31 summit</a></div>
+  <div class="article-summary">Conference president expresses ‘complete faith’ in Chris Bowen to lead tough negotiationsFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastTuvalu, the Pacific nation at the forefront of the g…</div>
+  <div class="article-meta">Apr 15, 2026  06:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/15/mova-unveils-all-in-one-plug-in-solar-and-storage-solutions/" target="_blank">Mova unveils all-in-one plug-in solar and storage solutions</a></div>
+  <div class="article-summary">Chinese appliance maker Mova has entered the competitive residential solar-plus-storage market with its new AI-powered LumeGret A2000 and A4000 units, offering plug-and-play solutions for homeowners. These systems, featuring expandable battery capacity up to 20 kWh and smart tariff optimization, aim to boost energy self-consumption and grid resilience, contributing to broader adoption of renewable energy solutions.</div>
+  <div class="article-meta">Apr 15, 2026  09:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/15/vertical-bifacial-pv-outperforms-tilted-pv-systems-in-the-uk/" target="_blank">Vertical bifacial PV outperforms tilted PV systems in the UK</a></div>
+  <div class="article-summary">A UK study reveals vertical bifacial solar panels generated up to 26.91% more power in morning hours and averaged 24.52% higher output in winter compared to traditional tilted systems. This breakthrough significantly boosts renewable energy generation potential, especially in regions with less direct sunlight, offering a more consistent and efficient path to decarbonization.</div>
+  <div class="article-meta">Apr 15, 2026  09:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/15/vaillant-launches-space-saving-residential-heat-pump/" target="_blank">Vaillant launches space-saving residential heat pump</a></div>
+  <div class="article-summary">German firm Vaillant has launched the compact Arotherm Pro heat pump, capable of delivering up to 70°C water temperatures with a COP of 4.93, making it a powerful solution for decarbonizing both new builds and existing homes. This advancement is crucial for accelerating the transition away from fossil fuels in residential heating, offering efficiency and flexibility for widespread adoption.</div>
+  <div class="article-meta">Apr 15, 2026  08:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/15/australian-developer-moves-ahead-with-modular-green-hydrogen-production-plant/" target="_blank">Australian developer moves ahead with modular green hydrogen production plant</a></div>
+  <div class="article-summary">Australian developer InterContinental Energy (ICE) is advancing its modular green hydrogen production system, the P2(H2)Node, with a AUD 1.6 million government grant and its first license agreement. This standardized, giga-scale architecture directly integrates renewable energy and electrolyzers, promising up to 10% cost and efficiency gains, and is slated to be a cornerstone of the massive 70 GW Western Green Energy Hub in Australia.</div>
+  <div class="article-meta">Apr 15, 2026  06:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/14/solar-trade-groups-statements-on-passage-of-the-utility-relief-act/" target="_blank">Solar Trade Groups Statements on Passage of the Utility RELIEF Act</a></div>
+  <div class="article-summary">Maryland lawmakers just passed the Utility RELIEF Act, a major energy bill poised to reshape the state's clean energy landscape. This legislation, now headed to Governor Moore's desk, is critical because it will likely accelerate solar deployment, directly impacting Maryland's progress towards its ambitious climate goals.</div>
+  <div class="article-meta">Apr 15, 2026  06:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-14/caterpillar-acquires-california-based-electric-tractor-startup-monarch" target="_blank">Caterpillar Acquires Self-Driving Electric Tractor Startup</a></div>
+  <div class="article-summary">Monarch is one of a growing number of green companies struggling to commercialize their technology.…</div>
+  <div class="article-meta">Apr 14, 2026  22:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-14/new-york-to-select-site-for-new-nuclear-power-plant-this-year" target="_blank">New York to Select Site for New Nuclear Power Plant This Year</a></div>
+  <div class="article-summary">New York state expects to select a community this year to host at least 1 gigawatt of new nuclear energy, signaling a push to accelerate reactor development as electricity demand climbs.…</div>
+  <div class="article-meta">Apr 14, 2026  19:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-14/nyc-washington-brace-for-record-heat-power-demand-set-to-rise" target="_blank">NYC, Washington Brace for Record Heat, Power Demand Set to Rise</a></div>
+  <div class="article-summary">Early-season heat is expected to sweep across New York City and large parts of the US, threatening hundreds of records and driving up energy demand.…</div>
+  <div class="article-meta">Apr 14, 2026  18:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-14/delta-waters-down-net-zero-target-to-an-aspiration" target="_blank">Delta Waters Down Net-Zero Target to an ‘Aspiration’</a></div>
+  <div class="article-summary">The airline also erased its green fuel pledge.…</div>
+  <div class="article-meta">Apr 14, 2026  18:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-14/electric-cars-aren-t-just-for-the-wealthy-anymore" target="_blank">Bargain Car Hunters Drive Next Wave of US EV Sales</a></div>
+  <div class="article-summary">Used electric cars and lower-priced models see big sales gains as new EVs stall.…</div>
+  <div class="article-meta">Apr 14, 2026  13:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/democratic-republic-congo/tors-inter-agency-humanitarian-evaluation-response-eastern-drc-april-2026" target="_blank">DR Congo: TORs for the Inter-Agency Humanitarian Evaluation of the Response in Eastern DRC (April 2026)</a></div>
+  <div class="article-summary">Country: Democratic Republic of the CongoSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Eastern DRC is experiencing one of the world’s most severe and protracted humanitarian crises, marked by escalati…</div>
+  <div class="article-meta">Apr 14, 2026  22:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/burkina-faso/burkina-faso-hrp-2026-suivi-periodique-de-la-reponse-humanitaire-fevrier-2026" target="_blank">Burkina Faso : HRP 2026 - Suivi périodique de la réponse humanitaire, février 2026</a></div>
+  <div class="article-summary">Country: Burkina FasoSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.En janvier et février 2026, les partenaires humanitaires ont atteint cumulativement plus de 452 000 personnes, soit 17 % de la…</div>
+  <div class="article-meta">Apr 14, 2026  19:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/poland/poland-protection-sector-meeting-minutes-26-march-2026" target="_blank">Poland: Protection Sector Meeting Minutes - 26 March 2026</a></div>
+  <div class="article-summary">Countries: Poland, UkraineSources: Protection Cluster, UN High Commissioner for RefugeesPlease refer to the attached file.…</div>
+  <div class="article-meta">Apr 14, 2026  19:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/occupied-palestinian-territory/palestine-logistics-cluster-gaza-coordination-meeting-minutes-31-march-2026" target="_blank">oPt: Palestine - Logistics Cluster Gaza Coordination Meeting Minutes, 31 March 2026</a></div>
+  <div class="article-summary">A robust response is required to avoid a humanitarian catastrophe. The plan aims to immediately and rapidly scale-up operations and to increase the provision of protection and life-saving assistance.…</div>
+  <div class="article-meta">Apr 14, 2026  18:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/lebanon/lebanon-middle-east-escalation-ltc-situation-report-telecoms-03-reporting-period-01-14-april-2026" target="_blank">Lebanon: Middle East Escalation, LTC Situation Report (Telecoms) #03 - Reporting period: 01 - 14 April 2026</a></div>
+  <div class="article-summary">Country: LebanonSources: Emergency Telecommunications Cluster, Logistics Cluster, World Food ProgrammePlease refer to the attached file.This situation report provides updates on Middle East Escalation, with a focus on the security situation in Lebano…</div>
+  <div class="article-meta">Apr 14, 2026  18:03 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/apr/15/cherry-blossom-1200-years-japan-climate-scientist-yasuyuki-aono" target="_blank">After 1,200 years, cherry blossom record to live on despite Japanese scientist’s death</a></div>
+  <div class="article-summary">A Japanese scientist's 1,200-year record of cherry blossom bloom dates, meticulously compiled by Prof. Yasuyuki Aono, definitively shows earlier flowering in recent decades. This groundbreaking data, stretching back to the 9th century, serves as a stark and quantifiable indicator of accelerating climate change.</div>
+  <div class="article-meta">Apr 15, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/apr/15/longer-summers-are-not-just-more-time-to-spend-eating-watermelon-no-its-far-more-sinister" target="_blank">Longer summers are not just more time to spend eating watermelon. No! It’s far more sinister! | First Dog on the Moon</a></div>
+  <div class="article-summary">Longer summers, driven by climate change, are not a cause for celebration but a sinister development with profound implications. This shift signifies a dangerous acceleration of global warming, threatening ecosystems and human well-being with escalating heatwaves and unpredictable weather patterns.</div>
+  <div class="article-meta">Apr 15, 2026  09:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14042026/iran-war-energy-impacts/" target="_blank">Global Finance and Energy Leaders Warn of Potentially Dire Impacts From Iran War</a></div>
+  <div class="article-summary">As the Iran war nears its seventh week, two of the world’s leading finance and energy institutions are forecasting a bleak future for the global economy if the conflict continues much longer. Reports released Tuesday by the International Monetary Fun…</div>
+  <div class="article-meta">Apr 15, 2026  00:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14042026/heat-batteries-leave-some-city-blocks-scorched/" target="_blank">‘Heat Batteries’ Leave Some City Blocks Scorched</a></div>
+  <div class="article-summary">It’s about to get hotter in our nation’s cities. Just how hot it gets depends not only on the weather, but also on infrastructure, working conditions and ZIP codes.  When that heat bears down on cities, with all their steel-and-concrete infrastructur…</div>
+  <div class="article-meta">Apr 14, 2026  23:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/14/turkiye-sets-cop31-dates-and-appoints-australian-cattle-farmer-as-youth-champion/" target="_blank">Türkiye sets COP31 dates and appoints Australian cattle farmer as youth champion</a></div>
+  <div class="article-summary">In an open letter, Murat Kurum gives details of the October Pacific pre-COP and the November COP31 leaders' summit in the Turkish city of AntalyaThe postTürkiye sets COP31 dates and appoints Australian cattle farmer as youth championappeared first on…</div>
+  <div class="article-meta">Apr 14, 2026  20:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/15/australia-fossil-fuels-politics-electric-vehicle-savings-clean-energy" target="_blank">Politicians and media can’t imagine a fossil-fuel free world - and it’s holding Australians back from huge EV savings | Adam Morton</a></div>
+  <div class="article-summary">Australia is well behind other countries in embracing clean cars – it’s past time we kicked into gear on going electricWant to get this in your inbox when it publishes?Sign up for the Clear Air Australia newsletter hereFollow our Australia news live…</div>
+  <div class="article-meta">Apr 14, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, April 15, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
