@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, April 17, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 44 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-17/china-lifts-green-push-with-plan-to-double-clean-energy-by-2035" target="_blank">China Lifts Green Push With Plan to Double Clean Energy by 2035</a></div>
+  <div class="article-summary">China aims to double its non-fossil fuel energy supply by 2035, a significant move that analysts believe will accelerate Beijing's climate goals. This ambitious plan signals a major acceleration in the global transition to clean energy, directly impacting the world's ability to meet critical climate targets.</div>
+  <div class="article-meta">Apr 17, 2026  06:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/16/more-proof-that-trumps-war-on-renewable-energy-is-failing-badly/" target="_blank">More Proof That Trump’s War On Renewable Energy Is Failing, Badly</a></div>
+  <div class="article-summary">Despite political headwinds, the renewable energy sector is forging ahead, evidenced by the commencement of construction on the 550-mile, 3-gigawatt SunZia SouthWest Transmission Project. This massive undertaking, connecting New Mexico's renewable resources to Arizona and California, underscores the industry's resilience and its critical role in decarbonizing the grid.</div>
+  <div class="article-meta">Apr 17, 2026  05:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/16/u-s-senate-disapproves-mining-ban-in-boundary-waters/" target="_blank">U.S. Senate Disapproves Mining Ban in Boundary Waters</a></div>
+  <div class="article-summary">WASHINGTON, D.C. — The U.S. Senate voted to approve a controversial proposal, backed by the Trump Administration, to allow toxic sulfide mining in the watershed of one of the country’s most visited wilderness areas. In a 50-49 vote, Senate Republican…</div>
+  <div class="article-meta">Apr 17, 2026  05:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/china-briefing-16-april-2026-billions-for-grid-petrochemical-plan-chinas-high-seas-bid/" target="_blank">China Briefing 16 April 2026: Billions for grid | Petrochemical plan | China’s high-seas bid</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s China Briefing.
+
+China Briefing handpicks and explains the most important climate and energy stories from China over the past fortnight. Subscribe for free here.
+
+Key developments
+
+Surge in grid investment
+
+TRILLION-YUAN ERA…</div>
+  <div class="article-meta">Apr 16, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/17/pur-energy-launches-all-in-one-battery-based-home-backup-power-solution/" target="_blank">Pur Energy launches all-in-one battery–based home backup power solution</a></div>
+  <div class="article-summary">IIT Hyderabad startup Pur Energy has launched the PuREPower 3.0 Lite, a compact, all-in-one lithium battery backup system for homes. This integrated solution, featuring a 2 kWh battery and AI energy management, offers a cleaner alternative to traditional systems and can store excess solar power, directly contributing to a more resilient and renewable energy grid.</div>
+  <div class="article-meta">Apr 17, 2026  09:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/17/u-s-startup-aims-to-make-signing-up-for-solar-as-easy-as-signing-up-for-cell-phone-service/" target="_blank">U.S. startup aims to make signing up for solar as easy as signing up for cell phone service</a></div>
+  <div class="article-summary">Florida startup Terra Energy is simplifying solar adoption with a 36-month subscription model, mirroring cell phone plans to attract homeowners. This innovative approach, which boasts a 98% customer retention rate, could significantly accelerate residential solar deployment and reduce reliance on fossil fuels.</div>
+  <div class="article-meta">Apr 17, 2026  09:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/16/floridas-new-way-to-ride-waymo-opens-to-everyone-in-miami-orlando/" target="_blank">Florida’s New Way to Ride: Waymo Opens to Everyone in Miami & Orlando</a></div>
+  <div class="article-summary">Waymo has officially launched its fully autonomous ride-hailing service to the public in Miami and Orlando, following a successful beta period with over 150,000 users. This expansion signifies a significant step towards widespread adoption of driverless technology, which promises to reduce traffic congestion and emissions by optimizing routes and potentially shifting away from personal vehicle ownership.</div>
+  <div class="article-meta">Apr 17, 2026  06:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/16/ev-announcements-have-dried-up-enormously-even-teslas-the-trump-slump-is-real/" target="_blank">EV Announcements Have Dried Up Enormously, Even Tesla’s — The Trump Slump Is Real</a></div>
+  <div class="article-summary">Electric vehicle announcements have plummeted, even from major players like Tesla, signaling a significant slowdown in industry momentum. This "Trump slump" suggests that political uncertainty and potential policy shifts are directly impacting the pace of EV innovation and deployment, a critical factor in achieving climate goals.</div>
+  <div class="article-meta">Apr 17, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/16/this-us-ev-market-share-chart-is-quite-lame/" target="_blank">This US EV Market Share Chart Is Quite Lame</a></div>
+  <div class="article-summary">US electric vehicle sales dipped 7.8% in Q1, a concerning trend for climate goals. This slowdown, despite record EV inventory, signals a potential roadblock in the transition away from fossil fuels, impacting emissions reduction targets.</div>
+  <div class="article-meta">Apr 17, 2026  06:21 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-17/pemex-undersea-pipeline-found-to-cause-gulf-oil-spill" target="_blank">Pemex Undersea Pipeline Found to Cause Gulf Oil Spill</a></div>
+  <div class="article-summary">An oil spill in the Gulf of Mexico that soiled beaches, killed wildlife and sparked outrage from environmental groups was caused by a leaky pipeline owned by state oil company Petroleos Mexicanos, the company said.…</div>
+  <div class="article-meta">Apr 17, 2026  05:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-16/us-rejects-centerpoint-energy-s-bid-to-close-indiana-coal-plant" target="_blank">US Rejects CenterPoint’s Bid to Close Indiana Coal Plant</a></div>
+  <div class="article-summary">The Trump administration rejected a request from CenterPoint Energy to allow a 60-year-old coal plant in Indiana to close, forcing the utility to keep operating a unit it says is costly and unreliable.…</div>
+  <div class="article-meta">Apr 16, 2026  21:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-16/nigeria-passes-green-tax-targeting-vehicles-with-bigger-engines" target="_blank">Nigeria Passes Green Tax Targeting Vehicles With Bigger Engines</a></div>
+  <div class="article-summary">Nigeria is imposing a new levy for buyers of heavy-engine vehicles, including SUVs and trucks, in a move designed to price in the cost of pollution, encourage electric-vehicle adoption and boost tax revenue.…</div>
+  <div class="article-meta">Apr 16, 2026  18:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-16/uk-to-scrap-carbon-tax-on-gas-plants-to-cut-energy-bills" target="_blank">UK to Scrap Carbon Tax on Gas Plants to Cut Power Bills</a></div>
+  <div class="article-summary">The UK will eliminate a carbon tax on natural gas used by power generators and industry as it tries to curb energy bills while also decarbonizing the grid.…</div>
+  <div class="article-meta">Apr 16, 2026  15:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-16/epa-weighs-loosening-rules-over-cancer-causing-gas-emissions" target="_blank">The EPA Weighs Loosening Rules Over Cancer-Causing Gas Emissions</a></div>
+  <div class="article-summary">The move comes after the Trump administration offered waivers to dozens of plants across the US.…</div>
+  <div class="article-meta">Apr 16, 2026  15:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/16/spacex-dominating-tesla-cybertruck-sales/" target="_blank">SpaceX Dominating Tesla Cybertruck Sales</a></div>
+  <div class="article-summary">SpaceX is reportedly buying a significant portion, an estimated 18%, of Tesla Cybertrucks, raising questions about genuine consumer demand. This reliance on internal company purchases highlights a potential disconnect between production and market adoption, with implications for Tesla's ambitious production targets and the broader transition to electric vehicles.</div>
+  <div class="article-meta">Apr 17, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16042026/florida-sloth-world-deaths/" target="_blank">At ‘Sloth World’ in Florida, Wild Sloths Have Died by the Dozens</a></div>
+  <div class="article-summary">On a busy tourist strip in Orlando, behind noisy bars and souvenir shops, 21 sloths in crates reached the end of a grueling international trip.  Soon, they would all be dead. The tree-dwelling mammals were transferred to a warehouse resembling an old…</div>
+  <div class="article-meta">Apr 17, 2026  01:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16042026/minnesotas-boundary-waters-just-lost-protection-from-mining/" target="_blank">Minnesota’s Boundary Waters Just Lost Protection From Mining</a></div>
+  <div class="article-summary">WASHINGTON—Despite hours of impassioned arguments from Sen. Tina Smith, the U.S. Senate ended a Biden-era moratorium on mining in the Boundary Waters Canoe Area Wilderness watershed. The vote on Thursday removed a major hurdle for Twin Metals, which…</div>
+  <div class="article-meta">Apr 16, 2026  23:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16042026/environmental-groups-sue-trump-god-squad/" target="_blank">Environmental Groups Take Trump Administration’s ‘God Squad’ to Court</a></div>
+  <div class="article-summary">Environmental groups are suing the Trump administration over its decision to exempt oil and gas drilling in the Gulf of Mexico from complying with the Endangered Species Act, a move they say threatens both the coastline region and the law designed to…</div>
+  <div class="article-meta">Apr 16, 2026  23:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16042026/great-white-sharks-ocean-warming/" target="_blank">Great White Sharks Are Overheating</a></div>
+  <div class="article-summary">The evolutionary edge that fueled great white shark dominance for millions of years could soon become its greatest downfall. The ocean’s most iconic predators maintain warmer body temperatures than the surrounding seawater and are paying an increasin…</div>
+  <div class="article-meta">Apr 16, 2026  21:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, April 17, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
