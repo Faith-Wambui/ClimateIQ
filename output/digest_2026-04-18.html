@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, April 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 44 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/apr/17/supreme-court-oil-and-gas-louisiana" target="_blank">Supreme court sides with oil and gas firms in Louisiana coastal damage fight</a></div>
+  <div class="article-summary">The Supreme Court unanimously ruled in favor of oil and gas companies, allowing them to challenge state court judgments in federal court, including Chevron's $740 million penalty for coastal damage in Louisiana. This decision significantly weakens the ability of states to hold energy firms accountable for environmental degradation, potentially impacting future climate litigation and the protection of vulnerable coastlines.</div>
+  <div class="article-meta">Apr 17, 2026  19:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/17/trump-makes-the-case-for-saf-stronger-than-ever-before/" target="_blank">Trump Makes The Case For SAF Stronger Than Ever Before</a></div>
+  <div class="article-summary">The escalating Iran conflict has created a critical six-week jet fuel shortage in Europe, highlighting the urgent need for alternatives like sustainable aviation fuel (SAF). This supply crunch, impacting global energy markets, underscores the climate imperative to accelerate SAF development and deployment beyond current limited feedstocks like used cooking oil.</div>
+  <div class="article-meta">Apr 17, 2026  18:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-17-april-2026-fossil-fuel-power-slumps-super-el-nino-warning-afghanistans-climate-struggle/" target="_blank">DeBriefed 17 April 2026: Fossil-fuel power slumps | ‘Super’ El Niño warning | Afghanistan’s climate struggle</a></div>
+  <div class="article-summary">Oil prices surged over 7% to $100 a barrel amid faltering US-Iran peace talks, prompting European nations like Ireland and Germany to unveil multi-billion euro energy support packages and accelerate clean energy rollouts. Simultaneously, meteorologists warn of a "super" El Niño poised to intensify global temperatures and extreme weather, while a potential US pressure to sideline climate discussions at international financial meetings raises concerns for global climate action.</div>
+  <div class="article-meta">Apr 17, 2026  17:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-magyars-defeat-of-orban-in-hungary-means-for-climate-and-energy/" target="_blank">Q&A: What Magyar’s defeat of Orbán in Hungary means for climate and energy</a></div>
+  <div class="article-summary">The right-wing populist Hungarian government led by Viktor Orbán has suffered a landslide electoral defeat to the centre-right Tisza party, led by Péter Magyar.
+
+This brings to an end 16 years of rule by Orbán and his Fidesz party, a move welcomed by…</div>
+  <div class="article-meta">Apr 17, 2026  16:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/04/uncertainty-over-future-of-world-banks-climate-plan-at-spring-meetings/" target="_blank">Uncertainty over Future of World Bank’s Climate Plan at Spring Meetings</a></div>
+  <div class="article-summary">US attempts to block the renewal or upgrade of the World Bank’s climate plan may leave the bank without a plan or a substantially weaker one, it certainly won’t be more ambitious. African countries however will want to see the US come up with funds f…</div>
+  <div class="article-meta">Apr 17, 2026  16:04 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-18/china-clean-tech-exports-jump-amid-global-energy-disruption" target="_blank">China Clean Tech Exports Jump Amid Global Energy Disruption</a></div>
+  <div class="article-summary">China's clean tech exports surged in March, driven by global demand for alternative energy amid disruptions from the Iran war. This shift highlights China's growing role in supplying the world's transition to cleaner energy sources.</div>
+  <div class="article-meta">Apr 18, 2026  07:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/17/byd-shark-6-is-a-predator-now-more-than-ready-to-eat-the-philippine-pickup-market/" target="_blank">BYD Shark 6 Is A Predator, Now More Than Ready To Eat The Philippine Pickup Market</a></div>
+  <div class="article-summary">The BYD Shark 6 has officially launched in the Philippines, aiming to disrupt the pickup truck market with its innovative design and capabilities. This move signals a significant expansion of electric vehicle options in a segment traditionally dominated by internal combustion engines, potentially accelerating the transition to cleaner transportation in the region.</div>
+  <div class="article-meta">Apr 18, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/17/u-s-coal-fired-generating-capacity-retired-in-2025-was-the-least-in-15-years/" target="_blank">U.S. Coal-Fired Generating Capacity Retired in 2025 Was the Least in 15 Years</a></div>
+  <div class="article-summary">During 2025, the U.S. electric power sector retired 2.6 gigawatts (GW) of coal-fired generating capacity at four power plants, the least since 2010. At the beginning of 2025, coal plant operators had planned to retire 8.5 GW of capacity; however, 4.8…</div>
+  <div class="article-meta">Apr 18, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/17/hydropower-generation-expected-to-recover-despite-snow-drought-in-the-west/" target="_blank">Hydropower Generation Expected to Recover Despite Snow Drought in the West</a></div>
+  <div class="article-summary">In our April Short-Term Energy Outlook (STEO), we expect U.S. hydropower generation will increase by 5% in 2026 but remain 1.8% below the 10-year average following snow drought conditions in some states. Hydropower generation in 2025 increased to 245…</div>
+  <div class="article-meta">Apr 18, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/17/north-america-just-got-its-first-new-kind-of-lithium-refinery/" target="_blank">North America just got its first new kind of lithium refinery</a></div>
+  <div class="article-summary">Mangrove Lithium has opened what it says is North America’s first commercial electrochemical lithium refinery, a 1,000-tonne-per-year plant in Delta, British Columbia, aimed at strengthening the continent’s EV battery supply chain.
+
+The new site – kn…</div>
+  <div class="article-meta">Apr 18, 2026  00:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-17/imf-warns-suspending-eu-carbon-market-comes-with-huge-risks" target="_blank">IMF Warns Suspending EU Carbon Market Comes With Huge Risks</a></div>
+  <div class="article-summary">The International Monetary Fund urged the European Union not to pause its emissions trading system, warning it would come with “huge” risks that might jeopardize investment.…</div>
+  <div class="article-meta">Apr 17, 2026  22:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-17/trump-plans-oil-lease-sale-in-alaska-s-arctic-wildlife-refuge" target="_blank">Trump Schedules Oil Lease Sale in Arctic Wildlife Refuge</a></div>
+  <div class="article-summary">The Trump administration plans to offer at least 400,000 acres in Alaska’s Arctic National Wildlife Refuge for oil and gas drilling rights in June, marking its first such sale in the rugged area prized for its rich wildlife.…</div>
+  <div class="article-meta">Apr 17, 2026  17:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-17/from-california-to-new-york-states-rush-clean-energy-projects" target="_blank">As Clean Energy Tax Credit Expiration Nears, States Rush Projects</a></div>
+  <div class="article-summary">California, Colorado, Minnesota, New York, New Jersey and Oregon are among the states expediting renewable energy projects.…</div>
+  <div class="article-meta">Apr 17, 2026  15:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-17/rbc-scotiabank-scrap-emissions-targets-for-oil-and-gas-lending" target="_blank">RBC, Scotiabank Scrap Emissions Targets for Oil and Gas Lending</a></div>
+  <div class="article-summary">Royal Bank of Canada and Bank of Nova Scotia have abandoned plans to reduce the carbon footprint associated with loans to heavy emitters such as oil and gas producers.…</div>
+  <div class="article-meta">Apr 17, 2026  14:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-17/california-among-states-rushing-to-build-clean-energy-before-tax-breaks-expire" target="_blank">States Rush to Build Clean Energy Projects to Tap Expiring Incentives</a></div>
+  <div class="article-summary">The federal tax credits can help save billions of dollars and lower electricity costs as sky-high power prices become an election issue.…</div>
+  <div class="article-meta">Apr 17, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17042026/iran-war-could-strain-climate-finance/" target="_blank">A Protracted US–Iran War Could Strain Climate Finance From Wealthy Countries to Developing Nations</a></div>
+  <div class="article-summary">WASHINGTON, D.C.—The ongoing war in Iran is casting a long shadow over the climate finance commitments countries agreed to in 2024, experts warned, as surging oil prices and rising defense budgets put further pressure on the limited pot of money deve…</div>
+  <div class="article-meta">Apr 18, 2026  02:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17042026/judge-dismisses-trump-bid-to-block-hawaii-climate-lawsuit/" target="_blank">Judge Dismisses Trump Administration’s Bid to Block Hawaii Climate Lawsuit</a></div>
+  <div class="article-summary">In a setback to the Trump administration’s extraordinary legal campaign against state climate action, a federal judge threw out the Justice Department’s lawsuit seeking to prevent the state of Hawaii from suing oil companies for damages. Trump admini…</div>
+  <div class="article-meta">Apr 18, 2026  00:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/apr/17/coral-reefs-extinction-global-warming-jason-momoa" target="_blank">Coral reefs are nearing extinction. 2026 must mark a turning point | Jason Momoa</a></div>
+  <div class="article-summary">At 1.5C of global warming, up to 90% of coral reefs could be lost. The next few months could be a defining momentWhere I come from – Hawai’i – the reef isn’t just something you look at. It’s part of us. It feeds our families, protects our shores, and…</div>
+  <div class="article-meta">Apr 17, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/17/qa-look-beyond-trump-for-the-full-story-on-us-climate-action-says-university-dean/" target="_blank">Q&A: Look beyond Trump for the full story on US climate action, says university dean</a></div>
+  <div class="article-summary">Lawyer Lou Leonard, who leads the climate school at Clark University, says Washington's attacks haven't halted climate efforts across American societyThe postQ&A: Look beyond Trump for the full story on US climate action, says university deanappeared…</div>
+  <div class="article-meta">Apr 17, 2026  14:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/apr/17/rainwater-harvesting-and-eco-gardens-how-one-colombian-neighbourhood-helped-a-whole-city-plan-for-climate-change" target="_blank">Rainwater harvesting and eco-gardens: how one Colombian neighbourhood helped a whole city plan for climate change</a></div>
+  <div class="article-summary">From rainwater harvesting to tree nurseries, communities in Medellín are taking steps to increase their landslide and flooding resilienceIn his home on a steep hillside in the neighbourhood of Golondrinas in Medellín, Róbinson Velásquez Cartagena sta…</div>
+  <div class="article-meta">Apr 17, 2026  13:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, April 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
