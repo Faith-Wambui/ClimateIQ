@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, April 19, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">18</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😊</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:65%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Cautiously Optimistic — 11 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/18/low-cost-community-solar-keeps-growing-despite-tide-of-negative-federal-policy/" target="_blank">Low-Cost Community Solar Keeps Growing Despite Tide Of Negative Federal Policy</a></div>
+  <div class="article-summary">Despite federal policy headwinds, US community solar has surpassed 10 GW of installed capacity, with an 8 GW pipeline, demonstrating significant growth driven by cost savings for consumers and innovative land use. This expansion is crucial for decarbonization, offering a scalable model for distributed clean energy access across 43 states and D.C.</div>
+  <div class="article-meta">Apr 18, 2026  16:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/18/why-the-future-of-energy-storage-is-spinning-to-make-a-comeback/" target="_blank">Why the Future of Energy Storage is Spinning To Make a Comeback</a></div>
+  <div class="article-summary">Flywheel energy storage, once overshadowed by batteries, is experiencing a significant resurgence with renewed investment, notably a $200 million injection into renewables-friendly systems. This comeback matters for the climate because flywheels offer a robust, long-duration storage solution crucial for stabilizing the grid as renewable energy sources like solar and wind become more prevalent.</div>
+  <div class="article-meta">Apr 19, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/18/tesla-model-x-solar-charging-atacama-desert-chile-pan-american-highway/" target="_blank">Tesla owner uses emergency solar to trickle charge after running out of battery in desert</a></div>
+  <div class="article-summary">A YouTuber driving a Tesla Model X the entire length of the Americas ran out of battery in Chile’s Atacama Desert — the driest place on Earth — and had to deploy emergency solar panels on the side of the highway to survive.The whole ordeal, captured…</div>
+  <div class="article-meta">Apr 19, 2026  05:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/18/xpeng-gx-exemplifies-the-large-premium-suvs-launching-ahead-of-auto-china-2026/" target="_blank">XPENG GX Exemplifies the Large, Premium SUVs Launching Ahead of Auto China 2026</a></div>
+  <div class="article-summary">Auto China 2026, also known as the Beijing Auto Show, begins next week. However, as this time of year is packed with new product announcements in China, many vehicles are released prior to the show starting. This year, the announcements have tended t…</div>
+  <div class="article-meta">Apr 19, 2026  02:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/18/sea-ice-in-antarctica-was-expanding-until-2016-then-everything-changed/" target="_blank">Sea Ice In Antarctica Was Expanding Until 2016. Then Everything Changed.</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+In a paper published by PNAS on March 23, 2026, researchers Earle Wilson, Lexi Arlen, and Ethan Campbell wrote in the introduction:
+
+“Antarctic sea ice is an integral compone…</div>
+  <div class="article-meta">Apr 18, 2026  22:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/18/canada-wants-high-speed-rail-megaproject-reality-wants-a-word/" target="_blank">Canada Wants High-Speed Rail. Megaproject Reality Wants a Word.</a></div>
+  <div class="article-summary">Canada’s revived high-speed rail (HSR) proposal deserves a serious hearing. It also deserves an outside-view assessment grounded in the history of rail megaprojects, not just the aspirations of sponsors and advocates. The current Alto proposal for a…</div>
+  <div class="article-meta">Apr 18, 2026  22:38 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-18/in-florida-the-pentagon-is-still-preparing-key-base-for-climate-change" target="_blank">The US Defense Department Is Still Preparing for Climate Change</a></div>
+  <div class="article-summary">The military might not be talking about climate anymore, but it’s still working to be ready for it.…</div>
+  <div class="article-meta">Apr 18, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/18/a-prickle-of-hedgehogs-and-an-armada-of-newts-wildlife-settles-in-at-londons-new-queen-elizabeth-garden" target="_blank">A prickle of hedgehogs and an armada of newts: wildlife settles in at London’s new Queen Elizabeth garden</a></div>
+  <div class="article-summary">A former horticultural nursery in Regent’s Park has been transformed into a diverse mix of habitats, with a wide range of species already spotted ahead of its opening to the public on April 27When theQueen Elizabeth II gardenopens in Regent’s Park th…</div>
+  <div class="article-meta">Apr 18, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18042026/illinois-pesticide-warning-system/" target="_blank">Illinois Weighs Early Warning System For Pesticide Spraying Near Parks, Schools</a></div>
+  <div class="article-summary">A bill in the Illinois General Assembly would require certified pesticide users—anyone licensed by the Illinois Department of Agriculture to use Restricted Use pesticides, such as paraquat or fumigant insecticides—to give written or emailed notice at…</div>
+  <div class="article-meta">Apr 18, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18042026/fifty-six-years-of-earth-day/" target="_blank">The History of Earth Day—and Why It Still Matters</a></div>
+  <div class="article-summary">From our collaborating partner Living on Earth, public radio’s environmental news magazine, an interview by host Steve Curwood with environmental historian Adam Rome.  Earth Day was born in 1970 during a moment of human solidarity in troubled times.…</div>
+  <div class="article-meta">Apr 18, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, April 19, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
