@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, April 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">48</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 40 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/clean-energy-pushes-fossil-fuel-power-into-reverse-for-first-time-ever/" target="_blank">Clean energy pushes fossil-fuel power into reverse for ‘first time ever’</a></div>
+  <div class="article-summary">Renewable energy has overtaken coal to become the world’s largest source of electricity in 2025, according to thinktank Ember.
+
+The growth of solar and wind meant that, for the first time since 1919, the share of coal power was lower than that of ren…</div>
+  <div class="article-meta">Apr 21, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/revealed-scientists-tell-colombia-fossil-fuel-transition-summit-to-halt-new-expansion/" target="_blank">Revealed: Scientists tell Colombia fossil-fuel transition summit to ‘halt new expansion’</a></div>
+  <div class="article-summary">Countries attending a first-of-its-kind fossil-fuel summit have been asked to consider “action recommendations” such as “halting all new fossil-fuel expansion” and “reject[ing] gas as a bridging fuel”, according to a preliminary scientific report see…</div>
+  <div class="article-meta">Apr 20, 2026  13:22 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/21/tandem-pv-launches-commercial-perovskite-silicon-manufacturing-in-california/" target="_blank">Tandem PV launches commercial perovskite-silicon manufacturing in California</a></div>
+  <div class="article-summary">Tandem PV has launched commercial manufacturing of high-efficiency perovskite-silicon solar panels in Fremont, California, a move that could significantly boost energy output from limited land footprints. This innovation is crucial as rising electricity demand from AI and data centers pressures existing capacity, offering a pathway to lower energy costs through advanced materials.</div>
+  <div class="article-meta">Apr 21, 2026  09:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/20/hyundai-motor-introduces-ioniq-3-aero-hatch-elevates-ev-technology-for-simple-spacious-intuitive-mobility/" target="_blank">Hyundai Motor Introduces IONIQ 3: Aero Hatch Elevates EV Technology for Simple, Spacious, & Intuitive Mobility</a></div>
+  <div class="article-summary">Hyundai just launched the IONIQ 3, an "Aero Hatch" EV designed for everyday European use, boasting aerodynamic efficiency and a spacious interior. This move signals a continued push for practical, user-friendly electric vehicles that can accelerate mainstream adoption and reduce transportation emissions.</div>
+  <div class="article-meta">Apr 21, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/20/switching-to-heat-pump-water-heaters-could-save-8-billion-annually-in-health-care-costs/" target="_blank">Switching to Heat Pump Water Heaters Could Save $8 Billion Annually in Health Care Costs</a></div>
+  <div class="article-summary">Adopting heat pump water heaters nationwide could slash annual healthcare costs by $8 billion by improving air quality. This shift directly combats pollution from traditional water heaters, leading to significant public health benefits.</div>
+  <div class="article-meta">Apr 21, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/20/toyota-bz4x-outsells-the-tesla-model-3/" target="_blank">Toyota BZ4X Outsells the Tesla Model 3</a></div>
+  <div class="article-summary">In a surprising March 2026 surge, plug-in vehicles captured 26% of New Zealand's auto sales, with Toyota's BZ4X even outselling the Tesla Model 3. This rapid market shift signals a significant acceleration in electric vehicle adoption, demonstrating growing consumer demand and a diversifying EV landscape that could impact global emissions reduction targets.</div>
+  <div class="article-meta">Apr 21, 2026  06:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/20/tesla-robotaxi-expansion-heavy-duty-evs-and-last-weeks-pain-at-the-pump/" target="_blank">Tesla Robotaxi expansion, heavy duty EVs, and last week’s pain at the pump</a></div>
+  <div class="article-summary">Tesla's limited "Robotaxi" rollout in Houston and Dallas, coinciding with a challenging earnings report, highlights the slow progress of its autonomous driving ambitions. Meanwhile, significant advancements in heavy-duty electric vehicles, like a 600-ton excavator in India and Mercedes-Benz's 40-tonne electric semi, signal a critical shift towards decarbonizing industrial sectors.</div>
+  <div class="article-meta">Apr 21, 2026  04:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/21/control-not-capacity-could-be-the-next-driver-of-us-residential-storage-investment/" target="_blank">Control, not capacity, could be the next driver of US residential storage investment</a></div>
+  <div class="article-summary">US residential battery investors are now prioritizing software control and grid service participation over sheer hardware capacity. This shift to integrated platforms, enabling virtual power plants and wholesale market access, unlocks significant revenue streams and offers a more defensible investment in a rapidly evolving energy landscape.</div>
+  <div class="article-meta">Apr 21, 2026  09:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/21/insurance-premiums-trending-down-despite-severe-weather-threat-for-solar/" target="_blank">Insurance premiums trending down despite severe weather threat for solar</a></div>
+  <div class="article-summary">Despite a growing threat from severe weather, insurance premiums for large-scale solar projects in Australia are projected to decline by 2026, driven by industry maturation and improved data. This trend highlights the increasing scale of solar infrastructure, now in the tens of millions of panels, making it more vulnerable to climate-driven events like hail, even as construction risks diminish.</div>
+  <div class="article-meta">Apr 21, 2026  09:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/21/permitting-headwinds-geopolitics-drive-north-american-solar-ppa-prices-higher-in-q1/" target="_blank">Permitting headwinds, geopolitics drive North American solar PPA prices higher in Q1</a></div>
+  <div class="article-summary">North American solar PPA prices jumped over 13% to $64.49/MWh in Q1, driven by permitting delays, new tariffs, and a data center boom, while wind prices surged nearly 24%. These rising costs for clean energy procurement, exacerbated by geopolitical tensions, highlight the increasing challenges and urgency for businesses to secure reliable renewable power amidst market volatility.</div>
+  <div class="article-meta">Apr 21, 2026  09:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-20/uk-plans-to-move-wind-farms-to-new-subsidies-to-cut-costs" target="_blank">UK Plans to Move Wind Farms to New Subsidies to Cut Costs</a></div>
+  <div class="article-summary">The UK will seek to speed up efforts to cut the costs of green electricity by reducing exposure to more-expensive gas.…</div>
+  <div class="article-meta">Apr 21, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-20/solar-rises-to-10-of-japan-power-generation-in-2025-ember-says" target="_blank">Solar Rises to 10% of Japan Power Generation in 2025, Ember Says</a></div>
+  <div class="article-summary">Solar power accounted for 10% of Japan’s electricity generation for the first time last year, exceeding the global average of 9%, according to a report from energy think tank Ember.…</div>
+  <div class="article-meta">Apr 21, 2026  02:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20042026/corpus-christi-projects-september-emergency-water-restrictions/" target="_blank">Corpus Christi Projects Emergency Water Restrictions in September for Large Industrial Users and 500,000 Customers</a></div>
+  <div class="article-summary">Without a shift in weather patterns, the City of Corpus Christi expects to enact emergency restrictions on water use in September, according to draft documents slated for release at a City Council meeting on Tuesday morning.  The 43-page draft presen…</div>
+  <div class="article-meta">Apr 21, 2026  02:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20042026/rio-grande-compact-meeting-low-river-flows/" target="_blank">Facing Drought and Low Snowpack, Rio Grande States Expect a “Challenging” Year</a></div>
+  <div class="article-summary">Reporting supported by the Water Desk at the University of Colorado Boulder. SANTA FE, N.M.—“Severe.“ “Critical.” “Dire.” “Challenging.” “Record-low.”  Officials at the Rio Grande Compact Commission annual meeting Friday worked through the thesaurus…</div>
+  <div class="article-meta">Apr 21, 2026  01:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20042026/rights-of-nature-defender-yuvelis-morales-blanco-goldman-prize/" target="_blank">Rights of Nature Defender Wins Goldman Prize for Protecting Colombia’s Magdalena River From Fracking</a></div>
+  <div class="article-summary">As a child growing up along the banks of Colombia’s Magdalena River, Yuvelis Morales Blanco learned to read the water. “Dark spots on the river meant that we were not going to eat,” she recalled. One of those slicks—oil spills from the country’s powe…</div>
+  <div class="article-meta">Apr 20, 2026  19:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/20/democrats-clean-energy-iran-war-affordability" target="_blank">Democrats urged to link clean energy to affordability as Iran war hikes up prices</a></div>
+  <div class="article-summary">Climate leaders say Democrats need to extol clean energy as a way to cut costs for Americans as war roils oil marketsDemocrats should get louder in championing clean energy’s affordability and resilience from global shocks, according to some of the p…</div>
+  <div class="article-meta">Apr 20, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20042026/plastic-waste-plant-violating-pollution-rules-expands/" target="_blank">As a Plastic Waste Plant Violates Pollution Rules, Its Owner Makes the Case for a Second Location</a></div>
+  <div class="article-summary">Belching smoke from a new plastic waste processing plant in central Ohio has stirred opposition to an even larger “chemical recycling” factory planned for Arizona by the same company. The Freepoint Eco-Systems plant near Hebron, Ohio, fired up its pr…</div>
+  <div class="article-meta">Apr 20, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, April 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
