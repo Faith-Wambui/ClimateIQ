@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, April 22, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 42 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/21/trump-to-give-coal-industry-more-handouts-while-americans-pay/" target="_blank">Trump to Give Coal Industry More Handouts While Americans Pay</a></div>
+  <div class="article-summary">The Trump administration is leveraging the Defense Production Act to funnel hundreds of millions of dollars to the struggling coal industry, despite its long-term decline. This move directly contradicts climate goals by propping up a major source of greenhouse gas emissions, potentially costing taxpayers significantly.</div>
+  <div class="article-meta">Apr 22, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/21/judge-blocks-clean-water-act-permit-for-mountaintop-removal-mine-on-coal-river-mountain/" target="_blank">Judge Blocks Clean Water Act Permit for Mountaintop Removal Mine on Coal River Mountain</a></div>
+  <div class="article-summary">A federal judge has blocked a Clean Water Act permit for a mountaintop removal coal mine on Coal River Mountain in West Virginia. This decision halts a project that would have destroyed vital habitat and polluted local waterways, a significant win for environmental groups and a setback for fossil fuel expansion.</div>
+  <div class="article-meta">Apr 22, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/21/win-judge-blocks-trumps-efforts-to-kneecap-renewables/" target="_blank">WIN: Judge Blocks Trump’s Efforts to Kneecap Renewables</a></div>
+  <div class="article-summary">A federal judge in Massachusetts has halted Trump administration policies designed to hinder renewable energy development. This ruling is a significant win for clean energy, preventing policies that would have stalled crucial progress in combating climate change.</div>
+  <div class="article-meta">Apr 22, 2026  06:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-how-the-uk-government-aims-to-break-link-between-gas-and-electricity-prices/" target="_blank">Q&A: How the UK government aims to ‘break link between gas and electricity prices’</a></div>
+  <div class="article-summary">The UK government has announced a series of measures to “double down on clean power” in response to the energy crisis sparked by the Iran war.
+
+The conflict has caused a spike in fossil-fuel prices – and the high cost of gas is already causing electr…</div>
+  <div class="article-meta">Apr 21, 2026  18:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/state-of-the-climate-strong-el-nino-puts-2026-on-track-for-second-warmest-year/" target="_blank">State of the climate: Strong El Niño puts 2026 on track for second-warmest year</a></div>
+  <div class="article-summary">The first three months of 2026 have been the fourth warmest on record, with each successive month surpassing historical averages by a greater margin.
+
+While weak La Niña conditions pushed down temperatures at the start of the year, scientists expect…</div>
+  <div class="article-meta">Apr 21, 2026  16:11 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/22/kosol-energie-completes-142-mw-solar-project-for-coal-india/" target="_blank">Kosol Energie completes 142 MW solar project for Coal India</a></div>
+  <div class="article-summary">Kosol Energie has successfully commissioned a 142 MW solar project for Coal India in Gujarat, overcoming significant execution hurdles to deliver the plant in just nine months. This substantial renewable energy addition is crucial for India's decarbonization efforts, directly displacing fossil fuel reliance from a major coal producer.</div>
+  <div class="article-meta">Apr 22, 2026  07:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/22/u-s-startups-announce-partnership-to-offer-domestic-perovskite-silicon-tandem-solar-modules/" target="_blank">U.S. startups announce partnership to offer domestic perovskite-silicon tandem solar modules</a></div>
+  <div class="article-summary">U.S. manufacturers Solx and Caelux are partnering to produce advanced perovskite-silicon tandem solar modules, boosting efficiency to 28% and aiming for 3 GW of domestic production by 2027. This collaboration significantly advances U.S. solar manufacturing capabilities, promising a more secure and innovative domestic energy supply chain.</div>
+  <div class="article-meta">Apr 22, 2026  07:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/21/the-alternative-fuels-infrastructure-regulation-for-shipping/" target="_blank">The Alternative Fuels Infrastructure Regulation for Shipping</a></div>
+  <div class="article-summary">Europe's Alternative Fuels Infrastructure Regulation is pushing for a significant increase in renewable and low-carbon fuels for shipping, aiming to curb the sector's 145.2 million tonnes of CO2 emissions annually. This regulation is critical because maritime transport's unchecked emissions could account for a third of all EU transport emissions by 2050, making these infrastructure investments essential for meeting climate targets.</div>
+  <div class="article-meta">Apr 22, 2026  06:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/21/iran-crisis-a-moment-of-reckoning-for-european-aviation/" target="_blank">Iran Crisis: A Moment of Reckoning for European Aviation</a></div>
+  <div class="article-summary">Airline ticket prices are soaring as a consequence of the recent crisis in the Middle East. This new analysis shows that European aviation’s dependence on fossil fuels is at the core of this spike in prices. The recent Middle East crisis underscores…</div>
+  <div class="article-meta">Apr 22, 2026  06:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/21/puerto-rico-suddenly-emerges-as-a-perovskite-solar-cell-powerhouse/" target="_blank">Puerto Rico Suddenly Emerges As A Perovskite Solar Cell Powerhouse</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+Despite the sharp U-turn in federal energy policy, solar cell innovators in the US just keep on persisting in the search for higher efficiency and lower costs. That includes…</div>
+  <div class="article-meta">Apr 22, 2026  04:44 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-21/lithium-rival-sodium-is-making-a-battery-breakthrough-for-evs-energy-storage" target="_blank">Laps of Icy Roads in China Show Sodium Batteries Making an EV Breakthrough</a></div>
+  <div class="article-summary">Volatile lithium prices and advances in technology mean sodium-ion cells are finally providing a credible alternative for automakers and the energy sector.…</div>
+  <div class="article-meta">Apr 22, 2026  00:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-21/china-s-lead-in-long-duration-energy-storage-might-not-last" target="_blank">China’s Lead in the Long Duration Energy Storage Race Might Not Last</a></div>
+  <div class="article-summary">The sheer range of technologies for long duration storage could make it hard for China to dominate the supply chain.…</div>
+  <div class="article-meta">Apr 21, 2026  18:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-21/kkr-fund-secures-investment-from-uae-blended-finance-vehicle" target="_blank">KKR Fund Secures Investment From UAE Blended-Finance Vehicle</a></div>
+  <div class="article-summary">A $30 billion fund backed by the United Arab Emirates has committed to invest in KKR & Co. Inc’s global climate transition fund.…</div>
+  <div class="article-meta">Apr 21, 2026  17:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-21/us-can-compete-with-china-on-batteries-for-long-duration-energy-storage" target="_blank">The US Has a Chance to Rival China in Rush for Longer-Lasting Batteries</a></div>
+  <div class="article-summary">A growing long-duration energy storage sector is an opportunity for competitors to challenge Beijing’s grip on clean technology.…</div>
+  <div class="article-meta">Apr 21, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-21/czech-pm-babis-urges-eu-to-soften-green-rules-to-ease-war-impact" target="_blank">Czech PM Babis Urges EU to Soften Green Rules to Ease War Impact</a></div>
+  <div class="article-summary">Czech Prime Minister Andrej Babis called on the European Union to relax environmental rules to ease the impact of the energy price spikes caused by the Iran war and to stem a decline in the bloc’s industrial competitiveness.…</div>
+  <div class="article-meta">Apr 21, 2026  12:32 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/apr/22/climate-change-extreme-weather-heatwaves-floods-wildfires-threat-democracy-elections" target="_blank">Heatwaves, floods and wildfires pose rising threat to democracy, report finds</a></div>
+  <div class="article-summary">Climate-fueled natural disasters like heatwaves, floods, and wildfires disrupted 23 elections in 18 countries in 2024 alone. This escalating trend, which has impacted 94 elections globally over the past two decades, highlights a critical new threat to democratic processes worldwide.</div>
+  <div class="article-meta">Apr 22, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22042026/american-lung-association-toxic-air-annual-report/" target="_blank">Almost Half of America’s Kids Are Breathing Toxic Air</a></div>
+  <div class="article-summary">A new American Lung Association report reveals 33.5 million U.S. children, nearly half the nation's youth, are exposed to dangerous levels of air pollution. This widespread exposure to pollutants harmful to developing lungs significantly exacerbates the climate crisis's health impacts on the next generation.</div>
+  <div class="article-meta">Apr 22, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/22/pollen-season-in-uk-and-mainland-europe-extended-by-climate-breakdown" target="_blank">Pollen season in UK and mainland Europe extended by climate breakdown</a></div>
+  <div class="article-summary">Research finds global heating has already lengthened the pollen season in addition to worsening heatwaves and droughtsClimate breakdown has extended the pollen season in the UK and mainland Europe by between one and two weeks since the 1990s, astudyh…</div>
+  <div class="article-meta">Apr 22, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21042026/florida-electricity-customer-shutoffs/" target="_blank">Florida Electricity Shutoffs Rank Among Nation’s Highest</a></div>
+  <div class="article-summary">Florida households had their electricity shut off some 2.1 million times in 2024 because of an inability to pay, a number that was among the highest of any state. That comes from a first-of-its-kind federal report examining energy insecurity across t…</div>
+  <div class="article-meta">Apr 22, 2026  03:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/22/earth-day-is-an-opportunity-for-communities-to-show-the-way-on-climate-action/" target="_blank">Earth Day is an opportunity for communities to show the way on climate action</a></div>
+  <div class="article-summary">We can work together to encourage new greener practices - even without the support of powerful people - so that local action brings global benefits for allThe postEarth Day is an opportunity for communities to show the way on climate actionappeared f…</div>
+  <div class="article-meta">Apr 22, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21042026/todays-climate-salt-freshwater-health-risks/" target="_blank">This Growing Climate Threat Could Be Increasing Your Blood Pressure</a></div>
+  <div class="article-summary">Anyone who has ever been told to lower their sodium intake knows they have to cut back on the usual salty suspects, from potato chips to deli meats. But the water you drink to wash down these snacks may also be part of the problem, experts say.  Each…</div>
+  <div class="article-meta">Apr 22, 2026  00:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21042026/transco-southeast-pipeline-lawsuit/" target="_blank">Transco Pipeline Project Faces Legal Challenge</a></div>
+  <div class="article-summary">Five environmental groups are petitioning a federal appeals court to invalidate a water quality permit issued by the U.S. Army Corps of Engineers for a controversial Transco pipeline. The $1.5 billion Southeast Supply Enhancement Project (SSEP) would…</div>
+  <div class="article-meta">Apr 21, 2026  22:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21042026/tesla-lithium-refinery-toxic-wastewater/" target="_blank">Independent Testing Where Tesla’s Lithium Refinery Discharges Wastewater Found Toxic Metals</a></div>
+  <div class="article-summary">After Texas regulators said Tesla’s lithium refinery near Corpus Christi wasn’t violating its permits by discharging what local officials reported as black wastewater into a drainage ditch, independent water testing there this month found two toxic m…</div>
+  <div class="article-meta">Apr 21, 2026  22:11 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, April 22, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
