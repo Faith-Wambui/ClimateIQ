@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, April 23, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">52</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 44 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/23/eu-responds-to-energy-price-shocks-with-homegrown-clean-energy-push/" target="_blank">EU responds to energy price shocks with ‘homegrown’ clean energy push</a></div>
+  <div class="article-summary">Europe is accelerating its shift to homegrown clean energy with the AccelerateEU strategy, aiming to cushion the blow of volatile fossil fuel prices exacerbated by the Middle East conflict. This push, including a new Electrification Action Plan by summer, signals a decisive move to bolster energy security and decarbonize the continent.</div>
+  <div class="article-meta">Apr 23, 2026  09:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/23/u-s-court-blocks-de-facto-moratorium-on-federal-solar-permitting/" target="_blank">U.S. court blocks ‘de facto moratorium’ on federal solar permitting</a></div>
+  <div class="article-summary">A U.S. court has overturned a federal policy that stalled 57 GW of solar projects on public lands, deeming it an arbitrary barrier to development. This ruling removes a significant hurdle for deploying clean energy at the pace needed to meet climate goals and lower energy costs.</div>
+  <div class="article-meta">Apr 23, 2026  08:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-23/sadiq-khan-on-lessons-from-one-of-the-world-s-greenest-cities" target="_blank">Lessons From One of the World’s Greenest Cities</a></div>
+  <div class="article-summary">London Mayor Sadiq Khan has successfully navigated a decade of political turbulence to implement ambitious climate policies, including a significant expansion of the Ultra Low Emission Zone (ULEZ) which has demonstrably reduced air pollution. This commitment to aggressive environmental action in a major global city offers a crucial blueprint for other urban centers grappling with the urgent need to decarbonize and improve public health.</div>
+  <div class="article-meta">Apr 23, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22042026/california-disaster-insurance-bill/" target="_blank">As Climate Disasters Create an Insurance Crisis, a California Bill Seeks to Make Fossil Fuel Companies Pay</a></div>
+  <div class="article-summary">California lawmakers are advancing SB 982, a bill that would hold fossil fuel companies financially liable for climate-related damages, aiming to alleviate the growing insurance crisis exacerbated by escalating climate disasters. This move signifies a critical shift in assigning responsibility, potentially forcing polluters to fund the mounting costs of a warming planet and its devastating consequences.</div>
+  <div class="article-meta">Apr 23, 2026  04:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-22-april-2026-global-food-catastrophe-beccs-emissions-uk-solar-farm-controversy/" target="_blank">Cropped 22 April 2026: Global food ‘catastrophe’ | BECCS emissions | UK solar farm controversy</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">Apr 22, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/22/catl-announces-6-minute-charging-time-for-latest-battery/" target="_blank">CATL Announces 6-Minute Charging Time For Latest Battery</a></div>
+  <div class="article-summary">CATL has unveiled its latest Shenxing Superfast Charging Battery, capable of charging from 10% to 98% in just 6 minutes, significantly outpacing competitors. This breakthrough, offering up to 1,500 kilometers of range, accelerates the transition to electric vehicles by eliminating range anxiety and charging delays, a critical step in decarbonizing transportation.</div>
+  <div class="article-meta">Apr 23, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/22/a-650-megawatt-wind-farm-is-rising-in-war-torn-ukraine-with-an-assist-from-norway/" target="_blank">A 650 Megawatt Wind Farm Is Rising In War Torn Ukraine, With An Assist From Norway</a></div>
+  <div class="article-summary">Despite ongoing Russian attacks, Ukraine's DTEK Group is forging ahead with a massive 650-megawatt wind farm, a crucial step towards energy independence and resilience. This significant renewable energy project, bolstered by Norwegian support, directly counters the weaponization of energy infrastructure and bolsters Ukraine's commitment to a cleaner future amidst conflict.</div>
+  <div class="article-meta">Apr 23, 2026  06:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/22/tesla-optimus-production-fremont-model-sx-line/" target="_blank">Tesla pushes Optimus V3 reveal later this year – again</a></div>
+  <div class="article-summary">Tesla's Optimus robot production is slated to begin in Fremont this summer, but Elon Musk acknowledges a "slow" start due to its complex design. This development, while not directly climate-related, signals a significant shift in industrial automation that could eventually impact energy consumption and manufacturing emissions globally.</div>
+  <div class="article-meta">Apr 23, 2026  03:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/22/china-shipped-a-record-68-gw-of-solar-in-march-heres-why-it-matters/" target="_blank">China shipped a record 68 GW of solar in March – here’s why it matters</a></div>
+  <div class="article-summary">China’s solar exports surged to unprecedented levels in March as a global energy shock is pushing countries to rapidly pivot away from fossil fuels.
+
+New data analyzed by Ember shows China exported 68 gigawatts (GW) of solar in March alone – double F…</div>
+  <div class="article-meta">Apr 23, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/22/tesla-will-build-factories-just-to-retrofit-hw3-cars-it-said-could-do-fsd-but-cant/" target="_blank">Tesla will build factories just to retrofit millions of HW3 cars it said could do FSD</a></div>
+  <div class="article-summary">There are millions of Tesla vehicles on the road today which were sold on the promise of full autonomy, but without hardware capable of doing so.Tesla CEO Elon Musk just proposed the company could build “microfactories” in urban areas in order to upg…</div>
+  <div class="article-meta">Apr 23, 2026  02:06 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-22/china-battery-maker-gotion-says-war-shifts-focus-to-clean-energy" target="_blank">China Battery-Maker Gotion Says War Shifts Focus to Clean Energy</a></div>
+  <div class="article-summary">Gotion High-Tech Co. Ltd., a major Chinese battery manufacturer, is seeing a renewed global focus on the green transition as fossil fuel disruptions due to the Iran war drive demand for clean-energy technology.…</div>
+  <div class="article-meta">Apr 23, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-22/race-for-next-un-chief-heats-up-with-first-round-of-interviews" target="_blank">Race for Next UN Chief Heats Up With First Round of Interviews</a></div>
+  <div class="article-summary">The race to become the next leader of the United Nations moved into a higher gear with the four declared candidates facing hours of questions over two days. Top among them: can the UN be made effective again?…</div>
+  <div class="article-meta">Apr 23, 2026  00:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-22/how-microsoft-spooked-the-global-carbon-removal-market" target="_blank">How Microsoft Spooked the Global Carbon Removal Market</a></div>
+  <div class="article-summary">In the early days of April, a group of mid-level employees at Microsoft Corp. started making calls that would send tremors through the global market for carbon removals.…</div>
+  <div class="article-meta">Apr 22, 2026  17:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-22/what-s-happening-with-tesla-s-megapack-battery-business" target="_blank">What’s Happening With Tesla’s Battery Business</a></div>
+  <div class="article-summary">Plus, CATL’s sodium ion batteries will be rolling out on roads across China later this year.…</div>
+  <div class="article-meta">Apr 22, 2026  16:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-22/turkey-says-cop31-climate-summit-to-focus-on-clean-energy-shift" target="_blank">Turkey Says COP31 Climate Summit to Focus on Clean Energy Shift</a></div>
+  <div class="article-summary">Turkey will use its role as host of this year’s COP31 climate summit to boost clean energy adoption, according to the event’s incoming president, with the Iran war showing how important it is to diversify away from fossil fuels.…</div>
+  <div class="article-meta">Apr 22, 2026  14:31 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/apr/23/catastrophic-climate-event-scientists-atlantic-system-collapse-billionaire-existential-crisis" target="_blank">A catastrophic climate event is upon us. Here is why you’ve heard so little about it | George Monbiot</a></div>
+  <div class="article-summary">Scientists now estimate a critical Atlantic Ocean current system, the Atlantic Meridional Overturning Circulation (AMOC), faces a significantly higher risk of collapse than previously understood. This potential collapse, largely ignored by media controlled by wealthy interests focused on short-term gain, could trigger catastrophic climate shifts impacting global weather patterns and ecosystems.</div>
+  <div class="article-meta">Apr 23, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/23/chinas-solar-exports-reach-gigantic-record-in-march-as-energy-crisis-bites/" target="_blank">China’s solar exports reach “gigantic” record in March as energy crisis bites</a></div>
+  <div class="article-summary">A planned increase in the cost of Chinese solar exports and the shock to oil and gas supplies from the Iran war drove record solar sales to Asia and AfricaThe postChina’s solar exports reach “gigantic” record in March as energy crisis bitesappeared f…</div>
+  <div class="article-meta">Apr 23, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22042026/major-livestock-companies-failed-climate-promises/" target="_blank">Major Livestock and Animal Agriculture Companies Are Making Climate Promises They Aren’t Keeping</a></div>
+  <div class="article-summary">Five years ago, the world’s largest meat company took out a full-page ad in The New York Times, making a bold claim: “Bacon, chicken wings, and steak with net zero emissions. It’s possible.” But according to new research, that assertion by JBS and hu…</div>
+  <div class="article-meta">Apr 22, 2026  21:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/22/to-phase-out-fossil-fuels-developing-countries-need-exit-route-from-debt-trap/" target="_blank">To phase out fossil fuels, developing countries need exit route from “debt trap”</a></div>
+  <div class="article-summary">New research from the Fossil Fuel Treaty Initiative shows that the Global South's debt crisis is slowing down the pace of the energy transition and supporting fossil fuelsThe postTo phase out fossil fuels, developing countries need exit route from “d…</div>
+  <div class="article-meta">Apr 22, 2026  20:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/apr/22/anthony-fauci-acting-debut-oedipus-the-king" target="_blank">Actorly Fauci becomes blind prophet for Oedipus the King reading in DC</a></div>
+  <div class="article-summary">Jesse Eisenberg and Chuck Schumer also star – could 2,500-year-old play teach US something about the climate crisis?WhenAnthony Fauciput on a pair of sunglasses, the hall erupted in cheers and applause. “Ah, how terrible it is to know when, in the en…</div>
+  <div class="article-meta">Apr 22, 2026  18:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22042026/north-carolina-energy-efficiency-company-fined-by-ferc/" target="_blank">Feds Fine Durham-Based Energy Efficiency Company $722 Million</a></div>
+  <div class="article-summary">This story was published in partnership with The Assembly. The Federal Energy Regulatory Commission has fined Durham, N.C.-based American Efficient $722 million and ordered the company to repay more than $410 million in “unjust profits” for alleged f…</div>
+  <div class="article-meta">Apr 22, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, April 23, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
