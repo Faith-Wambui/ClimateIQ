@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, April 24, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">52</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 45 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-24/fail-on-climate-action-and-miss-out-on-promotion-china-warns-officials" target="_blank">Fail on Climate Action and Miss Out on Promotion, China Warns Officials</a></div>
+  <div class="article-summary">Beijing is now tying promotions for local officials directly to their progress on President Xi Jinping's ambitious green targets, signaling a significant shift in how climate action is prioritized. This move means that failure to meet emissions reduction goals and other climate commitments could now derail careers, underscoring the urgency of China's climate agenda and its global implications.</div>
+  <div class="article-meta">Apr 24, 2026  09:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/iran-war-eu-strategy-sets-out-44-actions-to-limit-fossil-fuel-price-shocks/" target="_blank">Iran war: EU strategy sets out 44 actions to limit ‘fossil-fuel price shocks’</a></div>
+  <div class="article-summary">The European Commission has launched a strategy to protect people in the EU from “fossil-fuel price shocks” and accelerate the expansion of “homegrown clean energy”.
+
+The strategy notes that the latest fossil-fuel crisis, triggered by the Iran war, h…</div>
+  <div class="article-meta">Apr 23, 2026  18:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/24/daikin-unveils-plumb-and-play-residential-heat-pump/" target="_blank">Daikin unveils ‘plumb-and-play’ residential heat pump</a></div>
+  <div class="article-summary">Daikin's new Altherma 3 H HT heat pump offers a "plumb-and-play" solution for homes, delivering high-temperature water even in extreme cold down to -28°C. This innovation is crucial for decarbonizing residential heating, as it directly replaces existing boilers without requiring extensive system upgrades, making the transition to cleaner energy more accessible and efficient.</div>
+  <div class="article-meta">Apr 24, 2026  09:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/24/inside-pv-manufacturing-midsummers-cigs-factory-in-italy/" target="_blank">Inside PV Manufacturing: Midsummer’s CIGS factory in Italy</a></div>
+  <div class="article-summary">Midsummer has launched a €50 million CIGS thin-film solar factory in Bari, Italy, capable of producing 50 MW annually with a vertically integrated, EU-sourced supply chain. This move bolsters European solar manufacturing independence and provides critical, flexible solar solutions for markets across the EU and US.</div>
+  <div class="article-meta">Apr 24, 2026  09:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/24/saatvik-green-energy-enters-transformer-manufacturing/" target="_blank">Saatvik Green Energy enters transformer manufacturing</a></div>
+  <div class="article-summary">Saatvik Green Energy has acquired an 80% stake in Jaipur-based transformer manufacturer Melcon, integrating critical power transmission components into its renewable energy value chain. This strategic move by the Indian solar firm is crucial for enabling India's ambitious 500 GW non-fossil fuel capacity target by 2030, ensuring that generated clean energy can reliably reach consumers.</div>
+  <div class="article-meta">Apr 24, 2026  08:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/24/bangladesh-launches-tenders-for-77-6-mw-of-solar/" target="_blank">Bangladesh launches tenders for 77.6 MW of solar</a></div>
+  <div class="article-summary">Bangladesh is accelerating its clean energy transition by tendering for 77.6 MW of new solar capacity across Chittagong, Rangamati, and Dinajpur. This move is crucial for the nation as it aims to significantly increase its renewable energy share, reducing reliance on volatile fossil fuel prices and contributing to global climate goals.</div>
+  <div class="article-meta">Apr 24, 2026  08:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/23/porsche-cayenne-coupe-electric-is-an-off-road-capable-2-4s-0-60mph-beauty-and-beast/" target="_blank">Porsche Cayenne Coupe Electric is an off-road capable, 2.4s 0-60mph beauty and beast</a></div>
+  <div class="article-summary">Porsche is launching a new all-electric Cayenne Coupe boasting an astonishing 1139 hp and a 2.4-second 0-60 mph time. This high-performance electric SUV signals a significant shift in luxury vehicle electrification, demonstrating that powerful, desirable vehicles can also be zero-emission.</div>
+  <div class="article-meta">Apr 24, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-24/mufg-hires-asia-project-finance-head-from-clifford-capital" target="_blank">MUFG Hires Asia Project Finance Head From Clifford Capital</a></div>
+  <div class="article-summary">MUFG Bank has poached Saumitra Shrivastava from Clifford Capital to lead its Asia project finance operations in Singapore. This strategic hire signals a renewed focus on financing large-scale infrastructure projects across the region, which are critical for the transition to a low-carbon economy.</div>
+  <div class="article-meta">Apr 24, 2026  07:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-24/wheat-at-highest-since-2024-as-drought-stokes-food-inflation" target="_blank">Wheat at Highest Since 2024 as Drought Stokes Food Inflation</a></div>
+  <div class="article-summary">The US’s major variety of wheat jumped to the highest in almost two years on deepening concerns over crop conditions, with about 70% of the production area now under drought.…</div>
+  <div class="article-meta">Apr 24, 2026  06:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-23/world-bank-teams-up-with-amazon-for-a-120-million-bacon-tree-bond" target="_blank">World Bank Teams Up With Amazon for a $120 Million Bacon Tree Bond</a></div>
+  <div class="article-summary">The World Bank has teamed up with Amazon.com Inc. on a bond whose proceeds will go toward rehabilitating ecosystems in South Africa’s Eastern Cape Province.…</div>
+  <div class="article-meta">Apr 23, 2026  23:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-23/california-communities-are-pushing-back-against-big-batteries" target="_blank">Energy Storage Is the Latest ‘Not in My Backyard’ Battleground</a></div>
+  <div class="article-summary">The pushback threatens to slow a major battery boom in the US.…</div>
+  <div class="article-meta">Apr 23, 2026  18:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-23/apple-amazon-push-back-on-stricter-emissions-reporting-rules" target="_blank">Apple, Amazon Push Back on Stricter Emissions Reporting Rules</a></div>
+  <div class="article-summary">The tech giants and dozens more companies are resisting changes proposed by the Greenhouse Gas Protocol, a global standard-setter.…</div>
+  <div class="article-meta">Apr 23, 2026  17:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/23/down-to-earth-super-el-nino-extreme-weather" target="_blank">What is a ‘super El Niño’ and what might it mean for the global climate?</a></div>
+  <div class="article-summary">Experts are signaling the potential for a "super El Niño" to emerge, a powerful Pacific Ocean phenomenon that could significantly amplify extreme weather events globally. This development carries serious implications, as it may push global temperatures past the critical 1.5°C warming threshold, shattering previous heat records.</div>
+  <div class="article-meta">Apr 24, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global/video/2026/apr/24/we-are-in-a-fossil-fuel-crisis-is-labor-meeting-the-moment-full-story-newsroom-edition" target="_blank">We are in a ‘fossil-fuel crisis’. Is Labor meeting the moment? – Full Story newsroom edition</a></div>
+  <div class="article-summary">It’s been almost two months since the US and Israel launched a war on Iran, unleashing violence across the region and chaos in the global economy. But one of the strange and definitely unintended consequences of this war has been a renewed focus on g…</div>
+  <div class="article-meta">Apr 24, 2026  04:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23042026/endangered-species-act-amendments-faces-setback/" target="_blank">A Bill to Gut Endangered Species Protections Faced a Major Setback This Week</a></div>
+  <div class="article-summary">The Trump administration and congressional Republicans have spent the last year trying to defang the Endangered Species Act, the country’s bedrock conservation law. But one of the most aggressive and far-reaching attempts just faced a major setback—a…</div>
+  <div class="article-meta">Apr 24, 2026  01:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23042026/corpus-christi-water-emergency-explainer/" target="_blank">Corpus Christi Plans to Declare a ‘Water Emergency.’ What Does That Mean?</a></div>
+  <div class="article-summary">This story was published in partnership with the Texas Newsroom, the state’s network of public radio stations.  No modern American city has ever run out of water. But chances are rising that Corpus Christi, Texas, could be the first. Absent a biblica…</div>
+  <div class="article-meta">Apr 23, 2026  20:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23042026/west-texas-permian-basin-oilfield-leak/" target="_blank">An Oilfield Leak Springs Under a Permian Basin Baptist Church</a></div>
+  <div class="article-summary">Salty water is gurgling up from underground in the middle of the small Permian Basin town of Grandfalls, Texas. The liquid began pooling in the parking lot of the First Baptist Church on Tuesday. State inspectors from the Railroad Commission arrived…</div>
+  <div class="article-meta">Apr 23, 2026  20:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23042026/inside-clean-energy-ohio-permit-rejections/" target="_blank">Ohio Is Where Wind and Solar Projects Go to Die, and Other Findings From New Research on State Permitting</a></div>
+  <div class="article-summary">Ohio resembles a torture chamber for renewable energy developers, according to new research that examines how regulators in 19 states handle wind and solar project applications. The Buckeye State had the most projects rejected by state regulators, wi…</div>
+  <div class="article-meta">Apr 23, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, April 24, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
