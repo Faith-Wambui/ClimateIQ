@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, April 26, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">16</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😊</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:62%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Cautiously Optimistic — 11 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/25/new-bill-in-california-senate-could-turn-your-home-battery-into-a-moneymaker/" target="_blank">New bill in California senate could turn your home battery into a moneymaker</a></div>
+  <div class="article-summary">California's SB 913 proposes to unlock the financial value of homeowner batteries, allowing them to be compensated for contributing to grid stability during peak demand. This bill could incentivize the use of the 100 MW of monthly residential battery capacity being added in California, offering a cheaper and cleaner alternative to traditional power plants and directly addressing the state's energy affordability crisis.</div>
+  <div class="article-meta">Apr 26, 2026  04:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/25/do-over-republicans-cry-uncle-on-federal-tax-incentives/" target="_blank">Do-Over! Republicans Cry Uncle On Federal Tax Incentives</a></div>
+  <div class="article-summary">Four House Republicans are now backing extensions for crucial clean energy and efficiency tax incentives, admitting the Trump administration's "One Big Beautiful Bill Act" failed to deliver. This pivot signals a potential bipartisan path forward for climate policy, recognizing the economic benefits of green investments.</div>
+  <div class="article-meta">Apr 25, 2026  21:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/25/this-fleet-is-going-electric-and-sharing-their-real-world-results-and-savings-online/" target="_blank">This fleet is going electric, and sharing their real-world results (and savings) online</a></div>
+  <div class="article-summary">A small construction fleet's real-world data reveals a 2022 Ford E-Transit delivered over 38 miles per dollar, costing just $698 for over 27,000 miles, a stark contrast to their gas vans. This demonstrates significant operational savings and a clear pathway to reducing emissions for commercial vehicle operators.</div>
+  <div class="article-meta">Apr 26, 2026  05:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/04/25/they-took-r-jobs-new-dronedog-robot-security-guard-gets-to-work/" target="_blank">THEY TOOK R JOBS: new DroneDog robot security guard gets to work</a></div>
+  <div class="article-summary">Boston Dynamics' new quadruped robot, DroneDog, is now actively deployed to combat theft and vandalism on job sites. This marks a significant step in practical robotics, demonstrating their immediate utility in protecting valuable assets and infrastructure.</div>
+  <div class="article-meta">Apr 26, 2026  01:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/25/electric-garbage-trucks-are-the-heavy-duty-ev-story-hiding-in-plain-sight/" target="_blank">Electric Garbage Trucks Are The Heavy-Duty EV Story Hiding In Plain Sight</a></div>
+  <div class="article-summary">Electric garbage trucks are quietly revolutionizing waste management, with cities like New York and Los Angeles deploying hundreds of these zero-emission vehicles. This shift is crucial for climate action, as heavy-duty trucks like garbage haulers are significant contributors to urban air pollution and greenhouse gas emissions.</div>
+  <div class="article-meta">Apr 25, 2026  21:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/25/was-carlos-ghosn-truly-an-ev-visionary/" target="_blank">Was Carlos Ghosn Truly An EV Visionary?</a></div>
+  <div class="article-summary">I am writing this story because today, April 25, marks seven years since Ghosn walked out of a Japanese jail for a second time after posting bail of ¥500 million (about $4.5 million at the time). He had been arrested in 2018 and charged with multiple…</div>
+  <div class="article-meta">Apr 25, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-25/brazil-s-amazon-is-a-frontier-for-new-battery-deployments" target="_blank">The Brazilian Amazon Is the Next Battery Frontier</a></div>
+  <div class="article-summary">Brazil is poised to become a global leader in renewable energy, with the Amazon rainforest's vast untapped solar potential set to power its transition away from fossil fuels. This strategic shift, driven by the country's commitment to decarbonization, signals a critical opportunity to simultaneously protect the Amazon's biodiversity and meet ambitious climate goals.</div>
+  <div class="article-meta">Apr 25, 2026  18:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-04-25/brazil-s-amazon-villages-welcome-24-7-power-from-solar-panels-batteries" target="_blank">Solar Panels and Batteries Are Changing Life in Brazil’s Amazon</a></div>
+  <div class="article-summary">Clean energy projects are taking off across the rainforest, reducing the need to burn diesel and bringing 24/7 power for refrigeration, schooling and tourism.…</div>
+  <div class="article-meta">Apr 25, 2026  16:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-25/us-wheat-crops-wither-herds-thin-as-spring-drought-deepens" target="_blank">US Wheat Crops Wither, Herds Thin as Spring Drought Deepens</a></div>
+  <div class="article-summary">Farmers across the Great Plains are confronting an intense drought that threatens winter wheat harvests and is pushing cattle producers toward costly feed purchases, prompting some to abandon plans to expand their herds.The dryness is expected to per…</div>
+  <div class="article-meta">Apr 25, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/25/should-we-dam-the-bering-strait-to-keep-the-amoc-from-collapsing/" target="_blank">Should We Dam The Bering Strait To Keep The AMOC From Collapsing?</a></div>
+  <div class="article-summary">Dutch scientists propose a massive 55-mile dam across the Bering Strait to prevent the collapse of the Atlantic Meridional Overturning Circulation (AMOC). This ambitious engineering feat could potentially safeguard Europe's climate and prevent significant sea-level rise along the U.S. East Coast, though its feasibility and unintended consequences remain a major question.</div>
+  <div class="article-meta">Apr 25, 2026  21:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/25/drought-could-be-making-antibiotic-resistance-worse-scientists-say/" target="_blank">Drought Could Be Making Antibiotic Resistance Worse, Scientists Say</a></div>
+  <div class="article-summary">Climate change-driven droughts are intensifying antibiotic resistance by concentrating antibiotic-resistant bacteria and genes in drying soil. This phenomenon, detailed in *Nature Microbiology*, poses a significant threat to global public health by making infections harder to treat.</div>
+  <div class="article-meta">Apr 25, 2026  21:24 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/apr/26/indigenous-groups-australia-alaska-track-short-tailed-shearwater-bird" target="_blank">‘The birds are a global citizen’: Indigenous groups in Australia and Alaska team up to track a feathered adventurer’s epic journey</a></div>
+  <div class="article-summary">Indigenous communities in Australia and Alaska are collaborating to track the epic migration of the short-tailed shearwater, a species once so abundant it darkened the skies. This partnership highlights the critical role Indigenous knowledge plays in understanding and protecting migratory species vital to global ecosystems.</div>
+  <div class="article-meta">Apr 25, 2026  23:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/25/new-panel-of-top-climate-scientists-calls-for-fossil-fuel-transition-roadmaps/" target="_blank">New panel of climate scientists calls for fossil fuel transition roadmaps</a></div>
+  <div class="article-summary">The Science Panel for the Global Energy Transition, launched in Santa Marta, will provide evidence and insights to help governments plot a path away from oil, gas and coalThe postNew panel of climate scientists calls for fossil fuel transition roadma…</div>
+  <div class="article-meta">Apr 25, 2026  14:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/25/criminalisation-of-climate-protesters-in-uk-is-counterproductive-research-finds" target="_blank">Criminalisation of climate protesters in UK is counterproductive, research finds</a></div>
+  <div class="article-summary">Study of 1,300 campaigners finds arrests, fines and jail terms increase determination of activists to take direct actionThe criminalisation of direct action climate protests in the UK is counterproductive and increases the determination of activists…</div>
+  <div class="article-meta">Apr 25, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25042026/el-nino-earth-warming/" target="_blank">The Next El Niño Could Lock Earth Into a Hotter Climate</a></div>
+  <div class="article-summary">The Pacific Ocean is a giant climate cauldron, with a powerful heat engine that affects storms, fisheries and rainfall patterns half a world away, and scientists are watching closely to see if it’s about to boil over.  Their projections suggest the t…</div>
+  <div class="article-meta">Apr 25, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25042026/ev-lithium-mining-problems/" target="_blank">How to Think About the Extractive Problem of Lithium Mining</a></div>
+  <div class="article-summary">From our collaborating partner Living on Earth, public radio’s environmental news magazine, an interview by Paloma Beltran with Thea Riofrancos, the author of “Extraction: The Frontiers of Green Capitalism.”  Electric vehicle sales are skyrocketing.…</div>
+  <div class="article-meta">Apr 25, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, April 26, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
