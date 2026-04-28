@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, April 28, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/27/rally-in-charlotte-against-duke-rate-hikes-to-focus-on-affordability-crisis-wednesday/" target="_blank">Rally in Charlotte Against Duke Rate Hikes to Focus on Affordability Crisis — WEDNESDAY</a></div>
+  <div class="article-summary">Charlotte, NC — On Wednesday, April 29, 2026 at 5:30 PM, dozens of concerned residents are expected to join advocates in the courtyard of Mecklenburg County Courthouse for a rally in response to Duke Energy’s request to increase residential customers…</div>
+  <div class="article-meta">Apr 28, 2026  02:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27042026/trump-environmental-cuts-marginalize-florida-vulnerable-communities/" target="_blank">Trump’s Environmental Cuts Further Marginalize Vulnerable Communities</a></div>
+  <div class="article-summary">Since returning to the White House for his second term, President Donald Trump and his administration have drastically cut environmental programs and programs designed to serve disadvantaged communities and communities of color. These are groups with…</div>
+  <div class="article-meta">Apr 27, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/28/longi-announces-world-record-efficiency-of-28-13-for-silicon-solar-cell/" target="_blank">Longi announces world record efficiency of 28.13% for silicon solar cell</a></div>
+  <div class="article-summary">Longi has achieved a new world record for silicon solar cell efficiency at 28.13%, surpassing Trina Solar's recent benchmark. This advancement in solar technology is critical for accelerating the transition to renewable energy by making solar power more potent and cost-effective.</div>
+  <div class="article-meta">Apr 28, 2026  09:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/28/catl-secures-worlds-largest-sodium-ion-battery-order-with-hyperstrong/" target="_blank">CATL secures world’s largest sodium-ion battery order with Hyperstrong</a></div>
+  <div class="article-summary">CATL has secured the world's largest sodium-ion battery order, a 60 GWh deal with HyperStrong, signaling a major step towards commercializing this potentially cheaper and more sustainable energy storage technology. This breakthrough is critical for the climate as it could accelerate the deployment of grid-scale battery storage needed to integrate renewable energy sources, reducing reliance on fossil fuels.</div>
+  <div class="article-meta">Apr 28, 2026  08:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/28/dyness-battery-container-stolen-from-bm-energy-logistics-partner-units-to-be-remotely-blocked/" target="_blank">Dyness battery container stolen from BM Energy logistics partner, units to be remotely blocked</a></div>
+  <div class="article-summary">A container of Dyness batteries was stolen from BM Energy's logistics partner, but the company will remotely block the stolen units, rendering them unusable. This incident highlights the vulnerability of energy storage supply chains, underscoring the importance of securing these critical components for the renewable energy transition.</div>
+  <div class="article-meta">Apr 28, 2026  08:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/28/u-s-startup-launches-pv-driven-autonomous-pool-skimmer/" target="_blank">U.S. startup launches PV-driven autonomous pool skimmer</a></div>
+  <div class="article-summary">U.S. startup Beatbot has launched the iSkim Ultra, a solar-powered autonomous pool skimmer that reduces filtration load by capturing debris before it sinks. This innovation matters for the climate by decreasing the energy demand of pool filtration systems, which can be significant, and by utilizing renewable solar energy for its operation.</div>
+  <div class="article-meta">Apr 28, 2026  08:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/04/27/3rd-us-state-allows-plug-play-solar-power/" target="_blank">3rd US State Allows Plug & Play Solar Power</a></div>
+  <div class="article-summary">California and Oregon are now joined by a third state, allowing plug-and-play solar installations, a move that significantly lowers the barrier to entry for homeowners and will accelerate the adoption of clean energy. This policy shift is crucial for expanding renewable energy's reach, directly impacting the speed at which the U.S. can decarbonize its power sector.</div>
+  <div class="article-meta">Apr 28, 2026  06:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-28/china-weighing-a-second-green-sovereign-bond-sale-in-london" target="_blank">China Weighing a Second Green Sovereign Bond Sale in London</a></div>
+  <div class="article-summary">China is reportedly planning a second green sovereign bond issuance in London this year, aiming to tap international markets for climate finance. This move signifies China's commitment to funding its environmental initiatives and its growing role in global sustainable finance.</div>
+  <div class="article-meta">Apr 28, 2026  09:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-28/samsung-sdi-posts-smaller-than-expected-loss-sending-shares-up" target="_blank">Samsung SDI Posts Smaller-Than-Expected Loss; Sending Gain</a></div>
+  <div class="article-summary">South Korean battery maker Samsung SDI Co. reported a smaller-than-expected first-quarter loss, helping its shares extend a blistering rally, as demand for energy storage systems and electric cars in Europe helped cushion the impact of dwindling EV s…</div>
+  <div class="article-meta">Apr 28, 2026  04:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-28/catl-inks-first-major-deal-to-provide-sodium-ion-battery-storage" target="_blank">CATL Inks First Major Deal to Provide Sodium-Ion Battery Storage</a></div>
+  <div class="article-summary">Contemporary Amperex Technology Co. Ltd. said it signed a three-year deal to provide sodium-ion batteries to Beijing HyperStrong Technology Co., a domestic manufacturer of power equipment.
+
+CATL did not disclose the value of the agreement but said in…</div>
+  <div class="article-meta">Apr 28, 2026  04:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-28/india-s-heat-wave-creates-new-inflation-risks-after-oil-surge" target="_blank">India Heat Wave Creates New Inflation Risks After Oil Surge</a></div>
+  <div class="article-summary">Record-breaking heat in India, reaching 47°C, is driving up power demand and threatening crop yields due to an anticipated below-normal monsoon. This dual climate shock exacerbates existing inflation pressures, particularly after the recent surge in oil prices, creating significant economic challenges for policymakers.</div>
+  <div class="article-meta">Apr 28, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-28/southeast-asia-office-workers-swelter-in-energy-saving-drive-heat-wave" target="_blank">Southeast Asia Office Workers Swelter in Energy-Saving Drive, Heat Wave</a></div>
+  <div class="article-summary">A heat wave sweeping across Southeast Asia is making offices even warmer, as workers continue to adjust to energy-saving measures put in place by governments due to the war in Iran.
+
+Many countries have imposed temperature controls at government work…</div>
+  <div class="article-meta">Apr 28, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27042026/europe-bottom-trawlers-ocean-emissions/" target="_blank">Europe’s Trawlers Extract a Huge ‘Cost to Society’ in Bycatch and Carbon Dioxide</a></div>
+  <div class="article-summary">By the time it was dumped on deck, the heaved contents no longer resembled ocean life.  Smashed, and now spilled, a soup of dead crabs and conger eels slid across the salt-covered ship floor. Bruised, banged and beaten by boulders, half a ton of mud…</div>
+  <div class="article-meta">Apr 28, 2026  03:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27042026/duke-energy-data-center-tax-breaks/" target="_blank">Duke Energy Received Tax Breaks on Its Three N.C. Data Centers</a></div>
+  <div class="article-summary">Duke Energy has received tax breaks for three data centers that it owns, state Commerce Department records show, while the utility is proposing an 18 percent rate hike on its North Carolina customers and reported $4.9 billion in gross profits last ye…</div>
+  <div class="article-meta">Apr 28, 2026  00:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27042026/roundup-supreme-court-glyphosate-cancer-case/" target="_blank">Thousands of People Say Roundup Caused Their Cancer. The Supreme Court May Quash Their Lawsuits.</a></div>
+  <div class="article-summary">John Durnell just wanted to make things around his St. Louis neighborhood look a little nicer. So, on occasion, he’d spray a bit of Roundup in the obvious places—along weedy sidewalks and in public spaces he thought needed a little extra attention.…</div>
+  <div class="article-meta">Apr 27, 2026  23:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/apr/27/georgia-wildfires-rain" target="_blank">Heavy rain not ‘nearly enough’ to tame two wildfires in drought-stricken Georgia</a></div>
+  <div class="article-summary">Pineland Road fire and Highway 82 fire have destroyed over 100 homes, and are part of large number of wildfires this spring in the US southSign up for the Breaking News US email to get newsletter alerts in your inboxHeavy rain slowed the progress of…</div>
+  <div class="article-meta">Apr 27, 2026  20:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/apr/27/clean-energy-switch-must-not-be-excuse-to-plunder-indigenous-lands-say-leaders" target="_blank">Clean energy switch must not be excuse to plunder Indigenous lands, say leaders</a></div>
+  <div class="article-summary">Global conference told benefits should not come at expense of well-protected environmentsThe energy transition must not be used as a fresh excuse to plunder Indigenous territories, delegates at a groundbreaking global conference on phasing out fossil…</div>
+  <div class="article-meta">Apr 27, 2026  14:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, April 28, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
