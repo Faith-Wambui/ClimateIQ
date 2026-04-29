@@ -1,0 +1,198 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Wednesday, April 29, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (2 articles)
+============================================================
+
+▸ India launches 500 MW renewables tender requiring dispatch via power exchanges
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/29/india-launches-500-mw-renewables-tender-requiring-dispatch-via-power-exchanges/
+  Date   : Apr 29, 2026  08:49 EAT
+  Summary: India's Solar Energy Corporation has launched a 500 MW renewable energy tender, requiring developers to supply power through exchanges during peak evening hours. This move is crucial for integrating more renewables into the grid by ensuring reliable, dispatchable clean energy when demand is highest.
+
+
+▸ World ‘will not see significant return to coal’ in 2026 – despite Iran crisis
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/world-will-not-see-significant-return-to-coal-in-2026-despite-iran-crisis/
+  Date   : Apr 28, 2026  16:54 EAT
+  Summary: A much-discussed “return to coal” by some countries in the wake of the Iran war is likely to be far more limited than thought, amounting to a global rise of no more than 1.8% in coal power output this year.
+
+The new analysis by thinktank Ember, share…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Indium oxide promises to increase CIS solar cell efficiency to unprecedented levels
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/29/indium-oxide-promises-to-increase-cis-solar-cell-efficiency-to-unprecedented-levels/
+  Date   : Apr 29, 2026  10:00 EAT
+  Summary: Indian researchers have engineered a cadmium-free CIS solar cell using indium oxide, achieving a simulated efficiency of nearly 30% – a significant leap for this technology. This breakthrough is crucial for climate action as it promises more powerful and scalable solar energy solutions, reducing reliance on fossil fuels.
+
+
+▸ Installed BESS capacity in Spain grew by 589% since 2025 blackout
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/29/installed-bess-capacity-in-spain-grew-by-589-since-2025-blackout/
+  Date   : Apr 29, 2026  08:53 EAT
+  Summary: Spain's electricity grid experienced a massive 589% surge in installed battery storage capacity in the year following the April 2025 blackout, growing from 28 MW to 193 MW. This rapid expansion is a direct response to the vulnerabilities exposed by the blackout, which highlighted the critical need for grid stability and rapid response capabilities as renewable energy sources increasingly dominate the system.
+
+
+▸ Sungrow proposes multi-microgrid clusters for mining above 100 MW
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/29/sungrow-proposes-multi-microgrid-clusters-for-mining-above-100-mw/
+  Date   : Apr 29, 2026  08:45 EAT
+  Summary: Sungrow is rolling out integrated microgrid solutions for mining operations, including multi-microgrid clusters exceeding 100 MW, to ensure energy security and facilitate decarbonization. This move is critical as the mining sector increasingly demands reliable, clean power, pushing for advanced systems that integrate solar, wind, storage, and smart management to maintain continuous operations and enhance grid stability amidst rising renewable energy penetration.
+
+
+▸ The battery cost disconnect
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/29/the-battery-cost-disconnect/
+  Date   : Apr 29, 2026  08:40 EAT
+  Summary: Despite a recent surge in lithium prices, the cost of battery energy storage systems (BESS) has remained remarkably resilient, showing only a limited impact. This stability is crucial as it allows for continued, accelerated deployment of BESS, a vital technology for integrating renewable energy and decarbonizing the grid.
+
+
+▸ XPENG Releases World Model Technical Report, Powering VLA 2.0 Model R&D And Verification
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/28/xpeng-releases-world-model-technical-report-powering-vla-2-0-model-rd-and-verification/
+  Date   : Apr 29, 2026  06:59 EAT
+  Summary: Guangzhou — XPENG (NYSE: XPEV, HKEX: 9868), a leading China-based high-tech company, recently officially released its X-World Technical Report, providing a comprehensive breakdown of the model’s construction and deployment across data, architecture,…
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ Mirova Green Fund Exits Philippine Debt After Corruption Scandal
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-29/mirova-green-fund-exits-philippine-debt-after-corruption-scandal
+  Date   : Apr 29, 2026  05:30 EAT
+  Summary: Mirova SA’s flagship green bond fund exited its position in Philippine debt following a corruption scandal that raised concerns investors may have inadvertently financed flood-control projects now under investigation for graft.…
+
+
+▸ Chinese Wind Firm Ming Yang Doubles Down on Europe After UK Snub
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-29/chinese-wind-firm-ming-yang-doubles-down-on-europe-after-uk-snub
+  Date   : Apr 29, 2026  05:07 EAT
+  Summary: Ming Yang Smart Energy Group Ltd., a major Chinese maker of offshore wind turbines, aims to finalize a European site for a factory by June, after the UK rejected its plan to build a plant in Scotland.…
+
+
+▸ Unreported Coal Mine Methane Imperils Climate Action, Ember Says
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-28/unreported-coal-mine-methane-imperils-climate-action-ember-says
+  Date   : Apr 29, 2026  02:00 EAT
+  Summary: Nations that fail to report coal mine methane emissions could be missing out on cheap opportunities to slash releases of the potent greenhouse gas, according to a report from energy think tank Ember.…
+
+
+▸ Red-State AGs Call Out Credit-Rating Companies Over ESG
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-28/red-state-ags-call-out-credit-rating-companies-over-esg-policy
+  Date   : Apr 28, 2026  20:13 EAT
+  Summary: A group of state attorneys general wrote to the US Securities and Exchange Commission and major credit-rating firms, raising concerns about the use of environmental, social and governance factors in downgrade decisions.…
+
+
+▸ China Solar Giant Longi’s Shares Tumble on Widening Losses
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-28/china-solar-giant-longi-says-first-quarter-loss-widened
+  Date   : Apr 28, 2026  19:07 EAT
+  Summary: Shares of Longi Green Energy Technology Co. tumbled on Wednesday after the Chinese solar giant saw its net loss widen in the first quarter, despite stronger module pricing and exports.…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (5 articles)
+============================================================
+
+▸ Afghanistan: Flash Update #3: Flooding in Afghanistan (17 to 26 April 2026)
+  Source : ReliefWeb (Climate)
+  Link   : https://reliefweb.int/report/afghanistan/afghanistan-flash-update-3-flooding-afghanistan-17-26-april-2026
+  Date   : Apr 29, 2026  09:20 EAT
+  Summary: Afghanistan's recent floods, from April 17-26, have killed hundreds and devastated over 7,500 homes, vital infrastructure, and agricultural lands. This extreme weather event underscores the escalating climate vulnerability of regions like Afghanistan, where damaged infrastructure and concurrent shocks like conflict hinder essential services and humanitarian aid for millions.
+
+
+▸ Urban areas host 80% of England’s homes at high risk of flooding, study finds
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/apr/29/england-homes-high-risk-flooding-towns-cities-urban-environment-study
+  Date   : Apr 29, 2026  08:00 EAT
+  Summary: England's urban centers now house 839,000 homes at high risk of surface-water flooding, a threefold increase since 2018, with social housing residents bearing the brunt of potential financial fallout. This alarming concentration of flood risk in cities underscores the escalating impact of climate change on densely populated areas and highlights a critical vulnerability for a significant portion of the population.
+
+
+▸ World: Participatory Community-Managed Risk Mapping (PCRM): A Practical Guide to Turning Local Risk Knowledge into Funding Action (January 2026)
+  Source : ReliefWeb (Climate)
+  Link   : https://reliefweb.int/report/world/participatory-community-managed-risk-mapping-pcrm-practical-guide-turning-local-risk-knowledge-funding-action-january-2026
+  Date   : Apr 29, 2026  05:15 EAT
+  Summary: Country: WorldSource: International Journal for Disaster Risk and ManagementPlease refer to the attached file.By: Rustico “Rusty” Biñas, Rhinadel Cañete, Dustin L. JoinerAbout The GuidebookResearch FoundationThis guide is grounded in peer-reviewed re…
+
+
+▸ Cuba: Hurricane Rafael - DREF Final Report (MDRCU011)
+  Source : ReliefWeb (Climate)
+  Link   : https://reliefweb.int/report/cuba/cuba-hurricane-rafael-dref-final-report-mdrcu011
+  Date   : Apr 29, 2026  03:39 EAT
+  Summary: Country: CubaSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.Description of the EventDate of event06-11-2024What happened, where and when?Hurricane Rafael was a historic storm, tied with 1985'…
+
+
+▸ World: UNMAS Annual Report 2025
+  Source : ReliefWeb (Climate)
+  Link   : https://reliefweb.int/report/world/unmas-annual-report-2025
+  Date   : Apr 29, 2026  03:39 EAT
+  Summary: Country: WorldSource: UN Mine Action ServicePlease refer to the attached file.UNMAS operates at the front line of peace, security and development, literally clearing the path for civilians, peacekeepers and humanitarian workers in 19 countries and te…
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (1 articles)
+============================================================
+
+▸ Global Forest Loss Fell Sharply in 2025 After Hitting Record High
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-29/global-forest-loss-fell-sharply-in-2025-after-hitting-record-high
+  Date   : Apr 29, 2026  07:01 EAT
+  Summary: Tropical forest clearing plummeted 36% in 2025, a significant drop from record highs, offering a crucial reprieve for the planet's carbon sinks. This reduction is vital as these forests absorb vast amounts of CO2, and their continued protection is essential for mitigating climate change.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Trump Takes a ‘Wrecking Ball’ to Independent Scientific Advisory Board
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/28042026/trump-fires-national-science-board/
+  Date   : Apr 29, 2026  01:03 EAT
+  Summary: Since the start of his second term last year, President Donald Trump has sought to weaken the federal foundations underpinning American science, slashing or stalling research funding, firing or pushing out thousands of scientists, canceling grants fo…
+
+
+▸ Drought Turns Southeastern US Into ‘Tinderbox’ as Wildfires Rage
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/28042026/todays-climate-drought-wildfire-southeast-us/
+  Date   : Apr 29, 2026  00:45 EAT
+  Summary: Drought and fire are a dangerous duo. The Southeastern United States is witnessing this firsthand as several major blazes burn tens of thousands of acres across the parched region, destroying homes and prompting evacuations in some areas. Florida and…
+
+
+▸ Singing activists disrupt NatWest meeting over ‘climate backtracking’
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/business/2026/apr/28/activists-natwest-meeting-climate-backtracking
+  Date   : Apr 28, 2026  18:22 EAT
+  Summary: AGM briefly adjourned after protesters wearing T-shirts labelled ‘No more big oil’ burst into songThe chair of NatWest was forced to defend the bank against accusations of “climate backtracking” at a chaotic annual shareholder meeting, which was temp…
+
+
+▸ Trump’s attempt to crush clean energy progress not going to plan, experts say
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/apr/28/trump-clean-energy-progress
+  Date   : Apr 28, 2026  15:30 EAT
+  Summary: US generated more power from renewables including solar and wind than gas last month in a firstDonald Trumphas wielded the full might of his administration to crush the progress ofclean energy, which he has called a “scam” and “stupid”. But there are…
+
+
+▸ Santa Marta: Ministers grapple with practicalities of fossil fuel phase-out
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/04/28/santa-marta-ministers-grapple-with-practicalities-of-fossil-fuel-phase-out/
+  Date   : Apr 28, 2026  15:07 EAT
+  Summary: Around 60 governments that want to make progress on transitioning away from coal, oil and gas are meeting in Colombia to work out how they can do it an equitable wayThe postSanta Marta: Ministers grapple with practicalities of fossil fuel phase-outap…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 57  |  Sources: 9  |  Topics: 6
