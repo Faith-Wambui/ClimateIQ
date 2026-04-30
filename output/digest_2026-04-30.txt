@@ -1,0 +1,152 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Thursday, April 30, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ Traditional models still ‘outperform AI’ for extreme weather forecasts
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/traditional-models-still-outperform-ai-for-extreme-weather-forecasts/
+  Date   : Apr 29, 2026  21:00 EAT
+  Summary: Computer models that use artificial intelligence (AI) cannot forecast record-breaking weather as well as traditional climate models, according to a new study.
+
+It is well established that AI climate models have surpassed traditional, physics-based cl…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Renewables growth cut Spain’s electricity bills by 24.2% over the past two years
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/30/renewables-growth-cut-spains-electricity-bills-by-24-2-over-the-past-two-years/
+  Date   : Apr 30, 2026  10:07 EAT
+  Summary: Spain's electricity bills dropped 24.2% between 2023 and 2025, thanks to a surge in renewable energy displacing expensive gas power. This shift significantly reduces the country's exposure to volatile global energy markets, demonstrating a clear economic benefit of the energy transition.
+
+
+▸ New irrigation tech helps reduce water use in agrivoltaics
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/30/new-irrigation-tech-helps-reduce-water-use-in-agrivoltaics/
+  Date   : Apr 30, 2026  09:51 EAT
+  Summary: Spanish researchers have successfully grown tomatoes using a novel combination of regulated deficit irrigation and agrivoltaics in Madrid and Seville, slashing water use by up to 75% while maintaining crop yields. This breakthrough demonstrates a powerful synergy between renewable energy generation and sustainable agriculture, crucial for bolstering food security and mitigating climate change impacts in water-scarce regions.
+
+
+▸ Chile reaches 4.6 GW of energy storage under construction
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/30/chile-reaches-4-6-gw-of-energy-storage-under-construction/
+  Date   : Apr 30, 2026  09:20 EAT
+  Summary: Chile has surged past its 2030 energy storage target, with 4.6 GW of battery storage now under construction, significantly boosting its renewable energy capacity. This rapid build-out, driven by a $4.1 billion investment in storage projects, positions Chile to meet its 2050 goals years ahead of schedule, demonstrating decisive action to integrate intermittent solar and wind power and accelerate its clean energy transition.
+
+
+▸ Solar break quarterly generation records in Australia in Q1
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/30/solar-break-quarterly-generation-records-in-australia-in-q1/
+  Date   : Apr 30, 2026  09:16 EAT
+  Summary: Australia's grid-scale solar generation hit an all-time quarterly high of 2,706 MW in Q1 2026, with renewables now supplying a record 46.5% of the nation's electricity. This surge, coupled with a significant increase in household battery storage, demonstrates a rapid shift away from thermal generation, directly accelerating Australia's clean energy transition.
+
+
+▸ Enphase unveils distributed solid-state transformer for AI data centers
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/04/30/enphase-unveils-distributed-solid-state-transformer-for-ai-data-centers/
+  Date   : Apr 30, 2026  09:12 EAT
+  Summary: Enphase has unveiled a 1.25 MW solid-state transformer designed to deliver 800V DC power directly to AI data centers, a significant advancement for powering the immense energy demands of artificial intelligence. This innovative, modular system, built on Enphase's distributed architecture, promises higher efficiency and reliability, crucial for supporting the rapidly growing, power-intensive AI sector and its associated climate impact.
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ The Great Climate Bait and Switch – the West Wants Africa’s Minerals, not its survival
+  Source : African Climate Wire
+  Link   : https://africanclimatewire.org/2026/04/the-great-climate-bait-and-switch-the-west-wants-africas-minerals-not-its-survival/
+  Date   : Apr 30, 2026  10:11 EAT
+  Summary: Western powers, particularly at the 2026 IMF and World Bank Spring Meetings, are prioritizing access to Africa's critical minerals over crucial climate adaptation finance. This shift signals a concerning trade-off where the West secures resources for its green transition while potentially leaving African nations more vulnerable to climate impacts.
+
+
+▸ EDP Bets Big on Australia in $1 Billion Asia Renewables Push
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-29/edp-bets-big-on-australia-in-1-billion-renewables-push-in-asia
+  Date   : Apr 30, 2026  00:00 EAT
+  Summary: EDP SA’s renewables unit will invest about $1 billion in green energy projects across Asia-Pacific through 2028, with a focus on developing its presence in Australia.…
+
+
+▸ Dutch Climate Minister Says Talks to Quit Fossil Fuels Have Momentum
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-29/dutch-climate-minister-says-talks-to-quit-fossil-fuels-have-momentum
+  Date   : Apr 29, 2026  23:30 EAT
+  Summary: Countries that move away from oil and gas will be “shielding their economies against the kinds of price shocks that we’re seeing currently,” said Stientje van Veldhoven.…
+
+
+▸ Atome Sees War Driving Shifts That Boost Low-Carbon Fertilizer
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-29/atome-sees-war-driving-shifts-that-boost-low-carbon-fertilizer
+  Date   : Apr 29, 2026  20:04 EAT
+  Summary: The low-carbon fertilizer industry is getting a boost as buyers shift to long-term contracts amid rising geopolitical risks, according to the top executive at Atome PLC.…
+
+
+▸ How Global Deforestation Declined 36% in 2025
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-04-29/how-global-deforestation-declined-36-in-2025
+  Date   : Apr 29, 2026  18:40 EAT
+  Summary: The world still lost an area of rainforest roughly the size of Denmark…
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (1 articles)
+============================================================
+
+▸ Could the warming North Sea attract great white sharks?
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/apr/30/could-the-warming-north-sea-attract-great-white-sharks
+  Date   : Apr 30, 2026  08:00 EAT
+  Summary: Record-breaking North Sea temperatures, hitting an average of 11.6°C last year, are creating conditions that could attract large predators like great white sharks back to UK waters, according to new research. This shift, driven by warming oceans, signals a significant ecological change with the potential to reintroduce apex predators not seen in the region for millions of years.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ What fossil fuels really cost us in a world at war
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/04/30/what-fossil-fuels-really-cost-us-in-a-world-at-war/
+  Date   : Apr 30, 2026  02:01 EAT
+  Summary: Governments are under pressure to respond to rising fuel and food costs and deepening energy poverty. It's time for a power shiftThe postWhat fossil fuels really cost us in a world at warappeared first onClimate Home News.…
+
+
+▸ Six nations at Santa Marta could shape fossil fuel futures
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/04/29/six-nations-at-santa-marta-could-shape-fossil-fuel-futures/
+  Date   : Apr 29, 2026  20:18 EAT
+  Summary: A small but critical handful of countries attending the conference on transitioning away from fossil fuels remain deeply committed to expanding their outputThe postSix nations at Santa Marta could shape fossil fuel futuresappeared first onClimate Hom…
+
+
+▸ Tribe and Environmentalists to Sue Feds Over Arizona Mine’s  Impacts to Threatened Owls
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/29042026/arizona-mine-impacts-threatened-owls/
+  Date   : Apr 29, 2026  19:18 EAT
+  Summary: This story is co-published with Arizona Luminaria, a nonprofit newsroom dedicated to community-centered reporting. When the Bureau of Land Management approved mineral exploration for a proposed copper mine in southern Arizona last June, it concluded…
+
+
+▸ Labor will back fossil fuels in the budget but the gas tax campaign isn’t dead yet | Clear air
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/apr/30/anti-fossil-fuel-campaigns-offer-hope-but-labors-budget-will-play-it-safe
+  Date   : Apr 29, 2026  18:13 EAT
+  Summary: Despite popular support for a 25% levy on gas exports, Anthony Albanese opposes it and there is little discussion about how to reduce our usageSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereFollow our Australia…
+
+
+▸ Brazil leads “encouraging” decline in global rainforest destruction in 2025
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/04/29/brazil-leads-encouraging-decline-in-global-rainforest-destruction-in-2025/
+  Date   : Apr 29, 2026  16:04 EAT
+  Summary: After hitting a record high in 2024, loss of primary tropical forest dropped by over a third last year, but the world remains way off track for a 2030 goal to halt deforestationThe postBrazil leads “encouraging” decline in global rainforest destructi…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 49  |  Sources: 9  |  Topics: 5

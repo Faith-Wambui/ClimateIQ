@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, April 30, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">49</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 42 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/traditional-models-still-outperform-ai-for-extreme-weather-forecasts/" target="_blank">Traditional models still ‘outperform AI’ for extreme weather forecasts</a></div>
+  <div class="article-summary">Computer models that use artificial intelligence (AI) cannot forecast record-breaking weather as well as traditional climate models, according to a new study.
+
+It is well established that AI climate models have surpassed traditional, physics-based cl…</div>
+  <div class="article-meta">Apr 29, 2026  21:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/30/renewables-growth-cut-spains-electricity-bills-by-24-2-over-the-past-two-years/" target="_blank">Renewables growth cut Spain’s electricity bills by 24.2% over the past two years</a></div>
+  <div class="article-summary">Spain's electricity bills dropped 24.2% between 2023 and 2025, thanks to a surge in renewable energy displacing expensive gas power. This shift significantly reduces the country's exposure to volatile global energy markets, demonstrating a clear economic benefit of the energy transition.</div>
+  <div class="article-meta">Apr 30, 2026  10:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/30/new-irrigation-tech-helps-reduce-water-use-in-agrivoltaics/" target="_blank">New irrigation tech helps reduce water use in agrivoltaics</a></div>
+  <div class="article-summary">Spanish researchers have successfully grown tomatoes using a novel combination of regulated deficit irrigation and agrivoltaics in Madrid and Seville, slashing water use by up to 75% while maintaining crop yields. This breakthrough demonstrates a powerful synergy between renewable energy generation and sustainable agriculture, crucial for bolstering food security and mitigating climate change impacts in water-scarce regions.</div>
+  <div class="article-meta">Apr 30, 2026  09:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/30/chile-reaches-4-6-gw-of-energy-storage-under-construction/" target="_blank">Chile reaches 4.6 GW of energy storage under construction</a></div>
+  <div class="article-summary">Chile has surged past its 2030 energy storage target, with 4.6 GW of battery storage now under construction, significantly boosting its renewable energy capacity. This rapid build-out, driven by a $4.1 billion investment in storage projects, positions Chile to meet its 2050 goals years ahead of schedule, demonstrating decisive action to integrate intermittent solar and wind power and accelerate its clean energy transition.</div>
+  <div class="article-meta">Apr 30, 2026  09:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/30/solar-break-quarterly-generation-records-in-australia-in-q1/" target="_blank">Solar break quarterly generation records in Australia in Q1</a></div>
+  <div class="article-summary">Australia's grid-scale solar generation hit an all-time quarterly high of 2,706 MW in Q1 2026, with renewables now supplying a record 46.5% of the nation's electricity. This surge, coupled with a significant increase in household battery storage, demonstrates a rapid shift away from thermal generation, directly accelerating Australia's clean energy transition.</div>
+  <div class="article-meta">Apr 30, 2026  09:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/04/30/enphase-unveils-distributed-solid-state-transformer-for-ai-data-centers/" target="_blank">Enphase unveils distributed solid-state transformer for AI data centers</a></div>
+  <div class="article-summary">Enphase has unveiled a 1.25 MW solid-state transformer designed to deliver 800V DC power directly to AI data centers, a significant advancement for powering the immense energy demands of artificial intelligence. This innovative, modular system, built on Enphase's distributed architecture, promises higher efficiency and reliability, crucial for supporting the rapidly growing, power-intensive AI sector and its associated climate impact.</div>
+  <div class="article-meta">Apr 30, 2026  09:12 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/04/the-great-climate-bait-and-switch-the-west-wants-africas-minerals-not-its-survival/" target="_blank">The Great Climate Bait and Switch – the West Wants Africa’s Minerals, not its survival</a></div>
+  <div class="article-summary">Western powers, particularly at the 2026 IMF and World Bank Spring Meetings, are prioritizing access to Africa's critical minerals over crucial climate adaptation finance. This shift signals a concerning trade-off where the West secures resources for its green transition while potentially leaving African nations more vulnerable to climate impacts.</div>
+  <div class="article-meta">Apr 30, 2026  10:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-29/edp-bets-big-on-australia-in-1-billion-renewables-push-in-asia" target="_blank">EDP Bets Big on Australia in $1 Billion Asia Renewables Push</a></div>
+  <div class="article-summary">EDP SA’s renewables unit will invest about $1 billion in green energy projects across Asia-Pacific through 2028, with a focus on developing its presence in Australia.…</div>
+  <div class="article-meta">Apr 30, 2026  00:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-29/dutch-climate-minister-says-talks-to-quit-fossil-fuels-have-momentum" target="_blank">Dutch Climate Minister Says Talks to Quit Fossil Fuels Have Momentum</a></div>
+  <div class="article-summary">Countries that move away from oil and gas will be “shielding their economies against the kinds of price shocks that we’re seeing currently,” said Stientje van Veldhoven.…</div>
+  <div class="article-meta">Apr 29, 2026  23:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-04-29/atome-sees-war-driving-shifts-that-boost-low-carbon-fertilizer" target="_blank">Atome Sees War Driving Shifts That Boost Low-Carbon Fertilizer</a></div>
+  <div class="article-summary">The low-carbon fertilizer industry is getting a boost as buyers shift to long-term contracts amid rising geopolitical risks, according to the top executive at Atome PLC.…</div>
+  <div class="article-meta">Apr 29, 2026  20:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-04-29/how-global-deforestation-declined-36-in-2025" target="_blank">How Global Deforestation Declined 36% in 2025</a></div>
+  <div class="article-summary">The world still lost an area of rainforest roughly the size of Denmark…</div>
+  <div class="article-meta">Apr 29, 2026  18:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/30/could-the-warming-north-sea-attract-great-white-sharks" target="_blank">Could the warming North Sea attract great white sharks?</a></div>
+  <div class="article-summary">Record-breaking North Sea temperatures, hitting an average of 11.6°C last year, are creating conditions that could attract large predators like great white sharks back to UK waters, according to new research. This shift, driven by warming oceans, signals a significant ecological change with the potential to reintroduce apex predators not seen in the region for millions of years.</div>
+  <div class="article-meta">Apr 30, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/30/what-fossil-fuels-really-cost-us-in-a-world-at-war/" target="_blank">What fossil fuels really cost us in a world at war</a></div>
+  <div class="article-summary">Governments are under pressure to respond to rising fuel and food costs and deepening energy poverty. It's time for a power shiftThe postWhat fossil fuels really cost us in a world at warappeared first onClimate Home News.…</div>
+  <div class="article-meta">Apr 30, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/29/six-nations-at-santa-marta-could-shape-fossil-fuel-futures/" target="_blank">Six nations at Santa Marta could shape fossil fuel futures</a></div>
+  <div class="article-summary">A small but critical handful of countries attending the conference on transitioning away from fossil fuels remain deeply committed to expanding their outputThe postSix nations at Santa Marta could shape fossil fuel futuresappeared first onClimate Hom…</div>
+  <div class="article-meta">Apr 29, 2026  20:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29042026/arizona-mine-impacts-threatened-owls/" target="_blank">Tribe and Environmentalists to Sue Feds Over Arizona Mine’s  Impacts to Threatened Owls</a></div>
+  <div class="article-summary">This story is co-published with Arizona Luminaria, a nonprofit newsroom dedicated to community-centered reporting. When the Bureau of Land Management approved mineral exploration for a proposed copper mine in southern Arizona last June, it concluded…</div>
+  <div class="article-meta">Apr 29, 2026  19:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/apr/30/anti-fossil-fuel-campaigns-offer-hope-but-labors-budget-will-play-it-safe" target="_blank">Labor will back fossil fuels in the budget but the gas tax campaign isn’t dead yet | Clear air</a></div>
+  <div class="article-summary">Despite popular support for a 25% levy on gas exports, Anthony Albanese opposes it and there is little discussion about how to reduce our usageSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereFollow our Australia…</div>
+  <div class="article-meta">Apr 29, 2026  18:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/04/29/brazil-leads-encouraging-decline-in-global-rainforest-destruction-in-2025/" target="_blank">Brazil leads “encouraging” decline in global rainforest destruction in 2025</a></div>
+  <div class="article-summary">After hitting a record high in 2024, loss of primary tropical forest dropped by over a third last year, but the world remains way off track for a 2030 goal to halt deforestationThe postBrazil leads “encouraging” decline in global rainforest destructi…</div>
+  <div class="article-meta">Apr 29, 2026  16:04 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, April 30, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
