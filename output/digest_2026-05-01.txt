@@ -1,0 +1,182 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Friday, May 01, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (5 articles)
+============================================================
+
+▸ California sets precedent by overriding local blockade for massive solar-plus-storage project
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/01/california-sets-precedent-by-overriding-local-blockade-for-massive-solar-plus-storage-project/
+  Date   : May 01, 2026  09:05 EAT
+  Summary: California has approved the 300 MW Soda Mountain Solar Project, using a new state "opt-in" procedure to override local opposition and secure a critical clean energy development. This landmark decision, which includes a 1,200 MWh battery storage system, signals the state's commitment to prioritizing grid reliability and climate mandates over local land-use disputes, potentially accelerating future renewable energy projects.
+
+
+▸ How LNG interests are seeking to disrupt global talks on decarbonising shipping
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/may/01/lng-liquefied-natural-gas-imo-talks-shipping
+  Date   : May 01, 2026  09:00 EAT
+  Summary: LNG interests are actively lobbying the International Maritime Organization (IMO) to weaken global decarbonization targets for shipping, a move that could lock in emissions from a sector already responsible for 3% of global greenhouse gases. This pressure comes as recent geopolitical events, like the Strait of Hormuz closure, highlight shipping's critical role in fossil fuel transport and the urgent need for cleaner alternatives.
+
+
+▸ Farmers Are Choosing Solar to Maintain their Farms. Localities Shouldn’t Take Away That Choice.
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/30/farmers-are-choosing-solar-to-maintain-their-farms-localities-shouldnt-take-away-that-choice/
+  Date   : May 01, 2026  06:55 EAT
+  Summary: Facing cratering commodity prices and rising input costs, American farmers are increasingly turning to solar installations as a vital revenue stream to keep their operations afloat. Denying them this choice through local restrictions not only harms agricultural livelihoods but also hinders the expansion of clean energy crucial for climate resilience.
+
+
+▸ CPUC Protects Ratepayers, Rejects SoCalGas’ Attempt to Charge Customers for Hydrogen Pipeline
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/30/cpuc-protects-ratepayers-rejects-socalgas-attempt-to-charge-customers-for-hydrogen-pipeline/
+  Date   : May 01, 2026  06:50 EAT
+  Summary: The California Public Utilities Commission has blocked SoCalGas from charging ratepayers $266 million for its proposed Angeles Link hydrogen pipeline. This rejection prevents consumers from footing the bill for a project that faces significant climate risks and uncertainty.
+
+
+▸ Santa Marta: Key outcomes from first summit on ‘transitioning away’ from fossil fuels
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/santa-marta-key-outcomes-from-first-summit-on-transitioning-away-from-fossil-fuels/
+  Date   : Apr 30, 2026  18:37 EAT
+  Summary: Countries attending a first-of-its-kind summit have walked away with plans to develop national roadmaps away from fossil fuels, along with new tools to address harmful subsidies and carbon-intensive trade.
+
+The first conference on “transitioning away…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Inorganic perovskite solar cell based on tetraphenyl-porphine zinc interlayer achieves 82% fill factor
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/01/inorganic-perovskite-solar-cell-based-on-tetraphenyl-porphine-zinc-interlayer-achieves-82-fill-factor/
+  Date   : May 01, 2026  10:00 EAT
+  Summary: Researchers have boosted perovskite solar cell performance to over 13% efficiency by integrating a novel tetraphenyl-porphine zinc interlayer, significantly improving charge transport and reducing defects. This breakthrough in inorganic perovskite technology, achieving an impressive 82% fill factor, signals a critical step towards more stable and efficient solar energy solutions.
+
+
+▸ Australian researchers develop vapour-based manufacturing process for lead-free perovskite solar
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/01/australian-researchers-develop-vapour-based-manufacturing-process-for-lead-free-perovskite-solar/
+  Date   : May 01, 2026  09:11 EAT
+  Summary: University of Queensland researchers have developed a lead-free, vapour-based manufacturing process for perovskite solar cells, achieving a record 16.36% efficiency for indoor applications. This breakthrough eliminates toxic materials and offers a scalable, flexible alternative to batteries for low-power electronics, potentially powering everything from smart sensors to consumer devices within years.
+
+
+▸ Sierra Club: Nippon Investment in DRI in the South a Good First Step, Must Not Overlook Greening Midwest Steel
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/30/sierra-club-nippon-investment-in-dri-in-the-south-a-good-first-step-must-not-overlook-greening-midwest-steel/
+  Date   : May 01, 2026  05:45 EAT
+  Summary: Washington, DC — Yesterday, U.S. Steel announced it will invest nearly $2 billion to build a direct reduced iron (DRI) facility at Big River Steel Works in Osceola, Arkansas. The DRI will provide a cleaner input to feed into the company’s electric ar…
+
+
+▸ The First Toyota Plant to Go Carbon Neutral: “One Tahara”
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/30/the-first-toyota-plant-to-go-carbon-neutral-one-tahara/
+  Date   : May 01, 2026  05:02 EAT
+  Summary: In fiscal year 2026, Tahara Plant became the first Toyota plant to attain carbon neutrality. At the genba, a “One Tahara” spirit could be seen throughout, from large-scale equipment initiatives to small, on-the-ground improvements. Tahara Plant is lo…
+
+
+▸ A 65% cost cut? This 100-electric van rollout is ready to prove it
+  Source : Electrek
+  Link   : https://electrek.co/2026/04/30/65-percent-cost-cut-this-100-electric-van-rollout-is-ready-to-prove-it/
+  Date   : May 01, 2026  02:01 EAT
+  Summary: Workhorse just landed a 100‑truck order – and it’s tied to a model that could make electric fleets easier to run.
+
+OEM Workhorse Group and California truck dealer Kingsburg Truck Center say Gateway Fleets has ordered 100 of its W56 electric step vans…
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ India’s Heat Exposes a Fragile Grid as Energy Crunch Deepens
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-01/india-s-heat-exposes-a-fragile-grid-as-energy-crunch-deepens
+  Date   : May 01, 2026  03:06 EAT
+  Summary: India is likely to endure a blistering summer until monsoon rains arrive in June, with higher-than-average heat already straining power grids at a time when the country is grappling with energy shortages.…
+
+
+▸ Texas Hill Country on Alert for Flooding as Heavy Rains Approach
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-30/texas-hill-country-on-alert-for-flooding-as-heavy-rains-approach
+  Date   : May 01, 2026  00:03 EAT
+  Summary: A band of severe storms bearing down on central Texas has raised concerns about flooding, with heavy rains expected near the site of last year’s deadly Fourth of July floods.…
+
+
+▸ Gresham House Said to Plan €1 Billion Fund for Battery Storage
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-30/gresham-house-said-to-plan-1-billion-fund-for-battery-storage
+  Date   : Apr 30, 2026  23:30 EAT
+  Summary: Gresham House plans to raise a fund targeting roughly €1 billion ($1.2 billion) to give investors access to the growing market for battery-storage systems, according to a person familiar with the matter.…
+
+
+▸ How Countries Are Trying to Move Away From Fossil fuels
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-04-30/climate-negotiators-meet-in-santa-marta-to-discuss-fossil-fuel-transition
+  Date   : Apr 30, 2026  19:26 EAT
+  Summary: Nearly 60 nations, save the largest polluters, gathered in Colombia this week to discuss the energy transition.…
+
+
+▸ Countries Draw Up Next Steps to Decarbonize at Colombia Fossil-Fuel Summit
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-04-30/colombia-summit-sets-next-steps-for-countries-to-exit-oil-gas-and-coal
+  Date   : Apr 30, 2026  18:03 EAT
+  Summary: The conference in Santa Marta ended on an optimistic note, with plans for a second meeting in 2027.…
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (1 articles)
+============================================================
+
+▸ The climate crisis is making our hay fever worse – and affecting our enjoyment of nature
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/apr/30/the-climate-crisis-is-making-our-hay-fever-worse-and-affecting-our-enjoyment-of-nature
+  Date   : May 01, 2026  09:00 EAT
+  Summary: Europe's pollen season has lengthened by two weeks since the 1990s, directly linked to climate change. This escalating hay fever season is diminishing people's enjoyment of nature, highlighting another tangible impact of global warming on daily life.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Sierra Club Statement on Supreme Court Ruling to Gut the Voting Rights Act
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/04/30/sierra-club-statement-on-supreme-court-ruling-to-gut-the-voting-rights-act/
+  Date   : May 01, 2026  06:03 EAT
+  Summary: The Supreme Court's 6-3 decision in *Louisiana v. Callais* will weaken the Voting Rights Act, diluting minority voting power. This ruling is concerning for climate action because it disproportionately impacts communities of color, who are often on the frontlines of climate change and whose voices are crucial for advocating for equitable climate solutions.
+
+
+▸ Fema employees who criticized Trump cuts reinstated after months on leave
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/apr/30/fema-letter-katrina-declaration
+  Date   : May 01, 2026  04:01 EAT
+  Summary: Workers wrote ‘Katrina declaration’, warning that funding cuts made US dangerously unprepared for natural disastersFourteen employees with the US Federal Emergency Management Agency returned to work this week, after spending eight months on administr…
+
+
+▸ Western Lawmakers Move To Weaken Clean Air Act and Shield Fossil Fuel Companies From Climate Lawsuits
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/30042026/wyoming-texas-lawmakers-weaken-clean-air-act/
+  Date   : Apr 30, 2026  23:27 EAT
+  Summary: Members of Congress from Texas and Wyoming introduced bills recently that would grant fossil fuel companies sweeping legal immunity and shield energy producers from stricter compliance with the Clean Air Act.  Republican Harriet Hageman, Wyoming’s on…
+
+
+▸ Kenya seeks regional coordination to build African mineral value chains
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/04/30/kenya-seeks-regional-coordination-to-build-african-mineral-value-chains/
+  Date   : Apr 30, 2026  18:41 EAT
+  Summary: Kenyan President William Ruto is the latest African leader to announce an end to raw mineral exports as governments want to add more value to their resourcesThe postKenya seeks regional coordination to build African mineral value chainsappeared first…
+
+
+▸ Democrats say EPA head’s budget cut proposal ‘reads like climate change deniers’ manifesto’
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/apr/30/epa-budget-cut-proposal
+  Date   : Apr 30, 2026  18:20 EAT
+  Summary: Lee Zeldin claims before Senate that Trump administration plan will make Environmental Protection Agency ‘more efficient’Senate Democrats accused theTrump administrationof abandoning theEnvironmental Protection Agency’s mission to protect human healt…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 51  |  Sources: 8  |  Topics: 5
