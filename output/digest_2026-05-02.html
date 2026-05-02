@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, May 02, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">42</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/01/un-shipping-deal-lives-to-fight-another-day-as-us-fails-to-derail-negotiations/" target="_blank">UN Shipping Deal Lives to Fight Another Day, as US Fails to Derail Negotiations</a></div>
+  <div class="article-summary">Global shipping’s crucial net-zero framework survived a US-led pushback at the International Maritime Organization, postponing a vote until autumn but keeping ambitious climate goals on the table. This delay, while frustrating, means the industry's vital decarbonization efforts, essential for meeting global climate targets, will continue to be debated and hopefully strengthened.</div>
+  <div class="article-meta">May 02, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/01/epa-says-oil-gas-operators-can-continue-to-flare-past-long-set-deadline/" target="_blank">EPA Says Oil & Gas Operators Can Continue to Flare Past Long-Set Deadline</a></div>
+  <div class="article-summary">The EPA has greenlit continued routine flaring by oil and gas operators, delaying a long-set deadline for this practice. This decision allows the release of climate-warming methane and other pollutants, undermining a cost-effective strategy to immediately reduce emissions.</div>
+  <div class="article-meta">May 02, 2026  05:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-1-may-2026-countries-chart-path-away-from-fossil-fuels-chinas-clean-tech-surge-global-forest-loss-slows/" target="_blank">DeBriefed 1 May 2026: Countries chart path away from fossil fuels | China’s clean-tech surge | Global forest loss slows</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+Countries chart path away from fossil fuels
+
+SANTA MARTA SUMMIT: Countries attending a first-of-its-kind summit have walke…</div>
+  <div class="article-meta">May 01, 2026  18:28 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/01/sporty-cars-outshine-subcompacts-at-the-beijing-auto-show/" target="_blank">Sporty Cars Outshine Subcompacts At The Beijing Auto Show</a></div>
+  <div class="article-summary">The Beijing Auto Show revealed a surprising surge in high-performance, premium SUVs and sports cars, signaling a shift in consumer preference away from smaller, fuel-efficient vehicles. This trend is concerning for climate goals, as larger, more powerful cars typically have a significantly higher carbon footprint, potentially undermining efforts to reduce emissions from the transportation sector.</div>
+  <div class="article-meta">May 02, 2026  06:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/01/tesla-model-3-rwd-premium-canada-record-low-price-giga-shanghai/" target="_blank">Tesla launches Model 3 RWD in Canada at record-low $39,490 ($29,000 USD) from China</a></div>
+  <div class="article-summary">Tesla is now selling its China-made Model 3 RWD in Canada for a record-low $39,490 CAD, undercutting its own Performance trim and circumventing recent Canadian tariffs on Chinese EVs. This aggressive pricing strategy, enabled by production at Giga Shanghai, makes electric vehicles more accessible and could accelerate the transition away from fossil fuel-powered transportation.</div>
+  <div class="article-meta">May 02, 2026  06:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/01/sierra-club-allies-applaud-approval-of-accelergens-east-side-energy-storage-for-wyandotte-county/" target="_blank">Sierra Club, Allies Applaud Approval of Accelergen’s East Side Energy Storage for Wyandotte County</a></div>
+  <div class="article-summary">Wyandotte County has approved Accelergen's 300 MW East Side Energy Storage project, a significant step for the region's renewable energy infrastructure. This large-scale battery installation is crucial for stabilizing the grid and enabling greater integration of clean power sources, directly advancing climate goals.</div>
+  <div class="article-meta">May 02, 2026  05:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/01/kia-ev6-getting-5000-6000-price-cut-in-usa/" target="_blank">Kia EV6 Getting $5000–6000 Price Cut In USA!</a></div>
+  <div class="article-summary">Kia is slashing EV6 prices by $5,000-$6,000 in the US, making this popular electric crossover more accessible. This move signals a significant shift in the EV market, potentially accelerating adoption and reducing reliance on fossil fuel-powered vehicles.</div>
+  <div class="article-meta">May 02, 2026  05:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/01/solar-farm-lets-cattle-roam-under-moving-panels/" target="_blank">This solar farm lets cattle roam under moving panels</a></div>
+  <div class="article-summary">Silicon Ranch has brought something online commercially that you don’t see every day: a utility-scale solar farm where cattle graze under moving panels.
+
+The Nashville-based developer has launched its new “CattleTracker” system at the Christiana Sola…</div>
+  <div class="article-meta">May 02, 2026  00:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-01/bmo-turns-to-ai-and-quantum-computing-to-predict-earthquakes" target="_blank">BMO Turns to AI and Quantum Computing to Predict Earthquakes</a></div>
+  <div class="article-summary">Bank of Montreal is betting on artificial intelligence and quantum computing to help predict earthquakes and respond to wildfires as part of the Canadian bank’s expansion in the US.…</div>
+  <div class="article-meta">May 01, 2026  22:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-01/nuclear-ai-startup-fermi-ousts-co-founder-over-lack-of-clients" target="_blank">Nuclear AI Startup Fermi Promised Land and Ample Power. But It Couldn't Sign a Single Client</a></div>
+  <div class="article-summary">Now the ex-CEO is waging a battle for Fermi’s future and its vision of atomic-powered data centers in the Texas panhandle.…</div>
+  <div class="article-meta">May 01, 2026  20:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-01/how-india-s-heat-waves-impact-its-grids" target="_blank">India Braces for Another Summer of Dangerous Heat</a></div>
+  <div class="article-summary">The country is already dealing with energy shortages caused by the Middle East war.…</div>
+  <div class="article-meta">May 01, 2026  17:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-01/warm-wild-weather-puts-europe-on-storm-and-drought-watch-in-may" target="_blank">Warm, Wild Weather Puts Europe on Storm and Drought Watch in May</a></div>
+  <div class="article-summary">Europe is set for weeks of erratic and increasingly warm weather over the coming month, raising the risk of storms, early season drought stress and increasing cooling demand.…</div>
+  <div class="article-meta">May 01, 2026  10:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/01/tesla-got-573-million-from-spacex-and-xai-in-2025/" target="_blank">Tesla Got $573 Million from SpaceX and xAI in 2025</a></div>
+  <div class="article-summary">Tesla received a substantial $573 million in funding from SpaceX and xAI in 2025, signaling a deepening integration of AI across Musk's ventures. This capital injection is crucial for accelerating the development of AI infrastructure, which directly supports the scaling of electric vehicle production and renewable energy solutions, key drivers in the global climate transition.</div>
+  <div class="article-meta">May 02, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01052026/iowa-water-treatment-from-fertilizer-pollution/" target="_blank">With Fertilizer Pollution on the Rise, Iowa Will Invest $100 Million in Water Treatment</a></div>
+  <div class="article-summary">DES MOINES, Iowa—In a press conference at the state capitol on Friday, Gov. Kim Reynolds announced a “comprehensive legislative package” that will boost funding for utilities struggling to meet federal drinking water standards and combat high nitrate…</div>
+  <div class="article-meta">May 02, 2026  02:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01052026/trump-pushes-lng-exports-to-europe/" target="_blank">Trump Pushes ‘Peace Pipelines’ to Boost Exports of Climate-Busting LNG to Europe</a></div>
+  <div class="article-summary">In the midst of a war in Iran and skyrocketing energy prices at home, the Trump administration is pushing to boost sales of U.S. liquefied natural gas across Central and Eastern Europe.  Energy Secretary Chris Wright and other U.S. officials announce…</div>
+  <div class="article-meta">May 01, 2026  23:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/01/key-green-shipping-talks-to-be-held-in-late-2026/" target="_blank">Key green shipping talks to be held in late 2026</a></div>
+  <div class="article-summary">Global governments will convene for three weeks of crucial talks in late 2026 to finalize green shipping measures. This summit is vital for decarbonizing the maritime sector, which accounts for nearly 3% of global greenhouse gas emissions.</div>
+  <div class="article-meta">May 01, 2026  22:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01052026/rocky-mountain-power-joins-new-electricity-market/" target="_blank">Wyoming’s Largest Utility Joins a New Western Day Ahead Market for Electricity</a></div>
+  <div class="article-summary">Wyoming’s largest utility today began participating in a new “Extended Day Ahead Market” for electricity on the Western grid, a potentially landmark shift in the way energy is sold in the state that could lower rates as energy costs soar.  The new ma…</div>
+  <div class="article-meta">May 01, 2026  22:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, May 02, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
