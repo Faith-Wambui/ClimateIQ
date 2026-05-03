@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, May 03, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">14</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 7 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/02/maritime-decarbonization-is-closer-cheaper-and-more-practical-than-it-looks/" target="_blank">Maritime Decarbonization Is Closer, Cheaper, And More Practical Than It Looks</a></div>
+  <div class="article-summary">The International Maritime Organization's recent Net-Zero Framework, though delayed, signals progress in decarbonizing shipping, a sector responsible for significant greenhouse gas emissions. This development is crucial as it moves the industry towards cleaner fuels and technologies, directly impacting global efforts to curb climate change.</div>
+  <div class="article-meta">May 02, 2026  22:28 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/02/segway-launches-60-mph-electric-dirt-bike-and-its-basically-a-full-e-motorcycle/" target="_blank">Segway launches 60 MPH electric dirt bike – and it’s basically a full e-motorcycle</a></div>
+  <div class="article-summary">Segway has unveiled the Xaber 300, a 60 MPH electric dirt bike that blurs the line between e-motorcycle and powersport vehicle. This aggressive expansion into high-performance electric two-wheelers signals a significant shift in the market, potentially accelerating the adoption of electric alternatives in recreational and performance riding.</div>
+  <div class="article-meta">May 03, 2026  09:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/02/top-selling-electric-vehicles-in-the-world-march-2026/" target="_blank">Top Selling Electric Vehicles in the World — March 2026</a></div>
+  <div class="article-summary">Tesla's Model Y and Model 3 led global EV sales in March 2026, as pure electric vehicle (BEV) registrations surged 12% year-over-year to 1.7 million units. This strong BEV growth, despite a decline in plug-in hybrids, signals accelerating adoption of zero-emission transport, crucial for meeting climate targets.</div>
+  <div class="article-meta">May 03, 2026  03:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/02/3-2-million-awarded-for-tribal-solar-projects/" target="_blank">$3.2 Million Awarded For Tribal Solar Projects</a></div>
+  <div class="article-summary">Fourteen Tribal Nations and related organizations are set to boost solar energy access and resilience thanks to a $3.2 million grant from Tribal Energy Alternatives. This investment directly supports the transition to clean, renewable power sources, crucial for reducing carbon emissions and combating climate change.</div>
+  <div class="article-meta">May 02, 2026  22:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/02/nissan-to-produce-ice-trucks-suvs-instead-of-evs-in-usa/" target="_blank">Nissan to Produce ICE Trucks & SUVs Instead of EVs in USA</a></div>
+  <div class="article-summary">Nissan is shelving its U.S. EV production plans, opting instead to manufacture gas-powered trucks and SUVs. This pivot away from electrification in a major market like the U.S. signals a concerning setback for global decarbonization efforts and the transition to cleaner transportation.</div>
+  <div class="article-meta">May 02, 2026  18:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/02/tesla-1966-mustang-ev-conversion-full-self-driving/" target="_blank">1966 Ford Mustang converted into a Tesla with working ‘Full Self-Driving’</a></div>
+  <div class="article-summary">A Sacramento entrepreneur has successfully retrofitted a 1966 Ford Mustang with Tesla's dual-motor drivetrain and "Full Self-Driving" technology, achieving efficiency comparable to a Model 3. This groundbreaking conversion demonstrates the potential for electrifying and automating classic vehicles, offering a glimpse into a future where vintage cars can contribute to reduced emissions and advanced transportation.</div>
+  <div class="article-meta">May 02, 2026  17:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-02/spring-temperature-whiplash-is-getting-worse-with-climate-change" target="_blank">Spring Temperature Whiplash Is Getting Worse With Climate Change</a></div>
+  <div class="article-summary">Abrupt jumps from chilly to warm and back again are typical of the season but becoming more extreme in a warming world.…</div>
+  <div class="article-meta">May 02, 2026  16:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-02/spring-s-hot-to-cold-swings-are-being-juiced-by-climate-change" target="_blank">Spring’s Hot-to-Cold Swings Are Being Juiced by Climate Change</a></div>
+  <div class="article-summary">Springtime temperature swings are intensifying, with heatwaves followed by sharp drops becoming more frequent and extreme due to climate change. These volatile shifts disrupt ecosystems and agriculture, impacting everything from crop yields to wildlife migration patterns.</div>
+  <div class="article-meta">May 02, 2026  17:10 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/02/living-without-fossil-fuel-is-harder-than-we-think/" target="_blank">Living Without Fossil Fuel Is Harder Than We Think</a></div>
+  <div class="article-summary">Even iconic Sydney landmarks like the Queen Victoria Building, a century-old architectural marvel, highlight the deep integration of fossil fuels into our built environment. Transitioning away from these energy sources, as demonstrated by the challenges in retrofitting such structures, will require significant innovation and investment to decarbonize our cities and infrastructure.</div>
+  <div class="article-meta">May 03, 2026  00:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/02/houston-texas-immigrants-ice-health-extreme-weather" target="_blank">‘Living in survival mode’: Houston’s embattled immigrant community faces health, climate and petrochemical crises</a></div>
+  <div class="article-summary">Amid immigration raids, chemical spills, massive floods and costly healthcare, less-affluent residents of one of the most diverse US cities struggle to pull throughCándido Álvarez has made it his policy never to go to the doctor.“Not when I’m sick, n…</div>
+  <div class="article-meta">May 02, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02052026/california-gas-prices-iran-war/" target="_blank">California Drivers Are Paying a More Than $6-a-Gallon Price for the War in Iran</a></div>
+  <div class="article-summary">LOS ANGELES—At a Chevron station where the gas pump had a $6.49 cash price, Veronica Cervantes listed the concessions she’s made to afford the skyrocketing price of gasoline over the last two months. “I don’t go out as much as I did. When I go places…</div>
+  <div class="article-meta">May 02, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02052026/massive-ohio-gas-power-plant-energy-risks/" target="_blank">A Massive, Trump-Backed Power Plant May Be Too Big to Succeed</a></div>
+  <div class="article-summary">PIKETON, Ohio—At the edge of Appalachia, on a site where crews have worked for decades on nuclear waste remediation, the Trump administration aims to build the largest power plant and data center in the country. It would be a logistical feat, and ene…</div>
+  <div class="article-meta">May 02, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02052026/how-oil-fuels-war/" target="_blank">How Oil Fuels Conflict and War—and Who Profits</a></div>
+  <div class="article-summary">From our collaborating partner “Living on Earth,” public radio’s environmental news magazine, an interview by host Steve Curwood with Michael Klare, an emeritus professor of peace and security studies at Hampshire College. The U.S.-Israel joint war a…</div>
+  <div class="article-meta">May 02, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, May 03, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
