@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, May 06, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">42</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/06/brazil-revokes-3-57-gw-of-solar-permits-amid-grid-connection-constraints/" target="_blank">Brazil revokes 3.57 GW of solar permits amid grid connection constraints</a></div>
+  <div class="article-summary">Brazil has revoked 3.57 GW of solar power permits, primarily due to grid connection issues in states like Piauí and Minas Gerais. This significant cancellation highlights critical infrastructure bottlenecks that could slow the country's rapid renewable energy expansion and impact its climate goals.</div>
+  <div class="article-meta">May 06, 2026  08:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-how-countries-got-the-global-net-zero-shipping-deal-back-on-track/" target="_blank">Q&A: How countries got the global ‘net-zero’ shipping deal ‘back on track’</a></div>
+  <div class="article-summary">Nations are “back on track” to adopt a framework for curbing global shipping emissions, following the latest International Maritime Organization’s (IMO) meeting in London, UK.
+
+The proposed “net-zero framework” had been expected to be approved by cou…</div>
+  <div class="article-meta">May 05, 2026  10:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/06/fraunhofer-ise-opens-perovskite-silicon-tandem-scale-up-lab/" target="_blank">Fraunhofer ISE opens perovskite-silicon tandem scale-up lab</a></div>
+  <div class="article-summary">Fraunhofer ISE in Freiburg, Germany, has opened a new lab to scale up perovskite-silicon tandem solar cell production, achieving over 33% efficiency in lab tests. This advancement is critical for boosting solar energy output per area, potentially unlocking significantly higher theoretical efficiencies and supporting Europe's ambitious solar manufacturing goals.</div>
+  <div class="article-meta">May 06, 2026  10:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/06/how-to-retrofit-commercial-pv-panels-into-photovoltaic-thermal-modules/" target="_blank">How to retrofit commercial PV panels into photovoltaic-thermal modules</a></div>
+  <div class="article-summary">Brazilian researchers demonstrated that retrofitting existing commercial solar panels into photovoltaic-thermal (PVT) systems can achieve impressive combined efficiencies of 46-50%. This innovation is crucial for maximizing energy generation from installed solar capacity, as it simultaneously produces electricity and usable heat, thereby accelerating the transition to cleaner energy sources.</div>
+  <div class="article-meta">May 06, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/06/solar-panels-reduces-thermal-stress-in-dairy-barns-during-critical-afternoon-hours/" target="_blank">Solar panels reduce thermal stress in dairy barns during critical afternoon hours</a></div>
+  <div class="article-summary">Rooftop solar panels on a dairy barn in Shandong, China, demonstrably reduced peak indoor temperatures by up to 2.3°C during critical afternoon hours. This dual-purpose technology not only generates clean electricity but also offers a passive cooling solution, directly informing investment in sustainable agricultural infrastructure and mitigating climate-driven heat stress for livestock.</div>
+  <div class="article-meta">May 06, 2026  09:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/06/arctech-debuts-topcon-photovoltaic-pavement-solution/" target="_blank">Arctech debuts TOPCon photovoltaic pavement solution</a></div>
+  <div class="article-summary">Arctech has launched Harmony-F Solar Flooring, a durable photovoltaic paving system capable of generating 110W per module on walkable surfaces like sidewalks. This innovation unlocks significant potential for distributed renewable energy generation in urban environments, turning everyday infrastructure into power sources.</div>
+  <div class="article-meta">May 06, 2026  08:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/05/really-quick-charge-greenlane-ceo-talks-expansion-deals-and-more/" target="_blank">REALLY Quick Charge: Greenlane CEO talks expansion, deals, and more</a></div>
+  <div class="article-summary">Greenlane is expanding its heavy-duty EV truck charging network into Texas, specifically targeting the crucial Dallas-Houston-San Antonio freight corridor with new deals with Einride and Nevoya. This move is critical for decarbonizing long-haul trucking, a significant source of emissions, by providing much-needed charging infrastructure for electric semi-trucks.</div>
+  <div class="article-meta">May 06, 2026  07:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-06/india-s-renew-energy-trims-solar-output-due-to-grid-constraints" target="_blank">India’s ReNew Energy Trims Solar Output Due to Grid Constraints</a></div>
+  <div class="article-summary">ReNew Energy Global Plc is being forced to curb its solar power output, putting profits at risk, as India’s inadequate grid infrastructure struggles to absorb renewables during peak generation hours.…</div>
+  <div class="article-meta">May 06, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-05/aep-weighs-break-from-two-of-america-s-biggest-power-grids" target="_blank">US Utility Threatens to Quit Power Grids on Data Center Rift</a></div>
+  <div class="article-summary">American Electric Power Co., one of the largest US utilities, is threatening to remove itself from two of the country’s biggest electricity grids over the length of time it takes to connect new AI data centers.…</div>
+  <div class="article-meta">May 05, 2026  18:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-05/microplastics-in-the-air-are-making-earth-hotter-study-finds" target="_blank">Microplastics in the Air Are Making Earth Hotter, Study Finds</a></div>
+  <div class="article-summary">The tiny particles trap heat in the atmosphere, exacerbating climate change.…</div>
+  <div class="article-meta">May 05, 2026  17:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-05/sec-rule-to-end-biden-era-climate-policy-sent-to-white-house" target="_blank">SEC Rule to End Biden-Era Climate Policy Sent to White House</a></div>
+  <div class="article-summary">The White House is reviewing a proposal from the Securities and Exchange Commission to formally end Biden-era climate disclosure rules for publicly-traded companies.…</div>
+  <div class="article-meta">May 05, 2026  16:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-05/germany-offers-5-billion-to-help-heavy-industries-cut-emissions" target="_blank">Germany Offers €5 Billion to Help Heavy Industries Cut Emissions</a></div>
+  <div class="article-summary">Germany kicked off an auction to offer up to €5 billion ($5.8 billion) to help heavy industries cut their carbon emissions, easing uncertainty over whether the government would press ahead with the planned subsidies.…</div>
+  <div class="article-meta">May 05, 2026  13:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/may/06/donald-trump-oil-coal-oligarchy-sanctions-war-environment-europe" target="_blank">Trump and his oil-and-coal oligarchy should face sanctions for their war on the environment | Alexander Hurst</a></div>
+  <div class="article-summary">Europe punished Russian billionaires over the war in Ukraine. It should do the same to those abetting an ecocidal regimeThe ecological disasters of the US-Israel war with Iran arealready bad enough. The noxious smoke from bombed oil facilities, spill…</div>
+  <div class="article-meta">May 06, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/05/climate-crisis-working-class-economy" target="_blank">As household bills soar, is it time for a ‘working-class climate agenda’?</a></div>
+  <div class="article-summary">Group that worked with AOC and Bernie Sanders seeks to counter claim that climate policy is politically toxicAmericansdo not careabout the climate crisis, only economic issues: that’s the message some wonks have put forth in the past year, as the Tru…</div>
+  <div class="article-meta">May 05, 2026  14:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05052026/california-battery-power/" target="_blank">California’s Battery Array Is as Powerful as 12 Nuclear Power Plants. Here’s What’s on the Horizon.</a></div>
+  <div class="article-summary">SAN FRANCISCO—As families settled into their evening routines in late March, cooking dinner on electric stoves and flipping on their TV for the newest binge watch, the state’s energy grid was working hard.  For the first time, California discharged j…</div>
+  <div class="article-meta">May 05, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05052026/as-pjm-reopens-interconnection-queue-experts-warn-damage-to-marylands-clean-energy-plans-is-already-done/" target="_blank">As PJM Reopens Interconnection Queue, Experts Warn Damage to Maryland’s Clean Energy Plans Is Already Done</a></div>
+  <div class="article-summary">For the first time in four years, regional grid operator PJM Interconnection is adding new generation projects to its interconnection queue.  PJM, which serves 67 million people across portions of 13 states and the District of Columbia, announced las…</div>
+  <div class="article-meta">May 05, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, May 06, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
