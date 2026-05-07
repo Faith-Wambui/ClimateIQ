@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, May 07, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/05/prominent-african-countries-feature-at-the-santa-marta-fossil-fuel-transition-conference/" target="_blank">Prominent African Countries Feature at the Santa Marta Fossil Fuel Transition Conference</a></div>
+  <div class="article-summary">Several prominent African nations signaled strong support for an equitable fossil fuel transition at the Santa Marta Conference, despite dimming hopes for a new global treaty. This commitment is crucial as these nations represent a significant portion of the global population and hold immense potential to shape the future of energy markets.</div>
+  <div class="article-meta">May 07, 2026  10:14 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/07/icj-follow-up-resolution-is-a-test-of-climate-leadership-at-the-un/" target="_blank">ICJ follow-up resolution is a test of climate leadership at the UN</a></div>
+  <div class="article-summary">Nations are voting on a UN resolution that builds on the International Court of Justice's advisory opinion on climate change, a move that could signal global commitment to climate action and international law. This vote is a critical test for major emitters, potentially shaping the future of climate governance and accountability.</div>
+  <div class="article-meta">May 07, 2026  10:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-6-may-2026-forest-loss-falls-deforestation-regulations-saving-indias-galapagos/" target="_blank">Cropped 6 May 2026: Forest loss falls | Deforestation regulations | Saving ‘India’s Galapagos’</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">May 06, 2026  18:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/vacancy-three-week-summer-journalism-internship-at-carbon-brief-3/" target="_blank">Vacancy: Three-week summer journalism internship at Carbon Brief</a></div>
+  <div class="article-summary">Carbon Brief is offering an exciting opportunity for students, or recent graduates, to work with the team for three weeks this summer. This journalism internship will be paid the London Living Wage, with an additional travel bursary.
+
+Job description…</div>
+  <div class="article-meta">May 06, 2026  17:13 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/07/german-startup-offers-scalable-ac-system-for-bidirectional-charging/" target="_blank">German startup offers scalable AC system for bidirectional charging</a></div>
+  <div class="article-summary">German startup Lade Gmbh has launched a plug-and-play AC charging system that drastically simplifies and speeds up the deployment of large-scale EV infrastructure. This innovation, ready for bidirectional charging, is crucial for integrating more renewables and stabilizing the grid as electric vehicle adoption accelerates.</div>
+  <div class="article-meta">May 07, 2026  10:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/07/alphatracker-launches-hydraulic-mechanism-that-locks-trackers-during-strong-wind-gusts/" target="_blank">AlphaTracker launches hydraulic mechanism that locks trackers during strong wind gusts</a></div>
+  <div class="article-summary">Portuguese manufacturer AlphaTracker has launched Maxi-Lock, an autonomous hydraulic system that locks solar trackers during high winds, and Smart-Slope for uneven terrain. These innovations promise to boost solar farm reliability and efficiency, crucial for accelerating the renewable energy transition and meeting climate goals.</div>
+  <div class="article-meta">May 07, 2026  09:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/07/australian-researchers-accelerate-silicon-wafer-recycling-using-ai-robotics/" target="_blank">Australian researchers accelerate silicon wafer recycling using AI, robotics</a></div>
+  <div class="article-summary">Australian researchers are leveraging AI and robotics to achieve near-perfect silicon wafer recycling, a breakthrough that significantly boosts the circular economy for solar panels. This development is crucial as Australia anticipates one million tonnes of solar waste by 2035, with this advanced recycling method promising to unlock over AUD 1 billion in material value and reduce environmental impact.</div>
+  <div class="article-meta">May 07, 2026  09:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/07/texas-pv-module-production-to-exceed-15-gw-in-2026/" target="_blank">Texas PV module production to exceed 15 GW in 2026</a></div>
+  <div class="article-summary">Texas is poised to become the nation's solar manufacturing powerhouse, with production projected to surpass 15 GW in 2026, nearly half of the U.S. total. This surge, driven by major players like T1 Energy and Canadian Solar, significantly bolsters domestic clean energy supply chains and accelerates the transition away from fossil fuels.</div>
+  <div class="article-meta">May 07, 2026  09:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/06/commercial-electricity-sales-have-soared-in-virginia-driven-by-data-centers/" target="_blank">Commercial Electricity Sales Have Soared in Virginia, Driven by Data Centers</a></div>
+  <div class="article-summary">Commercial electricity sales in Virginia increased by nearly 30.0 million megawatthours (MWh) between 2019 and 2025, much faster growth than in any other state except Texas, a much larger state, according to our Annual Electric Power Industry Report.…</div>
+  <div class="article-meta">May 07, 2026  06:56 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/07/curtailment-negative-prices-push-greek-small-and-medium-sized-pv-owners-toward-bankruptcy/" target="_blank">Curtailment, negative prices push Greek small- and medium-sized PV asset owners toward bankruptcy</a></div>
+  <div class="article-summary">Greek solar producers are facing bankruptcy as wholesale electricity prices plummet to zero or negative during peak solar generation hours, leading to a dramatic surge in curtailed renewable energy. This crisis, with 876.5 GWh curtailed in just four months, threatens the financial viability of thousands of small PV assets, highlighting a critical bottleneck in Greece's rapid renewable energy expansion that could slow climate progress.</div>
+  <div class="article-meta">May 07, 2026  10:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-06/us-considers-tapping-oil-under-military-bases-to-refill-reserve" target="_blank">US Considers Tapping Oil Under Military Bases to Refill Reserve</a></div>
+  <div class="article-summary">The Trump administration is studying using oil under land at US military bases and other Department of War sites to help refill the nation’s depleted emergency reserves, according to a person familiar with the matter.…</div>
+  <div class="article-meta">May 07, 2026  00:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-06/microsoft-considers-dropping-100-100-0-clean-energy-target" target="_blank">Microsoft Reconsiders Clean-Energy Pledge Made Harder by AI</a></div>
+  <div class="article-summary">The tech giant may drop one of the industry’s most ambitious climate targets…</div>
+  <div class="article-meta">May 06, 2026  19:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-06/microsoft-clean-power-target-on-chopping-block-over-data-center-boom" target="_blank">Microsoft in Talks to Ax Energy Pledge Amid Data Center Boom</a></div>
+  <div class="article-summary">Microsoft Corp. is in discussions to shelve one of the industry’s most ambitious clean-energy targets as it tries to remove hurdles that could hold it back in the race to power data centers, according to people with knowledge of the matter.…</div>
+  <div class="article-meta">May 06, 2026  15:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/06/coal-distributions-for-non-electric-power-use-decline-in-the-south/" target="_blank">Coal Distributions for Non-Electric Power Use Decline in the South</a></div>
+  <div class="article-summary">The volume of coal delivered in the United States for uses other than power generation—primarily, for manufacturing—decreased by about half in the last 15 years. Coal delivered for these purposes in the South decreased the most in percentage terms be…</div>
+  <div class="article-meta">May 07, 2026  06:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/may/07/otway-basin-gasfield-project-approved-near-twelve-apostles" target="_blank">New gasfield approved near Twelve Apostles puts climate and ‘pristine’ ocean in jeopardy, environmentalists warn</a></div>
+  <div class="article-summary">Victorian and federal Labor governments greenlight Otway basin drilling project with potential to supply one-third of state’s gasFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcasA new gas dri…</div>
+  <div class="article-meta">May 07, 2026  09:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/may/07/peter-magyar-climate-lgbtq-progressive-hungary" target="_blank">New Hungarian PM’s voters want action on climate and LGBTQ+ rights, poll finds</a></div>
+  <div class="article-summary">Exclusive: Voters remain split on issues critical to EU, such as support for Ukraine and dependence on Russian energyMore than three-quarters of Hungarians who voted for Péter Magyar in last month’s election want his government to do more to address…</div>
+  <div class="article-meta">May 07, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/06/alaska-mega-tsunami-climate-change-glacier" target="_blank">Alaska’s 2025 mega tsunami highlights risk to cruise lines as glaciers retreat</a></div>
+  <div class="article-summary">Researchers say 481-metre wave in fjord was triggered by rockslide linked to climate crisisA mega tsunami inAlaskalast year in a fjord visited by cruise ships is a stark warning of the risks of coastal rockslides and glacier retreat fueled by the cli…</div>
+  <div class="article-meta">May 06, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/lifeandstyle/2026/may/06/heat-floods-droughts-men-more-violent-to-women-natasha-walter-eco-feminism-world" target="_blank">‘Heat, floods and droughts make men more violent to women’: Natasha Walter on eco-feminism in a world on fire</a></div>
+  <div class="article-summary">The author has become acutely aware of how the climate crisis is affecting women – and, in her new book, she argues that it’s time for mainstream western feminists to join the dotsNatasha Walter is halfway through explaining how she came to be politi…</div>
+  <div class="article-meta">May 06, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/may/06/vote-labour-climate-crisis-climate-action-infrastructure-electrify-britain" target="_blank">A reason to vote Labour tomorrow: we are the only party taking the climate crisis seriously | Katie White</a></div>
+  <div class="article-summary">Climate action is something the vast majority of Britons agree on. But even the Greens are blocking the vital infrastructure we need to electrify BritainKatie White is the Labour MP for Leeds North West and minister for climate in the Department for…</div>
+  <div class="article-meta">May 06, 2026  13:21 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, May 07, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
