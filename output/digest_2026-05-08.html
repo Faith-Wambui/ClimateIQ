@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, May 08, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">55</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 47 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/07/sec-moves-toward-rescinding-climate-disclosure-rule-retreating-further-from-investor-protection/" target="_blank">SEC Moves Toward Rescinding Climate Disclosure Rule, Retreating Further From Investor Protection</a></div>
+  <div class="article-summary">The SEC is moving to scrap its 2024 climate disclosure rule, a move that will deny investors crucial information on climate risks. This rollback significantly weakens investor protection and obscures the financial implications of climate change for businesses.</div>
+  <div class="article-meta">May 08, 2026  06:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-07/trump-fema-council-backs-sweeping-overhaul-of-disaster-response" target="_blank">Trump’s FEMA Council Backs Overhaul of Disaster Response</a></div>
+  <div class="article-summary">President Donald Trump’s task force for reforming the Federal Emergency Management Agency on Thursday recommended sweeping changes to how the federal government responds to natural disasters.…</div>
+  <div class="article-meta">May 07, 2026  19:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-wind-and-solar-have-saved-uk-from-gas-imports-worth-1-7bn-since-iran-war-began/" target="_blank">Analysis: Wind and solar have saved UK from gas imports worth £1.7bn since Iran war began</a></div>
+  <div class="article-summary">The UK has avoided the need for gas imports worth £1.7bn since the start of the Iran war, as a result of record electricity generation from wind and solar, reveals Carbon Brief analysis.
+
+The surge in wind and solar output is cutting the need for gas…</div>
+  <div class="article-meta">May 07, 2026  16:02 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/08/solar-backup-power-supports-ukrainian-intensive-care-units-during-grid-outages-and-cyberattacks/" target="_blank">Solar backup power supports Ukrainian intensive care units during grid outages and cyberattacks</a></div>
+  <div class="article-summary">Ukraine is leveraging solar power and battery storage to keep critical infrastructure, like intensive care units, operational during grid outages and cyberattacks, a vital lesson for the EU. This resilience demonstrates how renewable energy can safeguard essential services against disruptions, proving its strategic importance beyond just decarbonization.</div>
+  <div class="article-meta">May 08, 2026  09:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/08/remote-australian-community-secures-permit-for-sun-turtle-solar-and-battery-project/" target="_blank">Remote Australian community secures permit for Sun Turtle solar and battery project</a></div>
+  <div class="article-summary">From pv magazine Australia
+
+A proposed 100%-First Nations-owned solar and battery power station in Western Australia, the Aalga Goorlil Sun Turtle Djarindjin Community Power Project (DCPP), has received planning approval from the Western Australia Re…</div>
+  <div class="article-meta">May 08, 2026  09:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/08/seg-solar-to-expand-u-s-manufacturing-with-4-gw-solar-module-plant/" target="_blank">SEG Solar to expand U.S. manufacturing with 4 GW solar module plant</a></div>
+  <div class="article-summary">SEG Solar is doubling down on U.S. manufacturing, launching a new 4 GW solar module plant in Houston, Texas, by Q3 2026. This significant expansion, adding to their existing 2 GW capacity, will bring their total domestic output to 6 GW and is crucial for meeting the growing demand for domestically sourced, traceable solar components essential for decarbonization efforts.</div>
+  <div class="article-meta">May 08, 2026  09:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/07/ev-penetration-continues-to-grow-down-under-april-update/" target="_blank">EV Penetration Continues to Grow Down Under — April Update</a></div>
+  <div class="article-summary">Australia's electric vehicle market hit a significant milestone in April 2026, with plug-in vehicles capturing nearly 27% of all new car sales, totaling 25,087 units. This surge, driven by strong battery electric vehicle sales, signals a crucial acceleration in the nation's transition away from fossil fuels, directly impacting its emissions reduction targets.</div>
+  <div class="article-meta">May 08, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/07/xpeng-unveils-the-world-model-accelerator-x-cache-which-requires-no-training-is-plug-and-play-and-boosts-inference-speed-by-2-7-times/" target="_blank">XPENG Unveils The “World Model Accelerator” X-Cache, Which Requires No Training, Is Plug-And-Play, And Boosts Inference Speed By 2.7 Times</a></div>
+  <div class="article-summary">XPENG has launched X-Cache, a plug-and-play accelerator for "world models" that boosts inference speed by 2.7 times without requiring training. This breakthrough in AI efficiency for autonomous driving systems like XPENG's could accelerate the development and deployment of greener, more efficient transportation solutions.</div>
+  <div class="article-meta">May 08, 2026  06:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-07/hochul-strikes-deal-to-water-down-ny-state-climate-law" target="_blank">New York Readies Rollback From One of the Strictest Climate Laws</a></div>
+  <div class="article-summary">Gov. Kathy Hochul says the pullback is necessary to protect New Yorkers from soaring energy prices.…</div>
+  <div class="article-meta">May 07, 2026  23:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-07/us-cities-with-the-least-urban-sprawl-seen-benefits-to-health-well-being" target="_blank">How a Suburban County Beat Back Sprawl</a></div>
+  <div class="article-summary">A study of US metro areas shows how the Bridgeport, Connecticut, region went from one of the most sprawling to one of the least.…</div>
+  <div class="article-meta">May 07, 2026  19:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-07/polish-president-seeks-referendum-on-costly-eu-climate-policy" target="_blank">Polish President Seeks Referendum on ‘Costly’ EU Climate Policy</a></div>
+  <div class="article-summary">Poland’s nationalist President Karol Nawrocki said he wanted to call a referendum on European Union climate policy in a move that’s bound to create fresh tensions with the pro-EU government and with Brussels.…</div>
+  <div class="article-meta">May 07, 2026  19:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-07/china-and-europe-form-carbon-alliance-as-us-bets-on-fossil-fuels" target="_blank">China and Europe Form Carbon Alliance as US Bets on Fossil Fuels</a></div>
+  <div class="article-summary">China and the European Union have joined forces in a bid to create a global alliance on carbon pricing, putting them at odds with the Trump administration’s push to invest more in fossil fuels.…</div>
+  <div class="article-meta">May 07, 2026  19:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-07/ai-push-to-add-1-6-billion-to-maryland-power-bills-state-says" target="_blank">AI Push to Add $1.6 Billion to Maryland Power Bills, State Says</a></div>
+  <div class="article-summary">Maryland homeowners will pay an extra $1.6 billion on their electric bills over the next decade to subsidize grid costs to feed data centers, according to a state agency.…</div>
+  <div class="article-meta">May 07, 2026  18:58 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/mozambique/mozambique-food-security-cluster-overview-dashboard-response-monitoring-january-march-2026" target="_blank">Mozambique Food Security Cluster: Overview Dashboard - Response Monitoring (January to March 2026)</a></div>
+  <div class="article-summary">A robust response is required to avoid a humanitarian catastrophe. The plan aims to immediately and rapidly scale-up operations and to increase the provision of protection and life-saving assistance.…</div>
+  <div class="article-meta">May 08, 2026  09:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/enabling-recovery-yemens-displaced-families-al-dhalee-governorate" target="_blank">Enabling Recovery for Yemen’s Displaced Families in Al Dhale’e Governorate</a></div>
+  <div class="article-summary">Yemen's Al Dhale'e governorate, a frontline of conflict, is grappling with severe humanitarian needs, including 5.2 million internally displaced people and recurrent climate shocks like flooding. This displacement exacerbates food insecurity and limits access to basic services, pushing families like Saeed's to skip meals and forgo healthcare, a direct consequence of climate-induced instability impacting livelihoods.</div>
+  <div class="article-meta">May 08, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/occupied-palestinian-territory/providing-rental-cash-support-displaced-families" target="_blank">oPt: Providing rental cash support to displaced families</a></div>
+  <div class="article-summary">Over 33,000 Palestinians displaced from Jenin Camp since January 2025 are struggling with rental costs, with programs like the oPt HF providing crucial cash assistance to prevent further instability. This aid directly addresses the immediate climate-driven displacement crisis, ensuring families can maintain shelter amidst ongoing conflict and limited formal housing options.</div>
+  <div class="article-meta">May 08, 2026  04:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/zambia/zambia-flood-2026-dref-operational-update-mdrzm026" target="_blank">Zambia Flood 2026: DREF Operational Update (MDRZM026)</a></div>
+  <div class="article-summary">Country: ZambiaSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.Description of the EventDate of event17-04-2026What happened, where and when?Continuous and heavy rainfall began in Southern Prov…</div>
+  <div class="article-meta">May 08, 2026  03:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/colombia/colombia-briefing-departamental-narino-enero-diciembre-de-2025" target="_blank">Colombia: Briefing Departamental, Nariño, enero a diciembre de 2025</a></div>
+  <div class="article-summary">Country: ColombiaSources: El Equipo Humanitario País Colombia, UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.En 2025, Nariño concentró el 7,3% del desplazamiento forzado nacional, generando impactos despropor…</div>
+  <div class="article-meta">May 07, 2026  19:04 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/ukraine/snfi-cluster-kharkiv-hub-monthly-coordination-meeting-22-april-2026-enuk" target="_blank">Ukraine: SNFI Cluster Kharkiv-Hub Monthly Coordination Meeting (22 April 2026) [EN/UK]</a></div>
+  <div class="article-summary">Country: UkraineSources: Shelter Cluster, UN High Commissioner for RefugeesPlease refer to the attached file.…</div>
+  <div class="article-meta">May 08, 2026  04:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/07/iran-war-big-oil-climate" target="_blank">Trump’s Iran war may stymie climate gains with boost to big oil, experts say</a></div>
+  <div class="article-summary">Windfall profits could lock in Trump-era political wins for the industry and slow clean-energy transitionThe billions in profits big oil is reaping due to the Iran war may stymie the energy transition, experts and advocates fear, incentivizing oil an…</div>
+  <div class="article-meta">May 07, 2026  14:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/07/europe-us-car-culture-bigger-vehicles-harms-suvs-trucks" target="_blank">‘At a crossroads’: will piling-up crises force Europe to put brakes on SUV culture?</a></div>
+  <div class="article-summary">Bigger cars including electric can cause multiple harms, yet resistance to rise of US-style vehicles has had mixed supportOn a brisk winter’s evening in Europe’s automotive heartland, a cyclist who had pushed for safer streets went out on his bike fo…</div>
+  <div class="article-meta">May 07, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/07/oil-crisis-could-boost-struggling-sustainable-aviation-fuel-industry/" target="_blank">Oil crisis could boost struggling sustainable aviation fuel industry</a></div>
+  <div class="article-summary">As the price of oil-based jet fuel shoots up, biofuel or hydrogen-based alternatives look more appealingThe postOil crisis could boost struggling sustainable aviation fuel industryappeared first onClimate Home News.…</div>
+  <div class="article-meta">May 07, 2026  12:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07052026/duke-energy-north-carolina-enbridge-pipeline-opposition/" target="_blank">A New Enbridge Pipeline Spurs Opposition in Central North Carolina</a></div>
+  <div class="article-summary">SILER CITY, N.C.—John Alderman opened the letter, sent by certified mail from an attorney in New Orleans.  This is trouble, Alderman thought. It can’t be good news. In late April Enbridge, a Canadian company, announced its plans to build a new 28-mil…</div>
+  <div class="article-meta">May 07, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, May 08, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
