@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, May 11, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">34</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 26 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/11/malaysia-is-increasing-local-tariffs-to-protect-its-national-car-brands/" target="_blank">Malaysia Is Increasing Local Tariffs To Protect Its National Car Brands</a></div>
+  <div class="article-summary">Malaysia is raising import tariffs on electric vehicles starting July 1st to shield its domestic car manufacturers from foreign competition. This move, announced by the Ministry of Investment, Trade and Industry, could slow the adoption of cleaner transportation in the region, potentially hindering progress towards emissions reduction goals.</div>
+  <div class="article-meta">May 11, 2026  07:33 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/11/hybrid-latent-sensible-storage-can-improve-pvt-driven-residential-heat-pump-cop-by-72-4/" target="_blank">Hybrid latent-sensible storage can improve PVT-driven residential heat pump COP by 72.4%</a></div>
+  <div class="article-summary">Italian researchers have boosted the efficiency of solar-powered heat pumps for hot water by 72.4% using a novel hybrid storage system combining latent and sensible heat. This innovation better matches solar energy supply with demand, significantly increasing renewable energy use in homes.</div>
+  <div class="article-meta">May 11, 2026  11:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/11/chinese-researchers-achieve-world-record-efficiency-of-27-17-for-inverted-perovskite-solar-cell/" target="_blank">Chinese researchers achieve world-record efficiency of 27.17% for inverted perovskite solar cell</a></div>
+  <div class="article-summary">Chinese researchers have shattered the efficiency record for inverted perovskite solar cells, achieving a remarkable 27.17% conversion rate. This breakthrough, by Nankai University and Beijing Institute of Technology, is critical for accelerating the transition to cleaner energy by making solar power more potent and cost-effective.</div>
+  <div class="article-meta">May 11, 2026  10:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/11/worlds-smallest-island-nation-advances-18-mw-40-mwh-solar-plus-storage-project/" target="_blank">World’s smallest island nation advances 18 MW / 40 MWh solar-plus-storage project</a></div>
+  <div class="article-summary">The Republic of Nauru, a tiny island nation, is set to eliminate its reliance on 7-8 million liters of imported diesel annually by deploying an 18 MW solar and 40 MWh battery storage system. This significant shift to renewables will bolster Nauru's energy security and reduce costs, offering a crucial model for other vulnerable island states facing similar climate challenges.</div>
+  <div class="article-meta">May 11, 2026  08:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/11/fh-capital-to-acquire-majority-stake-in-jinkosolar-u-s-manufacturing/" target="_blank">FH Capital to acquire majority stake in JinkoSolar U.S. manufacturing</a></div>
+  <div class="article-summary">FH Capital is acquiring a majority stake in JinkoSolar's U.S. manufacturing operations, including a 2 GW solar module facility and battery storage business, to navigate new "Foreign Entity of Concern" rules and secure domestic content tax credits. This strategic shift is crucial for accelerating U.S. clean energy deployment by expanding domestic solar and battery manufacturing capacity to meet growing demand for integrated solutions.</div>
+  <div class="article-meta">May 11, 2026  08:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/10/oooooh-scary-electric-cars-are-everywhere-in-america/" target="_blank">Oooooh, Scary Electric Cars Are Everywhere In America!</a></div>
+  <div class="article-summary">Despite soaring gas prices, a recent survey reveals two-thirds of Americans don't believe electric cars will save them money on fuel. This widespread perception, even when actual savings could exceed $1,000 annually for drivers switching from gas-guzzling SUVs, hinders EV adoption and slows the transition to cleaner transportation.</div>
+  <div class="article-meta">May 11, 2026  06:56 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-10/china-s-green-exporters-seize-on-new-markets-after-iran-war-fuel-shock" target="_blank">China Green Tech Firms Target New Consumers Hit by Iran War Energy Shock</a></div>
+  <div class="article-summary">Suppliers of batteries, solar panels and electric cars are pushing to capitalize on rising demand.…</div>
+  <div class="article-meta">May 11, 2026  02:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-10/steel-sector-s-coal-reliance-puts-green-transition-in-doubt-gem" target="_blank">Steel Sector’s Coal Reliance Puts Green Transition in Doubt: GEM</a></div>
+  <div class="article-summary">The global steel industry’s green transition is threatened by continued spending on coal-based production and underinvestment in cleaner methods, according to a clean energy research group.…</div>
+  <div class="article-meta">May 11, 2026  01:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/mozambique/mozambique-floods-2026-operation-update-2-mdrmz027" target="_blank">Mozambique | Floods 2026 Operation Update #2 (MDRMZ027)</a></div>
+  <div class="article-summary">Mozambique is grappling with a severe humanitarian crisis after prolonged flooding in late 2025, impacting over 724,000 people, destroying thousands of homes, and devastating critical infrastructure and agriculture. This ongoing disaster highlights the increasing vulnerability of nations like Mozambique to extreme weather events, underscoring the urgent need for climate adaptation and sustained international support.</div>
+  <div class="article-meta">May 11, 2026  07:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-nutrition-cluster-operational-partners-governorate-jan-mar-2026" target="_blank">Yemen Nutrition Cluster Operational Partners per Governorate, Jan - Mar 2026</a></div>
+  <div class="article-summary">Country: YemenSources: Nutrition Cluster, UN Children's FundPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">May 11, 2026  03:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/world/sustaining-coordination-beyond-cluster-deactivation-urgent-case-locally-led-cluster-transitions-and-deactivation" target="_blank">World: Sustaining Coordination Beyond Cluster Deactivation: The Urgent Case for Locally Led Cluster Transitions and Deactivation</a></div>
+  <div class="article-summary">Countries: World, Lebanon, UkraineSource: Inter-Agency Standing CommitteePlease refer to the attached file.By the Global Cluster Coordination Group (GCCG) – Localisation Working Group - 9 April 2026Clusters are temporary coordination structures, whic…</div>
+  <div class="article-meta">May 11, 2026  02:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/cameroon/unfpa-cameroon-situation-report-politics-conflict-climate-disaster-and-displacement-1-31-march-2026" target="_blank">UNFPA Cameroon Situation Report: Politics, Conflict, Climate Disaster, and Displacement (1 - 31 March 2026)</a></div>
+  <div class="article-summary">Country: CameroonSource: United Nations Population FundPlease refer to the attached file.The North-West and South-West regions of Cameroon continue to experience escalating violence and abductions, severely restricting civilian movement and access to…</div>
+  <div class="article-meta">May 11, 2026  02:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/lebanon/unfpa-situation-report-lebanon-crisis-17-30-april-2026" target="_blank">UNFPA Situation Report: Lebanon Crisis (17 - 30 April 2026)</a></div>
+  <div class="article-summary">Country: LebanonSource: United Nations Population FundPlease refer to the attached file.Despite the formal announcement of a ceasefire, daily violations, including bombardment, shelling, airstrikes, demolitions, and movement restrictions, continue, p…</div>
+  <div class="article-meta">May 11, 2026  02:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/11/signify-we-believe-resilience-is-becoming-more-important-to-businesses-right-now/" target="_blank">Signify: “We believe resilience is becoming more important to businesses right now”</a></div>
+  <div class="article-summary">Global lighting giant Signify is prioritizing resilience in its new sustainability program, focusing on energy efficiency and the circular economy. This strategic shift underscores how businesses are increasingly linking climate action to operational stability and long-term viability.</div>
+  <div class="article-meta">May 11, 2026  10:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/10/vibrio-bacteria-east-coast-climate-change" target="_blank">A deadly bacterium is creeping up the US east coast. How worried should we be?</a></div>
+  <div class="article-summary">Warming ocean waters are priming beaches and raw shellfish for Vibrio even as scientists are trying to stay one step aheadBailey Magers and Sunil Kumar cut strange figures on Pensacola Beach. Bags of disinfectant solution surrounded them on the white…</div>
+  <div class="article-meta">May 10, 2026  17:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/2026/may/10/gullah-geechee-low-country" target="_blank">Gullah Geechee people set out to keep their family land. Unclear titles and surging taxes are pushing them out</a></div>
+  <div class="article-summary">Property disputes, predatory developers and surging sea levels are putting the historic Black community at riskOn Arthur Champen’s half-acre property in Hilton Head Island,South Carolina, a thicket of southern live oaks, palmettos and pine trees muff…</div>
+  <div class="article-meta">May 10, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10052026/well-done-foundation-plugging-abandoned-oil-gas-wells/" target="_blank">Plugging Away at the Millions of Derelict Oil and Gas Wells in the US</a></div>
+  <div class="article-summary">OKMULGEE, Okla.—There are a few truisms in the oil and gas industry: It is crowded with prodigious egos, there is always a boom around the corner and some industry operators aren’t above walking away from their mess at played-out well sites. Abandoni…</div>
+  <div class="article-meta">May 10, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10052026/plant-vogtle-nuclear-debate-two-years-after-completion/" target="_blank">Two Years After Completion, Plant Vogtle Still Looms Over the Nuclear Debate</a></div>
+  <div class="article-summary">As states across the country weigh a new wave of nuclear energy, many in Georgia are urging caution. Two years after Plant Vogtle’s newest reactors came online there, customers are still paying for the project—and many say they are not getting their…</div>
+  <div class="article-meta">May 10, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, May 11, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
