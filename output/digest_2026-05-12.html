@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, May 12, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 6 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:47%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/12/new-zealand-moves-to-reduce-red-tape-for-rooftop-solar/" target="_blank">New Zealand moves to reduce red tape for rooftop solar</a></div>
+  <div class="article-summary">New Zealand is slashing regulatory hurdles for rooftop solar, aiming to match Australia's swift 24-hour approval times and make installations as simple as possible. This move is crucial for accelerating clean energy adoption, as New Zealand lags significantly behind Australia in household solar penetration despite a 44% surge in installations last year, with the government recognizing that streamlining the process will lower costs and encourage more homes to generate their own power.</div>
+  <div class="article-meta">May 12, 2026  09:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/12/datacentres-australia-wind-solar-energy-investment" target="_blank">Datacentres should be forced to invest in wind and solar energy, agree all states except Queensland</a></div>
+  <div class="article-summary">Australia's energy ministers have agreed that new, energy-intensive datacentres must fully offset their electricity demand by investing in new wind and solar projects, with only Queensland abstaining. This move is critical as the burgeoning demand from AI-powered datacentres threatens to significantly increase emissions, making this mandate a crucial step towards ensuring their growth doesn't derail climate targets.</div>
+  <div class="article-meta">May 12, 2026  08:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/11/34-northvolt-sized-battery-factories-could-be-lost-if-eu-scales-back-ev-targets-study/" target="_blank">34 Northvolt-Sized Battery Factories Could Be Lost If EU Scales Back EV Targets — Study</a></div>
+  <div class="article-summary">Europe's potential to build 34 Northvolt-sized battery factories is at risk if the EU weakens its EV targets. This industrial opportunity loss could significantly hinder Europe's transition to clean energy and its competitiveness in the global EV market.</div>
+  <div class="article-meta">May 12, 2026  06:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/12/coal-india-shuts-down-solar-manufacturing-arm/" target="_blank">Coal India shuts down solar manufacturing arm</a></div>
+  <div class="article-summary">Coal India, a state-owned coal giant, has dissolved its solar manufacturing subsidiary, CIL Solar PV Ltd, abandoning plans for a 4 GW integrated solar PV facility. This decision signals a setback for India's domestic solar manufacturing ambitions and highlights the challenges in diversifying away from fossil fuels, even for companies aiming to decarbonize their operations.</div>
+  <div class="article-meta">May 12, 2026  10:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/12/zendure-launches-ems-combining-rooftop-pv-battery-storage-and-household-loads/" target="_blank">Zendure launches EMS combining rooftop PV, battery storage and household loads</a></div>
+  <div class="article-summary">Zendure's new PowerHub energy management system seamlessly integrates rooftop solar, up to 150 kWh of battery storage, and household loads, including 22 kW EV charging. This innovation is crucial for accelerating the adoption of renewable energy by optimizing home energy use and reducing reliance on fossil fuels.</div>
+  <div class="article-meta">May 12, 2026  09:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/12/u-s-transformer-market-faces-severe-supply-constraints/" target="_blank">U.S. transformer market faces severe supply constraints</a></div>
+  <div class="article-summary">The U.S. is facing a critical shortage of electrical transformers, with lead times stretching up to four years due to surging demand from AI data centers and the clean energy transition, alongside raw material constraints. This bottleneck is severely hindering grid modernization and renewable energy deployment, risking stranded assets and delaying crucial decarbonization efforts.</div>
+  <div class="article-meta">May 12, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/11/introducing-ford-energy/" target="_blank">Introducing Ford Energy</a></div>
+  <div class="article-summary">Today we mark the formal introduction of Ford Energy. For the better part of a year, we have operated quietly to build a foundation for this business. We haven’t just been planning; we have been executing — securing supply chains, readying our manufa…</div>
+  <div class="article-meta">May 12, 2026  05:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/11/sierra-club-toyota-isnt-delivering-for-u-s-families/" target="_blank">Sierra Club: Toyota Isn’t Delivering for U.S. Families</a></div>
+  <div class="article-summary">Washington, DC — On Friday, Toyota Motor reported its earnings for the fiscal year ending in March 2026. Toyota sold approximately 9.6 million units globally and touted that over 5 million units were “electrified vehicles.” While the full-year earnin…</div>
+  <div class="article-meta">May 12, 2026  05:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-11/ifm-warns-it-will-end-a-3-billion-fuel-project-without-new-rules" target="_blank">IFM Issues Ultimatum Over A$3 Billion Australia Fuel Project</a></div>
+  <div class="article-summary">IFM Investors Pty warned it may scrap a proposed A$3 billion ($2.2 billion) investment to make sustainable aviation fuel in Australia, unless the government mandates that airlines use the product.…</div>
+  <div class="article-meta">May 12, 2026  00:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-11/new-zealand-plans-law-change-to-block-action-against-polluters" target="_blank">Polluters to Win Protection Against Legal Action in New Zealand</a></div>
+  <div class="article-summary">New Zealand’s government plans a law change to prevent private legal action against greenhouse gas emitters, arguing cases have created business uncertainty and deterred investment.…</div>
+  <div class="article-meta">May 12, 2026  00:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-11/trump-taps-former-fema-chief-hamilton-to-lead-agency-again" target="_blank">Trump Taps Former FEMA Chief Hamilton to Lead Agency Again</a></div>
+  <div class="article-summary">The Trump administration selected Cameron Hamilton to lead the Federal Emergency Management Agency, which is grappling with reduced staffing levels ahead of hurricane season in the Atlantic.…</div>
+  <div class="article-meta">May 11, 2026  23:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-11/iran-war-is-triggering-a-new-china-push-on-clean-technology-exports" target="_blank">Iran War Is Triggering a New China Push on Clean Tech Exports</a></div>
+  <div class="article-summary">Manufacturers of electric vehicles, batteries, and solar panels are wooing new markets.…</div>
+  <div class="article-meta">May 11, 2026  16:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-11/why-el-nino-uncertainty-is-making-risk-pricing-harder-for-insurers" target="_blank">A Strong El Niño? Insurers Are Grappling With Risk Uncertainty</a></div>
+  <div class="article-summary">The possibility of a super planet-heating event, which would make extreme weather impacts more likely, is challenging underwriters pricing climate risks.…</div>
+  <div class="article-meta">May 11, 2026  14:38 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/12/scientists-warn-el-nino-could-intensify-climate-extremes-in-2026/" target="_blank">Scientists warn El Niño could intensify climate extremes in 2026</a></div>
+  <div class="article-summary">Scientists are warning that a potent El Niño event, predicted to emerge in 2026, could significantly amplify global wildfire risk, heatwaves, and flooding. This intensification of climate extremes is particularly concerning as it will layer on top of already rising global temperatures.</div>
+  <div class="article-meta">May 12, 2026  08:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-12/worst-start-to-wildfire-season-raises-alarm-as-el-nino-threatens" target="_blank">Worst Start to Wildfire Season Raises Alarm as El Niño Threatens</a></div>
+  <div class="article-summary">Record heat and drought have triggered the worst wildfire season start globally, with a developing El Niño poised to amplify these extreme events. This alarming trend underscores the escalating climate crisis, signaling increased risks of widespread environmental damage and disruption.</div>
+  <div class="article-meta">May 12, 2026  07:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11052026/epa-proposes-looser-construction-rules-for-gas-plants-data-centers/" target="_blank">Trump’s EPA Seeks Looser Construction Rules for Gas Plants, Data Centers and Factories</a></div>
+  <div class="article-summary">The U.S. Environmental Protection Agency announced proposed changes Monday that would allow gas power plants, data centers and factories to begin construction on non-polluting components such as piping, wiring, cement pads and other support structure…</div>
+  <div class="article-meta">May 12, 2026  03:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11052026/climate-change-role-in-war/" target="_blank">Some Climate Shocks Can Increase the Likelihood of War</a></div>
+  <div class="article-summary">New research reinforces scientific evidence that climate extremes can raise the risk of armed conflict, especially when drought conditions pass critical thresholds in vulnerable regions, including parts of Africa and Southeast Asia.  The study, publi…</div>
+  <div class="article-meta">May 11, 2026  22:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/11/santa-marta-was-a-learning-moment-for-how-to-shape-inclusive-just-transitions/" target="_blank">Santa Marta was a learning moment for how to shape inclusive just transitions</a></div>
+  <div class="article-summary">Researchers working on the shift away from fossil fuels must ensure knowledge is co-produced with grassroots communities and translates into action for those on the frontlineThe postSanta Marta was a learning moment for how to shape inclusive just tr…</div>
+  <div class="article-meta">May 11, 2026  16:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/11/critically-low-snowpack-west" target="_blank">Lasers in the sky: hi-tech missions track record snowpack loss in US west</a></div>
+  <div class="article-summary">Data from missions showing critically low snowpack on mountains across the west raises alarm among expertsHigh above the jagged peaks of California’s Sierra Nevada, the view from the cockpit is breathtaking. At first glance, the mountains appear drap…</div>
+  <div class="article-meta">May 11, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11052026/maine-wild-blueberry-farms-climate-change/" target="_blank">Wild Blueberry Farms Across Maine Suffer as Climate Change Upends Growing Seasons</a></div>
+  <div class="article-summary">Last summer, the wild blueberry fields at Crystal Spring Farm turned red too soon.  Severe drought had gripped most of the state of Maine. At his farm near the town of Brunswick, Seth Kroeck knew the leaves were changing color prematurely because the…</div>
+  <div class="article-meta">May 11, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, May 12, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
