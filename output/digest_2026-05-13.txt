@@ -1,0 +1,150 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Wednesday, May 13, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ South Korea’s first agrivoltaics law leaves half of farmland off-limits
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/13/south-koreas-first-agrivoltaics-law-leaves-half-of-farmland-off-limits/
+  Date   : May 13, 2026  08:00 EAT
+  Summary: South Korea just enacted its first agrivoltaics law, allowing solar panels on farmland, but controversially excludes nearly half of the nation's agricultural land. This significant carve-out limits the potential for renewable energy expansion and dual-use land strategies crucial for meeting climate goals.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Solar Impulse 2 crashes in Gulf of Mexico during unmanned test flight
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/13/solar-impulse-2-crashes-in-gulf-of-mexico-during-unmanned-test-flight/
+  Date   : May 13, 2026  09:57 EAT
+  Summary: The Solar Impulse 2, a pioneering solar-powered aircraft, crashed in the Gulf of Mexico during an unmanned test flight after losing power shortly after takeoff. This incident, while ending a specific airframe that once circumnavigated the globe without fossil fuels, underscores the ongoing challenges in scaling solar aviation for long-endurance applications, a critical area for decarbonizing air transport.
+
+
+▸ Anker Solix launches modular 5 kWh battery for residential PV
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/13/anker-solix-launches-modular-5-kwh-battery-for-residential-pv/
+  Date   : May 13, 2026  09:20 EAT
+  Summary: Anker Solix has launched a modular 5 kWh battery system, the Solarbank 4 E5000 Pro, in Berlin, designed for easy integration into existing homes and expandable up to 30 kWh. This innovation simplifies residential solar storage, enabling more households to directly utilize and store solar power, thereby reducing reliance on fossil fuels and bolstering grid resilience.
+
+
+▸ Sodium-ion batteries Alsym and Juniper to deploy 500 MWh of sodium-ion battery storage
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/13/sodium-ion-batteries-alsym-and-juniper-to-deploy-500-mwh-of-sodium-ion-battery-storage/
+  Date   : May 13, 2026  08:54 EAT
+  Summary: Juniper Energy is deploying 500 MWh of Alsym's non-flammable sodium-ion batteries, primarily in California's Mojave Desert, marking a significant shift away from lithium-ion for high-temperature grid storage. This move highlights sodium-ion's potential for safer, more cost-effective, and domestically sourced energy storage, crucial for scaling renewables in challenging climates.
+
+
+▸ U.S. Solar developer seeks connection to wrong powerline, delays project five years
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/13/u-s-solar-developer-seeks-connection-to-wrong-powerline-delays-project-five-years/
+  Date   : May 13, 2026  08:50 EAT
+  Summary: A 75 MW solar project in Mount Jackson, Virginia faces a five-year delay due to a developer error in specifying the wrong powerline for interconnection. This significant setback for clean energy deployment highlights the complex and often bureaucratic hurdles hindering renewable energy expansion.
+
+
+▸ The ICE age is over: gas car sales drop 37% in world’s biggest market
+  Source : Electrek
+  Link   : https://electrek.co/2026/05/12/the-ice-age-is-over-gas-car-sales-drop-37-in-worlds-biggest-market/
+  Date   : May 13, 2026  08:32 EAT
+  Summary: Gasoline car sales in China plummeted 37% in April, with plug-in vehicles now dominating the top 10 models, signaling a decisive shift away from fossil fuels. This rapid transition in the world's largest auto market underscores the accelerating global move towards electrification, directly impacting future oil demand and the pace of decarbonization.
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ Solar Power Is So Big in Europe That Electricity Is Being Wasted
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-13/europe-solar-power-wasted-as-electricity-grids-fail-to-handle-surge
+  Date   : May 13, 2026  07:00 EAT
+  Summary: In the coming months, enough electricity to supply London for a year will be switched off.…
+
+
+▸ High Stakes: How Much EV Investment Is At Risk Across Europe
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/05/12/high-stakes-how-much-ev-investment-is-at-risk-across-europe/
+  Date   : May 13, 2026  05:20 EAT
+  Summary: A new study examines the ‘industrial opportunity cost’ of proposals to weaken EU car CO2 targets. Spurred by the growing electric car market, much investment into EV production, batteries and components has been announced. But this is now at risk as…
+
+
+▸ Ananym Capital Urges BWX to Make Commercial Nuclear Reactors
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-12/activist-ananym-urges-bwx-to-make-commercial-nuclear-reactors
+  Date   : May 13, 2026  00:32 EAT
+  Summary: Activist fund Ananym Capital Management is pushing nuclear technology company BWX Technologies Inc. to tap its nuclear reactor manufacturing capabilities for commercial use.…
+
+
+▸ Trump Makes FEMA Decision Ahead of Atlantic Hurricane Season
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-05-12/trump-makes-fema-decision-ahead-of-atlantic-hurricane-season
+  Date   : May 12, 2026  20:33 EAT
+  Summary: The White House nominated former Navy SEAL Cameron Hamilton ahead of the Atlantic hurricane season.…
+
+
+▸ Can Trump's New FEMA Pick Save the Beleaguered Disaster Agency?
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-12/trump-s-fema-pick-aimed-to-radically-shrink-disaster-agency
+  Date   : May 12, 2026  17:22 EAT
+  Summary: Backers say Cameron Hamilton willbring direction to the agency, but critics question whether he has the experience for its top job.…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ Typhoon Season in Northwest Pacific Seen Most Active in a Decade
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-13/typhoon-season-in-northwest-pacific-seen-most-active-in-a-decade
+  Date   : May 13, 2026  06:06 EAT
+  Summary: Typhoon activity in the Northwest Pacific Ocean is expected to be the highest this year since 2015, according to commercial forecaster Tropical Storm Risk.…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ David Attenborough is not just a national treasure: he is also the most radical person on TV | Jonathan Liew
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/commentisfree/2026/may/13/david-attenborough-most-radical-person-tv
+  Date   : May 13, 2026  10:00 EAT
+  Summary: David Attenborough, often seen as a gentle naturalist, is actually delivering a radical critique of capitalism, warning that its profit-driven model inevitably leads to disaster. His message highlights a growing global realization that unchecked greed, the engine of our current economic system, is unsustainable and detrimental to our future.
+
+
+▸ An Unusual Heat Wave Strains the World’s Most Populous Country
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12052026/todays-climate-india-heat-wave-health-financial-risks/
+  Date   : May 13, 2026  00:42 EAT
+  Summary: Every one of the world’s 50 hottest cities was located inside India at the end of April—a global weather-tracking anomaly, according to a major air-quality monitoring platform.  As an unusual early-season heat wave gripped the country, average peak t…
+
+
+▸ As El Niño Approaches, Scientists Predict Fierce Heatwaves, Wildfires and Floods
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12052026/el-nino-climate-extremes-heatwaves-wildfires-floods/
+  Date   : May 12, 2026  22:40 EAT
+  Summary: Scientists said this week that a developing El Niño is likely to amplify heatwaves, droughts and floods this year, but warned that the long-term warming caused by burning fossil fuels remains the main driver of climate extremes. El Niño is the warm p…
+
+
+▸ Trump Administration Kills Rule Putting Conservation of Public Lands on Equal Footing With Resource Extraction
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12052026/trump-blm-repeals-public-lands-conservation-rule/
+  Date   : May 12, 2026  21:58 EAT
+  Summary: The Trump Administration on Tuesday finalized its repeal of the Bureau of Land Management’s Conservation and Landscape Health Rule, better known as the Public Lands Rule, which gave conservation activities on federal land equal priority with extracti…
+
+
+▸ Paris Agreement committee snubbed over missing NDC climate plans
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/05/12/paris-agreement-committee-snubbed-over-missing-ndc-climate-plans/
+  Date   : May 12, 2026  13:35 EAT
+  Summary: Many governments have still not submitted a nationally determined contribution to the UN, breaching a key requirement of the Paris AgreementThe postParis Agreement committee snubbed over missing NDC climate plansappeared first onClimate Home News.…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 45  |  Sources: 7  |  Topics: 5
