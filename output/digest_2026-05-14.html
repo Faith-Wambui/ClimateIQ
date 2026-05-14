@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, May 14, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 From Carbon Capture to Climate Justice: Global Efforts Accelerate Amidst Geopolitical Shocks</div>
+    <p>Today's climate news highlights a critical juncture, showcasing technological leaps in carbon utilization and renewable energy alongside significant policy developments aimed at climate justice. As nations grapple with the economic instability exposed by geopolitical events, the urgency for robust climate action and accountability has never been clearer. This convergence of innovation and international law signals a potential paradigm shift towards a more sustainable and equitable future.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">50</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-14/un-climate-chief-lavishes-praise-on-china-as-trump-meets-xi" target="_blank">UN Climate Chief Lavishes Praise on China as Trump Meets Xi</a></div>
+  <div class="article-summary">The UN's top climate official is championing China's green transition, highlighting its leadership as a model for other nations. This endorsement comes as the Iran war underscores the economic risks of fossil fuel dependency, making China's climate leadership increasingly critical for global stability.</div>
+  <div class="article-meta">May 14, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/may/14/un-members-prepare-for-pivotal-vote-on-landmark-icj-climate-justice-ruling" target="_blank">UN members prepare for pivotal vote on landmark ICJ climate justice ruling</a></div>
+  <div class="article-summary">Next week, UN member states will vote on a resolution to formally recognize the International Court of Justice's findings on climate justice, establishing a legal responsibility for governments to cut greenhouse gas emissions, including fossil fuels. This pivotal vote in New York will signal the UN's commitment to a fair and legal approach to the climate crisis, potentially ushering in a new era of accountability for nations.</div>
+  <div class="article-meta">May 14, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/14/indias-storage-market-shifts-from-tenders-to-execution/" target="_blank">India’s storage market shifts from tenders to execution</a></div>
+  <div class="article-summary">India's battery storage market is transitioning from ambitious bids to actual project deployment, driven by a national focus on grid stability and reliable, long-term energy supply. This shift is crucial as the country ramps up renewable energy integration, ensuring consistent power delivery even when solar and wind sources are intermittent.</div>
+  <div class="article-meta">May 14, 2026  10:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/14/plug-and-play-control-framework-for-adjusting-panel-tilt-in-agrivoltaics/" target="_blank">Plug-and-play control framework for adjusting panel tilt in agrivoltaics</a></div>
+  <div class="article-summary">Cornell researchers have engineered a "plug-and-play" system that dynamically adjusts solar panel tilt angles in agrivoltaics, optimizing energy generation by factoring in both historical and predicted weather. This innovation is critical for maximizing renewable energy output from dual-use agricultural land, a key strategy for accelerating decarbonization and bolstering food security.</div>
+  <div class="article-meta">May 14, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/14/low-cost-solar-pv-can-turn-co2-into-profitable-materials-enabling-negative-emissions/" target="_blank">Low-cost solar PV can turn CO2 into profitable materials enabling negative emissions</a></div>
+  <div class="article-summary">Breakthroughs in low-cost solar PV are transforming captured CO2 into valuable materials like carbon fiber and silicon carbide, creating a profitable pathway for carbon removal. This innovation offers a tangible route to negative emissions by turning a climate liability into a valuable resource for industrial applications.</div>
+  <div class="article-meta">May 14, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/14/very-low-cost-rooftop-solar-and-batteries-slashes-domestic-energy-cost-part-1-australia/" target="_blank">Very low cost rooftop solar and batteries slashes domestic energy cost – Part 1: Australia</a></div>
+  <div class="article-summary">Australia's widespread adoption of rooftop solar, now at 40% of homes, is delivering electricity at a mere $0.05/kWh, significantly undercutting retail prices and demonstrating a powerful, self-sustaining economic model for clean energy. This trend, particularly in South Australia where it exceeds 100% of demand on sunny days, highlights how private investment in distributed solar and storage can stabilize grids and slash domestic energy costs, offering a blueprint for other nations seeking rapid decarbonization.</div>
+  <div class="article-meta">May 14, 2026  09:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/14/datang-plans-14-6-gw-renewables-cluster-in-china/" target="_blank">Datang plans 14.6 GW renewables cluster in China</a></div>
+  <div class="article-summary">Datang is developing a colossal 14.6 GW renewable energy hub in Inner Mongolia, featuring significant solar, wind, and battery storage capacity alongside some coal. This ambitious project aims to power the industrial heartland of Jiangsu province, demonstrating China's continued commitment to large-scale clean energy deployment to meet its vast energy demands.</div>
+  <div class="article-meta">May 14, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/14/hanwha-japan-unit-closes-jpy-9-billion-solar-fund-loan/" target="_blank">Hanwha Japan unit closes JPY 9 billion solar fund loan</a></div>
+  <div class="article-summary">Hanwha Japan's spin-off, Q.ENEST Holdings, secured a JPY 9 billion loan from SMBC to finance 80 MW of new distributed solar projects across Japan. This move signals continued investment in renewable energy infrastructure, crucial for Japan's decarbonization goals and the global transition away from fossil fuels.</div>
+  <div class="article-meta">May 14, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-14/the-next-era-of-geopolitical-stability-will-be-powered-by-electricity" target="_blank">The Next Era of Geopolitical Stability Will Be Powered by Electricity</a></div>
+  <div class="article-summary">The world's response to the Iran war energy shock will shape our climate future. Eurasia Group Chairman Gerald Butts discusses how to pick the best path forward.…</div>
+  <div class="article-meta">May 14, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-14/india-s-top-banks-failing-to-tackle-climate-risk-as-threats-grow" target="_blank">India’s Top Banks Failing to Tackle Climate Risk as Threats Grow</a></div>
+  <div class="article-summary">India’s largest banks need to do more to incorporate climate risks into lending decisions as the country suffers escalating impacts from the effects of global warming, according to a new analysis.…</div>
+  <div class="article-meta">May 14, 2026  06:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-13/swiss-say-nuclear-plants-are-economically-viable-for-80-years" target="_blank">Swiss Say Nuclear Plants Are Economically Viable for 80 Years</a></div>
+  <div class="article-summary">Switzerland said its nuclear power plants in Goesgen and Leibstadt can profitably run for as long as 80 years, two decades beyond previous projections.…</div>
+  <div class="article-meta">May 13, 2026  18:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-13/stegra-and-its-lenders-agree-to-unlock-1-5-billion-debt-funding" target="_blank">Stegra and Its Lenders Agree to Unlock €1.5 Billion Debt Funding</a></div>
+  <div class="article-summary">Stegra AB has agreed with creditors to unlock about €1.5 billion ($1.8 billion) of undrawn credit lines which, together with recently secured equity funding, will help complete what will be the world’s biggest green-steel plant.…</div>
+  <div class="article-meta">May 13, 2026  18:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13052026/florida-everglades-migrant-detention-facility-to-close/" target="_blank">Florida to Close Alligator Alcatraz, News Report Says</a></div>
+  <div class="article-summary">Florida plans to shut down the Everglades migrant detention site known as Alligator Alcatraz as soon as early June, according to a news report. Officials at the site told vendors this week the facility, which is located in a sensitive region of the r…</div>
+  <div class="article-meta">May 14, 2026  02:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13052026/florida-temporarily-bans-sloth-imports/" target="_blank">Florida Temporarily Bans Sloth Imports After Dozens Die at Orlando Business</a></div>
+  <div class="article-summary">Florida has temporarily halted importation of sloths following the deaths of dozens of the wild-born mammals at a now-shuttered Orlando business, a move with national implications. The two-month ban, which the Florida Fish and Wildlife Conservation C…</div>
+  <div class="article-meta">May 14, 2026  01:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/13/apples-orchards-climate-crisis-scientists" target="_blank">Roots of resilience: the experts working to bolster apples against the climate crisis</a></div>
+  <div class="article-summary">Scientists are focusing on improving apples’ resilience after stressors like wild temperature swings and droughtTerence Robinson still remembers the Valentine’s Day Massacre – of 2015, not 1929.For theCornell University horticulture professor, the te…</div>
+  <div class="article-meta">May 13, 2026  20:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/13/cop30-roadmap-end-deforestation-invite-countries-domestic-plans-forests-nature/" target="_blank">COP30 roadmap to end deforestation will invite countries to draft domestic plans</a></div>
+  <div class="article-summary">After promising at COP30 to produce a voluntary global roadmap to stop forest loss by 2030, Brazil provided an update on the consultations this weekThe postCOP30 roadmap to end deforestation will invite countries to draft domestic plansappeared first…</div>
+  <div class="article-meta">May 13, 2026  19:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13052026/concentrated-precipitation-causing-dryer-landscapes/" target="_blank">New Paper Shows Surges of Concentrated Precipitation Can Lead to Dryer Landscapes</a></div>
+  <div class="article-summary">Scientists have uncovered a new driver of aridification, potentially reshaping how drought across the globe is understood. A new study published Wednesday in Nature by a pair of researchers from Dartmouth College and the Université du Québec à Montré…</div>
+  <div class="article-meta">May 13, 2026  19:07 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, May 14, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
