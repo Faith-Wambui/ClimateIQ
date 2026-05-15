@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, May 15, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">56</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 51 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/15/hy-solar-unveils-670-w-topcon-modules-with-24-8-efficiency/" target="_blank">HY Solar unveils 670 W TOPCon modules with 24.8% efficiency</a></div>
+  <div class="article-summary">Chinese manufacturer HY Solar has launched a new 670W solar module boasting 24.8% efficiency, powered by their advanced n-type TOPCon 3.0 cell technology. This development signifies a significant leap in solar panel performance, crucial for accelerating the global transition to renewable energy by generating more power from less space.</div>
+  <div class="article-meta">May 15, 2026  09:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/15/mistubishi-launches-propane-air-to-water-heat-pumps-for-large-homes-light-commercial-applications/" target="_blank">Mistubishi launches propane air-to-water heat pumps for large homes, light commercial applications</a></div>
+  <div class="article-summary">Mitsubishi has launched higher-capacity propane heat pumps, the 10 kW and 14 kW Hydrolution EZY models, for larger homes and light commercial use. This expansion is critical as these units utilize propane (R290), a natural refrigerant with a significantly lower global warming potential than traditional alternatives, accelerating the transition to cleaner heating solutions.</div>
+  <div class="article-meta">May 15, 2026  09:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/15/inox-clean-buys-u-s-pv-manufacturing-assets-of-boviet-solar-for-750-million/" target="_blank">Inox Clean buys U.S. PV manufacturing assets of Boviet Solar for $750 million</a></div>
+  <div class="article-summary">Inox Clean Energy has acquired Boviet Solar's U.S. manufacturing assets for $750 million, adding 3 GW of operational solar module capacity and securing another 3 GW of cell capacity. This strategic move significantly boosts U.S. domestic solar production, leveraging incentives like Section 45X to drive profitability and reduce tariff risks, ultimately accelerating the transition to clean energy.</div>
+  <div class="article-meta">May 15, 2026  08:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/14/in-some-countries-evs-are-already-cheaper-than-icevs-were-here-to-tell-you-how-that-looks-like-and-why-it-changes-everything/" target="_blank">In Some Countries, EVs Are Already Cheaper Than ICEVs. We’re Here To Tell You How That Looks, And Why It Changes Everything.</a></div>
+  <div class="article-summary">In several countries, electric vehicles (EVs) are now cheaper to own and operate than their gasoline counterparts, a tipping point driven by falling battery costs and government incentives. This economic parity is accelerating EV adoption, signaling a rapid shift away from fossil fuels in transportation and a significant win for climate mitigation efforts.</div>
+  <div class="article-meta">May 15, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/14/consumer-reports-list-of-5-least-reliable-midsize-suvs-includes-0-evs/" target="_blank">Consumer Reports’ List of 5 Least Reliable Midsize SUVs Includes 0 EVs</a></div>
+  <div class="article-summary">Consumer Reports has revealed the five (5) least reliable midsize SUVs in the United States. Interestingly, shockingly … well, completely unsurprisingly actually, there are no electric vehicles on the list. The five most unreliable midsize SUVs are t…</div>
+  <div class="article-meta">May 15, 2026  06:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/14/fsocs-proposed-guidance-on-nonbank-designations-undermines-its-ability-to-address-systemic-risk/" target="_blank">FSOC’s Proposed Guidance on Nonbank Designations Undermines its Ability to Address Systemic Risk</a></div>
+  <div class="article-summary">The Financial Stability Oversight Council's (FSOC) proposed guidance threatens to weaken its oversight of major nonbank financial firms, including private equity and insurance companies. This move is concerning because it could hinder the FSOC's ability to identify and mitigate systemic financial risks, which can have ripple effects on the broader economy and potentially impact climate-related financial stability.</div>
+  <div class="article-meta">May 15, 2026  06:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-14/pe-firm-lightrock-raises-500-million-for-new-clean-energy-fund" target="_blank">PE Firm Lightrock Raises $500 Million for New Clean Energy Fund</a></div>
+  <div class="article-summary">Private equity firm Lightrock, which was spun out from Liechtenstein’s LGT Group, has raised a new $500 million fund to back businesses advancing access to affordable and clean energy in Asia and Africa.…</div>
+  <div class="article-meta">May 15, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-14/clean-energy-seen-as-structurally-immune-to-hormuz-style-shock" target="_blank">Clean Energy Seen as ‘Structurally Immune’ to Hormuz-Style Shock</a></div>
+  <div class="article-summary">The war in Iran has provided new impetus to the low-carbon transition as renewable energy is seen as less vulnerable to future price shocks, according to a group of corporate bosses and senior bankers.…</div>
+  <div class="article-meta">May 15, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-14/carney-leaves-fate-of-2030-emission-reduction-target-unclear" target="_blank">Carney Leaves Fate of 2030 Emission Reduction Target Unclear</a></div>
+  <div class="article-summary">Canada’s target to sharply reduce greenhouse gas emissions by 2030 is in question after Prime Minister Mark Carney said his government will “update” its climate plan, without offering further detail.…</div>
+  <div class="article-meta">May 14, 2026  21:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-14/world-s-biggest-climate-fund-says-uk-halves-planned-contribution" target="_blank">World’s Biggest Climate Fund Says UK Halves Planned Contribution</a></div>
+  <div class="article-summary">The world’s largest state-backed climate fund will lose half its funding from the UK, a major setback following the cancellation of a $4 billion pledge from the US last year.…</div>
+  <div class="article-meta">May 14, 2026  20:39 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/cameroon/cameroon-humanitarian-dashboard-31-march-2026" target="_blank">Cameroon: Humanitarian Dashboard (as of 31 March 2026)</a></div>
+  <div class="article-summary">Cameroon's Far North, North-West, South-West, Adamawa, East, and North regions are grappling with severe humanitarian crises, fueled by conflict, insecurity, and climate shocks. This ongoing instability exacerbates displacement and strains resources, leaving vulnerable populations, particularly women and children, exposed to heightened protection risks and lacking essential services.</div>
+  <div class="article-meta">May 15, 2026  10:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/occupied-palestinian-territory/palestine-conflict-global-ltc-teleconference-46-meeting-minutes-05052026" target="_blank">oPt: Palestine: conflict - Global LTC Teleconference #46 Meeting Minutes (05/05/2026)</a></div>
+  <div class="article-summary">The oPt: Palestine: conflict teleconference on May 5th, 2026, highlighted the urgent need for a scaled-up response to prevent a humanitarian catastrophe. This rapid increase in protection and life-saving assistance is critical to mitigating the immediate, devastating human impact of the conflict.</div>
+  <div class="article-meta">May 15, 2026  09:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/lebanon/lebanon-middle-east-escalation-global-ltc-teleconference-telecoms-area-07-date-12-may-2026-time-1100-utc" target="_blank">Lebanon: Middle East Escalation - Global LTC Teleconference (Telecoms Area) #07 (Date: 12 May 2026 Time: 11:00 UTC)</a></div>
+  <div class="article-summary">Escalating conflict in Lebanon threatens a humanitarian catastrophe, demanding an immediate, rapid scale-up of protection and life-saving aid. This crisis highlights the urgent need for global cooperation to mitigate the devastating human and environmental consequences of regional instability.</div>
+  <div class="article-meta">May 15, 2026  09:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-earthquake-operation-update-4-mdraf019" target="_blank">Afghanistan | Earthquake - Operation Update #4 (MDRAF019)</a></div>
+  <div class="article-summary">Country: AfghanistanSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.A. SITUATION ANALYSISDescription of the crisisOn August 31, 2025, a 6.0-magnitude earthquake struck southeastern Afghanistan…</div>
+  <div class="article-meta">May 15, 2026  05:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-earthquake-dref-operational-update-mdraf019" target="_blank">Afghanistan | Earthquake - DREF Operational Update (MDRAF019)</a></div>
+  <div class="article-summary">Country: AfghanistanSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.Description of the EventDate of event01-09-2025What happened, where and when?On 31 August 2025, a 6.0-magnitude earthquake s…</div>
+  <div class="article-meta">May 15, 2026  04:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14052026/pennsylvania-residents-speak-against-data-center-growth/" target="_blank">An Outpouring of Frustration Over Pennsylvania’s Rapid Data Center Growth</a></div>
+  <div class="article-summary">The latest example of burgeoning opposition to rapid data-center development in Pennsylvania came at a town hall meeting overflowing with frustration about how the state is managing the surge. As about 225 people watched, more than 20 speakers in the…</div>
+  <div class="article-meta">May 15, 2026  03:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14052026/china-increases-clean-energy-investments/" target="_blank">China Widens Its Clean Energy Lead</a></div>
+  <div class="article-summary">As the leaders of the world’s two largest economies meet in Beijing this week, a new analysis underscores a growing divergence between China and the United States in shaping the global energy system.  While Chinese companies continue to expand their…</div>
+  <div class="article-meta">May 15, 2026  00:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/14/alito-stock-conflicts-senate-investigation" target="_blank">Watchdog groups urge Senate to investigate Samuel Alito over oil stock conflicts</a></div>
+  <div class="article-summary">Groups say supreme court justice, who owns oil stocks, may be violating ethics codes by participating in certain casesThe supreme court justiceSamuel Alito, who owns stock in oil companies, may be violating court ethics codes by participating in cert…</div>
+  <div class="article-meta">May 15, 2026  00:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/14/uk-halves-green-climate-fund-contribution-as-it-spends-more-on-security/" target="_blank">UK halves Green Climate Fund contribution, as it spends more on security</a></div>
+  <div class="article-summary">After promising £1.6 billion to the UN’s flagship climate fund in 2023, the UK government has now said it will only hand over half as muchThe postUK halves Green Climate Fund contribution, as it spends more on securityappeared first onClimate Home Ne…</div>
+  <div class="article-meta">May 14, 2026  16:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/14/live-webinar-from-santa-marta-to-bonn-where-next-for-the-fossil-fuel-transition/" target="_blank">Webinar: From Santa Marta to Bonn – where next for the fossil fuel transition?</a></div>
+  <div class="article-summary">An exclusive event for Climate Home News free essential users and paid subscribers — join the journalists reporting from this year's key climate talks to discuss how the Santa Marta conference could play out in Bonn.The postWebinar: From Santa Marta…</div>
+  <div class="article-meta">May 14, 2026  15:09 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, May 15, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
