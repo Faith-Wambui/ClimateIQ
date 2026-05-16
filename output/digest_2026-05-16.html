@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, May 16, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:56%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 39 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/16/who-should-declare-climate-crisis-global-public-health-emergency-experts-say" target="_blank">Declare climate crisis a global public health emergency, experts tell WHO</a></div>
+  <div class="article-summary">International experts are urging the World Health Organization to declare the climate crisis a global public health emergency. This declaration is crucial to trigger coordinated international action, which they believe could prevent millions of unnecessary deaths.</div>
+  <div class="article-meta">May 16, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/15/sierra-club-earthjustice-argue-against-illegal-coal-plant-extensions-in-court/" target="_blank">Sierra Club & Earthjustice Argue Against Illegal Coal Plant Extensions in Court</a></div>
+  <div class="article-summary">Washington, D.C. — Today, Sierra Club and Earthjustice presented oral arguments before the D.C. Circuit Court of Appeals in the legal challenge against the Department of Energy’s illegal application of Section 202(c) of the Federal Power Act. In May…</div>
+  <div class="article-meta">May 16, 2026  05:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-15-april-2026-trump-xi-talk-energy-supercharged-el-nino-indias-first-heat-lounges/" target="_blank">DeBriefed 15 April 2026: Trump-Xi talk energy | ‘Supercharged’ El Niño | India’s first ‘heat lounges’</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+US-China meet
+
+ENERGY TALKS: Trump administration officials have raised the prospect of China buying more US oil in respon…</div>
+  <div class="article-meta">May 15, 2026  16:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-uk-no-longer-top-un-green-climate-fund-donor-after-latest-aid-cut/" target="_blank">Analysis: UK no longer top UN Green Climate Fund donor after latest aid cut</a></div>
+  <div class="article-summary">The UK is no longer the top contributor to the UN’s flagship Green Climate Fund (GCF), after the government announced that it only intends to honour half of its most recent pledge.
+
+Amid wider cuts to its climate aid for developing countries, the UK…</div>
+  <div class="article-meta">May 15, 2026  16:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/05/when-the-water-comes-for-everything-loss-and-damage-finance-remains-adrift/" target="_blank">When the Water Comes for Everything – Loss and Damage Finance Remains Adrift.</a></div>
+  <div class="article-summary">A loss and damage fund exists but it is severely undercapitalized, and communities are still waiting – access, scale and coherence in loss and damage support must be prioritised to support those that need it most.The postWhen the Water Comes for Ever…</div>
+  <div class="article-meta">May 15, 2026  16:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/16/pv-power-generation-to-surpass-coal-in-texas/" target="_blank">PV power generation to surpass coal in Texas</a></div>
+  <div class="article-summary">Texas is set to see solar power generation overtake coal by 2026, with 14 GW of new utility-scale solar planned, reinforcing the state's role as a key driver of the U.S. energy transition. This significant shift away from fossil fuels, bolstered by massive battery storage expansion, signals a substantial acceleration in decarbonization efforts across the nation.</div>
+  <div class="article-meta">May 16, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/16/japan-awards-1-25-gw-of-battery-storage-in-capacity-market-auction/" target="_blank">Japan awards 1.25 GW of battery storage in capacity market auction</a></div>
+  <div class="article-summary">Japan just awarded 1.25 GW of battery storage capacity in its latest decarbonization auction, a significant commitment to grid reliability. This move, despite stricter rules, highlights the critical role of battery storage, including novel non-lithium technologies, in Japan's transition away from fossil fuels and towards a cleaner energy future.</div>
+  <div class="article-meta">May 16, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/16/leapmotor-gets-bigger-avenue-into-europe-and-beyond/" target="_blank">Leapmotor Gets Bigger Avenue Into Europe — And Beyond</a></div>
+  <div class="article-summary">Stellantis is deepening its partnership with Chinese EV maker Leapmotor, granting it a significant foothold in Europe and other global markets. This expansion accelerates the influx of potentially lower-cost electric vehicles, a move that could reshape the competitive landscape and impact the pace of global decarbonization efforts.</div>
+  <div class="article-meta">May 16, 2026  08:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/15/segways-wild-new-60-mph-electric-dirt-bike-is-now-officially-on-sale/" target="_blank">Segway’s wild new 60 MPH electric dirt bike is now officially on sale</a></div>
+  <div class="article-summary">Segway has launched its Xaber 300, a 60 MPH electric dirt bike, signaling a significant expansion into the high-performance electric powersports sector. This move is crucial as it offers a greener alternative to traditional gasoline-powered off-road vehicles, potentially reducing emissions in a recreational market often dominated by fossil fuels.</div>
+  <div class="article-meta">May 16, 2026  07:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/15/trumps-fossil-fuel-fantasy-wilts-under-balcony-solar-pressure/" target="_blank">Trump’s Fossil Fuel Fantasy Wilts Under Balcony Solar Pressure</a></div>
+  <div class="article-summary">Despite Trump's push for expensive fossil fuels, small-scale solar, including the emerging "balcony solar" trend, is significantly expanding US generating capacity, adding over 6 gigawatts in the past year alone. This surge in distributed solar power is crucial as it's projected to push renewable energy's share of total US capacity past natural gas by early 2027, a critical step in decarbonizing the grid.</div>
+  <div class="article-meta">May 16, 2026  06:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-15/grid-bottlenecks-threaten-uk-s-offshore-wind-push" target="_blank">Grid Connection Delays Threaten UK’s Offshore Wind Push</a></div>
+  <div class="article-summary">The majority of the UK’s recently announced offshore wind farms are stuck in a queue waiting for grid connections, despite a government push to speed up investment.…</div>
+  <div class="article-meta">May 15, 2026  18:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-15/south-africa-expands-coal-mine-to-feed-power-station-for-years" target="_blank">South Africa Expands Coal Mine to Feed Power Station for Years</a></div>
+  <div class="article-summary">South Africa’s Exxaro Resources Ltd. opened the expansion of a coal mine at its Matla operations that will keep a nearby power station supplied for nearly two more decades.…</div>
+  <div class="article-meta">May 15, 2026  17:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-15/what-to-know-about-carney-s-plan-to-boost-canada-s-electricity-output" target="_blank">Carney Unveils Major Plan to Double Canada’s Electricity Production</a></div>
+  <div class="article-summary">The plan will loosen rules clean power rules.…</div>
+  <div class="article-meta">May 15, 2026  16:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-15/china-s-mmg-bemoans-congo-cobalt-curbs-that-threaten-investment" target="_blank">China’s MMG Bemoans Congo Cobalt Curbs That Threaten Investment</a></div>
+  <div class="article-summary">China’s MMG Ltd. wants more clarity on the Democratic Republic of Congo’s cobalt-export policy after the state-controlled miner received a disappointing quota, as questions mount over how curbs have been imposed.…</div>
+  <div class="article-meta">May 15, 2026  14:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-15/pollution-from-coal-is-hurting-global-solar-output-study-finds" target="_blank">Pollution From Coal Is Hurting Global Solar Output, Study Finds</a></div>
+  <div class="article-summary">Pollution from coal-fired power plants that can block sunlight is significantly cutting global solar output, and potentially causing an overestimation of climate progress, according to a new study.…</div>
+  <div class="article-meta">May 15, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15052026/virginia-governor-signs-dominion-bills/" target="_blank">Virginia Governor Signs Dominion-Backed Bills. All Eyes on Regulators Now.</a></div>
+  <div class="article-summary">RICHMOND, Va.—Gov. Abigail Spanberger on Friday signed legislation that directs regulators to assign electricity costs to data centers and allows Dominion Energy to spend $900,000 a mile burying local distribution lines. The bills from Senate Preside…</div>
+  <div class="article-meta">May 16, 2026  03:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15052026/trump-administration-energy-emergency-appeals-court-challenge/" target="_blank">What Is an Energy Emergency? The Trump Administration Says It Alone Decides.</a></div>
+  <div class="article-summary">The Trump administration on Friday defended its legal authority to order coal plants to stay open, arguing before a panel of federal judges that it alone has the power to decide whether an energy emergency exists. The case before the U.S. Court of Ap…</div>
+  <div class="article-meta">May 16, 2026  00:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15052026/the-tennessee-valley-authority-produced-a-booklet-downplaying-coal-ash-risks-top-researchers-call-it-dishonest/" target="_blank">The Tennessee Valley Authority Produced a Booklet Downplaying Coal Ash Risks. Top Researchers Call it ‘Dishonest.’</a></div>
+  <div class="article-summary">A 35-page booklet distributed in a public meeting by the Tennessee Valley Authority about coal ash is filled with “lies” and misleading information, according to coal ash researchers.   The booklet, titled “Know the Facts: Coal Ash,” did not include…</div>
+  <div class="article-meta">May 15, 2026  18:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/15/ban-private-jets-cut-speed-limits-uk-fuel-crisis" target="_blank">Ban private jets and cut speed limits to avert UK fuel crisis, say campaigners</a></div>
+  <div class="article-summary">Climate and transport organisations warn ministers not to ‘sleepwalk into crisis’ amid Iran war oil and gas shortagesPrivate jets should be banned and the speed limit on UK motorways reduced to 60mph as part of a pre-emptive effort to ease the loomin…</div>
+  <div class="article-meta">May 15, 2026  13:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15052026/trump-administration-bans-federal-land-bison-grazing/" target="_blank">Trump Administration Bans a Nonprofit’s Bison From Grazing on Federal Lands, but Spares Tribes</a></div>
+  <div class="article-summary">SEATTLE—The Trump administration’s “final decision” banning bison grazing on public land is legally convoluted—and curiously narrow. Released earlier this month, it targets a single nonprofit, conservation-focused bison operation in one state, while…</div>
+  <div class="article-meta">May 15, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, May 16, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
