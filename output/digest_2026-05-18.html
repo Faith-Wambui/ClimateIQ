@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, May 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">33</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 27 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17052026/graham-platner-rooftop-solar-moratorium-maine/" target="_blank">On Sullivan Planning Board, Platner Voted to Pump the Brakes on Solar</a></div>
+  <div class="article-summary">Graham Platner’s recently released energy plan navigates several tensions, including how to build clean energy projects and transmission lines quickly while also incorporating community input. Such projects are not only needed to fight climate change…</div>
+  <div class="article-meta">May 17, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-18/top-india-utility-backs-local-reactors-to-meet-2047-nuclear-goal" target="_blank">Top India Utility Backs Local Reactors to Meet 2047 Nuclear Goal</a></div>
+  <div class="article-summary">India's top power producer, NTPC Ltd., is prioritizing local reactor technology for its nuclear expansion, a move crucial for meeting the nation's 2047 nuclear energy targets. This strategic shift aims to de-risk its ambitious nuclear build-out by avoiding over-reliance on single foreign suppliers, ensuring a more resilient and secure path to decarbonization.</div>
+  <div class="article-meta">May 18, 2026  10:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/18/new-solar-survey-report-2026/" target="_blank">NEW! Solar Survey Report 2026</a></div>
+  <div class="article-summary">Global solar power installation is accelerating at an unprecedented rate, outpacing all other energy sources. This rapid expansion is a critical development in the fight against climate change, offering a powerful tool to decarbonize our energy sector.</div>
+  <div class="article-meta">May 18, 2026  09:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/18/glass-frit-chemistry-explains-eva-driven-degradation-mechanisms-in-topcon-solar-cells/" target="_blank">Glass frit chemistry explains EVA-driven degradation mechanisms in TOPCon solar cells</a></div>
+  <div class="article-summary">New research pinpoints glass frit chemistry in low-aluminum silver metallization as the key driver of degradation in TOPCon solar cells. By modifying frits with barium-zinc, scientists have demonstrated a significant boost in resistance to acetic acid and damp-heat, promising more durable solar modules and reduced power loss.</div>
+  <div class="article-meta">May 18, 2026  09:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/18/waymo-reaching-11-cities-1400-square-miles-as-world-cup-approaches/" target="_blank">Waymo Reaching 11 Cities & 1,400 Square Miles As World Cup Approaches</a></div>
+  <div class="article-summary">The World Cup is fast approaching, and Waymo has been expanding its service in new cities while also growing its service areas in existing cities in anticipation of the biggest sporting event in the world. “The world’s largest 24/7 autonomous ride-ha…</div>
+  <div class="article-meta">May 18, 2026  08:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/17/judge-in-australia-not-happy-about-tesla-dragging-its-feet-in-class-action-case/" target="_blank">Judge In Australia Not Happy About Tesla Dragging Its Feet In Class Action Case</a></div>
+  <div class="article-summary">It took a lot longer than I expected, but there are class action lawsuits underway against Tesla in the US and Australia, and they just keep dragging on. In fact, in Australia, Tesla has been dragging things along so much that a judge there is losing…</div>
+  <div class="article-meta">May 18, 2026  06:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-18/pg-e-cuts-power-to-some-customers-in-california-on-fire-risk" target="_blank">PG&amp;E Cuts Power to Some Customers in California on Fire Risk</a></div>
+  <div class="article-summary">PG&E Corp. cut power to some customers in California due to dry and windy conditions that have elevated the risk of wildfires.…</div>
+  <div class="article-meta">May 18, 2026  07:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-18/china-polysilicon-maker-turns-to-battery-material-in-solar-slump" target="_blank">China Polysilicon Maker Turns to Battery Material in Solar Slump</a></div>
+  <div class="article-summary">GCL Technology Holdings Ltd., a major Chinese producer of polysilicon, is pivoting into battery materials as the solar sector remains mired in overcapacity and losses.…</div>
+  <div class="article-meta">May 18, 2026  06:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-18/disaster-resilience-investment-has-touched-100-billion-in-asia" target="_blank">Disaster Resilience Investment Has Touched $100 Billion in Asia</a></div>
+  <div class="article-summary">Governments, investors and banks have poured about $100 billion into efforts to handle the effects of climate change in Asia in the past five years, with water and infrastructure projects attracting the majority of the capital.…</div>
+  <div class="article-meta">May 18, 2026  06:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-18/danish-fund-gpsc-said-to-mull-sale-of-changfang-and-xidao-offshore-wind-farm" target="_blank">Danish Fund, GPSC Said to Mull Sale of Taiwan Offshore Wind Farm</a></div>
+  <div class="article-summary">Copenhagen Infrastructure Partners and Thailand’s Global Power Synergy Pcl are considering selling their offshore wind farm in Taiwan, according to people familiar with the matter.…</div>
+  <div class="article-meta">May 18, 2026  04:34 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/mozambique/mozambique-humanitarian-snapshot-april-2026" target="_blank">Mozambique: Humanitarian Snapshot, as of April 2026</a></div>
+  <div class="article-summary">Cyclone Freddy, which made landfall in Mozambique in April 2026, caused widespread devastation, impacting over 1.5 million people and displacing hundreds of thousands. This extreme weather event, exacerbated by climate change, highlights Mozambique's extreme vulnerability to climate impacts and the urgent need for enhanced adaptation and resilience measures.</div>
+  <div class="article-meta">May 18, 2026  10:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/mozambique/mozambique-flash-update-1-displacement-cabo-delgado-14-may-2026" target="_blank">Mozambique: Flash Update #1 - Displacement in Cabo Delgado (as of 14 May 2026)</a></div>
+  <div class="article-summary">In Mozambique's Cabo Delgado province, over 16,000 people have fled their homes since mid-April due to escalating violence from non-State Armed Groups, disrupting communities already facing severe humanitarian needs. This ongoing displacement, marked by civilian deaths, abductions, and destruction of vital infrastructure, highlights the region's instability and the urgent need for effective humanitarian response to prevent further suffering and unsafe returns.</div>
+  <div class="article-meta">May 18, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-humanitarian-response-snapshot-march-2026" target="_blank">Yemen: Humanitarian Response Snapshot - March 2026</a></div>
+  <div class="article-summary">Yemen's humanitarian crisis, exacerbated by climate-induced droughts and floods, has left 18 million people needing aid by March 2026, with over 2 million children acutely malnourished. This escalating disaster underscores the devastating impact of climate change on vulnerable populations, demanding urgent global attention and resources to prevent further catastrophe.</div>
+  <div class="article-meta">May 18, 2026  09:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-humanitarian-response-snapshot-february-2026" target="_blank">Yemen: Humanitarian Response Snapshot - February 2026</a></div>
+  <div class="article-summary">Yemen's humanitarian crisis, exacerbated by ongoing conflict and climate shocks, has left 18.4 million people needing assistance as of February 2026. This dire situation underscores the devastating impact of climate change on vulnerable populations, straining already scarce resources and hindering long-term recovery efforts in the region.</div>
+  <div class="article-meta">May 18, 2026  09:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/central-african-republic/mecanisme-de-reponse-humanitaire-republique-centrafricaine-bulletin-bimestriel-01-mars-30-avril-2026" target="_blank">CAR: Mécanisme de réponse humanitaire : République centrafricaine, Bulletin bimestriel (01 mars - 30 avril 2026)</a></div>
+  <div class="article-summary">A robust response is required to avoid a humanitarian catastrophe. The plan aims to immediately and rapidly scale-up operations and to increase the provision of protection and life-saving assistance.…</div>
+  <div class="article-meta">May 18, 2026  06:37 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-18/china-burns-more-fossil-fuels-for-power-as-coal-production-slips" target="_blank">China Burns More Fossil Fuels for Power as Coal Production Slips</a></div>
+  <div class="article-summary">China’s thermal power generation grew for a fourth straight month in April even as coal output fell, highlighting the challenges Beijing faces in continuing to buffer its economy from the global energy crisis stemming from the war in Iran.…</div>
+  <div class="article-meta">May 18, 2026  06:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/may/18/uk-datacentres-plan-to-burn-gas-to-generate-electricity" target="_blank">More than 100 UK datacentres plan to burn gas to generate electricity</a></div>
+  <div class="article-summary">Requests for gas connections by operators amount to more than 15 terawatt hours per year, endangering climate targetsMore than 100 new datacentres in the UK plan to burn gas to generate electricity, some potentially doing so permanently.British offic…</div>
+  <div class="article-meta">May 18, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/17/north-america-bees-early-swarm-season" target="_blank">Experts sound alarm as North America’s bees start swarm season unusually early</a></div>
+  <div class="article-summary">After record losses last year, beekeepers report a warm winter has led to bees ‘waking up earlier’ this yearAfter a series ofrecord-breakingUSheatwaves, the 2026 bee swarm season in North America has started 17 days earlier than last year, pushing be…</div>
+  <div class="article-meta">May 17, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/football/2026/may/17/world-cup-climate-change" target="_blank">‘Green card for the planet’? Fifa’s World Cup is on pace to be a climate catastrophe</a></div>
+  <div class="article-summary">The 2022 World Cup failed to deliver on its environmental promises. From air travel emissions to heat-related dangers, the 2026 edition will be even worseSoccer fans are increasingly watching preparations for the 2026 World Cup through their fingers.…</div>
+  <div class="article-meta">May 17, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17052026/maine-senate-candidate-energy-plan-to-reduce-consumer-costs/" target="_blank">Platner’s Energy Plan Prioritizes Lowering Costs and Taking on Big Oil and the ‘Oligarchy’</a></div>
+  <div class="article-summary">Graham Platner, the presumptive Democratic nominee for U.S. Senate from Maine, is known for a few things: his “more Bernie than Bernie” message of wresting back control from the rich and powerful; his biography as a Marine Corps veteran and oyster fa…</div>
+  <div class="article-meta">May 17, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17052026/icn-sunday-morning-looming-el-nino/" target="_blank">What To Expect as El Niño Approaches</a></div>
+  <div class="article-summary">Scientists said this week that a developing El Niño is likely to amplify heatwaves, droughts and floods this year. But it’s not the biggest culprit of climate extremes.  The consequences of a moderate or strong El Niño today are more damaging than th…</div>
+  <div class="article-meta">May 17, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, May 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
