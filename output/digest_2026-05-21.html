@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, May 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">63</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 57 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/21/england-harvest-rainfall-water-usage-shortages-house-of-lords-report" target="_blank">England must harvest rainfall and take action on water usage, Lords warn</a></div>
+  <div class="article-summary">England faces a critical 5 billion liter per day water deficit by 2055, driven by climate change and rising demand, according to a House of Lords report. Urgent action, including mandatory rainwater harvesting in new homes and widespread public campaigns to reduce usage, is essential to avert severe shortages and protect vital ecosystems.</div>
+  <div class="article-meta">May 21, 2026  08:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/21/un-vote-support-icj-world-court-climate-change-opinion" target="_blank">UN backs historic climate crisis ruling, despite US attempts to stop resolution</a></div>
+  <div class="article-summary">The UN General Assembly has overwhelmingly voted to back a world court opinion establishing a legal obligation for countries to address climate change, a landmark decision despite opposition from major oil producers like the US. This ruling, supported by 141 nations, signals a significant shift, holding governments accountable for protecting citizens from the escalating climate crisis and its impacts.</div>
+  <div class="article-meta">May 21, 2026  06:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/new-coal-plants-hit-10-year-global-high-in-2025-but-power-output-still-fell/" target="_blank">New coal plants hit ‘10-year’ global high in 2025 – but power output still fell</a></div>
+  <div class="article-summary">The number of new coal-fired power plants built around the world hit a “10-year high” in 2025, even as the global coal fleet generated less electricity, amid a “widening disconnect” in the sector.
+
+That is according to the latest annual report from G…</div>
+  <div class="article-meta">May 21, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-20-may-2026-deforestation-roadmap-melanesian-ocean-summit-returning-pet-parrots-to-the-wild/" target="_blank">Cropped 20 May 2026: Deforestation roadmap | Melanesian Ocean Summit | Returning pet parrots to the wild</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">May 20, 2026  17:16 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/21/unsw-researchers-shed-new-light-on-uv-induced-degradation-in-perc-topcon-solar-cells/" target="_blank">UNSW researchers shed new light on UV-induced degradation in PERC, TOPCon solar cells</a></div>
+  <div class="article-summary">The scientists identified that UV exposure in PERC and TOPCon solar cells increases interface defects and makes them more recombination-active, driving ultraviolet-induced degradation. They found strong degradation on PERC front and rear surfaces and…</div>
+  <div class="article-meta">May 21, 2026  11:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/21/european-pv-avoided-e10-billion-in-gas-imports-since-escalation-of-the-iran-conflict/" target="_blank">European PV avoided €10 billion in gas imports since escalation of Iran conflict</a></div>
+  <div class="article-summary">According to calculations by European PV association SolarPower Europe, European photovoltaic systems have supplied enough electricity since the escalation of the Middle East conflict in early March to theoretically avoid additional gas imports worth…</div>
+  <div class="article-meta">May 21, 2026  10:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/21/mta-launches-air-to-water-heat-pump-with-scalable-architecture/" target="_blank">MTA launches air-to-water heat pump with scalable architecture</a></div>
+  <div class="article-summary">Italian firm MTA has launched its scalable "Gemini" air-to-water heat pump system for commercial and industrial use, offering heating up to 900 kW and cooling over 1 MW. This advancement is crucial for decarbonizing large buildings, as it provides an efficient, modular alternative to fossil fuel heating systems, utilizing a refrigerant with a significantly lower global warming potential.</div>
+  <div class="article-meta">May 21, 2026  10:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/20/heybike-launches-40-mph-electric-moped-for-an-insanely-low-999-but-at-what-cost/" target="_blank">Heybike launches 40 MPH electric moped for an insanely low $999, but at what cost?</a></div>
+  <div class="article-summary">Heybike's new Saturn e-bike, a retro-styled electric moped capable of reaching 40 mph, has launched for just $999. This powerful, fast, and affordable option, while appealing to consumers, raises concerns about its potential misuse on public roads, contributing to the growing debate around regulating high-speed electric mobility.</div>
+  <div class="article-meta">May 21, 2026  08:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/21/offshore-vs-ground-mounted-pv-2/" target="_blank">Offshore vs. ground-mounted PV</a></div>
+  <div class="article-summary">Taiwanese researchers found that an 181 MW offshore floating solar farm generated 12% more electricity than a comparable 100 MW ground-mounted plant, demonstrating the technical viability of this emerging technology. This boost in efficiency, attributed to cooling and intertidal effects, offers a promising pathway for expanding renewable energy generation, even with current cost and engineering hurdles.</div>
+  <div class="article-meta">May 21, 2026  08:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-20/coal-power-capacity-grew-in-2025-despite-dip-in-use-gem-says" target="_blank">Coal Power Capacity Grew in 2025 Despite Dip in Use, GEM Says</a></div>
+  <div class="article-summary">Global coal-fired generation capacity grew last year, despite a drop in use of the dirty fossil fuel as nations turn increasingly to renewables to meet new demand for electricity.…</div>
+  <div class="article-meta">May 21, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-20/record-heat-forces-new-england-to-tap-oil-to-power-electric-grid" target="_blank">Record Heat Forces New England to Tap Oil to Power the Grid</a></div>
+  <div class="article-summary">New England is burning oil as a power source amid record May heat, highlighting how the region’s energy mix can worsen pollution during bouts of extreme weather.…</div>
+  <div class="article-meta">May 20, 2026  23:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-20/canada-updates-federal-carbon-price-to-match-lower-alberta-level" target="_blank">Canada Updates Federal Carbon Price to Match Lower Alberta Level</a></div>
+  <div class="article-summary">Canada is applying a slower escalator for its national carbon price to match a deal it struck with the oil-rich province of Alberta, according to an updated government website.…</div>
+  <div class="article-meta">May 20, 2026  22:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-20/bank-activist-group-shuts-down-citing-limits-of-climate-push" target="_blank">Bank Activist Group Shuts Down, Cites Limits of Climate Push</a></div>
+  <div class="article-summary">A shareholder activist group in Canada is shutting down after concluding that investor pressure alone isn’t enough to meaningfully influence financial and energy firms to address climate risks.…</div>
+  <div class="article-meta">May 20, 2026  20:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-20/carney-pitches-reluctant-bc-on-new-oil-pipeline-to-fuel-asia" target="_blank">Carney Pitches Reluctant British Columbia on New Oil Pipeline to Fuel Asia</a></div>
+  <div class="article-summary">Prime Minister Mark Carney said people in British Columbia should see “substantial economic and financial benefits” from a proposed new oil pipeline to the province’s coast, which BC Premier David Eby opposes.…</div>
+  <div class="article-meta">May 20, 2026  19:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/myanmar/myanmar-humanitarian-access-snapshot-april-2026" target="_blank">Myanmar Humanitarian Access Snapshot - April 2026</a></div>
+  <div class="article-summary">Myanmar faces a looming humanitarian catastrophe, demanding an immediate and rapid scale-up of life-saving assistance and protection efforts. The urgency stems from the escalating crisis, requiring a robust response to avert widespread suffering.</div>
+  <div class="article-meta">May 21, 2026  11:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/after-action-review-eastern-region-earthquake" target="_blank">Afghanistan: After Action Review: Eastern Region Earthquake</a></div>
+  <div class="article-summary">A powerful 6+ magnitude earthquake devastated eastern Afghanistan's Kunar and Nangarhar provinces on August 31, 2025, displacing thousands and damaging critical infrastructure. This event underscores the increasing vulnerability of such regions to climate-intensified natural disasters, highlighting the urgent need for robust, climate-resilient infrastructure and humanitarian aid mechanisms to mitigate future catastrophic impacts.</div>
+  <div class="article-meta">May 21, 2026  10:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/lebanon/lebanon-cash-working-group-situation-report-2-reporting-period-15-april-15-may-2026" target="_blank">Lebanon Cash Working Group: Situation Report #2 (Reporting period: 15 April to 15 May 2026)</a></div>
+  <div class="article-summary">Country: LebanonSource: UN High Commissioner for RefugeesPlease refer to the attached file.Situation OverviewRenewed hostilities since early March 2026 have significantly aggravated humanitarian needs across Lebanon, triggering mass internal displace…</div>
+  <div class="article-meta">May 21, 2026  08:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/central-african-republic/world-banks-adaptive-and-productive-social-safety-nets-project-extends-sudanese-refugees-and-host-communities-central-african-republic" target="_blank">World Bank’s Adaptive and Productive Social Safety Nets Project Extends to Sudanese Refugees and Host Communities in the Central African Republic</a></div>
+  <div class="article-summary">Countries: Central African Republic, SudanSource: World BankThe World Bank Group approved the Ndoyé Project in 2024 in the Central African Republic (CAR) to expand adaptive social safety nets and strengthen resilience among vulnerable populations. 70…</div>
+  <div class="article-meta">May 21, 2026  05:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/guatemala/community-led-innovation-partnership-final-evaluation" target="_blank">Guatemala: Community-Led Innovation Partnership - Final Evaluation</a></div>
+  <div class="article-summary">Countries: Guatemala, Indonesia, Philippines, South SudanSources: Catholic Agency for Overseas Development, ELRHA, Start Network, Yakkum Emergency UnitPlease refer to the attached files.The Community-Led Innovation Partnership (CLIP), is a global par…</div>
+  <div class="article-meta">May 21, 2026  04:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/20/oracle-exec-sues-tesla-over-full-self-driving-promises-and-wins-10600/" target="_blank">Oracle Exec Sues Tesla Over Full Self Driving Promises And Wins $10,600</a></div>
+  <div class="article-summary">Class action lawsuits against Tesla have been running for a while based on the claims and promises Elon Musk has made about Tesla Full Self Driving (FSD) over the past decade. Basically, people who spent a lot of money expecting Full Self Driving to…</div>
+  <div class="article-meta">May 21, 2026  06:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20052026/un-endorses-international-court-climate-opinion/" target="_blank">U.N. General Assembly Embraces Court Opinion That Says Nations Have a Legal Obligation to Take Climate Action</a></div>
+  <div class="article-summary">The United Nations General Assembly on Wednesday voted overwhelmingly in favor of a climate justice resolution championed by the small Pacific Island nation of Vanuatu. The resolution welcomes the historic advisory opinion on climate change issued by…</div>
+  <div class="article-meta">May 21, 2026  04:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20052026/global-warming-potential-star-livestock-emissions/" target="_blank">Top Climate Scientists Accuse the Livestock Industry of Pushing Fuzzy Math to Downplay its Climate Warming Emissions</a></div>
+  <div class="article-summary">A group of the world’s leading climate scientists are warning governments and the livestock industry against adopting an “accounting trick” that will imperil the all-out global effort required to control heat-trapping emissions. In the statement, 42…</div>
+  <div class="article-meta">May 21, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20052026/corpus-christi-postpones-water-emergency/" target="_blank">Corpus Christi Postpones Water Emergency to December as ‘Super El Niño’ Offers an End to Drought</a></div>
+  <div class="article-summary">This story was produced in partnership by Inside Climate News and the Texas Newsroom, the state’s network of public radio stations. CORPUS CHRISTI, Texas—Recent rainfall in South Texas has pushed off the projected date of emergency water restrictions…</div>
+  <div class="article-meta">May 21, 2026  01:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/20/trump-administration-climate-pollution-lawsuit" target="_blank">Young Americans demand court halt Trump’s biggest rollbacks of pollution protections</a></div>
+  <div class="article-summary">Suit says administration is impinging on rights to life and liberty by worsening planet-warming and toxic pollutionEva v Goliath: the 20-year-old climate activist taking on Trump and the fossil fuel industryEighteen American youth are demanding that…</div>
+  <div class="article-meta">May 20, 2026  23:04 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, May 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
