@@ -1,0 +1,159 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Friday, May 22, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (2 articles)
+============================================================
+
+▸ Brazil increases import tax on batteries at local manufacturer’s request
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/brazil-increases-import-tax-on-batteries-at-local-manufacturers-request/
+  Date   : May 22, 2026  10:21 EAT
+  Summary: Brazil just hiked import tariffs on specific 48V LFP batteries for stationary energy storage from 18% to 25% until May 2027, a move designed to protect local manufacturers. This protectionist policy could slow the adoption of renewable energy and battery storage solutions in Brazil, potentially hindering the country's climate goals.
+
+
+▸ Mexico launches call for renewable energy, storage projects linked to state utility CFE
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/mexico-launches-call-for-renewable-energy-storage-projects-linked-to-state-utility-cfe/
+  Date   : May 22, 2026  09:47 EAT
+  Summary: Mexico's Secretariat of Energy has launched a call for renewable energy and storage projects exceeding 0.7 MW, prioritizing those that enhance grid reliability and align with national planning. This initiative, part of Mexico's post-2024 electricity reforms, signals a move to integrate more clean energy and bolster system stability, potentially unlocking significant decarbonization opportunities.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Chinese wafer producers build inventory ahead of expected Q3 demand recovery
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/chinese-wafer-producers-build-inventory-ahead-of-expected-q3-demand-recovery/
+  Date   : May 22, 2026  10:28 EAT
+  Summary: According to the OPIS Global Solar Markets Report released on May 19, Free-On-Board (FOB) China n-type M10 and G12 wafer prices remained unchanged week-on-week at $0.139 per piece and $0.169/pc, respectively.
+
+Meanwhile, the newly launched FOB China…
+
+
+▸ Anker Solix E10 deep dive review: The alternative to the whole-home generator
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/anker-solix-e10-deep-dive-review-the-alternative-to-the-whole-home-generator/
+  Date   : May 22, 2026  09:58 EAT
+  Summary: In California's Napa Valley, a homeowner has replaced a noisy, gas-guzzling generator with the Anker Solix E10 battery system to manage frequent power outages and expensive electricity rates. This shift to stored solar power is crucial for reducing reliance on fossil fuels during grid disruptions and mitigating the financial penalty of exporting excess solar energy under new utility tariffs.
+
+
+▸ Colombia regulates transmission capacity allocation to speed up energy project connections
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/colombia-regulates-transmission-capacity-allocation-to-speed-up-energy-project-connections/
+  Date   : May 22, 2026  09:37 EAT
+  Summary: Colombia has streamlined its transmission capacity allocation process, cutting connection times for new energy projects to just 15 business days. This move is crucial for accelerating the integration of renewable energy and preventing grid bottlenecks, especially as the country anticipates significant demand growth in 2029 and 2030.
+
+
+▸ Chinese EV brands woo Yemen’s wealthy elite as war prompts solar boom
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/05/22/chinese-ev-brands-woo-yemens-wealthy-elite-as-war-prompts-solar-boom/
+  Date   : May 22, 2026  09:00 EAT
+  Summary: For the well-off few, buying an EV is the next step in a solar revolution that has helped Yemenis weather years of power outages and high fuel pricesThe postChinese EV brands woo Yemen’s wealthy elite as war prompts solar boomappeared first onClimate…
+
+
+▸ India has now 32.9 GW of operational PV capacity under private PPAs
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/india-has-now-32-9-gw-of-operational-pv-capacity-under-private-ppas/
+  Date   : May 22, 2026  08:59 EAT
+  Summary: India's open-access solar capacity surged 59% QoQ to 2.7 GW in Q1 2026, bringing the total operational PV under private PPAs to 32.9 GW. This rapid expansion, driven by regulatory shifts and demand for price certainty, signifies substantial progress in India's transition to renewable energy, crucial for its climate goals.
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ Iran conflict boosts interest in short-term PPAs in Europe
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/iran-conflict-boosts-interest-in-short-term-ppas-in-europe/
+  Date   : May 22, 2026  09:29 EAT
+  Summary: The Iran-related conflict is driving price volatility and supply concerns in European energy markets and, according to Montel analysis, increasing interest in short-term power purchase agreements (PPAs). In periods of uncertainty, the hedging value o…
+
+
+▸ Europe’s First Major Heat Wave of Season Threatens Records
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-22/europe-s-first-major-heat-wave-of-summer-threatens-records
+  Date   : May 22, 2026  08:15 EAT
+  Summary: The first heat wave of the season is set to scorch Europe over the coming week, sending temperatures toward monthly records in the UK, France and Spain.…
+
+
+▸ Middle East War Risks Creating an Environmental Disaster, Experts Warn
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-05-21/middle-east-war-is-threatening-persian-gulf-ecosystems
+  Date   : May 21, 2026  16:43 EAT
+  Summary: There’s been an increasing amount of oil slicks.…
+
+
+▸ Trump Delays EPA Refrigerant Limits in Affordability Push
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-21/trump-to-delay-superpollutant-restrictions-in-affordability-push
+  Date   : May 21, 2026  15:43 EAT
+  Summary: President Donald Trump said he’s easing requirements on planet-warming refrigerants, touting the move as a way to cut costs for consumers as he looks to address voters’ affordability concerns before November midterms.…
+
+
+▸ UK’s Mandate for Solar in Car Parks Scrapped Over Cost Concerns
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-21/uk-s-solar-powered-car-parks-mandate-scrapped-over-cost-fears
+  Date   : May 21, 2026  15:42 EAT
+  Summary: The UK government shelved plans to require new car parks to fit solar panels, after finding it may not deliver the savings first hoped for.…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ Record-dry April lifts irradiance across Eastern Australia
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/22/record-dry-april-lifts-irradiance-across-eastern-australia/
+  Date   : May 22, 2026  10:36 EAT
+  Summary: April 2026 saw record dryness across Eastern Australia, particularly New South Wales and Victoria, leading to a significant surge in solar irradiance due to persistent clear skies. This exceptional sunshine surplus, driven by a neutral ENSO and high pressure, offers a potent reminder of how weather patterns directly amplify renewable energy generation potential.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Congress Grills Officials About the Potomac River Sewage Spill
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/21052026/congress-investigates-potomac-river-sewage-spill/
+  Date   : May 22, 2026  02:40 EAT
+  Summary: Members of a congressional subcommittee this week questioned utility leaders and state officials about their knowledge of preexisting problems with the sewage line that collapsed on Jan. 19 near the Potomac River.  According to the University of Mary…
+
+
+▸ Atlantic hurricane season forecast to be milder than normal thanks to El Niño
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/may/21/hurricane-season-2026-noaa
+  Date   : May 21, 2026  22:40 EAT
+  Summary: Forecast came amid warning that US was unprepared for storms with staffing cuts under Trump administrationSign up for the Breaking News US newsletter emailTheUSwill see a below-normalhurricaneseason in 2026, federal government scientists said on Thur…
+
+
+▸ One Nation says it’s the only party in Australia to question climate science. It should ask itself why | Temperature Check
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/australia-news/2026/may/22/one-nation-pauline-hanson-australia-questions-climate-science-ntwnfb
+  Date   : May 21, 2026  18:00 EAT
+  Summary: Climate change denial has become untenable yet Hanson’s party digs in – with conspiracy theories, cherrypicking and claims that are easy to refuteFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news po…
+
+
+▸ Trump’s EPA to roll back refrigerant rule for grocery stores in push it claims will lower prices
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/may/21/trump-epa-refrigerant-rule-grocery-costs
+  Date   : May 21, 2026  17:34 EAT
+  Summary: EPA is loosening Biden-era rule that requires US businesses to reduce greenhouse gases used in cooling equipmentThe Trump administration is set to loosen a federal rule that requires grocery stores and air-conditioning companies to reduce greenhouse…
+
+
+▸ ‘It’s put the joy levels up’: the flood-prone London school with a climate-adapted playground
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/may/21/flood-prone-london-school-climate-adapted-playground
+  Date   : May 21, 2026  17:00 EAT
+  Summary: When pupils could no longer play outside, St John’s school in Barnet decided to act, enlisting Trees for Cities to help rethink its outside spaceThe play area at St John’s Church of England primary in Barnet, north London, used to flood so severely i…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 53  |  Sources: 7  |  Topics: 5

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, May 22, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">53</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 46 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/brazil-increases-import-tax-on-batteries-at-local-manufacturers-request/" target="_blank">Brazil increases import tax on batteries at local manufacturer’s request</a></div>
+  <div class="article-summary">Brazil just hiked import tariffs on specific 48V LFP batteries for stationary energy storage from 18% to 25% until May 2027, a move designed to protect local manufacturers. This protectionist policy could slow the adoption of renewable energy and battery storage solutions in Brazil, potentially hindering the country's climate goals.</div>
+  <div class="article-meta">May 22, 2026  10:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/mexico-launches-call-for-renewable-energy-storage-projects-linked-to-state-utility-cfe/" target="_blank">Mexico launches call for renewable energy, storage projects linked to state utility CFE</a></div>
+  <div class="article-summary">Mexico's Secretariat of Energy has launched a call for renewable energy and storage projects exceeding 0.7 MW, prioritizing those that enhance grid reliability and align with national planning. This initiative, part of Mexico's post-2024 electricity reforms, signals a move to integrate more clean energy and bolster system stability, potentially unlocking significant decarbonization opportunities.</div>
+  <div class="article-meta">May 22, 2026  09:47 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/chinese-wafer-producers-build-inventory-ahead-of-expected-q3-demand-recovery/" target="_blank">Chinese wafer producers build inventory ahead of expected Q3 demand recovery</a></div>
+  <div class="article-summary">According to the OPIS Global Solar Markets Report released on May 19, Free-On-Board (FOB) China n-type M10 and G12 wafer prices remained unchanged week-on-week at $0.139 per piece and $0.169/pc, respectively.
+
+Meanwhile, the newly launched FOB China…</div>
+  <div class="article-meta">May 22, 2026  10:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/anker-solix-e10-deep-dive-review-the-alternative-to-the-whole-home-generator/" target="_blank">Anker Solix E10 deep dive review: The alternative to the whole-home generator</a></div>
+  <div class="article-summary">In California's Napa Valley, a homeowner has replaced a noisy, gas-guzzling generator with the Anker Solix E10 battery system to manage frequent power outages and expensive electricity rates. This shift to stored solar power is crucial for reducing reliance on fossil fuels during grid disruptions and mitigating the financial penalty of exporting excess solar energy under new utility tariffs.</div>
+  <div class="article-meta">May 22, 2026  09:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/colombia-regulates-transmission-capacity-allocation-to-speed-up-energy-project-connections/" target="_blank">Colombia regulates transmission capacity allocation to speed up energy project connections</a></div>
+  <div class="article-summary">Colombia has streamlined its transmission capacity allocation process, cutting connection times for new energy projects to just 15 business days. This move is crucial for accelerating the integration of renewable energy and preventing grid bottlenecks, especially as the country anticipates significant demand growth in 2029 and 2030.</div>
+  <div class="article-meta">May 22, 2026  09:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/22/chinese-ev-brands-woo-yemens-wealthy-elite-as-war-prompts-solar-boom/" target="_blank">Chinese EV brands woo Yemen’s wealthy elite as war prompts solar boom</a></div>
+  <div class="article-summary">For the well-off few, buying an EV is the next step in a solar revolution that has helped Yemenis weather years of power outages and high fuel pricesThe postChinese EV brands woo Yemen’s wealthy elite as war prompts solar boomappeared first onClimate…</div>
+  <div class="article-meta">May 22, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/india-has-now-32-9-gw-of-operational-pv-capacity-under-private-ppas/" target="_blank">India has now 32.9 GW of operational PV capacity under private PPAs</a></div>
+  <div class="article-summary">India's open-access solar capacity surged 59% QoQ to 2.7 GW in Q1 2026, bringing the total operational PV under private PPAs to 32.9 GW. This rapid expansion, driven by regulatory shifts and demand for price certainty, signifies substantial progress in India's transition to renewable energy, crucial for its climate goals.</div>
+  <div class="article-meta">May 22, 2026  08:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/iran-conflict-boosts-interest-in-short-term-ppas-in-europe/" target="_blank">Iran conflict boosts interest in short-term PPAs in Europe</a></div>
+  <div class="article-summary">The Iran-related conflict is driving price volatility and supply concerns in European energy markets and, according to Montel analysis, increasing interest in short-term power purchase agreements (PPAs). In periods of uncertainty, the hedging value o…</div>
+  <div class="article-meta">May 22, 2026  09:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-22/europe-s-first-major-heat-wave-of-summer-threatens-records" target="_blank">Europe’s First Major Heat Wave of Season Threatens Records</a></div>
+  <div class="article-summary">The first heat wave of the season is set to scorch Europe over the coming week, sending temperatures toward monthly records in the UK, France and Spain.…</div>
+  <div class="article-meta">May 22, 2026  08:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-21/middle-east-war-is-threatening-persian-gulf-ecosystems" target="_blank">Middle East War Risks Creating an Environmental Disaster, Experts Warn</a></div>
+  <div class="article-summary">There’s been an increasing amount of oil slicks.…</div>
+  <div class="article-meta">May 21, 2026  16:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-21/trump-to-delay-superpollutant-restrictions-in-affordability-push" target="_blank">Trump Delays EPA Refrigerant Limits in Affordability Push</a></div>
+  <div class="article-summary">President Donald Trump said he’s easing requirements on planet-warming refrigerants, touting the move as a way to cut costs for consumers as he looks to address voters’ affordability concerns before November midterms.…</div>
+  <div class="article-meta">May 21, 2026  15:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-21/uk-s-solar-powered-car-parks-mandate-scrapped-over-cost-fears" target="_blank">UK’s Mandate for Solar in Car Parks Scrapped Over Cost Concerns</a></div>
+  <div class="article-summary">The UK government shelved plans to require new car parks to fit solar panels, after finding it may not deliver the savings first hoped for.…</div>
+  <div class="article-meta">May 21, 2026  15:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/22/record-dry-april-lifts-irradiance-across-eastern-australia/" target="_blank">Record-dry April lifts irradiance across Eastern Australia</a></div>
+  <div class="article-summary">April 2026 saw record dryness across Eastern Australia, particularly New South Wales and Victoria, leading to a significant surge in solar irradiance due to persistent clear skies. This exceptional sunshine surplus, driven by a neutral ENSO and high pressure, offers a potent reminder of how weather patterns directly amplify renewable energy generation potential.</div>
+  <div class="article-meta">May 22, 2026  10:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21052026/congress-investigates-potomac-river-sewage-spill/" target="_blank">Congress Grills Officials About the Potomac River Sewage Spill</a></div>
+  <div class="article-summary">Members of a congressional subcommittee this week questioned utility leaders and state officials about their knowledge of preexisting problems with the sewage line that collapsed on Jan. 19 near the Potomac River.  According to the University of Mary…</div>
+  <div class="article-meta">May 22, 2026  02:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/21/hurricane-season-2026-noaa" target="_blank">Atlantic hurricane season forecast to be milder than normal thanks to El Niño</a></div>
+  <div class="article-summary">Forecast came amid warning that US was unprepared for storms with staffing cuts under Trump administrationSign up for the Breaking News US newsletter emailTheUSwill see a below-normalhurricaneseason in 2026, federal government scientists said on Thur…</div>
+  <div class="article-meta">May 21, 2026  22:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/may/22/one-nation-pauline-hanson-australia-questions-climate-science-ntwnfb" target="_blank">One Nation says it’s the only party in Australia to question climate science. It should ask itself why | Temperature Check</a></div>
+  <div class="article-summary">Climate change denial has become untenable yet Hanson’s party digs in – with conspiracy theories, cherrypicking and claims that are easy to refuteFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news po…</div>
+  <div class="article-meta">May 21, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/21/trump-epa-refrigerant-rule-grocery-costs" target="_blank">Trump’s EPA to roll back refrigerant rule for grocery stores in push it claims will lower prices</a></div>
+  <div class="article-summary">EPA is loosening Biden-era rule that requires US businesses to reduce greenhouse gases used in cooling equipmentThe Trump administration is set to loosen a federal rule that requires grocery stores and air-conditioning companies to reduce greenhouse…</div>
+  <div class="article-meta">May 21, 2026  17:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/21/flood-prone-london-school-climate-adapted-playground" target="_blank">‘It’s put the joy levels up’: the flood-prone London school with a climate-adapted playground</a></div>
+  <div class="article-summary">When pupils could no longer play outside, St John’s school in Barnet decided to act, enlisting Trees for Cities to help rethink its outside spaceThe play area at St John’s Church of England primary in Barnet, north London, used to flood so severely i…</div>
+  <div class="article-meta">May 21, 2026  17:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, May 22, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
