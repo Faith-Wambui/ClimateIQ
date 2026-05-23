@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, May 23, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">50</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 47 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/23/mandatory-utility-fees-distort-price-signals-for-rooftop-solar-in-the-us/" target="_blank">Mandatory utility fees distort price signals for rooftop solar in the US</a></div>
+  <div class="article-summary">Regulators in 27 U.S. states are shifting residential electricity pricing toward higher fixed monthly charges and lower usage-based rates, weakening the economics of rooftop solar and home battery systems. This redesign reduces incentives for distrib…</div>
+  <div class="article-meta">May 23, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/22/hyundai-issued-with-demands-on-louisiana-steel-mill-by-delegation-of-labor-civil-rights-environmental-health-leaders/" target="_blank">Hyundai Issued with Demands on Louisiana Steel Mill by Delegation of Labor, Civil Rights, Environmental Health Leaders</a></div>
+  <div class="article-summary">Coalition raises concerns as development proceeds without protections for workers or residents GONZALES, LA — Representatives from the Good Neighbors Louisiana coalition dropped in on Hyundai’s offices in Gonzales to present the company with a list o…</div>
+  <div class="article-meta">May 23, 2026  03:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-22-may-2026-un-adopts-landmark-resolution-trump-takes-on-rcp8-5-climate-migration/" target="_blank">DeBriefed 22 May 2026: UN adopts landmark resolution | Trump takes on ‘RCP8.5’ | Climate migration</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+UN adopts landmark opinion
+
+ICJ OPINION: The UN has adopted a resolution backing a landmark world court opinion stating th…</div>
+  <div class="article-meta">May 22, 2026  17:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/experts-why-migration-is-not-a-failure-of-adaptation-in-a-warming-world/" target="_blank">Experts: Why migration is ‘not a failure of adaptation’ in a warming world</a></div>
+  <div class="article-summary">Hundreds of scientists gathered in London this week to discuss the role of migration as a way for communities to adapt to climate change.
+
+The impacts of a warming world, such as sea level rise and worsening extremes, are pushing many people around t…</div>
+  <div class="article-meta">May 22, 2026  17:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-how-cmip7-will-shape-the-next-wave-of-climate-science/" target="_blank">Guest post: How CMIP7 will shape the next wave of climate science</a></div>
+  <div class="article-summary">Hundreds of scientists in dozens of institutions are embarking on the next phase of the world’s largest coordinated climate-modelling effort.
+
+Climate-modelling groups use supercomputers to run climate models that simulate the physics, chemistry and…</div>
+  <div class="article-meta">May 22, 2026  12:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/23/have-you-seen-a-paywall-recently-support-cleantech-media-here/" target="_blank">Have You Seen A Paywall Recently? Support Cleantech Media Here</a></div>
+  <div class="article-summary">How many news articles do you go to now that are behind a paywall? This is the era of media we’re in — news sites need subscribers. There are sites, like The Guardian, that want to make sure content is accessible and important news and discussions ge…</div>
+  <div class="article-meta">May 23, 2026  10:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/23/europe-creates-map-to-locate-available-capacity-in-power-grids/" target="_blank">Europe creates map to locate available capacity in power grids</a></div>
+  <div class="article-summary">Europe's electricity grid operators have launched Capacitypedia, a new platform consolidating data on available grid capacity across 27 countries, making it easier for developers to identify connection points for renewables and storage. This initiative, a key part of the EU Grid Action Plan, aims to accelerate the integration of clean energy by providing unprecedented transparency on grid hosting capacity.</div>
+  <div class="article-meta">May 23, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/22/tilting-at-windmills/" target="_blank">Tilting at Windmills</a></div>
+  <div class="article-summary">Volvo EX30 owner Tom Sjolund's recent EV adventures highlight the growing practicality of electric vehicles for long-distance travel. This growing adoption signals a tangible shift away from fossil fuels, directly contributing to reduced carbon emissions and a cleaner transportation sector.</div>
+  <div class="article-meta">May 23, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/22/geely-ev-sales-down-in-april-but-zeekr-poppin/" target="_blank">Geely EV Sales Down In April, But Zeekr Poppin’</a></div>
+  <div class="article-summary">Geely's overall EV sales dipped in April, but its premium Zeekr brand saw a significant surge, highlighting a growing demand for higher-end electric vehicles. This bifurcation in sales performance underscores the evolving consumer preferences within the booming Chinese EV market, a key indicator for global electrification trends.</div>
+  <div class="article-meta">May 23, 2026  06:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/22/mozilla-foundation-condemns-data-collection-by-cars/" target="_blank">Mozilla Foundation Condemns Data Collection By Cars</a></div>
+  <div class="article-summary">Support CleanTechnica's work through a Substack subscription or on Stripe.
+
+When we hear “Mozilla,” we think of the search engine that is an alternative to Google. But the Mozilla Foundation is much more than that. On its homepage, it says:
+
+“We coll…</div>
+  <div class="article-meta">May 23, 2026  03:14 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/22/nio-financials-up-huge-year-over-year-but-market-not-happy/" target="_blank">NIO Financials Up Huge Year Over Year! But Market Not Happy.</a></div>
+  <div class="article-summary">NIO has published its first quarter financials. There’s good news and less good news. The company was able to achieve an adjusted operational profit (non-GAAP) for the second quarter in a row, as well as an adjusted net profit (non-GAAP). However, th…</div>
+  <div class="article-meta">May 23, 2026  05:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-22/france-seeks-to-shield-energy-producers-from-esg-fund-regulation" target="_blank">France Seeks to Shield Energy Producers From ESG Fund Regulation</a></div>
+  <div class="article-summary">France wants incoming ESG fund rules to be adjusted so that sustainable investors don’t need to exclude key energy producers, according to a draft proposal seen by Bloomberg.…</div>
+  <div class="article-meta">May 22, 2026  19:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-22/orsted-said-to-mull-over-1-billion-sale-of-us-renewable-assets" target="_blank">Orsted Considers Selling US Renewable Assets Worth More Than $1 Billion</a></div>
+  <div class="article-summary">Orsted A/S is exploring a sale of its onshore renewables assets in the US, people with knowledge of the matter said, as part of a pivot to its core market of offshore wind in Europe.…</div>
+  <div class="article-meta">May 22, 2026  18:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-22/climeworks-ceo-says-carbon-removal-can-t-hinge-on-microsoft" target="_blank">Climeworks CEO Says Carbon Removal Can’t Hinge on Microsoft</a></div>
+  <div class="article-summary">A pullback by the tech giant could spur an evolution of the market, said Christoph Gebald.…</div>
+  <div class="article-meta">May 22, 2026  17:12 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/22/drone-strikes-nuclear-power-plant-in-uae-this-could-get-bad/" target="_blank">Drone Strikes Nuclear Power Plant in UAE — This Could Get Bad</a></div>
+  <div class="article-summary">A drone strike has reportedly hit a nuclear power plant in the UAE amid escalating regional tensions, raising fears of a significant environmental and safety incident. This attack, occurring against a backdrop of blocked shipping lanes and a looming oil crisis, introduces a dangerous new dimension to the conflict with potentially catastrophic climate implications.</div>
+  <div class="article-meta">May 23, 2026  06:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/democratic-republic-congo/africa-region-ebola-bvd-epidemic-emergency-appeal-no-mdrs1007" target="_blank">DR Congo: Africa Region | Ebola (BVD) Epidemic Emergency Appeal №: MDRS1007</a></div>
+  <div class="article-summary">Countries: Democratic Republic of the Congo, UgandaSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.On 15 May, the Institut National de Recherche Biomédicale (INRB) Kinshasa confirmed an outbre…</div>
+  <div class="article-meta">May 22, 2026  17:14 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/cash-working-group-haiti-note-sur-la-valeur-de-transfert-usages-multiples-dans-laction-anticipatoire" target="_blank">Haiti: Cash Working Group Haïti - Note sur la valeur de transfert à usages multiples dans l’action anticipatoire</a></div>
+  <div class="article-summary">Country: HaitiSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.CASH WORKING GROUP HAÏTINOTE SUR LA VALEUR DE TRANSFERT À USAGES MULTIPLES DANS L’ACTION ANTICIPATOIRELe Groupe de Travail sur les Transfert…</div>
+  <div class="article-meta">May 22, 2026  16:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/groupe-de-travail-sur-les-transferts-monetaires-en-haiti-gttmcbtwg-compte-rendu-de-la-reunion-mensuelle-du-cbtwg-date-20-mai-2026-meeting-minutes" target="_blank">Haiti: Groupe de Travail sur les Transferts Monétaires en Haïti (GTTM/CBTWG) - Compte rendu de la réunion mensuelle du CBTWG (Date : 20 mai 2026) [Meeting Minutes]</a></div>
+  <div class="article-summary">Country: HaitiSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Le Groupe de Travail sur les Transferts Monétaires en Haïti (GTTM/CWG) est un groupe de coordinationhumanitaire chargé d’organiser, harmonis…</div>
+  <div class="article-meta">May 22, 2026  16:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/democratic-republic-congo/dr-congo-humanitarian-key-figures-30-april-2026" target="_blank">DR Congo: Humanitarian Key Figures (as of 30 April 2026)</a></div>
+  <div class="article-summary">Country: Democratic Republic of the CongoSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">May 22, 2026  16:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/23/uk-homes-roads-railways-sink-into-the-sea" target="_blank">‘There is no great master plan’: anxiety as UK homes, roads and railways sink into the sea</a></div>
+  <div class="article-summary">The vital Slapton Line road in south Devon, connecting Kingsbridge and Dartmouth, has been dramatically washed away by coastal erosion, a fate predicted decades ago but unaddressed. This destruction highlights the growing threat of rising sea levels to UK infrastructure, jeopardizing communities and livelihoods as climate change accelerates.</div>
+  <div class="article-meta">May 23, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22052026/environmental-groups-sue-us-government-over-seafood-imports/" target="_blank">Federal Law Requires US Seafood Imports to Not Threaten Marine Mammals. A Lawsuit Is Pushing the Government to Finally Act.</a></div>
+  <div class="article-summary">Environmental groups on Thursday sued the United States government to ensure internationally sourced seafood doesn’t threaten whales or dolphins that become entangled or drown due to sometimes lethal fishing techniques. The U.S., the world’s largest…</div>
+  <div class="article-meta">May 23, 2026  02:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22052026/california-wildfire-grows-near-ex-nuclear-site/" target="_blank">As Wildfire Grows Near Ex-Nuclear Site, California County Sets Up Radiation Air Monitors</a></div>
+  <div class="article-summary">With a Southern California wildfire only growing in size, firefighters in Ventura County have increased response efforts near a former nuclear reactor and rocket testing site. The Sandy Fire’s roughly quarter-of-a-mile proximity to the Santa Susana F…</div>
+  <div class="article-meta">May 23, 2026  02:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22052026/brazil-supreme-court-greenlights-amazon-grain-train/" target="_blank">The Brazilian Supreme Court Makes Way for the ‘Grain Train’</a></div>
+  <div class="article-summary">A nearly 600-mile railway that would cut through the heart of the Amazon rainforest got one step closer to reality Thursday when the Brazilian Supreme Court ruled that a national park could be resized to accommodate its passage. If approved, the Ferr…</div>
+  <div class="article-meta">May 23, 2026  00:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22052026/un-reinforces-youth-led-climate-campaign/" target="_blank">A Youth-Led Campaign Claims a Win For Climate Justice</a></div>
+  <div class="article-summary">A climate justice seed planted by young Pacific Island students in 2019, as mass participation in climate demonstrations peaked in the millions, is starting to reshape international law around the realities of a rapidly warming planet.  At the United…</div>
+  <div class="article-meta">May 23, 2026  00:22 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, May 23, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
