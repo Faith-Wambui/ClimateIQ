@@ -1,0 +1,129 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Monday, May 25, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ USDA Extends Pause on Loans for Controversial Digesters That Turn Manure Into Biogas
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/25052026/usda-biogas-digester-loan-pause/
+  Date   : May 25, 2026  11:55 EAT
+  Summary: The USDA has extended its pause on loans for anaerobic digesters, a technology that converts manure from large farms into biogas, due to high delinquency rates and financial losses. This delay is critical as these digesters, often promoted as climate solutions, are facing scrutiny over their actual methane reduction benefits and potential to lock in unsustainable industrial agriculture practices.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ DAS Solar, UNSW build tunnel back-contact solar cell with 27% efficiency, lower silver content
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/25/das-solar-unsw-build-tunnel-back-contact-solar-cell-with-27-efficiency-lower-silver-content/
+  Date   : May 25, 2026  12:00 EAT
+  Summary: DAS Solar and UNSW have achieved a breakthrough in solar technology, developing tunnel back-contact cells with over 27% efficiency and a significant reduction in silver usage. This innovation is crucial for accelerating the transition to clean energy by making solar panels more powerful and cost-effective.
+
+
+▸ Inlyte Energy targets US data centers with iron-sodium batteries
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/25/inlyte-energy-targets-us-data-centers-with-iron-sodium-batteries/
+  Date   : May 25, 2026  10:30 EAT
+  Summary: Inlyte Energy is piloting its iron-sodium battery technology in Swiss data centers by 2026, aiming to replace polluting diesel generators with a safe, long-duration backup solution. This innovation is crucial for decarbonizing the energy-intensive data center sector, which currently relies heavily on fossil fuels for reliable power.
+
+
+▸ Solar module recycling based on oxidative liquefaction
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/25/solar-module-recycling-based-oxidative-liquefaction/
+  Date   : May 25, 2026  10:00 EAT
+  Summary: Researchers have developed a low-temperature, hydrogen peroxide-mediated oxidative liquefaction process to recycle end-of-life solar panels by selectively breaking down polymers into useful chemical feedstocks. The proposed method reduces energy cons…
+
+
+▸ Fortescue begins building 690 MW solar farm, 650 MWh BESS in Australia
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/25/fortescue-begins-building-690-mw-solar-farm-650-mwh-bess-in-australia/
+  Date   : May 25, 2026  09:47 EAT
+  Summary: Mining giant Fortescue has commenced construction on a massive 690 MW solar farm and a 650 MWh battery storage system in Western Australia's Pilbara region, a critical step towards its "real zero" decarbonization goal. This significant investment in renewables, part of a broader off-grid network, underscores the urgent need for electrification and renewable power to combat volatile global fuel markets and achieve ambitious emissions reductions by 2030.
+
+
+▸ Oil in turmoil, solar stays stable
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/25/oil-in-turmoil-solar-stays-stable/
+  Date   : May 25, 2026  09:00 EAT
+  Summary: While Middle East conflict sent oil prices soaring, the solar industry remained remarkably stable, with polysilicon prices showing minimal fluctuation. This resilience highlights solar's decoupling from fossil fuel volatility, underscoring its growing importance as a climate solution independent of geopolitical energy shocks.
+
+
+============================================================
+💰  CLIMATE FINANCE  (3 articles)
+============================================================
+
+▸ Finergreen exits Africa, focuses growth on Europe and Asia
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/25/finergreen-exits-africa-focuses-growth-on-europe-and-asia/
+  Date   : May 25, 2026  11:15 EAT
+  Summary: French energy advisory firm Finergreen has divested its African operations, transferring its teams in Côte d’Ivoire, Kenya, and South Africa to local management. This strategic shift signals a redirection of resources towards Europe and Asia, potentially impacting the pace of renewable energy project development and investment flows across the continent.
+
+
+▸ Dubious Chinese Carbon Credits Expose European Market’s Flaws
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/graphics/2026-europe-china-dubious-carbon-credits/
+  Date   : May 25, 2026  00:00 EAT
+  Summary: Companies in at least nine European countries bought carbon offsets from projects that appear not to exist or were verified by an auditor-turned-developer who treated the two jobs as a revolving door, a Bloomberg investigation found.…
+
+
+▸ California Chemical Blast Risk Eased by Potential Crack in Tank
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-24/epa-says-california-chemical-tank-likely-to-leak-not-explode
+  Date   : May 24, 2026  18:22 EAT
+  Summary: A potential crack in the bottom of a compromised chemical tank, which has prompted the evacuation of more than 50,000 people in the suburbs of Los Angeles, may prevent a previously feared explosion.…
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (2 articles)
+============================================================
+
+▸ Pollution from coal plants can reduce solar generation by over 5%
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/05/25/pollution-from-coal-plants-can-reduce-solar-generation/
+  Date   : May 25, 2026  11:00 EAT
+  Summary: New research reveals that pollution from coal plants globally reduced solar generation by 5.8% in 2023, a loss equivalent to 111 TWh, with China bearing the brunt of this impact. This finding is critical as it demonstrates how existing fossil fuel infrastructure directly undermines the efficiency of renewable energy expansion, with aerosol-induced losses now equaling nearly one-third of the energy generated by new solar capacity annually.
+
+
+▸ Is this a good time for the CSIRO to be sacking climate scientists? | First Dog on the Moon
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/commentisfree/picture/2026/may/25/is-this-a-good-time-for-the-csiro-to-be-sacking-climate-scientists
+  Date   : May 25, 2026  09:50 EAT
+  Summary: A severe El Niño event, predicted to be the strongest on record, is on the horizon, threatening widespread global disruption. This looming climate crisis underscores the critical need for robust scientific expertise, making recent cuts to climate scientists at CSIRO particularly ill-timed and concerning for our ability to predict and respond to such events.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (3 articles)
+============================================================
+
+▸ In Florida, an Agricultural Town in Need of an Economic Boost Eyes Hyperscale Data Centers
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/25052026/florida-indiantown-hyperscale-data-center-proposals/
+  Date   : May 25, 2026  12:00 EAT
+  Summary: A proposed hyperscale data center in Indiantown, Florida, is sparking debate as residents like 87-year-old Carroll McAllister voice concerns about its impact on their rural community. While the project promises economic revitalization, its significant energy and water demands raise critical questions about its climate footprint in an area already grappling with environmental pressures.
+
+
+▸ Hottest May day for nearly 80 years as parts of UK hit heatwave threshold
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/uk-news/2026/may/24/uk-heatwave-expected-as-temperatures-near-record-highs-for-may
+  Date   : May 25, 2026  00:06 EAT
+  Summary: Highest temperatures of 2026 in England, Wales and Northern Ireland as Kew Gardens in London reaches 32.3CEngland, Wales and Northern Ireland recorded their highest temperatures of 2026 on Sunday, which was also the UK’s hottest May day for at least…
+
+
+▸ Could nature itself hold the solution to climate change?
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/books/2026/may/24/could-nature-itself-hold-the-solution-to-climate-change
+  Date   : May 24, 2026  14:00 EAT
+  Summary: Technological interventions face huge financial or practical challenges, but there is another wayIn 2019, my scientific research was nearly brought to an early end when my team and I published the bombastic statement that natural forest restoration w…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 23  |  Sources: 6  |  Topics: 5
