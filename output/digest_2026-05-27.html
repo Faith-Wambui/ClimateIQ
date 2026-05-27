@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, May 27, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:56%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 38 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/27/paraguay-launches-first-large-scale-solar-tender-marking-historic-shift-in-energy-policy/" target="_blank">Paraguay launches first large-scale solar tender, marking historic shift in energy policy</a></div>
+  <div class="article-summary">Paraguay just launched its first major solar tender, a 140 MW project backed by the World Bank, signaling a significant shift away from its sole reliance on hydropower. This move is crucial for diversifying the nation's energy portfolio and accelerating its transition to cleaner energy sources.</div>
+  <div class="article-meta">May 27, 2026  09:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/27/malaysia-offers-cash-rebate-for-home-solar/" target="_blank">Malaysia offers cash rebate for home solar</a></div>
+  <div class="article-summary">Malaysia is rolling out a MYS 120 million rebate program, offering up to MYS 3,000 per household for solar installations under its new net metering scheme. This initiative, capped at 250 MW and running until year-end, aims to significantly boost rooftop solar adoption, contributing to Malaysia's growing renewable energy capacity and climate goals.</div>
+  <div class="article-meta">May 27, 2026  09:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/27/colombia-awards-1546-9-mw-of-solar-capacity-in-firm-energy-auction-for-2029-2030/" target="_blank">Colombia awards 1,546.9 MW of solar capacity in firm energy auction for 2029–2030</a></div>
+  <div class="article-summary">Colombia just secured 1,546.9 MW of new solar capacity in its latest energy auction, signaling a significant acceleration of renewable energy deployment. This move is crucial for the country's climate goals, locking in clean power generation that will displace fossil fuels and reduce emissions for years to come.</div>
+  <div class="article-meta">May 27, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/27/solar-and-battery-hybrid-projects-prominent-in-latest-australian-tender/" target="_blank">Solar and battery hybrid projects prominent in latest Australian tender</a></div>
+  <div class="article-summary">Australia's latest renewable energy tender has secured 7.8 GW of new generation capacity and over 2 GW of battery storage, with a significant portion being hybrid solar and battery projects. This massive influx of clean energy, expected online by 2030, will power over 4 million homes and unlock an estimated AUD 17 billion in private investment, accelerating the nation's transition away from fossil fuels.</div>
+  <div class="article-meta">May 27, 2026  08:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/05/27/recycling-could-meet-half-of-europes-critical-mineral-needs-by-2050/" target="_blank">Recycling could meet half of Europe’s critical mineral needs by 2050</a></div>
+  <div class="article-summary">Europe's "urban mines"—waste streams containing critical minerals—could supply up to half of the continent's needs for these vital materials by 2050, according to a new EU-funded report. This significant recycling potential offers a pathway to drastically reduce Europe's reliance on China for minerals essential to the green energy transition.</div>
+  <div class="article-meta">May 27, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/27/pennar-industries-expands-investment-in-pv-manufacturing-in-india/" target="_blank">Pennar Industries expands investment in PV manufacturing in India</a></div>
+  <div class="article-summary">Pennar Industries is injecting $700,000 into its solar module manufacturing joint venture, ZAP91 Solar India, to complete a new plant in Telangana. This expansion directly supports India's growing renewable energy capacity, crucial for meeting climate targets and reducing reliance on fossil fuels.</div>
+  <div class="article-meta">May 27, 2026  09:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/26/rad-power-bikes-to-offer-safer-replacement-e-bike-batteries-at-steep-discount/" target="_blank">Rad Power Bikes to offer safer replacement e-bike batteries at steep discount</a></div>
+  <div class="article-summary">Rad Power Bikes is offering a significant discount, up to 50%, on its newer, safer "Safe Shield" e-bike batteries for owners of older models. This move addresses potential fire risks associated with older battery technology, a crucial step in ensuring the long-term sustainability and safety of the rapidly growing e-bike market.</div>
+  <div class="article-meta">May 27, 2026  09:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/27/pexapark-records-17-european-ppas-for-966-mw-in-april/" target="_blank">Pexapark records 17 European PPAs for 966 MW in April</a></div>
+  <div class="article-summary">European developers signed 17 power purchase agreements (PPAs) with a contracted capacity totaling 966 MW in April, according to the latest analysis from Swiss renewables research firm Pexapark.
+
+Last month’s deals included two hybrid solar and batte…</div>
+  <div class="article-meta">May 27, 2026  08:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/27/assessing-elon-musks-massive-100-gw-solar-ambitions/" target="_blank">Assessing Elon Musk’s massive 100 GW solar ambitions</a></div>
+  <div class="article-summary">From the magazine
+
+To anyone who knows about US solar manufacturing, Elon Musk’s claim that SpaceX and Tesla are working to build 100 GW of annual PV manufacturing capacity might seem unachievable.
+
+As 2025 came to a close, experts from Intertek CEA…</div>
+  <div class="article-meta">May 27, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-27/japan-power-price-extends-gains-as-war-and-heat-strain-supply" target="_blank">Japan Power Price Extends Gains as War, Heat Strain Supply</a></div>
+  <div class="article-summary">Japan’s spot power price climbed to its highest in more than a month as forecasts for unusually hot weather boosted demand, while the conflict in the Middle East tightened fuel supplies.…</div>
+  <div class="article-meta">May 27, 2026  05:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-26/climate-change-fueling-growth-of-antibiotic-resistant-salmonella" target="_blank">Climate Change Fueling Growth of Antibiotic-Resistant Salmonella</a></div>
+  <div class="article-summary">Climate change is linked to a 10% global increase in antibiotic-resistance genes in Salmonella, according to new research that suggests warming temperatures and shifting rainfall patterns could accelerate the spread of hard-to-treat infections.…</div>
+  <div class="article-meta">May 27, 2026  01:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-26/uk-and-france-break-may-records-as-heat-scorches-europe" target="_blank">UK and France Break May Records as Heat Scorches Europe</a></div>
+  <div class="article-summary">Driven by a heat dome, temperatures have soared.…</div>
+  <div class="article-meta">May 26, 2026  16:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-26/toxic-fumes-from-tehran-oil-fires-affected-area-size-of-italy" target="_blank">Toxic Fumes From Tehran Oil Fires Affected Area Size of Italy</a></div>
+  <div class="article-summary">When Tehran oil infrastructure caught fire in March following Israeli strikes, the blaze produced toxic fumes detectable across an area the size of Italy, according to fresh research.…</div>
+  <div class="article-meta">May 26, 2026  16:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-26/nextera-s-dominion-deal-expands-exposure-to-extreme-weather" target="_blank">NextEra’s Dominion Deal Expands Its Storm Risk</a></div>
+  <div class="article-summary">The utility giant is expanding into some of the US’ costliest weather zones.…</div>
+  <div class="article-meta">May 26, 2026  15:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/may/27/wednesday-briefing-can-the-uk-adapt-in-time-to-a-new-normal-of-extreme-heat" target="_blank">Wednesday briefing: ​Can the UK adapt in time to a new normal of extreme heat?</a></div>
+  <div class="article-summary">Britain is grappling with record-breaking spring heatwaves, with temperatures hitting 35C and even experiencing "tropical nights" where temperatures don't drop below 20C. This extreme heat, a stark indicator of a changing climate, highlights the urgent need for the UK to adapt its infrastructure and societal norms to prevent widespread health risks and prepare for a hotter future.</div>
+  <div class="article-meta">May 27, 2026  08:46 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/27/witnessing-the-disappearance-of-indonesia-eternity-glaciers" target="_blank">‘Planetary destruction on fast-forward’: witnessing the disappearance of Indonesia’s ‘eternity glaciers’</a></div>
+  <div class="article-summary">Researchers racing to document Oceania’s last tropical glaciers found the remaining ‘eternal snow’ in Indonesia’s West Papua region has lost almost all its iceMapping the last glaciers in Oceania – in picturesAn expedition to document the end days of…</div>
+  <div class="article-meta">May 27, 2026  06:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/may/27/britain-green-transition-belong-everyone-labour-planning-protest-laws" target="_blank">Britain’s green transition should belong to everyone. Why is Labour so intent on stopping us having our say? | George Monbiot</a></div>
+  <div class="article-summary">Tearing up planning and using protest laws to criminalise local people – this isn’t how to build the broad consent neededWe will not persuade. We will not explain. We will not listen. We know best and we will force you to comply. This, I’m sorry to s…</div>
+  <div class="article-meta">May 27, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/26052026/todays-climate-early-heat-wave-western-europe/" target="_blank">An Unusually Early Heat Wave Breaks Temperature Records Across Western Europe</a></div>
+  <div class="article-summary">Extreme heat is one of the most dangerous climate change risks in the United Kingdom, according to a new government-backed report that warned the nation is “built for a climate that no longer exists.”  Right after it came out, the U.K. recorded its h…</div>
+  <div class="article-meta">May 27, 2026  01:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/society/2026/may/26/climate-crisis-accelerating-antibiotic-resistance-across-world-salmonella-study" target="_blank">Climate crisis is accelerating antibiotic resistance across world, study says</a></div>
+  <div class="article-summary">Experts say climate change linked to 10% rise in salmonella antibiotic resistance genes between 1940 and 2023The climate crisis is accelerating a global increase in antibiotic resistance that poses a serious threat to human health, experts have said…</div>
+  <div class="article-meta">May 27, 2026  01:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/may/26/deaths-france-linked-record-high-temperatures" target="_blank">Seven heat-related deaths in France as May records set in several countries</a></div>
+  <div class="article-summary">Extreme early summer event across western Europe also brings highest temperatures for month in UK and IrelandSeven people have died in France in an extreme early summer heat event affecting a swathe of western Europe, with record high temperatures fo…</div>
+  <div class="article-meta">May 26, 2026  23:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/may/26/ben-jennings-on-britains-heatwave-cartoon" target="_blank">Ben Jennings on Britain’s heatwave – cartoon</a></div>
+  <div class="article-summary">Continue reading...…</div>
+  <div class="article-meta">May 26, 2026  19:56 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, May 27, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
