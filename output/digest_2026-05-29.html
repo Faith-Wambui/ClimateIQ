@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, May 29, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">52</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 44 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/israel-targets-26-gw-of-renewables-by-2035/" target="_blank">Israel targets 26 GW of renewables by 2035</a></div>
+  <div class="article-summary">Israel is aggressively targeting 26 GW of renewable energy by 2035, a significant leap from its current 8 GW, with a focus on solar and innovative agrivoltaics. This ambitious expansion is crucial for Israel to decarbonize its energy sector and contribute to global climate goals by drastically reducing its reliance on fossil fuels.</div>
+  <div class="article-meta">May 29, 2026  11:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/china-briefing-28-may-2026-deadly-rains-china-pushes-back-examining-chinas-carbon-intensity-metric/" target="_blank">China Briefing 28 May 2026: Deadly rains | China pushes back | Examining China’s carbon intensity metric</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s China Briefing.
+
+China Briefing handpicks and explains the most important climate and energy stories from China over the past fortnight. Subscribe for free here.
+
+Key developments
+
+Several dead as record rainfall hit several…</div>
+  <div class="article-meta">May 28, 2026  17:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/media-reaction-uk-and-europes-mind-boggling-may-heat-and-climate-change/" target="_blank">Media reaction: UK and Europe’s ‘mind-boggling’ May heat and climate change</a></div>
+  <div class="article-summary">Europe has been hit by a searing heatwave, which has shattered temperature records across France, Spain and the UK.
+
+In London, for example, the mercury hit a record high for May of 35.1C at Kew Gardens on Tuesday 26 May, breaking the former record-h…</div>
+  <div class="article-meta">May 28, 2026  15:29 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/nextpower-gets-into-energy-storage/" target="_blank">Nextpower gets into energy storage</a></div>
+  <div class="article-summary">Nextpower is acquiring Prevalon Energy for up to $365 million, significantly expanding its energy storage capabilities with over 6 GWh deployed globally and a focus on AI data centers. This strategic move positions Nextpower to deliver integrated firm power solutions, crucial for grid stability and the rapidly growing demand from hyperscale computing.</div>
+  <div class="article-meta">May 29, 2026  11:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/southeast-asia-surged-under-clear-skies-while-japans-storms-capped-solar-gains/" target="_blank">Southeast Asia surged under clear skies while Japan’s storms capped solar gains</a></div>
+  <div class="article-summary">In a new weekly update forpv magazine, Solcast, a DNV company, reports that a fading La Niña and ENSO transition led to widespread above-normal solar irradiance across Southeast Asia, especially mainland regions where persistent heat, low humidity, a…</div>
+  <div class="article-meta">May 29, 2026  09:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/china-cell-prices-hold-steady-amid-mounting-downward-pressure-ahead-of-snec/" target="_blank">China cell prices hold steady amid mounting downward pressure ahead of SNEC</a></div>
+  <div class="article-summary">Free-On-Board (FOB) China TOPCon cell prices held steady amid stable week-on-week indications, as market participants continued to assess price direction ahead of the upcoming Shanghai International Photovoltaic Power Generation and Smart Energy Conf…</div>
+  <div class="article-meta">May 29, 2026  09:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/japan-adds-rooftop-solar-reporting-fields-for-large-energy-users/" target="_blank">Japan adds rooftop solar reporting fields for large energy users</a></div>
+  <div class="article-summary">Japan plans to expand its energy efficiency reporting framework to include rooftop solar metrics from fiscal 2027, requiring designated large energy users to report total roof area and installed capacity after applying defined exclusions.The postJapa…</div>
+  <div class="article-meta">May 29, 2026  08:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/une-ombriere-solaire-beton-dediee-aux-poids-lourds/" target="_blank">French startup offers concrete solar carport for heavy weight vehicles</a></div>
+  <div class="article-summary">Visionpark is developing a concrete-structure photovoltaic canopy for heavy-duty vehicle parking areas, logistics hubs, and highway rest stops. In addition to generating electricity, the installation is designed to maintain refrigerated trucks at the…</div>
+  <div class="article-meta">May 29, 2026  08:15 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/sinovoltaics-updates-solar-module-manufacturer-financial-stability-ranking-3/" target="_blank">Sinovoltaics updates solar module manufacturer financial stability ranking</a></div>
+  <div class="article-summary">India's Waaree Renewable Technologies remains the top-ranked solar module manufacturer for financial stability, with a growing number of companies globally showing improved financial health. This trend is significant as it signals increased investment and resilience within the solar manufacturing sector, crucial for accelerating the transition to renewable energy.</div>
+  <div class="article-meta">May 29, 2026  10:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/05/29/vietnam-solar-boom-strains-grid-and-tests-project-finance/" target="_blank">Vietnam solar boom strains grid and tests project finance</a></div>
+  <div class="article-summary">Vietnam's solar expansion is running ahead of the grid infrastructure needed to support it, while a dispute over retroactive tariff cuts on 173 projects is clouding the financing outlook for new capacity.The postVietnam solar boom strains grid and te…</div>
+  <div class="article-meta">May 29, 2026  09:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-29/india-cuts-monsoon-forecast-to-90-of-normal-in-risk-to-crops" target="_blank">India Cuts Monsoon Outlook to 90% of Normal in Risk to Crops</a></div>
+  <div class="article-summary">India lowered this year’s monsoon forecast, a blow to farmers who are already facing higher input costs due to the Middle East conflict.…</div>
+  <div class="article-meta">May 29, 2026  07:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-29/rise-of-renewables-and-evs-in-australia-is-trimming-emissions" target="_blank">Rise of Renewables and EVs in Australia Is Trimming Emissions</a></div>
+  <div class="article-summary">Additions of renewable energy, lower use of fossil fuels and accelerating adoption of electric vehicles cut Australia’s annual greenhouse gas emissions by about 2%, helping to ease concerns the nation — one of the world’s top per-capita polluters — w…</div>
+  <div class="article-meta">May 29, 2026  07:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-28/americans-doubt-countries-will-do-enough-to-tame-climate-change" target="_blank">Americans Doubt Countries Will Do Enough to Tame Climate Change</a></div>
+  <div class="article-summary">Pew Research Center polling finds a majority of US adults view global warming as a significant problem, though with a sharp partisan divide.…</div>
+  <div class="article-meta">May 28, 2026  21:10 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-29/paris-heat-wave-set-to-peak-before-weekend-relief" target="_blank">Paris Heat Wave Set to Peak Before Weekend Relief</a></div>
+  <div class="article-summary">Paris is bracing for the peak of a record-breaking European heat wave on Friday, a stark reminder of intensifying climate impacts. This extreme heat underscores the urgent need for aggressive climate action to mitigate future risks to public health and infrastructure.</div>
+  <div class="article-meta">May 29, 2026  10:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-29/indian-power-firms-snap-up-gas-to-meet-night-time-cooling-demand" target="_blank">Indian Power Firms Snap Up Gas to Meet Night-Time Cooling Demand</a></div>
+  <div class="article-summary">India's power generators have quadrupled domestic natural gas purchases to combat soaring demand driven by record summer heat, a move that directly increases reliance on fossil fuels. This surge in gas consumption, while addressing immediate cooling needs, exacerbates the nation's carbon footprint and poses a significant challenge to its climate goals.</div>
+  <div class="article-meta">May 29, 2026  10:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-29/europe-faces-biggest-food-price-shock-in-g7-from-hotter-world" target="_blank">Europe Faces Biggest Food Price Shock in G7 From Hotter World</a></div>
+  <div class="article-summary">Europe is poised for the most severe food price shock within the G7 due to climate change-driven extreme weather, with the euro area facing a larger impact than other developed nations. This vulnerability highlights how climate change directly threatens economic stability and consumer costs in a critical region.</div>
+  <div class="article-meta">May 29, 2026  10:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/may/29/people-disabilities-heatwaves-uncomfortable-safe-climate-crisis" target="_blank">For people with disabilities, these heatwaves aren’t about being uncomfortable – they’re about being safe | Frances Ryan</a></div>
+  <div class="article-summary">Record-breaking heatwaves in the UK are disproportionately impacting individuals with disabilities, like the author who experiences severe health complications from post-viral fatigue exacerbated by rising temperatures. This highlights how climate change amplifies existing inequalities, posing life-threatening risks to vulnerable populations who lack access to essential cooling measures.</div>
+  <div class="article-meta">May 29, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28052026/environmentalists-oppose-trump-coal-ash-rollbacks/" target="_blank">Environmentalists Turn Out in Force to Oppose Trump Coal Ash Rollbacks</a></div>
+  <div class="article-summary">At a virtual public comment hearing hosted by the U.S. Environmental Protection Agency on Thursday, a long line of environmental advocates voiced strong opposition to proposed new regulations weakening requirements that utilities must follow in clean…</div>
+  <div class="article-meta">May 29, 2026  02:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/29/global-heating-hajj-muslim-pilgrimage-saudi-arabia-dangerous" target="_blank">Global heating is making hajj ever more dangerous, report finds</a></div>
+  <div class="article-summary">Rising heat in Saudi Arabia threatens millions of Muslim pilgrims – but cutting fossil fuels would keep it saferGlobal heating has “fundamentally altered” the climate of Mecca and is exposing millions of hajj pilgrims to extreme and dangerous heat ev…</div>
+  <div class="article-meta">May 29, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/may/28/air-conditioning-uk-homes-heatwave" target="_blank">Should I get air conditioning in the UK – and can it be green?</a></div>
+  <div class="article-summary">As summers become hotter, air conditioner sales are booming. If you’re looking to invest, here’s what to considerWhen aheatwave struck the UKthis week, Jon Connorton, a software developer, began monitoring temperatures inside his east Hampshire terra…</div>
+  <div class="article-meta">May 28, 2026  18:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/may/29/diphtheria-outbreak-remote-communities-aboriginal-indigenous-health-ntwnfb" target="_blank">Diphtheria is a disease of poverty that has no place in modern Australia. When we talk about Closing the Gap, this is the gap | Donna Ah Chee</a></div>
+  <div class="article-summary">For those of us working in Aboriginal health, the outbreak doesn’t come as a surprise. We must invest in housing that keeps remote communities safeThe diphtheria outbreak should shock Australia. Not simply because a disease once considered virtually…</div>
+  <div class="article-meta">May 28, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28052026/inside-clean-energy-utilities-renewable-portfolio-standard/" target="_blank">How Utility Companies and States Shaped America’s Clean Energy Transition</a></div>
+  <div class="article-summary">Not long ago, the rise of U.S. renewable energy was largely tied to state policies that required or encouraged utilities to meet benchmarks for obtaining wind and solar power. The first of these “renewable portfolio standard,” or RPS, laws was likely…</div>
+  <div class="article-meta">May 28, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, May 29, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
