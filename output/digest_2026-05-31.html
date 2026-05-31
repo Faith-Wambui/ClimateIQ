@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, May 31, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">22</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:57%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 16 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/30/connecticut-approves-plug-in-solar-its-so-exciting/" target="_blank">Connecticut Approves Plug-In Solar — It’s So Exciting!</a></div>
+  <div class="article-summary">Connecticut just greenlit plug-in solar, a move that will significantly boost renewable energy adoption by simplifying installation for homeowners. This decision is a critical step in decarbonizing the grid and accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">May 30, 2026  21:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/30/ct-keeps-home-solar-incentive-alive-through-2035-batteries-are-the-big-winners/" target="_blank">CT keeps home solar incentive alive through 2035, batteries are the big winners</a></div>
+  <div class="article-summary">Connecticut has passed legislation extending solar incentives through 2035, crucially exempting solar-plus-battery systems from future caps and solidifying batteries as a key driver for renewable energy adoption. This move ensures long-term financial stability for clean energy investments, directly supporting grid reliability and consumer savings as the state grapples with rising energy demand.</div>
+  <div class="article-meta">May 30, 2026  17:24 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/30/juiced-bikes-now-shipping-its-game-changing-electric-mopeds-in-the-us/" target="_blank">Juiced Bikes now shipping its game-changing electric mopeds in the US</a></div>
+  <div class="article-summary">Juiced Bikes is now shipping its powerful, moto-style electric mopeds in the US, featuring 750W motors and up to 2 kWh battery capacity. This aggressive pricing and performance strategy, mirroring Lectric eBikes' success, signals a significant shift towards more accessible and potent electric mobility options, directly impacting the transition away from fossil fuel-dependent transportation.</div>
+  <div class="article-meta">May 31, 2026  08:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/30/california-lowest-wholesale-electricity-prices-in-usa/" target="_blank">California — Lowest Wholesale Electricity Prices in USA</a></div>
+  <div class="article-summary">California's massive solar build-out, coupled with wind and hydro, is driving wholesale electricity prices to the lowest in the US, demonstrating the economic power of renewable energy. This success offers a compelling model for other states, proving that abundant clean power can simultaneously lower costs and advance climate goals.</div>
+  <div class="article-meta">May 31, 2026  02:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/30/china-sold-more-plugin-vehicles-in-2025-than-the-usa-bought-vehicles-of-all-types/" target="_blank">China Sold More Plugin Vehicles in 2025 Than the USA Bought Vehicles of All Types!</a></div>
+  <div class="article-summary">China's plugin vehicle sales in 2025 are projected to surpass the total number of all vehicle types purchased by the USA, a staggering testament to the nation's rapid EV adoption. This surge highlights China's dominant role in the global transition to electric mobility, significantly impacting future emissions trajectories and the automotive industry's landscape.</div>
+  <div class="article-meta">May 31, 2026  01:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/30/giant-data-center-in-new-mexico-will-be-powered-by-fuel-cells/" target="_blank">Giant Data Center In New Mexico Will Be Powered By Fuel Cells</a></div>
+  <div class="article-summary">A massive AI data center in Santa Teresa, New Mexico, originally slated for gas turbines, will now use fuel cells, significantly cutting emissions and water use. While still emitting millions of tons of greenhouse gases annually, this shift represents a crucial step in powering the burgeoning AI sector with less environmental impact.</div>
+  <div class="article-meta">May 30, 2026  21:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/05/30/is-spacex-tesla-100-gigawatt-year-us-solar-system-production-plan-realistic/" target="_blank">Is SpaceX & Tesla 100-Gigawatt/Year US Solar System Production Plan Realistic?</a></div>
+  <div class="article-summary">Elon Musk says that he wants SpaceX and Tesla teams to work together to build 100 gigawatts of solar power manufacturing capacity in the US — cells and modules. And he wants to do that within three years. There’s a lot to consider here. Before we get…</div>
+  <div class="article-meta">May 30, 2026  17:38 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-05-30/how-switzerland-is-adapting-to-shrinking-glaciers" target="_blank">How Switzerland Is Adpating to Melting Glaciers</a></div>
+  <div class="article-summary">Climate change is leading to the melting of glaciers and the thawing of permafrost worldwide.…</div>
+  <div class="article-meta">May 30, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-30/alberta-wildfires-break-out-in-lac-la-biche-oil-sands-region" target="_blank">Alberta Wildfires Break Out in Lac la Biche Oil Sands Region</a></div>
+  <div class="article-summary">Wildfires are raging in Alberta's Lac la Biche oil sands region, threatening nearly half a million barrels of daily crude production. This proximity to critical energy infrastructure raises immediate concerns about potential disruptions to global oil supply and the significant carbon emissions released from burning fossil fuel reserves and the surrounding boreal forest.</div>
+  <div class="article-meta">May 30, 2026  22:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/05/30/tesla-fsd-china-lawsuit-first-hearing-10-owners/" target="_blank">Tesla’s ‘Full Self-Driving’ fraud lawsuit gets first hearing in China — 10 owners seek $583K</a></div>
+  <div class="article-summary">Ten Tesla owners in Beijing are suing the automaker for over $583,000, alleging fraud over the company's "Full Self-Driving" (FSD) software. This landmark case in China challenges Tesla's marketing of FSD, raising critical questions about the accuracy of advanced driver-assistance systems and their potential impact on consumer trust and the broader adoption of electric vehicle technology.</div>
+  <div class="article-meta">May 30, 2026  19:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/may/30/garbage-incinerators-pfas-forever-chemicals" target="_blank">US garbage incinerators are failing to eliminate ‘forever chemical’ air pollution, experts warn</a></div>
+  <div class="article-summary">The virtually indestructible Pfas waste puts largely low-income neighborhoods at risk, public health advocates sayThe nation’s garbage incinerators are largely failing to eliminate Pfas “forever chemicals” air pollution, and are putting people in lar…</div>
+  <div class="article-meta">May 30, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/uk-news/2026/may/30/britain-heatwave-unequal-air-con-london" target="_blank">‘That’s why we work in finance – so one day we can afford air-con’: Britain’s unequal heatwave</a></div>
+  <div class="article-summary">While some found this week’s heat a breeze, many in poorer areas face health risks in furnace-like homesTravelling from his air-conditioned flat to the air-conditioned Elizabeth line to his air-conditioned office, 27-year-old banker Aykhan found this…</div>
+  <div class="article-meta">May 30, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30052026/fifa-world-cup-extreme-heat/" target="_blank">The 2026 World Cup Will Feature a Villainous Player: Extreme Heat</a></div>
+  <div class="article-summary">Sávio Bortolini Pimentel just missed getting on the roster to represent his national team, Brazil, at the 1994 FIFA World Cup in the United States. At the time, he was a 20-year-old professional player with the Rio de Janeiro team Flamengo. He recall…</div>
+  <div class="article-meta">May 30, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30052026/california-tank-crisis-air-monitoring/" target="_blank">Air Monitors Used in California Tank Crisis Were Inadequate in the Past, Leaving Returning Residents Uneasy</a></div>
+  <div class="article-summary">GARDEN GROVE, Calif.—The day before his 41st birthday, Hernando Morales found himself hurrying his one-year-old into the backseat of his car when an industrial tank just over a mile away from his apartment threatened to explode and release toxic chem…</div>
+  <div class="article-meta">May 30, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, May 31, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
