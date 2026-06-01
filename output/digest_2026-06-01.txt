@@ -1,0 +1,90 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Monday, June 01, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Trina Solar announces 907 W tandem solar module with 29.2% efficiency
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/01/trina-solar-announces-907-w-tandem-solar-module-with-29-2-efficiency/
+  Date   : Jun 01, 2026  13:16 EAT
+  Summary: Trina Solar has unveiled a 907W tandem solar module boasting a record 29.2% efficiency, a significant leap forward for photovoltaic technology. This breakthrough, designed for mass production, promises to accelerate the transition to clean energy by generating more power from less space.
+
+
+▸ The Race to Rethink<em> </em>Data Centers for AI’s Power Surge
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/graphics/2026-ai-data-center-redesign
+  Date   : Jun 01, 2026  13:00 EAT
+  Summary: AI's insatiable appetite for power is forcing tech giants like Microsoft and Google to fundamentally redesign data centers, moving beyond traditional cooling and power systems to accommodate the immense energy needs of advanced AI chips. This shift is critical as these new, hyper-efficient designs aim to mitigate the escalating carbon footprint of AI, which could otherwise overwhelm existing energy grids and accelerate climate change.
+
+
+▸ BYD will pay for crashes on its FSD competitor, something Tesla never has
+  Source : Electrek
+  Link   : https://electrek.co/2026/06/01/byd-gods-eye-accepts-liability-tesla-never-has/
+  Date   : Jun 01, 2026  12:46 EAT
+  Summary: BYD is now fully liable for any at-fault accidents involving its "God's Eye" autonomous driving system in China, a bold move unlike Tesla's approach to its FSD. This unprecedented commitment signals a significant shift in accountability for advanced driver-assistance systems, potentially accelerating safer development and deployment of autonomous technology.
+
+
+▸ Hoymiles launches new hybrid residential battery series
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/01/hoymiles-launches-new-hybrid-residential-battery-series/
+  Date   : Jun 01, 2026  12:17 EAT
+  Summary: Hoymiles has rolled out its new HiBattery 4020 hybrid residential battery series, offering both PV-coupled and AC-coupled options for new and existing solar installations. This expansion in modular, LiFePO₄ battery technology is crucial for enabling homeowners to store excess solar energy, thereby increasing renewable energy utilization and reducing reliance on fossil fuels for electricity.
+
+
+▸ JinkoSolar shipped 86.8 GW of modules in 2025, securing lead in global sales for the seventh time
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/01/jinkosolar-shipped-86-8-gw-of-modules-in-2025-securing-lead-in-global-sales-for-the-seventh-time/
+  Date   : Jun 01, 2026  12:00 EAT
+  Summary: JinkoSolar cemented its position as the world's top solar module supplier by shipping a record 86.8 GW in 2025, marking its seventh consecutive year of leadership. This massive deployment of solar technology, with over 400 GW shipped cumulatively, directly accelerates the global transition away from fossil fuels, a critical step in mitigating climate change.
+
+
+============================================================
+💰  CLIMATE FINANCE  (2 articles)
+============================================================
+
+▸ Most EU Nations Lag in Boosting Company EV Sales With Tax Levers
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-31/most-eu-nations-lag-in-boosting-company-ev-sales-with-tax-levers
+  Date   : Jun 01, 2026  00:01 EAT
+  Summary: Two-thirds of European Union member states are failing to provide adequate tax incentives to encourage companies to favor electric vehicles in corporate fleets, according to a study by a clean transport lobby.…
+
+
+▸ A Rare ‘Super’ El Niño Is Looking More Likely. Here’s What to Expect
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-05-31/a-super-el-nino-how-pacific-ocean-warming-affects-global-weather-food-supply
+  Date   : May 31, 2026  17:00 EAT
+  Summary: ​​A cyclical weather phenomenon that can drive flooding in one continent and drought in another looks increasingly likely to emerge this year.…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ Coral Reefs in French Polynesia Are Stuck Between Life and Death
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/01062026/french-polynesia-coral-reef-bleaching/
+  Date   : Jun 01, 2026  12:00 EAT
+  Summary: Moorea's coral reefs in French Polynesia are experiencing a critical "stuck" phase, neither fully recovering from bleaching events nor succumbing entirely, leaving them in a precarious state. This delicate balance is crucial because these vibrant ecosystems, vital for marine biodiversity and coastal protection, are now highly vulnerable to any further environmental stress.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (1 articles)
+============================================================
+
+▸ Wildfires devastating richer areas but fewer hectares burned globally – study
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/2026/jun/01/wildfires-devastating-richer-areas-but-fewer-hectares-burned-globally-study
+  Date   : Jun 01, 2026  09:00 EAT
+  Summary: ‘Megafires’ in California, Canada, South Korea and Europe in 2025, but changes to farming slowed spread in parts of Africa“Devastating” wildfires ripped across the wealthier parts of the world in 2025, a study has found, even as globally, the area ra…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 22  |  Sources: 6  |  Topics: 4

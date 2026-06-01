@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, June 01, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">22</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😊</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:60%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Cautiously Optimistic — 14 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/01/trina-solar-announces-907-w-tandem-solar-module-with-29-2-efficiency/" target="_blank">Trina Solar announces 907 W tandem solar module with 29.2% efficiency</a></div>
+  <div class="article-summary">Trina Solar has unveiled a 907W tandem solar module boasting a record 29.2% efficiency, a significant leap forward for photovoltaic technology. This breakthrough, designed for mass production, promises to accelerate the transition to clean energy by generating more power from less space.</div>
+  <div class="article-meta">Jun 01, 2026  13:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/graphics/2026-ai-data-center-redesign" target="_blank">The Race to Rethink<em> </em>Data Centers for AI’s Power Surge</a></div>
+  <div class="article-summary">AI's insatiable appetite for power is forcing tech giants like Microsoft and Google to fundamentally redesign data centers, moving beyond traditional cooling and power systems to accommodate the immense energy needs of advanced AI chips. This shift is critical as these new, hyper-efficient designs aim to mitigate the escalating carbon footprint of AI, which could otherwise overwhelm existing energy grids and accelerate climate change.</div>
+  <div class="article-meta">Jun 01, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/01/byd-gods-eye-accepts-liability-tesla-never-has/" target="_blank">BYD will pay for crashes on its FSD competitor, something Tesla never has</a></div>
+  <div class="article-summary">BYD is now fully liable for any at-fault accidents involving its "God's Eye" autonomous driving system in China, a bold move unlike Tesla's approach to its FSD. This unprecedented commitment signals a significant shift in accountability for advanced driver-assistance systems, potentially accelerating safer development and deployment of autonomous technology.</div>
+  <div class="article-meta">Jun 01, 2026  12:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/01/hoymiles-launches-new-hybrid-residential-battery-series/" target="_blank">Hoymiles launches new hybrid residential battery series</a></div>
+  <div class="article-summary">Hoymiles has rolled out its new HiBattery 4020 hybrid residential battery series, offering both PV-coupled and AC-coupled options for new and existing solar installations. This expansion in modular, LiFePO₄ battery technology is crucial for enabling homeowners to store excess solar energy, thereby increasing renewable energy utilization and reducing reliance on fossil fuels for electricity.</div>
+  <div class="article-meta">Jun 01, 2026  12:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/01/jinkosolar-shipped-86-8-gw-of-modules-in-2025-securing-lead-in-global-sales-for-the-seventh-time/" target="_blank">JinkoSolar shipped 86.8 GW of modules in 2025, securing lead in global sales for the seventh time</a></div>
+  <div class="article-summary">JinkoSolar cemented its position as the world's top solar module supplier by shipping a record 86.8 GW in 2025, marking its seventh consecutive year of leadership. This massive deployment of solar technology, with over 400 GW shipped cumulatively, directly accelerates the global transition away from fossil fuels, a critical step in mitigating climate change.</div>
+  <div class="article-meta">Jun 01, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-31/most-eu-nations-lag-in-boosting-company-ev-sales-with-tax-levers" target="_blank">Most EU Nations Lag in Boosting Company EV Sales With Tax Levers</a></div>
+  <div class="article-summary">Two-thirds of European Union member states are failing to provide adequate tax incentives to encourage companies to favor electric vehicles in corporate fleets, according to a study by a clean transport lobby.…</div>
+  <div class="article-meta">Jun 01, 2026  00:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-05-31/a-super-el-nino-how-pacific-ocean-warming-affects-global-weather-food-supply" target="_blank">A Rare ‘Super’ El Niño Is Looking More Likely. Here’s What to Expect</a></div>
+  <div class="article-summary">​​A cyclical weather phenomenon that can drive flooding in one continent and drought in another looks increasingly likely to emerge this year.…</div>
+  <div class="article-meta">May 31, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01062026/french-polynesia-coral-reef-bleaching/" target="_blank">Coral Reefs in French Polynesia Are Stuck Between Life and Death</a></div>
+  <div class="article-summary">Moorea's coral reefs in French Polynesia are experiencing a critical "stuck" phase, neither fully recovering from bleaching events nor succumbing entirely, leaving them in a precarious state. This delicate balance is crucial because these vibrant ecosystems, vital for marine biodiversity and coastal protection, are now highly vulnerable to any further environmental stress.</div>
+  <div class="article-meta">Jun 01, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jun/01/wildfires-devastating-richer-areas-but-fewer-hectares-burned-globally-study" target="_blank">Wildfires devastating richer areas but fewer hectares burned globally – study</a></div>
+  <div class="article-summary">‘Megafires’ in California, Canada, South Korea and Europe in 2025, but changes to farming slowed spread in parts of Africa“Devastating” wildfires ripped across the wealthier parts of the world in 2025, a study has found, even as globally, the area ra…</div>
+  <div class="article-meta">Jun 01, 2026  09:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, June 01, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
