@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, June 02, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">54</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 46 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02062026/alligator-alcatraz-diesel-emissions-lawsuit/" target="_blank">Alligator Alcatraz Emissions Threaten Human Health, Violate Clean Air Act, Lawsuit Claims</a></div>
+  <div class="article-summary">A federal lawsuit alleges that emissions from over 300 diesel generators and lighting towers at the Everglades' "Alligator Alcatraz" migrant detention site are harming human health and violating the Clean Air Act. This operation, a significant source of air pollution, raises critical environmental justice concerns and demands regulatory scrutiny.</div>
+  <div class="article-meta">Jun 02, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02062026/new-jersey-delays-sea-level-rise-protections/" target="_blank">In New Jersey, Sherrill Agrees to Delay Protections Against Sea Level Rise</a></div>
+  <div class="article-summary">New Jersey Governor Mikie Sherrill has bowed to business pressure, delaying crucial coastal protection rules for a year, a move sparking outrage from environmentalists. This decision sidelines vital measures designed to combat rising sea levels and increased flooding, jeopardizing the state's resilience against climate impacts.</div>
+  <div class="article-meta">Jun 02, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/02/tongwei-to-showcase-tnc-3-0-series-at-intersolar-europe-2026/" target="_blank">Tongwei to showcase TNC 3.0 series at Intersolar Europe 2026</a></div>
+  <div class="article-summary">Tongwei is unveiling its TNC 3.0 solar module series at Intersolar Europe 2026, boasting up to 770W output and 24.8% efficiency, which directly translates to more power generation per square meter. This advancement matters for climate goals by maximizing renewable energy capture and minimizing energy loss, even under challenging conditions like partial shading, thereby accelerating the transition to cleaner energy sources.</div>
+  <div class="article-meta">Jun 02, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/02/german-startup-advancing-compressor-free-electrocaloric-heat-pump-technology/" target="_blank">German startup advancing compressor-free electrocaloric heat pump technology</a></div>
+  <div class="article-summary">German startup Qurie GmbH is pioneering a compressor-free electrocaloric heat pump, promising up to 30% energy savings and over 70% theoretical efficiency by using solid-state materials instead of traditional mechanical compression. This innovation could significantly decarbonize cooling and heating systems, a major energy consumer globally.</div>
+  <div class="article-meta">Jun 02, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/02/marstek-debuts-new-plug-in-battery-series/" target="_blank">Marstek debuts new plug-in battery series</a></div>
+  <div class="article-summary">Marstek Energy has launched its Venus residential plug-in battery series, comprising the 2 kWh Venus E Mini, 5 kWh Venus E Gen 4.0 and 10 kWh Venus E Max. The new battery familiy is suitable for applications ranging from balcony solar storage to whol…</div>
+  <div class="article-meta">Jun 02, 2026  10:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/02/the-case-for-vehicle-integrated-phovoltaics-in-disaster-zones/" target="_blank">The case for vehicle-integrated phovoltaics in disaster zones</a></div>
+  <div class="article-summary">A new IEA PVPS report makes a rigorous case that solar electric vehicles are not just transport, but rather a distributed, mobile, fuel-free emergency energy network that could redefine disaster preparedness.The postThe case for vehicle-integrated ph…</div>
+  <div class="article-meta">Jun 02, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/01/these-polite-canadian-lawbreakers-may-soon-be-going-legal-under-new-e-bike-law/" target="_blank">These polite Canadian lawbreakers may soon be going legal under new e-bike law</a></div>
+  <div class="article-summary">The issue of e-bike scofflaws has grown considerably over the last few years, normally taking the form of teenagers on fast e-bikes illegally cruising down sidewalks or recklessly riding through intersections. But as it turns out, Canada’s largest pr…</div>
+  <div class="article-meta">Jun 02, 2026  09:31 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-01/judge-blocks-trump-administration-from-breaking-up-climate-research-center" target="_blank">Judge Blocks Trump Administration From Breaking Up Climate Research Center</a></div>
+  <div class="article-summary">A judge has temporarily blocked the National Science Foundation from dismantling the National Center for Atmospheric Research, or NCAR, a globally significant weather and climate research center based in Boulder, Colorado.…</div>
+  <div class="article-meta">Jun 02, 2026  00:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-01/wildfires-in-alberta-die-down-as-rain-storm-moves-into-region" target="_blank">Wildfires in Alberta Die Down as Rain Storm Moves Into Region</a></div>
+  <div class="article-summary">Wildfires that erupted on Friday and Saturday in the Canadian oil sands-producing region of Lac la Biche in Alberta have been reclassified as being held or under control, according to Alberta Wildfire.…</div>
+  <div class="article-meta">Jun 01, 2026  21:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-01/california-revamps-its-carbon-market-and-gets-tough-on-plastic-waste" target="_blank">California Revamps Its Carbon Market and Gets Tough on Plastic Waste</a></div>
+  <div class="article-summary">Ambitious green policies have been “upended by global economic upheaval,” a state official said.…</div>
+  <div class="article-meta">Jun 01, 2026  17:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-01/epa-climate-rollback-counts-savings-downplays-costs" target="_blank">EPA Climate Rollback Counts Savings, Downplays Costs</a></div>
+  <div class="article-summary">The agency estimates delaying a super-pollutant phaseout will result in millions of dollars in savings, but its calculation doesn’t take many costs into account.…</div>
+  <div class="article-meta">Jun 01, 2026  16:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-01/el-nino-offers-less-relief-than-hurricane-forecasts-suggest" target="_blank">El Niño Offers Less Relief Than Hurricane Forecasts Suggest</a></div>
+  <div class="article-summary">El Niño may limit the number of hurricanes this season, but one landfall can still hit insurers, energy, orange juice and power grids.…</div>
+  <div class="article-meta">Jun 01, 2026  15:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/humanitarian-programming-yemen-stories-inspiration-end-2025" target="_blank">Humanitarian Programming in Yemen: Stories of Inspiration (End of 2025)</a></div>
+  <div class="article-summary">Yemen's humanitarian crisis intensified in 2025 with 17 million facing food insecurity and millions more needing critical aid due to conflict, economic collapse, and climate disasters. This dire situation underscores the devastating impact of climate change on vulnerable populations, exacerbating existing crises and demanding urgent global attention and resources.</div>
+  <div class="article-meta">Jun 02, 2026  11:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-02/india-s-key-monsoon-rains-set-to-begin-days-after-official-start" target="_blank">India’s Key Monsoon Rains Set to Begin Days After Official Start</a></div>
+  <div class="article-summary">India's vital monsoon rains, critical for its agricultural output, are now expected to begin in Kerala a few days after their official start. This delay, while seemingly minor, highlights the growing unpredictability of climate patterns and its direct impact on global food security.</div>
+  <div class="article-meta">Jun 02, 2026  11:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/unicef-afghanistan-humanitarian-situation-report-no-4-30-april-2026" target="_blank">UNICEF Afghanistan Humanitarian Situation Report No. 4, 30 April 2026</a></div>
+  <div class="article-summary">Countries: Afghanistan, Iran (Islamic Republic of), PakistanSource: UN Children's FundPlease refer to the attached file.Situation in Numbers21.9 M People in need of humanitarian assistance (HNRP 2026)11.6 M Children in need of humanitarian assistance…</div>
+  <div class="article-meta">Jun 02, 2026  05:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/sudan/sudan-conflict-ltc-situation-report-telecoms-area-40-reporting-period-may-2026" target="_blank">Sudan conflict - LTC Situation Report (Telecoms Area) #40 (Reporting period: May 2026)</a></div>
+  <div class="article-summary">Country: SudanSources: Emergency Telecommunications Cluster, World Food ProgrammePlease refer to the attached file.The WFP-led Logistics and Telecommunications Cluster (LTC) was activated as the Emergency Telecommunications Cluster (ETC) on 25 May 20…</div>
+  <div class="article-meta">Jun 02, 2026  05:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/colombia/colombia-briefing-departamental-valle-del-cauca-enero-diciembre-de-2025" target="_blank">Colombia: Briefing Departamental, Valle del Cauca, enero a diciembre de 2025</a></div>
+  <div class="article-summary">Countries: Colombia, Venezuela (Bolivarian Republic of)Sources: El Equipo Humanitario País Colombia, UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Mensajes ClavesEn 2025 el agravamiento de la situación humani…</div>
+  <div class="article-meta">Jun 01, 2026  23:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/02/prepare-for-imminent-return-of-el-nino-un-warns" target="_blank">Prepare for imminent return of El Niño, UN warns</a></div>
+  <div class="article-summary">UN agency predicts phenomenon that supercharges weather extremes has 80% chance of forming before SeptemberThe world must prepare for the imminent return of El Niño and the supercharged weather extremes it brings, the UN has warned.The powerful natur…</div>
+  <div class="article-meta">Jun 02, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/democratic-republic-congo/republique-democratique-du-congo-tanganyika-presence-operationnelle-3w-qui-fait-quoi-ou-mars-2026" target="_blank">DR Congo: République démocratique du Congo - Tanganyika : Présence opérationnelle - 3W (Qui fait quoi où) (mars 2026)</a></div>
+  <div class="article-summary">In the Democratic Republic of Congo's Tanganyika province, 41 humanitarian projects serving over 335,000 people are underway, with 54% led by national NGOs. This ongoing support, particularly in critical sectors like food security and health, is vital for climate-vulnerable populations facing increasing displacement and resource scarcity.</div>
+  <div class="article-meta">Jun 02, 2026  11:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01062026/energy-department-restarts-home-efficiency-rebates/" target="_blank">DOE Restarts Home Efficiency Rebates, and Electrification Is the Biggest Loser</a></div>
+  <div class="article-summary">Federal energy efficiency rebate programs will no longer cover a switch from fossil fuels to electricity for heating, according to long-awaited guidance from the Department of Energy. The department published an update on how it will implement consum…</div>
+  <div class="article-meta">Jun 02, 2026  01:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01062026/forest-service-logging-project-near-yellowstone-draws-concerns/" target="_blank">Logging Project Near Yellowstone Could Threaten Wildlife Habitat and Tourist-Dependent Businesses</a></div>
+  <div class="article-summary">A proposed federal logging project in the forests bordering Yellowstone National Park is drawing growing concern from local residents, business owners and conservation advocates who fear it could have lasting impacts on wildlife habitat, recreation a…</div>
+  <div class="article-meta">Jun 02, 2026  00:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/01/agricultural-subsidies-can-be-repurposed-for-a-just-and-sustainable-rural-transition/" target="_blank">Agricultural subsidies can be repurposed for a just and sustainable rural transition</a></div>
+  <div class="article-summary">Achieving climate goals and zero waste without undermining farming communities requires financial support - a priority for the COP31 PresidencyThe postAgricultural subsidies can be repurposed for a just and sustainable rural transitionappeared first…</div>
+  <div class="article-meta">Jun 01, 2026  19:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, June 02, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
