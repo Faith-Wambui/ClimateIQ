@@ -1,0 +1,182 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Wednesday, June 03, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (5 articles)
+============================================================
+
+▸ In the Wake of Georgia’s Blue Wave, Alabama Changed Its Utility Regulation Elections. This Black Democrat Is Suing.
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/03062026/alabama-public-service-commission-restructuring-lawsuit/
+  Date   : Jun 03, 2026  11:55 EAT
+  Summary: Alabama's Public Service Commission election rules were abruptly changed following Georgia's "Blue Wave," leading to a lawsuit by Black Democrat Sheila McNeil. This shift in regulation elections is crucial for climate action as it impacts decisions on energy infrastructure and the transition to renewable sources.
+
+
+▸ A New N.C. Ratepayer Bill Puts the Brakes on Data Centers, but Incentivizes Fossil Fuels
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/03062026/north-carolina-ratepayer-protection-act-fuels-power-plants/
+  Date   : Jun 03, 2026  11:45 EAT
+  Summary: North Carolina's proposed Ratepayer Protection Act aims to curb data center land acquisition while simultaneously removing limits on Duke Energy's fossil fuel use. This legislation could significantly increase carbon emissions by incentivizing fossil fuel reliance, even as it attempts to control the energy demands of burgeoning data centers.
+
+
+▸ Q&A: How UK’s seventh carbon budget will deliver ‘£865bn’ in economic benefits
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/qa-how-uks-seventh-carbon-budget-will-deliver-865bn-in-economic-benefits/
+  Date   : Jun 03, 2026  11:11 EAT
+  Summary: The Labour government wants to cut UK greenhouse gas emissions to 87% below 1990 levels by 2040, which it says will deliver £865bn in economic benefits.
+
+The target has been set out in draft legislation for the seventh “carbon budget”, a legally bind…
+
+
+▸ Handful of African Countries Bow Out of the UNGA Vote on the ICJ Climate Opinion
+  Source : African Climate Wire
+  Link   : https://africanclimatewire.org/2026/06/handful-of-african-countries-bow-out-of-the-unga-vote-on-the-icj-climate-opinion/
+  Date   : Jun 02, 2026  16:46 EAT
+  Summary: Thirteen African States abstained from a UNGA vote in favour of the ICJ’s climate opinion. They are a small minority; how will they navigate the UNGA parallel climate process?The postHandful of African Countries Bow Out of the UNGA Vote on the ICJ Cl…
+
+
+▸ Q&A: The current state of ‘carbon dioxide removal’ around the world
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/qa-the-current-state-of-carbon-dioxide-removal-around-the-world/
+  Date   : Jun 02, 2026  16:31 EAT
+  Summary: Carbon dioxide removal (CDR) technologies will need to be deployed at rates even faster than those seen for solar power, if the world is to have a chance of limiting global warming to 1.5C by 2100, says a new report.
+
+Nearly all pathways to meeting t…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Grid expansion, batteries to ease curtailment in Brazil
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/03/melhorias-na-rede-eletrica-e-entrada-de-baterias-no-medio-prazo-aliviarao-curtailment-projeta-aurora/
+  Date   : Jun 03, 2026  12:30 EAT
+  Summary: Brazil's electricity grid faces significant curtailment, projected to hit 21% in 2025, but new transmission lines and battery storage could slash this by up to 12 percentage points by 2030. This expansion is crucial for integrating Brazil's growing renewable energy capacity and meeting rising demand from sectors like data centers and green hydrogen production.
+
+
+▸ Natural ester fluids beat mineral oil for use in renewable energy applications
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/03/natural-ester-fluids-beat-mineral-oil-for-use-in-renewable-energy-applications/
+  Date   : Jun 03, 2026  12:00 EAT
+  Summary: Natural ester fluids are proving superior to traditional mineral oil for transformers in photovoltaic applications, enabling more compact and thermally efficient designs. This innovation directly translates to reduced footprint, simplified installation, and lower capital expenditures for solar projects, accelerating the deployment of renewable energy.
+
+
+▸ France, Germany, Portugal, Spain set daily solar records
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/03/france-germany-portugal-spain-set-daily-solar-records/
+  Date   : Jun 03, 2026  11:41 EAT
+  Summary: France, Germany, Portugal, and Spain shattered daily solar power generation records last week, yet electricity prices still rose due to declining wind output and increased demand. This surge in solar underscores its growing role in the energy mix, even as intermittency challenges persist and require integrated solutions to maintain grid stability and affordability.
+
+
+▸ Scientists achieve 27% efficiency in a co-deposited inverted perovskite
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/03/scientists-achieve-27-efficiency-in-a-co-deposited-inverted-perovskite/
+  Date   : Jun 03, 2026  11:30 EAT
+  Summary: Chinese scientists have boosted the efficiency of perovskite solar cells to a record 27% by preventing molecular clumping, a breakthrough that significantly improves the performance of this promising solar technology. This advancement is critical for accelerating the transition to renewable energy by making solar power more cost-effective and efficient.
+
+
+▸ Enphase explains how gallium nitride is changing its microinverters
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/03/enphase-explains-how-gallium-nitride-is-changing-its-microinverters/
+  Date   : Jun 03, 2026  11:00 EAT
+  Summary: pv magazinehas spoken with Enphase chief product officer Raghu Belur about how gallium nitride technology is reshaping the company’s microinverter architecture. He highlighted gains in efficiency, power density and cost through its use of GaN-based b…
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ BNP Fund Beating 97% of Peers Pivots to SMR Stocks After Selloff
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-03/bnp-fund-beating-97-of-peers-pivots-to-smr-stocks-after-selloff
+  Date   : Jun 03, 2026  12:24 EAT
+  Summary: BNP Paribas Asset Management's top-performing fund is now investing in small modular reactor (SMR) stocks, a significant pivot after previously deeming them non-viable. This move signals growing investor confidence in SMRs as a potential solution for decarbonization, potentially accelerating the transition to cleaner energy sources.
+
+
+▸ Natural-Disaster Insurance Gap Now Exceeds $420 Billion Globally
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-03/natural-disaster-insurance-gap-now-exceeds-420-billion-globally
+  Date   : Jun 03, 2026  10:00 EAT
+  Summary: The value of uninsured natural-catastrophe losses rose more than 7% globally last year to $424 billion, with North America the most exposed region, according to a fresh analysis.…
+
+
+▸ Flights Halted as Tropical Storm Jangmi Nears Tokyo
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-03/hundreds-of-flights-halted-as-tropical-storm-jangmi-nears-tokyo
+  Date   : Jun 03, 2026  03:15 EAT
+  Summary: Tropical storm Jangmi approached Tokyo on Wednesday, bringing strong winds and heavy rain that triggered hundreds of flight cancellations as well as flood warnings around the capital.…
+
+
+▸ Extreme Weather to Drive $20 Trillion in Spending, BI Says
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-02/extreme-weather-to-drive-20-trillion-in-spending-bi-says
+  Date   : Jun 02, 2026  20:00 EAT
+  Summary: Extreme weather will likely spur more than $20 trillion in global spending over the next decade, boosting sales and earnings for reinsurers and companies involved in energy efficiency and climate security, according to analysts at Bloomberg Intellige…
+
+
+▸ Data Centers Now Use So Much Power, Their Designs Are Changing
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/newsletters/2026-06-02/data-centers-now-use-so-much-power-their-designs-are-changing
+  Date   : Jun 02, 2026  16:57 EAT
+  Summary: The huge amount of power that data centers use is forcing a rethink of their form.…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ An Iowa Town Spent $800,000 On a New Well. It Pumps Undrinkable Water.
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/03062026/princeton-iowa-contaminated-drinking-water/
+  Date   : Jun 03, 2026  11:50 EAT
+  Summary: Princeton, Iowa, is pumping undrinkable water from its new $800,000 well, a problem exacerbated by climate-driven changes to the Mississippi River's flow and sediment levels. This costly infrastructure failure highlights how extreme weather events are straining local resources and impacting essential services.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ El Niño expected to develop in coming months, bringing hotter and drier weather to eastern Australia
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/australia-news/2026/jun/03/el-nino-hotter-drier-weather-eastern-australia-bom-forecast
+  Date   : Jun 03, 2026  07:29 EAT
+  Summary: BoM and other agencies expect transition to the first El Niño since spring 2023 sometime during winterFollow our Australia news live blog for latest updatesSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereAustral…
+
+
+▸ Dismay as Trump officials to dismantle key ocean monitoring system
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/jun/02/trump-administration-ocean-observatories-initiative
+  Date   : Jun 03, 2026  01:35 EAT
+  Summary: Ocean Observatories Initiative, $368m network that has provided crucial climate data, latest victim of Trump cutsThe Trump administration plans to dismantle a $368m deep-sea observation system that has for more than a decade provided crucial data on…
+
+
+▸ Supreme Court’s Limitation on Wetlands Protection Will Make Flooding Worse
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/02062026/wetlands-destruction-will-worsen-flooding/
+  Date   : Jun 03, 2026  01:15 EAT
+  Summary: The destruction of wetlands in the United States has increased the amount of flood insurance claims by $10 billion over the past 40 years, a phenomenon expected to worsen in tandem with climate change, according to new research.  The peer-reviewed st…
+
+
+▸ Heat Is a Growing Threat to the Hajj—Even in Spring
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/02062026/todays-climate-hajj-pilgrimage-extreme-heat/
+  Date   : Jun 03, 2026  00:37 EAT
+  Summary: More than 1.7 million people participated last week in the annual Islamic pilgrimage to Mecca in Saudi Arabia—consistently one of the world’s largest mass gatherings.  Muslims are expected to perform Hajj at least once in their lives, but an increasi…
+
+
+▸ Young South Africans take up sustainable agriculture for food security
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/06/02/young-south-africans-take-up-sustainable-agriculture-for-food-security/
+  Date   : Jun 02, 2026  21:11 EAT
+  Summary: Aquaponics is seeing a revival in South Africa's schools, boosted by government support and climate concernsThe postYoung South Africans take up sustainable agriculture for food securityappeared first onClimate Home News.…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 54  |  Sources: 9  |  Topics: 5

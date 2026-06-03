@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, June 03, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">54</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 46 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03062026/alabama-public-service-commission-restructuring-lawsuit/" target="_blank">In the Wake of Georgia’s Blue Wave, Alabama Changed Its Utility Regulation Elections. This Black Democrat Is Suing.</a></div>
+  <div class="article-summary">Alabama's Public Service Commission election rules were abruptly changed following Georgia's "Blue Wave," leading to a lawsuit by Black Democrat Sheila McNeil. This shift in regulation elections is crucial for climate action as it impacts decisions on energy infrastructure and the transition to renewable sources.</div>
+  <div class="article-meta">Jun 03, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03062026/north-carolina-ratepayer-protection-act-fuels-power-plants/" target="_blank">A New N.C. Ratepayer Bill Puts the Brakes on Data Centers, but Incentivizes Fossil Fuels</a></div>
+  <div class="article-summary">North Carolina's proposed Ratepayer Protection Act aims to curb data center land acquisition while simultaneously removing limits on Duke Energy's fossil fuel use. This legislation could significantly increase carbon emissions by incentivizing fossil fuel reliance, even as it attempts to control the energy demands of burgeoning data centers.</div>
+  <div class="article-meta">Jun 03, 2026  11:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-how-uks-seventh-carbon-budget-will-deliver-865bn-in-economic-benefits/" target="_blank">Q&A: How UK’s seventh carbon budget will deliver ‘£865bn’ in economic benefits</a></div>
+  <div class="article-summary">The Labour government wants to cut UK greenhouse gas emissions to 87% below 1990 levels by 2040, which it says will deliver £865bn in economic benefits.
+
+The target has been set out in draft legislation for the seventh “carbon budget”, a legally bind…</div>
+  <div class="article-meta">Jun 03, 2026  11:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/06/handful-of-african-countries-bow-out-of-the-unga-vote-on-the-icj-climate-opinion/" target="_blank">Handful of African Countries Bow Out of the UNGA Vote on the ICJ Climate Opinion</a></div>
+  <div class="article-summary">Thirteen African States abstained from a UNGA vote in favour of the ICJ’s climate opinion. They are a small minority; how will they navigate the UNGA parallel climate process?The postHandful of African Countries Bow Out of the UNGA Vote on the ICJ Cl…</div>
+  <div class="article-meta">Jun 02, 2026  16:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-the-current-state-of-carbon-dioxide-removal-around-the-world/" target="_blank">Q&A: The current state of ‘carbon dioxide removal’ around the world</a></div>
+  <div class="article-summary">Carbon dioxide removal (CDR) technologies will need to be deployed at rates even faster than those seen for solar power, if the world is to have a chance of limiting global warming to 1.5C by 2100, says a new report.
+
+Nearly all pathways to meeting t…</div>
+  <div class="article-meta">Jun 02, 2026  16:31 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/03/melhorias-na-rede-eletrica-e-entrada-de-baterias-no-medio-prazo-aliviarao-curtailment-projeta-aurora/" target="_blank">Grid expansion, batteries to ease curtailment in Brazil</a></div>
+  <div class="article-summary">Brazil's electricity grid faces significant curtailment, projected to hit 21% in 2025, but new transmission lines and battery storage could slash this by up to 12 percentage points by 2030. This expansion is crucial for integrating Brazil's growing renewable energy capacity and meeting rising demand from sectors like data centers and green hydrogen production.</div>
+  <div class="article-meta">Jun 03, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/03/natural-ester-fluids-beat-mineral-oil-for-use-in-renewable-energy-applications/" target="_blank">Natural ester fluids beat mineral oil for use in renewable energy applications</a></div>
+  <div class="article-summary">Natural ester fluids are proving superior to traditional mineral oil for transformers in photovoltaic applications, enabling more compact and thermally efficient designs. This innovation directly translates to reduced footprint, simplified installation, and lower capital expenditures for solar projects, accelerating the deployment of renewable energy.</div>
+  <div class="article-meta">Jun 03, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/03/france-germany-portugal-spain-set-daily-solar-records/" target="_blank">France, Germany, Portugal, Spain set daily solar records</a></div>
+  <div class="article-summary">France, Germany, Portugal, and Spain shattered daily solar power generation records last week, yet electricity prices still rose due to declining wind output and increased demand. This surge in solar underscores its growing role in the energy mix, even as intermittency challenges persist and require integrated solutions to maintain grid stability and affordability.</div>
+  <div class="article-meta">Jun 03, 2026  11:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/03/scientists-achieve-27-efficiency-in-a-co-deposited-inverted-perovskite/" target="_blank">Scientists achieve 27% efficiency in a co-deposited inverted perovskite</a></div>
+  <div class="article-summary">Chinese scientists have boosted the efficiency of perovskite solar cells to a record 27% by preventing molecular clumping, a breakthrough that significantly improves the performance of this promising solar technology. This advancement is critical for accelerating the transition to renewable energy by making solar power more cost-effective and efficient.</div>
+  <div class="article-meta">Jun 03, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/03/enphase-explains-how-gallium-nitride-is-changing-its-microinverters/" target="_blank">Enphase explains how gallium nitride is changing its microinverters</a></div>
+  <div class="article-summary">pv magazinehas spoken with Enphase chief product officer Raghu Belur about how gallium nitride technology is reshaping the company’s microinverter architecture. He highlighted gains in efficiency, power density and cost through its use of GaN-based b…</div>
+  <div class="article-meta">Jun 03, 2026  11:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-03/bnp-fund-beating-97-of-peers-pivots-to-smr-stocks-after-selloff" target="_blank">BNP Fund Beating 97% of Peers Pivots to SMR Stocks After Selloff</a></div>
+  <div class="article-summary">BNP Paribas Asset Management's top-performing fund is now investing in small modular reactor (SMR) stocks, a significant pivot after previously deeming them non-viable. This move signals growing investor confidence in SMRs as a potential solution for decarbonization, potentially accelerating the transition to cleaner energy sources.</div>
+  <div class="article-meta">Jun 03, 2026  12:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-03/natural-disaster-insurance-gap-now-exceeds-420-billion-globally" target="_blank">Natural-Disaster Insurance Gap Now Exceeds $420 Billion Globally</a></div>
+  <div class="article-summary">The value of uninsured natural-catastrophe losses rose more than 7% globally last year to $424 billion, with North America the most exposed region, according to a fresh analysis.…</div>
+  <div class="article-meta">Jun 03, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-03/hundreds-of-flights-halted-as-tropical-storm-jangmi-nears-tokyo" target="_blank">Flights Halted as Tropical Storm Jangmi Nears Tokyo</a></div>
+  <div class="article-summary">Tropical storm Jangmi approached Tokyo on Wednesday, bringing strong winds and heavy rain that triggered hundreds of flight cancellations as well as flood warnings around the capital.…</div>
+  <div class="article-meta">Jun 03, 2026  03:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-02/extreme-weather-to-drive-20-trillion-in-spending-bi-says" target="_blank">Extreme Weather to Drive $20 Trillion in Spending, BI Says</a></div>
+  <div class="article-summary">Extreme weather will likely spur more than $20 trillion in global spending over the next decade, boosting sales and earnings for reinsurers and companies involved in energy efficiency and climate security, according to analysts at Bloomberg Intellige…</div>
+  <div class="article-meta">Jun 02, 2026  20:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-02/data-centers-now-use-so-much-power-their-designs-are-changing" target="_blank">Data Centers Now Use So Much Power, Their Designs Are Changing</a></div>
+  <div class="article-summary">The huge amount of power that data centers use is forcing a rethink of their form.…</div>
+  <div class="article-meta">Jun 02, 2026  16:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03062026/princeton-iowa-contaminated-drinking-water/" target="_blank">An Iowa Town Spent $800,000 On a New Well. It Pumps Undrinkable Water.</a></div>
+  <div class="article-summary">Princeton, Iowa, is pumping undrinkable water from its new $800,000 well, a problem exacerbated by climate-driven changes to the Mississippi River's flow and sediment levels. This costly infrastructure failure highlights how extreme weather events are straining local resources and impacting essential services.</div>
+  <div class="article-meta">Jun 03, 2026  11:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/jun/03/el-nino-hotter-drier-weather-eastern-australia-bom-forecast" target="_blank">El Niño expected to develop in coming months, bringing hotter and drier weather to eastern Australia</a></div>
+  <div class="article-summary">BoM and other agencies expect transition to the first El Niño since spring 2023 sometime during winterFollow our Australia news live blog for latest updatesSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereAustral…</div>
+  <div class="article-meta">Jun 03, 2026  07:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/02/trump-administration-ocean-observatories-initiative" target="_blank">Dismay as Trump officials to dismantle key ocean monitoring system</a></div>
+  <div class="article-summary">Ocean Observatories Initiative, $368m network that has provided crucial climate data, latest victim of Trump cutsThe Trump administration plans to dismantle a $368m deep-sea observation system that has for more than a decade provided crucial data on…</div>
+  <div class="article-meta">Jun 03, 2026  01:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02062026/wetlands-destruction-will-worsen-flooding/" target="_blank">Supreme Court’s Limitation on Wetlands Protection Will Make Flooding Worse</a></div>
+  <div class="article-summary">The destruction of wetlands in the United States has increased the amount of flood insurance claims by $10 billion over the past 40 years, a phenomenon expected to worsen in tandem with climate change, according to new research.  The peer-reviewed st…</div>
+  <div class="article-meta">Jun 03, 2026  01:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02062026/todays-climate-hajj-pilgrimage-extreme-heat/" target="_blank">Heat Is a Growing Threat to the Hajj—Even in Spring</a></div>
+  <div class="article-summary">More than 1.7 million people participated last week in the annual Islamic pilgrimage to Mecca in Saudi Arabia—consistently one of the world’s largest mass gatherings.  Muslims are expected to perform Hajj at least once in their lives, but an increasi…</div>
+  <div class="article-meta">Jun 03, 2026  00:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/02/young-south-africans-take-up-sustainable-agriculture-for-food-security/" target="_blank">Young South Africans take up sustainable agriculture for food security</a></div>
+  <div class="article-summary">Aquaponics is seeing a revival in South Africa's schools, boosted by government support and climate concernsThe postYoung South Africans take up sustainable agriculture for food securityappeared first onClimate Home News.…</div>
+  <div class="article-meta">Jun 02, 2026  21:11 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, June 03, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
