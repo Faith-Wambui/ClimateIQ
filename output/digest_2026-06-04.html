@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, June 04, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">62</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 54 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/04/india-extends-countervailing-duty-on-malaysian-solar-glass-imports-for-five-years/" target="_blank">India extends countervailing duty on Malaysian solar glass imports for five years</a></div>
+  <div class="article-summary">India has slapped a five-year extension on countervailing duties for solar glass imports from Malaysia, protecting its domestic industry from subsidized competition. This decision is critical for India's ambitious renewable energy targets, ensuring the continued growth and competitiveness of its own solar manufacturing sector.</div>
+  <div class="article-meta">Jun 04, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04062026/bidens-clean-drinking-water-plan-is-being-rebranded-as-maha/" target="_blank">Biden’s Clean Drinking Water Plan Is Being Rebranded as MAHA</a></div>
+  <div class="article-summary">The Trump administration is repackaging existing climate-focused funding for clean drinking water under the "Make America Healthy Again" banner, diverting attention from its original environmental purpose. This rebranding risks obscuring the climate change impacts driving water contamination and undermining efforts to address them.</div>
+  <div class="article-meta">Jun 04, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-chinas-co2-climbs-2-in-early-2026-due-to-wasted-wind-and-solar/" target="_blank">Analysis: China’s CO2 climbs 2% in early 2026 due to ‘wasted’ wind and solar</a></div>
+  <div class="article-summary">China’s carbon dioxide (CO2) emissions grew by 2% in the first quarter of 2026, after a rise in the amount of “wasted” wind and solar power.
+
+The country used more coal and gas to generate electricity than in the same quarter a year earlier, despite…</div>
+  <div class="article-meta">Jun 04, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-3-june-2026-highway-through-the-amazon-el-nino-impact-state-of-co2-removal/" target="_blank">Cropped 3 June 2026: Highway through the Amazon | El Niño impact | State of CO2 removal</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">Jun 03, 2026  17:06 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/04/researchers-combine-agrivoltaics-with-insect-net-house/" target="_blank">Researchers combine agrivoltaics with insect net house</a></div>
+  <div class="article-summary">Indian researchers have demonstrated that combining agrivoltaics with insect net houses boosts energy generation and protects crops. This innovative approach, tested with pepper plants, offers a dual benefit of increased solar power output and enhanced agricultural resilience, crucial for food security in a changing climate.</div>
+  <div class="article-meta">Jun 04, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/04/uk-hits-22-3-gw-solar-capacity-as-cost-per-kw-falls/" target="_blank">UK hits 22.3 GW solar capacity as cost per kW falls</a></div>
+  <div class="article-summary">The UK has surpassed 22.3 GW of solar capacity, driven by a significant 11.2% annual growth and falling installation costs, with over 2 million solar sites now active. This rapid expansion is crucial for the UK's climate goals, pushing the nation closer to its target of 45 GW by 2030 and demonstrating a clear trend towards cleaner energy generation.</div>
+  <div class="article-meta">Jun 04, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/04/mauritius-tenders-220-mw-of-solar-and-storage-via-new-e-marketplace/" target="_blank">Mauritius tenders 220 MW of solar and storage via new ‘e-Marketplace’</a></div>
+  <div class="article-summary">Mauritius is pushing forward with 220 MW of solar and storage projects, leveraging a new International Solar Alliance e-Marketplace designed to boost project financing. This move is critical for Small Island Developing States like Mauritius, accelerating their transition to clean energy and enhancing resilience against climate impacts.</div>
+  <div class="article-meta">Jun 04, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/04/giz-valida-un-piloto-de-energias-renovables-e-hidrogeno-en-una-base-antartica-chilena/" target="_blank">Hybrid solar-hydrogen project planned at Antarctic base</a></div>
+  <div class="article-summary">A pilot project is set to combine solar, battery, and hydrogen fuel cells at a scientific base on King George Island, aiming to slash diesel use in remote Antarctic operations. This initiative is crucial for decarbonizing hard-to-reach research stations, demonstrating a viable path to cleaner energy in extreme environments.</div>
+  <div class="article-meta">Jun 04, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/04/queensland-seeks-new-energy-generation-and-storage-proposals-under-200-million-fund/" target="_blank">Queensland opens funding call for solar, wind, storage projects</a></div>
+  <div class="article-summary">The government of Queensland in Australia has opened a call for proposals for new solar and wind projects, battery storage systems, and broader support for the state’s northwest power system under the AUD 200 million ($144 million) North West Energy…</div>
+  <div class="article-meta">Jun 04, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-04/asset-managers-hit-hurdle-in-efforts-to-avoid-europe-s-esg-rules" target="_blank">Asset Managers Hit Hurdle in Efforts to Avoid Europe’s ESG Rules</a></div>
+  <div class="article-summary">A European Commission proposal to dramatically cut asset managers’ ESG reporting requirements is facing opposition from the bloc’s largest sustainable investor organizations.…</div>
+  <div class="article-meta">Jun 04, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/audio/2026-06-04/zero-podcast-asia-s-ukraine-moment-supercharges-clean-energy" target="_blank">Asia’s ‘Ukraine Moment’ Is Supercharging the Energy Transition</a></div>
+  <div class="article-summary">No content available for this article.</div>
+  <div class="article-meta">Jun 04, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-03/china-s-emissions-rise-as-more-clean-electricity-goes-to-waste" target="_blank">China’s Emissions Rise as More Clean Electricity Goes to Waste</a></div>
+  <div class="article-summary">China’s carbon dioxide emissions increased in the first three months of the year as a rising volume of electricity generated by renewables was left unused, according a new report.…</div>
+  <div class="article-meta">Jun 04, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-03/trump-is-dismantling-key-ocean-and-flood-sensors" target="_blank">Earth Is Losing Key Ocean Sensors Tracking Climate Change</a></div>
+  <div class="article-summary">The Trump administration is scrapping a sensor network scientists say has no substitute.…</div>
+  <div class="article-meta">Jun 03, 2026  22:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-03/panama-canal-considers-water-limits-to-thwart-el-nino-impacts" target="_blank">Panama Canal Considers Water Limits to Thwart El Niño Impacts</a></div>
+  <div class="article-summary">The Panama Canal Authority is stepping up efforts to brace for El Niño-fueled weather extremes by drafting a plan that avoids limiting the type of vessel restrictions that hampered shipping through the waterway three years ago.…</div>
+  <div class="article-meta">Jun 03, 2026  19:27 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/lebanon/response-evacuated-families-tripoli-lebanon-dref-operational-update-mdrlb020" target="_blank">Response To Evacuated Families in Tripoli, Lebanon - DREF Operational Update (MDRLB020)</a></div>
+  <div class="article-summary">Country: LebanonSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.Description of the EventDate of event08-02-2026What happened, where and when?Tripoli, Lebanon is facing an acute and rapidly wor…</div>
+  <div class="article-meta">Jun 04, 2026  08:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/afghanistan/afghanistan-humanitarian-situation-monitoring-hsm-round-12-district-tables-factsheet-march-2026" target="_blank">Afghanistan: Humanitarian Situation Monitoring (HSM) Round 12 - The District Tables Factsheet (March 2026)</a></div>
+  <div class="article-summary">Country: AfghanistanSource: REACH InitiativePlease refer to the attached file.KEY MESSAGES• A substantial share of settlements (78%) reportedly experienced economic shocks, slightly lower than in March 2025 (90%), possibly indicating some improvement…</div>
+  <div class="article-meta">Jun 04, 2026  06:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/tonga/understanding-experiences-persons-disabilities-disasters-and-emergencies-tonga-december-2025" target="_blank">Understanding the Experiences of Persons with Disabilities in Disasters and Emergencies in Tonga (December 2025)</a></div>
+  <div class="article-summary">Country: TongaSources: Government of Tonga, World Food ProgrammePlease refer to the attached file.In support of the Government of Tonga’s focus on the needs and experiences of people with disabilities before, during, and after disasters, in September…</div>
+  <div class="article-meta">Jun 04, 2026  03:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/argentina/argentina-ifrc-dref-dengue-mdrar023-taller-de-lecciones-aprendidas-informe-final" target="_blank">Argentina | IFRC-DREF Dengue (MDRAR023) - Taller de Lecciones Aprendidas Informe Final</a></div>
+  <div class="article-summary">Country: ArgentinaSources: Cruz Roja Hondureña, International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.El objetivo de Cruz Roja Argentina en la emergencia de Bahía Blanca fue brindar una respuesta rápida y c…</div>
+  <div class="article-meta">Jun 04, 2026  01:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/honduras/honduras-ifrc-dref-mdrhn026-taller-de-lecciones-aprendidas-reporte-final" target="_blank">Honduras | IFRC-DREF (MDRHN026) - Taller de Lecciones Aprendidas Reporte Final</a></div>
+  <div class="article-summary">Country: HondurasSources: Cruz Roja Hondureña, International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.En el marco del compromiso con la mejora continua y la rendición de cuentas, Cruz Roja Hondureña desarrol…</div>
+  <div class="article-meta">Jun 04, 2026  01:27 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/04/world-inequality-lab-equality-academics-planetary-survival" target="_blank">‘An equal and habitable world is possible’: academics set out sweeping vision for planetary survival</a></div>
+  <div class="article-summary">A new report from the World Inequality Lab offers a concrete roadmap to simultaneously boost living standards, slash inequality, and cap global warming at 2°C, presenting a stark alternative to escalating climate breakdown and societal instability. This ambitious vision, grounded in data, argues that a more equitable and habitable planet is achievable, directly challenging the notion that economic growth must come at the expense of environmental and social well-being.</div>
+  <div class="article-meta">Jun 04, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/jun/04/a-good-life-for-the-99-isnt-a-pipe-dream-it-can-be-done-heres-how" target="_blank">A good life  for the 99% isn’t a pipe dream: it can be done. Here’s how</a></div>
+  <div class="article-summary">Academics propose a radical plan for a future where 90% of the global population doubles their income while halving work hours, dramatically redistributing wealth to lift the bottom half's share from 2% to 30%. This vision prioritizes planetary habitability, ensuring a sustainable future where everyone consumes enough without overconsumption, directly addressing the climate crisis by fundamentally altering our economic and social structures.</div>
+  <div class="article-meta">Jun 04, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/04/chinas-carbon-emissions-rise-again-as-more-clean-power-is-wasted/" target="_blank">China’s carbon emissions rise again as more clean power is wasted</a></div>
+  <div class="article-summary">The economic powerhouse burned more coal and gas in the first quarter of 2026, despite record wind and solar build-outThe postChina’s carbon emissions rise again as more clean power is wastedappeared first onClimate Home News.…</div>
+  <div class="article-meta">Jun 04, 2026  06:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03062026/unregulated-squid-fleets-threaten-ocean-life-and-workers/" target="_blank">Dolphins, Sharks, Turtles and Workers Are All Victims of Unregulated Squid Fleets</a></div>
+  <div class="article-summary">While their dazzling bright lights are visible from space, much of the global squid fleet operates in total darkness.   Hundreds of former Indonesian and Filipino crew members working onboard squid ships have exposed widespread environmental crimes a…</div>
+  <div class="article-meta">Jun 04, 2026  01:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03062026/illinois-environmental-justice-legislation/" target="_blank">In a Years-Long Fight, the Illinois Environmental Justice Movement Gets a Win</a></div>
+  <div class="article-summary">After years of fighting to curb toxic pollution in communities of color, Illinois activists are celebrating a step forward.  A bill expanding the state’s regulatory obligations over industrial air polluters in environmental justice communities passed…</div>
+  <div class="article-meta">Jun 04, 2026  00:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03062026/appeals-court-dismisses-lighthiser-v-trump-youth-climate-case/" target="_blank">Appeals Court Affirms Dismissal of Youth Climate Case Against Trump</a></div>
+  <div class="article-summary">A federal appeals court has sided with the Trump administration and 19 Republican-led states in a constitutional challenge to several of President Donald Trump’s executive orders designed to boost fossil fuels, concluding that the youth plaintiffs fa…</div>
+  <div class="article-meta">Jun 03, 2026  20:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, June 04, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
