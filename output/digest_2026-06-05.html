@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, June 05, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/05/nigeria-runs-solar-tender-for-schools-health-facilities/" target="_blank">Nigeria runs solar tender for schools, health facilities</a></div>
+  <div class="article-summary">Nigeria is deploying 32 solar power systems across 25 health clinics and seven schools in Niger, Nasarawa, and the Federal Capital Territory, a move backed by the World Bank's ROGEAP initiative. This significant expansion of renewable energy infrastructure directly addresses energy access gaps and will displace fossil fuel reliance for essential public services, contributing to cleaner air and reduced emissions.</div>
+  <div class="article-meta">Jun 05, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/05/researchers-test-accuracy-of-simulation-tools-for-floating-pv/" target="_blank">Researchers test accuracy of simulation tools for floating PV</a></div>
+  <div class="article-summary">Indian researchers validated three key simulation tools for floating solar farms, finding they accurately predict performance. Crucially, this technology also significantly reduces water evaporation from reservoirs, a vital co-benefit in a warming world.</div>
+  <div class="article-meta">Jun 05, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/05/chinese-topcon-module-spot-prices-hold-steady-as-forward-curve-softens-on-weaker-demand-outlook/" target="_blank">Chinese TOPCon module spot prices hold steady as forward curve softens on weaker demand outlook</a></div>
+  <div class="article-summary">Chinese TOPCon solar module spot prices are holding at $0.116/W FOB China, but future prices are softening due to a weaker demand outlook, signaling potential oversupply and margin pressure for manufacturers. This shift highlights the volatile nature of renewable energy markets and the ongoing competition between solar technologies, impacting the pace of global decarbonization efforts.</div>
+  <div class="article-meta">Jun 05, 2026  10:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/05/array-technologies-improves-omnitrack-flex-capability-to-2/" target="_blank">Array Technologies improves OmniTrack flex capability to 2°</a></div>
+  <div class="article-summary">Array Technologies' new OmniTrack solar tracker now offers double the terrain-following flexibility at 2°, significantly reducing the need for costly site grading and accelerating solar farm deployment. This enhanced capability preserves natural site hydrology, minimizing erosion and soil degradation, which can streamline permitting and improve community relations for faster project development.</div>
+  <div class="article-meta">Jun 05, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/05/la-bad-lance-un-tableau-de-bord-public-pour-suivre-lelectrification-de-lafrique/" target="_blank">AfDB dashboard to track Africa’s electrification progress</a></div>
+  <div class="article-summary">The African Development Bank has launched MapAfrica, a public dashboard tracking progress on Mission 300, an initiative aiming to bring electricity to 300 million Africans by 2030. This platform is crucial for monitoring the expansion of clean energy access, particularly in rural areas, which directly combats climate change by reducing reliance on fossil fuels and fostering sustainable development across the continent.</div>
+  <div class="article-meta">Jun 05, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/05/polish-grid-attack-reveals-cyber-insurance-gap-for-battery-storage/" target="_blank">Polish grid attack reveals cyber-insurance gap for battery storage</a></div>
+  <div class="article-summary">A 2025 cyberattack targeting 30 Polish renewable energy sites exposed a critical insurance gap for battery storage, revealing that neither cyber nor property policies adequately cover these vital climate infrastructure assets. This vulnerability could significantly hinder the deployment of battery storage, a crucial component for grid stability and renewable energy integration, by leaving operators exposed to potentially catastrophic financial losses.</div>
+  <div class="article-meta">Jun 05, 2026  09:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-05/china-s-crowded-solar-industry-pivots-to-new-areas-of-growth" target="_blank">China’s Crowded Solar Industry Pivots to New Areas of Growth</a></div>
+  <div class="article-summary">China’s solar industry is tacitly admitting something it has feared for years: it doesn’t know how to escape chronic overcapacity that has weighed on profits.…</div>
+  <div class="article-meta">Jun 05, 2026  06:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-05/japan-aims-to-replace-up-to-14-atomic-power-reactors-by-2050s" target="_blank">Japan Aims to Replace Up to 14 Atomic Power Reactors by 2050s</a></div>
+  <div class="article-summary">Japan plans to replace up to 14 aging nuclear reactors by the 2050s, a move driven by escalating power needs and geopolitical instability. This significant shift in its energy strategy will likely necessitate a substantial increase in reliance on other energy sources, impacting the nation's progress towards its climate goals.</div>
+  <div class="article-meta">Jun 05, 2026  06:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-04/us-says-antares-small-nuclear-reactor-reaches-criticality" target="_blank">US Says Antares’ Small Nuclear Reactor Reaches ‘Criticality’</a></div>
+  <div class="article-summary">The Trump administration announced a small modular nuclear reactor reached a critical milestone Thursday.…</div>
+  <div class="article-meta">Jun 05, 2026  01:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-04/trump-approves-700-million-in-bid-to-revive-us-coal-industry" target="_blank">Trump Approves $700 Million in Bid to Revive US Coal Industry</a></div>
+  <div class="article-summary">President Donald Trump said he would marshal hundreds of millions of US taxpayer dollars behind his bid to revitalize the coal industry in America, steering funds to build new power plants, sustain existing operations and construct an export terminal…</div>
+  <div class="article-meta">Jun 04, 2026  22:33 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04062026/new-york-data-center-moratorium-bill/" target="_blank">New York State Gets One Step Closer to a Data Center Moratorium</a></div>
+  <div class="article-summary">The New York Legislature passed a one-year moratorium Thursday night on data center permits, the latest sign of pushback amid a nationwide rush to build the power-hungry facilities.  New York would become the first state in the nation to enact such a…</div>
+  <div class="article-meta">Jun 05, 2026  03:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jun/04/trump-coal-defense-production-act" target="_blank">Trump uses wartime powers to dole out $700m to ‘clean, beautiful’ coal</a></div>
+  <div class="article-summary">US president announces plans for two new coal plants, in Alaska and West Virginia, using Defense Production ActDonald Trumpis using wartime presidential authority to hand $700m to coal-fired power plants in the US, the latest move by the president to…</div>
+  <div class="article-meta">Jun 04, 2026  23:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/04/climate-crisis-blue-states-california-new-york" target="_blank">California and New York weaken climate rules as red states ramp up green energy</a></div>
+  <div class="article-summary">Republican-led states growing renewable capabilities at faster rate as Texas emerges as clean-energy leaderDemocratic-led states are eroding their climate policies, as red states are scaling up their clean energy deployment.California on Friday scale…</div>
+  <div class="article-meta">Jun 04, 2026  19:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/jun/05/australia-ski-season-snow-climate-change-el-nino-impact" target="_blank">‘That’s a bad combination’: why Australia may be in for a slushy snow season</a></div>
+  <div class="article-summary">Snow arrives in time for the start of ski season, but climate change and El Niño mean it may not stick around for long, experts sayFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastThere was…</div>
+  <div class="article-meta">Jun 04, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04062026/inside-clean-energy-virtual-power-plants-role-in-transition-away-from-fossil-fuels/" target="_blank">As Energy Demand Rises, More States Turn to Virtual Power Plants</a></div>
+  <div class="article-summary">An executive order in Massachusetts and a regulatory commission action in Minnesota are among the big moves this year that highlight the growing role of virtual power plants in grid management. A virtual power plant, or VPP, is a network of resources…</div>
+  <div class="article-meta">Jun 04, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, June 05, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

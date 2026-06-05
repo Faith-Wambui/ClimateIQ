@@ -1,0 +1,128 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Friday, June 05, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Nigeria runs solar tender for schools, health facilities
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/05/nigeria-runs-solar-tender-for-schools-health-facilities/
+  Date   : Jun 05, 2026  11:30 EAT
+  Summary: Nigeria is deploying 32 solar power systems across 25 health clinics and seven schools in Niger, Nasarawa, and the Federal Capital Territory, a move backed by the World Bank's ROGEAP initiative. This significant expansion of renewable energy infrastructure directly addresses energy access gaps and will displace fossil fuel reliance for essential public services, contributing to cleaner air and reduced emissions.
+
+
+▸ Researchers test accuracy of simulation tools for floating PV
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/05/researchers-test-accuracy-of-simulation-tools-for-floating-pv/
+  Date   : Jun 05, 2026  11:00 EAT
+  Summary: Indian researchers validated three key simulation tools for floating solar farms, finding they accurately predict performance. Crucially, this technology also significantly reduces water evaporation from reservoirs, a vital co-benefit in a warming world.
+
+
+▸ Chinese TOPCon module spot prices hold steady as forward curve softens on weaker demand outlook
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/05/chinese-topcon-module-spot-prices-hold-steady-as-forward-curve-softens-on-weaker-demand-outlook/
+  Date   : Jun 05, 2026  10:35 EAT
+  Summary: Chinese TOPCon solar module spot prices are holding at $0.116/W FOB China, but future prices are softening due to a weaker demand outlook, signaling potential oversupply and margin pressure for manufacturers. This shift highlights the volatile nature of renewable energy markets and the ongoing competition between solar technologies, impacting the pace of global decarbonization efforts.
+
+
+▸ Array Technologies improves OmniTrack flex capability to 2°
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/05/array-technologies-improves-omnitrack-flex-capability-to-2/
+  Date   : Jun 05, 2026  10:00 EAT
+  Summary: Array Technologies' new OmniTrack solar tracker now offers double the terrain-following flexibility at 2°, significantly reducing the need for costly site grading and accelerating solar farm deployment. This enhanced capability preserves natural site hydrology, minimizing erosion and soil degradation, which can streamline permitting and improve community relations for faster project development.
+
+
+▸ AfDB dashboard to track Africa’s electrification progress
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/05/la-bad-lance-un-tableau-de-bord-public-pour-suivre-lelectrification-de-lafrique/
+  Date   : Jun 05, 2026  09:00 EAT
+  Summary: The African Development Bank has launched MapAfrica, a public dashboard tracking progress on Mission 300, an initiative aiming to bring electricity to 300 million Africans by 2030. This platform is crucial for monitoring the expansion of clean energy access, particularly in rural areas, which directly combats climate change by reducing reliance on fossil fuels and fostering sustainable development across the continent.
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ Polish grid attack reveals cyber-insurance gap for battery storage
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/05/polish-grid-attack-reveals-cyber-insurance-gap-for-battery-storage/
+  Date   : Jun 05, 2026  09:30 EAT
+  Summary: A 2025 cyberattack targeting 30 Polish renewable energy sites exposed a critical insurance gap for battery storage, revealing that neither cyber nor property policies adequately cover these vital climate infrastructure assets. This vulnerability could significantly hinder the deployment of battery storage, a crucial component for grid stability and renewable energy integration, by leaving operators exposed to potentially catastrophic financial losses.
+
+
+▸ China’s Crowded Solar Industry Pivots to New Areas of Growth
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-05/china-s-crowded-solar-industry-pivots-to-new-areas-of-growth
+  Date   : Jun 05, 2026  06:34 EAT
+  Summary: China’s solar industry is tacitly admitting something it has feared for years: it doesn’t know how to escape chronic overcapacity that has weighed on profits.…
+
+
+▸ Japan Aims to Replace Up to 14 Atomic Power Reactors by 2050s
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-05/japan-aims-to-replace-up-to-14-atomic-power-reactors-by-2050s
+  Date   : Jun 05, 2026  06:17 EAT
+  Summary: Japan plans to replace up to 14 aging nuclear reactors by the 2050s, a move driven by escalating power needs and geopolitical instability. This significant shift in its energy strategy will likely necessitate a substantial increase in reliance on other energy sources, impacting the nation's progress towards its climate goals.
+
+
+▸ US Says Antares’ Small Nuclear Reactor Reaches ‘Criticality’
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-04/us-says-antares-small-nuclear-reactor-reaches-criticality
+  Date   : Jun 05, 2026  01:26 EAT
+  Summary: The Trump administration announced a small modular nuclear reactor reached a critical milestone Thursday.…
+
+
+▸ Trump Approves $700 Million in Bid to Revive US Coal Industry
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-04/trump-approves-700-million-in-bid-to-revive-us-coal-industry
+  Date   : Jun 04, 2026  22:33 EAT
+  Summary: President Donald Trump said he would marshal hundreds of millions of US taxpayer dollars behind his bid to revitalize the coal industry in America, steering funds to build new power plants, sustain existing operations and construct an export terminal…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ New York State Gets One Step Closer to a Data Center Moratorium
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/04062026/new-york-data-center-moratorium-bill/
+  Date   : Jun 05, 2026  03:59 EAT
+  Summary: The New York Legislature passed a one-year moratorium Thursday night on data center permits, the latest sign of pushback amid a nationwide rush to build the power-hungry facilities.  New York would become the first state in the nation to enact such a…
+
+
+▸ Trump uses wartime powers to dole out $700m to ‘clean, beautiful’ coal
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/jun/04/trump-coal-defense-production-act
+  Date   : Jun 04, 2026  23:22 EAT
+  Summary: US president announces plans for two new coal plants, in Alaska and West Virginia, using Defense Production ActDonald Trumpis using wartime presidential authority to hand $700m to coal-fired power plants in the US, the latest move by the president to…
+
+
+▸ California and New York weaken climate rules as red states ramp up green energy
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/jun/04/climate-crisis-blue-states-california-new-york
+  Date   : Jun 04, 2026  19:00 EAT
+  Summary: Republican-led states growing renewable capabilities at faster rate as Texas emerges as clean-energy leaderDemocratic-led states are eroding their climate policies, as red states are scaling up their clean energy deployment.California on Friday scale…
+
+
+▸ ‘That’s a bad combination’: why Australia may be in for a slushy snow season
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/australia-news/2026/jun/05/australia-ski-season-snow-climate-change-el-nino-impact
+  Date   : Jun 04, 2026  18:00 EAT
+  Summary: Snow arrives in time for the start of ski season, but climate change and El Niño mean it may not stick around for long, experts sayFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastThere was…
+
+
+▸ As Energy Demand Rises, More States Turn to Virtual Power Plants
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/04062026/inside-clean-energy-virtual-power-plants-role-in-transition-away-from-fossil-fuels/
+  Date   : Jun 04, 2026  16:00 EAT
+  Summary: An executive order in Massachusetts and a regulatory commission action in Minnesota are among the big moves this year that highlight the growing role of virtual power plants in grid management. A virtual power plant, or VPP, is a network of resources…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 44  |  Sources: 7  |  Topics: 3
