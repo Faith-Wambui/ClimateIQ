@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, June 06, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">54</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 47 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/05/why-would-someone-prefer-coal-power-over-solar-wind/" target="_blank">Why Would Someone Prefer Coal Power Over Solar & Wind?</a></div>
+  <div class="article-summary">Despite a $700 million US subsidy for aging coal plants, numerous states like Missouri, Arkansas, and Ohio are actively embracing renewable energy, signaling a growing shift away from fossil fuels. This continued investment in coal, while states pivot to solar and wind, highlights a significant disconnect that undermines climate goals and represents a missed opportunity for clean energy innovation.</div>
+  <div class="article-meta">Jun 06, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-5-june-2026-uk-eyes-2040-emissions-cut-us-dismantling-oceans-research-chinas-solar-slump/" target="_blank">DeBriefed 5 June 2026: UK eyes 2040 emissions cut | US ‘dismantling’ oceans research | China’s solar slump</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+UK proposes new emissions target
+
+‘ON COURSE’: The UK government has proposed reducing the country’s greenhouse gas emissi…</div>
+  <div class="article-meta">Jun 05, 2026  16:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/chart-why-chinas-solar-boom-is-slowing-down/" target="_blank">Chart: Why China’s solar boom is slowing down</a></div>
+  <div class="article-summary">Solar power has been a major element of China’s renewables buildout since the mid-2010s.
+
+The country installed 315 gigawatts (GW) of new capacity in 2025, adding more than half of all new solar globally. The year before, it added 277GW.
+
+But the pic…</div>
+  <div class="article-meta">Jun 05, 2026  15:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/06/age-of-electrification-exposing-australias-weakest-link/" target="_blank">Age of electrification exposing Australia’s weakest link</a></div>
+  <div class="article-summary">Australia's electricity grid has seen renewables surge to a record 46.5% in 2026, a significant leap from 15% in 2015, driven by a decade-long focus on displacing fossil fuels. This rapid electrification, however, is exposing critical weaknesses in the grid's infrastructure, threatening the stability needed to support further clean energy transitions and achieve climate goals.</div>
+  <div class="article-meta">Jun 06, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/05/global-biofuel-demand-set-to-grow-by-nearly-70-as-food-prices-rise/" target="_blank">Global Biofuel Demand Set to Grow by Nearly 70% as Food Prices Rise</a></div>
+  <div class="article-summary">Global biofuel demand is projected to surge by nearly 70% by 2030, driven by efforts to combat high oil prices. This rapid expansion will intensify pressure on food supplies and fertilizer availability, potentially exacerbating already rising global food prices.</div>
+  <div class="article-meta">Jun 06, 2026  05:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/05/carvanas-bet-on-slate-is-actually-a-bet-on-itself-as-the-future-of-automotive-retail/" target="_blank">Carvana’s bet on Slate is ACTUALLY a bet on itself, as the future of automotive retail</a></div>
+  <div class="article-summary">Carvana secured a warrant to buy shares in EV startup Slate, signaling a strategic move to dominate automotive retail by potentially becoming the go-to service and delivery partner for new electric vehicle manufacturers. This positions Carvana to bypass traditional dealerships, accelerating the shift to direct-to-consumer EV sales and impacting the broader automotive industry's transition to cleaner transportation.</div>
+  <div class="article-meta">Jun 06, 2026  04:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/05/evs-take-33-0-share-in-france-tesla-model-y-leads/" target="_blank">EVs Take 33.0% Share In France — Tesla Model Y Leads</a></div>
+  <div class="article-summary">France's electric vehicle market surged to 33% of new car sales in Q1 2026, a significant jump from 22.9% last year, with the Tesla Model Y leading the charge. This rapid adoption signals a critical shift away from fossil fuel-powered vehicles, directly contributing to reduced emissions and accelerating the nation's climate goals.</div>
+  <div class="article-meta">Jun 06, 2026  04:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/05/people-who-worked-on-tesla-full-self-driving-dont-trust-tesla-full-self-driving/" target="_blank">People Who Worked On Tesla “Full Self Driving” Don’t Trust Tesla “Full Self Driving”</a></div>
+  <div class="article-summary">Some of them, at least. According to Reuters, the news organization interviewed a former self-driving engineer at Tesla and nine former data labelers, and they did not offer a singing endorsement of Tesla’s “Full Self Driving” (FSD) system. Reuters a…</div>
+  <div class="article-meta">Jun 06, 2026  03:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/06/global-grid-capex-to-surpass-650-billion-in-2026-says-rystad-energy/" target="_blank">Global grid capex to surpass $650 billion in 2026, says Rystad Energy</a></div>
+  <div class="article-summary">Global investment in grid infrastructure is set to exceed $650 billion by 2026, driven by a manufacturing capacity of 4,700 GVA from over 400 plants worldwide. This massive capital expenditure is crucial for expanding and modernizing the grid, enabling the integration of renewable energy sources and thus accelerating the transition to a low-carbon economy.</div>
+  <div class="article-meta">Jun 06, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-05/trump-s-alaska-oil-and-gas-lease-auction-draws-just-two-bidders" target="_blank">Trump’s Alaska Oil, Gas Lease Auction Draws Just Two Bidders</a></div>
+  <div class="article-summary">Only two bidders participated in the Trump administration’s auction for drilling leases in Alaska’s Arctic National Wildlife Refuge as big oil companies sat out the sale.…</div>
+  <div class="article-meta">Jun 05, 2026  21:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-05/which-teams-will-face-worst-heat-at-world-cup-2026" target="_blank">How Extreme Heat Will Factor Into World Cup Games</a></div>
+  <div class="article-summary">Some teams will face a much hotter path to the finals.…</div>
+  <div class="article-meta">Jun 05, 2026  16:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-05/la-boston-public-transit-ridership-rises-amid-war-fueled-gas-prices" target="_blank">US Public Transit Bounces Back as War-Fueled Gas Prices Remain High</a></div>
+  <div class="article-summary">From LA to Boston, bus and train ridership is growing. But experts say it’s still difficult to get most drivers out of their cars.…</div>
+  <div class="article-meta">Jun 05, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-05/chinese-solar-firms-look-beyond-earth-for-growth" target="_blank">Chinese Solar Firms Look Beyond Earth for Growth</a></div>
+  <div class="article-summary">Years of crippling oversupply are forcing the industry to explore new markets.…</div>
+  <div class="article-meta">Jun 05, 2026  14:24 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/jun/06/australian-snow-season-begins-thredbo-perisher-falls-creek-hotham-el-nino-fears" target="_blank">Australian snow season begins amid El Niño fears</a></div>
+  <div class="article-summary">Australia's ski season has kicked off with 20-40cm of snow in the Victorian and NSW Alps, defying El Niño fears for now. This early snowfall, boosted by snowmakers, is crucial for the tourism industry and highlights the ongoing battle to maintain winter conditions in a warming climate.</div>
+  <div class="article-meta">Jun 06, 2026  09:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05062026/trump-energy-department-funds-coal-projects/" target="_blank">Trump Funds Two New Coal Plants and Extends Another Dozen, Citing ‘Energy Dominance’</a></div>
+  <div class="article-summary">Thursday’s flurry of coal news from energy officials included $425 million to extend the life of 12 coal plants in several states, such as $50 million from the U.S. Department of Energy (DOE) for the Wheeling Power Company’s plans to “modernize” the…</div>
+  <div class="article-meta">Jun 06, 2026  03:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05062026/colorado-river-federal-management-plan/" target="_blank">Feds Will Soon Impose New Framework on Colorado River if States Can’t Agree How to Manage It</a></div>
+  <div class="article-summary">BOULDER, Colo.—The federal government will impose a 10-year operating framework for managing water use in the Colorado River Basin by the end of this summer if the seven states that rely on the river cannot come to an agreement before then, said Scot…</div>
+  <div class="article-meta">Jun 06, 2026  00:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05062026/duke-energy-federal-funding-for-coal-power-upgrades/" target="_blank">Trump Administration Doubles Down on Coal Power in North Carolina</a></div>
+  <div class="article-summary">Duke Energy could receive $28.4 million in taxpayer money to upgrade two coal-fired power units in Person County, North Carolina, where residents are already contending with the construction of new natural gas plants, a pipeline and a proposed Micros…</div>
+  <div class="article-meta">Jun 06, 2026  00:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05062026/sea-level-rise-impacts-mangrove-forests/" target="_blank">Mangrove Forests Fight Climate Change—But Climate Change Is Fighting Back</a></div>
+  <div class="article-summary">Mangrove forests have adapted over tens of millions of years to survive in harsh flooding from salty seas, while locking away vast stores of climate-warming carbon and protecting the world’s coastlines from storm surge.  But a new modeling study sugg…</div>
+  <div class="article-meta">Jun 05, 2026  23:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05062026/iran-war-jeopardizes-global-food-security/" target="_blank">Iran War Jeopardizes Global Food Security</a></div>
+  <div class="article-summary">The worldwide fallout from the U.S. war in Iran isn’t limited to gas prices. The largely blocked Strait of Hormuz has become “a critical failure point for global food security,” Máximo Torero Cullen, chief economist of the United Nations’ Food and Ag…</div>
+  <div class="article-meta">Jun 05, 2026  23:11 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, June 06, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
