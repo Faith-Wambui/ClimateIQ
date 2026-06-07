@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, June 07, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">16</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😊</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:62%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Cautiously Optimistic — 7 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/06/new-danfoss-hydraulic-pump-increases-equipment-runtime-by-50/" target="_blank">New Danfoss hydraulic pump increases equipment runtime by 50%</a></div>
+  <div class="article-summary">Danfoss has engineered a new digital hydraulic pump for electric excavators that boosts equipment runtime by over 50% and cuts energy consumption by 35%. This breakthrough, demonstrated on a Develon crawler excavator, allows for significantly more work with less energy, accelerating the decarbonization of heavy-duty machinery.</div>
+  <div class="article-meta">Jun 07, 2026  06:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/06/when-public-charging-stations-arent-so-public-and-why-it-matters/" target="_blank">When public charging stations aren’t so public, and why it matters</a></div>
+  <div class="article-summary">Thousands of "public" EV chargers are inaccessible to the general public due to dealer-specific restrictions, creating significant frustration for new EV drivers. This poor user experience risks hindering EV adoption, a critical factor in achieving climate goals.</div>
+  <div class="article-meta">Jun 07, 2026  00:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/06/catl-developing-12000-wh-per-kg-lithium-air-battery/" target="_blank">CATL Developing 12,000 Wh Per Kg Lithium-Air Battery</a></div>
+  <div class="article-summary">CATL, the world's largest battery maker, is developing lithium-air batteries with a theoretical energy density of 12,000 Wh/kg, matching gasoline. This breakthrough promises to revolutionize electric vehicles by enabling ranges of 1,000 miles or more on a single charge, accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Jun 06, 2026  22:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/06/ev-battery-lmr-gm-vehicle-electrification-us-nasa-lunar-rover/" target="_blank">GM Pitches New LMR EV Battery On Earth, New EV On The Moon</a></div>
+  <div class="article-summary">GM is launching its new, cost-effective lithium manganese-rich (LMR) EV battery for consumers in 2028, a move that leverages the abundance of manganese to drive down costs and increase range. This advancement, alongside GM Defense's contribution of advanced battery tech to NASA's Artemis lunar rover, signals a significant push towards more accessible and sustainable electric mobility.</div>
+  <div class="article-meta">Jun 06, 2026  19:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/06/ship-air-lubrication-air-isnt-free/" target="_blank">Air Lubrication For Ships Is Real. The Air Still Isn’t Free.</a></div>
+  <div class="article-summary">Engine Supported Air Lubrication systems, like those from Everllence and Silverstream, are now commercially viable, reducing ship drag by pumping air under the hull. This technology is crucial for decarbonizing shipping, a sector responsible for roughly 3% of global greenhouse gas emissions, by significantly cutting fuel consumption and associated emissions.</div>
+  <div class="article-meta">Jun 06, 2026  18:53 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-06/how-iran-war-shock-is-affecting-us-public-transit-use" target="_blank">US Commuters Turn to Public Transport as Gas Prices Stay High</a></div>
+  <div class="article-summary">High gas prices are contributing to a rise in public transit use.…</div>
+  <div class="article-meta">Jun 06, 2026  14:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-06/the-albanian-island-at-the-center-of-anger-over-kushner-s-resort-plans" target="_blank">The Albanian Island at the Center of Anger Over Kushner’s Resort Plans</a></div>
+  <div class="article-summary">The ride from the Albanian mainland to the island of Sazan takes just 20 minutes in a speedboat.…</div>
+  <div class="article-meta">Jun 06, 2026  14:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-06/eu-plans-lower-taxes-on-clean-energy-in-drive-to-cut-power-bills" target="_blank">EU Plans Lower Taxes on Clean Energy in Drive to Cut Power Bills</a></div>
+  <div class="article-summary">The European Union is developing plans to cut taxes on renewable energy and make electricity systems more flexible as high costs continue to weigh on the region’s economy.…</div>
+  <div class="article-meta">Jun 06, 2026  13:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/06/could-byd-buy-maserati/" target="_blank">Could BYD Buy Maserati?</a></div>
+  <div class="article-summary">Chinese EV giant BYD, already the world's largest, is reportedly eyeing luxury brands like Maserati, signaling a significant shift in the automotive landscape. This potential acquisition underscores the accelerating global transition to electric vehicles and the increasing dominance of Chinese manufacturers in shaping the future of sustainable mobility.</div>
+  <div class="article-meta">Jun 07, 2026  06:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/jun/06/ministers-uk-food-supply-immediate-national-priority-trade-body-urges" target="_blank">‘Immediate national priority’: ministers accused of complacency over UK food supply</a></div>
+  <div class="article-summary">Cold storage and logistics body warns food supplies at risk from fuel shortages, cyber attacks and extreme weatherMinisters have been accused of being complacent about the risks to vital supplies of food into the UK amid concerns over fuel shortages,…</div>
+  <div class="article-meta">Jun 06, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06062026/montana-drought-heat-elevated-wildfire-risk/" target="_blank">Montana Officials Warn of Elevated Wildfire Risk From Increasing Drought, Heat and Wind</a></div>
+  <div class="article-summary">Montana officials are warning that the 2026 wildfire season could bring above-normal fire risk to parts of the state, driven by a mix of drought conditions, wind events and warmer-than-average winter temperatures. At a statewide wildfire outlook brie…</div>
+  <div class="article-meta">Jun 06, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06062026/museum-of-unnatural-disasters-highlights-extreme-weather-risks/" target="_blank">A New DC ‘Museum’ Raises Awareness About the Looming Consequences of Extreme Weather</a></div>
+  <div class="article-summary">If you knew a major storm or fire was heading toward your home, what would you save? Maybe your pet? A box of letters? The blanket that your grandma knitted for you as a baby?
+
+A pop-up exhibit led by the Climate Action Campaign and curated by Sam Ha…</div>
+  <div class="article-meta">Jun 06, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, June 07, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
