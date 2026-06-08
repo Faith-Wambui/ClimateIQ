@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, June 08, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">23</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😊</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:62%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Cautiously Optimistic — 14 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/08/svolt-showcases-comprehensive-energy-storage-solutions-at-snec-2026/" target="_blank">SVOLT showcases comprehensive energy storage solutions at SNEC 2026</a></div>
+  <div class="article-summary">SVOLT unveiled new residential energy storage cell variants at SNEC 2026, including a fast-charging and a low-temperature, long-life option, signaling a shift to platform-based solutions. This innovation is crucial for accelerating the adoption of renewable energy by providing more reliable and versatile storage, even in challenging climates.</div>
+  <div class="article-meta">Jun 08, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/08/oman-seeks-consultants-for-300-mw-solar-project/" target="_blank">Oman seeks consultants for 300 MW solar project</a></div>
+  <div class="article-summary">Oman's Nama PWP is seeking consultants for a 300 MW solar project in Al Dakhiliyah, designed to power the low-emissions Marsa LNG facility and feed surplus energy to the grid. This significant solar expansion, adding to Oman's existing 1,672 MW capacity, underscores the nation's commitment to integrating renewable energy sources and reducing its carbon footprint.</div>
+  <div class="article-meta">Jun 08, 2026  11:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/08/25-is-the-new-23/" target="_blank">25% is the new 23%</a></div>
+  <div class="article-summary">Solar module manufacturers are now showcasing 25% efficiency as their flagship product at SNEC 2026 in Shanghai, a significant leap from previous mainstream offerings. This advancement means more power generation from the same footprint, accelerating the transition to renewable energy and making solar a more competitive and impactful climate solution.</div>
+  <div class="article-meta">Jun 08, 2026  09:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/08/inside-pv-manufacturing-la-fabrica-de-paneles-pvt-de-sunmaxx-en-alemania/" target="_blank">Inside PV manufacturing: Sunmaxx’s PVT module factory in Germany</a></div>
+  <div class="article-summary">Sunmaxx has opened what it claims is the world's largest PVT module factory in Germany, a significant step in industrializing hybrid solar technology. This expansion is crucial as PVT modules, which generate both electricity and heat, offer a more efficient way to harness solar energy, potentially accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Jun 08, 2026  08:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/08/halocell-energy-secures-grant-for-perovskite-pv-scale-up/" target="_blank">Halocell Energy secures grant for perovskite PV scale-up</a></div>
+  <div class="article-summary">Australian firm Halocell Energy will boost indoor perovskite solar module production tenfold to 100,000 units annually, thanks to over $600,000 in federal funding. This significant scale-up of a promising, low-light solar technology could accelerate the deployment of self-powered IoT devices and smart building sensors, reducing reliance on batteries and their associated environmental impact.</div>
+  <div class="article-meta">Jun 08, 2026  08:15 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-07/legal-general-says-energy-transition-is-alive-and-well" target="_blank">Legal &amp; General Says Energy Transition is ‘Alive and Well’</a></div>
+  <div class="article-summary">In a new report, the UK insurer and asset manager challenged the notion that the shift to a low-carbon economy has stalled.…</div>
+  <div class="article-meta">Jun 08, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-07/mexico-awarded-37-renewable-electricity-projects-in-tender" target="_blank">Mexico Awards 37 Renewable Electricity Projects in Tender, Report Says</a></div>
+  <div class="article-summary">Mexico’s electricity commission concluded the first bidding process under its new mixed-investment scheme for renewable energy, to add an expected 7,411 megawatts of generation capacity, a local outlet reported.…</div>
+  <div class="article-meta">Jun 08, 2026  00:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-07/hedge-funds-are-hiring-experts-in-catastrophe-risk" target="_blank">Hedge Funds Are Expanding Desks Designed to Profit From Natural-Catastrophe Risk</a></div>
+  <div class="article-summary">When Mitesh Parikh, a headhunter at UK recruiter Selby Jennings, started looking for an ILS modeler for a large US hedge fund this year, the pool of qualified candidates was disconcertingly small.…</div>
+  <div class="article-meta">Jun 07, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-07/china-issues-alert-for-flood-risks-in-hunan-guangxi-guizhou" target="_blank">China Issues Alert for Flood Risks in Hunan, Guangxi, Guizhou</a></div>
+  <div class="article-summary">China issued a red alert for mountain flooding on Sunday, warning that parts of southwestern Hunan, northern Guangxi and southeastern Guizhou face a high risk of flash floods triggered by heavy rainfall, according to a report by China Central Televis…</div>
+  <div class="article-meta">Jun 07, 2026  14:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08062026/new-york-brookhaven-landfill-pollution/" target="_blank">Troubled by Spreading Landfill Pollution, a Long Island Community Demands Action</a></div>
+  <div class="article-summary">Brookhaven residents are demanding action as groundwater contamination from a local landfill has spread beneath their Long Island community. This escalating pollution poses a direct threat to local water resources, highlighting the urgent need for stricter landfill oversight and remediation to protect public health and the environment.</div>
+  <div class="article-meta">Jun 08, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-08/flood-warnings-for-south-china-farmlands-raise-rice-crop-risks" target="_blank">Flood Warnings for South China Farmlands Raise Rice-Crop Risks</a></div>
+  <div class="article-summary">Forecasts for heavy rains in southern China over the next week are raising the risk of flash floods, potentially inundating crops and damaging rice fields.…</div>
+  <div class="article-meta">Jun 08, 2026  06:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08062026/midwest-wild-rice-climate-threats/" target="_blank">Wild Rice Faces Numerous Threats—and Has Determined Protectors</a></div>
+  <div class="article-summary">Wild rice, a culturally significant and ecologically vital crop, is facing severe threats from climate change and pollution, impacting Indigenous communities like the Red Cliff Band of Lake Superior Chippewa who depend on it. Rising water temperatures and altered water levels are decimating wild rice beds, jeopardizing food security and traditional practices for these communities.</div>
+  <div class="article-meta">Jun 08, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/07/update-on-iran-wars-impact-on-global-auto-sales/" target="_blank">Update On Iran War’s Impact On Global Auto Sales</a></div>
+  <div class="article-summary">A couple of months ago, I wrote this article on the new war in Iran’s impact on global auto sales, and today I’m writing this to update those observations. Iran War Update Little has changed in the last two months. We appear to be at a stalemate. The…</div>
+  <div class="article-meta">Jun 08, 2026  05:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/07/happy-world-ocean-day/" target="_blank">Happy World Ocean Day!</a></div>
+  <div class="article-summary">This World Ocean Day, the International Ocean Film Festival highlighted the critical role of our seas, underscoring the urgent need for greater awareness and action. The event served as a stark reminder that healthy oceans are fundamental to regulating our planet's climate and supporting global ecosystems.</div>
+  <div class="article-meta">Jun 08, 2026  03:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/08/australia-endangered-spiny-crayfish-protection" target="_blank">The fight to save Australia’s ‘incredibly captivating’ endangered spiny crayfish</a></div>
+  <div class="article-summary">Global heating is destroying creeks the crayfish call home. They’re the canary in the coalmine for other species living in the delicate ecosystemsFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news po…</div>
+  <div class="article-meta">Jun 07, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, June 08, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
