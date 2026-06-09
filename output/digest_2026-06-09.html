@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, June 09, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">55</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 49 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/09/court-restores-5-safe-harbor-for-wind-and-large-solar/" target="_blank">U.S. court restores 5% safe harbor for wind and large solar</a></div>
+  <div class="article-summary">A Washington D.C. court has reinstated the 5% safe harbor for wind and large solar projects, finding the IRS's previous change arbitrary and capricious. This ruling is crucial as it removes a significant financial hurdle, potentially accelerating the deployment of renewable energy by ensuring predictable tax credits.</div>
+  <div class="article-meta">Jun 09, 2026  10:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/09/from-crazy-vision-to-698-gw-how-a-bold-solar-forecast-became-too-conservative/" target="_blank">From ‘crazy vision’ to 698 GW: How a bold solar forecast became too conservative</a></div>
+  <div class="article-summary">Global solar photovoltaic (PV) installations in 2025 soared to 698 GW, more than double the ambitious target set in 2012. This explosive growth underscores the rapid acceleration of renewable energy deployment, significantly outpacing even bold climate projections and signaling a faster-than-expected transition away from fossil fuels.</div>
+  <div class="article-meta">Jun 09, 2026  11:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/09/the-different-options-for-energy-storage/" target="_blank">The different options for energy storage</a></div>
+  <div class="article-summary">As renewables surge to 43% of global electricity by 2030, the intermittency of sources like wind and solar demands robust energy storage solutions.  While pumped hydro can store gigawatt-hours, its geographical limitations and the short duration (4-6 hours) of lithium-ion batteries present significant challenges for grid stability and meeting escalating electricity demand.</div>
+  <div class="article-meta">Jun 09, 2026  10:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/09/ukraine-officially-adopts-new-electric-motorcycle-for-military-use/" target="_blank">Ukraine officially adopts new electric motorcycle for military use</a></div>
+  <div class="article-summary">Ukraine has officially adopted the domestically produced Wolfstorm electric motorcycle for its armed forces, recognizing the critical role these silent, agile vehicles play in modern warfare. This move signals a broader trend of militaries embracing electric propulsion for its tactical advantages, like reduced thermal signatures and near-silent operation, which are crucial for reconnaissance and rapid deployment in challenging environments.</div>
+  <div class="article-meta">Jun 09, 2026  10:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/08/2027-hyundai-ioniq-5-launches-as-2026-ioniq-5-wins-special-ev-award-in-usa/" target="_blank">2027 Hyundai IONIQ 5 Launches As 2026 IONIQ 5 Wins Special EV Award In USA</a></div>
+  <div class="article-summary">Hyundai is launching its 2027 IONIQ 5 with a price cut in South Korea to compete with rivals, while the 2026 model just snagged a significant EV award in the USA. This dual focus on affordability and recognition signals a strong push for mainstream EV adoption, directly impacting the speed at which we can transition away from fossil fuel vehicles.</div>
+  <div class="article-meta">Jun 09, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/08/majority-of-europeans-back-reducing-fossil-fuel-imports-to-make-europe-safer-polling-shows/" target="_blank">Majority of Europeans Back Reducing Fossil Fuel Imports to Make Europe Safer, Polling Shows</a></div>
+  <div class="article-summary">YouGov poll findings commissioned by E3G, T&E and the Electrification Alliance. New polling data across five major European countries shows strong support for electrification and clean energy investment. These views cut across traditional left-right…</div>
+  <div class="article-meta">Jun 09, 2026  06:58 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/09/world-banks-pledge-billions-fossil-fuel-industry-2025" target="_blank">World’s largest banks pledged $906bn to fossil fuel companies in ‘unfathomable’ increase in 2025, report finds</a></div>
+  <div class="article-summary">The world's top 65 banks, led by JPMorgan Chase, poured $906 billion into fossil fuels last year, an alarming 8% increase that directly undermines global efforts to limit warming. This massive investment locks in continued oil, gas, and coal production, making it significantly harder to meet climate targets and avert further temperature rises.</div>
+  <div class="article-meta">Jun 09, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-09/revego-h1-mull-merger-for-807-million-africa-renewables-fund" target="_blank">Revego and H1 Mull Merger for $807 Million Africa Renewables Fund</a></div>
+  <div class="article-summary">Revego Fund Managers is in talks to merge with H1 Holdings, potentially forming a $807 million powerhouse in South Africa's renewable energy sector. This consolidation signifies a significant push to scale up clean energy investments across the continent, crucial for meeting ambitious climate targets and driving the transition away from fossil fuels.</div>
+  <div class="article-meta">Jun 09, 2026  08:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-08/singapore-brings-back-19th-century-tech-to-beat-warming-climate" target="_blank">Singapore Brings Back 19th-Century Tech to Beat Warming Climate</a></div>
+  <div class="article-summary">Deep underneath Singapore’s northeastern district of Punggol, a five-kilometer network of metal pipes roars as it pumps chilled water to cool offices and classrooms overhead.…</div>
+  <div class="article-meta">Jun 09, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-08/climate-change-pollution-push-oceans-to-tipping-point-un-report-says" target="_blank">Climate Change, Pollution Push Oceans to Tipping Point, UN Report Says</a></div>
+  <div class="article-summary">Dying coral reefs and depleted fish stocks are signs of the “grave risk” to marine health, according to the third World Ocean Assessment.…</div>
+  <div class="article-meta">Jun 08, 2026  19:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-08/jpmorgan-jane-street-search-for-ils-experts-who-can-model-disaster" target="_blank">Wall Street Seeks Catastrophe Modelers and Weather Analysts</a></div>
+  <div class="article-summary">Some firms are seeking to expand their insurance-linked securities desks…</div>
+  <div class="article-meta">Jun 08, 2026  17:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-09/extreme-heat-risks-losses-for-indian-suppliers-to-uniqlo-tesco" target="_blank">Extreme Heat Risks Losses for Indian Suppliers to Uniqlo, Tesco</a></div>
+  <div class="article-summary">Garment factories in India supplying customers like Fast Retailing Co.’s Uniqlo, Marks & Spencer Plc and Tesco Plc are suffering productivity losses of as much as 10% as a result of the nation’s extreme heat, according to a new report.…</div>
+  <div class="article-meta">Jun 09, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/mauritius/mauritania-drought-early-action-protocol-summary-mdrmr021-12-may-2026" target="_blank">Mauritius: Mauritania | Drought - Early Action Protocol Summary (MDRMR021), 12 May 2026</a></div>
+  <div class="article-summary">Country: MauritiusSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.SUMMARY OF THE EARLY ACTION PROTOCOLThe IFRC Disaster Response Emergency Fund (DREF) has approved a total of CHF 769,566 for t…</div>
+  <div class="article-meta">Jun 09, 2026  04:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/syrian-arab-republic/syrian-arab-republic-fire-2025-final-report-mdrsy015-june-2026" target="_blank">Syrian Arab Republic Fire 2025: Final Report (MDRSY015), June 2026</a></div>
+  <div class="article-summary">Country: Syrian Arab RepublicSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.Description of the EventDate of event30-06-2025What happened, What happened, where and when?Beginning in early July…</div>
+  <div class="article-meta">Jun 09, 2026  04:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/nigeria/nigeria-acute-malnutrition-12-months-operation-update-mdrng042" target="_blank">Nigeria | Acute malnutrition - 12 Months Operation update (MDRNG042)</a></div>
+  <div class="article-summary">Country: NigeriaSource: International Federation of Red Cross and Red Crescent SocietiesPlease refer to the attached file.A. SITUATION ANALYSISDescription of the crisisSince April 2025, when the Nigerian government declared a national emergency on fo…</div>
+  <div class="article-meta">Jun 09, 2026  04:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/burundi/unicef-burundi-humanitarian-situation-report-no-20-31-may-2026" target="_blank">UNICEF Burundi Humanitarian Situation Report No. 20, 31 May 2026</a></div>
+  <div class="article-summary">Countries: Burundi, Democratic Republic of the Congo, United Republic of TanzaniaSource: UN Children's FundPlease refer to the attached file.Situation Overview & Humanitarian NeedsIn May 2026, Burundi continued to face a complex humanitarian situatio…</div>
+  <div class="article-meta">Jun 09, 2026  03:12 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/democratic-republic-congo/analyse-rapide-de-genre-rdc-epidemie-du-virus-ebola-i-sommaire-0" target="_blank">DR Congo: ANALYSE RAPIDE DE GENRE - RDC: ÉPIDÉMIE DU VIRUS EBOLA I SOMMAIRE</a></div>
+  <div class="article-summary">The Democratic Republic of Congo is facing a severe Ebola epidemic, impacting communities and exacerbating existing gender inequalities. This outbreak highlights the critical need for gender-sensitive approaches in public health responses to effectively combat the virus and protect vulnerable populations.</div>
+  <div class="article-meta">Jun 09, 2026  11:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/09/christian-leaders-alarmed-by-climate-crisis-raise-questions-over-gb-news-owners-28m-church-donations" target="_blank">Christian leaders alarmed by climate crisis raise questions over GB News owner’s £28m church donations</a></div>
+  <div class="article-summary">Sir Paul Marshall, co-owner of GB News, has donated £28 million to Church of England institutions, sparking alarm among Christian leaders. This comes as Marshall's climate views and those aired on his channel reportedly clash with the Church's stance on climate action as a core responsibility.</div>
+  <div class="article-meta">Jun 09, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08062026/trump-emergency-order-keeps-florida-coal-plant-open/" target="_blank">Trump Administration Emergency Order to Keep Florida Coal Plant Running</a></div>
+  <div class="article-summary">Under a Trump administration emergency order, a Florida coal-fired power plant will continue operating. The facility had been scheduled for retirement in 2025 as part of an Orlando Utilities Commission (OUC) plan to transition to renewable energy sou…</div>
+  <div class="article-meta">Jun 09, 2026  01:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/jun/08/the-guardian-view-on-climate-equality-a-richer-life-and-real-public-abundance-not-just-more-stuff" target="_blank">The Guardian view on climate equality: a richer life and real public abundance, not just more stuff | Editorial</a></div>
+  <div class="article-summary">The Global Justice Report offers a hopeful bargain: tax extreme wealth and replace consumer excess with social and economic security for allHumanity can raise living standards, reduce inequality and keep global heating within a 2C rise, according to…</div>
+  <div class="article-meta">Jun 08, 2026  20:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/08/un-world-ocean-assessment-severe-stress-sea-level-rise-doubles-pollution-fishing-climate" target="_blank">‘Severe’ stress on oceans as rate of sea level rise doubles in 10 years, UN warns</a></div>
+  <div class="article-summary">Global effort needed to limit effects of pollution, industrial fishing and climate crisis, World Ocean Assessment saysThe world’s oceans are under “severe and accelerating” pressure from human activities, with the rate of sea-level rise double that o…</div>
+  <div class="article-meta">Jun 08, 2026  19:45 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, June 09, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
