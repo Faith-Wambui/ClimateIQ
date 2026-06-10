@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, June 10, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/06/bonn-climate-talks-kick-off-whats-in-issue/" target="_blank">Bonn Climate Talks Kick-off: What’s in Issue?</a></div>
+  <div class="article-summary">The annual Bonn Climate Talks, SB64, just concluded, serving as a critical mid-year negotiation for the technical details that will shape year-end COP decisions. These discussions are vital for advancing global climate action by ironing out the complex policy frameworks needed to meet emissions targets.</div>
+  <div class="article-meta">Jun 10, 2026  11:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cited-9-june-2026-europes-exceptional-heatwave-warming-forecast-amoc-observations-at-risk/" target="_blank">Cited 9 June 2026: Europe’s ‘exceptional’ heatwave | Warming forecast | AMOC observations ‘at risk’</a></div>
+  <div class="article-summary">Welcome to Cited, your essential guide to new climate research.
+
+In the news
+
+SPRING HEATWAVE: Temperature records for May fell across western Europe as the region baked in an “exceptionally early” heatwave, reported the Associated Press. The outlet…</div>
+  <div class="article-meta">Jun 09, 2026  17:44 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/10/tezeus-c8-review-this-light-sleek-european-commuter-e-bike-gets-a-lot-right/" target="_blank">Tezeus C8 review: This light & sleek European commuter e-bike gets a lot right</a></div>
+  <div class="article-summary">This review highlights the Tezeus C8, a European commuter e-bike praised for its understated design and premium features, suggesting it offers strong value despite a higher price point. While the article focuses on the bike's consumer appeal, its emphasis on efficient, accessible electric mobility implicitly supports the broader shift away from fossil-fuel dependent transportation, a crucial element in reducing urban carbon emissions.</div>
+  <div class="article-meta">Jun 10, 2026  11:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/10/general-motors-to-build-sodium-ion-batteries-for-grid-scale-storage/" target="_blank">General Motors to build sodium-ion batteries for grid-scale storage</a></div>
+  <div class="article-summary">General Motors is entering the grid-scale battery storage market, initially with lithium-ion systems and a future focus on sodium-ion technology. This strategic pivot, mirroring Ford's own move into BESS, signals a significant push to decarbonize the grid by leveraging automotive manufacturing expertise and innovation in battery technology.</div>
+  <div class="article-meta">Jun 10, 2026  11:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/10/canadian-solar-unveils-6-25-mwh-liquid-cooled-storage-system/" target="_blank">Canadian Solar unveils 6.25 MWh liquid-cooled storage system</a></div>
+  <div class="article-summary">Canadian Solar has launched SolBank 4.0, a new 6.25 MWh liquid-cooled battery storage system boasting 40% higher energy density, crucial for supporting the grid and powering AI data centers. This advancement signifies a significant step in enabling longer-duration energy storage, a key component in the transition to a reliable, renewable energy future.</div>
+  <div class="article-meta">Jun 10, 2026  10:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/10/aiko-showcases-690-w-back-contact-solar-module-with-25-6-efficiency/" target="_blank">Aiko showcases 690 W back-contact solar module with 25.6% efficiency</a></div>
+  <div class="article-summary">Chinese manufacturer Aiko has unveiled a 690 W solar module boasting 25.6% mass production efficiency at SNEC 2026 in Shanghai. This advancement pushes the boundaries of solar technology, meaning more power can be generated from the same footprint, accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Jun 10, 2026  10:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/10/ceramifiable-foam-composite-confines-thermal-runaway-in-lab-battery-module-tests/" target="_blank">Ceramifiable foam composite confines thermal runaway in lab battery module tests</a></div>
+  <div class="article-summary">Chinese researchers have engineered a novel ceramifiable silicone foam that effectively halts battery fires by forming a dense ceramic barrier, as demonstrated in lab tests on a three-cell lithium-ion module. This breakthrough is critical for mitigating the dangerous thermal runaway phenomenon, a significant safety concern in the rapidly growing electric vehicle and energy storage sectors.</div>
+  <div class="article-meta">Jun 10, 2026  09:37 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-10/el-nino-emerges-raising-risks-for-global-weather-energy-agriculture" target="_blank">El Niño Is Here and That’s Bad News for the Global Economy</a></div>
+  <div class="article-summary">El Niño has officially arrived, threatening to exacerbate already volatile global energy markets, already reeling from the Iran war. This natural climate pattern is expected to drive up global temperatures and disrupt weather patterns, potentially leading to increased demand for energy and further price spikes, impacting economic stability worldwide.</div>
+  <div class="article-meta">Jun 10, 2026  10:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/10/solo-una-cuarta-parte-de-los-fondos-en-la-2a-subasta-europea-del-hidrogeno-se-convierte-en-inversion/" target="_blank">Only a quarter of funds from the second European hydrogen auction is turning into investment</a></div>
+  <div class="article-summary">European green hydrogen is running up against reality: Of the €1.2 billion available under the second call for proposals, only about €300 million has been committed to projects that have actually moved forward.The postOnly a quarter of funds from the…</div>
+  <div class="article-meta">Jun 10, 2026  09:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-10/will-we-get-a-super-el-nino-this-year-how-does-it-affect-global-weather" target="_blank">Why the World Is Bracing for a Rare ‘Super’ El Niño</a></div>
+  <div class="article-summary">​​A cyclical weather phenomenon that can drive flooding in one continent and drought in another has returned.…</div>
+  <div class="article-meta">Jun 10, 2026  09:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-10/el-nino-emerges-in-pacific-raising-heat-risks-and-crop-threats" target="_blank">El Niño Emerges in Pacific, Raising Heat and Crop Risks</a></div>
+  <div class="article-summary">El Niño has formed across the equatorial Pacific, setting the stage for months of droughts, floods and temperature fluctuations that will threaten communities worldwide along with agriculture and energy.…</div>
+  <div class="article-meta">Jun 10, 2026  07:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-10/britain-s-garden-habits-make-their-homes-harder-to-insure" target="_blank">Britain’s Garden Habits Are Making Their Homes Harder to Insure</a></div>
+  <div class="article-summary">As the UK moves from a record-hot May into an unseasonably wet June, the risk of flooding is being exacerbated by a proliferation of paved gardens, according to the country’s flood insurer of last resort.…</div>
+  <div class="article-meta">Jun 10, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/10/super-rich-assets-outsized-amount-climate-harm-study" target="_blank">Super-rich’s assets cause outsized amount of climate harm, study says</a></div>
+  <div class="article-summary">Greenpeace calculates that wealthiest contribute nearly $1tn of damage a year with ownership-based emissionsUltra-wealthy people zooming across the world on theirprivate jets, lounging on yachts and conspicuous by theirInstagrammable consumptionare a…</div>
+  <div class="article-meta">Jun 10, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09062026/china-belt-and-road-steel-production/" target="_blank">Driven by Steel Production, China’s Belt and Road Construction Carries a Heavy Climate Cost</a></div>
+  <div class="article-summary">China’s Belt and Road Initiative, the world’s largest ongoing infrastructure program, has a substantial climate impact. More than half its emissions stem from steel, the majority of which was produced in China. Cutting the emissions will require stro…</div>
+  <div class="article-meta">Jun 10, 2026  01:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09062026/todays-climate-heat-wildlife-forecast/" target="_blank">Heat Is Killing Wildlife Across the Animal Kingdom. A New Forecasting Tool May Help.</a></div>
+  <div class="article-summary">At the end of May, eight endangered Asiatic lions died at a national park in India. Officials feared the animals had succumbed to a tick-borne parasitic disease that previously killed lions in the area.  But over the weekend, the Gujarat government a…</div>
+  <div class="article-meta">Jun 10, 2026  00:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/09/extreme-heat-double-hospitalizations-2040-study" target="_blank">‘Woefully unprepared’: extreme heat will double US hospitalizations by 2040, study finds</a></div>
+  <div class="article-summary">Sharp rise in hospital visits will in turn drive up annual healthcare costs for heat-related conditions to over $1bnPeople in the US are poised to endure another summer of unusually ferocious heat and there will be little respite in the years ahead,…</div>
+  <div class="article-meta">Jun 09, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/jun/09/super-el-nino-global-economy" target="_blank">Here are 10 ways a ‘super’ El Niño could impact the planet | Benjamin Selwyn</a></div>
+  <div class="article-summary">A powerful, or “super” El Niño – marked by 2C (3.6F) or greater increase in sea surface temperatures – is now highly probable for this year, lasting into 2027. Weakened trade winds allow warm surface waters to spread across the central and eastern Pa…</div>
+  <div class="article-meta">Jun 09, 2026  15:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, June 10, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
