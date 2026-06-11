@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, June 11, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 43 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-how-a-record-high-energy-imbalance-is-driving-global-warming/" target="_blank">Guest post: How a record-high ‘energy imbalance’ is driving global warming</a></div>
+  <div class="article-summary">The planet is heating up more quickly than ever before.
+
+For decades, greenhouse gas emissions caused by human activity have been building up in the atmosphere and trapping ever-higher levels of heat.
+
+The resulting asymmetry between incoming solar e…</div>
+  <div class="article-meta">Jun 11, 2026  01:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/11/tongwei-debuts-bifimax-module-for-projects-requiring-high-bifaciality/" target="_blank">Tongwei debuts BIFIMAX module for projects requiring high-bifaciality</a></div>
+  <div class="article-summary">Tongwei has launched its BIFIMAX 670W solar module, boasting 90±5% bifaciality, which can cut project costs by nearly one euro cent per Watt. This innovation is specifically engineered for high-latitude, high-albedo regions, promising to boost solar energy's efficiency and economic viability in challenging environments.</div>
+  <div class="article-meta">Jun 11, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/11/one-year-outdoor-testing-reveals-degradation-paths-in-perovskite-tandem-solar-cells/" target="_blank">One-year outdoor testing reveals degradation paths in perovskite tandem solar cells</a></div>
+  <div class="article-summary">A year-long outdoor test of perovskite/perovskite/silicon triple-junction solar cells by TNO and Fraunhofer ISE revealed a significant efficiency drop from 17-18% to 13-14%. This degradation, primarily caused by voltage loss and encapsulation issues, highlights critical challenges in achieving the long-term stability required for widespread adoption of this promising next-generation solar technology.</div>
+  <div class="article-meta">Jun 11, 2026  11:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/11/solar-module-cooling-tech-based-on-perforated-fins/" target="_blank">Solar module cooling tech based on perforated fins</a></div>
+  <div class="article-summary">Algerian researchers have developed a novel perforated hexagonal-fin heat sink design that can reduce solar panel temperatures by over 20%. This breakthrough in passive cooling is crucial for maintaining photovoltaic efficiency and maximizing clean energy output, especially in hotter climates.</div>
+  <div class="article-meta">Jun 11, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/11/study-finds-tandem-pv-has-30-lower-environmental-impact-than-crystalline-silicon/" target="_blank">Study finds tandem PV has 30% lower environmental impact than crystalline silicon</a></div>
+  <div class="article-summary">New research reveals tandem solar cells boast a 30% lower environmental footprint than traditional crystalline silicon, primarily due to their higher efficiency. While cadmium telluride thin-film still leads in sustainability, tandem technology's future climate advantage hinges on achieving longer operational lifespans and enhanced stability.</div>
+  <div class="article-meta">Jun 11, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/11/eskom-launches-renewables-unit/" target="_blank">Eskom launches renewables unit</a></div>
+  <div class="article-summary">South Africa's state-owned utility, Eskom, has launched Eskom Green, a dedicated unit to accelerate utility-scale and commercial renewable energy projects, signaling a strategic shift from its traditional coal-reliant model. This move is critical for South Africa's climate goals, as it aims to unlock diverse capital and agile decision-making needed to transition away from expensive fossil fuels and meet growing clean energy demand.</div>
+  <div class="article-meta">Jun 11, 2026  09:10 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-11/nz-sees-2-9-billion-cost-to-use-carbon-credits-for-climate-goal" target="_blank">New Zealand Sees $2.9 Billion Cost to Use Carbon Credits for Climate Goal</a></div>
+  <div class="article-summary">New Zealand could need to pay as much as NZ$5 billion ($2.9 billion) if it purchases overseas carbon credits to help meet 2030 emissions-cutting targets under the Paris Agreement.…</div>
+  <div class="article-meta">Jun 11, 2026  08:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-11/hanuman-wind-pulls-bond-deal-again-as-parent-governance-clouds" target="_blank">Hanuman Wind Pulls Bond Again as Parent Governance Clouds</a></div>
+  <div class="article-summary">Hanuman Wind Power, a Hong Kong-based unit of troubled Thai renewable energy firm Energy Absolute Pcl, postponed a junk bond offering for a second time after it failed to attract the desired investor demand, according to a person familiar with the ma…</div>
+  <div class="article-meta">Jun 11, 2026  07:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/audio/2026-06-11/zero-podcast-ben-cohen-regrets-making-ben-jerry-s-public" target="_blank">Ben Cohen Regrets Making Ben &amp; Jerry’s Public</a></div>
+  <div class="article-summary">No content available for this article.</div>
+  <div class="article-meta">Jun 11, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-10/lee-raymond-exxon-ceo-who-doubted-climate-change-dies-at-87" target="_blank">Lee Raymond, Exxon CEO Who Doubted Climate Change, Dies at 87</a></div>
+  <div class="article-summary">Lee Raymond, the former head of Exxon Mobil Corp. who oversaw the biggest corporate merger in the history of the oil industry and was derided as “the Darth Vader of global warming” for his skepticism toward climate change, has died. He was 87.…</div>
+  <div class="article-meta">Jun 11, 2026  01:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-10/texas-governor-seeks-consumer-protection-from-data-center-costs" target="_blank">Texas Governor Seeks Consumer Protection From Data Center Costs</a></div>
+  <div class="article-summary">Texas Governor Greg Abbott called on state regulators to better protect ratepayers from shouldering the costs of the data center buildout, the latest sign of growing political scrutiny over the AI-driven surge in electricity demand.…</div>
+  <div class="article-meta">Jun 10, 2026  20:32 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11062026/miami-biscayne-bay-sea-level-rise-threatens-sharks-and-aquifer/" target="_blank">Biscayne Bay Is Slowly Becoming the Ocean</a></div>
+  <div class="article-summary">Biscayne Bay, a crucial nursery for critically endangered species like great hammerhead sharks and sawfish, is increasingly resembling open ocean due to rising sea levels. This alarming shift threatens the survival of these vulnerable marine populations and highlights the profound impact of climate change on vital coastal ecosystems.</div>
+  <div class="article-meta">Jun 11, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11062026/texas-oil-well-leaks-million-of-gallons-of-toxic-wastewater/" target="_blank">An Old Well Gushed Waste, Not Oil, in a Small West Texas Town</a></div>
+  <div class="article-summary">An abandoned West Texas oil well erupted under a church parking lot, spewing over 1.5 million gallons of toxic wastewater for eight days. This uncontrolled release highlights the significant environmental risk posed by aging oil infrastructure, potentially contaminating local water sources and underscoring the urgent need for robust oversight of legacy wells.</div>
+  <div class="article-meta">Jun 11, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/11/millions-homes-london-essex-and-kent-sinking-climate-crisis-subsidence" target="_blank">Millions of homes in London, Essex and Kent at risk of sinking as climate crisis worsens</a></div>
+  <div class="article-summary">Analysis pinpoints areas most vulnerable to hotter, drier weather causing ground to shrink and drag foundations downMillions of homes are at risk from climate-related subsidence, according toan analysis by the British Geological Survey (BGS).Ashotter…</div>
+  <div class="article-meta">Jun 11, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10062026/rural-alabama-community-opposes-hyperscale-data-center/" target="_blank">On the Historic Route From Selma to Montgomery, an AI Cloud Looms</a></div>
+  <div class="article-summary">HAYNEVILLE, Ala.—When Alabamians marched from Selma to Montgomery in 1965 to demand voting rights for African Americans, Highway 80 became their path toward freedom.  Two weeks after state troopers had violently attacked nonviolent demonstrators on t…</div>
+  <div class="article-meta">Jun 11, 2026  03:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/10/record-winter-temperatures-in-antarctic-raise-fears-over-speed-of-climate-breakdown" target="_blank">Record winter temperatures in Antarctic raise fears over speed of climate breakdown</a></div>
+  <div class="article-summary">Temperatures above 15C ‘very strange’ say scientists, as snow melts and rain falls on glaciers in usually frozen regionTemperatures in the Antarctic climbed above 15C this month, shattering the previous winter heat record for the usually frozen regio…</div>
+  <div class="article-meta">Jun 10, 2026  21:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10062026/dead-trees-and-coral-shape-ecosystems/" target="_blank">Across Ecosystems, Dead Organisms Help Shape the Living World</a></div>
+  <div class="article-summary">Death casts a shadow over life, not only for people but also other animals, plants and entire ecosystems. In some ways, the phenomenon is well known. A fallen tree sprouts a plethora of mushrooms while also hosting ants, beetles and the creatures tha…</div>
+  <div class="article-meta">Jun 10, 2026  21:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10062026/north-carolina-sues-brenntag-for-water-contamination/" target="_blank">North Carolina Sues Chemical Company for Polluting a Nearby Creek</a></div>
+  <div class="article-summary">DURHAM, N.C.—Acetone and ethanol, 1,4-dioxane and “mucilaginous goo.” For decades, state regulatory documents show, a chemical repackaging and distribution company in Durham has discharged high levels of toxic chemicals, as well as other unknown subs…</div>
+  <div class="article-meta">Jun 10, 2026  19:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, June 11, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,161 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Thursday, June 11, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ Guest post: How a record-high ‘energy imbalance’ is driving global warming
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/guest-post-how-a-record-high-energy-imbalance-is-driving-global-warming/
+  Date   : Jun 11, 2026  01:01 EAT
+  Summary: The planet is heating up more quickly than ever before.
+
+For decades, greenhouse gas emissions caused by human activity have been building up in the atmosphere and trapping ever-higher levels of heat.
+
+The resulting asymmetry between incoming solar e…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Tongwei debuts BIFIMAX module for projects requiring high-bifaciality
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/11/tongwei-debuts-bifimax-module-for-projects-requiring-high-bifaciality/
+  Date   : Jun 11, 2026  12:00 EAT
+  Summary: Tongwei has launched its BIFIMAX 670W solar module, boasting 90±5% bifaciality, which can cut project costs by nearly one euro cent per Watt. This innovation is specifically engineered for high-latitude, high-albedo regions, promising to boost solar energy's efficiency and economic viability in challenging environments.
+
+
+▸ One-year outdoor testing reveals degradation paths in perovskite tandem solar cells
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/11/one-year-outdoor-testing-reveals-degradation-paths-in-perovskite-tandem-solar-cells/
+  Date   : Jun 11, 2026  11:46 EAT
+  Summary: A year-long outdoor test of perovskite/perovskite/silicon triple-junction solar cells by TNO and Fraunhofer ISE revealed a significant efficiency drop from 17-18% to 13-14%. This degradation, primarily caused by voltage loss and encapsulation issues, highlights critical challenges in achieving the long-term stability required for widespread adoption of this promising next-generation solar technology.
+
+
+▸ Solar module cooling tech based on perforated fins
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/11/solar-module-cooling-tech-based-on-perforated-fins/
+  Date   : Jun 11, 2026  11:00 EAT
+  Summary: Algerian researchers have developed a novel perforated hexagonal-fin heat sink design that can reduce solar panel temperatures by over 20%. This breakthrough in passive cooling is crucial for maintaining photovoltaic efficiency and maximizing clean energy output, especially in hotter climates.
+
+
+▸ Study finds tandem PV has 30% lower environmental impact than crystalline silicon
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/11/study-finds-tandem-pv-has-30-lower-environmental-impact-than-crystalline-silicon/
+  Date   : Jun 11, 2026  10:00 EAT
+  Summary: New research reveals tandem solar cells boast a 30% lower environmental footprint than traditional crystalline silicon, primarily due to their higher efficiency. While cadmium telluride thin-film still leads in sustainability, tandem technology's future climate advantage hinges on achieving longer operational lifespans and enhanced stability.
+
+
+▸ Eskom launches renewables unit
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/11/eskom-launches-renewables-unit/
+  Date   : Jun 11, 2026  09:10 EAT
+  Summary: South Africa's state-owned utility, Eskom, has launched Eskom Green, a dedicated unit to accelerate utility-scale and commercial renewable energy projects, signaling a strategic shift from its traditional coal-reliant model. This move is critical for South Africa's climate goals, as it aims to unlock diverse capital and agile decision-making needed to transition away from expensive fossil fuels and meet growing clean energy demand.
+
+
+============================================================
+💰  CLIMATE FINANCE  (5 articles)
+============================================================
+
+▸ New Zealand Sees $2.9 Billion Cost to Use Carbon Credits for Climate Goal
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-11/nz-sees-2-9-billion-cost-to-use-carbon-credits-for-climate-goal
+  Date   : Jun 11, 2026  08:44 EAT
+  Summary: New Zealand could need to pay as much as NZ$5 billion ($2.9 billion) if it purchases overseas carbon credits to help meet 2030 emissions-cutting targets under the Paris Agreement.…
+
+
+▸ Hanuman Wind Pulls Bond Again as Parent Governance Clouds
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-11/hanuman-wind-pulls-bond-deal-again-as-parent-governance-clouds
+  Date   : Jun 11, 2026  07:48 EAT
+  Summary: Hanuman Wind Power, a Hong Kong-based unit of troubled Thai renewable energy firm Energy Absolute Pcl, postponed a junk bond offering for a second time after it failed to attract the desired investor demand, according to a person familiar with the ma…
+
+
+▸ Ben Cohen Regrets Making Ben &amp; Jerry’s Public
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/audio/2026-06-11/zero-podcast-ben-cohen-regrets-making-ben-jerry-s-public
+  Date   : Jun 11, 2026  07:00 EAT
+  Summary: No content available for this article.
+
+
+▸ Lee Raymond, Exxon CEO Who Doubted Climate Change, Dies at 87
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-10/lee-raymond-exxon-ceo-who-doubted-climate-change-dies-at-87
+  Date   : Jun 11, 2026  01:45 EAT
+  Summary: Lee Raymond, the former head of Exxon Mobil Corp. who oversaw the biggest corporate merger in the history of the oil industry and was derided as “the Darth Vader of global warming” for his skepticism toward climate change, has died. He was 87.…
+
+
+▸ Texas Governor Seeks Consumer Protection From Data Center Costs
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-10/texas-governor-seeks-consumer-protection-from-data-center-costs
+  Date   : Jun 10, 2026  20:32 EAT
+  Summary: Texas Governor Greg Abbott called on state regulators to better protect ratepayers from shouldering the costs of the data center buildout, the latest sign of growing political scrutiny over the AI-driven surge in electricity demand.…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (2 articles)
+============================================================
+
+▸ Biscayne Bay Is Slowly Becoming the Ocean
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11062026/miami-biscayne-bay-sea-level-rise-threatens-sharks-and-aquifer/
+  Date   : Jun 11, 2026  12:00 EAT
+  Summary: Biscayne Bay, a crucial nursery for critically endangered species like great hammerhead sharks and sawfish, is increasingly resembling open ocean due to rising sea levels. This alarming shift threatens the survival of these vulnerable marine populations and highlights the profound impact of climate change on vital coastal ecosystems.
+
+
+▸ An Old Well Gushed Waste, Not Oil, in a Small West Texas Town
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11062026/texas-oil-well-leaks-million-of-gallons-of-toxic-wastewater/
+  Date   : Jun 11, 2026  11:55 EAT
+  Summary: An abandoned West Texas oil well erupted under a church parking lot, spewing over 1.5 million gallons of toxic wastewater for eight days. This uncontrolled release highlights the significant environmental risk posed by aging oil infrastructure, potentially contaminating local water sources and underscoring the urgent need for robust oversight of legacy wells.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Millions of homes in London, Essex and Kent at risk of sinking as climate crisis worsens
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/jun/11/millions-homes-london-essex-and-kent-sinking-climate-crisis-subsidence
+  Date   : Jun 11, 2026  08:00 EAT
+  Summary: Analysis pinpoints areas most vulnerable to hotter, drier weather causing ground to shrink and drag foundations downMillions of homes are at risk from climate-related subsidence, according toan analysis by the British Geological Survey (BGS).Ashotter…
+
+
+▸ On the Historic Route From Selma to Montgomery, an AI Cloud Looms
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/10062026/rural-alabama-community-opposes-hyperscale-data-center/
+  Date   : Jun 11, 2026  03:54 EAT
+  Summary: HAYNEVILLE, Ala.—When Alabamians marched from Selma to Montgomery in 1965 to demand voting rights for African Americans, Highway 80 became their path toward freedom.  Two weeks after state troopers had violently attacked nonviolent demonstrators on t…
+
+
+▸ Record winter temperatures in Antarctic raise fears over speed of climate breakdown
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/jun/10/record-winter-temperatures-in-antarctic-raise-fears-over-speed-of-climate-breakdown
+  Date   : Jun 10, 2026  21:32 EAT
+  Summary: Temperatures above 15C ‘very strange’ say scientists, as snow melts and rain falls on glaciers in usually frozen regionTemperatures in the Antarctic climbed above 15C this month, shattering the previous winter heat record for the usually frozen regio…
+
+
+▸ Across Ecosystems, Dead Organisms Help Shape the Living World
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/10062026/dead-trees-and-coral-shape-ecosystems/
+  Date   : Jun 10, 2026  21:31 EAT
+  Summary: Death casts a shadow over life, not only for people but also other animals, plants and entire ecosystems. In some ways, the phenomenon is well known. A fallen tree sprouts a plethora of mushrooms while also hosting ants, beetles and the creatures tha…
+
+
+▸ North Carolina Sues Chemical Company for Polluting a Nearby Creek
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/10062026/north-carolina-sues-brenntag-for-water-contamination/
+  Date   : Jun 10, 2026  19:50 EAT
+  Summary: DURHAM, N.C.—Acetone and ethanol, 1,4-dioxane and “mucilaginous goo.” For decades, state regulatory documents show, a chemical repackaging and distribution company in Durham has discharged high levels of toxic chemicals, as well as other unknown subs…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 51  |  Sources: 7  |  Topics: 5
