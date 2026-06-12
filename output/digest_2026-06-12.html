@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, June 12, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">52</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 44 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/12/chile-releases-bidding-terms-for-first-energy-auction-including-storage/" target="_blank">Chile releases bidding terms for first energy auction including storage</a></div>
+  <div class="article-summary">Chile has opened bidding for its 2026/01 power supply tender, a move that specifically enables storage-backed renewable energy projects to compete for 15-year contracts. This policy shift is designed to favor solar and hybrid solar-plus-storage solutions, crucial for meeting daytime and evening peak demand and accelerating the nation's clean energy transition.</div>
+  <div class="article-meta">Jun 12, 2026  11:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/china-briefing-11-june-2026-tech-clampdown-extreme-weather-provinces-energy-plans/" target="_blank">China Briefing 11 June 2026: Tech clampdown | Extreme weather | Provinces’ energy plans</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s China Briefing.
+
+China Briefing handpicks and explains the most important climate and energy stories from China over the past fortnight. Subscribe for free here.
+
+Key developments
+
+Trade tensions intensify
+
+AUTHORITY TO RETA…</div>
+  <div class="article-meta">Jun 11, 2026  17:04 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/12/first-9-in-1-heat-pump-transforms-load-into-an-energy-hub/" target="_blank">First 9-in-1 heat pump transforms load into an energy hub</a></div>
+  <div class="article-summary">Differ Power's new D1 Series heat pump, launching at Intersolar Europe 2026, integrates nine functions into one unit, transforming a major home energy load into a smart energy hub. This innovation promises over 10% efficiency gains by directly managing rooftop solar, battery storage, and home energy needs, significantly streamlining installations and enhancing grid resilience.</div>
+  <div class="article-meta">Jun 12, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/12/chinese-pv-industry-brief-daqo-expands-beyond-polysilicon/" target="_blank">Chinese PV Industry Brief: Daqo expands beyond polysilicon</a></div>
+  <div class="article-summary">Daqo New Energy is investing $835 million in a new Kunshan facility to produce advanced power equipment and storage solutions for AI data centers. This strategic move signals the company's pivot beyond polysilicon production, aiming to meet the burgeoning energy demands of AI infrastructure and accelerate the integration of renewable energy into critical digital operations.</div>
+  <div class="article-meta">Jun 12, 2026  11:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/12/global-polysilicon-prices-hold-steady-as-section-232-outcome-draws-focus-at-snec/" target="_blank">Global polysilicon prices hold steady as Section 232 outcome draws focus at SNEC</a></div>
+  <div class="article-summary">Global polysilicon prices remain steady at $19.227/kg, but the industry is keenly awaiting the U.S. Section 232 investigation outcome, which could significantly reshape trade flows and pricing for this critical solar component. The decision, expected around July 4th, carries implications for the competitiveness of non-Chinese polysilicon and the potential for Chinese imports to disrupt the market, impacting the pace of solar energy deployment worldwide.</div>
+  <div class="article-meta">Jun 12, 2026  11:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/12/snec-2026-wrap-storage-ai-and-back-contact-are-reshaping-solar/" target="_blank">SNEC 2026 wrap-up: Storage, AI and back-contact are reshaping solar</a></div>
+  <div class="article-summary">The SNEC 2026 trade show revealed solar's pivot from just panel manufacturing to integrated systems, with battery storage and AI now driving project design and value. This evolution, featuring advanced back-contact solar cells and specialized modules, is crucial for accelerating the transition to a low-carbon economy by making solar more efficient, reliable, and adaptable.</div>
+  <div class="article-meta">Jun 12, 2026  11:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/12/heat-pumps-cheaper-to-operate-than-gas-boilers-in-almost-all-eu-countries-iea-claims/" target="_blank">Heat pumps cheaper to operate than gas boilers in almost all EU countries, IEA claims</a></div>
+  <div class="article-summary">The International Energy Agency (IEA) reports that heat pumps are now cheaper to run than gas boilers across nearly all of the EU, potentially saving consumers up to €800 annually. This significant cost advantage, however, is being hampered by uneven adoption due to varying national policies and market structures, hindering a crucial shift away from fossil fuels.</div>
+  <div class="article-meta">Jun 12, 2026  10:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/why-ben-and-jerry-s-co-founder-wants-to-leave-magnum" target="_blank">Ben &amp; Jerry’s ‘Cannot Criticize’ Trump, Co-Founder Says</a></div>
+  <div class="article-summary">Ben Cohen wants to free the ice cream maker from its owner, Magnum, which he says is holding it back from supporting social causes.…</div>
+  <div class="article-meta">Jun 12, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/dhl-says-clean-energy-technology-is-getting-harder-to-transport" target="_blank">DHL Says Clean Energy Technology Is Getting Harder to Transport</a></div>
+  <div class="article-summary">Global efforts to transition away from fossil fuels are running into a new challenge: clean energy equipment is getting more complex, hazardous and too big to transport easily.…</div>
+  <div class="article-meta">Jun 12, 2026  06:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/us-declares-power-emergency-in-southeast-as-heat-strains-grids" target="_blank">US Declares Power Emergency in Southeast as Heat Strains Grids</a></div>
+  <div class="article-summary">The Trump administration declared a power emergency in the southeastern US as forecasters warned of dangerous heat that’s likely to stress power grids along the country’s east coast.…</div>
+  <div class="article-meta">Jun 12, 2026  04:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/gas-supply-woes-are-delaying-bangladesh-s-industrial-dreams" target="_blank">Iran War Puts Bangladesh’s Nascent Industrial Dreams at Risk</a></div>
+  <div class="article-summary">Inside a new Bangladeshi glass factory with a production floor nearly twice the size of a soccer field, machinery sits wrapped in tarpaulins. At a neighboring steel mill, construction has slowed and production has yet to begin.…</div>
+  <div class="article-meta">Jun 12, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-11/why-tomato-prices-are-so-high-this-summer" target="_blank">Why Your Summer Tomatoes Cost So Much</a></div>
+  <div class="article-summary">Prices are soaring after crop losses in Mexico and Florida, offering a glimpse of how climate disruptions could make food inflation longer lasting.…</div>
+  <div class="article-meta">Jun 11, 2026  21:15 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12062026/china-coal-power-generation-grows/" target="_blank">Despite Record Renewable Growth, China Is Still Betting on Coal</a></div>
+  <div class="article-summary">China's coal power output increased in early 2026, even as renewable energy capacity hit record highs, raising alarms that the nation's emissions reduction progress might be a fleeting trend. This continued reliance on coal, despite significant renewable investment, jeopardizes global climate goals by potentially undermining the temporary dip in power-sector emissions seen in 2025.</div>
+  <div class="article-meta">Jun 12, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/12/climate-adaptation-helps-african-nations-tackle-rising-conflict-over-resources/" target="_blank">Climate adaptation helps African nations tackle rising conflict over resources</a></div>
+  <div class="article-summary">The growing overlap between insecurity and climate vulnerability is forcing governments and development agencies to rethink adaptation effortsThe postClimate adaptation helps African nations tackle rising conflict over resourcesappeared first onClima…</div>
+  <div class="article-meta">Jun 12, 2026  09:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/jun/12/hug-a-climate-scientist-today-just-dont-make-it-weird-they-are-already-dealing-with-enough" target="_blank">Hug a climate scientist today! Just don’t make it weird, they are already dealing with enough | First Dog on the Moon</a></div>
+  <div class="article-summary">Today we show our love and gratitude to the brave boffins at the coal face of existential dread Sign up here to get an emailwhenever First Dog cartoons are published Get all your needs met at the First Dog shopif what you need is First Dog merchandis…</div>
+  <div class="article-meta">Jun 12, 2026  09:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11062026/earths-massive-underground-fungal-networks/" target="_blank">Threads of Earth’s Underground Fungal Networks Are Long Enough to Reach Beyond the Solar System</a></div>
+  <div class="article-summary">Hidden underground around the world lie 110 quadrillion kilometers of arbuscular mycorrhizal fungal networks—webs of ultra-thin threads that, if connected in a single line, would stretch almost a billion times thge distance between the Earth and the…</div>
+  <div class="article-meta">Jun 12, 2026  01:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/education/2026/jun/11/natural-history-gcse-to-teach-teenagers-to-plant-wildflower-friendly-gardens" target="_blank">Natural history GCSE to teach teenagers to plant wildflower-friendly gardens</a></div>
+  <div class="article-summary">Long-awaited course to examine human effects on natural world and explore everyday ways to aid biodiversitySchool pupils will learn how to plant a wildflower-friendly garden, according to long-awaited plans announced on Thursday for a natural history…</div>
+  <div class="article-meta">Jun 12, 2026  00:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/11/fewer-journalists-register-for-bonn-talks-as-cuts-to-climate-reporting-bite/" target="_blank">Fewer journalists register for Bonn talks, as cuts to climate reporting bite</a></div>
+  <div class="article-summary">UN data shows a smaller number have signed up to cover the mid-year climate negotiations in Germany than in any year since the COVID-19 pandemicThe postFewer journalists register for Bonn talks, as cuts to climate reporting biteappeared first onClima…</div>
+  <div class="article-meta">Jun 11, 2026  21:12 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, June 12, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
