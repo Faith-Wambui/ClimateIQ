@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, June 13, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/12/uk-sprints-forward-with-grid-connections-for-700-clean-energy-projects/" target="_blank">UK Sprints Forward With Grid Connections for 700 Clean Energy Projects</a></div>
+  <div class="article-summary">The UK has fast-tracked grid connections for over 700 clean energy projects, a stark contrast to the US's permitting delays. This decisive action by Britain's power planning body significantly accelerates the deployment of crucial solar, wind, and battery infrastructure, bolstering the nation's climate transition.</div>
+  <div class="article-meta">Jun 13, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/12/yup-us-solar-growth-hurting-from-solar-permitting-delays/" target="_blank">Yup, US Solar Growth Hurting from Solar Permitting Delays</a></div>
+  <div class="article-summary">Just yesterday, I wrote about T1 Energy CEO Dan Barcelo contending that the US needs serious solar permitting reform. Now we have another warning about how much this is holding back solar power growth in the state. In the latest US Solar Market Insig…</div>
+  <div class="article-meta">Jun 13, 2026  06:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-12-june-2026-el-nino-begins-cop31-hosts-eye-electrification-atlantic-current-monitoring-at-risk/" target="_blank">DeBriefed 12 June 2026: El Niño begins | COP31 hosts eye electrification | Atlantic current monitoring at risk</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+El Niño begins
+
+‘DOMINO WEATHER’: The natural weather phenomenon El Niño, which can raise global heat and “bring domino we…</div>
+  <div class="article-meta">Jun 12, 2026  16:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-solar-overtakes-gas-power-in-asia-for-first-time-ever/" target="_blank">Analysis: Solar overtakes gas power in Asia for first time ever</a></div>
+  <div class="article-summary">Solar has overtaken gas power in Asia to become the continent’s third-largest source of electricity, according to new analysis by Carbon Brief.
+
+The rapid expansion of solar power in nations such as China, India and Pakistan has seen its annual outpu…</div>
+  <div class="article-meta">Jun 12, 2026  16:22 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-13/china-eyes-40-market-share-for-electric-heavy-duty-trucks-by-2030" target="_blank">China Maps Out Heavy‑Truck Electrification Push With 40% Goal</a></div>
+  <div class="article-summary">China aims for 40% of its heavy-duty truck market to be electric by 2030, projecting over 1.6 million new-energy vehicles on the road. This ambitious electrification targets a significant portion of the world's freight transport emissions, a crucial step in global decarbonization efforts.</div>
+  <div class="article-meta">Jun 13, 2026  10:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/12/most-efficient-solar-module-in-the-world-new-record/" target="_blank">Most Efficient Solar Module in the World — New Record</a></div>
+  <div class="article-summary">Fraunhofer ISE has achieved a groundbreaking 34.4% efficiency with its III-V germanium solar module, shattering previous records. This leap forward in solar technology signifies a critical step towards significantly boosting renewable energy generation and accelerating the global transition away from fossil fuels.</div>
+  <div class="article-meta">Jun 13, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/12/new-method-turns-ocean-water-into-drinking-water-without-waste/" target="_blank">New Method Turns Ocean Water into Drinking Water, without Waste</a></div>
+  <div class="article-summary">A breakthrough solar-powered desalination system, utilizing engineered black metal, now produces fresh drinking water from seawater without chemical additives, transforming waste salts into usable materials. This innovation is critical for climate resilience, offering a sustainable solution to water scarcity exacerbated by climate change, while simultaneously mitigating the environmental damage of traditional desalination brine.</div>
+  <div class="article-meta">Jun 13, 2026  06:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/12/largest-wind-farm-in-the-united-states-slated-to-begin-commercial-operations/" target="_blank">Largest Wind Farm in the United States Slated to Begin Commercial Operations</a></div>
+  <div class="article-summary">The massive SunZia Wind Project, the largest in the U.S. with 916 turbines and 3,650 MW capacity, is launching in New Mexico this month. This significant expansion of renewable energy infrastructure is a critical step in decarbonizing the grid and meeting ambitious climate goals.</div>
+  <div class="article-meta">Jun 13, 2026  06:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/12/hyundai-go-green-hackathon-showcases-best-of-youth-led-innovative-solutions-on-community-heat-resilience-smart-mobility/" target="_blank">Hyundai Go Green Hackathon Showcases Best of Youth-Led Innovative Solutions on Community Heat Resilience & Smart Mobility</a></div>
+  <div class="article-summary">In conjunction with the Ministry of Sustainability and the Environment’s (MSE) Go Green SG 2026, Hackathon was hosted by HMGICS and Hyundai CRADLE Singapore in partnership with Temasek Foundation, with support from the National University of Singapor…</div>
+  <div class="article-meta">Jun 13, 2026  05:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/wind-groups-fight-pentagon-project-freeze-with-billions-at-risk" target="_blank">Wind Groups Fight Pentagon Project Halt With Billions Risked</a></div>
+  <div class="article-summary">Renewable energy groups asked a federal judge to order the US Defense Department to lift its freeze on approvals of wind energy projects that has threatened billions of dollars of investments.…</div>
+  <div class="article-meta">Jun 12, 2026  18:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/brazil-s-development-bank-will-make-new-loans-to-companies-restoring-native-forests" target="_blank">Brazil’s Development Bank Will Make New Loans to Companies Restoring Native Forests</a></div>
+  <div class="article-summary">The loans totaling $164 million are intended to spur private investment in conservation.…</div>
+  <div class="article-meta">Jun 12, 2026  18:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-12/extreme-heat-is-already-stifling-economic-growth-in-india" target="_blank">Extreme Heat Is Already Stifling Economic Growth in India</a></div>
+  <div class="article-summary">Severe temperatures are having increasing impacts on workers and businesses…</div>
+  <div class="article-meta">Jun 12, 2026  15:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/americas-weather-heat-bakes-us-as-world-cup-heads-into-weekend" target="_blank">Heat Bakes US as World Cup Heads Into Weekend</a></div>
+  <div class="article-summary">Heat is engulfing both the East and West coasts of the US as the World Cup heads into its first weekend, after kicking off in Mexico City on Thursday.…</div>
+  <div class="article-meta">Jun 12, 2026  14:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-12/total-to-seek-german-wind-project-compensation-over-grid-delays" target="_blank">Total to Seek German Wind Project Compensation Over Grid Delays</a></div>
+  <div class="article-summary">TotalEnergies SE will seek compensation because of uncertainty over the grid-connection timeline for one of its German offshore wind projects, as the company reviews plans for wind farms there.…</div>
+  <div class="article-meta">Jun 12, 2026  11:54 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/13/tropical-heron-spotted-first-time-uk-aoe" target="_blank">Tropical heron spotted in UK for first time as more exotic birds arrive to thrill birdwatchers</a></div>
+  <div class="article-summary">A tropical western reef heron, usually found from west Africa to India, has been sighted in the UK for the first time in north Wales. This unusual arrival signals that warming temperatures are allowing species from warmer climates to survive Britain's winters, a trend experts predict will continue.</div>
+  <div class="article-meta">Jun 13, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/13/trees-store-less-carbon-than-thought-study" target="_blank">Trees may store less planet-heating carbon than hoped, study suggests</a></div>
+  <div class="article-summary">New research across 137 US sites reveals trees cease wood growth months before photosynthesis ends, meaning they may store significantly less planet-heating carbon than previously assumed. This finding challenges a core assumption in climate models and suggests forests' capacity to offset emissions is less robust than anticipated.</div>
+  <div class="article-meta">Jun 13, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/13/australia-fossil-fuel-exports-renewables-cop-chris-bowen" target="_blank">Australia can switch from fossil fuel exports to renewables, says next Cop president</a></div>
+  <div class="article-summary">Climate minister Chris Bowen says country must prepare for changing world and can play bigger role in reducing emissionsAustralia will find exporting fossil fuels increasingly difficult but can switch to exporting clean energy products, the president…</div>
+  <div class="article-meta">Jun 13, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12062026/global-warming-overlooked-pollutants/" target="_blank">The Climate Change Culprits Not Addressed by Global Policy</a></div>
+  <div class="article-summary">Record-high global temperatures aren’t driven only by well-known greenhouse gas culprits. These other emissions, unlike carbon dioxide, don’t have a direct warming effect on their own. Instead, they trigger reactions in the atmosphere that create mor…</div>
+  <div class="article-meta">Jun 13, 2026  01:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12062026/judge-rules-trump-environmental-justice-grant-cancellations-unlawful/" target="_blank">Trump’s EPA Unlawfully Cancelled Environmental Justice Grants, Judge Rules</a></div>
+  <div class="article-summary">A federal judge in South Carolina ruled this week that the Trump administration’s termination of environmental justice grants was “illegal.” The decision dealt a setback to efforts to dismantle a Biden-era program that funded projects addressing envi…</div>
+  <div class="article-meta">Jun 13, 2026  01:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/12/european-island-states-seek-clear-future-for-global-roadmap-to-cut-fossil-fuels/" target="_blank">European, island states seek clear future for global roadmap to cut fossil fuels</a></div>
+  <div class="article-summary">Some European, small island and other nations argue the forthcoming roadmap should be part of UN climate talks, while Russia has resisted this ideaThe postEuropean, island states seek clear future for global roadmap to cut fossil fuelsappeared first…</div>
+  <div class="article-meta">Jun 12, 2026  20:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12062026/hoover-dam-approaches-a-hydropower-cliff/" target="_blank">Hoover Dam Approaches a Hydropower Cliff</a></div>
+  <div class="article-summary">Some day in the next 12 months—maybe in late August, maybe not until next spring— Lake Mead will drop below the critical threshold of 1,035 feet above sea level. That is the water-level elevation at which hydropower generating capacity at Hoover Dam,…</div>
+  <div class="article-meta">Jun 12, 2026  19:33 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, June 13, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
