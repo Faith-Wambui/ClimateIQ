@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, June 14, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">19</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:58%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 11 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/13/why-pushback-is-growing-against-new-jerseys-crazy-e-bike-law/" target="_blank">Why pushback is growing against New Jersey’s crazy e-bike law</a></div>
+  <div class="article-summary">New Jersey's new e-bike law, intended to improve safety, is facing significant backlash from riders and lawmakers who argue it unfairly burdens everyday commuters and families by requiring licenses and registration for all e-bikes, regardless of speed. This broad regulation, which lumps low-speed commuter bikes with high-powered e-motos, risks hindering accessible, low-emission transportation and disproportionately impacts vulnerable communities.</div>
+  <div class="article-meta">Jun 14, 2026  09:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/14/climate-denial-in-vogue-pauline-hanson-australia-cop31-ntwnfb" target="_blank">Denial is back in vogue. As Australia leads climate talks, it’s beyond time we took the issue seriously</a></div>
+  <div class="article-summary">It is unlikely that many voters are flocking to Pauline Hanson for her scientific insights – but that is where they are lining up, regardlessWant to get this in your inbox when it publishes?Sign up for the Clear Air Australia newsletter herePolitics…</div>
+  <div class="article-meta">Jun 13, 2026  23:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/13/fraunhofer-wants-solar-cells-on-vehicles-to-help-the-grid/" target="_blank">Fraunhofer Wants Solar Cells On Vehicles — To Help The Grid</a></div>
+  <div class="article-summary">Fraunhofer researchers are developing integrated solar cells for vehicles, not to power the car itself, but to feed electricity directly into the grid. This innovation could transform electric vehicles into mobile power sources, offering a significant new pathway for renewable energy integration and grid stabilization.</div>
+  <div class="article-meta">Jun 14, 2026  06:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/13/buried-in-negative-equity-these-ev-deals-can-help-get-you-out-of-that-gas-guzzler/" target="_blank">Buried in negative equity? These EV deals can help get you out of that gas guzzler</a></div>
+  <div class="article-summary">Major automakers are now offering significant rebates, like $9,000 on the Ford F-150 Lightning and up to $14,100 on the Kia EV9, to help consumers overcome negative equity on their current gas cars and switch to electric. These incentives are crucial for accelerating EV adoption by removing a key financial barrier, directly contributing to reduced tailpipe emissions and a faster transition away from fossil fuels.</div>
+  <div class="article-meta">Jun 14, 2026  03:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/13/is-byd-making-a-better-ferrari-than-ferrari/" target="_blank">Is BYD Making A Better “Ferrari” Than Ferrari?</a></div>
+  <div class="article-summary">Chinese automaker BYD has unveiled the Denza Z, a 1582-horsepower electric sports car that rivals the performance of luxury brands like Ferrari. This development signals a significant leap in EV technology, demonstrating that high-performance, desirable vehicles can be produced with zero emissions, accelerating the transition away from fossil fuel-powered transportation.</div>
+  <div class="article-meta">Jun 14, 2026  02:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/13/observations-after-two-weeks-with-tesla-hardware-4-full-self-driving-v14-in-my-2026-tesla-model-y/" target="_blank">Observations After Two Weeks with Tesla Hardware 4 & Full Self Driving V14 in My 2026 Tesla Model Y</a></div>
+  <div class="article-summary">Tesla's new Hardware 4 and FSD V14 in a 2026 Model Y show significant advancements, building on years of development and promises for Level 4 autonomy. This progress in autonomous driving technology is crucial for the climate as it could eventually lead to more efficient driving patterns and reduced emissions from transportation.</div>
+  <div class="article-meta">Jun 13, 2026  23:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/13/teslas-level-2-supervised-full-self-driving-approved-in-belgium/" target="_blank">Tesla’s Level 2++ Supervised Full Self-Driving Approved In Belgium</a></div>
+  <div class="article-summary">Tesla has gotten “Full Self Driving (Supervised)” approved in another European country. Following the Netherlands, Lithuania, Estonia, and Denmark, the driver-assist system is now allowed to be deployed in Belgium. Well, Tesla still has to pass some…</div>
+  <div class="article-meta">Jun 13, 2026  21:16 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-13/uk-japan-plan-to-sign-18-billion-clean-energy-investment-deal" target="_blank">UK, Japan Plan to Sign £18 Billion Clean Energy Investment Deal</a></div>
+  <div class="article-summary">The UK and Japan are poised to finalize an £18 billion clean energy investment pact, signaling a significant commitment to bolstering offshore wind and infrastructure development. This substantial deal is set to accelerate the transition to renewable energy sources, a critical step in meeting global climate targets and fostering green economic growth.</div>
+  <div class="article-meta">Jun 14, 2026  02:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/13/clean-energy-investments-surge-but-that-is-only-part-of-the-story/" target="_blank">Clean Energy Investments Surge, But That Is Only Part Of The Story</a></div>
+  <div class="article-summary">Global investments in clean energy surged to $2.2 trillion last year, nearly double the $1.2 trillion invested in fossil fuels, according to the IEA. This significant shift, driven by solar, wind, and battery storage, highlights a growing momentum towards decarbonization, even as fossil fuels remain artificially cheap due to substantial government subsidies.</div>
+  <div class="article-meta">Jun 14, 2026  00:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-13/how-one-startup-is-trying-to-coax-rain-from-clouds" target="_blank">How One Startup Is Trying to Coax Rain From Clouds</a></div>
+  <div class="article-summary">The technology is needed on a drier planet…</div>
+  <div class="article-meta">Jun 13, 2026  16:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13062026/commercial-satellite-space-race-pollution/" target="_blank">A Commercial Space Race Prompts a Thorny Question: Who Owns the Sky?</a></div>
+  <div class="article-summary">The starry night sky has always anchored humanity’s sense of place in a vast universe. It’s a map guiding travelers, a calendar for migrations and harvests, a wellspring of stories. But a surge of commercial satellite launches into the upper fringes…</div>
+  <div class="article-meta">Jun 13, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13062026/florida-volunteers-work-to-save-endangered-sea-turtles/" target="_blank">A Massive Volunteer Network in Florida Works to Save Endangered Sea Turtles</a></div>
+  <div class="article-summary">“Pull! Pull!” shouts Scott Dexter, chanting the cadence for eight men gripping a rope. “Pull!”  With each pull, a 172-pound male loggerhead sea turtle is hoisted higher into the air. It takes several hoists to lift the turtle about 35 feet above the…</div>
+  <div class="article-meta">Jun 13, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13062026/beronda-montgomery-americas-black-botanical-legacy/" target="_blank">‘Their Breath Was Captured in the Tree’</a></div>
+  <div class="article-summary">From our collaborating partner “Living on Earth,” public radio’s environmental news magazine, an interview by host Steve Curwood with botanist and author Beronda Montgomery. When plant biologist Beronda Montgomery sat down to write what became a pers…</div>
+  <div class="article-meta">Jun 13, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, June 14, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
