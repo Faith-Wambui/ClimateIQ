@@ -1,0 +1,83 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Monday, June 15, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ Microsoft’s Clean Energy Reversal Collides with Virginia’s Climate Goals
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/15062026/microsoft-backpedals-on-climate-promises/
+  Date   : Jun 15, 2026  12:00 EAT
+  Summary: Microsoft is reportedly scaling back its commitment to 100% clean energy in Virginia, a state leading the world in data center development. This pivot, driven by the massive energy demands of new data centers, directly challenges Virginia's ambitious climate goals and raises concerns about the pace of decarbonization in a critical tech hub.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ HVR Solar to set up 1.2 GW TOPCon cell factory in India
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/15/hvr-solar-to-set-up-1-2-gw-topcon-cell-manufacturing-facility-in-uttar-pradesh/
+  Date   : Jun 15, 2026  12:09 EAT
+  Summary: HVR Solar is launching a 1.2 GW TOPCon solar cell factory in Uttar Pradesh, India, bolstering domestic high-efficiency solar production. This expansion signifies a significant step in India's renewable energy manufacturing capacity, crucial for accelerating the transition away from fossil fuels.
+
+
+▸ Energy density up 25%, site footprint down 20%
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/15/energy-density-up-25-site-footprint-down-20/
+  Date   : Jun 15, 2026  12:00 EAT
+  Summary: CRRC Zhuzhou Institute is launching a new liquid-cooled energy storage system in Europe, boasting a 25% increase in energy density and a 20% smaller footprint, directly addressing land constraints and planning hurdles in the region. This innovation, validated by the successful 200 MWh Bohot BESS project in Bulgaria, is crucial for accelerating the deployment of renewable energy infrastructure needed to meet climate goals.
+
+
+▸ Airengy, Hagag Europe to build 5 GWh compressed-air energy storage plant in Romania
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/15/airengy-hagag-europe-to-build-5-gwh-compressed-air-energy-storage-plant-in-romania/
+  Date   : Jun 15, 2026  11:42 EAT
+  Summary: Airengy and Hagag Europe are set to deploy a 5 GWh compressed-air energy storage plant in Romania, utilizing underground salt caverns and Airengy's AirBattery technology. This significant development, slated for commercial operation by early 2028, will provide crucial long-duration storage capacity, vital for integrating intermittent renewable energy sources and stabilizing the grid.
+
+
+▸ Pseudo-planar heterojunction organic solar cell achieves world record efficiency of 20.21%
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/15/pseudo-planar-heterojunction-organic-solar-cell-achieves-world-record-efficiency-of-20-21/
+  Date   : Jun 15, 2026  11:36 EAT
+  Summary: Researchers have developed a new organic solar cell, achieving a record 20.21% efficiency by overcoming material degradation with a novel interfacial buffering strategy. This breakthrough in organic photovoltaics signifies a significant step towards more efficient and potentially lower-cost solar energy solutions.
+
+
+▸ Chinese scientists identify degradation pathways in low-silver heterojunction solar cells
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/06/15/chinese-scientists-identify-degradation-pathways-in-low-silver-heterojunction-solar-cells/
+  Date   : Jun 15, 2026  10:47 EAT
+  Summary: Chinese scientists have pinpointed how silver-copper interdiffusion in low-silver solar cell electrodes causes significant electrical performance degradation through thermal aging. This discovery is crucial for improving the long-term reliability of these increasingly important renewable energy technologies, directly impacting their efficiency and lifespan.
+
+
+============================================================
+💰  CLIMATE FINANCE  (1 articles)
+============================================================
+
+▸ KKR-Backed Firm Raises $1.3 Billion in Debt for EVs, Batteries
+  Source : Bloomberg Green (RSS)
+  Link   : https://www.bloomberg.com/news/articles/2026-06-15/kkr-backed-firm-raises-1-3-billion-in-debt-for-evs-batteries
+  Date   : Jun 15, 2026  09:00 EAT
+  Summary: Zenobe Energy Ltd., a company backed by KKR & Co., has raised £980 million ($1.3 billion) of new debt financing to go toward expanding the fleet of green vehicles in the UK and Ireland.…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (1 articles)
+============================================================
+
+▸ ‘The Antarctic is the last frontier’: the quest to save Shackleton’s Endurance
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/jun/15/shackleton-endurance-shipwrecks-global-heating-antarctic-underwater-protected-area
+  Date   : Jun 15, 2026  09:00 EAT
+  Summary: Amid fears the wreck will be more accessible to explorers – and new species – as the climate warms, conservationists want to create the region’s first underwater protected areaThe harsh temperatures, treacherous currents and shifting pack ice of the…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 24  |  Sources: 6  |  Topics: 4
