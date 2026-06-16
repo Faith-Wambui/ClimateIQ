@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, June 16, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 39 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-uks-ev-drivers-are-now-saving-1100-each-a-year-and-3bn-in-total/" target="_blank">Analysis: UK’s EV drivers are now saving £1,100 each a year – and £3bn in total</a></div>
+  <div class="article-summary">Amid reports that the government could weaken the UK’s electric vehicle (EV) targets, Carbon Brief analysis reveals the nation’s EV drivers are saving more than £1,100 a year in fuel costs, compared with running a petrol car.
+
+Battery EVs (BEVs) are…</div>
+  <div class="article-meta">Jun 15, 2026  18:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/16/vikram-solar-to-commission-9-gw-pv-cell-manufacturing-capacity-by-december-2026/" target="_blank">Vikram Solar to commission 9 GW PV cell manufacturing capacity by December</a></div>
+  <div class="article-summary">Vikram Solar is set to bring a significant 9 GW of solar photovoltaic cell manufacturing capacity online by December, alongside a substantial expansion of its module production to 15.5 GW by early 2027. This rapid scaling of domestic solar manufacturing is crucial for accelerating India's transition to renewable energy and reducing its reliance on imported solar components.</div>
+  <div class="article-meta">Jun 16, 2026  13:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/16/the-real-cybersecurity-debate-around-chinese-inverters-is-only-just-beginning/" target="_blank">The real cybersecurity debate around chinese inverters is only just beginning</a></div>
+  <div class="article-summary">The European Commission is restricting funding for solar projects using Chinese inverters, but this move won't solve the sector's cybersecurity vulnerabilities. True security requires clear technical standards and better asset visibility, not just vendor bans.</div>
+  <div class="article-meta">Jun 16, 2026  12:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/16/satellite-breakthrough-enables-accurate-panel-scale-temperature-mapping-for-solar-farms/" target="_blank">Satellite breakthrough enables accurate panel-scale temperature mapping for solar farms</a></div>
+  <div class="article-summary">A Chinese research team has achieved a breakthrough by developing a satellite-based model that accurately maps solar panel temperatures at the individual panel level for utility-scale PV plants. This advancement, leveraging MODIS thermal infrared data and correcting for complex environmental factors, is crucial for optimizing solar farm performance and identifying potential issues that could impact energy generation and grid stability.</div>
+  <div class="article-meta">Jun 16, 2026  10:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/16/welsh-rugby-stadium-goes-solar-with-1-5-mw-pv-array/" target="_blank">Welsh rugby stadium goes solar with 1.5 MW PV array</a></div>
+  <div class="article-summary">Cardiff's Principality Stadium, home of Welsh rugby, has installed a 1.5 MW solar array, the largest on a UK sports venue, capable of powering over 50 matchdays. This significant move by the Welsh Rugby Union, alongside Ascot Racecourse's own solar additions, signals a growing trend of major sporting venues embracing renewable energy to reduce their carbon footprint.</div>
+  <div class="article-meta">Jun 16, 2026  10:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/16/rheem-launches-variable-speed-air-source-heat-pump/" target="_blank">Rheem launches variable-speed air-source heat pump</a></div>
+  <div class="article-summary">Rheem has introduced a new variable-speed air-source heat pump, the RP17AY, designed for easy installation in both new builds and retrofits, utilizing a lower global warming potential refrigerant. This innovation is crucial for decarbonizing residential heating and cooling, a major source of emissions, by offering an efficient and adaptable alternative to fossil fuel systems.</div>
+  <div class="article-meta">Jun 16, 2026  10:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-16/scientists-found-the-coral-reefs-that-can-survive-climate-change" target="_blank">Scientists Found the Coral Reefs That Can Survive Climate Change</a></div>
+  <div class="article-summary">Some coral reef ecosystems have a far greater chance of surviving the effects of climate change than previously understood, according to new global research.…</div>
+  <div class="article-meta">Jun 16, 2026  07:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-15/us-residential-solar-installations-set-to-stall-for-years" target="_blank">US Residential Solar Installations Set to Stall for Years</a></div>
+  <div class="article-summary">While most of the country is experiencing a decline, two states are bucking the trend: California and Florida.…</div>
+  <div class="article-meta">Jun 15, 2026  21:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-15/eu-nations-approve-carbon-benchmarks-for-handout-of-free-permits" target="_blank">EU Nations Approve Carbon Benchmarks for Handout of Free Permits</a></div>
+  <div class="article-summary">European Union member states approved a controversial update of benchmark values for the bloc’s carbon market, taking a key step toward distribution of free allowances to companies in the flagship emissions trading system.…</div>
+  <div class="article-meta">Jun 15, 2026  17:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-15/us-finalizes-1-6-billion-loan-to-michigan-gas-utility-dte" target="_blank">US Finalizes $1.6 Billion Loan to Michigan Gas Utility DTE</a></div>
+  <div class="article-summary">The Trump administration has finalized a $1.6 billion loan to Michigan-based utility DTE Energy Co. to modernize hundreds of miles of natural gas infrastructure.…</div>
+  <div class="article-meta">Jun 15, 2026  16:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-15/why-us-tomatoes-are-set-to-be-more-expensive-this-summer" target="_blank">Extreme Weather Makes US Tomatoes More Expensive This Summer</a></div>
+  <div class="article-summary">A severe freeze in Florida, coupled with unfavorable weather in Mexico, has already pushed tomato prices up, and this trend is expected to continue through the summer. These extreme weather events, increasingly linked to climate change, directly impact agricultural supply chains, leading to higher costs for consumers and highlighting the economic vulnerability of our food systems.</div>
+  <div class="article-meta">Jun 15, 2026  16:13 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16062026/joint-base-andrews-piscataway-creek-fuel-leak-water-testing/" target="_blank">Months After a Jet Fuel Leak, No Agency Tested Waters Downstream of Piscataway Creek. So Community Groups Are Doing It Themselves.</a></div>
+  <div class="article-summary">Five months after a jet fuel leak at Joint Base Andrews, downstream waters leading to the Potomac River remain untested by any agency, prompting community groups to take water and sediment samples themselves. This oversight is critical as the contamination could be impacting vital ecosystems and public health in areas used for recreation and fishing.</div>
+  <div class="article-meta">Jun 16, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/16/australia-el-nino-bom-bureau-of-meteorology-dry-hot-weather" target="_blank">BoM forecasts strong El Niño and warns climate change could amplify effects on Australia</a></div>
+  <div class="article-summary">Australia is now officially in an El Niño, a climate pattern that typically brings hotter, drier conditions and increases the risk of bushfires. Climate change is expected to intensify these impacts, posing significant challenges for the continent.</div>
+  <div class="article-meta">Jun 16, 2026  10:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02641-w" target="_blank">An early warning system to forecast biodiversity risks of extreme temperatures</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 16 June 2026;doi:10.1038/s41558-026-02641-wClimate change is predicted to increase extremes of weather, affecting ecosystems and resulting in biodiversity losses. We leveraged advances in climate seasonal fore…</div>
+  <div class="article-meta">Jun 16, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02666-1" target="_blank">Asymmetric intensification increases global disparities in cropland use and emissions</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 16 June 2026;doi:10.1038/s41558-026-02666-1The authors classify cropland and emissions changes for 174 countries over 30 years. They highlight the asymmetric intensification of global disparities, with imports…</div>
+  <div class="article-meta">Jun 16, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/16/half-of-worlds-children-exposed-to-at-least-three-climate-hazards-unicef-says" target="_blank">Half of world’s children exposed to at least three climate hazards, Unicef says</a></div>
+  <div class="article-summary">Almost every child, including those from high-income countries, is now exposed to at least one hazardHalf of the world’s children are exposed to at least three overlapping climate hazards threatening their health, education and survival, according to…</div>
+  <div class="article-meta">Jun 16, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15062026/trump-administration-abandons-fight-against-wind-energy/" target="_blank">Trump Administration Abandons Fight Against Wind Energy as Clean Energy Output Surges</a></div>
+  <div class="article-summary">The Trump administration has abandoned its effort to halt wind energy projects across the United States and dropped its challenge to the court ruling that tossed President Donald Trump’s order freezing federal permitting and leasing for wind projects…</div>
+  <div class="article-meta">Jun 16, 2026  03:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/15/uns-first-paris-agreement-carbon-credits-face-human-rights-and-climate-concerns/" target="_blank">UN’s first Paris Agreement carbon credits face human rights and climate concerns</a></div>
+  <div class="article-summary">Civil society groups allege the cookstove project in Myanmar exaggerated its climate impact while maintaining ties with military juntaThe postUN’s first Paris Agreement carbon credits face human rights and climate concernsappeared first onClimate Hom…</div>
+  <div class="article-meta">Jun 15, 2026  19:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/15/bonn-bulletin-ministry-divisions-complicate-brazils-roadmap-away-from-fossil-fuels/" target="_blank">Bonn Bulletin: Finance dominates discussions in every room</a></div>
+  <div class="article-summary">Lack of progress on finance issues - including putting a number on the new goal to triple adaptation funding - is causing blockages across negotiating tracks at UN climate talksThe postBonn Bulletin: Finance dominates discussions in every roomappeare…</div>
+  <div class="article-meta">Jun 15, 2026  14:31 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, June 16, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
