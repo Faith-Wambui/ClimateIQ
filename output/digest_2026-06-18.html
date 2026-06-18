@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, June 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">65</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 59 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18062026/trump-administration-funds-coal-plants-with-repeated-violations/" target="_blank">Trump Administration’s Coal Investments Breathe New Life Into Plants With Repeated Violations</a></div>
+  <div class="article-summary">The Trump administration's investment in coal infrastructure has effectively delayed the closure of the Cumberland Fossil Plant in Tennessee, a facility with a history of pollution violations and equipment failures. This decision directly contradicts efforts to reduce emissions, as the plant will continue to burn coal, a major contributor to greenhouse gas pollution, for years to come.</div>
+  <div class="article-meta">Jun 18, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18062026/colombia-beef-law-tackles-deforestation/" target="_blank">Colombia Passes First-Ever National Law Requiring Beef to Be Traced Back to Its Origins</a></div>
+  <div class="article-summary">Colombia has enacted a groundbreaking law mandating origin traceability for all beef, a critical step to combat deforestation driven by cattle ranching. This legislation, a potential model for the Amazon, directly addresses a leading cause of tree loss in the world's largest rainforest, vital for global climate stability.</div>
+  <div class="article-meta">Jun 18, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/18/portugal-plans-capacity-market-with-dedicated-battery-storage-auction/" target="_blank">Portugal plans capacity market with dedicated battery storage auction</a></div>
+  <div class="article-summary">From ESS News
+
+Portugal has begun work on a new capacity mechanism designed to safeguard electricity supply as electrification accelerates, renewable energy expands and power demand is expected to rise over the coming decade.
+
+The measure, announced…</div>
+  <div class="article-meta">Jun 18, 2026  11:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-17-june-2026-coral-reef-hope-ocean-talks-plant-flowering-times-shift/" target="_blank">Cropped 17 June 2026: Coral reef ‘hope’ | Ocean talks | Plant flowering times ‘shift’</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">Jun 17, 2026  17:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/18/gamechange-energy-integrates-platforms-to-simplify-utility-scale-solar/" target="_blank">GameChange Energy integrates platforms to simplify utility-scale solar</a></div>
+  <div class="article-summary">GameChange Energy is integrating its solar tracker, electrical balance of system (eBOS), and transformer platforms, a move CEO Phillip Vyhanek says will cut costs and reduce risk for utility-scale solar projects. This consolidation streamlines procurement and construction, accelerating the deployment of clean energy infrastructure.</div>
+  <div class="article-meta">Jun 18, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/18/mongolia-tenders-110-mw-of-solar/" target="_blank">Mongolia tenders 110 MW of solar</a></div>
+  <div class="article-summary">Mongolia’s Ministry of Energy has kicked off a tender for five solar-plus-storage projects.
+
+The independent power producer (IPP) projects are set to have a combined solar capacity of 110 MW connected to 52 MW/188 MWh of battery energy storage system…</div>
+  <div class="article-meta">Jun 18, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/18/argentina-advances-232-battery-bids-in-almasadi-tender/" target="_blank">Argentina advances 232 battery bids in AlmaSADI tender</a></div>
+  <div class="article-summary">From ESS News
+
+rgentina’s Energy Secretariat has approved the qualification of bids submitted in the AlmaSADI tender, the national and international procurement process for battery energy storage systems on the Argentine Interconnection System (SADI)…</div>
+  <div class="article-meta">Jun 18, 2026  11:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/18/ipvf-tu-delft-achieve-31-efficiency-for-4-cm2-perovskite-silicon-tandem-solar-cell/" target="_blank">IPVF, TU Delft achieve 31% efficiency for 4 cm2 perovskite-silicon tandem solar cell</a></div>
+  <div class="article-summary">Researchers from IPVF and TU Delft have achieved 31% efficiency on a 4 cm² two-terminal perovskite-silicon tandem solar cell using nanotextured silicon heterojunction bottom cells and ambient-air slot-die coated perovskite layers.The postIPVF, TU Del…</div>
+  <div class="article-meta">Jun 18, 2026  10:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/18/pv-module-recycling-tech-based-on-heavy-liquid-separation-metal-chloride-etching/" target="_blank">PV module recycling tech based on heavy liquid separation, metal chloride etching</a></div>
+  <div class="article-summary">Chinese researchers have unveiled a novel three-step PV module recycling process that achieves an 80.42% reduction in carbon emissions and recovers high-purity silicon and valuable metals. This breakthrough technology, utilizing heavy liquid separation and metal chloride etching, offers a significantly more sustainable and economically viable pathway for managing end-of-life solar panels.</div>
+  <div class="article-meta">Jun 18, 2026  10:23 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/top-eu-party-wants-carbon-market-changes-to-protect-industries" target="_blank">Top EU Party Wants Carbon Market Changes to Protect Industries</a></div>
+  <div class="article-summary">The biggest political group in the European Union’s parliament is considering pushing for carbon market changes to safeguard the region’s industrial competitiveness and curb excessive price swings.…</div>
+  <div class="article-meta">Jun 18, 2026  10:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/australia-sees-biggest-jump-in-planned-large-renewable-projects" target="_blank">Australia Sees Biggest Jump in Planned Large Renewable Projects</a></div>
+  <div class="article-summary">The amount of large-scale renewables projects classified as “probable” in Australia rose the most in records going back a decade, as the country pushes forward with ambitious plans to reduce emissions and hit green targets.…</div>
+  <div class="article-meta">Jun 18, 2026  09:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/data-centers-are-being-built-in-areas-exposed-extreme-weather" target="_blank">Data Centers Are Being Built in Areas Exposed to Extreme Weather</a></div>
+  <div class="article-summary">A significant number of data centers is being built in areas that are exposed to extreme weather risks brought on by climate change, a report by XDI has found.…</div>
+  <div class="article-meta">Jun 18, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/india-monsoon-starts-almost-40-short-as-el-nino-upends-weather" target="_blank">India Monsoon Starts Almost 40% Short as El Niño Upends Weather</a></div>
+  <div class="article-summary">India’s monsoon has had an unusually weak start and the lackluster rainfall is likely to persist, threatening crops and industrial activity as the El Niño weather phenomenon takes hold.…</div>
+  <div class="article-meta">Jun 18, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/jera-books-mitsui-osk-ships-to-bring-low-carbon-ammonia-to-japan" target="_blank">Jera Books Mitsui OSK Ships to Bring Low-Carbon Ammonia to Japan</a></div>
+  <div class="article-summary">Jera Co. has agreed to book two gas carriers from Mitsui OSK Lines Ltd. that will enable Japan’s largest power producer to transport low-carbon ammonia from the US and build up a supply chain for the alternative fuel.…</div>
+  <div class="article-meta">Jun 18, 2026  06:07 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18062026/feds-relocate-alligator-alcatraz-detainees/" target="_blank">Detainees Moved Out of Alligator Alcatraz, ICE Confirms</a></div>
+  <div class="article-summary">ICE has confirmed the evacuation of detainees from the Everglades migrant detention site, dubbed "Alligator Alcatraz," as hurricane season approaches. This move is critical for climate resilience, protecting vulnerable populations from the increasing threats posed by severe weather events exacerbated by climate change.</div>
+  <div class="article-meta">Jun 18, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/european-heat-wave-threatens-to-spur-record-cooling-demand" target="_blank">European Heat Wave Threatens to Spur Record Cooling Demand</a></div>
+  <div class="article-summary">Western Europe's scorching heat wave is poised to shatter cooling demand records, while simultaneously, warming rivers are forcing French nuclear plants to reduce power generation. This dual crisis highlights the growing vulnerability of our energy infrastructure to extreme weather, potentially impacting grid stability and energy prices.</div>
+  <div class="article-meta">Jun 18, 2026  11:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/syrian-arab-republic/health-sector-syria-update-biweekly-national-and-sub-national-health-sector-coordination-1-15-june-2026" target="_blank">Health Sector Syria update, biweekly national and sub-national health sector coordination (1 -15 June 2026)</a></div>
+  <div class="article-summary">Country: Syrian Arab RepublicSources: Health Cluster, World Health OrganizationPlease refer to the attached file.National health sector coordination, Damascus• Developed mid-year progress report on health sector Syria coordination for January – May 2…</div>
+  <div class="article-meta">Jun 18, 2026  09:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/world/unicef-core-resources-annual-report-2025" target="_blank">World: UNICEF Core Resources Annual Report 2025</a></div>
+  <div class="article-summary">Country: WorldSource: UN Children's FundPlease refer to the attached files.HighlightsCore Resources are UNICEF's most valuable funding, because they are unrestricted: free to move to children before any other source can. They let UNICEF respond in th…</div>
+  <div class="article-meta">Jun 18, 2026  03:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/haiti-artibonite-centre-et-ouest-apercu-de-la-severite-de-lacces-humanitaire-de-janvier-avril-2026" target="_blank">Haiti - Artibonite, Centre et Ouest - Aperçu de la sévérité de l'accès humanitaire de janvier à avril 2026</a></div>
+  <div class="article-summary">Country: HaitiSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.L’accès humanitaire dans certaines zones des départements de l’Ouest, de l’Artibonite et du Centre reste fortement limité par une com…</div>
+  <div class="article-meta">Jun 18, 2026  00:23 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/18/west-africa-atlantic-high-seas-protection-marine-ocean-canary-guinea/" target="_blank">West African nations target Eastern Atlantic for early high seas protection</a></div>
+  <div class="article-summary">At the 11th Our Ocean Conference, African governments launched a bid to have the zone classified as one of the first high-seas protected areasThe postWest African nations target Eastern Atlantic for early high seas protectionappeared first onClimate…</div>
+  <div class="article-meta">Jun 18, 2026  11:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/18/the-sea-took-everything-away-how-nigerias-happy-city-is-disappearing-beneath-the-waves" target="_blank">‘The sea took everything away’: how Nigeria’s ‘Happy City’ is disappearing beneath the waves</a></div>
+  <div class="article-summary">More than half of Ayetoro – a Christian utopia founded in the 1940s – has been lost to the ocean, and its remaining people are running out of optionsIn the early hours of 15 February 2019, the Atlantic Ocean came for Arowo Victoria’s livelihood. The…</div>
+  <div class="article-meta">Jun 18, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17062026/alabama-republican-jim-zeigler-unseats-incumbent-public-service-commissioner/" target="_blank">Alabama’s Self-Proclaimed ‘AI Watchman’ Unseats Incumbent Public Service Commissioner</a></div>
+  <div class="article-summary">MOBILE, Ala.—Jim Zeigler didn’t have much time to celebrate. The morning after his Republican primary victory on Tuesday and a gathering of supporters at Wintzell’s Oyster House, the 78-year-old hit the road early to drive the nearly four hours to hi…</div>
+  <div class="article-meta">Jun 18, 2026  02:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17062026/alabama-expands-utilities-regulator-with-four-new-commissioners/" target="_blank">Alabama Governor Names Four New PSC Members, Including Its First Two Black Appointees</a></div>
+  <div class="article-summary">The Alabama Public Service Commission has never had a Black commissioner in its 145-year history, but that’s about to change. Alabama Gov. Kay Ivey announced the appointments of four new commissioners Wednesday, two of whom will become the first Blac…</div>
+  <div class="article-meta">Jun 18, 2026  02:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17062026/north-carolina-residents-sue-landfill-over-pfas-contamination/" target="_blank">‘We Just Want Clean Water’: Residents Sue a North Carolina County Over Landfill Contamination</a></div>
+  <div class="article-summary">This story was published by the Border Belt Independent in collaboration with Inside Climate News. Viv Tolson Wayne rang the large dinner bell on her front porch along Britt Road in St. Pauls, North Carolina. The crowd on her front lawn hushed their…</div>
+  <div class="article-meta">Jun 18, 2026  00:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, June 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
