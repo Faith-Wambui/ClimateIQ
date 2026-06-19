@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, June 19, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">54</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 48 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-do-chinas-provincial-five-year-plans-say-about-climate-and-energy/" target="_blank">Q&A: What do China’s provincial five-year plans say about climate and energy?</a></div>
+  <div class="article-summary">China’s provincial-level governments have now all published their 15th five-year plans – economic and social development blueprints for 2026-2030.
+
+These provincial plans reaffirm the overall trajectory of China’s energy transition, but reveal region…</div>
+  <div class="article-meta">Jun 18, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/19/huaweis-fusionsolar9-0-solution-aims-to-redefine-optimal-lcoe-for-utility-scale-solar-projects/" target="_blank">Huawei’s FusionSolar9.0 solution aims to redefine optimal LCOE for utility-scale solar projects</a></div>
+  <div class="article-summary">Huawei's new FusionSolar9.0 solution is set to significantly lower the Levelized Cost of Energy (LCOE) for utility-scale solar projects by boosting energy yield across their entire lifecycle. This innovation directly addresses the economic viability of large solar farms, making renewable energy a more competitive and attractive investment for the global energy transition.</div>
+  <div class="article-meta">Jun 19, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/19/china-wafer-output-set-to-rise-despite-weak-demand-and-inventory-pressure/" target="_blank">China wafer output set to rise despite weak demand and inventory pressure</a></div>
+  <div class="article-summary">Despite weak global demand, China's solar wafer output is projected to climb to 55 GW in June, driven by vertically integrated manufacturers. This surge in production, even with existing inventory pressures, signals continued investment in solar manufacturing capacity, a critical component for the global transition to renewable energy.</div>
+  <div class="article-meta">Jun 19, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/19/fraunhofer-iwu-storage-analyzer-reduces-peak-loads-in-factories/" target="_blank">Fraunhofer IWU storage analyzer reduces peak loads in factories</a></div>
+  <div class="article-summary">Fraunhofer IWU's new analyzer for on-site energy storage systems can unlock nearly 50% of factory-generated electricity, significantly reducing peak demand. This innovation is crucial for industrial decarbonization, enabling businesses to better utilize renewable energy and lessen their reliance on the grid during high-consumption periods.</div>
+  <div class="article-meta">Jun 19, 2026  11:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/19/jinkosolar-achieves-34-82-efficiency-for-perovskite-silicon-tandem-solar-cell/" target="_blank">JinkoSolar achieves 34.82% efficiency for perovskite-silicon tandem solar cell</a></div>
+  <div class="article-summary">JinkoSolar has pushed the boundaries of solar technology, achieving a certified 34.82% power conversion efficiency for its perovskite-silicon tandem solar cell. This significant leap forward in efficiency for next-generation solar technology means more electricity can be generated from the same surface area, accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Jun 19, 2026  10:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/19/the-hydrogen-stream-2030-targets-increasingly-out-of-reach-says-iea/" target="_blank">The Hydrogen Stream: 2030 targets increasingly out of reach, says IEA</a></div>
+  <div class="article-summary">The International Energy Agency (IEA) warns that despite renewed interest in hydrogen for energy security, low-emissions production is failing to scale, with 2030 targets now looking increasingly unrealistic due to high costs and infrastructure gaps. This slow deployment of crucial clean energy solutions like green hydrogen directly hinders global efforts to decarbonize heavy industry and transportation, a critical step in meeting climate goals.</div>
+  <div class="article-meta">Jun 19, 2026  10:37 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/19/the-era-of-unlimited-cheap-inventory-is-ending/" target="_blank">‘The era of unlimited cheap inventory is ending’</a></div>
+  <div class="article-summary">Europe's solar module market is exiting a period of oversupply, signaling the end of consistently falling prices and a shift towards prioritizing supply security over further cost reductions. This transition, driven by leaner inventories and more disciplined production, means businesses can no longer rely on indefinite cheap solar panels, impacting future investment and deployment strategies.</div>
+  <div class="article-meta">Jun 19, 2026  12:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19062026/green-economy-hits-10-trillion-in-market-value/" target="_blank">Green Economy Hits $10 Trillion in Market Value</a></div>
+  <div class="article-summary">The global green economy has officially surpassed $10 trillion in market value, fueled by a robust 5.3% surge in green revenue last year. This significant milestone underscores the accelerating financial viability and investor confidence in companies providing climate solutions, signaling a powerful shift in the economic landscape towards sustainability.</div>
+  <div class="article-meta">Jun 19, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/us-power-regulator-adopts-interventionist-posture-amid-ai-boom" target="_blank">US Regulator Makes ‘Interventionist’ Pivot to Speed Data Centers</a></div>
+  <div class="article-summary">The chairman of the US Federal Energy Regulatory Commission said moves to help AI data centers accelerate hook ups to the country’s electric grids reflect a new and more interventionist approach by the regulator.…</div>
+  <div class="article-meta">Jun 19, 2026  00:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/trump-administration-backtracks-on-removing-ocean-sensors" target="_blank">Trump Administration Backtracks on Removing Ocean Sensors</a></div>
+  <div class="article-summary">The U-turn comes after a plan to dismantle the monitors sparked opposition from scientists and members of Congress.…</div>
+  <div class="article-meta">Jun 18, 2026  21:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-18/over-100-countries-back-un-framework-for-climate-migration" target="_blank">Countries Back UN Framework for Climate Migration</a></div>
+  <div class="article-summary">More than 50 countries endorsed a new United Nations framework for communities so threatened by climate change that they may need to resettle elsewhere.…</div>
+  <div class="article-meta">Jun 18, 2026  19:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19062026/environmental-journalism-watchdog-james-bruggers-dies-at-68/" target="_blank">James Bruggers, Who Brought Passion and Kindness to Environmental Reporting, Dies at 68</a></div>
+  <div class="article-summary">Veteran environmental reporter James Bruggers, a champion for climate justice who tirelessly exposed polluting corporations and regulatory failures, has died at 68 in Louisville, Kentucky. His impactful work, spanning decades, was crucial in holding powerful entities accountable and amplifying the voices of those most affected by environmental degradation.</div>
+  <div class="article-meta">Jun 19, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/19/scientists-refreeze-arctic-melting-sea-ice" target="_blank">My trip to meet the scientists trying to refreeze the Arctic</a></div>
+  <div class="article-summary">In this week’s newsletter: The melting of the Arctic’s summer sea ice is the most visible upshot of the climate crisis. Refreezing it might be a long shot – but do drastic times call for drastic measures?•Don’t get Down to Earth delivered to your inb…</div>
+  <div class="article-meta">Jun 19, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18062026/alabama-limestone-quarry-settlement/" target="_blank">Alabama Limestone Quarry Settles Lawsuit Over Dust, Noise</a></div>
+  <div class="article-summary">Residents of the small north Alabama community of Belle Mina are breathing easier after reaching a settlement with a limestone quarry they say was disrupting their homes and places of worship.  Three Belle Mina residents and four churches located nea…</div>
+  <div class="article-meta">Jun 19, 2026  03:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18062026/federal-energy-regulatory-commission-data-center-orders/" target="_blank">Federal Regulators Tell Electric Grid Operators to Fix Their Rules on Data Centers</a></div>
+  <div class="article-summary">The nation’s electric grid is stressed out.  Unprecedented energy demands for large customers, such as data centers and cryptomines, are straining power supplies, raising electric rates in some regions, and stoking consumer advocates’ concerns that r…</div>
+  <div class="article-meta">Jun 19, 2026  03:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/18/bonn-climate-talks-end-in-gridlock-on-adaptation-and-emissions-cutting-work/" target="_blank">Bonn climate talks end in “gridlock” on adaptation and emissions-cutting</a></div>
+  <div class="article-summary">Splits between developed and developing countries over finance and science held back progress on key areas of climate action, leaving disappointment and much work for COP31The postBonn climate talks end in “gridlock” on adaptation and emissions-cutti…</div>
+  <div class="article-meta">Jun 19, 2026  01:58 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, June 19, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
