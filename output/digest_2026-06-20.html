@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, June 20, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">41</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-19-june-2026-bonn-talks-end-in-gridlock-energys-new-era-oceans-in-climate-negotiations/" target="_blank">DeBriefed 19 June 2026: Bonn talks end in ‘gridlock’ | Energy’s ‘new era’ | Oceans in climate negotiations</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+Bonn talks close
+
+‘SIDE-STEPPING AND STALLING’: UN climate talks in Bonn have ended in “gridlock”, according to Climate Ho…</div>
+  <div class="article-meta">Jun 19, 2026  18:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/bonn-climate-talks-key-outcomes-from-the-june-2026-un-climate-conference/" target="_blank">Bonn climate talks: Key outcomes from the June 2026 UN climate conference</a></div>
+  <div class="article-summary">Two weeks of tense UN climate talks in Bonn, Germany, have produced few tangible outcomes as diplomats faced “gridlock”.
+
+Negotiators failed to find agreement in numerous areas, such as scaling up global emissions cuts and funding for climate adaptat…</div>
+  <div class="article-meta">Jun 19, 2026  18:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/06/climate-conflict-and-governance-in-the-sahel-why-africas-security-future-will-be-negotiated-at-the-climate-table/" target="_blank">Climate, Conflict and Governance in the Sahel: Why Africa’s Security Future Will Be Negotiated at the Climate Table</a></div>
+  <div class="article-summary">The climate and conflict crisis in the Sahel requires integrated strategies that bridge the artificial divides between climate policy, peacebuilding and development governance, with opportunities for Africa to lead tailored solutions at COP31.The pos…</div>
+  <div class="article-meta">Jun 19, 2026  17:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/experts-why-carbon-removal-needs-a-major-scale-up-to-return-warming-to-1-5c/" target="_blank">Experts: Why carbon removal needs a ‘major scale up’ to return warming to 1.5C</a></div>
+  <div class="article-summary">Last week, more than 260 researchers convened in Milan to discuss the opportunities, challenges and risks involved in scaling “carbon dioxide removal” (CDR) to help curb climate change.
+
+The conference – held on the campus of the Politecnico di Milan…</div>
+  <div class="article-meta">Jun 19, 2026  13:02 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/20/bess-as-a-swiss-army-knife-for-data-centers/" target="_blank">BESS as a ‘Swiss Army knife’ for data centers</a></div>
+  <div class="article-summary">Artificial intelligence is changing how data centers consume electricity. New workloads are introducing levels of variability that conventional power systems were not designed to handle, creating operational challenges both inside the facility and ac…</div>
+  <div class="article-meta">Jun 20, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/19/uruguay-ev-sales-report-icev-sales-start-melting-down-as-bevs-surpass-40-share-in-may/" target="_blank">Uruguay EV Sales Report: ICEV Sales Start Melting Down as BEVs Surpass 40% Share in May!</a></div>
+  <div class="article-summary">Uruguay's electric vehicle market is accelerating rapidly, with battery-electric vehicles (BEVs) capturing over 40% of new sales in May, a dramatic surge from 20% in 2025. This rapid shift signals a significant decline for internal combustion engine vehicles and positions Uruguay as a regional leader in decarbonizing transportation.</div>
+  <div class="article-meta">Jun 20, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/19/energy-access-in-rural-north-carolina-grows-through-solar/" target="_blank">Energy Access In Rural North Carolina Grows Through Solar</a></div>
+  <div class="article-summary">In the heart of the Emma community just outside Asheville, North Carolina, a transformation is taking place that goes far beyond hardwire and wires. While the transition to renewable energy is often seen as a luxury, a partnership between Sugar Hollo…</div>
+  <div class="article-meta">Jun 20, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/19/rivian-to-challenge-tesla-fsd-later-this-year-ceo-thinks/" target="_blank">Rivian To Challenge Tesla FSD Later This Year, CEO Thinks</a></div>
+  <div class="article-summary">Rivian's CEO plans to challenge Tesla's Full Self-Driving (FSD) capabilities later this year, potentially accelerating the adoption of autonomous vehicle technology. This development could significantly impact the transportation sector, influencing energy consumption patterns and the overall carbon footprint of personal mobility.</div>
+  <div class="article-meta">Jun 20, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/19/comed-metropolitan-mayors-caucus-honor-9-communities-advancing-ev-readiness-across-northern-illinois/" target="_blank">ComEd, Metropolitan Mayors Caucus Honor 9 Communities Advancing EV Readiness Across Northern Illinois</a></div>
+  <div class="article-summary">Nine Northern Illinois communities, recognized by ComEd and the Metropolitan Mayors Caucus, have successfully advanced their electric vehicle readiness. This initiative is crucial for accelerating EV adoption, a key step in reducing transportation emissions and combating climate change.</div>
+  <div class="article-meta">Jun 20, 2026  03:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-20/byd-rejects-claims-it-violated-hungary-s-environmental-rules" target="_blank">BYD Rejects Claims It Violated Hungary’s Environmental Rules</a></div>
+  <div class="article-summary">BYD has denied claims it violated environmental regulations during the construction of its new electric vehicle plant in Hungary, a significant development as the company expands its European footprint. This denial is crucial as such breaches could jeopardize BYD's EU expansion and set precedents for environmental compliance in the burgeoning EV manufacturing sector.</div>
+  <div class="article-meta">Jun 20, 2026  10:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-19/spain-weighs-financial-aid-to-struggling-solar-power-industry" target="_blank">Spain Weighs Financial Aid to Struggling Solar Power Industry</a></div>
+  <div class="article-summary">The Spanish government is weighing whether to offer financial support to a domestic solar industry that’s grappling with oversupply and negative wholesale power prices.…</div>
+  <div class="article-meta">Jun 19, 2026  17:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-19/california-and-us-west-threatened-by-wildfires-over-coming-days" target="_blank">California and US West Threatened by Wildfires Over Coming Days</a></div>
+  <div class="article-summary">The fire threat across the US West will rise Friday and remain dangerous through Saturday for many areas, including Northern California, as lightning strikes risk igniting dry vegetation.…</div>
+  <div class="article-meta">Jun 19, 2026  15:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-19/european-firefighters-call-for-more-resources-as-more-wildfires-loom" target="_blank">European Firefighters Call for More Resources as More Wildfires Loom</a></div>
+  <div class="article-summary">They’re bracing for another severe fire season.…</div>
+  <div class="article-meta">Jun 19, 2026  15:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-19/firefighters-warn-they-re-ill-prepared-for-a-bad-wildfire-season" target="_blank">Firefighters Warn They’re Ill-Prepared for a Bad Wildfire Season</a></div>
+  <div class="article-summary">With another hot summer looming, fire services across Europe face funding and labor shortfalls.…</div>
+  <div class="article-meta">Jun 19, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/chad/tchad-apercu-de-la-situation-humanitaire-lest-au-19-juin-2026" target="_blank">TCHAD : Aperçu de la situation humanitaire à l’Est (au 19 juin 2026)</a></div>
+  <div class="article-summary">Countries: Chad, South SudanSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.Depuis le déclenchement du conflit au Soudan en avril 2023, l’Est du Tchad fait face à un afflux massif et continu de p…</div>
+  <div class="article-meta">Jun 19, 2026  15:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/world/emphnet-emergency-bulletin-issue-36-may-2026-enar" target="_blank">World: The EMPHNET Emergency Bulletin, Issue 36 | May 2026 [EN/AR]</a></div>
+  <div class="article-summary">Country: WorldSource: Eastern Mediterranean Public Health NetworkPlease refer to the attached files.The EMPHNET Emergency Bulletin, Issue 36The issue of the EMPHNET Emergency Bulletin highlights two significant emerging infectious disease threats: th…</div>
+  <div class="article-meta">Jun 19, 2026  13:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/democratic-republic-congo/rd-congo-situation-humanitaire-dans-la-province-du-sud-kivu-rapport-de-situation-6-15-juin-2026" target="_blank">DR Congo: RD Congo : Situation humanitaire dans la province du Sud-Kivu – rapport de situation #6, 15 juin 2026</a></div>
+  <div class="article-summary">Country: Democratic Republic of the CongoSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Ce rapport est produit par OCHA RDC en collaboration avec les partenaires humanitaires. Il couvre la période du 1…</div>
+  <div class="article-meta">Jun 19, 2026  12:48 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/jun/20/say-what-new-insults-to-use-in-2026" target="_blank">Say what?! New insults to use in 2026 | Fiona Katauskas</a></div>
+  <div class="article-summary">The news is providing a lot of material to work with See more ofFiona Katauskas’s cartoons here…</div>
+  <div class="article-meta">Jun 19, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/football/2026/jun/19/world-cup-matches-severe-heat-level-analysis" target="_blank">Two World Cup matches were played in ‘severe heat’, analysis finds</a></div>
+  <div class="article-summary">Games in Miami and Monterrey were at heat level a players’ union had warned in the past should trigger delaysTwo of the first round of matches at the World Cup were played at a level of severe heat that a football players’ union has previously said s…</div>
+  <div class="article-meta">Jun 19, 2026  15:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/19/mombasa-ocean-summit-progress-marine-protection-funding-barriers-persist/" target="_blank">Mombasa ocean summit drives progress on marine protection, but threats persist</a></div>
+  <div class="article-summary">At the 11th Our Ocean conference in Kenya, its founder John Kerry says the ocean must become central to climate solutions and needs to be looked afterThe postMombasa ocean summit drives progress on marine protection, but threats persistappeared first…</div>
+  <div class="article-meta">Jun 19, 2026  14:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/jun/19/solar-geoengineering-risk-to-planet-earth" target="_blank">‘Termination shock’: trust our expert warnings on geoengineering’s planetary risks | Raymond Pierrehumbert, Julia Slingo, Michael Mann and Valerie Masson-Delmotte</a></div>
+  <div class="article-summary">Do we really want to play dice with our planet?A series in the Guardian recently declared “it’stime to talkabout geoengineering.” So let’s talk about it. And let us start with some simple truths about this cluster of techno-optimistic “quick fixes” w…</div>
+  <div class="article-meta">Jun 19, 2026  13:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, June 20, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
