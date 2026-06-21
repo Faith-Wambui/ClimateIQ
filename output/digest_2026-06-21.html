@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, June 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">10</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😊</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:71%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Cautiously Optimistic — 1 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-20/bloomberg-green-what-to-watch-at-london-climate-action-week" target="_blank">What to Watch at London Climate Week</a></div>
+  <div class="article-summary">London Climate Week is underway, bringing together top CEOs, policymakers, and activists to tackle critical climate challenges. This gathering is crucial for forging the partnerships and commitments needed to accelerate the global transition to a sustainable economy.</div>
+  <div class="article-meta">Jun 20, 2026  20:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/20/byd-battery-production-ramps-up-in-brazil/" target="_blank">BYD Battery Production Ramps Up In Brazil</a></div>
+  <div class="article-summary">Chinese EV giant BYD is significantly boosting its battery production in Brazil, a move poised to accelerate the adoption of electric vehicles in Latin America. This expansion directly supports the global transition away from fossil fuels by increasing the supply of critical components for cleaner transportation.</div>
+  <div class="article-meta">Jun 21, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/20/india-needs-10-gwh-of-battery-storage-now-to-stop-coals-inflexibility-wasting-clean-power/" target="_blank">India Needs 10 GWh of Battery Storage Now to Stop Coal’s Inflexibility Wasting Clean Power</a></div>
+  <div class="article-summary">Batteries are the fastest fix to make room for India’s midday solar surge as coal-based power plants are unable to ramp down far enough for the same India needs around 10 gigawatt-hours (GWh) of battery storage immediately to stop renewable energy cu…</div>
+  <div class="article-meta">Jun 21, 2026  06:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/20/perovskite-silicon-solar-cells-meet-matrix-shingled-interconnection-collaboration-between-oxford-pv-fraunhofer-ise/" target="_blank">Perovskite-Silicon Solar Cells Meet Matrix Shingled Interconnection Collaboration between Oxford PV & Fraunhofer ISE</a></div>
+  <div class="article-summary">Oxford PV and Fraunhofer ISE have successfully integrated Oxford PV's high-efficiency perovskite-silicon solar cells with Fraunhofer's Matrix Shingled interconnection technology. This breakthrough promises to significantly boost solar panel energy output, accelerating the transition to cleaner energy sources.</div>
+  <div class="article-meta">Jun 21, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/20/tesla-autopilot-katy-texas-home-crash-woman-killed/" target="_blank">Tesla driver says it was on Autopilot before fatal Texas home crash</a></div>
+  <div class="article-summary">A Tesla on Autopilot reportedly veered off a road in Katy, Texas, crashing into a home and killing a resident. This incident raises serious questions about the safety and reliability of advanced driver-assistance systems in real-world conditions, highlighting the potential for catastrophic failures that impact public safety and trust in emerging automotive technologies.</div>
+  <div class="article-meta">Jun 21, 2026  04:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/20/as-kenyas-electric-motorcycle-ecosystem-grows-local-firms-are-starting-to-specialise-and-forge-interesting-partnerships-with-large-global-firms/" target="_blank">As Kenya’s Electric Motorcycle Ecosystem Grows, Local Firms Are Starting to Specialise and Forge Interesting Partnerships With Large Global Firms</a></div>
+  <div class="article-summary">Kenyan electric motorcycle startups are scaling up, moving beyond basic assembly to specialized production and forging partnerships with global players. This growth is crucial for decarbonizing transport in East Africa, potentially displacing millions of fossil-fuel-powered motorbikes and significantly reducing emissions.</div>
+  <div class="article-meta">Jun 21, 2026  00:16 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-20/driving-an-electric-car-saves-you-the-most-money-in-these-9-us-states" target="_blank">Driving an EV in These US States Saves You the Most Money</a></div>
+  <div class="article-summary">Some of the places with the most expensive gas have the cheapest electricity, including Arizona, Utah and Washington.…</div>
+  <div class="article-meta">Jun 20, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/20/is-ai-doomed-to-fail/" target="_blank">Is AI Doomed To Fail?</a></div>
+  <div class="article-summary">A 1995 critique by computer scientist Niklaus Wirth warns that AI's reliance on inefficient neural networks, not energy consumption, could be its undoing. This highlights a critical challenge for the burgeoning AI sector, as software bloat could hinder progress and potentially increase its overall environmental footprint, even if direct energy use is managed.</div>
+  <div class="article-meta">Jun 21, 2026  02:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20062026/montana-musselshell-county-fiscal-future/" target="_blank">Planning For Life After Coal Cost a Montana County Commissioner His Seat</a></div>
+  <div class="article-summary">Robert Pancratz couldn’t believe it.  The Musselshell County commissioner had been defeated in the Republican primary for his seat by a two-to-one margin earlier this month. Mark Olson, who lives in Musselshell and serves as the undersheriff in Golde…</div>
+  <div class="article-meta">Jun 20, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, June 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
