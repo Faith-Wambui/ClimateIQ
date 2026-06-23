@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, June 23, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 45 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-23/mining-billionaire-calls-on-china-to-push-green-ship-fuel-deal" target="_blank">Mining Billionaire Calls on China to Push Green Ship Fuel Deal</a></div>
+  <div class="article-summary">Australian billionaire Andrew Forrest urges China to lead the charge in decarbonizing global shipping fuel, especially after US opposition stalled emissions fee plans last year. This is critical because shipping accounts for nearly 3% of global greenhouse gas emissions, and China's influence could unlock vital progress towards a greener maritime industry.</div>
+  <div class="article-meta">Jun 23, 2026  10:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/23/very-low-cost-rooftop-solar-slashes-domestic-energy-cost-part-2-south-american-countries/" target="_blank">Very low cost rooftop solar slashes domestic energy cost – Part 2: South American Countries</a></div>
+  <div class="article-summary">As photovoltaics continues getting cheaper, an increasing number of countries are adapting their regulatory frameworks to facilitate its integration into electricity markets. Brazil is currently adding more than 1 GW of new PV capacity each month, wi…</div>
+  <div class="article-meta">Jun 23, 2026  08:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/project-cosmos/" target="_blank">Project Cosmos</a></div>
+  <div class="article-summary">Welcome to the Project Cosmos homepage.
+
+The project was launched by Carbon Brief in June 2026 following an 18-month research and development effort.
+
+The aim: to build the world’s largest database of climate change research.
+
+Containing more than 1.…</div>
+  <div class="article-meta">Jun 22, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/mapped-inside-carbon-briefs-cosmos-database-of-1-8-million-climate-studies/" target="_blank">Mapped: Inside Carbon Brief’s Cosmos database of 1.8 million climate studies</a></div>
+  <div class="article-summary">This visualised “cosmos” of 1.8m data points is what is known as a “network graph”.
+
+It is a way to illustrate the “strength” of the connections – namely, citations and references – between the various nodes within any network. In this case, the netw…</div>
+  <div class="article-meta">Jun 22, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/carbon-briefs-ranking-of-the-most-highly-cited-climate-publications/" target="_blank">Carbon Brief’s ranking of the most highly cited climate publications</a></div>
+  <div class="article-summary">The most highly cited publications in Carbon Brief’s Cosmos database reveal the building blocks supporting so many elements of climate science.
+
+Every year, thousands of new scientific documents are published, from studies and reports to books and as…</div>
+  <div class="article-meta">Jun 22, 2026  16:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/23/dinto-solar-launches-775-w-heterojunction-pv-module-with-25-0-efficiency/" target="_blank">Dinto Solar launches 775 W heterojunction PV module with 25.0% efficiency</a></div>
+  <div class="article-summary">Chinese manufacturer Dinto Solar will debut its new DT198G-FZ HJT solar module for utility-scale applications at the Intersolar tradeshow in Munich. The zero-barbus (0BB), 1/3-cut cell panel delivers up to 775 W of power with 25.05% efficiency, featu…</div>
+  <div class="article-meta">Jun 23, 2026  11:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/23/atw-launches-1-3-gw-encapsulation-turnkey-solution-for-heterojunction-solar-modules/" target="_blank">ATW launches 1.3 GW encapsulation turnkey solution for heterojunction solar modules</a></div>
+  <div class="article-summary">Autowell (ATW) has unveiled a 1.3 GW automated encapsulation line for heterojunction (HJT) solar modules, designed to slash production costs and boost efficiency. This breakthrough significantly lowers the barrier to entry for advanced HJT solar technology, accelerating the deployment of cleaner energy solutions.</div>
+  <div class="article-meta">Jun 23, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/23/solar-pv-can-return-greater-cairo-to-become-the-city-of-the-sun-once-more/" target="_blank">Solar PV can return Greater Cairo to become the city of the sun once more</a></div>
+  <div class="article-summary">Greater Cairo, once known as the "City of the Sun," is exploring a revival of its namesake through widespread solar PV adoption to meet surging energy demand. This initiative positions solar power as a critical component of the megacity's energy transition, offering a sustainable path forward.</div>
+  <div class="article-meta">Jun 23, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/23/solar-everywhere-the-infrastructure-opportunity/" target="_blank">Solar everywhere: The infrastructure opportunity</a></div>
+  <div class="article-summary">Europe is now deploying solar panels on infrastructure like roads, railways, and canals, moving beyond prime rooftop and land sites. This innovative dual-use approach unlocks significant new solar capacity, accelerating the continent's transition to clean energy by integrating renewables into existing landscapes.</div>
+  <div class="article-meta">Jun 23, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/23/jackery-launches-latest-versatile-homepower-batteries/" target="_blank">Jackery Launches Latest, Versatile HomePower Batteries</a></div>
+  <div class="article-summary">Jackery just rolled out its newest HomePower battery lineup, featuring models like the 1000 v2 and 3600 Pro Max, now available with introductory pricing. These portable power solutions are crucial for grid resilience and enabling a faster transition to renewable energy by providing reliable backup and off-grid capabilities.</div>
+  <div class="article-meta">Jun 23, 2026  08:46 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-23/gas-flaring-by-fossil-fuel-producers-rose-in-2025-says-world-bank" target="_blank">Gas Flaring by Fossil Fuel Producers Rose in 2025, Says World Bank</a></div>
+  <div class="article-summary">Global gas flaring by fossil fuel producers surged in 2025, releasing over 500 million tons of greenhouse gases annually – a climate burden exceeding the UK's total emissions. This alarming increase underscores the persistent, significant methane and CO2 pollution from oil and gas operations, directly exacerbating global warming.</div>
+  <div class="article-meta">Jun 23, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-22/los-angeles-warehouse-fire-casts-gotham-city-shadow-above-city" target="_blank">Los Angeles Warehouse Fire Smoke Chokes Southern California for Fifth Day</a></div>
+  <div class="article-summary">A fire at a cold storage warehouse near downtown Los Angeles continued pumping fumes across Southern California five days after it ignited, prompting emergency declarations as air quality reached unhealthy levels.…</div>
+  <div class="article-meta">Jun 22, 2026  19:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-22/what-starmer-s-resignation-means-for-the-uk-s-climate-goals" target="_blank">What Starmer’s Resignation Means for the UK’s Climate Goals</a></div>
+  <div class="article-summary">The government has faced growing pressure to loosen its commitment to cutting emissions.…</div>
+  <div class="article-meta">Jun 22, 2026  19:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-22/record-heat-wave-tests-french-nuclear-reactors" target="_blank">Heat Wave Shows Why French Reactors Must Adapt to Climate Change</a></div>
+  <div class="article-summary">Global warming and extreme weather are forcing French nuclear reactors to adapt.…</div>
+  <div class="article-meta">Jun 22, 2026  17:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-22/uk-s-world-leading-climate-goals-look-shakier-in-post-starmer-era" target="_blank">UK’s World-Leading Climate Goals Look Shakier in Post-Starmer Era</a></div>
+  <div class="article-summary">The British government faces significant pressure to make policy concessions on fossil fuels. It has stood firm, so far.…</div>
+  <div class="article-meta">Jun 22, 2026  16:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/jun/23/europe-heatwave-live-news-updates-uk-red-temperature-warnings-40-degrees-france-heat-deaths-crisis-meeting" target="_blank">Europe heatwave live: UK temperatures forecast to reach 38C; French PM to hold crisis meeting after heat deaths</a></div>
+  <div class="article-summary">Temperatures could smash June record in England and Wales set in 1976; red alerts in France after 19 heat deathsTwo children found dead in car in France as heatwave hits EuropeItaly’s health ministry has declared a red heatwave alert in 15 cities inc…</div>
+  <div class="article-meta">Jun 23, 2026  11:23 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/science/audio/2026/jun/23/extreme-heat-is-uk-becoming-40c-country-podcast" target="_blank">Extreme heat: is the UK becoming a 40C country? – podcast</a></div>
+  <div class="article-summary">Met Office forecasters have issued a rare red weather warning for England, with temperatures potentially reaching 40C (104F) in some places. Europe is also dealing with a debilitating heatwave, with schools closed, trains cancelled and France even re…</div>
+  <div class="article-meta">Jun 23, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/23/taiwan-giant-trees-tested-climate-crisis-threat-heaven-sword-of-the-daan-river-aoe" target="_blank">A thousand years old and 20 storeys high: tracking down Taiwan’s tallest trees</a></div>
+  <div class="article-summary">The country’s biggest tree – named Heaven Sword of the Da’an River – is a carbon-storing behemoth hosting whole neighbourhoods of wildlife. But this and other giant trees are under threatThe higher you climb up the gigantic, millennia-old trees of Ta…</div>
+  <div class="article-meta">Jun 23, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22062026/colombia-de-la-espriella-presidency-fracking-projects/" target="_blank">A Trump Ally’s Rise in Colombia Could Mean the End of Landmark Climate Policies</a></div>
+  <div class="article-summary">Right-wing businessman Abelardo de la Espriella holds a razor-thin lead in Colombia’s preliminary presidential vote count, positioning the Donald Trump ally to clear the way for expanded fossil fuel extraction, including controversial fracking projec…</div>
+  <div class="article-meta">Jun 23, 2026  00:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/uk-news/2026/jun/22/uk-met-office-issues-rare-red-weather-warning-for-wednesday-and-thursday" target="_blank">Met Office issues rare red weather warning for Wednesday and Thursday</a></div>
+  <div class="article-summary">UK Health Security Agency also issues red heat alert for six English regions, indicating risk to life even for the healthyMet Office forecasters have issued a rare red weather warning for Wednesday and Thursday in the face of extreme heat and humidit…</div>
+  <div class="article-meta">Jun 23, 2026  00:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/22/chinas-coal-chemicals-boom-risks-repeating-the-mistakes-of-the-past/" target="_blank">China’s coal-chemicals boom risks repeating the mistakes of the past</a></div>
+  <div class="article-summary">By reviving the problematic industry in the name of energy security, China runs the risk of higher emissions, stranded assets and setting back its ambitions as a clean energy leaderThe postChina’s coal-chemicals boom risks repeating the mistakes of t…</div>
+  <div class="article-meta">Jun 23, 2026  00:02 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, June 23, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
