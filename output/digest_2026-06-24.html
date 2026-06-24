@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, June 24, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">67</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">10</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 64 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/ccc-faster-electrification-of-uk-will-put-money-back-into-peoples-pockets/" target="_blank">CCC: Faster electrification of UK will ‘put money back into people’s pockets’</a></div>
+  <div class="article-summary">Faster electrification is the best way to secure lower energy bills and stronger energy security, according to the Climate Change Committee (CCC).
+
+The government’s official climate advisers have stressed the importance of electrification, noting tha…</div>
+  <div class="article-meta">Jun 24, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/06/june-climate-talks-a-recipe-for-gridlock/" target="_blank">June Climate Talks: A Recipe for Gridlock</a></div>
+  <div class="article-summary">Incremental progress in some areas of the Bonn SB64 climate talks, was overshadowed by a walk back on previous commitments, and you-first-ism, setting a poor framework for COP31 talks At the closing session of this year’s mid-year climate talks under…</div>
+  <div class="article-meta">Jun 23, 2026  17:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/06/sb64-the-delegates-speak/" target="_blank">SB64: The Participants Speak</a></div>
+  <div class="article-summary">Over 9,000 people attended the 2026 June Climate Meetings. Some of them share their thoughts on the negotiations and their outcomes for specific target areas, and the way forward. Lisa Nyamadzawo: Urban Planning Professional and Specialist in Interna…</div>
+  <div class="article-meta">Jun 23, 2026  17:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cited-23-june-project-cosmos-launch-science-under-attack-at-bonn-emissions-inequality/" target="_blank">Cited 23 June 2026: Project Cosmos launch | Science ‘under attack’ at Bonn | Emissions inequality</a></div>
+  <div class="article-summary">Welcome to Cited, your essential guide to new climate research.
+
+In the news
+
+SCIENCE ‘UNDER ATTACK’: Climate Home News reported that “dozens” of countries called out “coordinated attacks” aimed at “undermining the role of climate science” at UN clim…</div>
+  <div class="article-meta">Jun 23, 2026  17:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/prof-philippe-ciais-the-worlds-most-highly-cited-climate-scientist/" target="_blank">Prof Philippe Ciais: The world’s most highly cited climate scientist</a></div>
+  <div class="article-summary">Phillipe Ciais has spent almost four decades researching the planet’s carbon cycle – and the ways in which humans have been impacting its balance.
+
+Based at the Laboratoire des Sciences du Climat et de l’Environnement (LSCE) on the outskirts of Paris…</div>
+  <div class="article-meta">Jun 23, 2026  16:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/24/trina-solar-debuts-670-w-topcon-module-for-utility-scale-pv/" target="_blank">Trina Solar debuts 670 W TOPCon module for utility scale PV</a></div>
+  <div class="article-summary">Chinese PV module manufacturer Trina Solar has introduced its Vertex NG TSM-NEG19RC.20 TOPCon solar module series at the Smarter E trade show in Munich, Germany, this week.
+
+“Our new bifacial dual-glass module series will be available in two variants…</div>
+  <div class="article-meta">Jun 24, 2026  10:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/24/rct-group-launches-unit-for-space-solar-applications/" target="_blank">RCT Group launches unit for space solar applications</a></div>
+  <div class="article-summary">German clean energy solutions company RCT Group has launched a subsidiary focused on the development and supply of crystalline silicon solar cells and modules for space applications.
+
+The new company, named RCT Space, will target customers in low Ear…</div>
+  <div class="article-meta">Jun 24, 2026  09:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/06/23/djis-e-bike-motors-expand-past-emtbs-with-new-electric-suv-bike/" target="_blank">DJI’s e-bike motors expand past eMTBs with new electric SUV bike</a></div>
+  <div class="article-summary">Amflow made waves in late 2024 when it launchedits first electric mountain bikes powered by DJI’s impressive Avinox drive system. Now the company is expanding beyond the traditional eMTB category with the launch of the new Amflow TL Carbon, joining a…</div>
+  <div class="article-meta">Jun 24, 2026  08:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/24/feeding-europes-ai-energy-demand/" target="_blank">Feeding Europe’s AI energy demand</a></div>
+  <div class="article-summary">On one hand, European policymakers are aiming for climate neutrality by 2050. On the other, they’re aiming to at least triple the region’s data center market by the mid-2030s to conserve European digital sovereignty and economic competitiveness. Is i…</div>
+  <div class="article-meta">Jun 24, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/24/solar-industrys-shift-from-silver-presents-potential-barrier-for-panel-recycling/" target="_blank">Solar industry’s shift from silver presents potential barrier for panel recycling</a></div>
+  <div class="article-summary">Efforts among leading manufacturers to produce solar cells using base metals instead of silver in a bid to reduce costs could pose a threat to the future economic viability of recycling end-of-life panels.The postSolar industry’s shift from silver pr…</div>
+  <div class="article-meta">Jun 24, 2026  06:37 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-24/africa-s-biggest-solar-mini-grid-operator-sells-stake-to-expand" target="_blank">Africa’s Biggest Solar Mini-Grid Operator Sells Stake to Expand</a></div>
+  <div class="article-summary">WeLight, Africa's leading solar mini-grid operator, has secured a significant investment from the International Finance Corp. This capital injection will fuel WeLight's ambitious expansion into Nigeria and the Democratic Republic of Congo, accelerating the deployment of clean energy solutions across the continent.</div>
+  <div class="article-meta">Jun 24, 2026  08:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-24/londoners-complain-of-unbearable-heat-in-city-s-modern-housing" target="_blank">Londoners Complain of ‘Unbearable Heat’ in City’s Modern Housing</a></div>
+  <div class="article-summary">In Britain’s capital city, an architectural trend that started about two decades ago is now being linked to unbearable levels of indoor heat.…</div>
+  <div class="article-meta">Jun 24, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-24/el-nino-is-raising-the-risk-of-severe-haze-in-southeast-asia" target="_blank">El Niño Is Raising the Risk of Severe Haze in Southeast Asia</a></div>
+  <div class="article-summary">Widespread dryness and heat driven by El Niño will raise the risks of severe haze in Southeast Asia this year, according to a report by the Singapore Institute of International Affairs.…</div>
+  <div class="article-meta">Jun 24, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-23/uk-climate-watchdog-urges-removal-of-green-levies-from-bills" target="_blank">UK Climate Watchdog Urges Removal of Green Levies From Bills</a></div>
+  <div class="article-summary">The UK government must do more to lower electricity costs, including by removing green levies from energy bills, if it is to meet its net zero emissions target by mid-century, the country’s climate watchdog has said.…</div>
+  <div class="article-meta">Jun 24, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-23/exelon-urges-us-states-to-ease-rules-on-utility-owned-generation" target="_blank">Exelon Urges US States to Ease Rules on Utility-Owned Assets</a></div>
+  <div class="article-summary">The head of one of the US’s largest utilities is pressing states across the country to allow it to own generation facilities as it seeks to capitalize on surging demand from data centers, arguing that such a move would help curb rising energy prices…</div>
+  <div class="article-meta">Jun 23, 2026  21:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-24/france-records-hottest-day-ever-as-european-heat-wave-deepens" target="_blank">France Records Hottest Day Ever as European Heat Wave Deepens</a></div>
+  <div class="article-summary">France recorded its hottest ever night and day as the heat wave searing western Europe deepened, disrupting schools, transport and tourist sites.…</div>
+  <div class="article-meta">Jun 24, 2026  09:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/colombia/colombia-mapeo-de-mecanismos-de-respuesta-rapida-mrr-equipo-humanitario-pais-ehp-junio-23-de-2026" target="_blank">Colombia: Mapeo de Mecanismos de Respuesta Rápida (MRR) - Equipo Humanitario País (EHP) (Junio 23 de 2026)</a></div>
+  <div class="article-summary">Country: ColombiaSource: El Equipo Humanitario País ColombiaPlease refer to the attached Infographic.Mecanismos de Respuesta rápida en Colombia.En Colombia existen actualmente varias iniciativas en Mecanismos de Respuesta Rápida (MRR) al nivel nacion…</div>
+  <div class="article-meta">Jun 24, 2026  01:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/colombia/informe-de-impacto-estrategia-de-localizacion" target="_blank">Colombia: Informe de Impacto - Estrategia de Localización</a></div>
+  <div class="article-summary">Country: ColombiaSource: 3iSPlease refer to the attached file.Este informe presenta los principales resultados de la Estrategia de Localización implementada por 3iS en el marco del Consorcio EVIDEM en Colombia, con financiación de la Unión Europea. L…</div>
+  <div class="article-meta">Jun 24, 2026  01:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/venezuela-bolivarian-republic/reporte-de-situacion-venezuela-marzo-y-abril-2026" target="_blank">Reporte de Situación Venezuela – marzo y abril 2026</a></div>
+  <div class="article-summary">Country: Venezuela (Bolivarian Republic of)Source: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Este informe ha sido elaborado por OCHA Venezuela en colaboración con los clústeres y socios humanitarios. Abar…</div>
+  <div class="article-meta">Jun 24, 2026  00:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/map/world/european-civil-protection-pool-offered-and-registered-response-capacities-dg-echo-daily-map-23062026" target="_blank">World: European Civil Protection Pool - Offered and registered response capacities - DG ECHO Daily Map | 23/06/2026</a></div>
+  <div class="article-summary">Country: WorldSource: European Commission's Directorate-General for European Civil Protection and Humanitarian Aid OperationsPlease refer to the attached Map.…</div>
+  <div class="article-meta">Jun 23, 2026  21:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/jun/24/europe-heatwave-live-news-updates-uk-record-breaking-temperatures-italy-red-alert" target="_blank">Europe heatwave live: UK braces for record-breaking temperatures; Italy issues red alert for 16 cities</a></div>
+  <div class="article-summary">Temperatures expected to hit 40C in parts of the UK, as extreme heatwave spreads slowly eastwards, sparking warnings in Italy and the NetherlandsFrance records hottest day ever as 40 people drown across countryTell us: how is the heatwave in the UK a…</div>
+  <div class="article-meta">Jun 24, 2026  11:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/jun/24/paris-heatwave-alcohol-public-events-cities-extreme-temperatures" target="_blank">Emergency swimming and alcohol bans: what cities could learn from Paris's ‘heatwave mode’ | Helen Massy-Beresford</a></div>
+  <div class="article-summary">Paris is implementing "heatwave mode" with measures like public alcohol bans to protect citizens during extreme heat, a strategy born from the deadly 2003 heatwave. This proactive approach, triggered at the "red heatwave alert" level, is crucial for urban resilience as climate change intensifies heat events.</div>
+  <div class="article-meta">Jun 24, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jun/24/wednesday-briefing-how-can-the-uk-protect-its-landscape-in-an-increasingly-hot-world" target="_blank">Wednesday briefing: How can the UK protect its landscape in an increasingly hot world?</a></div>
+  <div class="article-summary">Britain is currently experiencing unprecedented heatwaves, with temperatures in some areas forecast to hit 39C, pushing infrastructure and ecosystems to their breaking point. This extreme weather underscores the urgent need for the UK to adapt its policies and infrastructure, as the Climate Change Committee warns the nation is no longer built for its current climate reality.</div>
+  <div class="article-meta">Jun 24, 2026  08:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/24/weakening-net-zero-policy-damage-economy-climate-change-committee" target="_blank">Weakening UK net zero policy would damage economy, chief climate adviser says</a></div>
+  <div class="article-summary">Climate Change Committee chair Nigel Topping says U-turns damage investor confidence and disrupt businessesWeakening the UK’s net zero policy would disrupt business and damage the economy, the UK’s chief climate adviser has warned.Nigel Topping, chai…</div>
+  <div class="article-meta">Jun 24, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23062026/tanya-trujillo-upper-colorado-river-commission/" target="_blank">As Colorado River States Struggle to Reach Agreement, New Mexico Brings on a Fresh Voice</a></div>
+  <div class="article-summary">The Upper Colorado River Commission welcomed a new representative from New Mexico at a meeting in downtown Denver on Tuesday, where it discussed ongoing negotiations over how to share America’s most over-allocated river. Tanya Trujillo, deputy state…</div>
+  <div class="article-meta">Jun 24, 2026  01:37 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, June 24, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
