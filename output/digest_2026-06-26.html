@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, June 26, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">60</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 58 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/china-briefing-25-june-2026-five-year-plans-passed-critical-mineral-tensions-industrial-decarbonisation-plan/" target="_blank">China Briefing 25 June 2026: Five-year plans passed | Critical-mineral tensions | Industrial decarbonisation plan</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s China Briefing.
+
+China Briefing handpicks and explains the most important climate and energy stories from China over the past fortnight. Subscribe for free here.
+
+Key developments
+
+New five-year plans
+
+GENERATION TARGET: Chi…</div>
+  <div class="article-meta">Jun 25, 2026  17:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/livestock-heat-deaths-in-transit-doubled-in-uk-record-hot-summer-of-2025/" target="_blank">Livestock heat deaths in transit doubled in UK record-hot summer of 2025</a></div>
+  <div class="article-summary">Twice as many animals died due to heat stress en route to slaughterhouses during the UK’s record-hot summer in 2025 compared to 2024, according to new Carbon Brief analysis.
+
+Government figures showed that nearly 6,600 animals – mostly chickens – die…</div>
+  <div class="article-meta">Jun 25, 2026  16:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-uk-sales-of-electric-vehicles-just-overtook-petrol-cars-for-the-first-time/" target="_blank">Analysis: UK sales of electric vehicles just overtook petrol cars for the first time</a></div>
+  <div class="article-summary">For the first time in the UK, more new electric vehicles (EVs) have been sold over a 12-month period than petrol cars, according to Carbon Brief analysis.
+
+The news comes amid a battle over the future of the UK’s “zero-emissions vehicle” (ZEV) mandat…</div>
+  <div class="article-meta">Jun 25, 2026  13:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-how-us-renewable-energy-growth-persists-despite-federal-policy-uncertainty/" target="_blank">Guest post: How US renewable-energy growth persists despite federal policy uncertainty</a></div>
+  <div class="article-summary">Despite recent shifts in federal energy policies, our analysis shows that the US transition to renewable energy is continuing.
+
+The current administration has enacted a range of changes to prioritise fossil-fuel energy and environmental deregulation…</div>
+  <div class="article-meta">Jun 25, 2026  11:38 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/26/longi-showcases-portable-containerized-photovoltaic-station/" target="_blank">Longi showcases portable containerized photovoltaic station</a></div>
+  <div class="article-summary">Longi has unveiled a portable, containerized photovoltaic station that integrates modules, structure, and inverters into a rapidly deployable off-grid system. This innovation boasts a remarkably low Levelized Cost of Energy (LCOE) of approximately €0.0413–€0.045/kWh in European markets like Ukraine and Poland, offering a cost-effective and flexible solution for renewable energy deployment.</div>
+  <div class="article-meta">Jun 26, 2026  11:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/26/germany-wraps-up-solar-plus-storage-tender-with-average-price-of-e0-0534-kwh/" target="_blank">Germany wraps up solar-plus-storage tender with average price of €0.0534/kWh</a></div>
+  <div class="article-summary">Germany has concluded a recent tender for innovative renewable energy projects. The exercise drew 46 bids with a total capacity of 749 MW. The authorities awarded 29 projects with a total capacity of 482 MW.
+
+All selected projects were for PV plants…</div>
+  <div class="article-meta">Jun 26, 2026  11:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/26/who-will-be-the-u-s-solar-cell-technology-leaders-in-2030/" target="_blank">Who will be the U.S. solar cell technology leaders in 2030?</a></div>
+  <div class="article-summary">As the U.S. solar PV sector scales up domestic cell manufacturing, long-term competitiveness will depend on whether American producers can move beyond turn-key foreign equipment to secure independent technology roadmaps and domestic material supply c…</div>
+  <div class="article-meta">Jun 26, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/26/china-topcon-cell-prices-fall-for-fourth-week-as-inventory-pressure-builds/" target="_blank">China TOPCon cell prices fall for fourth week as inventory pressure builds</a></div>
+  <div class="article-summary">China's TOPCon solar cell prices have dropped for the fourth consecutive week, with M10 cells now at $0.0440/W, driven by oversupply and weak demand. This price decline, fueled by falling upstream costs and high inventories, signals potential overcapacity in the solar manufacturing sector, which could impact future investment and deployment of renewable energy technologies.</div>
+  <div class="article-meta">Jun 26, 2026  10:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/26/sungrow-releases-its-first-all-in-one-battery-inverter-for-residential-use/" target="_blank">Sungrow releases its first all-in-one battery inverter for residential use</a></div>
+  <div class="article-summary">Sungrow has launched its PowerHarbor, an all-in-one residential hybrid inverter system featuring modular LFP batteries and advanced AI optimization. This integrated solution significantly boosts solar-to-battery charging speed and grid resilience, accelerating the adoption of clean energy in homes.</div>
+  <div class="article-meta">Jun 26, 2026  10:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/how-europe-s-extreme-heat-and-drought-are-already-biting-into-paychecks" target="_blank">As Europe Bakes, Heatwaves Are Already Biting Into Paychecks</a></div>
+  <div class="article-summary">Extreme heat and drought have cut average household incomes across the continent, putting millions at risk of poverty, according to a new study.…</div>
+  <div class="article-meta">Jun 26, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/europe-s-heat-wave-is-the-worst-on-record-researchers-find" target="_blank">Europe’s Heat Wave Is the Worst on Record, Researchers Find</a></div>
+  <div class="article-summary">High night-time temperatures and humidity made June’s weather particularly dangerous, scientists said.…</div>
+  <div class="article-meta">Jun 26, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/weak-monsoon-emerges-as-india-s-next-economic-worry-after-oil" target="_blank">Weak Monsoon Emerges as India’s Next Economic Worry, After Oil</a></div>
+  <div class="article-summary">A weak monsoon is emerging as India’s next inflation risk, with a developing El Niño threatening to curb rainfall and push up food prices just as an easing oil relieves broader price pressures.…</div>
+  <div class="article-meta">Jun 26, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-25/heat-waves-spur-uk-lawmakers-to-seek-government-response-plan" target="_blank">Heat Waves Spur UK Lawmakers to Seek Government Response Plan</a></div>
+  <div class="article-summary">British lawmakers pressed the government on its plans to protect citizens from scorching weather as the UK experiences its second heat wave this year and the hottest June temperatures on record.…</div>
+  <div class="article-meta">Jun 26, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-06-25/hedge-fund-eyes-crop-disruption-as-super-el-nino-looms" target="_blank">Hedge Fund Eyes Crop Disruption as Super El Niño Looms</a></div>
+  <div class="article-summary">Moreton Capital Partners is shifting focus to extreme weather.…</div>
+  <div class="article-meta">Jun 25, 2026  19:33 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/sport/2026/jun/26/biggest-worry-british-sport-extreme-heat-climate-crisis" target="_blank">Rain stopped play? Biggest worry now in British sport is extreme heat | Emma John</a></div>
+  <div class="article-summary">Climate crisis is on show every day when sportspeople do their thing and the rest of us sweat on the sofaNothing sharpens the distinction between professional athletes and the rest of us like a week of truly hot weather. While we’re apologetically cr…</div>
+  <div class="article-meta">Jun 26, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/jun/26/extreme-heat-europe-productivity-economic-growth" target="_blank">Too hot for work: why extreme heat is a threat to Europe’s productivity</a></div>
+  <div class="article-summary">High temperatures make some workplaces dangerous, with economists warning disruption will dent growthMonique Mosley is used to sweltering conditions at the food factory in Yorkshire where she works, but June’srecord-breaking heatwavehas made conditio…</div>
+  <div class="article-meta">Jun 26, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/26/country-diary-even-in-a-heatwave-haymaking-is-a-race-against-time" target="_blank">Country diary: Even in a heatwave, haymaking is a race against time | Nicola Chester</a></div>
+  <div class="article-summary">Inkpen, Berkshire:Mow, tedder, rake and bale – it all has to be done before the next rainfall, which is increasingly hard to predictWith the weather set fair and a heatwave under way, all around are literally making hay while the sun shines. Last yea…</div>
+  <div class="article-meta">Jun 26, 2026  07:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/26/europe-heatwave-impossible-without-climate-crisis-scientists" target="_blank">European heatwave is worst ever and impossible without climate crisis, scientists say</a></div>
+  <div class="article-summary">Study also finds high humidity means people in hundreds of cities are enduring their worst ever heat stressThe heatwave scorching western Europe is the most severe and widespread ever and is only possible due to the climate crisis driven by fossil fu…</div>
+  <div class="article-meta">Jun 26, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/26/fossil-fuel-firm-total-must-account-total-emissions-french-court-lawsuit/" target="_blank">French court rules Total must revise climate plan to account for all emissions</a></div>
+  <div class="article-summary">Oil and gas giant TotalEnergies has been given six months by a court to publish a more robust climate planThe postFrench court rules Total must revise climate plan to account for all emissionsappeared first onClimate Home News.…</div>
+  <div class="article-meta">Jun 26, 2026  04:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25062026/alabama-birmingham-northern-beltline-wetlands-permit/" target="_blank">Alabama Seeks Permit to Fill Wetlands, Streams for Controversial Highway Project</a></div>
+  <div class="article-summary">Alabama officials are seeking federal permission to fill a stretch of wetlands and streams to move forward on the Birmingham Northern Beltline, a decades-long highway project that critics say is unnecessary and will destroy huge swaths of sensitive f…</div>
+  <div class="article-meta">Jun 26, 2026  00:11 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, June 26, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
