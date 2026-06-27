@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, June 27, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">56</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 50 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/26/local-groups-sierra-club-challenge-permit-for-pipeline-that-would-feed-cp2-lng-export-facility/" target="_blank">Local Groups & Sierra Club Challenge Permit for Pipeline that Would Feed CP2 LNG Export Facility</a></div>
+  <div class="article-summary">Louisiana Approved the Marais Pipeline Coastal Use Permit without Legally Required Impacts Analysis Today, Louisiana Bucket Brigade, Fisherman Involved in Sustaining our Heritage (FISH), and Sierra Club filed a lawsuit in the 38th Judicial District i…</div>
+  <div class="article-meta">Jun 27, 2026  03:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-26-june-2026-heat-records-broken-across-europe-london-climate-action-week-introducing-project-cosmos/" target="_blank">DeBriefed 26 June 2026: Heat records broken across Europe | London climate action week | Introducing ‘Project Cosmos’</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+Record Europe heat
+
+HOTTEST EVER: The UK broke its temperature record for June twice this week, while France recorded its…</div>
+  <div class="article-meta">Jun 26, 2026  17:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-change-of-power-in-colombia-could-mean-for-worlds-fossil-fuel-transition/" target="_blank">Q&A: What change of power in Colombia could mean for world’s fossil-fuel transition</a></div>
+  <div class="article-summary">Over the last four years, Colombia has emerged as one of the most vocal advocates for the world to transition away from fossil fuels.
+
+Under the leadership of leftist politician and economist Gustavo Petro, it became the first major oil-and-gas produ…</div>
+  <div class="article-meta">Jun 26, 2026  17:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/media-reaction-how-climate-change-intensified-europes-record-breaking-june-heat/" target="_blank">Media reaction: How climate change intensified Europe’s record-breaking June heat</a></div>
+  <div class="article-summary">For the second time in two months, western and central Europe has been hit by a record-breaking heatwave.
+
+Temperature records have toppled in multiple countries, with France seeing its “hottest day ever” for two days running and the UK, Spain and Sw…</div>
+  <div class="article-meta">Jun 26, 2026  15:44 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/27/lower-temperatures-higher-heat-pump-efficiency/" target="_blank">Lower temperatures, higher heat pump efficiency</a></div>
+  <div class="article-summary">A major UK study found heat pumps often underperform in real-world conditions, but adjustments during installation, like optimizing for lower temperatures, can significantly boost their efficiency. This matters because improved heat pump performance is crucial for decarbonizing heating and meeting climate targets.</div>
+  <div class="article-meta">Jun 27, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/26/uk-sales-of-electric-vehicles-just-overtook-petrol-cars-for-the-first-time/" target="_blank">UK Sales of Electric Vehicles Just Overtook Petrol Cars for the First Time</a></div>
+  <div class="article-summary">For the first time, UK new electric vehicle sales have surpassed petrol car sales over a 12-month period, a significant milestone in the country's transition away from fossil fuels. This shift signals a critical acceleration in decarbonizing transport, a key sector for meeting ambitious climate targets.</div>
+  <div class="article-meta">Jun 27, 2026  06:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/26/metered-electricity-demand-in-the-new-york-iso-falls-midday-because-of-small-scale-solar/" target="_blank">Metered Electricity Demand in the New York ISO Falls Midday Because of Small-Scale Solar</a></div>
+  <div class="article-summary">Small-scale solar installations in New York are now measurably reducing midday electricity demand, especially in spring, a trend that signals a significant shift in how the grid operates. This growing distributed generation is a key factor in the state's overall declining electricity load, impacting grid management and future energy planning.</div>
+  <div class="article-meta">Jun 27, 2026  06:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/26/byd-seal-08-launching-next-week-and-its-stunning/" target="_blank">BYD Seal 08 Launching Next Week — And It’s Stunning</a></div>
+  <div class="article-summary">BYD is set to unveil the stunning Seal 08 electric SUV next week, signaling a significant expansion in the EV market. This launch matters for the climate as it represents another high-volume, attractive option to accelerate the global transition away from fossil fuel vehicles.</div>
+  <div class="article-meta">Jun 27, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/26/the-limitations-of-powered-trailers-that-nobody-thinks-about/" target="_blank">The Limitations Of Powered Trailers That Nobody Thinks About</a></div>
+  <div class="article-summary">New "active-assist" electric trailers from startups like Evotrex and Pebble promise to ease EV towing range anxiety by powering themselves. However, these innovations, while seemingly climate-friendly, could actually increase overall energy consumption and emissions due to the added weight and complexity of their electric powertrains.</div>
+  <div class="article-meta">Jun 27, 2026  06:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/06/26/renewable-power-purchase-agreement-prices-about-to-spike/" target="_blank">Renewable Power Purchase Agreement Prices About To Spike</a></div>
+  <div class="article-summary">The Trump administration’s “One Big Beautiful Bill Act” (OBBBA) was full of all kinds of crap, rubbish, and bile. In short, it was named for what it was not — but that’s enough to fool most people. One thing the OBBBA did was rapidly phase out federa…</div>
+  <div class="article-meta">Jun 27, 2026  06:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/us-appeals-court-rejects-trump-epa-bid-to-roll-back-soot-pollution-limit" target="_blank">US Appeals Court Rejects Trump EPA Bid to Roll Back Soot Pollution Limit</a></div>
+  <div class="article-summary">In a blow to the Trump administration’s deregulatory agenda, a federal appeals court on Friday rejected the Environmental Protection Agency’s attempt to roll back soot pollution standards set in 2024.…</div>
+  <div class="article-meta">Jun 26, 2026  23:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/europe-heat-wave-how-record-breaking-temperatures-cause-widespread-disruption" target="_blank">Why Is Europe Warming Twice as Fast as the World Average?</a></div>
+  <div class="article-summary">Europe is contending with a new climate reality as extreme heat is no longer a rare occurrence.…</div>
+  <div class="article-meta">Jun 26, 2026  19:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/la-palisades-fire-jury-fails-to-reach-verdict-in-arson-trial" target="_blank">LA Palisades Fire Jury Fails to Reach Verdict in Arson Trial</a></div>
+  <div class="article-summary">A federal jury failed to reach a verdict in the arson case over the most destructive wildfire in Los Angeles history.…</div>
+  <div class="article-meta">Jun 26, 2026  19:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/china-three-gorges-is-said-in-talks-to-buy-german-wind-assets" target="_blank">China Three Gorges Is Said In Talks to Buy German Wind Assets</a></div>
+  <div class="article-summary">China Three Gorges Corp. is in talks to buy a German wind portfolio from NEAG Norddeutsche Energie AG, according to a person with knowledge of the matter.…</div>
+  <div class="article-meta">Jun 26, 2026  17:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/27/snow-and-ice-on-swiss-glaciers-melting-at-alarming-rate-amid-heatwave-expert-says" target="_blank">Snow and ice on Swiss glaciers melting at alarming rate amid heatwave, expert says</a></div>
+  <div class="article-summary">Accumulation on Switzerland’s glaciers from last winter expected to all be gone by Monday amid ‘enormous’ melt rates across AlpsSwiss glaciers are set to lose an enormous amount of ice due to the heatwave battering Europe, according to the head of Gl…</div>
+  <div class="article-meta">Jun 27, 2026  05:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/26062026/columbia-missouri-mayor-at-london-climate-week/" target="_blank">A Midwest Mayor Joins London Climate Week as a ‘Rational Optimist’ Who Aims to Get Things Done</a></div>
+  <div class="article-summary">London Climate Action Week opened in the British capital just as an unprecedented heat wave gripped the country and mainland Europe. Among the tens of thousands of attendees at the global event were elected leaders from U.S. cities who are pursuing o…</div>
+  <div class="article-meta">Jun 27, 2026  02:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/26062026/climate-lawsuits-surge-after-trump-regulatory-rollbacks/" target="_blank">Trump’s ‘Unprecedented’ Regulatory Rollbacks Fuel Surge in Protective Climate Lawsuits</a></div>
+  <div class="article-summary">Sweeping revisions to U.S. climate policy in the first year of President Donald Trump’s second term have spawned a wave of protective litigation, legal challenges aimed not at advancing new climate goals but at preventing the rollbacks of existing re…</div>
+  <div class="article-meta">Jun 26, 2026  22:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/video/2026/jun/26/europeans-voice-concerns-amid-sweltering-heatwave-video" target="_blank">Europeans voice concerns amid sweltering heatwave - video</a></div>
+  <div class="article-summary">European residents and tourists voiced their concerns over soaring temperatures as the continent continues to grapple with 'the most severe and widespread' heatwave ever. In summer 2022, more than 60,000 people died due to heat in Europe, and the cur…</div>
+  <div class="article-meta">Jun 26, 2026  22:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/26/europe-heatwave-shift-east-child-deaths-france-cities-heat-stress" target="_blank">Fourth toddler dies in France as Europe’s brutal heatwave forecast to shift east</a></div>
+  <div class="article-summary">Scientists say hot spell is worst ever, with nearly half of region’s 850 largest cities facing unprecedented heat stressThe number of deaths in France linked to the heatwave has climbed to four toddlers and more than 55 drownings, as the brutally hot…</div>
+  <div class="article-meta">Jun 26, 2026  20:04 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, June 27, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
