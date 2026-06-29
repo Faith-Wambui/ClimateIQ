@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, June 29, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">35</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 29 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/06/29/we-need-no-go-mining-zones-for-the-energy-transition-to-be-just-heres-how-it-could-work/" target="_blank">We need no-go mining zones for the energy transition to be just: Here’s how it could work</a></div>
+  <div class="article-summary">As rising demand for critical minerals is compounding threats to fragile ecosystems, NGOs have mapped out areas that should be off-limits to miningThe postWe need no-go mining zones for the energy transition to be just: Here’s how it could workappear…</div>
+  <div class="article-meta">Jun 29, 2026  12:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/29/mexico-aims-to-add-22-gw-of-renewables-by-2030/" target="_blank">Mexico aims to add 22 GW of renewables by 2030</a></div>
+  <div class="article-summary">Mexico’s President Claudia Sheinbaum Pardo presented last week the country’s Renewable Energy Growth Plan, which aims to increase the share of clean energy in the electricity mix, reduce fossil fuel consumption, and cut dependence on natural gas impo…</div>
+  <div class="article-meta">Jun 29, 2026  11:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-climate-change-has-caused-one-fifth-of-pine-island-glacier-retreat/" target="_blank">Guest post: Climate change has caused one-fifth of Pine Island glacier retreat</a></div>
+  <div class="article-summary">The Pine Island glacier in West Antarctica is one of the fastest-changing glaciers in the world.
+
+Alongside its neighbour, the Thwaites glacier, it is responsible for almost half the sea level rise caused by melting ice sheets in Antarctica.
+
+Scienti…</div>
+  <div class="article-meta">Jun 29, 2026  02:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/29/how-to-detect-low-energy-fractures-in-pv-modules/" target="_blank">How to detect low-energy fractures in PV modules</a></div>
+  <div class="article-summary">Researchers developed a daylight electroluminescence imaging method that enables detection of low-energy glass cracks in PV modules using motion-enhanced SWIR drone imaging. The approach allows simultaneous identification of cell defects and glass cr…</div>
+  <div class="article-meta">Jun 29, 2026  12:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/29/ecoflow-unveils-oasis-3-0-pioneering-energy-intelligence-for-the-european-home/" target="_blank">EcoFlow unveils OASIS 3.0: Pioneering energy intelligence for the European home</a></div>
+  <div class="article-summary">EcoFlow launched its OASIS 3.0 home energy management system at Intersolar 2026 in Munich, signaling a significant advancement in intelligent energy control for Europe's growing residential solar market. This innovation is crucial as it empowers homeowners to optimize their energy consumption and storage, directly contributing to grid stability and accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Jun 29, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/29/panasonic-launches-co%e2%82%82-air-to-water-heat-pump-with-coefficient-of-performance-of-6-1/" target="_blank">Panasonic launches CO₂ air-to-water heat pump with coefficient of performance of 6.1</a></div>
+  <div class="article-summary">Panasonic has launched a residential CO₂ (R744) air-to-water heat pump range designed for efficient hot water production, even in low ambient temperatures, using natural carbon dioxide refrigerant.The system offers 4.0 kW or 6.0 kW outdoor units with…</div>
+  <div class="article-meta">Jun 29, 2026  11:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/29/atmoce-integrates-snow-removal-tech-in-microinverters/" target="_blank">Atmoce integrates snow removal tech in microinverters</a></div>
+  <div class="article-summary">Atmoce has introduced Smart Snow Removal for its MI-series microinverters, using controlled low-power operation to gently heat PV modules and accelerate snow melt. The function is managed via a dedicated app with multiple operating modes and configur…</div>
+  <div class="article-meta">Jun 29, 2026  11:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/06/29/oman-tenders-1-5-gw-of-solar/" target="_blank">Oman tenders 1.5 GW of solar</a></div>
+  <div class="article-summary">Oman’s state-owned power and water procurement agency, PWP, has opened a tender covering two solar projects with a cumulative capacity of 1.5 GW.
+
+Tender details list the projects as the Adam Solar independent power project (IPP), a 1 GW solar site t…</div>
+  <div class="article-meta">Jun 29, 2026  10:43 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29062026/london-climate-action-week-climate-investments/" target="_blank">Millions in Climate Investments for Developing Countries Were Just Announced. It’s Not Nearly Enough.</a></div>
+  <div class="article-summary">During London Climate Action Week, a wave of new climate finance pledges for developing nations was unveiled, totaling hundreds of millions. While a step forward, these commitments are critically insufficient to address the escalating climate crisis faced by these vulnerable economies.</div>
+  <div class="article-meta">Jun 29, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-29/extreme-heat-grips-eastern-europe-after-records-fall-in-germany" target="_blank">Extreme Heat Grips Eastern Europe After Records Fall in Germany</a></div>
+  <div class="article-summary">The deadly heat wave that’s set temperature records across western Europe for more than a week has shifted east to scorch Hungary, Romania and the Balkans.…</div>
+  <div class="article-meta">Jun 29, 2026  11:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-28/biggest-us-wind-farm-arrives-as-trump-policies-hit-industry" target="_blank">America’s Biggest Wind Farm Arrives Just as Industry Heads for Declines</a></div>
+  <div class="article-summary">The pace of onshore turbine installations is set to slow until 2030 as the renewables sector faces a myriad of headwinds.…</div>
+  <div class="article-meta">Jun 28, 2026  16:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/jun/29/extreme-heat-europe-germany-poland-czechia-hungary-serbia-heatwave-nato-rutte-starmer-eu-latest-news-updates" target="_blank">Extreme heat continues in central and eastern Europe with temperatures of 38C expected – Europe live</a></div>
+  <div class="article-summary">Germany, Czechia, Poland and Hungary reached record temperatures of more than 40C on SundayAs a record-breaking heatwave swept across Europe, the Balkans remained on alert for sweltering temperatures on Monday, prompting health warnings and sparking…</div>
+  <div class="article-meta">Jun 29, 2026  12:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-29/el-nino-threatens-to-deepen-crisis-for-brazilian-rice-farmers" target="_blank">El Niño Threatens to Deepen Crisis for Brazilian Rice Farmers</a></div>
+  <div class="article-summary">Southern Brazil's crucial rice-growing region faces a deepening crisis as El Niño exacerbates years of extreme weather, forcing farmers to cut planting plans. This threatens a significant disruption to global rice supply, impacting food security and prices worldwide.</div>
+  <div class="article-meta">Jun 29, 2026  12:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29062026/offshore-oil-threatens-whale-corridors-coral-reefs/" target="_blank">Offshore Oil and Gas Rush Threatens Whale Corridors and Coral Reefs</a></div>
+  <div class="article-summary">A global surge in offshore oil and gas exploration is now encroaching on critical marine ecosystems, from Kenya's coral reefs to Arctic whale migration routes. This expansion poses a significant threat to biodiversity and the ocean's capacity to absorb carbon, directly undermining climate mitigation efforts.</div>
+  <div class="article-meta">Jun 29, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29062026/endangered-northeastern-bulrush-to-be-delisted/" target="_blank">Federal Officials Say an Endangered Wetland Plant Is Recovering. Not Everyone Agrees.</a></div>
+  <div class="article-summary">Federal officials report a significant recovery for the endangered northeastern bulrush, with populations surging from 13 to 148 across six states since 1991. This comeback, if confirmed, signals a potential win for habitat restoration efforts and highlights the resilience of certain ecosystems, offering a glimmer of hope in broader conservation battles.</div>
+  <div class="article-meta">Jun 29, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jun/29/first-edition-monday-briefing-heatwave-europe-uk-political-action-far-right-culture-wars" target="_blank">Monday briefing: Will the heatwave spark action, or further inflame the culture wars?</a></div>
+  <div class="article-summary">In today’s newsletter: Last week’s extreme weather should galvanise the political response to global heating. But the sad paradox is that it could bolster support for climate-sceptical partiesGood morning. You could be forgiven for thinking that last…</div>
+  <div class="article-meta">Jun 29, 2026  08:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/jun/29/progressive-case-for-air-conditioning-climate-adaptation" target="_blank">Not just for rich people: the progressive case for air conditioning | Phineas Harper</a></div>
+  <div class="article-summary">Air conditioning can bring significant benefits but also real harms. The answer is for it to take its place alongside a comprehensive state plan for climate adaptationAs Britain reels from Europe’sworst ever heatwave, many households are, for the fir…</div>
+  <div class="article-meta">Jun 29, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/29/were-up-against-forces-that-have-all-the-money-in-the-world-erin-brockovich-on-her-battle-against-ai-datacentres" target="_blank">‘We’re up against forces that have all the money in the world’: Erin Brockovich on her battle against AI datacentres</a></div>
+  <div class="article-summary">In 1993, she squeezed a $333m settlement from a Californian energy company in a scandal over contaminated water. Three decades later, she has a new target in her sights – and it’s globalWhen Erin Brockovich woke to find 30 emails from people from the…</div>
+  <div class="article-meta">Jun 29, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/28/temperature-records-tumble-across-europe-as-heatwave-moves-east" target="_blank">Germany, Czechia, Poland and Hungary swelter through hottest days on record</a></div>
+  <div class="article-summary">Heat records of over 40C set as extreme weather spreads east, with more than 191m in Europe enduring 35C or aboveAfter decades of  warnings, why is Europe so unprepared?Germany, Czechia, Poland and Hungary reached record temperatures of more than 40C…</div>
+  <div class="article-meta">Jun 28, 2026  22:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/uk-news/2026/jun/28/body-boy-manchester-reservoir-uk-heatwave" target="_blank">Body of boy, 15, recovered from Manchester reservoir amid UK heatwave</a></div>
+  <div class="article-summary">At least seven people have died in water-related incidents during record-breaking June temperaturesThe body of a 15-year-old boy has been recovered from a reservoir near Manchester, as police renewed warnings about the dangers of swimming in open wat…</div>
+  <div class="article-meta">Jun 28, 2026  18:02 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, June 29, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
