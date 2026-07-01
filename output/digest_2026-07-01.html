@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, July 01, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">48</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 42 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/01/german-researchers-achieve-world-record-25-5-efficiency-for-perovskite-cigs-tandem-solar-cell/" target="_blank">German researchers achieve world record 25.5% efficiency for perovskite-CIGS tandem solar cell</a></div>
+  <div class="article-summary">German researchers have set a new world record, achieving 25.5% efficiency with a perovskite-CIGS tandem solar cell, surpassing the previous benchmark set by Tokyo City University. This breakthrough is significant because higher efficiency solar cells mean more electricity can be generated from the same surface area, accelerating the transition to renewable energy and reducing our reliance on fossil fuels.</div>
+  <div class="article-meta">Jul 01, 2026  10:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/01/rwe-ppc-complete-930-mw-solar-cluster-in-greece/" target="_blank">RWE, PPC complete 930 MW solar cluster in Greece</a></div>
+  <div class="article-summary">Germany’s RWE and Greece’s PPC have finished building nine solar farms in northern Greece. The two partners are now working on two additional projects in the area with a combined capacity of 567 MW, due for commissioning next year.The postRWE, PPC co…</div>
+  <div class="article-meta">Jul 01, 2026  10:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/01/vertical-agrivoltaics-for-oats/" target="_blank">Vertical agrivoltaics for oats</a></div>
+  <div class="article-summary">Swedish researchers found that growing oats under vertical agrivoltaic systems boosted crop performance compared to traditional methods. This innovative dual-use approach, integrating solar power generation with agriculture, demonstrates a promising pathway to increase food production on less land, a critical factor in adapting to climate change.</div>
+  <div class="article-meta">Jul 01, 2026  10:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/01/maxeon-qcells-settle-patent-dispute/" target="_blank">Maxeon, Qcells settle patent dispute</a></div>
+  <div class="article-summary">Solar giants Maxeon and Qcells have settled all patent disputes, including those concerning Qcells' TOPCon solar cell technology, ending litigation initiated by Maxeon in Texas. This resolution removes a significant legal hurdle, allowing both companies to accelerate their focus on expanding solar manufacturing and delivering advanced solar products, crucial for meeting global decarbonization goals.</div>
+  <div class="article-meta">Jul 01, 2026  09:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/01/biwatt-launches-modular-sodium-ion-residential-storage-system/" target="_blank">Biwatt launches modular sodium-ion residential storage system</a></div>
+  <div class="article-summary">The new PowerNest R5 Series features a wire-free, stackable architecture utilizing NFPP sodium-ion chemistry. It is available as a standalone battery pack or as an all-in-one system with an integrated single-phase hybrid inverter.The postBiwatt launc…</div>
+  <div class="article-meta">Jul 01, 2026  09:07 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-01/list-of-uninsurable-assets-keeps-growing-allianz-executive-says" target="_blank">Climate Change Keeps Adding to the List of Uninsurable Assets, Allianz Executive Says</a></div>
+  <div class="article-summary">Extreme weather events — such as the heat wave gripping Europe — are making a growing number of assets too risky to insure, according to a director at Europe’s largest primary insurer.…</div>
+  <div class="article-meta">Jul 01, 2026  09:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-01/australia-s-largest-green-hydrogen-project-secures-green-light" target="_blank">Australia’s Largest Clean Hydrogen Plant Gets Orica Green Light</a></div>
+  <div class="article-summary">Orica Ltd. approved a major renewable hydrogen project, the biggest in Australia to reach the milestone.…</div>
+  <div class="article-meta">Jul 01, 2026  05:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-30/emergency-ordered-for-largest-us-power-grid-as-record-heat-nears" target="_blank">Emergency Ordered for Largest US Power Grid as Record Heat Nears</a></div>
+  <div class="article-summary">The Trump administration has declared a power emergency for the nation’s largest energy grid in advance of a dangerous heat wave that threatens to strain electricity infrastructure.…</div>
+  <div class="article-meta">Jun 30, 2026  22:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-30/canada-prime-minister-mark-carney-won-t-curb-oil-growth-to-meet-climate-targets" target="_blank">Carney Concedes Canada Will Overshoot Emissions Forecasts</a></div>
+  <div class="article-summary">Prime Minister Mark Carney said Canada’s emissions will be higher in the coming years than previously projected, his clearest admission yet that the country’s near-term climate targets are likely out of reach.…</div>
+  <div class="article-meta">Jun 30, 2026  21:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-06-30/eastern-us-heat-wave-set-to-collide-with-world-cup-matches" target="_blank">Eastern US Heat Wave Set to Collide With World Cup Matches</a></div>
+  <div class="article-summary">A dangerous heat wave is expected to engulf the eastern US in the coming days, threatening power grids just as a critical slate of World Cup football matches is scheduled heading into the Fourth of July weekend.…</div>
+  <div class="article-meta">Jun 30, 2026  17:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/01/ocean-surface-temperatures-hit-a-record-high-for-june" target="_blank">Ocean surface temperatures hit a record high for June</a></div>
+  <div class="article-summary">European scientists warn of consequences for weather patterns, the global climate and marine lifeTemperatures on the ocean surface have hit a record high, raising fears of another burst of extreme heat this summer.On 21 June, temperatures outside the…</div>
+  <div class="article-meta">Jul 01, 2026  05:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30062026/hazardous-chemical-accidents-rise-as-safety-rules-weaken/" target="_blank">Chemical Accidents Rise, Analysis Shows, as Trump Administration Proposes Weakening Safety Rules</a></div>
+  <div class="article-summary">Physicist Ronald Koopman appeared at a Southern California Air District meeting in 2018 to talk about what seemed like an arcane scientific topic: hydrofluoric acid dispersion and water mitigation testing.  Hydrofluoric acid, also known as hydrogen f…</div>
+  <div class="article-meta">Jul 01, 2026  03:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30062026/large-fires-scorch-drought-stricken-western-u-s/" target="_blank">Large Fires Scorch Drought-Stricken Western U.S.</a></div>
+  <div class="article-summary">After an exceptionally warm and dry winter, vast swaths of the Western United States are up in flames—and conditions could get worse.  Several large fires are burning in Arizona, Colorado, New Mexico, Wyoming, Nevada and Utah. In Colorado, three fede…</div>
+  <div class="article-meta">Jul 01, 2026  01:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jun/30/world-cup-matches-extreme-heat" target="_blank">World Cup matches played in potentially dangerous heat as players’ union makes climate warning</a></div>
+  <div class="article-summary">Nine of the group stage games played in severe heat, analysis finds, as union points to lessons for the whole sportNine matches in theWorld Cupgroup stage were played amid potentially dangerous heat and humidity, a Guardian analysis shows, as the glo…</div>
+  <div class="article-meta">Jun 30, 2026  19:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jun/30/labour-mps-tell-burnham-ignore-deluded-calls-more-north-sea-drilling" target="_blank">Labour MPs tell Burnham to ignore ‘deluded’ calls for more North Sea drilling</a></div>
+  <div class="article-summary">Critics debunk economic claims as research finds Rosebank development would produce estimated 250m tonnes of CO2UK politics live – latest updatesScores of Labour MPs have urged the prospective prime minister Andy Burnham to rule out the “tin-eared” a…</div>
+  <div class="article-meta">Jun 30, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, July 01, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
