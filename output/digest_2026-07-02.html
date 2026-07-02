@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, July 02, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">58</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 56 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-uk-newspapers-have-already-printed-63-editorials-in-2026-backing-north-sea-drilling/" target="_blank">Analysis: UK newspapers have already printed 63 editorials in 2026 backing North Sea drilling</a></div>
+  <div class="article-summary">UK newspapers have already published 63 editorials this year calling for more oil and gas extraction in the North Sea, according to Carbon Brief analysis.
+
+The national outlets, including the Sun, the Daily Telegraph and the Times, argue that the nat…</div>
+  <div class="article-meta">Jul 01, 2026  17:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cropped-1-july-2026-heatwave-scorches-europe-uk-2050-farm-plan-whats-next-for-the-high-seas-treaty/" target="_blank">Cropped 1 July 2026: Heatwave scorches Europe | UK 2050 farm plan | What’s next for the High Seas Treaty</a></div>
+  <div class="article-summary">We handpick and explain the most important stories at the intersection of climate, land, food and nature over the past fortnight.
+
+This is an online version of Carbon Brief’s fortnightly Cropped email newsletter.
+
+Subscribe for free here.
+
+Key develo…</div>
+  <div class="article-meta">Jul 01, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/02/africas-largest-floating-pv-plant-comes-online-in-morocco/" target="_blank">Africa’s largest floating PV plant comes online in Morocco</a></div>
+  <div class="article-summary">H2air PX, the construction subsidiary of France-based H2air Group, has announced the completion of a 13 MW floating photovoltaic plant installed on the Oued Rmel Dam reservoir, near Ksar Sghir, in northern Morocco, close to the Tanger Med port comple…</div>
+  <div class="article-meta">Jul 02, 2026  11:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/02/el-salvadors-pv-capacity-tops-846-mw/" target="_blank">El Salvador’s PV capacity tops 846 MW</a></div>
+  <div class="article-summary">El Salvador’s installed electricity generation capacity reached 3,200.61 MW by the end of 2025, according to the dynamic electricity statistics visualization tool of the General Superintendency of Electricity and Telecommunications (Siget). Of this t…</div>
+  <div class="article-meta">Jul 02, 2026  10:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/02/pv-capacity-under-chiles-net-billing-scheme-exceeds-500-mw/" target="_blank">Chile has now more than 500 MW of solar power under net billing schem</a></div>
+  <div class="article-summary">Chile has surpassed 500 MW of operational solar power under its Net Billing scheme, with the agricultural sector leading adoption. This significant milestone highlights Chile's rapid transition to distributed renewable energy, crucial for meeting its climate goals and reducing reliance on fossil fuels.</div>
+  <div class="article-meta">Jul 02, 2026  10:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/02/new-pv-module-recycling-tech-achieves-97-75-silicon-recovery-for-electrode-production/" target="_blank">New PV module recycling tech achieves 97.75% silicon recovery for electrode production</a></div>
+  <div class="article-summary">Researchers developed a process to recover silicon and silicon dioxide (SiO₂) from end-of-life crystalline silicon solar cells for use in lithium-ion (Li-ion) battery electrodes across different substrates. The recovered material achieved around 97.7…</div>
+  <div class="article-meta">Jul 02, 2026  10:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/02/new-research-shows-ground-mounted-pv-needs-enhanced-earthing-systems-to-safely-manage-lightning-induced-step-voltages/" target="_blank">New research shows ground-mounted PV needs enhanced earthing systems to safely manage lightning-induced step voltages</a></div>
+  <div class="article-summary">Large ground-mounted PV plants face significant lightning-induced transient voltages that can increase step-voltage hazards, especially in open, high-exposure terrains, requiring carefully designed earthing and bonding systems. Researchers from Austr…</div>
+  <div class="article-meta">Jul 02, 2026  09:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-02/what-climate-change-means-for-sport-and-what-sport-means-for-climate-change" target="_blank">The Future of Sport on an Overheating Planet</a></div>
+  <div class="article-summary">What is climate change doing to sport? And — given the emissions impact of some big events — what is sport doing to climate change?…</div>
+  <div class="article-meta">Jul 02, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-02/mekong-capital-starts-climate-focused-fund-backed-by-green-group" target="_blank">Mekong Capital Starts Climate-Focused Fund Backed by Green Group</a></div>
+  <div class="article-summary">Vietnam’s Mekong Capital Ltd. is launching a climate-focused private equity fund with a $50 million anchor investment from the Green Climate Fund.…</div>
+  <div class="article-meta">Jul 02, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-01/big-tech-s-carbon-emissions-spike-with-runaway-growth-of-ai" target="_blank">Big Tech’s Carbon Emissions Spike With Runaway Growth of AI</a></div>
+  <div class="article-summary">Amazon and Google report jumps in their greenhouse gas output as the data center boom gains momentum.…</div>
+  <div class="article-meta">Jul 01, 2026  21:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-01/ivory-coast-ghana-floods-claim-71-lives-as-rains-intensify" target="_blank">Ivory Coast, Ghana Floods Claim 71 Lives as Rains Intensify</a></div>
+  <div class="article-summary">Heavy rains have left at least 71 people dead in Ivory Coast and Ghana over the past few days, with the worst downpour occurring Sunday and Monday.…</div>
+  <div class="article-meta">Jul 01, 2026  20:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-01/amazon-s-carbon-emissions-rose-16-in-2025-amid-data-center-boom" target="_blank">Amazon’s Carbon Emissions Rose 16% in 2025 Amid Data Center Boom</a></div>
+  <div class="article-summary">Amazon.com Inc.’s carbon emissions rose for the second year in a row in 2025, driven by data center construction and fuel consumed by its delivery operation.…</div>
+  <div class="article-meta">Jul 01, 2026  19:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/south-sudan/south-sudan-nutrition-cluster-quarterly-bulletin-q2-2026" target="_blank">South Sudan Nutrition Cluster - Quarterly Bulletin | Q2 2026</a></div>
+  <div class="article-summary">Country: South SudanSources: Nutrition Cluster, UN Children's FundPlease refer to the attached file.Last Reporting Month: March 202624 Partners Reporting836 Functional Nutrition SitesNUTRITION RESPONSE SUMMARY2025 Annual Achievements & Q1 2026 Update…</div>
+  <div class="article-meta">Jul 02, 2026  08:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/democratic-republic-congo/rdc-epidemie-debola-bvd-reunion-du-groupe-de-travail-local-ltc-telecoms-29062026-meeting-minutes" target="_blank">DR Congo: RDC, épidémie d’Ebola BVD : Réunion du groupe de travail local LTC Télécoms (29/06/2026) [Meeting Minutes]</a></div>
+  <div class="article-summary">A robust response is required to avoid a humanitarian catastrophe. The plan aims to immediately and rapidly scale-up operations and to increase the provision of protection and life-saving assistance.…</div>
+  <div class="article-meta">Jul 02, 2026  07:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/sudan/unicef-sudan-humanitarian-situation-report-no-42-30-april-2026" target="_blank">UNICEF Sudan Humanitarian Situation Report No. 42, 30 April 2026</a></div>
+  <div class="article-summary">Country: SudanSource: UN Children's FundPlease refer to the attached file.HighlightsOn 15 April 2026, Sudan's war entered its fourth year with no signs of abating, as violence, mass displacement and collapsed services continue to drive one of the wor…</div>
+  <div class="article-meta">Jul 02, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/venezuela-bolivarian-republic/earthquakes-venezuela-situation-report-no-8-01-july-2026-time-0700-pm" target="_blank">Earthquakes in Venezuela: Situation Report No. 8 (01 July 2026, Time: 07:00 pm)</a></div>
+  <div class="article-summary">Country: Venezuela (Bolivarian Republic of)Source: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Situation Report No. 8Earthquakes in Venezuela01 July 2026Time: 7:00 pmHighlightsFollowing the 24 June earthqua…</div>
+  <div class="article-meta">Jul 02, 2026  06:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/venezuela-bolivarian-republic/terremotos-en-venezuela-reporte-de-situacion-8-01-de-julio-de-2026-hora-0700-pm" target="_blank">Terremotos en Venezuela: Reporte de situación #8 (01 de julio de 2026, Hora: 07:00 pm)</a></div>
+  <div class="article-summary">Country: Venezuela (Bolivarian Republic of)Source: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Reporte de situación N.º 8Terremotos en Venezuela1 de julio de 2026Hora: 7:00 pmDestacadosTras los sismos de ma…</div>
+  <div class="article-meta">Jul 02, 2026  06:02 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/02/huge-rise-mammals-poultry-livestock-farming-worldwide-nature-report" target="_blank">Global boom in livestock farming since 2006 is piling pressure on nature, report finds</a></div>
+  <div class="article-summary">Wildlife at risk as demand for cropland and water grows to feed 50% rise in farmed animals, campaign alliance saysThe number of mammals and poultry farmed worldwide has increased by half in the last two decades, research shows, and the amount of crop…</div>
+  <div class="article-meta">Jul 02, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/2026/jul/02/weatherwatch-cleaner-clouds-slow-rate-global-heating" target="_blank">Weatherwatch: Cleaner clouds may slow rate of global heating</a></div>
+  <div class="article-summary">Study shows falling dust levels are making clouds more reflective, an effect not taken into account in climate modelsCleaner clouds are helping to slow the rate of global heating, a study shows. Falling levels of dust in the atmosphere are making clo…</div>
+  <div class="article-meta">Jul 02, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01072026/new-mexico-immigration-detention-center-water-use/" target="_blank">A New Mexico Town Is Running Dry. An Immigration Detention Center Is Its Biggest Water Customer.</a></div>
+  <div class="article-summary">Following years of drought, the wells in Estancia, N.M., are running dry.  After declaring a water emergency last week, the small town in Torrance County is hauling in water to fill its pipes. Estancia has also reduced water sales to the Torrance Cou…</div>
+  <div class="article-meta">Jul 02, 2026  00:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/01/england-hottest-june-on-record-met-office-data" target="_blank">England has just had its hottest June on record, Met Office data shows</a></div>
+  <div class="article-summary">Chief scientist says dangerous heatwaves, which are getting more likely, ‘bring home the implications of climate change’The month of June was the hottest in England on record, driven by a searing heatwave in the final days of the month, which for the…</div>
+  <div class="article-meta">Jul 01, 2026  18:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jul/01/new-orleans-relocation-reactions-climate" target="_blank">New Orleans residents on warning to abandon sinking city: ‘Nobody wants to leave home’</a></div>
+  <div class="article-summary">After a recent study found New Orleans is at a ‘point of no return’ amid the climate crisis, some locals say they will ‘only leave if forced to’. But what would it take to stay?When a study in May concluded thatNew Orleanshad hit a “point of no retur…</div>
+  <div class="article-meta">Jul 01, 2026  15:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, July 02, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
