@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, July 03, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">54</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 48 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-where-do-the-un-secretary-general-candidates-stand-on-climate-change/" target="_blank">Q&A: Where do the UN secretary general candidates stand on climate change?</a></div>
+  <div class="article-summary">Candidates are being nominated to take over as the UN secretary general, when António Guterres steps down after nearly a decade in the role at the end of 2026.
+
+Since becoming the ninth secretary general on 1 January 2017, Guterres has been a strong…</div>
+  <div class="article-meta">Jul 02, 2026  15:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/03/chiles-pv-capacity-reaches-12-18-gw/" target="_blank">Chile’s PV capacity reaches 12.18 GW</a></div>
+  <div class="article-summary">Chile’s solar PV capacity reached 12.2 GW, representing about 61% of total reneweable energy capacity as of May 2026. Solar also led renewables generation, contributing 1,825 GWh in April—over 55% of monthly reneables output in the National Electric…</div>
+  <div class="article-meta">Jul 03, 2026  10:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/03/agrivoltaic-cold-frame-system-for-controlled-environment-crop-cultivation/" target="_blank">Agrivoltaic cold frame system for controlled-environment crop cultivation</a></div>
+  <div class="article-summary">Canadian researchers have unveiled an agrivoltaic cold frame that uses semi-transparent solar panels to create controlled growing environments, boosting lettuce yields by an impressive margin in field trials. This innovation demonstrates a practical pathway to simultaneously increase food production and generate clean energy on the same land footprint, offering a dual benefit for climate resilience and resource efficiency.</div>
+  <div class="article-meta">Jul 03, 2026  10:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/03/bhutan-secures-funding-for-310-mw-of-solar/" target="_blank">Bhutan secures funding for 310 MW of solar</a></div>
+  <div class="article-summary">The Asian Development Bank has approved a $160 million ordinary capital resources loan that will go towards a solar expansion project in Bhutan.
+
+The expansion project will develop three solar projects in the country with a combined capacity of 310 M…</div>
+  <div class="article-meta">Jul 03, 2026  10:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/03/blocking-el-nino-and-extreme-events-redistribute-solar-resource-in-2026-so-far/" target="_blank">Blocking, El Niño and extreme events redistribute solar resource in 2026 so far</a></div>
+  <div class="article-summary">In a new weekly update forpv magazine, Solcast, a DNV company, reports that, in the first half of 2026, solar irradiance was broadly above average across Europe, the United States, Southeast Asia, South America, and Central Africa, driven by shifting…</div>
+  <div class="article-meta">Jul 03, 2026  09:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/03/chinese-pv-industry-brief-tcl-zhonghuan-completes-acquisition-of-das-solar/" target="_blank">Chinese PV Industry Brief: TCL Zhonghuan completes acquisition of Das Solar</a></div>
+  <div class="article-summary">TCL Zhonghuan has completed its acquisition of Das Solar, gaining 20 GW of n-type TOPCon cell capacity and 50 GW of module capacity while outlining plans to upgrade 20 GW of cell and 25 GW of module production to back-contact technology.The postChine…</div>
+  <div class="article-meta">Jul 03, 2026  09:33 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/07/03/tropical-forest-protection-fund-at-risk-after-uk-stalls-on-pledge/" target="_blank">Tropical forest protection fund at risk after UK stalls on pledge</a></div>
+  <div class="article-summary">The UK's delayed commitment to the Brazil-led Tropical Forest Protection Fund (TFFF), a crucial initiative launched at COP30 to finance rainforest preservation, now jeopardizes its operational launch. This stall is significant as the TFFF aims to provide a vital, innovative financial mechanism to halt deforestation, a primary driver of climate change.</div>
+  <div class="article-meta">Jul 03, 2026  10:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-03/stanchart-targets-mid-sized-african-companies-for-debt-sales" target="_blank">StanChart Targets Mid-Sized African Companies for Debt Sales</a></div>
+  <div class="article-summary">Standard Chartered Plc said a $50 million green bond it placed last month for a solar home system financier opens the way for a slew of debt sales by mid-sized African companies.…</div>
+  <div class="article-meta">Jul 03, 2026  08:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-07-03/uk-apartment-owners-are-getting-locked-out-of-money-saving-green-tech" target="_blank">UK Apartment Owners Are Getting Locked Out of Money-Saving Green Tech</a></div>
+  <div class="article-summary">Leaseholders have limited control over the place where they live, including how it’s heated and powered.…</div>
+  <div class="article-meta">Jul 03, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-07-02/china-s-net-zero-strategy-relies-on-an-unlikely-tool-lots-of-coal" target="_blank">China’s Net Zero Strategy Relies on an Unlikely Tool: Lots of Coal</a></div>
+  <div class="article-summary">The central government sees coal as an essential bridge to a clean-energy future. Some regions are motivated to extend its use as long as possible.…</div>
+  <div class="article-meta">Jul 03, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-02/nyc-s-extreme-heat-threatens-holiday-weekend-plans-with-110f-real-feel" target="_blank">NYC’s Extreme Heat Threatens Holiday Weekend Plans With 110F Real Feel</a></div>
+  <div class="article-summary">A dangerous heat wave that is trapped over New York City is also trapping people in the city.…</div>
+  <div class="article-meta">Jul 02, 2026  21:21 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jul/03/heatwave-world-cup-250th-anniversary" target="_blank">US heatwave threatens 250th anniversary events and World Cup</a></div>
+  <div class="article-summary">Weekend’s high temperatures and humidity ‘virtually impossible’ without climate crisis, researchers sayThe scorching heat blanketing much of the US this week would have been “virtually impossible” if not for the climate crisis, researchers have found…</div>
+  <div class="article-meta">Jul 03, 2026  10:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/jul/03/is-donald-trump-going-to-accidentally-save-the-world-what-is-going-on" target="_blank">Is Donald Trump going to (accidentally?) save the world?! What is going on? | First Dog on the Moon</a></div>
+  <div class="article-summary">Donald Trump's recent actions, though perhaps not intentionally, are sparking unexpected environmental discussions. While the specifics remain unclear, the article suggests his controversial moves are inadvertently highlighting critical climate issues, potentially forcing a broader public reckoning.</div>
+  <div class="article-meta">Jul 03, 2026  09:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jul/02/trump-administration-wins-appeal-national-parks" target="_blank">Trump administration can remove history and climate info from US parks, court says</a></div>
+  <div class="article-summary">In latest legal twist, appeals panel rules US does not have to reinstate signage on climate, immigration and slaveryTheTrump administrationdoes not have to reinstate materials related to climate change, immigration and slavery that it has removed fro…</div>
+  <div class="article-meta">Jul 03, 2026  02:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02072026/new-york-heat-wave-politics/" target="_blank">Heat Wave Politics: GOP Leaders Deride Calls to Conserve</a></div>
+  <div class="article-summary">Seeking to sow unity amid a pending heat crisis, New York Mayor Zohran Mamdani reaped a whirlwind of right-wing rage. Mamdani’s post on X on Wednesday urged New Yorkers to turn their thermostats to 78 degrees F and turn off unneeded lights and electr…</div>
+  <div class="article-meta">Jul 03, 2026  00:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02072026/data-center-power-plants-pennsylvania-pollution/" target="_blank">New Power Plants for Data Centers Would Significantly Increase Pennsylvania’s Climate Pollution</a></div>
+  <div class="article-summary">Data center developers in Pennsylvania plan to rely on at least seven new natural gas-fired power plants that would emit climate-warming gases equal to adding 14 million cars on the road every year, according to a new report. The report from the Envi…</div>
+  <div class="article-meta">Jul 02, 2026  22:03 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, July 03, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
