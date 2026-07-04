@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, July 04, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">51</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 46 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-3-july-2026-us-faces-scorching-independence-day-record-ocean-temperatures-vietnams-ev-surge/" target="_blank">DeBriefed 3 July 2026: US faces scorching Independence Day | Record ocean temperatures | Vietnam’s EV surge</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+Heating up
+
+NOT FREE FROM HEAT: “Dangerous, record-breaking” heat altered plans for 4 July celebrations across the US this…</div>
+  <div class="article-meta">Jul 03, 2026  17:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-how-will-the-world-banks-abandoned-finance-goal-affect-climate-action/" target="_blank">Q&A: How will the World Bank’s abandoned finance goal affect climate action?</a></div>
+  <div class="article-summary">The World Bank has abandoned a target for 45% of the funding it gives developing countries to be “climate finance”, following months of pressure from the Trump administration in the US.
+
+However, a concerted effort by developed- and developing-countr…</div>
+  <div class="article-meta">Jul 03, 2026  17:22 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/03/electric-buses-make-up-over-50-of-new-deliveries-in-australia/" target="_blank">Electric Buses Make Up Over 50% of New Deliveries in Australia</a></div>
+  <div class="article-summary">Australia's electric bus deliveries surged to over 50% of new sales in Q1 2026, a dramatic shift from just 9 electric buses delivered in January. This rapid adoption signifies a critical acceleration in decarbonizing public transport, directly reducing emissions from a major urban source.</div>
+  <div class="article-meta">Jul 04, 2026  04:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/03/vatrer-lfp-battery-transforms-ez-go-golf-cart/" target="_blank">Vatrer LFP Battery Transforms EZ Go Golf Cart</a></div>
+  <div class="article-summary">A Chinese company, Vatrer, has successfully upgraded an EZ Go golf cart with its 51.2V LFP battery, demonstrating a significant improvement over traditional lead-acid power. This transition from lead-acid to LFP batteries in widespread applications like golf carts is crucial for reducing the environmental impact of mining and disposal associated with older battery technologies.</div>
+  <div class="article-meta">Jul 04, 2026  02:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/03/the-dc-metro-area-is-getting-its-first-en-route-electric-bus-chargers/" target="_blank">The DC metro area is getting its first en-route electric bus chargers</a></div>
+  <div class="article-summary">Alexandria, Virginia, is installing its first en-route electric bus chargers, enabling DASH buses to quickly recharge on their routes and support a fully zero-emission fleet. This significant infrastructure upgrade, funded by over $1 million in federal dollars, marks a crucial step in electrifying public transit and reducing emissions in the DC metro area.</div>
+  <div class="article-meta">Jul 04, 2026  00:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/03/byd-seal-08-ev-a-no-compromise-premium-sedan-at-a-commodity-car-price/" target="_blank">BYD Seal 08 EV: A No-Compromise Premium Sedan At A Commodity Car Price</a></div>
+  <div class="article-summary">Last week, CleanTechnica showed a preview of the stunning new BYD Seal 08. Looking at the pictures and specifications released at the time, it seemed like an impressive flagship sedan for BYD’s Ocean lineup. With the launch of the Seal 08 this week,…</div>
+  <div class="article-meta">Jul 03, 2026  23:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/03/tesla-has-a-blowout-q2-the-story-behind-the-numbers/" target="_blank">Tesla Has A Blowout Q2 — The Story Behind The Numbers</a></div>
+  <div class="article-summary">Although Zach did a great job of covering Tesla’s sales report, I want to mention a few other factors and talk about the broader market. Tesla’s strong Q2 deliveries resulted from converging tailwinds: elevated oil prices from the Iran conflict, refr…</div>
+  <div class="article-meta">Jul 03, 2026  22:34 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-03/largest-us-grid-saw-demand-hit-record-high-thursday-on-heat" target="_blank">US Extreme Heat and Storms to Stress Power Grid Through Weekend</a></div>
+  <div class="article-summary">A searing heat dome over the eastern US that’s disrupting some Independence Day festivities in Washington, DC, and drove power demand to record levels, is threatening to bring potentially dangerous thunderstorms across the region this weekend.…</div>
+  <div class="article-meta">Jul 03, 2026  23:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-07-03/heat-wave-searing-us-pushes-taylor-swift-fans-to-stay-home" target="_blank">Heat Dome Searing US East Coast Pushes Swifties to Stay Home</a></div>
+  <div class="article-summary">The extreme heat engulfing New York and US East Coast is straining power grids as holiday weekend begins…</div>
+  <div class="article-meta">Jul 03, 2026  18:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-07-03/how-coal-is-winning-a-net-zero-role-in-china-s-energy-transition" target="_blank">How Coal Is Winning a Net Zero Role in China’s Energy Transition</a></div>
+  <div class="article-summary">Policymakers see coal as a necessary bridge to the nation’s clean-energy future.…</div>
+  <div class="article-meta">Jul 03, 2026  16:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-03/south-africa-loses-case-to-prevent-export-of-rhino-horns" target="_blank">South Africa Loses Case to Prevent Export of Rhino Horns</a></div>
+  <div class="article-summary">The South African government’s appeal to overturn a ruling allowing the export of horns from captive rhinos was dismissed by the Northern Cape High Court on Friday.…</div>
+  <div class="article-meta">Jul 03, 2026  16:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-03/free-permits-emissions-cap-divide-eu-uk-in-carbon-link-talks" target="_blank">Free Permits, Emissions Cap Divide EU-UK in Carbon Link Talks</a></div>
+  <div class="article-summary">Talks between the UK and the European Union on linking their carbon markets as part of a post-Brexit reset are exposing differences over issues including free permits and the British emissions cap.…</div>
+  <div class="article-meta">Jul 03, 2026  15:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/jul/04/sydney-records-hottest-june-since-1859-as-expert-warns-new-high-a-signature-of-global-warming" target="_blank">Sydney records hottest June since 1859 as expert warns new high a ‘signature’ of global warming</a></div>
+  <div class="article-summary">Bureau of Meteorology says city’s mean temperature reached 16.1C, surpassing the previous record of 15.7C set in 1991Get ourbreaking news email,free appordaily news podcastSydney has officially experienced its hottest June since records began, after…</div>
+  <div class="article-meta">Jul 04, 2026  07:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/venezuela-bolivarian-republic/earthquakes-venezuela-situation-report-10-03-july-2026-time-0700-pm" target="_blank">Earthquakes in Venezuela: Situation Report #10 (03 July 2026, Time: 07:00 pm)</a></div>
+  <div class="article-summary">Venezuela is grappling with the aftermath of powerful 7.2 and 7.5 magnitude earthquakes that struck on June 24th, resulting in over 2,600 deaths and displacing thousands. While the immediate focus is on humanitarian aid, the increased frequency and intensity of such seismic events underscore the growing climate-related risks to infrastructure and populations in vulnerable regions.</div>
+  <div class="article-meta">Jul 04, 2026  04:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/venezuela-bolivarian-republic/terremotos-en-venezuela-reporte-de-situacion-10-03-de-julio-de-2026-hora-0700-pm" target="_blank">Terremotos en Venezuela: Reporte de situación #10 (03 de julio de 2026, Hora: 07:00 pm)</a></div>
+  <div class="article-summary">Venezuela is reeling from powerful earthquakes on June 24th, with magnitudes of 7.2 and 7.5, resulting in over 2,600 fatalities and displacing approximately 15,000 people, primarily in La Guaira state. While the immediate crisis is humanitarian, the sheer scale of destruction and the ongoing 890 aftershocks underscore the vulnerability of infrastructure to seismic events, a risk amplified by climate change impacts on geological stability.</div>
+  <div class="article-meta">Jul 04, 2026  04:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/groupe-de-travail-sur-les-transferts-monetaires-en-haiti-gttmcbtwg-compte-rendu-de-la-reunion-mensuelle-du-cbtwg-date-30-juin-2026-meeting-minutes" target="_blank">Haiti: Groupe de Travail sur les Transferts Monétaires en Haïti (GTTM/CBTWG) - Compte rendu de la réunion mensuelle du CBTWG (Date : 30 juin 2026) [Meeting Minutes]</a></div>
+  <div class="article-summary">Country: HaitiSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Le Groupe de Travail sur les Transferts Monétaires en Haïti (GTTM/CWG) est un groupe de coordinationhumanitaire chargé d’organiser, harmonis…</div>
+  <div class="article-meta">Jul 03, 2026  21:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/haiti/groupe-de-travail-sur-les-transferts-monetaires-en-haiti-gttmcbtwg-compte-rendu-de-la-reunion-mensuelle-du-cbtwg-date-24-juin-2026-meeting-minutes" target="_blank">Haiti: Groupe de Travail sur les Transferts Monétaires en Haïti (GTTM/CBTWG) - Compte rendu de la réunion mensuelle du CBTWG (Date : 24 juin 2026) [Meeting Minutes]</a></div>
+  <div class="article-summary">Country: HaitiSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached file.Le Groupe de Travail sur les Transferts Monétaires en Haïti (GTTM/CWG) est un groupe de coordinationhumanitaire chargé d’organiser, harmonis…</div>
+  <div class="article-meta">Jul 03, 2026  20:47 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/03/lynk-co-announces-leadership-changes-to-support-the-next-phase-of-its-european-growth/" target="_blank">Lynk & Co Announces Leadership Changes to Support the Next Phase of Its European Growth</a></div>
+  <div class="article-summary">Lynk & Co has appointed Mo Wang as CEO of its European operations, signaling a strategic push for growth in the region. This leadership shift underscores the company's commitment to expanding its presence in a market increasingly focused on sustainable mobility solutions.</div>
+  <div class="article-meta">Jul 04, 2026  05:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/07/03/as-food-shocks-spread-citizens-are-showing-more-leadership-than-governments/" target="_blank">As food shocks spread, citizens are showing more leadership than governments</a></div>
+  <div class="article-summary">People support efforts to protect forests and curb industrial food production, the results of the latest Global Citizens' Assembly show - but politicians have been slow to actThe postAs food shocks spread, citizens are showing more leadership than go…</div>
+  <div class="article-meta">Jul 03, 2026  13:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03072026/california-environmentalists-press-for-assessment-of-first-carbon-capture-project/" target="_blank">California’s First Carbon Capture Project Is Up and Running. Environmentalists Are Still Trying To Stop It.</a></div>
+  <div class="article-summary">California Resources Corporation, the state’s largest oil company, passed a long-targeted milestone in May: It had finally taken carbon dioxide that would otherwise warm the atmosphere and injected it deep underneath its own oil field. It’s the first…</div>
+  <div class="article-meta">Jul 03, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03072026/freedom-250-sponsorship-from-florida-mining-company-seeking-federal-approval/" target="_blank">As America Celebrates 250th, Murkiness Surrounds Trump-Backed Planning Fund</a></div>
+  <div class="article-summary">Among the sponsors of Freedom 250, the organization created by President Donald Trump to plan the celebration of the nation’s semiquincentennial, is a Florida mining company with a regulatory issue pending before the Trump administration, according t…</div>
+  <div class="article-meta">Jul 03, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03072026/drone-delivery-could-cut-pollution/" target="_blank">Drone Delivery Could Cut Pollution. Can Communities Live With the Noise?</a></div>
+  <div class="article-summary">RICHARDSON, Texas—Jonathan Pace first noticed the noise. But it wasn’t until he bought a Bluetooth-based drone tracker that what seemed like a neighborhood nuisance became something he could measure: how often Amazon drones flew above his home—and ho…</div>
+  <div class="article-meta">Jul 03, 2026  11:50 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, July 04, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
