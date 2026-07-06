@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, July 06, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/06/poweroad-receives-chinas-first-pilot-battery-passport-from-bureau-veritas/" target="_blank">Poweroad receives China’s first pilot Battery Passport from Bureau Veritas</a></div>
+  <div class="article-summary">Poweroad has secured China's inaugural pilot Battery Passport, issued by Bureau Veritas via the Circulor platform. This development is a crucial early step towards the EU's Digital Battery Passport mandate, promising greater transparency and accountability throughout a battery's entire lifecycle.</div>
+  <div class="article-meta">Jul 06, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/06/solax-announces-new-energy-management-system-for-residential-pv/" target="_blank">Solax unveils new energy management system for residential PV</a></div>
+  <div class="article-summary">Solax Power's new XHub system uses AI to intelligently manage residential solar power, optimizing battery use based on real-time electricity prices, weather, and household demand. This innovation promises to slash energy costs for homeowners and accelerate the return on investment for solar installations, a crucial step in driving broader adoption of renewable energy.</div>
+  <div class="article-meta">Jul 06, 2026  11:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/06/medium-voltage-series-regulator-enables-260-more-pv-capacity-in-german-distribution-grids/" target="_blank">Medium-voltage series regulator enables 260% more PV capacity in German distribution grids</a></div>
+  <div class="article-summary">A compact medium-voltage series regulator allows existing distribution grids to accommodate significantly more photovoltaic capacity by actively controlling voltage.The technology can be reportedly installed in existing transformer stations without a…</div>
+  <div class="article-meta">Jul 06, 2026  11:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/06/photovoltaics-for-metro-stations/" target="_blank">Photovoltaics for metro stations</a></div>
+  <div class="article-summary">Bangladeshi researchers modelled a 20.38 MW rooftop solar PV system across Dhaka Metro’s MRT Line 6, showing strong technical potential and significant CO₂ reductions.The study also found attractive economics, including a six-year payback period, hig…</div>
+  <div class="article-meta">Jul 06, 2026  11:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/06/vikram-solar-begins-pv-module-production-at-new-tamil-nadu-manufacturing-facility/" target="_blank">Vikram Solar starts PV module production at manufacturing facility in India</a></div>
+  <div class="article-summary">Vikram Solar has started PV module production at its new manufacturing facility in Gangaikondan, Tamil Nadu, with the rollout of the plant’s first solar module.
+
+The facility is being developed in phases, with a planned annual module manufacturing ca…</div>
+  <div class="article-meta">Jul 06, 2026  11:22 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/graphics/2026-extreme-heat-climate-change-data" target="_blank"><strong>Extreme Heat Isn't the Only Climate Impact Shocking Scientists</strong></a></div>
+  <div class="article-summary">For the full experience visit: Extreme Heat Isn't the Only Climate Impact Shocking Scientists…</div>
+  <div class="article-meta">Jul 06, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-06/el-nino-threatens-to-fuel-coal-power-surge-in-india-study-says" target="_blank">El Niño Threatens To Fuel Coal Power Surge in India, Study Says</a></div>
+  <div class="article-summary">A super El Niño risks straining India’s power grid more than any other electricity network globally and would slow the country’s shift away from coal, according to a new study.…</div>
+  <div class="article-meta">Jul 06, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-06/more-investors-add-pressure-on-eu-to-ban-drilling-in-the-arctic" target="_blank">More Investors Add Pressure on EU to Ban Drilling in the Arctic</a></div>
+  <div class="article-summary">Six institutional investors joined a call urging the European Union to maintain its opposition against further Arctic oil and gas expansion, saying the EU needs to continue to commit to its green transition.…</div>
+  <div class="article-meta">Jul 06, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-05/europe-s-heat-wave-is-bright-spot-for-china-s-portable-ac-makers" target="_blank">Europe’s Heat Wave Is Bright Spot for China’s Portable AC Makers</a></div>
+  <div class="article-summary">As heat records shattered across Europe in the last weeks of June and indoor temperatures rose to uncomfortable levels, many of the continent’s residents sought immediate relief in the form of portable air conditioner units.…</div>
+  <div class="article-meta">Jul 06, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-05/us-northern-marianas-threatened-by-second-super-typhoon-in-2026" target="_blank">US Northern Marianas Threatened by Second Super Typhoon in 2026</a></div>
+  <div class="article-summary">Guam and the Northern Marianas Islands are being threatened by a super typhoon for the second time this year.…</div>
+  <div class="article-meta">Jul 05, 2026  18:32 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-taiz-governorate-humanitarian-presence-4ws-may-2026" target="_blank">Yemen: Ta'iz Governorate Humanitarian Presence (4Ws) May 2026</a></div>
+  <div class="article-summary">Country: YemenSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Jul 06, 2026  10:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-socotra-governorate-humanitarian-presence-4ws-may-2026" target="_blank">Yemen: Socotra Governorate Humanitarian Presence (4Ws) May 2026</a></div>
+  <div class="article-summary">Country: YemenSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Jul 06, 2026  10:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-shabwah-governorate-humanitarian-presence-4ws-may-2026" target="_blank">Yemen: Shabwah Governorate Humanitarian Presence (4Ws) May 2026</a></div>
+  <div class="article-summary">Country: YemenSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Jul 06, 2026  10:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-lahj-governorate-humanitarian-presence-4ws-may-2026" target="_blank">Yemen: Lahj Governorate Humanitarian Presence (4Ws) May 2026</a></div>
+  <div class="article-summary">Country: YemenSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Jul 06, 2026  10:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">ReliefWeb (Climate)</div>
+  <div class="article-title"><a href="https://reliefweb.int/report/yemen/yemen-ibb-governorate-humanitarian-presence-4ws-may-2026" target="_blank">Yemen: Ibb Governorate Humanitarian Presence (4Ws) May 2026</a></div>
+  <div class="article-summary">Country: YemenSource: UN Office for the Coordination of Humanitarian AffairsPlease refer to the attached Infographic.…</div>
+  <div class="article-meta">Jul 06, 2026  10:44 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06072026/maine-dam-removal-efforts-lead-to-fish-comeback/" target="_blank">Dam Removal Efforts Lead to a Stunning Comeback for Maine’s Alewives</a></div>
+  <div class="article-summary">For a few weeks each summer, the Sebasticook River in Benton, Maine, is paved with flashing silver scales, so thick it seems you could almost walk across. The alewives have returned for their annual migration. On a mid-May weekend, Benton held its an…</div>
+  <div class="article-meta">Jul 06, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jul/05/heatwave-deaths-weather" target="_blank">At least 25 people die in US as record heatwave scorches swaths of country</a></div>
+  <div class="article-summary">More than 20 states reported temperatures above 100F as heat dome sits over eastern US during holiday weekendAt least two dozen people have died amid the perilousclimate crisis-drivenheatwavethat has scorched swaths of the US with record temperatures…</div>
+  <div class="article-meta">Jul 05, 2026  21:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/06/five-outlandish-plans-to-remodel-earth-climate" target="_blank">Bomb the Arctic, dam the Mediterranean and build a second moon: five outlandish plans to remodel our climate</a></div>
+  <div class="article-summary">Humans have long sought to geoengineer the Earth’s environment.Tim Flanneryoutlines a few of the wildest ideas from the 20th centuryAn increasing number of scientists think we have let the climate crisis fester for so long that our only hope to stave…</div>
+  <div class="article-meta">Jul 05, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/05/readers-recall-heatwave-1976-uk-weather-climate" target="_blank">Empty reservoirs, ladybirds and sunstroke: remembering the UK heatwave of 1976</a></div>
+  <div class="article-summary">As Britain reached its hottest June temperature on record, readers recall the summer when temperatures hit 36CTherecent heatwave in the UKbroke the previous June record of 35.6C, recordedduring the 1976 heatwave.In Lingwood, Norfolk, a provisional te…</div>
+  <div class="article-meta">Jul 05, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05072026/inside-climate-podcast-pilot/" target="_blank">Climate Reporting Is Changing</a></div>
+  <div class="article-summary">Welcome to Inside Climate, a new podcast from the staff of Inside Climate News. As the ICN newsroom grows and expands, so is its reporting. For the show’s debut episode, co-host Kiley Price sits down with ICN founder and publisher David Sassoon to ta…</div>
+  <div class="article-meta">Jul 05, 2026  13:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, July 06, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
