@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, July 08, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">49</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 45 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/why-car-bans-and-bike-lanes-haven-t-cleaned-up-milan-s-air" target="_blank">Milan’s Battle Against Bad Air Goes On</a></div>
+  <div class="article-summary">A quirk of geography has hampered the Italian city’s ongoing efforts to reduce pollution from vehicle emissions and other regional sources.…</div>
+  <div class="article-meta">Jul 08, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cited-7-july-2026-impossible-heat-global-ocean-record-climate-change-and-the-ozone-hole/" target="_blank">Cited 7 July 2026: ‘Impossible’ heat | Global ocean record | Climate change and the ozone hole</a></div>
+  <div class="article-summary">Welcome to Cited, your essential guide to new climate research.
+
+In the news
+
+‘HEAT ALERT’: At least 25 people died as a “heat dome” smothered the eastern half of the US, reported the Guardian, with more than 20 states under “stifling temperatures mo…</div>
+  <div class="article-meta">Jul 07, 2026  17:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/07/netherlands-allocates-773-mw-of-solar-in-2025-subsidy-round/" target="_blank">Netherlands allocates 773 MW of solar in 2025 subsidy round</a></div>
+  <div class="article-summary">The Netherlands has published the results of the 2025 round of its SDE++ (Stimulering Duurzame Energieproductie) program for renewable energy projects, a government subsidy offering multi-year financial support for companies delivering large-scale pr…</div>
+  <div class="article-meta">Jul 07, 2026  15:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-frances-june-heatwave-caused-more-than-2700-heat-related-deaths/" target="_blank">Guest post: France’s June heatwave caused more than 2,700 heat-related deaths</a></div>
+  <div class="article-summary">In June 2026, a record-breaking heatwave swept across Europe, with France among the first and hardest hit countries.
+
+In a new analysis, we estimate that the extreme conditions caused more than 2,700 heat-related deaths in France.
+
+We also show how F…</div>
+  <div class="article-meta">Jul 07, 2026  15:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/08/water-jet-delamination-for-solar-module-recycling/" target="_blank">Water-jet delamination for solar module recycling</a></div>
+  <div class="article-summary">Researchers have developed a high-pressure water-jet method that efficiently separates valuable materials like silver and silicon from discarded solar panels, achieving up to 97% silver purity. This breakthrough is crucial for the circular economy, significantly boosting the recovery of critical raw materials from solar waste and reducing reliance on new mining.</div>
+  <div class="article-meta">Jul 08, 2026  10:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/08/tuv-nord-study-confirms-back-contact-advantage-over-topcon-is-limited-to-mild-shading-conditions/" target="_blank">TÜV NORD study confirms back-contact advantage over TOPCon is limited to mild shading conditions</a></div>
+  <div class="article-summary">A new TÜV NORD study reveals that back-contact solar modules only outperform TOPCon in very specific, mild shading scenarios, losing their advantage once four or more cells are shaded. This means the widely touted performance gains of back-contact technology are significantly limited in real-world conditions, where more substantial shading can negate its benefits.</div>
+  <div class="article-meta">Jul 08, 2026  10:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/08/ariel-rider-launches-outrageous-new-mudd-72v-bike-with-65-mph-top-speed/" target="_blank">Ariel Rider launches outrageous new MUDD 72V bike with 65 MPH top speed</a></div>
+  <div class="article-summary">Ariel Rider's new MUDD 72V bike, capable of 65 MPH and marketed as a "private property bike," blurs the line between e-bikes and motorcycles. While not street-legal, its high-speed, off-road focus highlights a growing segment of powerful electric vehicles that could contribute to emissions if not strictly managed for private use.</div>
+  <div class="article-meta">Jul 08, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/nuclear-power-to-climb-44-worldwide-as-china-tops-us-bnef-says" target="_blank">Nuclear Power to Climb 44% Worldwide as China Tops US, BNEF Says</a></div>
+  <div class="article-summary">Global nuclear capacity is set to climb 44% over the next decade after years of tepid growth, spurred by growing demand for electricity and aggressive efforts to build reactors in China and India.…</div>
+  <div class="article-meta">Jul 08, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/08/haier-launches-propane-air-to-water-heat-pump-for-commercial-applications/" target="_blank">Haier launches propane air-to-water heat pump for commercial applications</a></div>
+  <div class="article-summary">The new monobloc heat pump range uses propane refrigerant and is available in four versions from 26 kW to 40 kW. Haier says the system is designed for commercial buildings, retrofit projects, and applications requiring high-temperature water supply.T…</div>
+  <div class="article-meta">Jul 08, 2026  09:26 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/london-wants-a-much-bigger-chunk-of-the-catastrophe-bond-market" target="_blank">London Wants a Much Bigger Chunk of the Catastrophe Bond Market</a></div>
+  <div class="article-summary">The world’s biggest hub for commercial and specialty risk is angling for a much more prominent role in the $140 billion global market for insurance-linked securities.…</div>
+  <div class="article-meta">Jul 08, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/tencent-inks-first-deal-for-carbon-removal-credits-outside-china" target="_blank">Tencent Inks First Deal for Carbon-Removal Credits Outside China</a></div>
+  <div class="article-summary">Tencent Holdings Ltd will buy 300,000 carbon removal credits from an agroforestry project in Indonesia, marking the first deal of its kind for the Chinese technology firm outside its domestic market.…</div>
+  <div class="article-meta">Jul 08, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/china-s-deadly-storms-turbocharged-by-convergence-of-factors" target="_blank">China’s Deadly Storms Turbocharged by Convergence of Factors</a></div>
+  <div class="article-summary">This week’s deadly storms in southern and central China were worsened by a convergence of factors, underscoring the growing frequency of weather extremes that the world’s second-largest economy must increasingly contend with.…</div>
+  <div class="article-meta">Jul 08, 2026  08:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/ecom-seeks-to-expand-vietnam-coffee-farmer-weather-insurance-coverage-fivefold" target="_blank">Coffee Trader Seeks to Shield More Vietnam Growers From Weather</a></div>
+  <div class="article-summary">Major coffee trader ECOM Agroindustrial Corp. is pushing for a fivefold increase in the number of growers covered by its specialty weather insurance in Vietnam, where the industry depends on thousands of smallholder farmers increasingly exposed to cl…</div>
+  <div class="article-meta">Jul 08, 2026  03:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/private-equity-funds-become-heat-detectives-as-climate-analytics-boom" target="_blank">Private Equity Turns to Heat Detectives as Climate Risks Intensify</a></div>
+  <div class="article-summary">For decades, investment models at the largest private equity funds relied on assumptions of relatively stable weather patterns. Now frequent extreme events are creating new threats for their portfolio companies.…</div>
+  <div class="article-meta">Jul 08, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07072026/todays-climate-heat-waves-europe-us-deaths/" target="_blank">Extreme Temperatures Once Again Prove Deadly in Europe and U.S.</a></div>
+  <div class="article-summary">This summer has been off to a particularly hot—and deadly—start.  In June and early July, severe heat waves blanketed Europe and the United States, exposing millions of people to dangerously high temperatures and humidity. The French government recor…</div>
+  <div class="article-meta">Jul 08, 2026  01:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07072026/record-heat-drives-wildfires-in-europe-forces-thousands-to-evacuate/" target="_blank">Record Heat Drives Wildfires in Europe, Forces Thousands to Evacuate</a></div>
+  <div class="article-summary">Wildfires are tearing through southern France and parts of Spain, Portugal and Greece, forcing thousands of people to evacuate from their homes.  The wildfires follow a record-breaking June heat wave across the continent that caused thousands of deat…</div>
+  <div class="article-meta">Jul 08, 2026  01:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07072026/after-a-weekend-of-heavy-rains-chicagos-deep-tunnel-is-almost-full/" target="_blank">After a Weekend of Heavy Rains, Chicago’s Deep Tunnel Is Almost Full</a></div>
+  <div class="article-summary">For the first time in history, Deep Tunnel, Chicago’s massive system of underground tunnels and reservoirs designed to hold flood water, is almost completely full after a weekend of heavy rain. Built over more than a half-century, Deep Tunnel sends f…</div>
+  <div class="article-meta">Jul 07, 2026  23:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/07/07/ugandan-farmers-launch-uk-court-case-against-east-african-oil-pipeline/" target="_blank">Ugandan farmers launch UK court case against East African oil pipeline</a></div>
+  <div class="article-summary">Crowdfunded lawsuit filed at London’s High Court seeks to enforce Uganda’s laws against EACOP Ltd, the pipeline project's ⁠UK-registered companyThe postUgandan farmers launch UK court case against East African oil pipelineappeared first onClimate Hom…</div>
+  <div class="article-meta">Jul 07, 2026  20:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/jul/07/marks-and-spencer-fridges-hot-weather-45c" target="_blank">M&S invests in fridges that can cope with weather as hot as 45C</a></div>
+  <div class="article-summary">Retailer admits it struggled in June heatwave and also had to order more ice-cream to keep pace with demandMarks & Spencer is investing in refrigeration equipment that can cope with weather as hot as 45C as the climate crisis is expected to drive reg…</div>
+  <div class="article-meta">Jul 07, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, July 08, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
