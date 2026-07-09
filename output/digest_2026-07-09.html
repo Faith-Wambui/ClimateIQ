@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, July 09, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">52</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 44 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/09/ban-on-high-risk-pv-inverters-to-impact-14-of-eu-solar-demand-to-2030/" target="_blank">Ban on high-risk PV inverters to impact 14% of EU solar demand to 2030</a></div>
+  <div class="article-summary">A new EU funding ban targeting high-risk solar inverters, primarily from China, will disrupt 14% of the bloc's solar demand and 12% of energy storage deployments through 2030. This policy shift signals a significant move towards supply chain security, potentially slowing the pace of renewable energy build-out as the EU navigates the transition.</div>
+  <div class="article-meta">Jul 09, 2026  11:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/eu-plans-2040-electrification-target-to-cut-oil-gas-consumption" target="_blank">EU Plans 2040 Electrification Target to Cut Oil, Gas Consumption</a></div>
+  <div class="article-summary">The EU is targeting a significant increase in electrification by 2040 to boost its clean tech market and reduce reliance on fossil fuels. This ambitious goal aims to accelerate the transition away from oil and gas, a critical step in meeting climate objectives.</div>
+  <div class="article-meta">Jul 09, 2026  10:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/09/uk-approves-pv-projects-totaling-1-2-gw/" target="_blank">UK approves PV projects totaling 1.2 GW</a></div>
+  <div class="article-summary">The UK government just greenlit 1.2 GW of new solar capacity, including major projects like the 740 MW One Earth Solar Farm, significantly boosting the nation's renewable energy pipeline. This rapid approval of large-scale solar, with integrated battery storage, is crucial for the UK to meet its ambitious 2030 target of 45 GW of solar power and accelerate its transition to clean energy.</div>
+  <div class="article-meta">Jul 09, 2026  10:05 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/09/sp-global-releases-2026-tier-1-cleantech-companies-list/" target="_blank">S&P Global releases 2026 Tier 1 Cleantech Companies list</a></div>
+  <div class="article-summary">S&P Global's 2026 Tier 1 Cleantech list highlights key players in solar, wind, and battery storage, now including battery cells, amidst diverging market trends. This recognition is crucial as the sector navigates solar oversupply and booming battery demand, signaling shifts in investment and innovation vital for accelerating the clean energy transition.</div>
+  <div class="article-meta">Jul 09, 2026  10:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/09/free-online-calculator-shows-irish-homeowners-how-to-save-with-solar/" target="_blank">Free online calculator shows Irish homeowners how to save with solar</a></div>
+  <div class="article-summary">Solar consultant Scott McKechnie told pv magazine his updated solar and storage calculator tool, AirPV, is designed to cut through the information noise homeowners have to wade through if they want to save money and get shorter payback time on their…</div>
+  <div class="article-meta">Jul 09, 2026  10:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/09/growth-of-u-s-pure-play-solar-cell-makers-critical-for-downstream-module-buyers-and-investors/" target="_blank">Growth of U.S. pure-play solar cell makers critical for downstream module buyers and investors</a></div>
+  <div class="article-summary">U.S. pure-play solar cell manufacturers are poised for significant growth between 2026 and 2028, a critical development for downstream module buyers. This domestic expansion is essential for building a robust and sustainable solar manufacturing ecosystem, reducing reliance on foreign supply chains and bolstering the nation's clean energy transition.</div>
+  <div class="article-meta">Jul 09, 2026  10:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/09/notes-from-the-field/" target="_blank">Notes from the field</a></div>
+  <div class="article-summary">Across Europe, North America and high-latitude regions in Asia, agricultural operators face rising energy demand, volatile markets and increasing dependence on electrically driven processes. So why isn’t agricultural solar more popular? Based on her…</div>
+  <div class="article-meta">Jul 09, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/08/xpeng-mona-l03-the-best-base-model-y-competitor/" target="_blank">XPENG MONA L03: The Best Base Tesla Model Y Competitor?</a></div>
+  <div class="article-summary">When looking at the new MONA L03, which recently went on presale, it struck me that this might be the closest competitor to the base RWD Model Y. The car better fits the more premium priced Tesla, despite being positioned a class below XPENG’s G6 in…</div>
+  <div class="article-meta">Jul 09, 2026  06:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/china-s-top-solar-firm-makes-switch-from-silver-to-copper" target="_blank">China’s Top Solar Firm Makes Switch From Silver to Copper</a></div>
+  <div class="article-summary">China’s biggest solar maker has begun producing cells that replace silver with copper, in response to soaring prices of the precious metal that have rattled the industry since last year.…</div>
+  <div class="article-meta">Jul 09, 2026  07:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/-gargantuan-typhoon-bavi-threatens-more-floods-in-rain-soaked-china" target="_blank">‘Gargantuan’ Typhoon Threatens More Floods in Rain-Soaked China</a></div>
+  <div class="article-summary">China is facing more torrential rain and flooding this weekend from a massive typhoon tracking toward the country’s east coast, following recent severe storms that led to deaths and crop damage.…</div>
+  <div class="article-meta">Jul 09, 2026  07:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-07-09/suppliers-to-fashion-brands-like-uniqlo-ralph-lauren-are-tackling-heat-stress" target="_blank">Top Fashion Brands Have a Supply Chain Battle Against Extreme Heat</a></div>
+  <div class="article-summary">The global garment industry is beginning to address impacts of record temperatures, which threaten tens of millions of workers and erode productivity.…</div>
+  <div class="article-meta">Jul 09, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/uk-issues-electricity-supply-warning-as-heat-wave-strains-grid" target="_blank">UK Grid Issues Another Supply Warning as Heat Tests Network</a></div>
+  <div class="article-summary">The UK grid operator issued another warning over tight electricity supplies for Thursday evening as a heat wave stretching across Europe strains power systems, marking the third such alert this summer.…</div>
+  <div class="article-meta">Jul 09, 2026  01:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-08/uk-edf-reach-deal-to-extend-life-of-sizewell-b-nuclear-plant" target="_blank">UK, EDF Reach Deal to Extend Life of Sizewell B Nuclear Plant</a></div>
+  <div class="article-summary">The UK government reached a draft deal with Electricite de France SA to extend the life of a key nuclear plant beyond the middle of the century, as the nation seeks to cut reliance on fossil fuels for power generation.…</div>
+  <div class="article-meta">Jul 09, 2026  00:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/hundreds-of-snakes-on-the-loose-after-severe-flooding-in-china" target="_blank">Hundreds of Snakes on the Loose After Severe Flooding in China</a></div>
+  <div class="article-summary">Hundreds of snakes have escaped from flooded breeding farms in China's Guangxi region due to severe weather. This unexpected release poses a significant ecological risk, potentially disrupting local ecosystems and introducing invasive species.</div>
+  <div class="article-meta">Jul 09, 2026  09:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/super-el-nino-will-give-us-a-glimpse-of-life-in-2035" target="_blank">Super El Niño Will Give Us a Glimpse of Life in 2035</a></div>
+  <div class="article-summary">The current super El Niño, amplified by climate change, is poised to deliver a preview of the planet's warmer future, pushing global temperatures towards 2035 projections. This intensified warming poses significant risks to ecosystems and human societies worldwide.</div>
+  <div class="article-meta">Jul 09, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/07/09/india-looks-to-untapped-graphite-riches-for-slice-of-critical-minerals-boom/" target="_blank">India looks to untapped graphite riches for slice of critical minerals boom</a></div>
+  <div class="article-summary">Clean energy demand for battery-grade graphite is surging, but India faces hurdles as it positions itself to compete with China's grip on the supply chainThe postIndia looks to untapped graphite riches for slice of critical minerals boomappeared firs…</div>
+  <div class="article-meta">Jul 09, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/09/western-europe-records-hottest-ever-june-as-heatwaves-intensify" target="_blank">Western Europe records hottest-ever June as heatwaves intensify</a></div>
+  <div class="article-summary">Temperatures across ravaged region 3C above average as scientists warn of risks for people, ecosystems and infrastructureRecord wildfires in Europe show failure to adapt carries a mounting costWestern Europe has been scorched by its hottest June on r…</div>
+  <div class="article-meta">Jul 09, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08072026/forest-service-approves-arizona-south32-hermosa-mine/" target="_blank">Feds Grant Final Approval for Arizona Mine Situated in Critical Habitat for Jaguars and Mexican Spotted Owls</a></div>
+  <div class="article-summary">The U.S. Forest Service Tuesday approved a proposed mine in southern Arizona that will extract up to five critical minerals and was the first added to a program designed to streamline federal permitting. Local environmental groups quickly condemned t…</div>
+  <div class="article-meta">Jul 09, 2026  00:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08072026/planet-china-oakes-award/" target="_blank">A Major Journalism Award Honors ‘Trailblazing Series’ on China’s Global Environmental Impact</a></div>
+  <div class="article-summary">An Inside Climate News series that showed the often-hidden environmental impacts of China’s trillion-dollar global development push is a finalist for the John B. Oakes Award for Distinguished Environmental Journalism. With reporting from Indonesia, E…</div>
+  <div class="article-meta">Jul 08, 2026  23:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08072026/cashing-out-takeways-from-isds-investigation/" target="_blank">5 Takeaways From Our Investigation Into a Secretive System That Undermines Climate Action</a></div>
+  <div class="article-summary">What if companies affected by government efforts to protect the environment could get international arbitrators to award them billion-dollar payouts? That’s exactly what has been happening because of an obscure system called investor-state dispute se…</div>
+  <div class="article-meta">Jul 08, 2026  22:44 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, July 09, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
