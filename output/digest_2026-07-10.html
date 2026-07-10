@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, July 10, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">55</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 47 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/07/10/iran-war-fuel-shocks-threaten-africa-clean-cooking-push-iea-says/" target="_blank">Iran war fuel shocks threaten Africa’s clean cooking push, IEA says</a></div>
+  <div class="article-summary">Escalating tensions in the Strait of Hormuz are disrupting liquefied petroleum gas (LPG) supplies, a critical fuel for Africa's clean cooking initiatives. This shock threatens to derail progress in reducing deforestation and harmful indoor air pollution across the continent.</div>
+  <div class="article-meta">Jul 10, 2026  11:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/10/zambia-introduces-new-procurement-approaches-as-solar-interest-booms/" target="_blank">Zambia introduces new procurement approaches as solar interest booms</a></div>
+  <div class="article-summary">Zambia is attracting booming solar investment by introducing new procurement approaches, signaling a significant shift in its energy market. This move is crucial for the climate as it accelerates the adoption of renewable energy, directly contributing to reduced carbon emissions in the region.</div>
+  <div class="article-meta">Jul 10, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/china-briefing-9-july-2026-guangxi-floods-beautiful-china-plan-new-eu-china-mechanism/" target="_blank">China Briefing 9 July 2026: Guangxi floods | ‘Beautiful China’ plan | New EU-China mechanism</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s China Briefing.
+
+China Briefing handpicks and explains the most important climate and energy stories from China over the past fortnight. Subscribe for free here.
+
+Key developments
+
+Rain, typhoons and heat
+
+GUANGXI FLOODS: Se…</div>
+  <div class="article-meta">Jul 09, 2026  18:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/interview-dr-sun-yixian-on-his-new-database-tracking-chinese-climate-leadership/" target="_blank">Interview: Dr Sun Yixian on his new database tracking Chinese climate ‘leadership’</a></div>
+  <div class="article-summary">The number of global climate initiatives launched or run by China has been growing since 2009, a new study shows.
+
+But whether this will translate into China taking up the mantle of climate leadership remains an “open question”, says Dr Sun Yixian, s…</div>
+  <div class="article-meta">Jul 09, 2026  15:13 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/10/yamaha-launches-sporty-aerox-e-electric-scooter-with-removable-batteries/" target="_blank">Yamaha launches sporty Aerox-E electric scooter with removable batteries</a></div>
+  <div class="article-summary">Yamaha has launched its performance-oriented Aerox-E electric scooter in India, aiming for a premium segment of the market. This move signifies a growing trend towards higher-end electric mobility solutions, potentially accelerating the shift away from fossil fuel-powered vehicles in urban centers.</div>
+  <div class="article-meta">Jul 10, 2026  10:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/10/winaico-showcases-500-w-back-contact-solar-module-with-24-5-efficiency/" target="_blank">Winaico showcases 500 W back-contact solar module with 24.5% efficiency</a></div>
+  <div class="article-summary">Winaico has unveiled a new 500W solar module boasting a 24.5% efficiency, a significant leap in power output and energy conversion. This advancement is crucial for accelerating the transition to renewable energy, as higher efficiency modules mean more clean power can be generated from less space, driving down costs and increasing adoption.</div>
+  <div class="article-meta">Jul 10, 2026  10:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/10/china-polysilicon-prices-fall-as-output-rebounds-oversupply-persists/" target="_blank">China polysilicon prices fall as output rebounds, oversupply persists</a></div>
+  <div class="article-summary">China's polysilicon prices are plummeting as production surges to record levels, driven by the seasonal hydropower advantage, creating a persistent oversupply. This glut, coupled with new mandatory energy efficiency standards for solar manufacturing set to take effect in 2027, signals a potential shakeout of older, less efficient production capacity, impacting the global solar supply chain.</div>
+  <div class="article-meta">Jul 10, 2026  09:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/10/sungrow-launches-3-mw-solid-state-transformer/" target="_blank">Sungrow launches 3 MW solid-state transformer</a></div>
+  <div class="article-summary">Sungrow has launched EnerNeo, a self-developed commercial solid-state transformer (SST) designed for artificial intelligence data center power supply applications.
+
+The company unveiled the product at an AIDC product event in Hefei, China, positionin…</div>
+  <div class="article-meta">Jul 10, 2026  09:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/10/multi-drone-platform-for-autonomous-solar-inspections-digital-twin-creation/" target="_blank">Multi-drone platform for autonomous solar inspections, digital twin creation</a></div>
+  <div class="article-summary">Israeli startup vHive's autonomous multi-drone platform now enables utility-scale solar farms to create detailed digital twins for faster, more efficient inspections, eliminating the need for specialized pilots. This innovation is crucial for optimizing renewable energy infrastructure, ensuring solar assets perform at peak capacity and contribute more effectively to climate change mitigation efforts.</div>
+  <div class="article-meta">Jul 10, 2026  09:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-10/climate-models-become-more-precise-even-as-political-attacks-sharpen" target="_blank">Climate Models Become More Precise Even as Political Attacks Sharpen</a></div>
+  <div class="article-summary">Computer simulations are vital to the work scientists and insurers do. The resulting studies may also be used to hold companies and governments liable for damage caused by climate change.…</div>
+  <div class="article-meta">Jul 10, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-10/taiwan-suspends-stock-trading-and-shuts-schools-as-typhoon-nears" target="_blank">Taiwan Halts Stock Trading, Shuts Schools as Typhoon Nears</a></div>
+  <div class="article-summary">Taiwan halted trading on its stock exchange and shut schools in most areas on Friday as Typhoon Bavi approached the island, with the massive storm set to dump heavy rain over a vast area as it tracks toward China.…</div>
+  <div class="article-meta">Jul 10, 2026  04:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/epa-proposes-to-relax-air-pollution-standards-for-buses-trucks" target="_blank">EPA Wants to Relax Air Pollution Standards for Buses, Trucks</a></div>
+  <div class="article-summary">The US Environmental Protection Agency on Thursday proposed rolling back emission standards for new heavy-duty trucks, including buses, garbage trucks and semis.…</div>
+  <div class="article-meta">Jul 09, 2026  20:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/microsoft-s-emissions-surged-25-in-2025-during-data-center-boom" target="_blank">Microsoft’s Emissions Surged 25% in 2025 During Data Center Boom</a></div>
+  <div class="article-summary">Microsoft Corp. said its carbon emissions climbed 25% in 2025, making it the latest technology company to report a setback in its efforts to erase emissions amid heavy spending on artificial intelligence data centers.…</div>
+  <div class="article-meta">Jul 09, 2026  20:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-09/how-a-heat-wave-pushed-the-uk-s-power-grid-to-its-limit" target="_blank">How a Heat Wave Pushed the UK’s Power Grid to Its Limit</a></div>
+  <div class="article-summary">On a sweltering day in late June, the UK’s power grid came under exceptional strain. As temperatures rose, wind generation slumped and electricity prices spiked, forcing Britain’s grid operator to take emergency measures to keep the lights on.…</div>
+  <div class="article-meta">Jul 09, 2026  19:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/10/pollutionwatch-ozone-air-pollution-heatwaves-europe" target="_blank">Pollutionwatch: How harmful ozone builds up near ground in heatwaves</a></div>
+  <div class="article-summary">Concentrations of gas were continuously raised in Europe during June hot spell, with potentially deadly effectsWidespread air pollution was a feature of June’s record-breaking heat across western Europe and is likely to increase again as the UK exper…</div>
+  <div class="article-meta">Jul 10, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09072026/maryland-county-adopts-data-center-moratorium/" target="_blank">Maryland County Adopts a Two-year Moratorium on Data Center Development</a></div>
+  <div class="article-summary">Maryland’s second largest county is the latest jurisdiction in the state to slam the brakes on data centers. Prince George’s County on Tuesday adopted a two-year moratorium on development of the server farms, the longest such pause in the state. It i…</div>
+  <div class="article-meta">Jul 10, 2026  03:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09072026/pennsylvania-mass-transit-funding/" target="_blank">Pennsylvania’s Legislature Is Likely to Punt on Mass Transit Funding—Again</a></div>
+  <div class="article-summary">PHILADELPHIA—Four days before the deadline for Pennsylvania’s legislature to pass its next budget and eight days before Philadelphia celebrated America’s 250th birthday, a crowd of transportation advocates gathered outside of the Independence Hall su…</div>
+  <div class="article-meta">Jul 10, 2026  00:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09072026/seneca-meadows-landfill-lung-cancer/" target="_blank">Report on Elevated Lung Cancer Fails to Quell Uproar Around New York’s Largest Landfill</a></div>
+  <div class="article-summary">This article previously appeared in Water Front.  SENECA FALLS, N.Y.—In its recent 20-page report on elevated lung cancer rates around Seneca Meadows Inc., the state Department of Health (DOH) officially declares that the state’s largest municipal wa…</div>
+  <div class="article-meta">Jul 10, 2026  00:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09072026/montana-county-seeks-data-center-moratorium/" target="_blank">Montana County Seeks Pause on AI Data Centers After Property Owner Withdraws Support</a></div>
+  <div class="article-summary">A proposed artificial intelligence data center in western Montana has stalled before construction could begin after the property owner withdrew his signature from a required land-use application on July 6, a move that comes amid growing environmental…</div>
+  <div class="article-meta">Jul 09, 2026  21:24 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, July 10, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
