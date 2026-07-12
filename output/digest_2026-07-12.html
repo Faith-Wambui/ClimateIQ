@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, July 12, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">20</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:48%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 1 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 17 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/features/2026-07-12/bangladesh-s-nuclear-debut-tests-developing-world-s-atomic-ambitions" target="_blank">A Nuclear Debut in Bangladesh Tests Developing World’s Atomic Shift</a></div>
+  <div class="article-summary">Bangladesh has launched its first nuclear power plant, a $13 billion Russian-built facility expected to supply 15% of the nation's electricity. This marks a significant step for developing nations embracing nuclear energy to meet growing power demands while potentially reducing reliance on fossil fuels.</div>
+  <div class="article-meta">Jul 12, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/11/cinergy-mobile-power-debuts-smart-clean-mobile-energy-solutions-for-south-africas-film-and-live-events-industries/" target="_blank">Cinergy Mobile Power Debuts Smart, Clean Mobile Energy Solutions for South Africa’s Film and Live Events Industries</a></div>
+  <div class="article-summary">Battery prices have fallen significantly over the past 15 years, making battery electric vehicles more competitive. Maarten Vinkhuyzen wrote that he still expects that battery prices will drop even further, by 70% in the next five years. This will ha…</div>
+  <div class="article-meta">Jul 12, 2026  02:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/11/tesla-cybercab-giga-texas-parking-lot/" target="_blank">Tesla claims Cybercab driving employees at Giga Texas — in a parking lot</a></div>
+  <div class="article-summary">Tesla says “Cybercab employee rides at Giga Texas” are “starting soon” — its first stated step toward putting people inside the wheel-less, pedal-less robotaxi.But the announcement, spread across two Tesla accounts and roughly 2.9 million combined vi…</div>
+  <div class="article-meta">Jul 11, 2026  23:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/11/waymo-expands-into-germany-tesla-pumping-up-production-while-volkswagen-in-crisis/" target="_blank">Waymo Expands Into Germany & Tesla Pumping Up Production While Volkswagen In Crisis</a></div>
+  <div class="article-summary">Volkswagen is reportedly slashing factories, models, and jobs, signaling a major internal crisis while competitors like Waymo expand into Germany and Tesla ramps up production. This seismic shift in the automotive landscape highlights the urgent need for established players to adapt to the accelerating transition towards cleaner transportation and advanced mobility solutions.</div>
+  <div class="article-meta">Jul 11, 2026  19:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/11/ford-ev-universal-electric-pickup-truck-phev-europe/" target="_blank">Ford’s New EV Needs A Name…What Will It Be?</a></div>
+  <div class="article-summary">Ford is set to launch its first mid-sized electric pickup truck from its new Universal EV platform, with "Ranchero" rumored as a potential name. This move signals a significant step in Ford's electrification strategy, potentially bringing the benefits of electric power, like Pro Power Onboard, to a wider market and contributing to reduced emissions in the crucial pickup truck segment.</div>
+  <div class="article-meta">Jul 11, 2026  18:14 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/11/energy-intelligence-platform-florion-launched-to-help-south-african-businesses-navigate-a-new-era-of-energy-risk-opportunity/" target="_blank">Energy Intelligence Platform Florion Launched to Help South African Businesses Navigate a New Era of Energy Risk & Opportunity</a></div>
+  <div class="article-summary">South Africa's energy landscape is undergoing a significant transformation driven by technology and market reforms, prompting the launch of Florion, a new energy intelligence platform. This initiative aims to equip businesses with the insights needed to manage evolving energy risks and capitalize on emerging opportunities in this dynamic sector.</div>
+  <div class="article-meta">Jul 11, 2026  17:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/newsletters/2026-07-11/lush-grass-playing-fields-for-tennis-cricket-struggle-in-uk-heat" target="_blank">Lush Grass Playing Fields for Tennis, Cricket Struggle in UK Heat</a></div>
+  <div class="article-summary">Heat waves are baking famous sports grounds.…</div>
+  <div class="article-meta">Jul 11, 2026  15:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-11/relentless-heat-waves-hit-england-s-fabled-grass-playing-fields" target="_blank">Relentless Heat Waves Hit England’s Fabled Grass Playing Fields</a></div>
+  <div class="article-summary">England's iconic cricket grounds, like Lord's, are struggling with unprecedented heatwaves, turning their famed green pitches brown and brittle. This relentless heat, a stark symptom of climate change, threatens not only the nation's beloved summer sport but also highlights the vulnerability of even seemingly resilient natural landscapes to escalating global temperatures.</div>
+  <div class="article-meta">Jul 11, 2026  11:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Bloomberg Green (RSS)</div>
+  <div class="article-title"><a href="https://www.bloomberg.com/news/articles/2026-07-11/arizona-s-maricopa-county-heat-death-prevention-faces-new-threat" target="_blank">Another Brutal Summer Tests Arizona’s Decline in Heat-Linked Deaths</a></div>
+  <div class="article-summary">Maricopa County has made progress in preventing heat-related deaths. But another scorching summer and dwindling funding threaten that trend.…</div>
+  <div class="article-meta">Jul 11, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11072026/venezuela-earthquakes-expose-disaster-preparedness-issues/" target="_blank">Recent Earthquakes Expose Problems with Venezuela’s Disaster Preparedness and Response, Scientists Say</a></div>
+  <div class="article-summary">When Antonio Machado Allison assisted with earthquake response efforts in Venezuela’s capital of Caracas in 1967, he felt confident in the way the government mobilized its teams. When he arrived, Allison described immediately seeing a plethora of sta…</div>
+  <div class="article-meta">Jul 11, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/jul/12/super-el-nino-severe-shock-global-food-prices-lasting-into-2028-economists-warn" target="_blank">‘Super’ El Niño could cause global food price shock lasting into 2028, analysts say</a></div>
+  <div class="article-summary">A "super" El Niño event this year, amplified by global heating, is poised to trigger a significant global food price shock extending into 2028, compounding existing inflation from conflicts like the Iran war. This dual threat to harvests worldwide means businesses must prepare for sustained volatility in food supply chains and their associated costs.</div>
+  <div class="article-meta">Jul 12, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/11/two-progressive-representatives-chart-a-course-forward-for-america/" target="_blank">Two Progressive Representatives Chart A Course Forward For America</a></div>
+  <div class="article-summary">Progressive representatives are pushing back against a Republican agenda, spearheaded by Russell Vought and backed by figures like Charles Koch, that seeks to dismantle federal government functions and roll back civil rights protections. This push matters for the climate as it threatens to undermine environmental regulations and clean energy initiatives, potentially reversing progress made in combating climate change.</div>
+  <div class="article-meta">Jul 11, 2026  17:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jul/11/microsoft-amazon-google-datacentre-carbon-emissions-france" target="_blank">Datacentres drive up big tech’s carbon emissions to a third of those of France</a></div>
+  <div class="article-summary">Microsoft, Amazon and Google say they still aim to achieve net zero output despite construction boomMicrosoft, Amazon and Google’s collectivecarbon emissionshave increased by nearly a fifth in the past year, driven largely by datacentre construction.…</div>
+  <div class="article-meta">Jul 11, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/jul/11/every-time-the-rain-falls-the-fear-comes-back-life-in-lagos-under-the-constant-threat-of-floods" target="_blank">‘Every time the rain falls, the fear comes back’: life in Lagos under the constant threat of floods</a></div>
+  <div class="article-summary">As Nigeria braces for another season of devastating rains, people affected describe the mental toll of repeatedly rebuilding their livesMurky water first tore down a perimeter fence, then bubbled into the yard before spilling into every room. Within…</div>
+  <div class="article-meta">Jul 11, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11072026/antarctica-missing-ice/" target="_blank">The Case of the (France-Sized) Missing Antarctic Ice</a></div>
+  <div class="article-summary">Antarctica's crucial winter sea ice expansion has failed to materialize this year, with an area the size of France missing, a critical deviation from normal conditions. This unprecedented ice loss, occurring during the Antarctic winter, signals a significant weakening of the continent's ability to regulate global temperatures and protect its massive ice sheets from melting.</div>
+  <div class="article-meta">Jul 11, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, July 12, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
