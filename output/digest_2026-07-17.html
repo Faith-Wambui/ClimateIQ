@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, July 17, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">38</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:57%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 30 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/17/the-hydrogen-stream-tanaka-energizes-500-kw-pure-hydrogen-fuel-cell-facility-in-japan/" target="_blank">The Hydrogen Stream: Tanaka energizes 500 kW fuel cell facility in Japan</a></div>
+  <div class="article-summary">Japan's Tanaka has activated a 500 kW fuel cell facility, a significant step in deploying clean energy solutions. This development, alongside other global advancements like France's 5 MW electrolyzer and Australia's high-concentration hydrogen discoveries, signals accelerating progress in hydrogen technology, crucial for decarbonizing industries and achieving climate goals.</div>
+  <div class="article-meta">Jul 17, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/17/ai-powered-9-ton-tracked-robot-for-large-scale-pv-construction/" target="_blank">AI-powered 9-ton tracked robot for large-scale PV construction</a></div>
+  <div class="article-summary">Relu Robotics has unveiled a 9-ton AI-powered robot capable of installing solar panels in challenging terrains, from deserts to hillsides. This advancement in automated construction is crucial for accelerating the deployment of large-scale solar farms, a key component in decarbonizing global energy production.</div>
+  <div class="article-meta">Jul 17, 2026  09:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/17/31-mw-agrovoltaic-project-kicks-off-construction-in-new-zealand/" target="_blank">Construction begins on 31 MW agrivoltaic project in New Zealand</a></div>
+  <div class="article-summary">New Zealand's Central Hawke’s Bay is now home to its first utility-scale solar farm, a 31.5 MW agrivoltaic project from Lodestone Energy that will generate 50 GWh annually. This significant development, which integrates sheep grazing with 49,168 solar panels, underscores a crucial shift towards renewable energy infrastructure and regional energy resilience.</div>
+  <div class="article-meta">Jul 17, 2026  08:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/17/research-breakthrough-develops-indium-free-tandem-solar-cell-with-31-efficiency/" target="_blank">Scientists build 31%-efficient indium-free tandem perovskite silicon mini-module via reactive plasma deposition</a></div>
+  <div class="article-summary">Scientists have achieved a record 31% efficiency for an indium-free tandem perovskite-silicon solar mini-module, bypassing a critical material bottleneck. This breakthrough is significant because it paves the way for more cost-effective and scalable solar technology, accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Jul 17, 2026  08:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/17/holistic-approach-wins-for-agrivoltaics/" target="_blank">Holistic approach wins for agrivoltaics</a></div>
+  <div class="article-summary">Integrating solar panels onto farmland, known as agrivoltaics, is gaining traction as early projects reveal the need for tailored solutions for both crop and livestock operations. This dual-use approach is crucial for scaling renewable energy while maintaining food production, offering a vital pathway to decarbonize agriculture and secure our food supply simultaneously.</div>
+  <div class="article-meta">Jul 17, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/17/as-the-uk-and-europe-battle-deadly-wildfires-what-lessons-can-australia-offer" target="_blank">As the UK and Europe battle deadly wildfires, what lessons can Australia offer?</a></div>
+  <div class="article-summary">Deadly wildfires are scorching the UK and Europe, mirroring Australia's century-long struggle with escalating fire seasons. This global escalation underscores the urgent need to adopt Australia's hard-won fire management expertise to mitigate increasingly severe climate-driven blazes.</div>
+  <div class="article-meta">Jul 17, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/17/argentinas-electricity-demand-fell-by-1700-mw-during-world-cup-semifinal-against-england/" target="_blank">Argentina’s electricity demand fell by 1,700 MW during World Cup semifinal against England</a></div>
+  <div class="article-summary">During Argentina's World Cup semifinal against England, electricity demand plummeted by 1,700 MW as the nation watched, only to rebound sharply by 1,500 MW after the match. This dramatic fluctuation highlights the significant, albeit temporary, impact of collective human behavior on energy consumption patterns, underscoring the need for flexible grid management in the face of unpredictable demand shifts, a crucial consideration for climate resilience.</div>
+  <div class="article-meta">Jul 17, 2026  09:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/17/record-el-nino-forecast-2027-hottest-year-on-record-bom-says" target="_blank">‘We are waiting with bated breath’: experts alarmed as BoM says gathering El Niño could be strongest on record</a></div>
+  <div class="article-summary">Most Australian capital cities have at least 80% chance of unusually warm and dry spring as climatologists watch developing system with increasing alarmFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily n…</div>
+  <div class="article-meta">Jul 17, 2026  02:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16072026/groups-push-back-on-trump-endangered-species-act-rule/" target="_blank">Tribes and Environmental Groups Push Back on Trump Rule to Diminish Habitat Protections for Endangered Species</a></div>
+  <div class="article-summary">Environmental groups and tribes are suing the Trump administration over a new rule eliminating the majority of habitat protections for imperiled wildlife protected by the Endangered Species Act.  Experts say the rule represents the most profound chan…</div>
+  <div class="article-meta">Jul 17, 2026  02:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16072026/climate-event-attribution-science-evolves/" target="_blank">As Climate Extremes Collide, Attribution Science Evolves</a></div>
+  <div class="article-summary">A new assessment from the United States’ most influential science advisory panel says climate attribution science has moved beyond asking whether human-caused global warming is driving deadly heat waves, floods and wildfires. The focus is now on how…</div>
+  <div class="article-meta">Jul 17, 2026  01:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16072026/inside-clean-energy-us-ev-sales/" target="_blank">Without Tax Credits, EV Sales Are Searching for a Spark</a></div>
+  <div class="article-summary">The U.S. electric vehicle market continues to suffer through a long hangover following the cancellation of federal tax credits. One of the keys to recovery is a model, or hopefully several models, that grab the public’s attention and exceed sales for…</div>
+  <div class="article-meta">Jul 16, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, July 17, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
