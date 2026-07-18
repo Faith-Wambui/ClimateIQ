@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, July 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">41</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 34 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/17/pass-permitting-reform-unleash-american-solar-and-storage/" target="_blank">Pass Permitting Reform. Unleash American Solar and Storage.</a></div>
+  <div class="article-summary">Permitting reform is urgently needed to unlock the full potential of America's affordable and rapidly deployable solar and storage, which are already proving crucial for grid stability during extreme heatwaves. Without these reforms, the pace of clean energy deployment risks being stifled, hindering our ability to meet escalating electricity demand and combat climate change effectively.</div>
+  <div class="article-meta">Jul 18, 2026  05:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/17/east-coast-states-will-sue-trump-for-illegal-payoffs/" target="_blank">East Coast States Will Sue Trump for Illegal Payoffs</a></div>
+  <div class="article-summary">Eight East Coast states are suing the Trump administration for nearly $2 billion in illegal payoffs to energy companies, forcing them to abandon offshore wind projects and instead invest in fossil fuels. This move directly undermines crucial clean energy transitions and locks in decades of further carbon emissions.</div>
+  <div class="article-meta">Jul 18, 2026  04:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/17/sierra-club-north-carolina-reacts-nextera-dominion-file-application-to-merge-form-countrys-largest-utility/" target="_blank">Sierra Club North Carolina Reacts: NextEra & Dominion File Application to Merge, Form Country’s Largest Utility</a></div>
+  <div class="article-summary">NextEra Energy and Dominion Energy, two of the nation's largest and most profitable utilities, are seeking approval to merge, creating the country's biggest energy provider. This consolidation is concerning because both companies have significant fossil fuel footprints, and their combined power could slow the transition to clean energy.</div>
+  <div class="article-meta">Jul 18, 2026  04:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/debriefed-17-july-2026-uk-firewave-fossil-fuelled-heat-deaths-londons-natural-history-museum-spotlights-climate/" target="_blank">Debriefed 17 July 2026: UK ‘firewave’ | Fossil-fuelled heat deaths | London’s Natural History Museum spotlights climate</a></div>
+  <div class="article-summary">Welcome to Carbon Brief’s DeBriefed.
+
+An essential guide to the week’s key developments relating to climate change.
+
+This week
+
+Heat and firewaves
+
+‘FIREWAVE’: Wildfires ravaged Europe and North America this week. France utilised water-dumping planes…</div>
+  <div class="article-meta">Jul 17, 2026  15:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-europes-may-and-june-heatwave-deaths-and-how-they-were-counted/" target="_blank">Q&A: Europe’s May and June heatwave deaths – and how they were counted</a></div>
+  <div class="article-summary">Recent weeks have seen a flurry of reports from public health authorities and scientists that estimate the deaths caused by Europe’s record-breaking summer heatwaves.
+
+In France, the national public health agency reported 2,025 excess deaths over the…</div>
+  <div class="article-meta">Jul 17, 2026  14:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/18/an-ex-nrel-scientist-is-using-ai-to-bypass-high-pressure-solar-sales-reps/" target="_blank">New AI tool brings transparency to the solar buying process</a></div>
+  <div class="article-summary">A new AI tool, AgentSolar AI, is now actively negotiating solar contracts for homeowners, aiming to eliminate the estimated $2 billion in overpayments driven by opaque sales tactics in the U.S. residential solar market. By automating the sales process and compressing costly customer acquisition, this innovation can significantly accelerate the clean energy transition by making solar more affordable and accessible.</div>
+  <div class="article-meta">Jul 18, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/18/from-import-dependence-to-global-competitiveness-indias-solar-manufacturing-story/" target="_blank">From import dependence to global competitiveness: India’s solar manufacturing story</a></div>
+  <div class="article-summary">India has rapidly transformed into a major global solar manufacturer, shedding its import reliance and establishing significant domestic production capacity. This strategic shift is crucial for the global climate transition, positioning India as a key player in providing affordable, clean energy solutions worldwide.</div>
+  <div class="article-meta">Jul 18, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/18/gencost-at-eight-how-a-decade-of-disruption-reshaped-the-future-of-australias-energy-system/" target="_blank">GenCost at Eight: how a decade of disruption reshaped the future of Australia’s energy system</a></div>
+  <div class="article-summary">Eight years of GenCost analysis reveals Australia's energy transition is being profoundly reshaped by rapid technological advancements and global economic shifts, significantly impacting the cost and feasibility of low-emissions electricity. This ongoing disruption is crucial for understanding how Australia can achieve its climate targets amidst evolving energy landscapes.</div>
+  <div class="article-meta">Jul 18, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/17/endgame-the-decline-fall-of-the-western-automotive-industry/" target="_blank">Endgame: The Decline & Fall of the Western Automotive Industry</a></div>
+  <div class="article-summary">Western automakers, including giants like Toyota, are facing a precipitous decline due to their slow adoption of electric vehicles. This shift is critical for climate action, as the industry's failure to electrify rapidly directly hinders the transition away from fossil fuel-dependent transportation.</div>
+  <div class="article-meta">Jul 18, 2026  06:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/17/heros-mission-building-a-blueprint-for-wave-energy-components/" target="_blank">HERO’s Mission: Building a Blueprint for Wave Energy Components</a></div>
+  <div class="article-summary">Researchers at the National Laboratory of the Rockies are advancing their HERO wave energy converter with a new charge controller design, tackling a critical industry challenge. This innovation is crucial for unlocking the potential of wave energy, a renewable resource that could significantly contribute to decarbonization efforts.</div>
+  <div class="article-meta">Jul 18, 2026  04:11 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/ng-interactive/2026/jul/18/the-impossible-choices-of-a-deadly-wildfire-season" target="_blank">‘It’s only going to get worse’: wildfires forcing firefighters to make impossible choices</a></div>
+  <div class="article-summary">Wildfires, amplified by the climate crisis, are forcing firefighters like César Alcaraz in Spain to make agonizing decisions about which blazes to fight due to overwhelming intensity and resource scarcity. This escalating reality means communities are increasingly vulnerable as the scale of fires outstrips our capacity to combat them, a direct consequence of a warming planet.</div>
+  <div class="article-meta">Jul 18, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17072026/texas-precipitation-models-underestimate-risk/" target="_blank">Latest Precipitation Models Still Seem to Underestimate Risk as ‘1,000-Year’ Rain Events Pummel Texas</a></div>
+  <div class="article-summary">Parts of South Texas ravaged by flooding this week have logged a steep rise in rainfall intensity over recent decades, federal data show.  The latest official dataset, published in 2018 by the National Oceanic and Atmospheric Administration (NOAA), i…</div>
+  <div class="article-meta">Jul 18, 2026  02:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17072026/wildfire-smoke-chokes-eastern-and-midwestern-cities/" target="_blank">Wildfire Smoke Chokes Eastern and Midwestern Cities as Air Pollution Soars to Dangerously High Levels</a></div>
+  <div class="article-summary">Smoke from climate change-fueled wildfires in Canada and northern Minnesota blanketed skies across much of the Midwest and East Coast, exposing millions of Americans to dangerous levels of air pollution. The National Weather Service warned residents…</div>
+  <div class="article-meta">Jul 18, 2026  00:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17072026/mobile-bay-dredged-mud-dumping-ban/" target="_blank">Will Congress Ban ‘Mud Dumping’ in Mobile Bay?</a></div>
+  <div class="article-summary">For decades, fishers, swimmers and environmental groups have complained that mud and silt from dredging operations in the Mobile Bay shipping channel have been smothering seagrasses, choking out oysters and clouding water that was once pristine.  Now…</div>
+  <div class="article-meta">Jul 17, 2026  23:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/07/17/most-zombie-credits-locked-out-of-new-un-carbon-market-after-china-and-india-snub/" target="_blank">Most “zombie credits” locked out of new UN carbon market after China and India snub</a></div>
+  <div class="article-summary">Fears of a flood of environmentally-dubious carbon credits have faded, with most old projects not able to transition to new UN marketThe postMost “zombie credits” locked out of new UN carbon market after China and India snubappeared first onClimate H…</div>
+  <div class="article-meta">Jul 17, 2026  19:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/17/europe-emissions-trading-system-greenhouse-gas-risks-weakened" target="_blank">Europe’s most effective tool to cut greenhouse gas emissions ‘risks being weakened’</a></div>
+  <div class="article-summary">European Commission proposal to overhaul emissions trading system would give companies less demanding pathway to reductionsEurope’s most effective method of cutting dangerous planet-heating gases risks being weakened after the European Commission pro…</div>
+  <div class="article-meta">Jul 17, 2026  19:01 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, July 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
