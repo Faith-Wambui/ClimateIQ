@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, July 19, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">22</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:58%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 13 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/jul/18/northern-rivers-rail-trail-tweed-nsw-funding-knock-back" target="_blank">Canefields to ocean to rolling hills: vision splendid of 135km northern NSW rail trail short-changed</a></div>
+  <div class="article-summary">The federal government has rejected a $42 million grant to complete the 54km missing link of the 135km Northern Rivers rail trail in northern NSW, despite strong local council support. This decision stalls a project vital for regional economic development and tourism, which could have offered a sustainable alternative to traditional transport and boosted local economies through eco-tourism.</div>
+  <div class="article-meta">Jul 19, 2026  07:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/18/trumps-dumb-idea-to-tariff-canada-over-smoke-could-set-a-useful-precedent/" target="_blank">Trump’s dumb idea to tariff Canada over smoke could set a useful precedent</a></div>
+  <div class="article-summary">The latest dumb, hypocritical “idea” to come out of the idiot running the US into the ground could actually set the precedent we need to solve climate change. Hear me out for a minute.
+
+Right now, much of the east and midwest US is shrouded in smoke…</div>
+  <div class="article-meta">Jul 18, 2026  16:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/19/vinfast-bets-on-entrepreneurs-with-rentapasada-program-in-the-philippines/" target="_blank">VinFast Bets on Entrepreneurs with “Rentapasada” Program in the Philippines</a></div>
+  <div class="article-summary">VinFast is launching its "Rentapasada" program in the Philippines, offering electric vehicles on a rent-to-hire basis to empower local entrepreneurs to start ride-hailing businesses. This innovative strategy aims to accelerate EV adoption by creating a new class of business owners, potentially driving significant emissions reductions in the transportation sector.</div>
+  <div class="article-meta">Jul 19, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/18/new-6-passenger-780-mile-phev-from-gm-has-north-america-written-all-over-it/" target="_blank">New 6 passenger, 780-mile PHEV from GM has North America written all over it</a></div>
+  <div class="article-summary">GM's new Starlight L PHEV SUV, boasting 160 miles of all-electric range and six-passenger capacity, is poised for a potential North American launch. This move could significantly impact the market by offering a more affordable, long-range hybrid option, accelerating the transition away from purely gasoline-powered vehicles.</div>
+  <div class="article-meta">Jul 19, 2026  03:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/18/liugong-brings-electric-heavy-equipment-options-to-north-america-video/" target="_blank">LiuGong brings electric heavy equipment options to North America [video]</a></div>
+  <div class="article-summary">Chinese manufacturer LiuGong has launched a broad range of proven battery-electric heavy equipment, including wheel loaders and excavators, in the North American market. This move offers construction and forestry companies a direct pathway to significantly cut emissions and operating costs, potentially by 40-50%, by replacing diesel fleets with zero-emission alternatives.</div>
+  <div class="article-meta">Jul 18, 2026  23:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/18/honda-goes-all-in-on-evs-in-a-multibillion-dollar-market-commercial-lawnmowers/" target="_blank">Honda goes all-in on EVs in a multibillion dollar market: commercial lawnmowers</a></div>
+  <div class="article-summary">Honda has launched its $33,000 ProZision Autonomous ZTR, an AI-powered electric mower, into the $2 billion US commercial lawnmower market, aiming to solve labor shortages and meet growing demand for cleaner, quieter equipment. This move signals a significant shift away from gas-powered machinery, directly contributing to reduced emissions and noise pollution in urban areas increasingly enacting bans on traditional landscaping equipment.</div>
+  <div class="article-meta">Jul 18, 2026  22:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/18/offshore-wind-china-reducing-costs-new-vessels/" target="_blank">This New Made-In-China Ship Explains Why Offshore Wind Will Crush Trump’s Coal Dreams</a></div>
+  <div class="article-summary">A new generation of massive, China-built offshore wind installation vessels is dramatically lowering costs, enabling the deployment of supersized turbines. This technological leap ensures offshore wind's continued growth and cost competitiveness, effectively sidelining fossil fuels like coal regardless of political shifts.</div>
+  <div class="article-meta">Jul 18, 2026  21:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/jul/18/arizona-teen-rescue-woman-dementia-heatwave" target="_blank">Arizona teen hailed for helping save woman with dementia wandering in 103F heat</a></div>
+  <div class="article-summary">Fire crew in Gilbert to honor Royal Cothrun, 14, for helping elderly woman who became disoriented amid heatwaveAnArizonafire department is formally honoring a 14-year-old boy who recently helped save an elderly woman with dementia after she wandered…</div>
+  <div class="article-meta">Jul 18, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/18/poultry-sector-growth-plan-uk-national-food-security-supply-chain" target="_blank">Poultry sector growth plan risks UK national security, campaigners warn</a></div>
+  <div class="article-summary">Government’s food security push is said to rely on animal feed imports with vulnerability to supply chain shocksThe government’s planned poultry sector growth plan is a risk to national security, campaigners have warned.Earlier this month, the enviro…</div>
+  <div class="article-meta">Jul 18, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18072026/activists-fight-to-end-faroe-islands-dolphin-hunts/" target="_blank">What Will It Take To End the Slaughter of Dolphins in the Faroe Islands?</a></div>
+  <div class="article-summary">On May 27, a massive pod of more than 400 long-finned pilot whales was spotted off the coast of Tórshavn, the capital of the Faroe Islands—a remote archipelago located about 200 miles north of Scotland. By early evening, dozens of motorboats converge…</div>
+  <div class="article-meta">Jul 18, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18072026/why-plastics-have-overtaken-the-planet/" target="_blank">Why Plastics Have Overtaken the Planet</a></div>
+  <div class="article-summary">From our collaborating partner Living on Earth, public radio’s environmental news magazine, an interview by Paloma Beltran with Judith Enck, the founder of advocacy group Beyond Plastics. After World War II, plastics grew from a cheap wartime alterna…</div>
+  <div class="article-meta">Jul 18, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, July 19, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
