@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, July 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:57%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 32 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/21/chile-tenders-2835-gwh-of-backup-supply-open-to-renewables-storage/" target="_blank">Chile tenders 2,835 GWh of backup supply open to renewables, storage</a></div>
+  <div class="article-summary">Chile just launched a massive tender for 2,835 GWh of backup power, explicitly opening the door for solar, wind, hydro, and battery storage while excluding high-emission fuels like coal. This move is a significant step towards decarbonizing its grid and ensuring reliable clean energy supply, demonstrating a clear commitment to a renewable future.</div>
+  <div class="article-meta">Jul 21, 2026  09:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/20/ev-sales-california-trump-fails-newsom-laughs/" target="_blank">EV Sales Rebound In Trump’s Nemesis, The Entire State Of California</a></div>
+  <div class="article-summary">Despite federal efforts to undermine clean vehicle standards, California's EV sales are rebounding, demonstrating the state's continued leadership in the automotive market. This resilience is crucial as California's emissions standards, which predate the federal Clean Air Act, significantly influence national climate policy and the broader transition to electric mobility.</div>
+  <div class="article-meta">Jul 21, 2026  06:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/20/sierra-club-condemns-congressional-effort-to-attack-californias-waivers-protecting-clean-air/" target="_blank">Sierra Club Condemns Congressional Effort to Attack California’s Waivers Protecting Clean Air</a></div>
+  <div class="article-summary">WASHINGTON, D.C. — Today, House Republican Representative Harriet Hageman introduced legislation under the Congressional Review Act (CRA) to revoke California’s Clean Air Act waiver allowing the state to enforce stronger than federal greenhouse gas s…</div>
+  <div class="article-meta">Jul 21, 2026  04:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-the-eus-carbon-market-review-means-for-climate-action/" target="_blank">Q&A: What the EU’s carbon market review means for climate action</a></div>
+  <div class="article-summary">The European Commission has put forward new plans to cut emissions under the EU carbon market more slowly, from 2031 onwards.
+
+On 17 July, the commission presented its long-awaited proposal for reform of the EU’s Emissions Trading System (ETS).
+
+It r…</div>
+  <div class="article-meta">Jul 20, 2026  19:11 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/21/goodwe-launches-single-phase-off-grid-inverter-series-for-residential-microgrids/" target="_blank">GoodWe launches single-phase off-grid inverter series for residential microgrids</a></div>
+  <div class="article-summary">GoodWe has launched a new series of rugged, single-phase off-grid inverters for African homes, boasting advanced AI energy management and rapid switching capabilities. This innovation is crucial for enabling reliable, resilient residential microgrids in regions prone to grid instability, thereby accelerating the adoption of solar power and reducing reliance on fossil fuels.</div>
+  <div class="article-meta">Jul 21, 2026  10:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/21/colombias-pv-capacity-tops-4-58-gw-with-1-19-gw-under-testing/" target="_blank">Colombia’s PV capacity tops 4.58 GW, with 1.19 GW under testing</a></div>
+  <div class="article-summary">Colombia's solar power generation now exceeds 4.58 GW, with an additional 1.19 GW in testing, solidifying solar's dominance in the nation's renewable energy expansion. This rapid growth is crucial as Colombia races to meet its 6 GW renewable energy target by August 2026, a significant step towards decarbonizing its energy sector.</div>
+  <div class="article-meta">Jul 21, 2026  09:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/21/acme-solar-signs-ppa-with-seci-for-300-mw-wind-solar-hybrid-renewable-energy-project/" target="_blank">ACME Solar secures PPA for 300 MW hybrid wind-solar project in India</a></div>
+  <div class="article-summary">ACME Solar inked a 25-year deal with SECI for a 300 MW wind-solar hybrid project in India, agreeing to supply power at a competitive $0.034/kWh. This significant renewable energy expansion will displace substantial fossil fuel generation, directly contributing to India's decarbonization goals and global climate mitigation efforts.</div>
+  <div class="article-meta">Jul 21, 2026  09:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/21/low-cost-catalyst-innovation-boosts-green-hydrogen-production/" target="_blank">Low-cost catalyst innovation boosts green hydrogen production</a></div>
+  <div class="article-summary">RMIT University researchers have developed a low-cost titanium dioxide catalyst that boosts green hydrogen production by over 80 times. This breakthrough significantly enhances the efficiency of producing hydrogen from water using renewable energy, a critical step in decarbonizing heavy industry and transportation.</div>
+  <div class="article-meta">Jul 21, 2026  09:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/21/when-solar-has-nowhere-to-go-turning-curtailed-pv-into-dispatchable-power/" target="_blank">When solar has nowhere to go: turning curtailed PV into dispatchable power</a></div>
+  <div class="article-summary">Geo2Watts' Borehole Battery Platform turns excess solar power, often curtailed during peak production, into dispatchable electricity by storing its heat in idle oil and gas wells. This innovation allows otherwise wasted solar energy to be converted into firm, peak-demand power, enhancing grid reliability and the value of renewable investments.</div>
+  <div class="article-meta">Jul 21, 2026  08:58 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/20/slowdown-arctic-sea-ice-melt-largest-winter-decline-record" target="_blank">Slowdown in Arctic ice melt ends after largest winter decline on record</a></div>
+  <div class="article-summary">Scientists recorded slower reduction over past 20 years, but study finds this was ‘temporary rather than sustained’A previously recorded slowdown in Arctic sea ice decline has ended, according to a new study, with the largest year-to-year wintertime…</div>
+  <div class="article-meta">Jul 20, 2026  22:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/07/20/top-maritime-court-rejects-bid-to-halt-un-deep-sea-mining-inquiry/" target="_blank">Top maritime court rejects bid to halt UN deep-sea mining inquiry</a></div>
+  <div class="article-summary">Two subsidiaries of The Metals Company sought to block the probe into potential contract breaches launched after the firm's application for US-sponsored permitsThe postTop maritime court rejects bid to halt UN deep-sea mining inquiryappeared first on…</div>
+  <div class="article-meta">Jul 20, 2026  21:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/20/deadly-floods-nuristan-afghanistan" target="_blank">Afghanistan floods kill at least 20 people, with more than 100 missing</a></div>
+  <div class="article-summary">National disaster agency confirms ‘severe financial and human losses’ in remote province of NuristanAt least 20 people have been killed and more than 80 injured in flooding that hit Afghanistan’s Nuristan province, the country’s disaster management a…</div>
+  <div class="article-meta">Jul 20, 2026  20:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/jul/21/australian-ski-resorts-smash-july-climate-records-with-temperatures-12c-above-average" target="_blank">Australian ski resorts smash July climate records with temperatures 12C above average</a></div>
+  <div class="article-summary">Resorts in New South Wales and Victoria face a warm and dry start to the season with only sporadic falls of natural snow in many alpine areasFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcast…</div>
+  <div class="article-meta">Jul 20, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/20/louisiana-toxic-air-floodlight" target="_blank">‘A public health emergency waiting to occur’: how US industry groups spent years fighting who gets to measure toxic air</a></div>
+  <div class="article-summary">Air polluters try to ensure toxic emissions happen far from monitors – but the people who live nearby still feel itKimbrelle Kyereh lives just a few hundred feet from the massive chemical storage tanks in St Rose, in south-easternLouisiana. Oily fume…</div>
+  <div class="article-meta">Jul 20, 2026  17:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, July 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
