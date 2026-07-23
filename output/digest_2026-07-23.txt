@@ -1,0 +1,104 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Thursday, July 23, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ Brazil sets compensation rules for wind and solar curtailment
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/23/brazil-sets-compensation-rules-for-wind-and-solar-curtailment/
+  Date   : Jul 23, 2026  09:19 EAT
+  Summary: Brazil is now compensating wind and solar farms for grid-related curtailments, a move that acknowledges the growing pains of integrating renewables. This framework, covering 2023-2025, signals a critical step towards ensuring investment stability in clean energy while underscoring the urgent need for grid upgrades and storage to manage supply fluctuations.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Fox ESS unveils high-voltage battery-inverter solution for C&I solar
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/23/fox-ess-unveils-high-voltage-battery-inverter-solution-for-ci-solar/
+  Date   : Jul 23, 2026  10:16 EAT
+  Summary: Fox ESS has launched its "Power Beast" platform, a high-voltage battery-inverter system designed for commercial and industrial solar installations. This advanced solution boasts impressive efficiency and rapid backup capabilities, crucial for ensuring reliable, clean energy supply and maximizing the impact of renewable energy adoption.
+
+
+▸ Enervenue unveils 150 kWh nickel-hydrogen battery
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/23/enervenue-unveils-150-kwh-nickel-hydrogen-battery/
+  Date   : Jul 23, 2026  09:53 EAT
+  Summary: EnerVenue has launched a 150 kWh nickel-hydrogen battery system, boasting 30,000 cycles and a 30-year lifespan for utility-scale applications. This breakthrough technology, derived from NASA research, promises significantly reduced thermal management needs, potentially accelerating the deployment of reliable, long-duration clean energy storage.
+
+
+▸ Argentina’s distributed solar capacity grew 34.5% in H1
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/23/argentinas-distributed-solar-capacity-grew-34-5-in-h1/
+  Date   : Jul 23, 2026  09:13 EAT
+  Summary: Argentina's distributed solar capacity surged 34.5% in the first half of the year, reaching 159.5 MW and adding over 4,700 new users to the grid. This rapid expansion signifies a significant shift towards decentralized renewable energy generation, crucial for reducing reliance on fossil fuels and meeting climate targets.
+
+
+▸ Flexible contracting framework aims to help renewables meet data center energy demand
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/23/data-centre-energy-demand-can-boost-new-grid-scale-solar-and-battery-growth/
+  Date   : Jul 23, 2026  09:06 EAT
+  Summary: A new CEC paper proposes flexible contracting, specifically long-term power purchase agreements for hybrid solar and battery systems, as the key to meeting data center energy demand. This innovative approach is crucial for unlocking utility-scale renewable energy development and ensuring a stable, green power supply for the growing digital infrastructure.
+
+
+▸ Solar and storage account for 91% of new U.S. grid capacity in Q1
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/23/solar-and-storage-account-for-91-of-new-u-s-grid-capacity-in-first-half-of-2026/
+  Date   : Jul 23, 2026  08:58 EAT
+  Summary: Solar and battery storage dominated new U.S. grid capacity in Q1, accounting for a staggering 91% of additions driven by rapid deployment across major regional grids. This surge signifies a critical acceleration in the transition away from fossil fuels, directly impacting the nation's ability to meet its climate goals.
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ Climate crisis-driven heat ‘sucking soils dry’ as extreme drought hits Europe
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/jul/23/climate-crisis-heat-sucking-soils-dry-extreme-drought-europe-analysis
+  Date   : Jul 23, 2026  07:00 EAT
+  Summary: Europe's soils are being desiccated by climate crisis-fueled heatwaves, with extreme drought conditions made up to 80 times more likely by global heating. This intensified evaporation is severely impacting water supplies, food production, and power generation across the continent.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (4 articles)
+============================================================
+
+▸ France records more than 5,700 excess deaths during June heatwave
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/2026/jul/22/france-recorded-more-than-5700-excess-deaths-during-june-heatwave
+  Date   : Jul 22, 2026  18:34 EAT
+  Summary: Figures come as large parts of southern Europe endure another record-breaking period of extreme temperaturesFrance recorded more than 5,700 excess deaths during its June heatwave, authorities have said, as swathes of southern Europe continue to endur…
+
+
+▸ Will new UK PM’s green measures at home cause climate finance pain overseas?
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/07/22/will-new-uk-pms-green-measures-at-home-cause-climate-finance-pain-overseas/
+  Date   : Jul 22, 2026  16:21 EAT
+  Summary: Andy Burnham will cut bus fares and household electricity tax in a boost for UK climate action - but this will be funded partly by switching international climate finance from grants to loansThe postWill new UK PM’s green measures at home cause clima…
+
+
+▸ Norway’s national oil company’s profits double to $11.5bn amid war on Iran
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/2026/jul/22/norway-national-oil-company-equinor-profits-double-115bn-war-iran
+  Date   : Jul 22, 2026  15:45 EAT
+  Summary: Equinor benefits from decision to increase oil and gas production during strait of Hormuz blockadesBusiness live – latest updatesProfits at Norway’s state oil company nearly doubled to $11.5bn (£8.6bn) in the three months to the end of June as the ju…
+
+
+▸ The world is on fire, and who does Trump blame? The Canadians | Arwa Mahdawi
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/commentisfree/2026/jul/22/trump-canada-wildfires-blame-air-pollution-climate-crisis
+  Date   : Jul 22, 2026  13:00 EAT
+  Summary: The US president has been complaining about Canada’s ‘filthy, polluted and unhealthy air’. Maybe he should put all that energy into tackling the climate crisisRight, that’s it: we’ve got to do something about Canada. The country’s wildfires, which re…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 35  |  Sources: 5  |  Topics: 4
