@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, July 25, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 33 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/24/trump-administration-admits-retaliatory-grant-cancellations/" target="_blank">Trump Administration Admits Retaliatory Grant Cancellations</a></div>
+  <div class="article-summary">The Trump administration has admitted in court filings to canceling billions in clean energy grants specifically targeting states that voted for Kamala Harris and are represented by Democrats. This politically motivated action directly undermined critical investments in renewable energy infrastructure, hindering progress on climate change mitigation efforts.</div>
+  <div class="article-meta">Jul 25, 2026  03:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/factcheck-no-europes-heatwaves-are-not-being-caused-by-declining-air-pollution" target="_blank">Factcheck: No, Europe’s heatwaves are not being ‘caused’ by declining air pollution</a></div>
+  <div class="article-summary">By:
+
+This summer has seen Europe suffer through a series of record-breaking heatwaves.
+
+Amid widespread media coverage of the number of deaths and the influence of climate change, the UK’s Daily Telegraph reported on new research with the incorrect h…</div>
+  <div class="article-meta">Jul 24, 2026  17:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/access-to-finance-strengthens-climate-resilience-among-sub-saharan-women" target="_blank">Access to finance ‘strengthens climate resilience’ among sub-Saharan women</a></div>
+  <div class="article-summary">Access to finance ‘strengthens climate resilience’ among sub-Saharan women
+
+By:
+
+Empowering women through greater access to finance could “strengthen” households’ resilience to “climate shocks”, according to a new study.
+
+Published in Climate Risk Ma…</div>
+  <div class="article-meta">Jul 24, 2026  14:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/state-of-the-climate-rapidly-developing-el-nino-raises-chance-of-record-warm-2026" target="_blank">State of the climate: Rapidly developing El Niño raises chance of record-warm 2026</a></div>
+  <div class="article-summary">State of the climate: Rapidly developing El Niño raises chance of record-warm 2026
+
+By:
+
+As 2026 passes its halfway point, the world is watching one of the most rapidly intensifying El Niño events in the modern record take shape in the tropical Pacif…</div>
+  <div class="article-meta">Jul 24, 2026  13:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/24/volvo-electric-heavy-trucks-built-in-queensland-for-australia/" target="_blank">Volvo Electric Heavy Trucks — Built in Queensland for Australia</a></div>
+  <div class="article-summary">Volvo has just launched the first electric heavy trucks manufactured at its Wacol plant in Queensland, Australia. This marks a significant step in decarbonizing Australia's freight transport sector, a major contributor to national emissions.</div>
+  <div class="article-meta">Jul 25, 2026  04:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/24/cs-powertech-launches-best-in-class-pv-hjt-solar-cell-factory/" target="_blank">CS PowerTech Launches Best In Class PV HJT Solar Cell Factory</a></div>
+  <div class="article-summary">CS PowerTech has opened its new, state-of-the-art HJT solar cell factory in Jeffersonville, Indiana, creating over 1,200 jobs and bolstering U.S. manufacturing. This expansion significantly strengthens domestic solar production, crucial for accelerating the transition to clean energy and reducing reliance on foreign supply chains.</div>
+  <div class="article-meta">Jul 25, 2026  04:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/24/tesla-open-source-model-s-x-roadster-release-audit/" target="_blank">Musk says Tesla to ‘open source’ Model S and X, but prior release makes us skeptical</a></div>
+  <div class="article-summary">Elon Musk announced Tesla will "open source" Model S and X, mirroring a prior release of limited Roadster data that lacked crucial design files and an actual open-source license. This move, while potentially fostering innovation, falls short of true open-sourcing, raising questions about its impact on accelerating sustainable technology adoption.</div>
+  <div class="article-meta">Jul 25, 2026  02:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/24/position-paper-on-the-connecting-europe-through-high-speed-rail-own-initiative-report/" target="_blank">Position Paper on the Connecting Europe through High-Speed Rail Own-Initiative Report</a></div>
+  <div class="article-summary">The EU Parliament can enhance the ambition of the implementation of the EU Commission plan, but some additional risks in it need to be addressed In November 2025 the European Commission presented its High-Speed Rail Plan, aiming to accelerate the dev…</div>
+  <div class="article-meta">Jul 25, 2026  01:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/24/a-1-2-gw-solar-farm-is-rising-at-a-texas-coal-site-but-coal-is-staying/" target="_blank">A 1.2 GW solar farm is rising at a Texas coal site – but coal is staying</a></div>
+  <div class="article-summary">A massive 1.2 GW solar farm is under construction in Texas, but it's being built alongside an existing coal plant, not as a replacement. This significant solar expansion, alongside continued coal power, highlights Texas's "all of the above" energy strategy to meet soaring demand, particularly from data centers, rather than a direct transition away from fossil fuels.</div>
+  <div class="article-meta">Jul 25, 2026  01:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/24/new-analysis-evaluates-major-u-s-investors-record-on-key-climate-shareholder-votes/" target="_blank">New Analysis Evaluates Major U.S. Investors’ Record on Key Climate Shareholder Votes</a></div>
+  <div class="article-summary">A new analysis by the Center for Active Stewardship, incorporating Sierra Club's Hidden Risk data, now publicly scores major U.S. investors on their climate shareholder votes. This initiative directly holds financial giants accountable for their decisions on critical climate-related resolutions, impacting the flow of capital towards or away from sustainable practices.</div>
+  <div class="article-meta">Jul 25, 2026  03:27 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/jul/25/france-spain-wildfires-latest-news-updates-madrid-cap-ferret-bordeaux-gironde" target="_blank">France and Spain race to control wildfires as suburbs of Bordeaux begin evacuation – live</a></div>
+  <div class="article-summary">Thousands were evacuated from Bordeaux suburbs as France battles raging wildfires, with Spain also facing worsening blazes due to high winds. These uncontrolled fires, exacerbated by extreme heat, underscore the escalating climate crisis and its immediate threat to communities.</div>
+  <div class="article-meta">Jul 25, 2026  09:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/25/france-rivers-heatwaves-water-levels-drop" target="_blank">‘Without us, they are doomed’: volunteers save fish from French rivers drying up in heatwaves</a></div>
+  <div class="article-summary">In Brittany, France, volunteers are physically rescuing hundreds of trout and young salmon from the Odet River, which is rapidly drying up due to record heatwaves. This desperate measure highlights the severe impact of climate-driven extreme weather on freshwater ecosystems, threatening vital fish populations and the health of these aquatic environments.</div>
+  <div class="article-meta">Jul 25, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/24/france-evacuation-cap-ferret-peninsula-wildfire" target="_blank">More than 200,000 people flee or lock down as wildfires sweep France and Spain</a></div>
+  <div class="article-summary">Wildfires, burning over 47,000 acres in France and prompting a national emergency in Spain, have forced over 200,000 people to evacuate or shelter in place. These extreme events underscore the escalating climate crisis, demonstrating its direct impact on human populations and infrastructure.</div>
+  <div class="article-meta">Jul 25, 2026  01:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/jul/24/france-spain-wildfires-cap-ferret-europe-latest-news-updates" target="_blank">France evacuates Cap Ferret peninsula as Spanish wildfires merge near Madrid – as it happened</a></div>
+  <div class="article-summary">French evacuees using hundreds of mobilised boats or the only road linking the area with the mainland as evacuation also ordered in areas near Spanish capitalOver in France, it’s not just the south-west that gets affected, but the country’s south-eas…</div>
+  <div class="article-meta">Jul 24, 2026  18:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2025/aug/13/how-dangerous-wildfires-stop-them-getting-worse" target="_blank">How dangerous are wildfires and how can we stop them from getting worse?</a></div>
+  <div class="article-summary">The conditions for ferocious fires are expected to worsen as the planet heats up, putting more people at riskFierce wildfires after back-to-back heatwaves have forced tens of thousands of people across southern Europe toflee their homes, while powerf…</div>
+  <div class="article-meta">Jul 24, 2026  17:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/food/2026/jul/24/nutrition-food-declining-can-regenerative-agriculture-save-it" target="_blank">Nutrients in our food are declining. Can regenerative agriculture save it?</a></div>
+  <div class="article-summary">Approach focuses on rebuilding soil health, increasing biodiversity and restoring natural ecosystemsFor the last few decades, the nutrient content of our crops has been declining. In the late 90s,the US Department of Agriculture foundthe vitamin C co…</div>
+  <div class="article-meta">Jul 24, 2026  15:34 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, July 25, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
