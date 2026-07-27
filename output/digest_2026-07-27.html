@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, July 27, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">19</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 11 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/27/albanian-government-approves-agrivoltaics/" target="_blank">Albanian government approves agrivoltaics</a></div>
+  <div class="article-summary">Albania's parliament has approved legislation allowing agrivoltaics, wind energy, and storage systems on agricultural land, marking a significant step for renewable energy integration. This move is crucial for the climate as it unlocks new potential for clean energy generation while aiming to support agricultural development, mirroring similar policy shifts seen in countries like South Korea and Israel.</div>
+  <div class="article-meta">Jul 27, 2026  11:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/27/new-disaggregation-methodology-quantifies-uncertainty-in-behind-the-meter-pv-generation-and-heat-pump-demand/" target="_blank">New disaggregation methodology quantifies uncertainty in behind-the-meter PV generation</a></div>
+  <div class="article-summary">Spanish researchers have created a new method using low-resolution smart meter data to precisely estimate electricity generated by rooftop solar panels you can't see, crucially quantifying the uncertainty involved. This breakthrough offers grid operators vital clarity for planning and managing electricity flow, essential for integrating more renewable energy and meeting climate targets.</div>
+  <div class="article-meta">Jul 27, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/27/advait-greenergy-guofuhee-showcase-5-mw-alkaline-electrolyser-in-live-factory-acceptance-testing-ahead-of-india-deployment/" target="_blank">India’s Advait Greenergy, China’s GuofuHee showcase 5 MW alkaline electrolyzer</a></div>
+  <div class="article-summary">India's Advait Greenergy and China's GuofuHee have jointly demonstrated a 5 MW alkaline electrolyzer, a critical piece of technology for scaling up green hydrogen production. This advancement is significant because green hydrogen, produced using renewable energy, offers a pathway to decarbonize heavy industries like steel and chemicals, crucial for meeting global climate targets.</div>
+  <div class="article-meta">Jul 27, 2026  10:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/27/canadian-solar-subsidiary-opens-6-gw-solar-cell-factory-in-indiana/" target="_blank">Canadian Solar subsidiary opens 6 GW solar cell factory in Indiana</a></div>
+  <div class="article-summary">Canadian Solar's subsidiary, CS PowerTech, has opened a massive 6 GW solar cell factory in Jeffersonville, Indiana, representing a $1 billion investment and creating over 1,200 jobs. This facility, producing advanced heterojunction (HJT) bifacial n-type solar cells, is crucial for building a domestic supply chain and bolstering grid reliability as the U.S. increasingly relies on clean energy technologies.</div>
+  <div class="article-meta">Jul 27, 2026  10:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/26/partnership-with-energyhub-sunrun-the-mobility-house-to-test-massachusetts-residential-vehicle-to-grid-program-for-eversource-national-grid-customers/" target="_blank">Partnership with EnergyHub, Sunrun, & The Mobility House to Test Massachusetts Residential Vehicle-to-Grid Program for Eversource & National Grid Customers</a></div>
+  <div class="article-summary">Partnership designed to enable EV drivers in Massachusetts to earn incentives while supporting grid reliability and affordability. NEW YORK — Eversource, National Grid, EnergyHub, Sunrun, and The Mobility House — leaders in grid flexibility and smart…</div>
+  <div class="article-meta">Jul 27, 2026  04:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/26/altus-power-partners-with-new-leaf-energy-on-development-of-5-community-solar-projects-in-virginia/" target="_blank">Altus Power Partners with New Leaf Energy on Development of 5 Community Solar Projects in Virginia</a></div>
+  <div class="article-summary">32 MW Portfolio to deliver affordable, clean power under APCo Shared Solar Program STAMFORD, Connecticut — Altus Power, a leading commercial-scale power company, today announced the acquisition of five community solar projects from New Leaf Energy, c…</div>
+  <div class="article-meta">Jul 27, 2026  04:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/jul/27/europe-wildfires-france-spain-emmanuel-macron-crisis-meeting-pedro-sanchez-castillon-latest-news-updates" target="_blank">Europe wildfires live: Macron to chair crisis meeting as France and Spain continue to battle major blazes</a></div>
+  <div class="article-summary">France and Spain are grappling with devastating wildfires, forcing hundreds of thousands to evacuate and prompting a crisis meeting chaired by President Macron. These blazes underscore Spain's Prime Minister Sánchez's assertion that the nation is experiencing the harsh realities of the climate crisis.</div>
+  <div class="article-meta">Jul 27, 2026  11:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/jul/27/uganda-begins-emergency-food-handouts-after-19-die-from-hunger" target="_blank">Uganda begins emergency food handouts after 19 die from hunger</a></div>
+  <div class="article-summary">Uganda is now distributing emergency food aid in the Karamoja region after 19 people died from hunger, a direct consequence of prolonged drought and crop failures impacting 1.5 million residents. This crisis underscores the devastating impact of climate-driven extreme weather events on food security and human lives in vulnerable regions.</div>
+  <div class="article-meta">Jul 27, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/society/2026/jul/27/london-rough-sleepers-homeless-heatwaves-extreme-weather" target="_blank">‘The city isn’t built for heat’: how extreme weather puts London’s rough sleepers at risk</a></div>
+  <div class="article-summary">As heatwaves make the capital increasingly dangerous, outreach workers warn that vulnerable people face barriers to finding water and cool spaces“You’ve just got to bear it. It’s like being in a hot country. It drains you,” said Tom*, a man in his 60…</div>
+  <div class="article-meta">Jul 27, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/27/three-year-testing-assesses-wind-flow-dynamics-in-solar-plants/" target="_blank">Three-year testing assesses wind flow dynamics in solar plants</a></div>
+  <div class="article-summary">New research from southwestern France reveals that wind direction is the critical factor influencing turbulence and drag over solar farms, a finding crucial for accurately modeling these energy sites. This breakthrough, based on three years of data, will improve how land-atmosphere and weather models represent solar parks, leading to more precise climate predictions.</div>
+  <div class="article-meta">Jul 27, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/26/firefighters-in-france-battle-to-prevent-huge-blaze-from-approaching-bordeaux" target="_blank">Pedro Sánchez says Spain is suffering effects of climate crisis as firefighters battle wildfires in France</a></div>
+  <div class="article-summary">Spain's Prime Minister Pedro Sánchez declared the country is already experiencing the climate crisis, as a massive wildfire near Bordeaux, France, continues to rage, having already scorched an area four times the size of Paris and forced nearly 220,000 evacuations. This escalating crisis, fueled by windy conditions and an impending heatwave, underscores the immediate and severe impact of climate change on European regions.</div>
+  <div class="article-meta">Jul 27, 2026  06:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/jul/26/ella-baron-wildfires-france-spain-cartoon" target="_blank">Ella Baron on the wildfires in France and Spain – cartoon</a></div>
+  <div class="article-summary">Continue reading...…</div>
+  <div class="article-meta">Jul 26, 2026  20:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/26/every-new-home-should-have-air-conditioning-say-liberal-democrats" target="_blank">Every new UK home should have air conditioning, say Liberal Democrats</a></div>
+  <div class="article-summary">Exclusive: Party says housing stock ‘woefully unprepared’ for extreme heat and new rules for builders must be setAll new UK homes should be built with air conditioning to cope with the effects of the climate crisis, according to the Liberal Democrats…</div>
+  <div class="article-meta">Jul 26, 2026  20:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/jul/26/ed-miliband-development-climate-crisis-uk-foreign-policy-world-bank-seat" target="_blank">Ed Miliband indicates development and climate will be at heart of UK foreign policy</a></div>
+  <div class="article-summary">Exclusive: Foreign secretary to take up World Bank seat and play active role in shaping changes to global lenderBritain’s foreign secretary, Ed Miliband, is to indicate he will put the climate crisis and overseas development at the heart of UK intern…</div>
+  <div class="article-meta">Jul 26, 2026  19:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, July 27, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
