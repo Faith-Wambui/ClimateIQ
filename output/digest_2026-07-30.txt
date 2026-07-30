@@ -1,0 +1,144 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Thursday, July 30, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (3 articles)
+============================================================
+
+▸ World falling short on 22 of 23 nature targets for 2030, says draft UN report
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/world-falling-short-on-22-of-23-nature-targets-for-2030-says-draft-un-report
+  Date   : Jul 29, 2026  18:00 EAT
+  Summary: The global goal to halt and reverse nature loss by 2030 “will not be achieved” unless action by countries “accelerates rapidly”, says a draft UN report.
+
+Countries are falling short on 22 of the 23 targets for 2030 they set under the Kunming-Montreal…
+
+
+▸ Climate change is driving a ‘shift’ in childhood malaria risk across Africa
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/climate-change-is-driving-a-shift-in-childhood-malaria-risk-across-africa
+  Date   : Jul 29, 2026  18:00 EAT
+  Summary: By:
+
+Rising temperatures are redistributing the risk of childhood malaria in sub-Saharan Africa, resulting in areas of “new risk” in the east and south of the continent, but also “relief hotspots” in western Africa.
+
+This is according to a new study,…
+
+
+▸ Q&A: What does China’s 15th ‘five-year plan’ for renewables mean for climate change?
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/qa-what-does-chinas-15th-five-year-plan-for-renewables-mean-for-climate-change
+  Date   : Jul 29, 2026  15:08 EAT
+  Summary: Q&A: What does China’s 15th ‘five-year plan’ for renewables mean for climate change?
+
+By:
+
+Anika Patel, Lekai Liu
+
+China has released its “15th five-year plan for the development of renewable energy”, outlining key targets and policies for the sector…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ South Africa energizes 216 MW solar, 500 MWh BESS project
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/30/south-africa-energizes-216-mw-solar-500-mwh-bess-project/
+  Date   : Jul 30, 2026  10:30 EAT
+  Summary: South Africa's Northern Cape province has launched Africa's largest hybrid renewable energy project, a 216 MW solar farm paired with a 500 MWh battery storage system. This 20-year deal with Eskom will deliver 75 MW of reliable, dispatchable solar power, equivalent to powering 200,000 homes annually and significantly decarbonizing the nation's electricity supply.
+
+
+▸ Low-cost open-access tool for rooftop PV assessment in informal settlements
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/07/30/low-cost-open-access-tool-for-rooftop-pv-assessment-in-informal-settlements/
+  Date   : Jul 30, 2026  10:00 EAT
+  Summary: Brazilian researchers have created an affordable, open-access tool using drones and GIS to accurately map rooftop solar potential in informal settlements. This innovation revealed 338 kW of installable PV capacity in two communities, enough to meet 61% of local electricity needs and significantly boost clean energy adoption where it's often overlooked.
+
+
+▸ IEA: Global EV sales jump 35% in Q2 and 50 countries set records
+  Source : Electrek
+  Link   : https://electrek.co/2026/07/29/477795/
+  Date   : Jul 30, 2026  08:00 EAT
+  Summary: Global EV sales surged 35% in Q2, with 50 countries setting records, driven by strong growth outside China and the US, indicating a significant shift towards electrification. This rapid adoption, even as the overall car market contracts, underscores the accelerating transition away from fossil fuels and signals a critical juncture for the automotive industry's climate impact.
+
+
+▸ Fired Tesla Robotaxi Supervisor Files Suit In Houston
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/07/29/fired-tesla-robotaxi-supervisor-files-suit-in-houston/
+  Date   : Jul 30, 2026  05:38 EAT
+  Summary: A former Tesla robotaxi supervisor is suing the company in Houston, alleging wrongful termination after raising concerns about the safety of their autonomous vehicle technology. This lawsuit highlights critical questions about the real-world safety and reliability of self-driving cars, a technology heavily promoted as a key solution for reducing transportation emissions and mitigating climate change.
+
+
+▸ Tesla & ContourGlobal Sign Long-Term Power Agreement Covering 1 Terawatt-Hour/Year for Sterling Renewable Project
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/07/29/tesla-contourglobal-sign-long-term-power-agreement-covering-1-terawatt-hour-year-for-sterling-renewable-project/
+  Date   : Jul 30, 2026  05:29 EAT
+  Summary: Tesla and ContourGlobal have inked a massive deal for 1 terawatt-hour of clean energy annually from Arizona's Project Sterling, one of the largest solar-plus-battery storage projects in the U.S. This significant commitment will power Tesla's operations with renewable energy, directly contributing to the reduction of carbon emissions and accelerating the transition away from fossil fuels.
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (2 articles)
+============================================================
+
+▸ Weatherwatch: rainclouds are travelling farther in warmer world
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/news/2026/jul/30/weatherwatch-rainclouds-are-travelling-farther-in-warmer-world
+  Date   : Jul 30, 2026  08:00 EAT
+  Summary: New research reveals that in the US Southwest and Southern Plains, atmospheric moisture is now traveling 50-80 kilometers farther before falling as rain, staying aloft for an additional two to four hours. This shift, driven by warmer air holding more water vapor, has significant implications for land use and water security across these regions.
+
+
+▸ First-of-Its-Kind Research Examines the Factors Accelerating — and Stalling — Solar Progress in California
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/07/29/first-of-its-kind-research-examines-the-factors-accelerating-and-stalling-solar-progress-in-california/
+  Date   : Jul 30, 2026  05:19 EAT
+  Summary: New research reveals that California's utility-scale solar development is significantly faster on previously disturbed lands, avoiding delays common on pristine natural sites. This finding is critical for accelerating clean energy deployment, as efficient permitting on brownfields and agricultural lands can unlock crucial renewable capacity to meet ambitious climate goals.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Aviation’s $4 Trillion Footprint Does Not Prove Every Flight Adds Growth
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/07/30/aviation-economic-growth-additionality/
+  Date   : Jul 30, 2026  10:14 EAT
+  Summary: Aviation's $4 trillion economic footprint, while vital for global connectivity and commerce, doesn't automatically equate to climate-positive growth. This industry's significant carbon emissions, largely unaddressed by current technologies, pose a substantial challenge to climate goals.
+
+
+▸ Three firefighters killed on Crete and in mainland Greece as Europe battles wildfires
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/2026/jul/29/pedro-sanchez-next-12-hours-decisive-extreme-heat-wildfires-madrid-europe
+  Date   : Jul 29, 2026  21:30 EAT
+  Summary: Repeated heatwaves and strong winds alarm experts, who warn blazes are becoming harder to quellThree Greek firefighters have died while tackling wildfires on the island of Crete and in the south of the mainland, the Greek fire department has said, as…
+
+
+▸ Spain faces ‘complex’ three days with risks of heatwave and strong winds reigniting some fires – as it happened
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/live/2026/jul/29/france-spain-wildfires-heatwave-extreme-heat-europe-latest-news-updates
+  Date   : Jul 29, 2026  19:04 EAT
+  Summary: Spain is bracing for a challenging period with the potential for heatwaves and strong winds to reignite existing wildfires, threatening progress made in containing blazes in the Gironde and Madrid regions. This situation highlights the escalating threat of climate-driven wildfires across Europe, as exemplified by concerns over further outbreaks in Italy and Greece, forcing firefighters to prioritize property and human safety over full extinguishment.
+
+
+▸ A ​decade on the Iberian ​frontline​ has shown me that Europe’s ​climate ​emergency​ is ​impossible to ​deny
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/2026/jul/29/a-decade-on-the-iberian-frontline-has-shown-me-that-europes-climate-emergency-is-impossible-to-deny
+  Date   : Jul 29, 2026  17:35 EAT
+  Summary: What once felt exceptional now arrives with grim regularity​ all over the continent, and it will only get worse•Don’t get This Is Europe delivered to your inbox? Sign up hereSpain has changed immeasurably since I arrived here 10 years ago to begin wo…
+
+
+▸ Hotter summers may force RHS to move hydrangeas to north of England
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/jul/29/heatwaves-hydrangeas-risk-south-of-england-rhs-warns
+  Date   : Jul 29, 2026  14:22 EAT
+  Summary: Exclusive: British garden staple becomes plant most frequently reported as suffering in heat, charity reportsWith their lush foliage and blooms that turn pink, purple or blue depending on the soil, hydrangeas are a firm favourite in Britain.The shrub…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 40  |  Sources: 5  |  Topics: 4
