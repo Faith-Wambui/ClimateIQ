@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, July 31, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 33 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/30/europes-waste-creates-value-elsewhere/" target="_blank">Europe’s Waste Creates Value Elsewhere</a></div>
+  <div class="article-summary">How the Circular Economy Act can provide the tools to help scale Europe’s recycling industry, in order to secure access to critical minerals. Recovering materials from end-of-life products like cars and batteries is a key means to secure much needed…</div>
+  <div class="article-meta">Jul 31, 2026  04:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/correcting-climate-misperceptions-may-not-boost-climate-action" target="_blank">Correcting climate ‘misperceptions’ may not boost climate action</a></div>
+  <div class="article-summary">By:
+
+The general public often underestimate support for climate action, while overestimating the real-world actions taken by other people to address the problem, according to new research.
+
+The study, published in Nature Climate Change, explores the…</div>
+  <div class="article-meta">Jul 30, 2026  18:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires" target="_blank">Factcheck: No, Europe is not having its ‘quietest’ year for wildfires</a></div>
+  <div class="article-summary">In recent days, prominent climate sceptics and rightwing commentators have shared charts on social media incorrectly implying that Europe is having its “quietest” year for wildfires in 2026.
+
+These include Dr Matthew Wielicki, a former University of…</div>
+  <div class="article-meta">Jul 30, 2026  17:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/31/utility-scale-pv-project-delivery-a-roadblock-to-ultra-low-cost-solar-arena/" target="_blank">Australia identifies utility-scale project delivery as key barrier to lower solar costs</a></div>
+  <div class="article-summary">Australia's ambitious push for ultra-low solar costs is now bottlenecked by the slow and scaled delivery of utility-scale projects, according to the Australian Renewable Energy Agency. This bottleneck threatens to hinder the nation's ability to rapidly deploy the renewable energy needed to meet its climate targets.</div>
+  <div class="article-meta">Jul 31, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/07/31/exploring-electrochemical-recovery-of-silver-from-end-of-life-solar-modules/" target="_blank">Exploring electrochemical recovery of silver from end-of-life solar modules</a></div>
+  <div class="article-summary">Australian scientists have developed an electrochemical process using 316L stainless steel electrodes that can recover up to 93% of silver from old solar panels. This breakthrough is crucial for the circular economy of solar energy, significantly reducing the need for virgin silver mining and its associated environmental impact.</div>
+  <div class="article-meta">Jul 31, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/30/zoox-gets-first-us-paid-robotaxi-with-no-human-controls-approval/" target="_blank">Zoox Gets 1st Approval From USA For Paid Robotaxis — With No Human Controls</a></div>
+  <div class="article-summary">Zoox has secured the first U.S. approval for paid robotaxi services using vehicles entirely devoid of human controls. This landmark decision by California regulators paves the way for a new era of autonomous transportation, potentially accelerating the transition away from carbon-intensive personal vehicle ownership.</div>
+  <div class="article-meta">Jul 31, 2026  05:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/30/energy-storage-factory-made-carbon-blocks-us-startup-antora/" target="_blank">“Hot Blocks” Thermal Energy Storage Startup Nails Down $550 Million More To Chase Fossil Fuels Away</a></div>
+  <div class="article-summary">Antora Energy just secured $550 million for its "hot blocks" thermal battery, a long-duration energy storage solution designed to hold heat for days. This significant investment signals a major push to replace fossil fuels by enabling greater integration of renewable energy sources like solar and wind, which require storage beyond the typical 2-4 hour capacity of lithium-ion batteries.</div>
+  <div class="article-meta">Jul 31, 2026  04:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/30/were-we-less-happy-before-social-media/" target="_blank">Were We Less Happy Before Social Media?</a></div>
+  <div class="article-summary">We’ve got so much going on with the AI craze and AI crisis that the social media ones feel like old news. The old-school era of social media, though, is still here. There are still all kinds of challenges and problems associated with TikTok, Instagra…</div>
+  <div class="article-meta">Jul 31, 2026  03:32 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/31/wildfires-extreme-weather-europe-spain-france-climate-crisis-analysis" target="_blank">‘Extremely scary findings’ show climate crisis is supercharging Europe’s wildfire weather</a></div>
+  <div class="article-summary">The climate crisis has supercharged Europe's wildfire risk, making the extreme hot, dry, and windy conditions fueling blazes in Spain at least 20 times more likely. These findings from the World Weather Attribution consortium directly link the continent's deadly summer to fossil fuel emissions, underscoring the urgent need for decisive climate action.</div>
+  <div class="article-meta">Jul 31, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/jul/30/europe-wildfires-climate-crisis-heat-summer" target="_blank">‘We can’t make it better again’: what Europe’s wildfires tell us about the climate crisis</a></div>
+  <div class="article-summary">Europe's ongoing battle with devastating wildfires, like the one near Bordeaux, France, highlights a stark reality: the climate crisis is here, and its impacts are irreversible. Despite decades of worsening extreme weather events, from floods to heatwaves, the urgency for decisive global action to cut carbon emissions remains unmet.</div>
+  <div class="article-meta">Jul 31, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/07/30/tesla-weighs-selling-china-business-spacex-merger/" target="_blank">Tesla weighs selling China business to clear path for SpaceX merger</a></div>
+  <div class="article-summary">Tesla is reportedly considering divesting its substantial China operations, which produce over half of its global vehicle output, to facilitate a merger with SpaceX. This strategic move could significantly reshape the automotive landscape and has profound implications for Tesla's global manufacturing footprint and its future integration with the burgeoning space industry.</div>
+  <div class="article-meta">Jul 31, 2026  05:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/07/30/people-want-us-to-not-cover-elon-musks-politics-but-hes-using-his-wealth-power-from-tesla-to-influence-elections/" target="_blank">People Want Us To Not Cover Elon Musk’s Politics, But He’s Using His Wealth & Power From Tesla To Influence Elections</a></div>
+  <div class="article-summary">One random guy talking crazy, racist, extreme nonsense on the street corner doesn’t warrant coverage here at CleanTechnica. But when someone is using hundreds of millions of dollars and nearly unmatched social media influence to affect elections, whi…</div>
+  <div class="article-meta">Jul 31, 2026  04:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/video/2026/jul/30/europe-record-low-water-levels" target="_blank">Record low water levels across Europe reveal mammoth skeletons and forgotten shipwrecks – video</a></div>
+  <div class="article-summary">Water levels across several of Europe’s major waterways have dropped to exceptionally low levels, setting new records in some areas.Extreme heat exacerbated by the climate crisis is intensifying the drought hitting the continent as record-breaking he…</div>
+  <div class="article-meta">Jul 31, 2026  01:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/30/fire-weather-eu-wildfires-data" target="_blank">Race to extinguish blazes across Europe as fire weather breaks records</a></div>
+  <div class="article-summary">Figures show hot, dry, windy conditions in EU are 43% more severe than the average over last 20 yearsFire weather in the EU has broken records for severity for this time of year, data shows, as firefighters race to extinguish blazes across the Medite…</div>
+  <div class="article-meta">Jul 30, 2026  21:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/jul/30/europe-burns-france-spain-visual-guide-wildfires" target="_blank">Europe burns: a visual guide to the wildfires</a></div>
+  <div class="article-summary">Ferocious flames continue to rage in parts of France and Spain, with no sign of abating. We chart the destruction in graphics and picturesThe hellish infernos that have torn through parts of France and Spain have caused deaths, the evacuation of 330,…</div>
+  <div class="article-meta">Jul 30, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, July 31, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
