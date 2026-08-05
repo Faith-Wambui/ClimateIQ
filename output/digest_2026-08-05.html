@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, August 05, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 32 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/factcheck-how-nuclear-gas-wind-and-solar-power-are-affected-during-heatwaves" target="_blank">Factcheck: How nuclear, gas, wind and solar power are affected during heatwaves</a></div>
+  <div class="article-summary">By:
+
+Heatwaves are becoming more likely and more intense due to climate change, impacting sources of power generation around the world as they work to meet increased demand.
+
+When temperatures soared past 40C in parts of Europe in June and July 2026,…</div>
+  <div class="article-meta">Aug 04, 2026  18:39 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/05/pm-surya-ghar-rooftop-solar-scheme-surpasses-5-million-households/" target="_blank">India’s rooftop solar scheme surpasses 5 million households</a></div>
+  <div class="article-summary">India's PM Surya Ghar scheme has powered over 5 million homes with rooftop solar in just two years, a massive acceleration that adds nearly 16,000 installations daily. This rapid deployment of 14.8 GW of clean energy capacity is a significant stride in reducing emissions and bolstering energy independence for millions.</div>
+  <div class="article-meta">Aug 05, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/05/scientists-explain-unexpected-hotspot-formation-in-half-cell-heterojunction-modules/" target="_blank">Scientists explain unexpected hotspot formation in half-cell heterojunction modules</a></div>
+  <div class="article-summary">Japanese researchers have pinpointed a circuit-level issue in half-cell HJT solar modules that causes unshaded cells to overheat due to current mismatch. This discovery is critical for improving the reliability of solar technology, directly impacting the efficiency and longevity of renewable energy installations.</div>
+  <div class="article-meta">Aug 05, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/04/waymo-launches-robotaxi-service-in-dallas/" target="_blank">Waymo Launches Robotaxi Service in Dallas</a></div>
+  <div class="article-summary">Waymo has officially launched its fully autonomous robotaxi service in Dallas, allowing residents to hail driverless rides via their app. This expansion signifies a significant step in the widespread adoption of electric vehicle technology for urban transportation, potentially reducing emissions from traditional ride-sharing and personal vehicle use.</div>
+  <div class="article-meta">Aug 05, 2026  06:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/04/byd-commercial-vehicle-sales-jumped-149-in-july/" target="_blank">BYD Commercial Vehicle Sales Jumped 149% in July</a></div>
+  <div class="article-summary">BYD's commercial electric vehicle sales surged 149% in July, signaling a significant acceleration in the electrification of heavy-duty transport. This rapid adoption of electric trucks and buses is crucial for decarbonizing the logistics and public transit sectors, directly impacting global emissions reduction targets.</div>
+  <div class="article-meta">Aug 05, 2026  06:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/04/la-city-council-votes-to-allow-billion-dollar-scattergood-gas-plant-retrofit-to-move-forward/" target="_blank">LA City Council Votes to Allow Billion Dollar Scattergood Gas Plant Retrofit to Move Forward</a></div>
+  <div class="article-summary">LOS ANGELES — This afternoon, the Los Angeles City Council voted to allow the Los Angeles Department of Water and Power to disregard the concerns of Angelenos and environmental advocates and move forward with its ill-conceived plans to retrofit the S…</div>
+  <div class="article-meta">Aug 05, 2026  05:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/05/murderous-heat-climate-disaster-mediterranean-life-radical-right" target="_blank">Murderous heat, an endangered food supply, decimated landscapes: embrace the Mediterranean life | George Monbiot</a></div>
+  <div class="article-summary">Right-wing commentators like Allister Heath are now advocating for abandoning climate action and embracing a "Mediterranean life," arguing the fight against climate change is lost. This nihilistic stance dismisses the devastating reality of climate disasters, including murderous heatwaves and endangered food supplies, as a desirable outcome.</div>
+  <div class="article-meta">Aug 05, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/aug/05/kashmir-deadly-cloudbursts-devastate-mountain-communities-erratic-weather-climate-change" target="_blank">‘I just want to find them’: deadly cloudbursts devastate Kashmir’s mountain communities</a></div>
+  <div class="article-summary">A devastating cloudburst on July 19th unleashed a torrent of mud and debris onto mountain communities in Indian-administered Kashmir, destroying homes and livelihoods. This extreme weather event, amplified by climate change, highlights the growing vulnerability of remote regions to increasingly erratic climate patterns.</div>
+  <div class="article-meta">Aug 05, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine" target="_blank">Europe’s rivers are running dry, and the knock-on effects are disastrous | Yiannis Baboulias</a></div>
+  <div class="article-summary">Europe's major rivers, like the Danube, are experiencing unprecedented low water levels, forcing cruise ship evacuations and halting vital transport for goods like grain. This severe drought, now an annual event instead of a once-a-century occurrence, highlights the accelerating impact of climate change on critical infrastructure and economic activity across the continent.</div>
+  <div class="article-meta">Aug 05, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/aug/05/war-what-is-it-good-for-absolutely-humongous-oil-company-profits-thanks-to-the-us-israel-war-on-iran" target="_blank">War! What is it good for? Absolutely humongous oil company profits | First Dog on the Moon</a></div>
+  <div class="article-summary">The ongoing conflict in Ukraine has fueled record profits for major oil companies like ExxonMobil and Shell, who saw their earnings surge by billions in 2022. This windfall, driven by high energy prices exacerbated by the war, directly contradicts urgent climate goals by incentivizing continued reliance on fossil fuels.</div>
+  <div class="article-meta">Aug 05, 2026  09:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/ng-interactive/2026/aug/04/revealed-major-oil-firms-make-93bn-profits-amid-war-and-climate-crisis" target="_blank">Revealed: major oil firms make $93bn profits amid war and climate crisis</a></div>
+  <div class="article-summary">Iran conflict windfall over three months reignites calls for companies ‘cashing in on human misery’ to pay for environmental damageEight of the biggest oil companies amassed profits of more than $90bn (£67bn) in just three months as the Iran conflict…</div>
+  <div class="article-meta">Aug 04, 2026  20:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/04/is-fomo-undermining-climate-diplomacy/" target="_blank">Is FOMO undermining climate diplomacy?</a></div>
+  <div class="article-summary">Benito Müller, Anju Sharma, Jen Allan, Matthias Roesti and Luis Gomez-Echeverri.
+
+Every November, tens of thousands of people descend on the world's annual UN climate conference. Presidents and prime ministers, negotiators, business executives, campa…</div>
+  <div class="article-meta">Aug 04, 2026  19:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/aug/04/europe-drought-extreme-heat-wildfires-climate-crisis-hungary-romania-ceuta-spain-migration-eu-latest-news-updates" target="_blank">Spain says 70,000 out of 72,000 migrants that entered Ceuta in mass border crossing have returned to Morocco – as it happened</a></div>
+  <div class="article-summary">Minister tells reporters least 75 people died after EU ministers meet to discuss response to the crisisMeanwhile,the European Commission said it was “monitoring very closely” the situation in Bulgaria, Hungary and Romania as the region faces an energ…</div>
+  <div class="article-meta">Aug 04, 2026  18:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/video/2026/aug/04/extreme-heat-why-our-cities-cant-cope-opinion-video" target="_blank">Extreme heat: why our cities can't cope | Opinion</a></div>
+  <div class="article-summary">The UK and Europe have been facing extreme heatwaves – Greenpeace recorded temperatures of up to 53C at one London playground in recent weeks. It’s clear our cities are not equipped to deal with the soaring temperatures brought by the climate crisis.…</div>
+  <div class="article-meta">Aug 04, 2026  16:38 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, August 05, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
