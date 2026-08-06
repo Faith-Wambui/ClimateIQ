@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, August 06, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">43</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/05/trump-mocks-evs-mandate-claim-las-vegas-rally/" target="_blank">Trump claims electric car drivers have a ‘disease’</a></div>
+  <div class="article-summary">President Trump went on another rambling tangent about electric cars at a Las Vegas rally Wednesday night, telling the crowd he “ended the electric mandate” and mocking EV owners for worrying about range – claiming they have a “disease.”Out of the en…</div>
+  <div class="article-meta">Aug 06, 2026  04:10 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/06/transmission-logjams-and-ai-load-growth-push-data-centers-toward-on-site-solar-storage-and-vpps/" target="_blank">US data centers turn to on-site solar, storage, VPPs as grid delays mount</a></div>
+  <div class="article-summary">US data centers are installing 56 GW of on-site solar and storage, and leveraging Virtual Power Plants, to bypass multi-year grid connection delays. This shift is critical as it allows these energy-intensive facilities to decarbonize their operations and reduce strain on an already overburdened grid, accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Aug 06, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/05/european-countries-cut-tens-of-billions-of-euros-of-fossil-fuel-imports-from-wind-solar-power-growth/" target="_blank">European Countries Cut Tens of Billions of Euros of Fossil Fuel Imports from Wind & Solar Power Growth</a></div>
+  <div class="article-summary">European nations have slashed tens of billions of euros from fossil fuel imports thanks to a surge in wind and solar power generation. This significant shift underscores the economic viability and climate imperative of accelerating renewable energy deployment across the continent.</div>
+  <div class="article-meta">Aug 06, 2026  05:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/05/latin-america-ev-sales-report-10-ev-market-share-surpassed-in-q2/" target="_blank">Latin America EV Sales Report: 10% EV Market Share Surpassed in Q2!</a></div>
+  <div class="article-summary">Latin America's electric vehicle market has officially crossed a significant threshold, surpassing 10% market share in Q2, a milestone driven by sustained customer interest and the impact of high oil prices. This surge in EV adoption is a critical indicator of the region's accelerating transition away from fossil fuels, directly contributing to reduced greenhouse gas emissions and a more sustainable energy future.</div>
+  <div class="article-meta">Aug 06, 2026  05:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/05/lucid-evs-robotaxi-driverless-tesla-cybercab-elon-musk/" target="_blank">Lucid Aims Another Salvo At Tesla’s Robotaxi Business</a></div>
+  <div class="article-summary">Lucid is launching a significant robotaxi fleet, partnering with Uber and Hertz's Oro Mobility for deployment starting in San Francisco this year. This move, involving at least 35,000 vehicles and substantial investment, escalates competition in the autonomous vehicle market, directly challenging Tesla's robotaxi ambitions and accelerating the transition to electric, self-driving transportation.</div>
+  <div class="article-meta">Aug 06, 2026  04:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/05/more-than-100000-pre-orders-for-the-xiaomi-sky-nomad/" target="_blank">More Than 100,000 Pre-Orders For The Xiaomi Sky Nomad?</a></div>
+  <div class="article-summary">Xiaomi's new Sky Nomad electric vehicle has garnered over 100,000 pre-orders, signaling a massive surge in consumer demand for EVs in China. This rapid adoption of electric mobility, driven by tech giants like Xiaomi, is a critical indicator of accelerating decarbonization efforts and a significant shift away from fossil fuel dependence in the world's largest auto market.</div>
+  <div class="article-meta">Aug 06, 2026  04:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/06/pv-recycling-challenges-unlikely-to-be-the-same-everywhere/" target="_blank">PV recycling challenges unlikely to be the same everywhere</a></div>
+  <div class="article-summary">New Australian research reveals socioeconomic factors, not climate, are the primary driver of solar panel waste, while regional climate influences panel lifespan. This means a one-size-fits-all approach to PV recycling policy is ineffective, requiring tailored strategies to address diverse waste generation and lifespan realities across the country.</div>
+  <div class="article-meta">Aug 06, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/06/climate-change-europe-nuclear-cooling-assumptions/" target="_blank">Climate Change Is Rewriting Europe’s Nuclear Cooling Assumptions</a></div>
+  <div class="article-summary">Romania's recent use of explosives to clear a canal highlights how extreme weather is disrupting critical infrastructure, forcing drastic measures to maintain cooling for nuclear power plants. This event underscores a growing vulnerability for Europe's nuclear fleet, as rising river temperatures and water scarcity threaten reliable operation and, by extension, the stability of low-carbon energy grids.</div>
+  <div class="article-meta">Aug 06, 2026  09:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/2026/aug/06/weatherwatch-paving-over-front-gardens-hotter-nights" target="_blank">Weatherwatch: Paving over front gardens is leading to hotter nights</a></div>
+  <div class="article-summary">Paving over UK front gardens, projected to reach 55% by 2025, is significantly exacerbating the urban heat island effect, leading to hotter nights. This loss of green space, which covers an area three times larger than all UK nature reserves, means less evaporative cooling and more heat absorption, directly contributing to rising urban temperatures.</div>
+  <div class="article-meta">Aug 06, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/06/china-wastes-clean-power-stopping-coal-use-from-falling/" target="_blank">China’s coal power rebounds as record clean energy goes to waste</a></div>
+  <div class="article-summary">China's use of coal for electricity grew in the first half of 2026 as a record amount of wind and solar power was wasted through curtailment, new research has found.
+
+The world’s largest greenhouse gas emitter brought 30 gigawatts (GW) of new coal po…</div>
+  <div class="article-meta">Aug 06, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05082026/fema-downsizing-imperils-disaster-response/" target="_blank">FEMA Downsizing Exacerbates Longstanding Problems, Imperils Disaster Response, Federal Watchdog Says</a></div>
+  <div class="article-summary">A widespread downsizing of the Federal Emergency Management Agency during the second Trump administration has exacerbated longstanding workforce challenges there and imperiled its response to disasters, a congressional watchdog warns.  More than 4,30…</div>
+  <div class="article-meta">Aug 06, 2026  02:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/society/2026/aug/05/nhs-must-prepare-for-annual-summer-heat-pressures-says-yvette-cooper" target="_blank">NHS must prepare for annual summer heat pressures, says Yvette Cooper</a></div>
+  <div class="article-summary">Health secretary says global heating means UK hospitals and GPs will have to prepare for summer as well as winter peaks of demandAdapting to global heating: which UK public services are struggling in hot weather?The NHS has been warned to prepare for…</div>
+  <div class="article-meta">Aug 05, 2026  23:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/05/global-heating-public-services-struggling-heatwaves" target="_blank">Adapting to global heating: which UK public services are struggling in hot weather?</a></div>
+  <div class="article-summary">As NHS told to prepare for extreme weather, strain also felt in other areas including transport and farmingNHS must prepare for annual summer heat pressures, says Yvette CooperThe NHS has been told it must become more resilient to increasingly freque…</div>
+  <div class="article-meta">Aug 05, 2026  23:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/aug/05/william-lawrence-michigan-democratic-house-primary" target="_blank">Progressive climate organizer William Lawrence wins Michigan Democratic House primary</a></div>
+  <div class="article-summary">Activist who rallied around a datacenter moratorium will face incumbent Republican Tom Barrett in NovemberUS politics live – latest updatesWilliam Lawrence, a prominent environmental organizer who foregrounded his support for a datacenter moratorium,…</div>
+  <div class="article-meta">Aug 05, 2026  18:31 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, August 06, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
