@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, August 07, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">43</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 36 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-is-in-chinas-new-five-year-plan-for-climate-change" target="_blank">Q&A: What is in China’s new five-year plan for climate change?</a></div>
+  <div class="article-summary">China's latest five-year plan for 2026-2030 consolidates existing climate policies, reaffirming its commitment to peak emissions before 2030 and achieve carbon neutrality by 2060. This comprehensive approach, covering CO2, non-CO2 greenhouse gases, and carbon markets, signals a strategic elevation of climate governance, crucial for global efforts to meet Paris Agreement targets.</div>
+  <div class="article-meta">Aug 06, 2026  17:48 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/06/new-zealand-electric-vehicle-market-rises-from-the-depths-charts/" target="_blank">New Zealand Electric Vehicle Market Rises from the Depths! (CHARTS)</a></div>
+  <div class="article-summary">Once touted as a possible “Norway of the Pacific,” New Zealand’s electric vehicle transition was stopped in its tracks by a change of government. The new conservative government reversed the generous tax incentives for EVs and brought in a road user…</div>
+  <div class="article-meta">Aug 07, 2026  06:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/06/waymo-jacks-up-lobbying-in-washington-dc/" target="_blank">Waymo Jacks Up Lobbying In Washington, DC</a></div>
+  <div class="article-summary">The race is on in the robotaxi industry to get into new markets, build up customer bases, and edge out the competition before they arrive — or at least at these nascent stages when no one is too massive or dominant. I just covered news of Zoox launch…</div>
+  <div class="article-meta">Aug 07, 2026  05:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/06/zoox-to-start-charging-passengers-next-week/" target="_blank">Zoox To Start Charging Passengers Next Week</a></div>
+  <div class="article-summary">Zoox has been allowed to do self-driving vehicle and robotaxi testing for a long time, but it hasn’t been allowed to charge passengers for them. Now, however, that has changed — Zoox got approval last week from the National Highway Traffic Safety Adm…</div>
+  <div class="article-meta">Aug 07, 2026  04:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/06/tesla-is-racking-up-speeding-tickets-and-you-are-on-the-hook/" target="_blank">Tesla is racking up speeding tickets, and YOU are on the hook</a></div>
+  <div class="article-summary">On today’s brain-addled episode of Quick Charge, President Trump says electric car drivers have a disease, Full Self Driving won’t stop earning Tesla drivers tickets, and Waymo’s CEO spends over forty minutes explaining why Tesla’s tech won’t ever be…</div>
+  <div class="article-meta">Aug 07, 2026  02:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/06/victory-court-overturns-trump-administrations-wind-pause/" target="_blank">VICTORY: Court Overturns Trump Administration’s Wind Pause</a></div>
+  <div class="article-summary">Portland, Oregon — Today, the United States District Court for the District of Oregon ruled in favor of clean energy developers in a legal challenge against Donald Trump’s Department of Defense for freezing reviews of wind projects and delaying devel…</div>
+  <div class="article-meta">Aug 07, 2026  01:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/aug/07/extreme-heat-breaks-temperature-records-central-eastern-europe" target="_blank">Extreme heat breaks temperature records in central and eastern Europe</a></div>
+  <div class="article-summary">Slovakia hit a scorching 42°C, a new national record, as extreme heat forced power plant shutdowns in Poland. This surge in temperatures across central and eastern Europe underscores the escalating climate crisis, impacting critical infrastructure and highlighting the urgent need for adaptation and mitigation strategies.</div>
+  <div class="article-meta">Aug 07, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/07/wildfire-smoke-britain-uk-air-pollution-climate-crisis" target="_blank">Why Britain is breathing the world’s wildfire smoke</a></div>
+  <div class="article-summary">Scientists say global blazes account for 10% of UK’s particle pollution – and climate crisis could make the problem worseSmoke rising above wildlife habitats, thousands of people evacuated and homes and livelihoods reduced to ashes – this is fastbeco…</div>
+  <div class="article-meta">Aug 07, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/06/as-heatwave-hits-caribbean-its-not-just-el-nino-to-blame/" target="_blank">When taps run dry in the Caribbean, it’s not enough to blame El Niño</a></div>
+  <div class="article-summary">Record-breaking heat and drought are hitting the Caribbean, with temperatures in Puerto Rico exceeding 38°C and Cuba facing widespread power outages, pushing millions to risk heat stroke and dengue fever outbreaks. Climate change is amplifying the impact of El Niño, leading to severe water rationing, devastating crop losses that threaten the agricultural sector, and crippling tourism due to sargassum seaweed.</div>
+  <div class="article-meta">Aug 06, 2026  18:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/politics/audio/2026/aug/06/heatwave-britain-why-are-politicians-so-slow-to-act-podcast" target="_blank">Heatwave Britain: why are politicians so slow to act? – podcast</a></div>
+  <div class="article-summary">Britain is facing escalating risks from extreme heat, including excess deaths and potential food shortages, yet politicians are demonstrably slow to implement necessary climate adaptation measures. This inaction, highlighted by the ongoing summer heatwave, poses a significant threat to public health and national resilience in the face of a warming planet.</div>
+  <div class="article-meta">Aug 06, 2026  16:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/aug/07/july-heatwaves-uk-shoppers-stay-away-from-high-street" target="_blank">July’s heatwaves kept UK shoppers away from high street</a></div>
+  <div class="article-summary">Visits down 3.8% after 6.2% fall in June, with many choosing to buy online instead, research for retail body findsShoppers stayed away from UK high streets duringlast month’s heatwave temperatures, with many choosing to buy online instead as the merc…</div>
+  <div class="article-meta">Aug 07, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07082026/wildfire-smoke-pollution-prenatal-threat/" target="_blank">Wildfire Smoke Is Now a Bigger Prenatal Threat Than Human Sources of Air Pollution</a></div>
+  <div class="article-summary">In 1965, a presidential advisory panel issued a report warning that pervasive chemical and carbon pollution was harming environmental health and changing the climate. Five years later, President Richard Nixon signed the Clean Air Act.  Since that 197…</div>
+  <div class="article-meta">Aug 07, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/07/le-corbusier-social-housing-france-dream-summer-extreme-heat-nightmare" target="_blank">Le Corbusier’s social housing was meant to be the dream. In a summer of extreme heat, it is a nightmare | Anna Richards</a></div>
+  <div class="article-summary">When temperatures get to 40C inside, and French building regulations won’t even allow shutters, these tenants’ listed homes are simply unlivableThe population of Firminy, south-east France, has been dwindling for decades. Its recent history is one of…</div>
+  <div class="article-meta">Aug 07, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/06/musks-mayhem-continues-beyond-doge-into-our-everyday-lives/" target="_blank">Musk’s Mayhem Continues Beyond DOGE Into Our Everyday Lives</a></div>
+  <div class="article-summary">Elon Musk's "Department of Government Efficiency" (DOGE) caused widespread disruption by firing thousands of federal employees, only to rehire many due to emergent problems. This chaotic restructuring highlights the fragility of essential government functions, potentially impacting climate policy implementation and progress.</div>
+  <div class="article-meta">Aug 06, 2026  19:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/06/the-messaging-skills-that-have-blown-up-the-ai-bubble/" target="_blank">The Messaging Skills That Have Blown Up The AI Bubble</a></div>
+  <div class="article-summary">AI's current hype cycle, fueled by impressive messaging from companies like OpenAI and Google, has inflated expectations beyond current capabilities. While these tools offer genuine utility, the disconnect between marketing and reality risks a significant market correction, potentially impacting investment in crucial climate solutions that rely on technological advancement.</div>
+  <div class="article-meta">Aug 06, 2026  18:53 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, August 07, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
