@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, August 12, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">45</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 38 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/12/deye-launches-2-5-mw-ci-storage-system-with-0-ms-switching/" target="_blank">Deye launches 2.5 MW C&I storage system with 0 ms switching</a></div>
+  <div class="article-summary">Deye has launched a modular 2.5 MW energy storage system for commercial and industrial clients, featuring a 0 ms seamless power transfer crucial for mission-critical operations like data centers and telecom infrastructure. This advancement directly supports climate goals by enhancing grid stability and enabling greater integration of renewable energy sources for businesses.</div>
+  <div class="article-meta">Aug 12, 2026  08:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/12/researchers-near-100-silver-recovery-from-end-of-life-solar-panels/" target="_blank">Researchers near 100% silver recovery from end-of-life solar panels</a></div>
+  <div class="article-summary">Researchers at the University of Newcastle have achieved almost 100% silver recovery from end-of-life solar panels using a proven mineral-processing technology they believe could make solar panel recycling more economically viable.The postResearchers…</div>
+  <div class="article-meta">Aug 12, 2026  08:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/12/tesla-files-tax-incentive-application-for-10-1-billion-texas-solar-cell-plant/" target="_blank">Tesla files tax incentive application for $10.1 billion Texas solar cell plant</a></div>
+  <div class="article-summary">Tesla has submitted plans for a $10.1 billion vertically integrated solar cell manufacturing campus in Fort Bend County under the internal name Project Crystal Sun, seeking property tax limitations under the Texas Jobs, Energy, Technology and Innovat…</div>
+  <div class="article-meta">Aug 12, 2026  08:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/12/irelands-leap-of-faith-to-power-data-centers/" target="_blank">Ireland’s leap of faith to power data centers</a></div>
+  <div class="article-summary">Under Ireland’s Large Energy User Action Plan (LEAP), 10 MW-plus data centers must provide at least 80% of their energy demand through new onsite renewable energy generation and storage. But whether data centers can meaningfully contribute to Ireland…</div>
+  <div class="article-meta">Aug 12, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/11/scaling-autonomous-freight-inside-pony-ais-robotruck-business/" target="_blank">Scaling Autonomous Freight: Inside Pony.ai’s Robotruck Business</a></div>
+  <div class="article-summary">From Gen-4 heavy-duty trucks to L4 urban delivery vehicles, shared technology, automotive-grade production and industry partnerships are shaping the next phase of Pony.ai’s autonomous freight business. At a media briefing on August 3, He Xing, Vice P…</div>
+  <div class="article-meta">Aug 12, 2026  05:25 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/live/2026/aug/11/uk-europe-france-heatwave-climate-crisis-drought-amber-health-alert-latest-updates-news" target="_blank">Summer 2026 on course to be UK’s hottest on record, says Met Office – as it happened</a></div>
+  <div class="article-summary">The UK Met Office predicts Summer 2026 could be the hottest on record, following warnings of 38C heat this week. This escalating extreme weather, already contributing to drought across England, underscores the damaging impacts of fossil fuel use and the urgent need for climate resilience.</div>
+  <div class="article-meta">Aug 11, 2026  19:31 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/food/2026/aug/12/all-british-chocolate-bar-made-by-scientists-using-reading-grown-cocoa" target="_blank">All-British chocolate bar made by scientists using Reading-grown cocoa</a></div>
+  <div class="article-summary">Master’s student made first bar with 100% UK ingredients since 1932 to highlight affect of climate crisis on cocoa plantsThe late queen was the only person in history to have ever eaten a chocolate bar made with 100% British ingredients, after she wa…</div>
+  <div class="article-meta">Aug 12, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/aug/12/heatwaves-uk-cost-economy-lost-output-thinktank" target="_blank">UK heatwaves may have cost economy £4.4bn in lost output so far this year, analysis finds</a></div>
+  <div class="article-summary">Verdant thinktank says cost could top £25bn a year by 2030 and calls for maximum temperature for working and urban redesign to cool down citiesRepeated debilitating heatwaves this summer are likely to have cost the UK economy more than £4bn in lost e…</div>
+  <div class="article-meta">Aug 12, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11082026/pennsylvania-neighborhood-deals-with-fuel-spill-as-environmental-enforcement-shrinks/" target="_blank">Neighbors Live in Fear After Pipeline Leak in ‘Unleashing American Energy’ Era</a></div>
+  <div class="article-summary">UPPER MAKEFIELD TOWNSHIP, Pa.— As their children ran in circles at the street corner on a clear morning, parents of Mount Eyre Manor kept watch, especially mindful of the white pickup trucks that begin to roll into the neighborhood before the school…</div>
+  <div class="article-meta">Aug 12, 2026  02:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11082026/todays-climate-extreme-weather-loneliness/" target="_blank">As Climate-Fueled Extreme Weather Spikes, Loneliness Can Be Life-Threatening</a></div>
+  <div class="article-summary">Amid heat waves, wildfire smoke warnings and sudden storms over the last few months, officials around the world have urged people to follow a fairly straightforward method for keeping safe: stay inside.  But this guidance comes with its own risks, in…</div>
+  <div class="article-meta">Aug 12, 2026  01:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/11/the-guardian-view-on-wildfires-firefighters-cant-handle-this-crisis-alone" target="_blank">The Guardian view on wildfires: firefighters can’t handle this crisis alone | Editorial</a></div>
+  <div class="article-summary">The response to this summer’s record heat and drought should be led by ministers – not left to the emergency servicesThe wildfire that began on protected heathland in the New Forest in Hampshire on Sunday was reported to beunder controlon Tuesday. Bu…</div>
+  <div class="article-meta">Aug 11, 2026  21:04 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, August 12, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
