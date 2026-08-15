@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, August 15, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:47%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 39 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/14/ev-sales-oil-costs-and-temperatures-are-spiking-so-uk-govt-pushes-more-gas/" target="_blank">As EV sales, oil costs and wildfires spike, UK gov’t considers.. fewer EVs? (update)</a></div>
+  <div class="article-summary">The UK government is considering relaxing its landmark electric vehicle rules, even in the face of inflated oil prices, a recordbreaking year for temperatures and wildfires, and EV sales that are already rising fast enough to meet the government’s cu…</div>
+  <div class="article-meta">Aug 15, 2026  03:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-does-chinas-15th-five-year-plan-for-coal-mean-for-climate-action" target="_blank">Q&A: What does China’s 15th five-year plan for coal mean for climate action?</a></div>
+  <div class="article-summary">Q&A: What does China’s 15th five-year plan for coal mean for climate action?
+
+By:
+
+China has published a new five-year plan for coal, the latest in a slew of important policy documents for the country’s energy transition.
+
+The 15th five-year plan for…</div>
+  <div class="article-meta">Aug 14, 2026  17:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/14/coal-jobs-black-lung-disease-niosh-doge-cutbacks-elon-musk-trump/" target="_blank">Trump’s Gift To Coal Miners: Less Coal Jobs, More Black Lung Disease</a></div>
+  <div class="article-summary">President Trump's promises to revive coal jobs have coincided with a disturbing resurgence of black lung disease, particularly in Appalachia, where rates have climbed back to 32.5% among miners. This resurgence, marked by more severe cases and increased benefit claims, directly contradicts the progress made in the late 20th century and highlights the human cost of prioritizing fossil fuel industries over worker safety.</div>
+  <div class="article-meta">Aug 14, 2026  13:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14082026/florida-law-makes-it-harder-to-sue-phosphate-mines-for-radioactive-so/" target="_blank">Florida Makes It Harder for Residents Living on Radioactive Soil From Former Phosphate Mines to Sue</a></div>
+  <div class="article-summary">Florida lawmakers have passed legislation significantly limiting residents' ability to sue companies responsible for radioactive phosphogypsum stacks, a byproduct of phosphate mining. This decision, despite documented health concerns like those of residents exposed to radiation from these sites, prioritizes industry over public health and environmental accountability, potentially leaving communities exposed to long-term radioactive contamination.</div>
+  <div class="article-meta">Aug 14, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/15/making-the-data-center-business-case/" target="_blank">Making the data center business case</a></div>
+  <div class="article-summary">A data center can be built in 18 to 24 months, but connecting it to the grid is another matter, writes Laura Hoffmann-Ostenhof, Europe industry lead at modeling software supplier Gridcog. Across Europe’s established hubs – the FLAP-D cluster of Frank…</div>
+  <div class="article-meta">Aug 15, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/14/porsche-ditches-volkswagen-group-emissions-pool-joins-up-with-xpeng/" target="_blank">Porsche Ditches Volkswagen Group Emissions Pool, Joins Up With XPENG</a></div>
+  <div class="article-summary">Well, this is an interesting one…. For some background, regulations in the European Union require that automakers reduce the CO2 emissions that the cars they sell create. Year after year, they have to cut their average fleet emissions. If they don’t…</div>
+  <div class="article-meta">Aug 15, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/14/china-exports-1-million-automobiles-in-a-month-twice/" target="_blank">China Exports 1 Million Automobiles in a Month … Twice</a></div>
+  <div class="article-summary">I was just writing about China exporting electric vehicles, and Chery buying a Nissan factory in South Africa to produce them there. Now I’ve also seen news that China just reached a new milestone, with electric vehicles playing a big part of that. C…</div>
+  <div class="article-meta">Aug 15, 2026  06:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/14/thousands-of-comments-shared-with-governor-katie-hobbs-passionately-oppose-desert-southwest-gas-pipeline/" target="_blank">Thousands of Comments Shared with Governor Katie Hobbs Passionately Oppose Desert Southwest Gas Pipeline</a></div>
+  <div class="article-summary">On Friday, the Sierra Club Grand Canyon Chapter shared with Gov. Katie Hobbs’s office about 2,000 comments that were submitted to the Federal Energy Regulatory Commission (FERC) last week opposing the Desert Southwest Pipeline. The comments, mostly f…</div>
+  <div class="article-meta">Aug 15, 2026  05:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/14/more-renewables-lead-to-lower-demand-for-methane-in-europe/" target="_blank">More Renewables Lead To Lower Demand For Methane In Europe</a></div>
+  <div class="article-summary">There’s a line in a Bruce Springsteen song that goes like this: “Foreman says these jobs are going, and they ain’t comin’ back.” Something similar is happening to demand for methane in Europe. When Russia invaded Ukraine in 2022, the Continent depend…</div>
+  <div class="article-meta">Aug 15, 2026  04:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/aug/15/rural-swimming-pools-france-funding-threat" target="_blank">‘In the heatwaves, it’s crucial’: the fight to save France’s rural swimming pools</a></div>
+  <div class="article-summary">Record heatwaves are straining France's rural swimming pools, vital community hubs facing funding cuts despite their crucial role in providing relief and well-being during extreme temperatures. These ageing facilities, like the one Suzy Bernard enjoys with her family, offer a tangible escape from the heat, but their survival is threatened as climate change intensifies.</div>
+  <div class="article-meta">Aug 15, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14082026/mexican-howler-monkeys-microplastics/" target="_blank">Microplastics Found in Mexican Howler Monkeys Living in a UNESCO Biosphere Reserve</a></div>
+  <div class="article-summary">Microplastics have been detected in the feces of Mexican howler monkeys living in the pristine Los Tuxtlas UNESCO biosphere reserve in Veracruz. This discovery highlights how pervasive plastic pollution has become, contaminating even remote ecosystems and posing a potential threat to the health of iconic wildlife.</div>
+  <div class="article-meta">Aug 14, 2026  11:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14082026/california-regulators-face-calls-to-better-protect-immigrants-from-pesticides/" target="_blank">California Pesticide Agency Hopelessly Captured by Industry, Critics Charge</a></div>
+  <div class="article-summary">SACRAMENTO, Calif.—Farmworkers, their loved ones and advocates lined up out the door of a California state legislative hearing room this week to urge elected officials to hold pesticide regulators accountable for failing to protect their communities…</div>
+  <div class="article-meta">Aug 15, 2026  02:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14082026/trump-expands-hunting-fishing-access-on-wildlife-refuges/" target="_blank">As Trump Expands Hunting and Fishing Access on Wildlife Refuges, What Will the Impact Be?</a></div>
+  <div class="article-summary">Over 95 percent of land within national wildlife refuges across the country will soon be open to hunting and fishing. The announcement Thursday from the U.S. Department of the Interior represents the largest such expansion in the nation’s history, al…</div>
+  <div class="article-meta">Aug 15, 2026  00:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/14/andy-burnham-climate-response-drought-hit-farmers-labour-pressure" target="_blank">Burnham announces £65m for drought-hit farmers after Labour pressure</a></div>
+  <div class="article-summary">PM steps up climate response with measures including better water access and support for building farm reservoirsFarmers must not carry the risks of the climate crisis alone, Andy Burnham has said, as he announced £65m of funding to help them manage…</div>
+  <div class="article-meta">Aug 15, 2026  00:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/14/andy-burnham-new-ev-sales-targets" target="_blank">Burnham criticised for EV and North Sea approach amid climate crisis</a></div>
+  <div class="article-summary">Cut in electric vehicle sales targets could add millions of tonnes of CO2to emissions in UK, say green campaignersAndy Burnham has been criticised for moving to cut electric vehicle (EV) sales targets and accept North Sea drilling at a time of devast…</div>
+  <div class="article-meta">Aug 14, 2026  21:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/14/south-africas-top-court-blocks-shells-offshore-oil-exploration-right/" target="_blank">South Africa’s top court blocks Shell’s offshore oil exploration right</a></div>
+  <div class="article-summary">South Africa's Constitutional Court ruled that Shell and its partners failed to consult affected communities and did not properly consider the environmental risks of offshore oil explorationThe postSouth Africa’s top court blocks Shell’s offshore oil…</div>
+  <div class="article-meta">Aug 14, 2026  20:18 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, August 15, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
