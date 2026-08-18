@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, August 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">☀️ Innovation Sparks Hope: From Resilient Farms to Recycling Gold, Climate Solutions Gain Momentum Amidst Global Challenges</div>
+    <p>Today's climate news underscores a critical duality: the escalating impacts of climate change, from ghost villages in Iraq to record-low reservoirs, are juxtaposed with remarkable advancements in technological and policy solutions. Innovations in agrivoltaics and solar panel recycling offer tangible pathways to mitigate environmental damage, while streamlined clean energy legislation and grid modernization protocols promise to accelerate the transition to a sustainable future. These developments provide a much-needed beacon of progress as we confront the undeniable realities of a warming planet.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">45</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/18/california-advances-slate-of-community-solar-balcony-solar-and-virtual-power-plant-bills/" target="_blank">California advances slate of community solar, balcony solar, and virtual power plant bills</a></div>
+  <div class="article-summary">California lawmakers are advancing key clean energy legislation, including bills to streamline balcony solar installations and reform community solar valuation, which could unlock billions in grid cost savings. These moves aim to leverage distributed generation and storage to combat soaring electricity rates and accelerate the state's transition to renewable energy.</div>
+  <div class="article-meta">Aug 18, 2026  07:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-the-two-largest-reservoirs-in-the-us-have-hit-record-low-levels" target="_blank">Analysis: The two largest reservoirs in the US have hit record-low levels</a></div>
+  <div class="article-summary">Analysis: The two largest reservoirs in the US have hit record-low levels
+
+By:
+
+The second-largest reservoir in the US reached a record-low water height on Saturday – just days after the country’s largest reservoir broke its own record.
+
+Both Lake Me…</div>
+  <div class="article-meta">Aug 17, 2026  19:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/why-land-use-emissions-have-fallen-by-a-third-this-century-in-six-charts" target="_blank">Why land-use emissions have fallen by a third this century – in six charts</a></div>
+  <div class="article-summary">Why land-use emissions have fallen by a third this century – in six charts
+
+By:
+
+Emissions from land-use change – including deforestation, loss of peatland and forest degradation – have been falling over the course of the 21st century.
+
+The latest Gl…</div>
+  <div class="article-meta">Aug 17, 2026  15:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/08/gcf-might-revisit-donor-policies-as-adaptation-finance-dwindles/" target="_blank">GCF Might Revisit Donor Policies as Adaptation Finance Dwindles</a></div>
+  <div class="article-summary">Ensuring the availability and accessibility of adaptation finance lies at the centre of many of the disputes within the climate negotiations.  While last year’s COP 30 text called on developed countries to at least triple adaptation finance by 2035,…</div>
+  <div class="article-meta">Aug 17, 2026  15:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/08/ets-and-african-carbon-market/" target="_blank">Africa’s Carbon Markets Could Benefit from EU Emissions Trading Reform</a></div>
+  <div class="article-summary">The EU has recently announced that it intends to partly meet its 2040 emissions target through the use of high quality international carbon credits, marking a material departure from the bloc’s previous approach. This could be foundational for credit…</div>
+  <div class="article-meta">Aug 17, 2026  15:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/18/agrivoltaics-can-reduce-soil-temperatures-by-more-than-20-c/" target="_blank">Agrivoltaics can reduce soil temperatures by more than 20 C</a></div>
+  <div class="article-summary">Italian researchers have demonstrated that agrivoltaic systems can slash soil temperatures by over 20°C, a critical finding for bolstering crop resilience against heat and water stress in arid regions. This innovation offers a dual benefit, generating clean energy while simultaneously mitigating the damaging impacts of rising global temperatures on agricultural productivity.</div>
+  <div class="article-meta">Aug 18, 2026  08:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/18/researchers-model-1708-pathways-for-global-pv-waste-recycling/" target="_blank">Researchers model 1,708 pathways for global PV waste recycling</a></div>
+  <div class="article-summary">Optimized, outsourced solar panel recycling pathways could slash up to 3.32 billion metric tons of CO2 equivalent and unlock $935.5 billion in net benefits by 2060. This crucial development offers a pathway to manage the growing volume of PV waste, ensuring a more sustainable energy transition and mitigating significant climate impact.</div>
+  <div class="article-meta">Aug 18, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/18/proposed-grid-2-0-protocol-would-enable-connect-and-manage-for-both-load-and-generation/" target="_blank">Proposed Grid 2.0 protocol would enable ‘connect and manage’ for both load and generation</a></div>
+  <div class="article-summary">AES Corporation and Fluence have unveiled a groundbreaking "Grid 2.0" protocol, aiming to standardize how new energy loads and generators connect to the grid, mirroring the internet's open architecture. This innovation is crucial for accelerating the integration of renewable energy and managing demand, a vital step in decarbonizing the global energy system.</div>
+  <div class="article-meta">Aug 18, 2026  07:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/18/solars-infrastructure-obstacle-2/" target="_blank">Solar’s infrastructure obstacle</a></div>
+  <div class="article-summary">A major solar developer in Texas' ERCOT grid is now dedicating more time to navigating transmission infrastructure and interconnection hurdles than to the actual solar modules, revealing a critical bottleneck hindering renewable energy expansion. This shift highlights how outdated grid infrastructure, not solar technology itself, is becoming the primary obstacle to scaling up clean energy projects, impacting the pace of decarbonization.</div>
+  <div class="article-meta">Aug 18, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/17/to-disconnect-or-not-to-disconnect/" target="_blank">To Disconnect or Not to Disconnect</a></div>
+  <div class="article-summary">Australians are grappling with a critical energy decision: disconnect from the grid to rely solely on solar and batteries, or remain connected and trade power like Gary. This shift is driven by the nation's evolving energy landscape, highlighting the growing potential for decentralized, renewable energy solutions and the implications for grid stability and consumer choice.</div>
+  <div class="article-meta">Aug 18, 2026  06:21 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/aug/18/northern-iraq-villages-islamic-state-climate-crisis" target="_blank">Iraq’s ghost villages: Islamic State drove people away – now a new enemy is preventing their return</a></div>
+  <div class="article-summary">Extreme heat and severe water shortages, exacerbated by climate change, are preventing the return of residents to ghost villages in northern Iraq's Sinjar district, a decade after they fled the Islamic State. This environmental crisis is now the primary obstacle to rebuilding communities and restoring livelihoods in a region already devastated by conflict.</div>
+  <div class="article-meta">Aug 18, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/politics/2026/aug/17/reform-uk-richard-tice-stop-tackling-climate-crisis-enjoy-heat" target="_blank">Reform’s Tice accused of misinformation after urging people to enjoy heatwaves</a></div>
+  <div class="article-summary">Nurses, medical experts and green campaigners reject party deputy leader’s dismissal of efforts to reach net zeroReform’s deputy leader has been accused of spreading misinformation after he dismissed efforts to tackle the climate crisis and urged Bri…</div>
+  <div class="article-meta">Aug 18, 2026  01:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/society/2026/aug/17/extreme-heat-more-dangerous-for-people-60-and-over-than-previously-thought" target="_blank">Extreme heat more dangerous for people 60 and over than previously thought</a></div>
+  <div class="article-summary">Study finds older adults could face harmful heat stress at just 1.5C of warming above preindustrial levelsPeople aged 60 and overface dangers to their healthfrom exposure to heat at much lower temperatures than previously thought, research has found.…</div>
+  <div class="article-meta">Aug 18, 2026  01:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17082026/canada-hydro-wind-power-investments/" target="_blank">Canada Bets Big on Hydro and Wind Power</a></div>
+  <div class="article-summary">Canadian Prime Minister Mark Carney said the country will build the largest clean energy investment in North America’s history—a package of hydropower, onshore wind and transmission projects aimed at meeting electricity needs while also exporting pow…</div>
+  <div class="article-meta">Aug 18, 2026  00:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/17/european-farmers-unprecedented-crisis-successive-heatwaves" target="_blank">European farmers face ‘unprecedented crisis’ after successive heatwaves</a></div>
+  <div class="article-summary">Vegetable and grain growers call for urgent action, warning of ‘catastrophic’ harvests due to continent-wide droughtSuccessive intense heatwaves and an increasingly severe, continent-wide drought have left many of Europe’s farmers in an “unprecedente…</div>
+  <div class="article-meta">Aug 17, 2026  19:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/aug/17/europe-wildfires-france-greece-belgium-germany-climate-crisis-drought-extreme-heat-latest-news-updates" target="_blank">French PM booed on visit to wildfire-affected region as EU sends assistance to Belgium and Spain – as it happened</a></div>
+  <div class="article-summary">Belgium wildfire creeps closer to German border, as 104 firefighters and 36 vehicles from France help with Spain wildfire effortAs flagged earlier,Belgium’s King Philippe is now visiting the emergency coordination centre looking after the firefighter…</div>
+  <div class="article-meta">Aug 17, 2026  18:48 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, August 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
