@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, August 19, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">☀️ Global Heatwaves Intensify as Solar Power Surges and US Weakens Forest Protections</div>
+    <p>This week, extreme weather events are underscoring the urgency of climate action, with unprecedented European marine heatwaves directly linked to carbon pollution and devastating impacts felt from Hawaii to the UK's food supply. Amidst these growing threats, the world is witnessing a monumental surge in solar capacity, with India leading the charge and global installations surpassing the 3-terawatt mark, signaling a powerful shift towards renewable energy. However, a concerning rollback of critical environmental safeguards in the U.S., particularly regarding forest protections and marine life, casts a shadow over these advancements, demanding renewed vigilance and policy focus.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">43</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 33 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/18/sierra-club-statement-on-usda-announcement-to-remove-roadless-rule-protections/" target="_blank">Sierra Club Statement on USDA Announcement to Remove Roadless Rule Protections</a></div>
+  <div class="article-summary">WASHINGTON, D.C. — Today, the U.S. Department of Agriculture announced its latest step to eliminate protections under the Roadless Area Conservation Rule, claiming the move is necessary to reduce wildfire risk and expand forest management. Since the…</div>
+  <div class="article-meta">Aug 19, 2026  05:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://interactive.carbonbrief.org/el-nino-explainer/index.html" target="_blank">Explainer: How the ‘super El Niño’ will reshape the world’s weather</a></div>
+  <div class="article-summary">The history of El Niño
+
+The cycles of El Niño and La Niña have been affecting the Earth for millennia. A study of proxy data from preserved corals, for example, suggests that ENSO-like variability has existed for at least 130,000 years.
+
+Historical r…</div>
+  <div class="article-meta">Aug 18, 2026  15:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18082026/noaa-scraps-marine-protections/" target="_blank">NOAA’s New Priorities Put Profits Ahead of Marine Protections</a></div>
+  <div class="article-summary">NOAA is prioritizing fishing industry profits over crucial marine protections, threatening endangered leatherback turtles in the Western Pacific, shrinking Steller sea lion sanctuaries in Alaska, and potentially scrapping gear designed to save North Atlantic right whales. This rollback of safeguards directly jeopardizes vulnerable species and undermines decades of conservation efforts, increasing the risk of extinctions and ecosystem collapse.</div>
+  <div class="article-meta">Aug 18, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18082026/hurdles-complicate-aviation-lead-fuel-transition/" target="_blank">The Clock Is Ticking on Leaded Aviation Fuel</a></div>
+  <div class="article-summary">General aviation aircraft, like those gathered at Oshkosh's AirVenture, are facing an urgent deadline as leaded aviation gasoline (Avgas) faces phase-out. This transition is critical because leaded Avgas is a significant source of lead pollution, impacting air quality and human health, and its continued use hinders progress towards decarbonizing the aviation sector.</div>
+  <div class="article-meta">Aug 18, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/08/un-framework-tax-convention/" target="_blank">The Art of the Tax Deal – How to Talk about Fairness While Protecting Your Turf</a></div>
+  <div class="article-summary">Despite five rounds of UN negotiations in New York, a Global Tax Treaty remains stalled, with powerful corporate interests and wealthy individuals blocking agreements that could hold them accountable for their environmental obligations. This deadlock directly hinders the mobilization of critical climate finance, leaving developing nations disproportionately burdened by the impacts of pollution and climate change.</div>
+  <div class="article-meta">Aug 18, 2026  11:29 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/19/indias-model-solar-villages/" target="_blank">India’s model solar villages</a></div>
+  <div class="article-summary">India has achieved a remarkable twentyfold increase in solar capacity, reaching over 150 GW by 2026, largely through massive utility-scale projects. This rapid expansion not only reshapes the nation's energy landscape but also signals a critical shift towards distributed solar generation, promising significant economic uplift for rural areas and accelerating climate action.</div>
+  <div class="article-meta">Aug 19, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/18/solar-power-passes-3-terawatt-marker/" target="_blank">Solar Power Passes 3 Terawatts!</a></div>
+  <div class="article-summary">Solar power has passed another big milestone. Solar has reached and quickly surpassed the 3-terawatt — yes, terawatt — marker globally. That’s how much solar power is installed across the world. Naturally, a lot of the growth was from China, but a lo…</div>
+  <div class="article-meta">Aug 19, 2026  06:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/18/pony-ai-plans-to-deploy-1000-autonomous-heavy-trucks/" target="_blank">Pony AI Plans to Deploy 1,000 Autonomous Heavy Trucks</a></div>
+  <div class="article-summary">Just yesterday, I wrote about Einride and DAF Trucks partnering on a new, serious autonomous trucking initiative. There’s another recent autonomous trucking story that slipped through the cracks. Autonomous driving company Pony.AI is reportedly looki…</div>
+  <div class="article-meta">Aug 19, 2026  06:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/18/dukes-new-energy-plan-for-data-centers-requires-consumer-protections-now/" target="_blank">Duke’s New Energy Plan for Data Centers Requires Consumer Protections Now</a></div>
+  <div class="article-summary">Duke Energy's new long-range plan hinges on speculative data center growth, proposing two new gas plants and extended coal operations. This reliance on fossil fuels to meet uncertain demand directly contradicts urgent climate goals and risks locking in polluting infrastructure for decades.</div>
+  <div class="article-meta">Aug 19, 2026  05:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/18/unearthing-the-future-inside-nlrs-summer-educational-programs/" target="_blank">Unearthing the Future: Inside NLR’s Summer Educational Programs</a></div>
+  <div class="article-summary">An underground mine provided some welcomed cool on a peak-summer day in the mountains west of Denver, Colorado, for a group of 21 undergraduate interns from the U.S. Department of Energy’s National Laboratory of the Rockies (NLR). Outfitted with hard…</div>
+  <div class="article-meta">Aug 19, 2026  04:12 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/19/uk-heat-stressed-countries-fruit-veg-import" target="_blank">UK relies on heat-stressed countries for fruit and veg it could grow itself – report</a></div>
+  <div class="article-summary">The UK's reliance on fruit and vegetable imports from climate-vulnerable nations, like those experiencing record heatwaves and droughts, poses significant risks to domestic food security and price stability. This dependence means Britain is exposed to supply chain disruptions and price shocks that could be mitigated by investing in its own, more resilient, domestic food production.</div>
+  <div class="article-meta">Aug 19, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/19/carbon-pollution-massive-expansion-marine-heatwaves-europe" target="_blank">Carbon pollution has fuelled ‘massive expansion’ of marine heatwaves in Europe, study finds</a></div>
+  <div class="article-summary">Carbon pollution has driven a "massive expansion" of European marine heatwaves this summer, with some areas experiencing temperatures up to 6°C above normal. This unprecedented warming, which would have been "virtually impossible" without human-caused emissions, significantly increases the risk of severe impacts on marine ecosystems and coastal economies.</div>
+  <div class="article-meta">Aug 19, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/aug/19/bushfire-danger-risk-heightened-fire-australia-nt-nsw-queensland" target="_blank">‘Prepare early’: bushfire authorities sound alarm for NT, NSW and Queensland</a></div>
+  <div class="article-summary">Effects of global heating in NT worsened by ‘dangerous and fire-promoting buffel grass’, expert saysFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastFire authorities have warned large parts…</div>
+  <div class="article-meta">Aug 19, 2026  04:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18082026/marathon-el-paso-refinery-emissions/" target="_blank">El Paso Officials Seek Answers Following Emissions at Marathon Refinery</a></div>
+  <div class="article-summary">EL PASO, Texas—Gilbert Morales struggled to compose himself before addressing the El Paso City Council on Tuesday morning. Morales fought back tears as he recounted how his wife died of lung cancer in June, despite never being a smoker. He lives next…</div>
+  <div class="article-meta">Aug 19, 2026  01:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18082026/todays-climate-hurricane-lala-hawaii/" target="_blank">Hurricane Lala Pummels Hawaii—Despite Never Making Landfall</a></div>
+  <div class="article-summary">Despite never making landfall, Hurricane Lala left a path of destruction across Hawaii over the weekend. Strong winds, torrential rain and mudslides damaged or swept away more than 100 homes while felled trees blocked key roads on the island of Hawai…</div>
+  <div class="article-meta">Aug 19, 2026  00:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/18/every-country-needs-a-model-to-help-optimise-its-energy-transition/" target="_blank">Every country needs a model to help optimise its energy transition</a></div>
+  <div class="article-summary">Claver Gatete is Executive Secretary of the UN Economic Commission for Africa. Jason Veysey is Energy Modeling Program Director and Senior Scientist at the Stockholm Environment Institute. Lisa Sachs is Director of the Columbia Center on Sustainable…</div>
+  <div class="article-meta">Aug 18, 2026  20:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/aug/18/rebecca-hendin-richard-tice-climate-crisis-cartoon" target="_blank">Rebecca Hendin on Richard Tice and the climate crisis – cartoon</a></div>
+  <div class="article-summary">Continue reading...…</div>
+  <div class="article-meta">Aug 18, 2026  18:34 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, August 19, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
