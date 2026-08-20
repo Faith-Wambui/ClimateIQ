@@ -1,0 +1,140 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Thursday, August 20, 2026
+============================================================
+
+☀️ From Birdsong to Batteries: Climate's Alarming Echoes and Innovative Responses
+
+This week, the climate crisis paints a stark picture, with over half of migratory birds on the African-Eurasian flyway facing steep declines and vital coastal marshes succumbing to rising seas. Meanwhile, technological advancements in solar are highlighted alongside the critical need for energy storage solutions, as exemplified by the UK's push for 'super batteries'. These stories underscore the urgent interconnectedness of our ecosystems, technological progress, and the policy decisions shaping our planet's future.
+
+============================================================
+🏛️  POLICY & REGULATION  (2 articles)
+============================================================
+
+▸ Q&A: What is ‘long-duration energy storage’ – and why does the UK need it?
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/qa-what-is-long-duration-energy-storage-and-why-does-the-uk-need-it
+  Date   : Aug 19, 2026  14:18 EAT
+  Summary: Q&A: What is ‘long-duration energy storage’ – and why does the UK need it?
+
+By:
+
+The UK is pioneering the use of “super batteries” that can store energy for long periods, smoothing the output from wind and solar power as the country moves towards net…
+
+
+▸ Pakistan’s net billing reform sheds light on deeper power sector issues
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/19/pakistans-net-billing-reform-sheds-light-on-deeper-power-sector-issues/
+  Date   : Aug 19, 2026  11:56 EAT
+  Summary: Pakistan's recent shift from net metering to net billing, lowering the buyback rate for exported solar energy, aims to ease power sector financial woes but won't solve deeper issues like electricity theft and weak bill recovery. This reform, reducing the value of rooftop solar by up to 49% for some users, highlights the urgent need to address grid inefficiencies alongside prosumer policy changes to ensure a stable and equitable energy future.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Essential system testing every solar project needs for long-term performance
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/20/essential-system-testing-every-solar-project-needs-for-long-term-performance/
+  Date   : Aug 20, 2026  08:31 EAT
+  Summary: Hidden electrical, structural, and communication faults in solar projects can lead to safety risks and significant lost revenue. Proactive testing at every stage, from commissioning to routine maintenance, is crucial for ensuring long-term performance and maximizing energy generation.
+
+
+▸ Blocked BESS in Britain: Clearstone’s appeal fails for 150 MW site at Axminster
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/20/blocked-bess-in-britain-clearstones-appeal-fails-for-150-mw-site-at-axminster/
+  Date   : Aug 20, 2026  08:00 EAT
+  Summary: Clearstone Energy’s proposed 150 MW Axminster Energy Hub BESS appeal was dismissed by planning inspector Helen Heward on August 13, 2026, despite the developer’s compliance with relevant fire-safety guidance and use of Wärtsilä Quantum 1 technology.…
+
+
+▸ New materials in the frame
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/20/new-materials-in-the-frame/
+  Date   : Aug 20, 2026  07:00 EAT
+  Summary: Solar cells, encapsulants, glass, backsheets, and virtually every PV module component have seen rapid changes and improvements over the past 10 years. During that time, module frames have seen relatively little innovation and remain a simple piece of…
+
+
+▸ SolarAnywhere® Supports Solar PV & Unmanned Flight!
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/08/19/solaranywhere-supports-solar-pv-unmanned-flight-2/
+  Date   : Aug 20, 2026  06:50 EAT
+  Summary: SolarAnywhere® is often associated with utility-scale or distributed PV, but our solar irradiance data powers a lot more than solar plants. A great example: Piotr Lichota at the Warsaw University of Technology is using SolarAnywhere to figure out whe…
+
+
+▸ The Genesis GV90 takes luxury up a notch with coach doors and all [Images]
+  Source : Electrek
+  Link   : https://electrek.co/2026/08/19/genesis-gv90-luxury-coach-doors-images/
+  Date   : Aug 20, 2026  06:00 EAT
+  Summary: Genesis unveiled its first full-size flagship SUV, the GV90, and it’s about as over-the-top as they come. The ultra-luxe electric SUV packs coach doors, a built-in refrigerator, massive digital screens, air suspension, and plenty of other high-end to…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ From bone-dry to soaked to the bone, welcome to the age of climate whiplash | Aditya Chakrabortty
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/commentisfree/2026/aug/20/hot-summer-wet-winter-welcome-to-the-age-of-climate-whiplash
+  Date   : Aug 20, 2026  08:00 EAT
+  Summary: This punishingly hot and dry summer will probably be followed by another wet winter. But it’s nothing compared with what Britain will endure in years to comeThis summer could be thehottest,driestanddeadliestin English history. Successive heatwaves ha…
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (2 articles)
+============================================================
+
+▸ Weatherwatch: Climate crisis fuelling steep fall in migratory bird numbers
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/news/2026/aug/20/weatherwatch-climate-crisis-bird-migration
+  Date   : Aug 20, 2026  08:00 EAT
+  Summary: A major review reveals over half of migratory birds using the vital African-Eurasian flyway are experiencing steep population declines. This alarming trend signals a critical climate crisis impact, threatening one of the planet's largest natural migration systems and the delicate ecological balance it supports.
+
+
+▸ As Seas Rise, Scientists Race to Save Coastal Marshes From Drowning
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/19082026/sea-level-rise-drowns-coastal-marshes/
+  Date   : Aug 19, 2026  11:55 EAT
+  Summary: Coastal marshes, vital buffers against storm surges and carbon sinks, are drowning at an alarming rate due to rising sea levels. Scientists are now racing against time, as exemplified by efforts in Stone Harbor, New Jersey, to implement innovative strategies to save these critical ecosystems before they are lost forever.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ California becomes first US state to set efficiency rules for replacement tires
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/aug/19/california-replacement-tires
+  Date   : Aug 20, 2026  02:48 EAT
+  Summary: Regulations that would block sale of older tires praised by environmental groups amid rightwing backlashCalifornia has become the first state in the nation to mandate that replacement tires be energy efficient, a major auto industry regulation set to…
+
+
+▸ Recent Rain Slowed Southwestern Montana Wildfires. Now the Heat Is Returning.
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/19082026/montana-wildfire-conditions-rapidly-change/
+  Date   : Aug 20, 2026  01:32 EAT
+  Summary: Firefighters are gaining ground on three large wildfires that have burned more than 47,000 acres across southwestern Montana, but unhelpful warmer temperatures, lower humidity and breezy conditions are returning after recent rainfall slowed the fires…
+
+
+▸ Human remains again found at Lake Mead as water levels drop amid drought
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/aug/19/lake-mead-human-remains
+  Date   : Aug 19, 2026  20:30 EAT
+  Summary: Discovery marks latest grim finding in lake as water levels in crucial reservoir outside Las Vegas continue to declineHuman remains have once again been discovered at Lake Mead outside Las Vegas, Nevada, marking the latest in a line of gruesome disco…
+
+
+▸ Tice should apologise to firefighters for ‘enjoy it’ remark on extreme heat, says Labour
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/uk-news/2026/aug/19/richard-tice-enjoy-it-remark-extreme-heat-labour
+  Date   : Aug 19, 2026  19:19 EAT
+  Summary: Exclusive: Bridget Phillipson’s comments show her party feels voters have been alienated by Reform net zero attacksRichard Tice should apologise to firefighters for his comments this week urging British people to “enjoy” this summer’s extreme heat, a…
+
+
+▸ Reform says we need to choose between climate and economy. It's wrong | Larry Elliott
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/commentisfree/2026/aug/19/reform-says-we-need-to-choose-between-climate-and-economy-its-wrong
+  Date   : Aug 19, 2026  18:10 EAT
+  Summary: The party’s deputy leader Richard Tice says we should stop worrying about extreme heat and enjoy it. This dangerous nonsense will wreck our finances and the planetSo now we know: the smart response to the UK’s summer of record temperatures is to do p…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 41  |  Sources: 6  |  Topics: 5
