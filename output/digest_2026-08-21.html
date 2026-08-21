@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, August 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">☀️ Solar's Sunshine and Shadows: Waste Woes, Storage Shifts, and Unforeseen Costs Dim Renewables' Glow</div>
+    <p>Today's climate news reveals a complex picture for solar energy, a cornerstone of our transition. While ambitious targets are being met in places like Cambodia, the reality of solar deployment is proving more challenging than anticipated. From the disappointing truth of 'solar recycling' amounting to landfilling, to the economic non-viability of integrated solutions like Tesla's Solar Roof, the industry faces significant hurdles. Furthermore, the environmental ripple effects of solar expansion, from impacting bird diversity to the critical need for energy storage to manage overcapacity, underscore that even our most promising green technologies require careful, holistic management and adaptation.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/factcheck-10-flaws-in-the-conservative-report-on-cheap-power" target="_blank">Factcheck: 10 flaws in the Conservative report on ‘cheap power’</a></div>
+  <div class="article-summary">In a new report, the opposition Conservatives argue that UK electricity prices are too high and that it would be better for the climate to have cheap electricity, even if that means using more gas.
+
+The idea is that cheap power would encourage people…</div>
+  <div class="article-meta">Aug 20, 2026  18:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/20/collective-global-roadmap-can-boost-cambodias-energy-transition-goals/" target="_blank">Collective global roadmap can boost Cambodia’s energy transition goals</a></div>
+  <div class="article-summary">Cambodia is on track to meet its 2030 renewable energy target, with nearly half its power now sourced domestically, but achieving 70% requires global cooperation on fossil fuel transition roadmaps. This push for homegrown energy is crucial, as the recent global energy crisis highlights the economic and security risks of relying on volatile imported fossil fuels.</div>
+  <div class="article-meta">Aug 20, 2026  11:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/21/bombshell-report-alleges-u-s-solar-recycling-is-mostly-landfilling-offshoring-in-disguise/" target="_blank">Report alleges U.S. solar recycling is mostly landfilling, offshoring in disguise</a></div>
+  <div class="article-summary">A new report reveals that the vast majority of U.S. solar panel "recycling" is actually just landfilling or offshoring of degraded materials, failing to recover valuable components. This practice undermines the environmental benefits of solar energy, creating a hidden waste stream and hindering the development of a truly circular economy for renewables.</div>
+  <div class="article-meta">Aug 21, 2026  08:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/21/solar-powerhouse-to-storage-leader/" target="_blank">Solar powerhouse to storage leader</a></div>
+  <div class="article-summary">Chile, a solar powerhouse thanks to massive Atacama Desert installations, is now pivoting to energy storage to salvage its overbuilt PV capacity and prevent revenue collapse. This strategic shift is crucial for stabilizing its grid and ensuring the long-term viability of its renewable energy investments, a lesson for nations grappling with similar solar boom-and-bust cycles.</div>
+  <div class="article-meta">Aug 21, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/20/tesla-discontinues-solar-roof-panels-only/" target="_blank">Tesla discontinues its Solar Roof tiles, not economically viable</a></div>
+  <div class="article-summary">Tesla has officially discontinued its Solar Roof tiles, citing economic non-viability after years of scaling issues and price hikes that significantly exceeded initial promises. This move signals a setback for integrated solar solutions, potentially slowing the adoption of aesthetically pleasing, building-integrated photovoltaics crucial for widespread renewable energy deployment.</div>
+  <div class="article-meta">Aug 21, 2026  06:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/20/princeton-critical-minerals-raises-16m-to-scale-lithium-production-technologies/" target="_blank">Princeton Critical Minerals Raises $16M to Scale Lithium Production Technologies</a></div>
+  <div class="article-summary">The Princeton University spinout will use the funding to expand sales and commercial deployments of its revolutionary brine-based lithium production platform in the U.S. and South America. PRINCETON, N.J. — Princeton Critical Minerals (PCM), a startu…</div>
+  <div class="article-meta">Aug 21, 2026  05:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/20/waymo-fully-launches-robotaxi-service-in-houston/" target="_blank">Waymo Fully Launches Robotaxi Service in Houston</a></div>
+  <div class="article-summary">Waymo fully launched robotaxi service in Houston, Texas, today. You may recall that Waymo started inviting customers to use its service in Space City about 6 months ago. I didn’t recall that at first when I saw the news today that Waymo was launching…</div>
+  <div class="article-meta">Aug 21, 2026  05:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20082026/florida-threats-lead-to-climate-migration/" target="_blank">Climate Change Reshuffles Where People Are Moving in Florida</a></div>
+  <div class="article-summary">Rising sea levels and increased storm intensity are forcing Floridians to reconsider coastal living, with data showing a notable shift away from vulnerable coastal communities towards inland areas like Sebring. This migration pattern highlights the tangible impact of climate change on population distribution and underscores the urgent need for adaptation strategies as more people seek refuge from climate-related risks.</div>
+  <div class="article-meta">Aug 20, 2026  11:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/20/pv-life-cycle-assessment-gets-its-most-comprehensive-data-overhaul-in-more-than-a-decade/" target="_blank">PV life cycle assessment gets its most comprehensive data overhaul in more than a decade</a></div>
+  <div class="article-summary">The International Energy Agency's PVPS Task 12 has just released its most significant update in over a decade to the life cycle assessment data for solar photovoltaics, incorporating factory-level data for modern technologies like TOPCon and PERC modules. This comprehensive overhaul provides a crucial, up-to-date baseline for understanding and reporting the true environmental footprint of solar energy, impacting everything from procurement decisions to sustainability claims.</div>
+  <div class="article-meta">Aug 20, 2026  10:54 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20082026/florida-sloth-world-deaths-investigation-concludes-no-crime/" target="_blank">More than 50 Sloths Died at a Florida Wildlife Attraction. Officials Say No Crime Occurred.</a></div>
+  <div class="article-summary">New investigative findings from a Florida sheriff’s office detail the stark conditions of emaciated and dehydrated sloths at a planned tourism attraction where more than 50 of the animals died, including one frothing at the mouth and another that had…</div>
+  <div class="article-meta">Aug 21, 2026  01:57 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20082026/china-solar-panels-harm-bird-diversity/" target="_blank">China’s Solar Buildout Hampers Bird Diversity</a></div>
+  <div class="article-summary">Policies promoting solar power construction projects in China have contributed to a decline in bird diversity across the country. Those findings, from a study published Thursday in the journal Science, highlight the environmental impacts of large-sca…</div>
+  <div class="article-meta">Aug 20, 2026  21:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/20/marine-heat-records-countries-ocean-roadmap-australia-turkiye-cop31/" target="_blank">As marine heat breaks records, countries seek ocean roadmap at COP31</a></div>
+  <div class="article-summary">With record-breaking ocean temperatures weakening the world's largest carbon sink, a group of countries is pushing for the UN COP31 summit to deliver meaningful commitments to protect marine ecosystems. Yet this effort could be hobbled by a shrinking…</div>
+  <div class="article-meta">Aug 20, 2026  18:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/20/environment-oceans-acidification-alkali-carbon-absorption-lobsters" target="_blank">Lobsters and acidic seas: can shellfish help neutralise one of the greatest threats to the ocean?</a></div>
+  <div class="article-summary">Crustaceans are the subject of tests to see if alkalis added to seawater, so it absorbs more CO2, harm marine life. But Trump’s halt to funding threatens to scupper the researchFor many in the US region of New England, the lobster roll is synonymous…</div>
+  <div class="article-meta">Aug 20, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20082026/inside-clean-energy-illinois-virtual-power-plants/" target="_blank">Notes from Illinois’ Virtual Power Plant Frontier</a></div>
+  <div class="article-summary">Illinois is the latest example of how a state can embrace virtual power plants and see results almost immediately. Today, Solrite Energy is announcing its entry into the Illinois market with a program that provides households with battery energy stor…</div>
+  <div class="article-meta">Aug 20, 2026  16:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, August 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
