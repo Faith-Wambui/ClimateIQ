@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, August 22, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">☀️ Heatwaves spark political firestorms as tech innovations promise greener grids and transport, while a London mega-data center faces climate scrutiny.</div>
+    <p>As Europe grapples with the political fallout from relentless heatwaves, the climate narrative is being shaped by both urgent crises and promising technological advancements. Innovations in battery storage and autonomous electric vehicles signal a potential acceleration in decarbonization efforts. However, significant carbon emissions from projects like a proposed London data center highlight the ongoing tension between development and climate goals, demanding a critical re-evaluation of our energy and infrastructure strategies.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/uk-news/2026/aug/21/proposed-london-datacentre-will-have-annual-carbon-footprint-of-27000-flights-to-new-york" target="_blank">Proposed London datacentre ‘incompatible’ with net zero with 1m-tonne carbon footprint</a></div>
+  <div class="article-summary">A proposed massive datacentre campus in North Ockendon, London, could emit over 1 million tonnes of CO2 annually, equivalent to nearly 8,500 flights to New York. This significant carbon footprint directly conflicts with London's net-zero targets, raising serious concerns about the project's climate compatibility.</div>
+  <div class="article-meta">Aug 21, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/22/ac-coupled-vs-dc-coupled/" target="_blank">AC-Coupled vs. DC-Coupled</a></div>
+  <div class="article-summary">New simulations reveal that AC-coupled battery storage systems can be significantly more cost-effective than DC-coupled systems for grid-scale applications, challenging the assumption that DC-coupling is always superior. This finding is critical for optimizing battery energy storage system (BESS) sizing and architecture, directly impacting the levelized cost of electricity (LCOE) and accelerating the deployment of clean energy solutions.</div>
+  <div class="article-meta">Aug 22, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/21/who-was-right-about-tesla-robotaxi-deployment-in-2025/" target="_blank">Who Was Right About Tesla Robotaxi Deployment in 2025?</a></div>
+  <div class="article-summary">Nevada just greenlit Tesla to deploy up to 5,000 robotaxis statewide, a massive jump from its initial 10-vehicle limit. This expansion signals a significant acceleration in autonomous vehicle deployment, potentially impacting the carbon footprint of transportation and the pace of electric vehicle adoption.</div>
+  <div class="article-meta">Aug 22, 2026  06:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/21/genesis-ushers-in-a-new-age-of-fully-electric-luxury-with-the-flagship-gv90-suv/" target="_blank">Genesis Ushers In A New Age of Fully Electric Luxury with the Flagship GV90 SUV</a></div>
+  <div class="article-summary">At a packed event in San Francisco, California, Genesis unveiled its new flagship electric SUV, the GV90. The GV90 is a full-sized three-row SUV that is also offered in a fully loaded GV90 Neolun spec aimed at people who want to be driven rather than…</div>
+  <div class="article-meta">Aug 22, 2026  05:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/21/engwe-packs-extra-power-into-the-new-m20-3-0-cleantechnica-tested/" target="_blank">ENGWE Packs Extra Power Into The New M20 3.0 — CleanTechnica Tested</a></div>
+  <div class="article-summary">ENGWE has been one of the top e-bike builders globally for a few years now, and we’re excited to test out one of its more moped style “ebikes” here in the United States. Disclaimer: Engwe provided the M20 3.0 to the author for the purposes of this re…</div>
+  <div class="article-meta">Aug 22, 2026  04:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/21/icymi-enbridges-line-5-has-another-frac-out-as-reroute-challenge-and-intimidation-concerns-escalate/" target="_blank">ICYMI: Enbridge’s Line 5 Has Another Frac Out As Reroute Challenge And Intimidation Concerns Escalate</a></div>
+  <div class="article-summary">WISCONSIN – Another frac-out on Enbridge’s Line 5 reroute construction has been reported at Trout Brook in Marengo, Wisconsin. It is only the latest frac out — or drilling fluid spill — Enbridge has caused during reroute construction, following a 1,9…</div>
+  <div class="article-meta">Aug 22, 2026  03:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21082026/europe-heat-fuels-political-tensions/" target="_blank">Extreme Heat Waves Fuel Political Tensions in Europe</a></div>
+  <div class="article-summary">Europe's unprecedented summer heatwaves, gripping the continent since June, are igniting political backlash as leaders face scrutiny for inadequate responses to deadly climate impacts. This crisis underscores the urgent need for policy shifts, as current approaches continue to exacerbate the very problem demanding immediate action.</div>
+  <div class="article-meta">Aug 21, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21082026/texas-railroad-commission-new-participation-policy/" target="_blank">Texas Oil and Gas Regulators Will No Longer Have to Accept Public Comment at Open Meetings</a></div>
+  <div class="article-summary">The three elected officials who regulate the oil and gas industry in Texas hold an open meeting each month in Austin to vote on matters from pipeline violations to permit renewals. Members of the public can register to speak for up to three minutes a…</div>
+  <div class="article-meta">Aug 22, 2026  01:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21082026/lawsuit-to-block-climate-research-center-closure/" target="_blank">Lawsuit Seeks to Block Closure of Top Federal Climate Research Center</a></div>
+  <div class="article-summary">One of the nation’s largest environmental groups is challenging the Trump administration’s closure of a leading climate institute, filing a lawsuit Thursday in federal court saying the closure is unlawful. The administration had announced in December…</div>
+  <div class="article-meta">Aug 21, 2026  23:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21082026/bomb-fishing-destroying-coral-reefs/" target="_blank">Bomb Fishing Is Reducing Coral Reefs to ‘Rubble’</a></div>
+  <div class="article-summary">Nicknamed the “Amazon of the Seas,” the Coral Triangle is the world’s most biologically diverse marine ecosystem. Sink below the surface and you’ll encounter the sound of a vibrant symphony of snapping shrimp, crunching crustaceans and feeding fish.…</div>
+  <div class="article-meta">Aug 21, 2026  23:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21082026/lead-city-series-receives-national-association-of-black-journalists-award/" target="_blank">‘Lead City’ Series Receives National Association of Black Journalists Award</a></div>
+  <div class="article-summary">A collaborative project about Chicago’s handling of its massive number of lead water pipes—a public health hazard—has won a reporting award from the National Association of Black Journalists. The “Salute to Excellence” award is the latest in a list o…</div>
+  <div class="article-meta">Aug 21, 2026  23:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/aug/21/colorado-river-water-crisis-plan" target="_blank">The US has a plan to save the Colorado River. Experts say it won’t be enough to stop the crisis</a></div>
+  <div class="article-summary">The 10-year blueprint mandates water cuts of up to 40% for California, Arizona and NevadaIt’s official: after years of tense negotiations and missed deadlines, there is finally a plan to govern the future of the imperiled Colorado River - or at least…</div>
+  <div class="article-meta">Aug 21, 2026  22:41 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, August 22, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
