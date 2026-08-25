@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, August 25, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌡️ Heatwaves claim thousands as fossil fuel projects face scrutiny amid a global push for energy resilience.</div>
+    <p>This past week has starkly illuminated the human and economic costs of our warming planet, with Europe grappling with an unprecedented death toll from summer heatwaves and developing nations struggling under extreme temperatures. Meanwhile, analyses reveal the significant climate damage and financial risks associated with continued fossil fuel expansion, even as Australia and Brazil accelerate their clean energy transitions with ambitious renewable and battery manufacturing initiatives.  Policy efforts in Massachusetts and calls for a swift end to fossil fuel reliance in Europe signal a growing momentum towards energy security and climate stability, though challenges like grid integration and water resource management persist.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">45</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 36 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/24/massachusetts-is-taking-steps-to-lower-energy-costs-lets-get-the-details-right/" target="_blank">Massachusetts Is Taking Steps to Lower Energy Costs. Let’s Get the Details Right.</a></div>
+  <div class="article-summary">Massachusetts legislators are advancing bills to cut energy costs and boost grid reliability through measures like flexible interconnection and modernized solar permitting. These reforms are crucial for integrating more renewable energy sources, directly contributing to the state's climate goals by making clean power more accessible and affordable.</div>
+  <div class="article-meta">Aug 25, 2026  06:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/24/making-this-fossil-fuel-crisis-europes-last-one/" target="_blank">Making This Fossil Fuel Crisis Europe’s Last One</a></div>
+  <div class="article-summary">Over 100 organizations are urging President von der Leyen to develop a science-based plan to end Europe's reliance on fossil fuels, aiming to prevent future energy crises. This initiative underscores the urgent need for a decisive shift away from fossil fuels to secure Europe's long-term energy security and climate stability.</div>
+  <div class="article-meta">Aug 25, 2026  04:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/24/sierra-club-condemns-trump-appointed-tva-approval-of-massive-illinois-coal-mining-expansion/" target="_blank">Sierra Club Condemns Trump-Appointed TVA Approval of Massive Illinois Coal Mining Expansion</a></div>
+  <div class="article-summary">ILLINOIS — On Thursday, August 20, the Tennessee Valley Authority Board of Directors voted to sell its federally-owned mineral rights to the Sugar Camp mine in Illinois. TVA’s decision to divest its ownership in Sugar Camp ensures that one of the nat…</div>
+  <div class="article-meta">Aug 25, 2026  03:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/24/andy-burnham-rosebank-carbon-capture-storage-north-sea-uk-net-zero-commitments" target="_blank">Can Burnham justify giving the go ahead to oil drilling? Yes, but these must be the conditions | Michael Jacobs</a></div>
+  <div class="article-summary">The UK government faces a critical decision on approving the Rosebank oil field, with a recent court ruling demanding a new environmental assessment that includes the emissions from burning the extracted fuel. While carbon capture technology could potentially align Rosebank with net-zero goals, its viability hinges on the owners' willingness to invest, making this a pivotal moment for balancing energy security with climate commitments.</div>
+  <div class="article-meta">Aug 24, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24082026/trump-spends-billions-boosting-lng-exports/" target="_blank">The Trump Administration Has Spent Billions Boosting Gas Exports, Spurring More Fracking</a></div>
+  <div class="article-summary">The Trump administration actively funneled billions into boosting U.S. natural gas exports, a move that has directly fueled an increase in fracking operations. This policy push significantly expands the extraction and burning of fossil fuels, directly exacerbating the climate crisis by increasing greenhouse gas emissions.</div>
+  <div class="article-meta">Aug 24, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/25/40-gw-project-pipeline-has-australias-energy-transition-on-track/" target="_blank">40 GW project pipeline has Australia’s energy transition on track</a></div>
+  <div class="article-summary">Australia's energy transition is on track with a robust 40 GW pipeline of renewable generation and storage projects poised to replace retiring coal plants and ensure grid reliability. However, the Australian Energy Market Operator emphasizes that successful delivery of these projects, not just announcements, is critical to avoid future energy shortfalls.</div>
+  <div class="article-meta">Aug 25, 2026  07:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/25/enphase-enters-commercial-battery-storage-market-announces-iq-battery-c80/" target="_blank">Enphase enters commercial battery storage market, announces IQ Battery C80</a></div>
+  <div class="article-summary">Enphase Energy is now taking pre-orders for its IQ Battery C80, a scalable AC-coupled commercial battery system capable of multi-megawatt-hour deployments. This move signals a significant expansion into the commercial sector, crucial for integrating renewable energy and stabilizing grids as demand for clean power grows.</div>
+  <div class="article-meta">Aug 25, 2026  07:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/25/brazils-plan-for-a-battery-supply-chain/" target="_blank">Brazil’s plan for a battery supply chain</a></div>
+  <div class="article-summary">Brazil is accelerating its battery manufacturing capabilities through local content mandates for its 2026 energy storage auction and preferential financing from BNDES. This strategic push aims to establish a domestic supply chain, crucial for meeting growing demand and potentially reducing the carbon footprint associated with battery production and transportation.</div>
+  <div class="article-meta">Aug 25, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/24/when-do-you-trade-in-your-ev-for-a-new-one/" target="_blank">When Do You Trade In Your EV For A New One?</a></div>
+  <div class="article-summary">A Tesla owner is trading in their seven-year-old Model 3 after 112,000 miles, not due to major battery degradation, but likely for a newer model. This highlights that while EV batteries are proving durable, the pace of technological advancement and consumer desire for upgrades, rather than necessity, is driving the replacement cycle for electric vehicles.</div>
+  <div class="article-meta">Aug 25, 2026  05:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/24/lynk-co-partnership-comes-to-life-as-cev-trendyol-eurovolley-2026-women-opens-in-gothenburg/" target="_blank">Lynk & Co Partnership Comes to Life as CEV Trendyol EuroVolley 2026 Women Opens in Gothenburg</a></div>
+  <div class="article-summary">Thousands of spectators attended the opening weekend of the CEV Trendyol EuroVolley 2026 Women in Gothenburg, creating a vibrant atmosphere at Scandinavium as fans gathered to support Europe’s top volleyball nations. As official car partner in Sweden…</div>
+  <div class="article-meta">Aug 25, 2026  03:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/25/climate-damage-economy-north-sea-oil-gas-fields-rosebank-jackdaw" target="_blank">Climate damage would obliterate any economic benefits of new North Sea fields, analysis shows</a></div>
+  <div class="article-summary">Developing the Rosebank and Jackdaw North Sea oil and gas fields will inflict climate damage costing between £119 billion and £336 billion, dwarfing the projected £28.7 billion economic benefit to the UK. This analysis reveals that the long-term environmental costs of these projects far outweigh any short-term financial gains, underscoring the significant climate risk associated with continued fossil fuel expansion.</div>
+  <div class="article-meta">Aug 25, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/25/at-least-35000-excess-deaths-europe-back-to-back-heatwaves" target="_blank">At least 35,000 excess deaths recorded in Europe’s back-to-back heatwaves</a></div>
+  <div class="article-summary">Europe's summer heatwaves, which saw temperatures shatter records across the continent, have resulted in at least 35,000 excess deaths, a figure projected to climb as more data emerges. This stark reality underscores the escalating human cost of climate change, highlighting the urgent need for robust adaptation and mitigation strategies to protect vulnerable populations from extreme weather events.</div>
+  <div class="article-meta">Aug 25, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/aug/24/pakistan-extreme-heat-50c-ice-blocks-nasirabad" target="_blank">No fridge, no fans, just blocks of ice: improvising to survive in Pakistan’s searing heat</a></div>
+  <div class="article-summary">In Nasirabad, Pakistan, residents like 12-year-old Taimoor are queuing at ice factories to survive daily temperatures hitting 50°C, a stark illustration of climate change's devastating impact on vulnerable communities. This desperate reliance on ice highlights the urgent need for global action to mitigate extreme heat events and ensure basic human safety.</div>
+  <div class="article-meta">Aug 24, 2026  11:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24082026/nevada-sues-trump-administration-over-colorado-river-plan/" target="_blank">Fearing ‘Catastrophic Impacts’ From Water Cuts, Nevada Sues Feds Over Colorado River Plan</a></div>
+  <div class="article-summary">Three days was all it took for the Trump administration’s Colorado River plan to see a legal challenge from, somewhat ironically, Nevada.  Of the seven states that rely on the river, Nevada gets the smallest amount by law. Nevada water managers said…</div>
+  <div class="article-meta">Aug 25, 2026  02:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24082026/texas-gov-abbott-data-centers-audit/" target="_blank">ERCOT Says Abbott’s Data Center Audit Will Be Done in December</a></div>
+  <div class="article-summary">The first group of large data centers in line to get connected to Texas’ grid won’t move forward until mid-December, grid officials say.  Electric Reliability Council of Texas (ERCOT) staff needs to vet the first 300 projects, 90 percent of which are…</div>
+  <div class="article-meta">Aug 25, 2026  01:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/aug/24/nevada-federal-lawsuit-colorado-river" target="_blank">Nevada files lawsuit challenging federal plan for Colorado River revival</a></div>
+  <div class="article-summary">In Trump administration’s plan, California, Arizona and Nevada face about a 20% cut to water supply over two yearsNevada filed a federal lawsuit on Monday challenging theTrump administration’s new plan for the imperiled Colorado River,launching what…</div>
+  <div class="article-meta">Aug 24, 2026  23:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/aug/24/french-tourist-death-valley-park" target="_blank">French tourist dies in California’s Death Valley after being stranded in heat</a></div>
+  <div class="article-summary">Man, 68, was left searching for help in 116F weather after his car became stuck in mud along remote park roadA French tourist recently died inDeath Valley national parkafter a car mishap left him stranded in 116F (47C) weather.The visitor, identified…</div>
+  <div class="article-meta">Aug 24, 2026  21:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24082026/remembering-franklin-kury-pennsylvania-environmental-rights-amendment-visionary/" target="_blank">Remembering the ‘Visionary’ Author of Pennsylvania’s Environmental Rights Amendment</a></div>
+  <div class="article-summary">A monumental figure in Pennsylvania’s environmental movement passed away last week. Former state legislator Franklin Kury, who was 89, led Pennsylvania to become one of the first governments in the world to adopt a constitutional amendment guaranteei…</div>
+  <div class="article-meta">Aug 24, 2026  19:02 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, August 25, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
