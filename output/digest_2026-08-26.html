@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, August 26, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🔥 Climate Crossroads: From Outdated Policy to Urgent Action on Water, Heat, and Global Tensions</div>
+    <p>Today's climate news paints a stark picture of interconnected crises, from the devastating impact of fossil fuels on Western water resources to the chilling geopolitical anxieties that threaten to overshadow climate action. As extreme heat grips the US Southwest and wildfires rage, policy inertia in states like Pennsylvania and a myopic focus on new EVs over existing vehicles highlight critical gaps in our transition. Yet, glimmers of hope emerge with more affordable EV options and significant strides in energy storage, demonstrating that technological innovation and strategic policy can still steer us toward a more sustainable future.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">41</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:46%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 1 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/26/1995-dodge-ram-ev-scrappage-incentives/" target="_blank">A 1995 Dodge Ram Shows What US EV Policy Keeps Missing</a></div>
+  <div class="article-summary">A reader's commitment to maintaining a 1995 Dodge Ram highlights a critical blind spot in US EV policy: the overlooked economic realities of existing vehicle ownership. This focus on new EV adoption fails to address the significant climate impact of keeping older, less efficient gasoline vehicles on the road, a rational choice for many consumers.</div>
+  <div class="article-meta">Aug 26, 2026  08:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25082026/pennsylvania-legislature-slows-renewable-energy-adoption/" target="_blank">Pennsylvania Lags Far Behind on Solar. Here’s How It Could Catch Up.</a></div>
+  <div class="article-summary">Pennsylvania, once a renewable energy leader, is now falling behind on solar development due to legislative inaction, according to a new report by PennFuture. This policy inertia is a critical missed opportunity for the state to rebound and significantly boost its clean energy portfolio.</div>
+  <div class="article-meta">Aug 25, 2026  11:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/26/argentinas-next-era/" target="_blank">Argentina’s next era</a></div>
+  <div class="article-summary">Argentina's solar capacity is approaching 2.6 GW, driven by mining, grid-connected projects, and self-consumption spurred by tariff hikes, with battery storage tenders now underway. This expansion is crucial as it signals a significant shift towards renewable energy adoption in a key South American economy, potentially impacting regional emissions reduction efforts.</div>
+  <div class="article-meta">Aug 26, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/25/kia-ev3-to-give-americans-a-cheap-electric-car-option/" target="_blank">Kia EV3 To Give Americans A Cheap Electric Car Option</a></div>
+  <div class="article-summary">Kia is launching the EV3, a significantly more affordable electric vehicle, in the US market, offering a much-needed alternative to the current premium-priced EV landscape. This move is crucial for accelerating EV adoption and achieving climate goals by making electric transportation accessible to a broader consumer base.</div>
+  <div class="article-meta">Aug 26, 2026  06:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/25/energy-storage-is-strengthening-reliability-these-5-states-are-leading-the-charge/" target="_blank">Energy Storage Is Strengthening Reliability. These 5 States Are Leading the Charge.</a></div>
+  <div class="article-summary">California, Texas, Massachusetts, Arizona, and Nevada are spearheading the integration of energy storage, adding a crucial buffer to their grids as demand spikes from data centers and extreme weather. This surge in battery capacity is directly bolstering grid reliability, ensuring consistent power delivery and mitigating the risk of blackouts in the face of escalating climate-driven challenges.</div>
+  <div class="article-meta">Aug 26, 2026  04:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/25/nlr-nrri-partnership-advances-industry-scale-innovation-and-process-demonstration/" target="_blank">NLR-NRRI Partnership Advances Industry-Scale Innovation and Process Demonstration</a></div>
+  <div class="article-summary">By Lindsey McGuirk and Brooke Van Zandt The National Laboratory of the Rockies (NLR) and the University of Minnesota’s Natural Resources Research Institute (NRRI) have launched a new initiative to demonstrate, at scale, the technologies that will sec…</div>
+  <div class="article-meta">Aug 26, 2026  03:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/25/photovoltaic-windows-have-been-heating-water-in-a-bucharest-apartment-for-two-years/" target="_blank">Photovoltaic Windows Have Been Heating Water in a Bucharest Apartment for Two Years</a></div>
+  <div class="article-summary">A two-year apartment pilot in Bucharest uses semi-transparent photovoltaic windows to heat domestic water directly in DC, turning an ordinary water tank into thermal storage without a solar inverter or battery. By Adrian Băisan, PhotoVoltaic Windows…</div>
+  <div class="article-meta">Aug 26, 2026  03:23 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25082026/attribution-study-links-carbon-majors-to-colorado-river-crisis/" target="_blank">The Biggest Carbon Polluters Are to Blame for Half of U.S. Western Water Lost to Climate Change, ‘Groundbreaking’ Paper Says</a></div>
+  <div class="article-summary">Groundbreaking research reveals that a handful of major fossil fuel companies are responsible for half of the water lost in the American West due to climate change, with the region's snowpack shrinking by over a third and streamflows dropping 13% in the last decade. This stark finding underscores the direct link between corporate emissions and the escalating water scarcity crisis impacting millions.</div>
+  <div class="article-meta">Aug 25, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/26/world-people-dangerous-politics-global-public-human-rights" target="_blank">Around the world, people are rejecting divisive and dangerous politics. We can – and must – build on that | Gordon Brown</a></div>
+  <div class="article-summary">Global publics are increasingly worried about nuclear war, with nations like Poland and Germany considering acquiring or hosting nuclear weapons, signaling a dangerous shift from a rules-based to a power-based international order. This escalating geopolitical tension, amplified by the Doomsday Clock's proximity to midnight, underscores the urgent need for global cooperation on critical issues like climate change, which is being overshadowed by immediate existential threats.</div>
+  <div class="article-meta">Aug 26, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/aug/25/us-weather-heat-dome-south-west" target="_blank">Record-breaking heat dome expected to bring dangerous temperatures to US south-west</a></div>
+  <div class="article-summary">As wildfires rage and intense heat builds across the region, daytime highs of 110-11F (43-46C) are forecastSurging temperatures are expected to broil more than 45 million people as aheat domesettles in across the south-western US through the end of A…</div>
+  <div class="article-meta">Aug 26, 2026  01:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25082026/alabama-prisons-unbearable-heat/" target="_blank">‘Unbearable’ Heat in Uncooled Alabama Prisons</a></div>
+  <div class="article-summary">ELMORE, Ala.—Tiffany Montellano can’t sleep.  Instead, she lies awake, worried about her husband Andrew, 31, who is incarcerated at Elmore Correctional Facility just north of Montgomery, Alabama’s state capital.  She worries because a few days ago, s…</div>
+  <div class="article-meta">Aug 26, 2026  01:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25082026/todays-climate-el-nino-drought-panama-canal/" target="_blank">A Severe Drought Is Straining the Panama Canal. Could Global Warming Make It Worse?</a></div>
+  <div class="article-summary">One of the world’s most-used shortcuts is at risk as a severe drought plagues Central America.  Starting in early September, the Panama Canal will reduce the number of ships allowed to pass through each day due to low water levels in the artificial l…</div>
+  <div class="article-meta">Aug 26, 2026  01:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/politics/2026/aug/25/uk-to-warn-citizens-to-stock-up-on-food-amid-threat-from-climate-crisis-and-hostile-states" target="_blank">UK to warn citizens to stock up on food amid threat from climate crisis and hostile states</a></div>
+  <div class="article-summary">Government resilience campaign aims to ensure people can cope in a national disaster, in order to free resources for most vulnerableUK citizens will be told to stock up on tinned food and take steps to ensure they are prepared for national emergencie…</div>
+  <div class="article-meta">Aug 25, 2026  19:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, August 26, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
