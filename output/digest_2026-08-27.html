@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, August 27, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 32 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/27/new-jersey-vineland-datacenter-permits" target="_blank">One of east coast’s largest datacenters accused of ‘violating federal law’</a></div>
+  <div class="article-summary">Microsoft's massive DataOne AI datacenter in Vineland, New Jersey, is reportedly operating dozens of unpermitted gas generators, a move that could violate federal law. This facility's reliance on fossil fuels for power, even during construction, directly undermines climate goals by increasing emissions.</div>
+  <div class="article-meta">Aug 27, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/aug/27/west-point-climate-scientist-fired" target="_blank">West Point’s only climate scientist fired after continuing to teach human causes of climate change</a></div>
+  <div class="article-summary">West Point fired its sole climate scientist, Dr. Adam Kalkstein, for refusing to stop teaching the human causes of climate change, a move that undermines crucial climate education within the U.S. military academy. This dismissal is concerning as it hinders the development of future military leaders equipped to understand and address the significant climate risks impacting national security.</div>
+  <div class="article-meta">Aug 27, 2026  17:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/27/executive-order-bans-foreign-produced-transformers-inverters-and-circuit-breakers-for-u-s-power-grid/" target="_blank">Executive order bans foreign-produced transformers, inverters, and circuit breakers for U.S. power grid</a></div>
+  <div class="article-summary">President Donald Trump issued an emergency executive order banning the acquisition, importation, transfer, or installation of foreign-produced electrical grid equipment from designated foreign countries, according to a legal analysis published by law…</div>
+  <div class="article-meta">Aug 27, 2026  16:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/climate-change-exposes-580-million-children-to-20-extra-heat-stress-days-every-year" target="_blank">Climate change exposes 580 million children to 20 extra ‘heat-stress days’ every year</a></div>
+  <div class="article-summary">Climate change exposes 580 million children to 20 extra ‘heat-stress days’ every year
+
+By:
+
+More than 40% of children under the age of 10 globally are already experiencing at least 20 additional “heat-stress days” due to climate change.
+
+This is acco…</div>
+  <div class="article-meta">Aug 26, 2026  21:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/27/bmws-new-ix3-ev-racking-up-orders-even-in-china/" target="_blank">BMW’s new iX3 EV is racking up orders, even in China, despite selling only an image</a></div>
+  <div class="article-summary">BMW's new iX3 electric SUV is exceeding expectations with nearly 100,000 global orders, driven by overwhelming demand in China where dealers are selling the vehicle based on images alone. This surge in interest for BMW's first "Neue Klasse" EV, featuring advanced sixth-generation eDrive technology, signals a significant shift in consumer preference towards electric mobility and a potential challenge to established domestic EV makers.</div>
+  <div class="article-meta">Aug 27, 2026  18:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/27/https-www-pv-magazine-com-2026-08-27-solarwindow-launches-flexible-self-adhesive-solar-film/" target="_blank">SolarWindow launches 0.85 mm-thick, self-adhesive solar film</a></div>
+  <div class="article-summary">SolarWindow has unveiled ElectroFlex, a 0.85 mm-thick, self-adhesive solar film boasting 24.4% cell efficiency. This breakthrough technology, designed for weight-sensitive applications like transportation and aerospace, promises to integrate solar power into previously inaccessible surfaces, accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Aug 27, 2026  17:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/27/waymo-tesla-self-driving-false-summit/" target="_blank">Waymo takes a shot at Tesla’s self-driving: it’s a ‘false summit’</a></div>
+  <div class="article-summary">Waymo, having logged over 200 million autonomous miles, directly challenges Tesla's approach, calling the attempt to evolve driver-assist into full autonomy a "false summit." This distinction is critical for climate impact, as Waymo's more robust, sensor-heavy system is designed for safer, more efficient autonomous operation, potentially accelerating the adoption of electric vehicles without the inherent risks and limitations of Tesla's vision-based system.</div>
+  <div class="article-meta">Aug 27, 2026  16:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/27/battery-boom-brings-round-the-clock-solar-closer-ember-says/" target="_blank">Battery boom brings round-the-clock solar closer, Ember says</a></div>
+  <div class="article-summary">Global solar power now exceeds 10% of electricity generation, but its midday peak limits its impact. However, Ember projects that a surge in affordable battery storage will shift 34% of new solar output to non-daylight hours by 2026, significantly advancing the prospect of reliable, 24/7 solar power.</div>
+  <div class="article-meta">Aug 27, 2026  16:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/27/japans-29th-solar-auction-allocates-38-2-mw-of-pv-capacity/" target="_blank">Japan’s 29th solar auction allocates 38.2 MW of PV capacity</a></div>
+  <div class="article-summary">Japan’s Green Investment Promotion Organization has released the final results of its latest auction for utility-scale solar energy projects.
+
+The state-run agency said that 38.2 MW of PV projects were selected in the procurement exercise. It was Jap…</div>
+  <div class="article-meta">Aug 27, 2026  16:33 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27082026/inside-clean-energy-rooftop-solar-sales/" target="_blank">Rooftop Solar Is Having a Rough One</a></div>
+  <div class="article-summary">Rooftop solar installers feel like a dog that’s been repeatedly kicked. President Donald Trump has made solar more expensive—or at least slowed the long-term decline in costs—by imposing tariffs on imported photovoltaic panels and other parts. Trump…</div>
+  <div class="article-meta">Aug 27, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/27/britain-wildfires-flood-risks-climate-crisis" target="_blank">A Britain of wildfires and flood risks: be sure, the climate crisis is real, and we will deal with it | Angela Eagle</a></div>
+  <div class="article-summary">Reform and the Conservatives are willing to mislead the public, but as environment secretary, I believe we must be honest – and act boldlyThis long, hot summer has brought our third drought in five years and thedriest July in almost two centuries. We…</div>
+  <div class="article-meta">Aug 27, 2026  15:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27082026/corpus-christi-withholds-wetlands-water-while-lifting-lawn-restrictions/" target="_blank">Corpus Christi Withholds Water to Wetlands While Lifting Restrictions on Lawns</a></div>
+  <div class="article-summary">Environmental regulators in Texas issued an emergency order on Tuesday evening suspending requirements for the drought-stricken city of Corpus Christi to release water from its reservoir system in support of coastal wetlands. On the same day, Corpus…</div>
+  <div class="article-meta">Aug 27, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27082026/fertilizer-industry-profits-grow/" target="_blank">As Water Pollution Concerns Grow in Iowa, So Do Fertilizer Industry Profits</a></div>
+  <div class="article-summary">As farmers balk at skyrocketing fertilizer costs and runoff threatens drinking water sources in Iowa, North American manufacturers are raking in cash. Illinois-based CF Industries and Canadian company Nutrien dominate the domestic market for nitrogen…</div>
+  <div class="article-meta">Aug 27, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/2026/aug/27/weatherwatch-how-to-protect-our-railways-in-hotter-summers" target="_blank">Weatherwatch: how to protect our railways in hotter summers</a></div>
+  <div class="article-summary">Steel rails warping and signalling equipment failing in metal cabinets are among the problems to be solvedTarmac softens in the summer heat, which may cause problems on the roads, but even trains running on steel rails are not immune.Railways in the…</div>
+  <div class="article-meta">Aug 27, 2026  08:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, August 27, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

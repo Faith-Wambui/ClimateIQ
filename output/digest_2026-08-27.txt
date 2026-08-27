@@ -1,0 +1,129 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Thursday, August 27, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (4 articles)
+============================================================
+
+▸ One of east coast’s largest datacenters accused of ‘violating federal law’
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/aug/27/new-jersey-vineland-datacenter-permits
+  Date   : Aug 27, 2026  18:00 EAT
+  Summary: Microsoft's massive DataOne AI datacenter in Vineland, New Jersey, is reportedly operating dozens of unpermitted gas generators, a move that could violate federal law. This facility's reliance on fossil fuels for power, even during construction, directly undermines climate goals by increasing emissions.
+
+
+▸ West Point’s only climate scientist fired after continuing to teach human causes of climate change
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/aug/27/west-point-climate-scientist-fired
+  Date   : Aug 27, 2026  17:15 EAT
+  Summary: West Point fired its sole climate scientist, Dr. Adam Kalkstein, for refusing to stop teaching the human causes of climate change, a move that undermines crucial climate education within the U.S. military academy. This dismissal is concerning as it hinders the development of future military leaders equipped to understand and address the significant climate risks impacting national security.
+
+
+▸ Executive order bans foreign-produced transformers, inverters, and circuit breakers for U.S. power grid
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/27/executive-order-bans-foreign-produced-transformers-inverters-and-circuit-breakers-for-u-s-power-grid/
+  Date   : Aug 27, 2026  16:26 EAT
+  Summary: President Donald Trump issued an emergency executive order banning the acquisition, importation, transfer, or installation of foreign-produced electrical grid equipment from designated foreign countries, according to a legal analysis published by law…
+
+
+▸ Climate change exposes 580 million children to 20 extra ‘heat-stress days’ every year
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/climate-change-exposes-580-million-children-to-20-extra-heat-stress-days-every-year
+  Date   : Aug 26, 2026  21:00 EAT
+  Summary: Climate change exposes 580 million children to 20 extra ‘heat-stress days’ every year
+
+By:
+
+More than 40% of children under the age of 10 globally are already experiencing at least 20 additional “heat-stress days” due to climate change.
+
+This is acco…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ BMW’s new iX3 EV is racking up orders, even in China, despite selling only an image
+  Source : Electrek
+  Link   : https://electrek.co/2026/08/27/bmws-new-ix3-ev-racking-up-orders-even-in-china/
+  Date   : Aug 27, 2026  18:35 EAT
+  Summary: BMW's new iX3 electric SUV is exceeding expectations with nearly 100,000 global orders, driven by overwhelming demand in China where dealers are selling the vehicle based on images alone. This surge in interest for BMW's first "Neue Klasse" EV, featuring advanced sixth-generation eDrive technology, signals a significant shift in consumer preference towards electric mobility and a potential challenge to established domestic EV makers.
+
+
+▸ SolarWindow launches 0.85 mm-thick, self-adhesive solar film
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/27/https-www-pv-magazine-com-2026-08-27-solarwindow-launches-flexible-self-adhesive-solar-film/
+  Date   : Aug 27, 2026  17:55 EAT
+  Summary: SolarWindow has unveiled ElectroFlex, a 0.85 mm-thick, self-adhesive solar film boasting 24.4% cell efficiency. This breakthrough technology, designed for weight-sensitive applications like transportation and aerospace, promises to integrate solar power into previously inaccessible surfaces, accelerating the transition to renewable energy.
+
+
+▸ Waymo takes a shot at Tesla’s self-driving: it’s a ‘false summit’
+  Source : Electrek
+  Link   : https://electrek.co/2026/08/27/waymo-tesla-self-driving-false-summit/
+  Date   : Aug 27, 2026  16:49 EAT
+  Summary: Waymo, having logged over 200 million autonomous miles, directly challenges Tesla's approach, calling the attempt to evolve driver-assist into full autonomy a "false summit." This distinction is critical for climate impact, as Waymo's more robust, sensor-heavy system is designed for safer, more efficient autonomous operation, potentially accelerating the adoption of electric vehicles without the inherent risks and limitations of Tesla's vision-based system.
+
+
+▸ Battery boom brings round-the-clock solar closer, Ember says
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/27/battery-boom-brings-round-the-clock-solar-closer-ember-says/
+  Date   : Aug 27, 2026  16:37 EAT
+  Summary: Global solar power now exceeds 10% of electricity generation, but its midday peak limits its impact. However, Ember projects that a surge in affordable battery storage will shift 34% of new solar output to non-daylight hours by 2026, significantly advancing the prospect of reliable, 24/7 solar power.
+
+
+▸ Japan’s 29th solar auction allocates 38.2 MW of PV capacity
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/08/27/japans-29th-solar-auction-allocates-38-2-mw-of-pv-capacity/
+  Date   : Aug 27, 2026  16:33 EAT
+  Summary: Japan’s Green Investment Promotion Organization has released the final results of its latest auction for utility-scale solar energy projects.
+
+The state-run agency said that 38.2 MW of PV projects were selected in the procurement exercise. It was Jap…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Rooftop Solar Is Having a Rough One
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/27082026/inside-clean-energy-rooftop-solar-sales/
+  Date   : Aug 27, 2026  16:00 EAT
+  Summary: Rooftop solar installers feel like a dog that’s been repeatedly kicked. President Donald Trump has made solar more expensive—or at least slowed the long-term decline in costs—by imposing tariffs on imported photovoltaic panels and other parts. Trump…
+
+
+▸ A Britain of wildfires and flood risks: be sure, the climate crisis is real, and we will deal with it | Angela Eagle
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/commentisfree/2026/aug/27/britain-wildfires-flood-risks-climate-crisis
+  Date   : Aug 27, 2026  15:05 EAT
+  Summary: Reform and the Conservatives are willing to mislead the public, but as environment secretary, I believe we must be honest – and act boldlyThis long, hot summer has brought our third drought in five years and thedriest July in almost two centuries. We…
+
+
+▸ Corpus Christi Withholds Water to Wetlands While Lifting Restrictions on Lawns
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/27082026/corpus-christi-withholds-wetlands-water-while-lifting-lawn-restrictions/
+  Date   : Aug 27, 2026  12:00 EAT
+  Summary: Environmental regulators in Texas issued an emergency order on Tuesday evening suspending requirements for the drought-stricken city of Corpus Christi to release water from its reservoir system in support of coastal wetlands. On the same day, Corpus…
+
+
+▸ As Water Pollution Concerns Grow in Iowa, So Do Fertilizer Industry Profits
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/27082026/fertilizer-industry-profits-grow/
+  Date   : Aug 27, 2026  11:55 EAT
+  Summary: As farmers balk at skyrocketing fertilizer costs and runoff threatens drinking water sources in Iowa, North American manufacturers are raking in cash. Illinois-based CF Industries and Canadian company Nutrien dominate the domestic market for nitrogen…
+
+
+▸ Weatherwatch: how to protect our railways in hotter summers
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/news/2026/aug/27/weatherwatch-how-to-protect-our-railways-in-hotter-summers
+  Date   : Aug 27, 2026  08:00 EAT
+  Summary: Steel rails warping and signalling equipment failing in metal cabinets are among the problems to be solvedTarmac softens in the summer heat, which may cause problems on the roads, but even trains running on steel rails are not immune.Railways in the…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 39  |  Sources: 6  |  Topics: 3
