@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, August 28, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/28/despite-african-walkout-fractious-land-cop-ends-without-drought-agreement/" target="_blank">Despite African walkout, fractious land COP ends without drought deal</a></div>
+  <div class="article-summary">African nations walked out of UN land talks in Mongolia, delaying a crucial drought agreement until 2028, a move that risks exacerbating climate-driven migration and food insecurity. Developed nations' resistance to a legally binding protocol means proactive drought management, vital for regions like Africa, will continue to be sidelined, leaving vulnerable populations exposed to escalating climate impacts.</div>
+  <div class="article-meta">Aug 28, 2026  19:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/19/is-the-environmental-impact-of-datacentres-finally-cutting-through" target="_blank">Is the environmental impact of datacentres finally cutting through?</a></div>
+  <div class="article-summary">Datacentre development is facing a growing backlash across the US political spectrum, with over a dozen states considering moratoria and New York enacting a temporary ban. This surge in opposition, driven by concerns over energy consumption and potential impacts on consumer bills, signals a critical moment in the debate over the climate footprint of our increasingly digital world.</div>
+  <div class="article-meta">Aug 28, 2026  19:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/28/renewables-installed-capacity-to-beat-natural-gas-within-a-year-eia-data/" target="_blank">Renewables’ installed capacity to beat natural gas within a year – EIA data</a></div>
+  <div class="article-summary">US renewable energy capacity is set to overtake natural gas by mid-2027, driven by an 11% surge in renewable electricity generation in the first half of 2026, primarily from solar and wind. This rapid expansion signals a significant shift away from fossil fuels, accelerating the transition to cleaner energy sources and directly impacting the nation's carbon emissions trajectory.</div>
+  <div class="article-meta">Aug 28, 2026  19:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/28/volkswagen-unveils-first-california-ev-camper-images/" target="_blank">Volkswagen unveils the first California EV camper, and it’s based on the ID. Buzz [Images]</a></div>
+  <div class="article-summary">Volkswagen just unveiled the ID. California Cruise, its first all-electric camper van based on the ID. Buzz, set for customer deliveries in early 2027. This zero-emission vehicle, featuring a built-in bed and V2L power capabilities, signals a significant step towards sustainable adventure travel and a growing market for electric recreational vehicles.</div>
+  <div class="article-meta">Aug 28, 2026  18:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/28/investments-in-co-located-solar-plus-storage-reach-25-billion-in-h1-says-bloombergnef/" target="_blank">Investments in co-located solar-plus-storage reach $25 billion in H1, says BloombergNEF</a></div>
+  <div class="article-summary">Global renewable energy investment reached $327.5 billion in the first half of 2026, as capital shifted toward solar-plus-storage projects amid growing revenue uncertainty. US investment surged ahead of tax credit deadlines, while weaker activity in…</div>
+  <div class="article-meta">Aug 28, 2026  16:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/28/the-hydrogen-stream-africas-first-full-stack-pv-driven-hydrogen-hub-powers-up-in-namibia/" target="_blank">The Hydrogen Stream: Africa’s first PV-driven hydrogen hub powers up</a></div>
+  <div class="article-summary">Cmb-Tech has started operations at a green hydrogen facility in Walvis Bay featuring 5 MW of off-grid solar, a 5 MW proton exchange membrane (PEM) electrolyzer and 5.9 MWh of battery energy storage. The project, developed with Namibia’s Ohlthaver & L…</div>
+  <div class="article-meta">Aug 28, 2026  16:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/28/wheel-e-podcast-powerful-bafangs-cops-on-sur-rons-qronge-more/" target="_blank">Wheel-E Podcast: Powerful Bafangs, cops on Sur-Rons, Qronge, more</a></div>
+  <div class="article-summary">This week onElectrek’s Wheel-E podcast, we discuss the most popular news stories from the world of electric bikes and other nontraditional electric vehicles. This time, that includes new e-bikes from Flit and SONDORS (yep, that one), testing a batter…</div>
+  <div class="article-meta">Aug 28, 2026  15:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/28/byd-q2-2026-earnings-profit-exports/" target="_blank">BYD Q2 profit jumps 30% as record exports offset weak China sales</a></div>
+  <div class="article-summary">BYD's Q2 profit surged 30% to $1.22 billion, driven by a record export volume that compensated for sluggish domestic sales. This significant rebound, ending four quarters of decline, highlights the growing global demand for Chinese electric vehicles, signaling a crucial shift in the automotive sector's decarbonization trajectory.</div>
+  <div class="article-meta">Aug 28, 2026  17:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/08/28/private-equity-gets-900m-for-a-methane-terminal-after-bribing-trump-1m/" target="_blank">Private equity bribed Trump $1M, then got $900M for a methane terminal</a></div>
+  <div class="article-summary">An Australian-American billionaire's private equity firm secured a $900 million government payout for a Louisiana methane terminal, just after the billionaire personally donated $1 million to the official who originated the deal. This transaction highlights how political influence can directly translate into massive financial windfalls, potentially incentivizing further fossil fuel infrastructure development despite the urgent need for climate action.</div>
+  <div class="article-meta">Aug 28, 2026  17:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/aug/28/martin-rowson-trump-consequences-climate-crisis-cartoon" target="_blank">Martin Rowson on Trump and the consequences of the climate crisis – cartoon</a></div>
+  <div class="article-summary">A new cartoon by Martin Rowson depicts Donald Trump gleefully wielding a chainsaw, cutting down a tree labeled "Paris Agreement" while the planet burns in the background. This visual commentary highlights Trump's withdrawal from the Paris Agreement and underscores the dire consequences of such actions for global climate efforts.</div>
+  <div class="article-meta">Aug 28, 2026  19:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/28/elon-musk-fails-in-his-attempt-to-subvert-first-amendment-considerations-for-social-media/" target="_blank">Elon Musk Fails In His Attempt To Subvert First Amendment Considerations For Social Media</a></div>
+  <div class="article-summary">Elon Musk's bid to shield X (formerly Twitter) from First Amendment scrutiny has been rejected, meaning the platform must still consider free speech protections. This ruling is significant as it upholds the principle that even privately owned social media giants are not entirely exempt from constitutional considerations regarding user expression.</div>
+  <div class="article-meta">Aug 28, 2026  18:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/28/nepal-tibet-flood-climate-crisis-global-heating" target="_blank">Nepal-Tibet flood: this is the cost of not acting in the face of the climate crisis | Sunil Acharya</a></div>
+  <div class="article-summary">Nepalis and Tibetans must not pay the price – with their lives, livelihoods and money meant for education and health – for global heating caused by wealthy statesSunil Acharya is an international climate policy and just transition specialist based in…</div>
+  <div class="article-meta">Aug 28, 2026  13:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/28/pacific-islands-new-regional-fund-climate-finance-cop31-australia-prf/" target="_blank">Pacific islands seek backing for new regional fund ahead of COP31</a></div>
+  <div class="article-summary">Burdened by rising fuel import costs and an "ocean crisis" of record-breaking heat, Pacific island nations are seeking to build support for a new regional fund ahead of COP31, intended to channel investment into renewable energy, community resilience…</div>
+  <div class="article-meta">Aug 28, 2026  12:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28082026/california-farms-plastic-reliance/" target="_blank">Can California Farmers Break Free From Plastic?</a></div>
+  <div class="article-summary">Farmers have relied on plastic since the 1960s, when the mass production of affordable agricultural tools derived from petrochemicals made them widely accessible. Plastic mulch quickly became a cornerstone of crop production, helping farmers boost yi…</div>
+  <div class="article-meta">Aug 28, 2026  12:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, August 28, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
