@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, August 29, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">23</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 16 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29082026/super-pac-targets-conservatives-against-clean-energy/" target="_blank">Super PAC Targeting Conservatives Against Clean Energy Touts Fifth Republican Primary Win</a></div>
+  <div class="article-summary">A conservative super PAC, Invest in Tomorrow Coalition, has secured its fifth Republican primary win by backing Darline Graham in South Carolina, defeating incumbent Rep. Ralph Norman. This victory signals growing bipartisan support for clean energy initiatives, even within traditionally conservative circles, potentially shifting the political landscape for climate policy.</div>
+  <div class="article-meta">Aug 29, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29082026/pennsylvania-pays-millions-to-coal-waste-companies/" target="_blank">While Renewables Languish, Pennsylvania Pays Millions to Coal Waste Companies</a></div>
+  <div class="article-summary">Pennsylvania is channeling millions in taxpayer dollars to coal waste companies, despite the state's lagging renewable energy growth. This financial support for fossil fuel byproducts directly undermines climate goals by perpetuating pollution and hindering the transition to cleaner energy sources.</div>
+  <div class="article-meta">Aug 29, 2026  11:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/29/chiles-hybrid-heroics/" target="_blank">Chile’s hybrid heroics</a></div>
+  <div class="article-summary">Chile's new law incentivizing solar paired with battery storage has unlocked massive private investment, with over 6 GW of battery capacity expected by 2026. This rapid deployment of hybrid renewable energy projects is a critical step in decarbonizing Chile's grid and ensuring reliable power as the country transitions away from fossil fuels.</div>
+  <div class="article-meta">Aug 29, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/28/california-sues-trump-over-ridiculous-wind-power-cancellations/" target="_blank">California Sues Trump Over Ridiculous Wind Power Cancellations</a></div>
+  <div class="article-summary">I was going to say that one of the craziest things Trump has done as president is cancel billions of dollars of wind power leases and pay off companies to not build wind farms. But then, yeah, it quickly hit me this isn’t even close to one of the cra…</div>
+  <div class="article-meta">Aug 29, 2026  04:03 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29082026/california-dairy-farm-biogas-project/" target="_blank">California Dairy Farm’s New Biogas Project Makes History and Raises Eyebrows</a></div>
+  <div class="article-summary">A California dairy farm in Kerman has launched a groundbreaking biogas project, capturing methane emissions from its cows to generate renewable energy. This initiative is crucial for climate action, as it directly tackles potent greenhouse gas emissions from livestock, a significant contributor to global warming.</div>
+  <div class="article-meta">Aug 29, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/29/vycarb-successfully-stores-low-purity-co2-in-seawater/" target="_blank">Vycarb Successfully Stores Low-Purity CO2 In Seawater</a></div>
+  <div class="article-summary">Brooklyn's Vycarb has demonstrated a breakthrough in storing low-purity CO2 directly in seawater, a development that could slash the cost and complexity of carbon capture. This innovation promises to unlock more affordable and accessible climate solutions by simplifying a critical step in emissions reduction.</div>
+  <div class="article-meta">Aug 29, 2026  07:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/28/the-real-electric-aviation-revolution-is-being-strangled-to-enrich-don-jr-other-trump-associates/" target="_blank">The Real Electric Aviation Revolution Is Being Strangled To Enrich Don Jr. & Other Trump Associates</a></div>
+  <div class="article-summary">For years, venture capitalists and tech bros have burned through billions of dollars promising us flying electric cars. We have all seen the slick CGI videos of battery-powered air taxis whisking executives over gridlocked highway traffic. Yet, while…</div>
+  <div class="article-meta">Aug 29, 2026  04:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/28/multisensor-data-fusion-optimizes-traffic-flow-intersection-safety-delivering-cost-time-savings/" target="_blank">Multisensor Data Fusion Optimizes Traffic Flow & Intersection Safety, Delivering Cost & Time Savings</a></div>
+  <div class="article-summary">Digital-Twin Framework Provides Real-Time Visibility Into Traffic Conditions We have all been there: stopped at a red light at an empty intersection or narrowly avoiding a collision after a driver runs a red light. Researchers at the National Laborat…</div>
+  <div class="article-meta">Aug 29, 2026  02:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/28/as-diesel-prices-surge-trump-administration-moves-to-make-fueling-large-trucks-even-more-expensive/" target="_blank">As Diesel Prices Surge, Trump Administration Moves to Make Fueling Large Trucks Even More Expensive</a></div>
+  <div class="article-summary">WASHINGTON, D.C. — Today, the Trump administration finalized a rule setting up a weakening Corporate Average Fuel Economy (CAFE) standards for heavy-duty commercial vehicles. Heavy-duty vehicles are responsible for a significant share of the transpor…</div>
+  <div class="article-meta">Aug 29, 2026  02:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/29/methane-thermolysis-carbon-market-problem/" target="_blank">Methane Thermolysis Has A Carbon Market Problem</a></div>
+  <div class="article-summary">Methane thermolysis, a promising hydrogen production method using heat rather than combustion, faces a significant hurdle: its current inability to generate valuable carbon credits. This presents a major challenge because the economic viability of many clean energy projects hinges on carbon market revenue, potentially slowing the adoption of this cleaner hydrogen pathway.</div>
+  <div class="article-meta">Aug 29, 2026  09:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29082026/alabama-power-flock-surveillance-cameras/" target="_blank">The Grid Has Eyes</a></div>
+  <div class="article-summary">Wired for Profit: Fifth in a series about Alabama Power’s influence over electric rates, renewable energy, pollution and politics in the Yellowhammer State. BIRMINGHAM, Ala.—Darrell Nance knows he’s being watched. We all are.  Nance, a longtime resid…</div>
+  <div class="article-meta">Aug 29, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28082026/scientists-warn-of-additional-risk-after-nepal-flood/" target="_blank">Flood-Ravaged Nepal on Alert as Scientists Warn of Additional Risk</a></div>
+  <div class="article-summary">Residents and rescue workers in flood-ravaged valleys of Nepal faced the threat of a new wave of inundation Friday, as scientists warned that debris had blocked rivers upstream, forming fragile dams ready to burst.  In the narrow upper valleys, Wedne…</div>
+  <div class="article-meta">Aug 28, 2026  23:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28082026/trump-administration-speeds-up-alaska-pipeline-environmental-review/" target="_blank">Trump Administration Speeds Up Environmental Review for 800-Mile Alaska Oil Pipeline</a></div>
+  <div class="article-summary">The Trump administration is expediting an environmental review of the 800-mile Trans-Alaska Pipeline System that would reauthorize the project for another 30 years, including the pipeline, pump stations, access roads, bridges and a fuel gas line that…</div>
+  <div class="article-meta">Aug 28, 2026  22:41 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, August 29, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
