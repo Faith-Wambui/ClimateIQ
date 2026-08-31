@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, August 31, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">30</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:48%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 24 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/08/sadc-slow-on-green-regional-value-chains/" target="_blank">SADC Slow on Green Regional Value Chains</a></div>
+  <div class="article-summary">Southern African Development Community (SADC) nations, despite not being major emitters themselves, are lagging in developing green regional value chains, a critical step for industrialization and growth. This delay risks hindering their transition to a low-carbon economy and their ability to leverage emerging global green markets.</div>
+  <div class="article-meta">Aug 31, 2026  13:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/31/india-adds-6-6-gw-of-rooftop-solar-in-h1-2026/" target="_blank">India adds 6.6 GW of rooftop solar in H1</a></div>
+  <div class="article-summary">India's rooftop solar installations surged 136% to 6.6 GW in the first half of 2026, driven by the PM Surya Ghar program which has now reached nearly 4.5 million households. This rapid expansion significantly boosts India's renewable energy capacity, accelerating its transition away from fossil fuels and contributing to global climate goals.</div>
+  <div class="article-meta">Aug 31, 2026  14:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/31/journey-ahead-ja-roadshow-2026-to-spotlight-integrated-energy-solutions/" target="_blank">Journey Ahead: JA Roadshow 2026 to spotlight integrated energy solutions</a></div>
+  <div class="article-summary">JA is launching its "Journey Ahead: JA Roadshow 2026" across Europe to showcase how its integrated solar and energy storage solutions can bolster grid resilience. This initiative directly addresses the growing demand for dependable energy in the face of climate challenges.</div>
+  <div class="article-meta">Aug 31, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/08/31/hydrogen-gets-far-more-attention-than-its-deployment-justifies/" target="_blank">Hydrogen Gets Far More Attention Than Its Deployment Justifies</a></div>
+  <div class="article-summary">Despite widespread media coverage and government announcements, hydrogen's actual deployment in the energy transition remains minimal. This overemphasis risks diverting crucial resources and attention from more established, scalable climate solutions.</div>
+  <div class="article-meta">Aug 31, 2026  11:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/31/denmark-adds-337-mw-of-solar-in-h1/" target="_blank">Denmark adds 337 MW of solar in H1</a></div>
+  <div class="article-summary">Denmark significantly boosted its solar capacity by 337 MW in the first half of the year, driven by a surge in large-scale projects. This expansion is crucial for the climate as it accelerates the transition away from fossil fuels, though a concerning decline in rooftop solar installations on buildings highlights the need for policy adjustments to fully leverage decentralized clean energy.</div>
+  <div class="article-meta">Aug 31, 2026  11:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/31/intersolar-2026-armazenamento-traz-novo-animo-para-o-setor-em-ano-de-desaceleracao-solar/" target="_blank">Brazil’s Intersolar SA 2026 highlights storage momentum amid solar slowdown</a></div>
+  <div class="article-summary">Energy storage is emerging as one of the key growth areas for Brazil’s solar industry. Manufacturers are expanding their battery portfolios and seeking local partnerships to meet domestic content requirements for the country’s first storage auction.…</div>
+  <div class="article-meta">Aug 31, 2026  09:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/08/31/chinese-pv-industry-brief-another-5-major-solar-manufacturers-announce-h1-losses/" target="_blank">Chinese PV Industry Brief: Another 5 major solar manufacturers announce H1 losses</a></div>
+  <div class="article-summary">China's top solar manufacturers, including Longi and TCL Zhonghuan, reported significant H1 2026 losses driven by oversupply and falling prices, signaling continued financial strain across the industry's upstream and integrated segments. This persistent pressure on key solar producers, despite some diversification efforts, underscores the volatile economic landscape impacting the global transition to renewable energy.</div>
+  <div class="article-meta">Aug 31, 2026  13:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/31082026/philadelphia-refinery-clean-up-bellwether-district/" target="_blank">Will a Data Center Join the Philadelphia Bellwether District’s Mix of Manufacturers and Warehouses?</a></div>
+  <div class="article-summary">Philadelphia's Bellwether District, a hub for manufacturing and warehouses, is being considered for a massive data center, a development that could dramatically increase the area's energy consumption and carbon footprint. This potential shift highlights the growing tension between industrial growth and climate goals as cities grapple with the demands of the digital economy.</div>
+  <div class="article-meta">Aug 31, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/31082026/inside-climate-podcast-alabama-power/" target="_blank">Power Struggles</a></div>
+  <div class="article-summary">Alabama residents are facing soaring utility bills driven by rapidly increasing energy demand, a situation that directly exacerbates climate change by fueling greater reliance on fossil fuels. This power struggle highlights the urgent need for sustainable energy solutions to curb emissions and protect consumers from escalating costs.</div>
+  <div class="article-meta">Aug 31, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/08/31/india-needs-climate-adaptation-cash-to-be-an-investment-not-a-quick-fix/" target="_blank">India needs climate adaptation cash to be an investment, not a quick fix</a></div>
+  <div class="article-summary">Anuradha Barua, Aakriti Wanchoo and Swapan Mehra are from Iora Ecological Solutions, a New Delhi-based company focused on nature-based solutions, climate action, conservation and environmental policy.
+
+When Rojo Neog’s village in northeast India was…</div>
+  <div class="article-meta">Aug 31, 2026  10:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/aug/31/turkmenistan-methane-leaks-un-alerts-mars" target="_blank">‘Breakthrough’ as Turkmenistan starts fixing ‘mindboggling’ methane mega-leaks</a></div>
+  <div class="article-summary">Secretive state begins repairs on ageing facilities after being revealed as worst country for leaks of potent greenhouse gasTurkmenistan has started plugging the mega-leaks of methane that spew from its ageing oil and gas facilities, the latest UN da…</div>
+  <div class="article-meta">Aug 31, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/aug/31/climate-crisis-nepal-floods-india-caribbean" target="_blank">The Nepal floods seem a world away – but make no mistake, climate breakdown will affect us all | Nesrine Malik</a></div>
+  <div class="article-summary">Richer countries might have more resources to deal with catastrophe, but this problem grips the entire planet, however much leaders may want to deny itClimate breakdown is happening on one Earth, but two different worlds. In one, its impacts increasi…</div>
+  <div class="article-meta">Aug 31, 2026  08:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, August 31, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
