@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, September 01, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01092026/trump-epa-clean-air-water-retreat/" target="_blank">The Trump EPA Is a Toothless Friend of Polluting Industries, Analysis Shows</a></div>
+  <div class="article-summary">The Trump EPA's celebrated surge in civil enforcement cases, reaching a nine-year high of 2,127, masks a significant decline in the severity of penalties imposed on polluters. This strategic shift, prioritizing quantity over accountability, weakens the agency's ability to deter environmental damage and protect public health, undermining crucial climate action.</div>
+  <div class="article-meta">Sep 01, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01092026/maryland-ratepayer-advocate-challenges-pjm-power-plan/" target="_blank">Maryland Consumer Advocate Challenges PJM Plan to Buy Power for Projected Data Center Growth</a></div>
+  <div class="article-summary">Maryland's consumer advocate is challenging PJM's plan to build new power plants, arguing ratepayers shouldn't foot the bill for projected data center demand that might not materialize. This move is crucial for preventing billions in unnecessary costs and ensuring new energy infrastructure is truly needed, not just speculative.</div>
+  <div class="article-meta">Sep 01, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/01/philippines-to-develop-pv-exemption-areas/" target="_blank">Philippines to develop PV exemption areas</a></div>
+  <div class="article-summary">The Philippines is establishing digital boundaries around three million hectares of prime agricultural land, particularly rice paddies, to prevent solar farm development from encroaching on food production. This move is critical as the nation rapidly expands solar energy capacity, importing 4 GW of panels in just four months, to balance its urgent need for affordable clean power with ensuring food security.</div>
+  <div class="article-meta">Sep 01, 2026  11:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/explainer-the-cmip7-emissions-scenarios-and-how-they-explore-future-climate-change" target="_blank">Explainer: The CMIP7 emissions scenarios – and how they explore future climate change</a></div>
+  <div class="article-summary">Every six to seven years, climate modelling groups around the world run a coordinated set of simulations that explore how the climate could change in the future.
+
+These simulations form a key line of evidence for future projections used in Intergover…</div>
+  <div class="article-meta">Sep 01, 2026  02:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/01/mexicos-cfe-plans-to-deploy-5-4-gw-of-solar-by-2030/" target="_blank">Mexico’s CFE plans to deploy 5.4 GW of solar by 2030</a></div>
+  <div class="article-summary">Mexico's state-owned utility, CFE, is committing $32.9 billion to expand its generation capacity by 18.6 GW by 2030, with a significant 5.4 GW earmarked for solar projects. This substantial investment in renewables signals a major shift for Mexico's energy landscape, directly contributing to global decarbonization efforts by displacing fossil fuel generation.</div>
+  <div class="article-meta">Sep 01, 2026  10:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/01/japan-to-exclude-silicon-solar-from-new-subsidies-prioritize-perovskite/" target="_blank">Japan to exclude silicon solar from new subsidies, prioritize perovskite</a></div>
+  <div class="article-summary">Japan's Ministry of the Environment (MOE) plans to exclude conventional silicon solar panels from newly implemented subsidy programs beginning in fiscal 2027, while prioritizing perovskite and other next-generation solar technologies.The postJapan to…</div>
+  <div class="article-meta">Sep 01, 2026  10:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/01/cutric-transit-analysis-credibility-problem/" target="_blank">CUTRIC Has Lost The Right To Be Treated As A Neutral Transit Authority</a></div>
+  <div class="article-summary">CUTRIC has a credibility problem that extends well beyond its long enthusiasm for hydrogen buses. The underlying issue is whether an organization whose mission includes commercializing technologies should receive a presumption of neutrality when it a…</div>
+  <div class="article-meta">Sep 01, 2026  09:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/01/waaree-energies-wins-700-mw-solar-plus-storage-project-from-seci-plans-37-million-arizona-factory-upgrade/" target="_blank">Waaree Energy increases capacity of Arizona factory to 1.6 GW</a></div>
+  <div class="article-summary">Waaree Energies’ board has approved the consolidation of some of its module manufacturing operations in Gujarat. The company plans to relocate plant and machinery from its 1 GW Tumb facility and 1.11 GW Nandigram facility to its existing manufacturin…</div>
+  <div class="article-meta">Sep 01, 2026  08:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/01/researchers-team-with-queensland-manufacturer-to-drive-perovskite-silicon-tandem-solar-cell-development/" target="_blank">Australian manufacturer plans 500 MW perovskite-silicon tandem solar module factory</a></div>
+  <div class="article-summary">University of Sydney researchers will team with a Queensland-based solar panel manufacturer to accelerate the commercialisation of next-generation silicon-perovskite tandem solar cell technology after securing $7.25 million in federal government fund…</div>
+  <div class="article-meta">Sep 01, 2026  08:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/live/2026/sep/01/nepal-tibet-floods-death-toll-rescue-hydropower-tunnels-china-latest-updates" target="_blank">Nepal-Tibet floods: warning signs visible before glacier collapse, report says, as death toll passes 1,000 – latest updates</a></div>
+  <div class="article-summary">A catastrophic glacier collapse in Nepal-Tibet triggered devastating floods, with the death toll now exceeding 1,000 and 4,500 still missing. This disaster highlights the urgent need for improved early-warning systems, especially as the climate crisis intensifies glacial melt, threatening vulnerable communities and exacerbating humanitarian crises, particularly for women and girls.</div>
+  <div class="article-meta">Sep 01, 2026  12:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/01/nepal-flooding-climate-disaster" target="_blank">Nepal’s glacial collapse foreshadowed a future of climate disaster | Michael Mann</a></div>
+  <div class="article-summary">Nepal's recent glacial collapse, a structural failure of the Himalayas, serves as a stark warning of the escalating climate crisis. This event, amplified by a summer of extreme weather globally, underscores the urgent need for dramatic climate action to avert a future of widespread disasters.</div>
+  <div class="article-meta">Sep 01, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-why-tough-methane-cuts-are-crucial-for-keeping-warming-well-below-2c" target="_blank">Guest post: Why tough methane cuts are crucial for keeping warming ‘well-below’ 2C</a></div>
+  <div class="article-summary">Guest post: Why tough methane cuts are crucial for keeping warming ‘well-below’ 2C
+
+Konstantin Weber
+
+Konstantin Weber, doctoral student at ETH Zurich
+
+Prof Reto Knutti
+
+Prof Reto Knutti, climate physicist and full professor at the department of envi…</div>
+  <div class="article-meta">Sep 01, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01092026/amazons-defenders-declare-state-of-emergency/" target="_blank">The Amazon’s Defenders Declare a State of Emergency</a></div>
+  <div class="article-summary">Indigenous and local communities across the Amazon, fed up with government inaction, have declared a state of emergency. This bold move highlights the escalating threats from oil extraction and mining, underscoring the critical role these frontline defenders play in protecting the world's largest rainforest and its immense carbon sink.</div>
+  <div class="article-meta">Sep 01, 2026  12:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/commentisfree/2026/sep/01/has-climate-crisis-killed-instagrams-euro-summer" target="_blank">Cities sweltering and the smell of the middle ages: has the climate crisis killed Instagram’s Euro summer? | Brigid Delaney</a></div>
+  <div class="article-summary">Who dreams of having a Euro summer now when staying in an ancient, uncooled building in the Old Town is like trying to sleep in a wood-fired pizza oven?This week the Euro summer comes to an end – and so does a certain type of posting on Instagram.Wai…</div>
+  <div class="article-meta">Sep 01, 2026  08:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/01/nepal-tibet-flood-alaska-himalayas-andes-greenland-alps" target="_blank">The Nepal and Tibet flood is a warning: melting snow and ice will bring more disasters around the world |  Bill McGuire</a></div>
+  <div class="article-summary">In Alaska, the Himalayas, the Andes, Greenland, and perhaps also the Alps, deadly chain reactions are just waiting to be triggeredYou may not have felt it, but the earth beneath our feet is getting twitchier, and global heating is to blame. As temper…</div>
+  <div class="article-meta">Sep 01, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01092026/food-packaging-toxic-chemicals/" target="_blank">No One Knows All the Toxic Chemicals You’re Eating</a></div>
+  <div class="article-summary">Most people decide if it’s safe to eat an old tub of yogurt in the fridge or canned tuna in the back of the cupboard by checking its sell-by date. But no label indicates that pesticides, phthalates, PFAS or other hazardous chemicals could be seeping…</div>
+  <div class="article-meta">Sep 01, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/ng-interactive/2026/aug/31/grand-canyon-flash-flood-causes" target="_blank">How intense rains in the Grand Canyon turned into a deadly disaster</a></div>
+  <div class="article-summary">Flash flooding in Arizona tourist destination was likely triggered by compounding climate factors, such as drought and warming in Pacific OceanRemote Grand Canyon lodge hit by deadly flash flood boasts fabled historyAdeadly flash floodin the Grand Ca…</div>
+  <div class="article-meta">Sep 01, 2026  04:53 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, September 01, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
