@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, September 04, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 34 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/04/france-updates-list-of-certified-low-carbon-photovoltaic-modules/" target="_blank">France updates list of certified low-carbon photovoltaic modules</a></div>
+  <div class="article-summary">France's Certisolis just updated its list of low-carbon photovoltaic modules, a crucial step for solar projects seeking government support. This move incentivizes the adoption of cleaner solar technology, accelerating the nation's transition to renewable energy.</div>
+  <div class="article-meta">Sep 04, 2026  12:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/04/jackdaw-gasfield-set-to-be-approved-by-ministers-this-month-sources-say" target="_blank">Jackdaw gasfield set to be approved by ministers this month, sources say</a></div>
+  <div class="article-summary">The UK government is reportedly set to approve the controversial Jackdaw gasfield in the North Sea this month, with Energy Secretary Miatta Fahnbulleh expected to recommend its go-ahead next week. This decision, alongside potential approval for the Rosebank oilfield, directly contradicts climate commitments by locking in new fossil fuel extraction that will contribute to global warming.</div>
+  <div class="article-meta">Sep 04, 2026  10:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/04/vertical-rooftop-pv-arrives-in-ireland/" target="_blank">Vertical rooftop PV arrives in Ireland</a></div>
+  <div class="article-summary">Ireland has just seen its first vertical solar PV installation in Dublin, a 5.37 kW system that seamlessly integrates with a green roof. This innovative approach proves that urban spaces can simultaneously boost biodiversity and generate clean energy, offering a dual climate solution for commercial rooftops.</div>
+  <div class="article-meta">Sep 04, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/04/unsw-researchers-secure-64-8-million-in-funding-for-12-separate-solar-projects/" target="_blank">Australia continues heavy investment in solar research</a></div>
+  <div class="article-summary">Australia's University of New South Wales just landed a record AUD 64.8 million investment for 12 cutting-edge solar research projects, focusing on breakthroughs in perovskite and tandem technologies. This significant funding boost signals a determined push to accelerate the development of cheaper, more efficient solar power, crucial for meeting global decarbonization targets.</div>
+  <div class="article-meta">Sep 04, 2026  11:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/04/chinese-pv-industry-brief-inverter-manufacturers-post-mixed-h1-results-as-storage-gains-ground/" target="_blank">Chinese PV Industry Brief: Inverter manufacturers post mixed H1 results as storage gains ground</a></div>
+  <div class="article-summary">Chinese PV inverter makers saw a mixed first half of 2026, with energy storage demand significantly boosting growth despite a slowdown in some traditional inverter markets. This shift highlights the accelerating integration of storage solutions, crucial for grid stability and maximizing renewable energy utilization as the world transitions away from fossil fuels.</div>
+  <div class="article-meta">Sep 04, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/04/multi-source-heat-pump-test-bench-explores-coupling-with-solar-thermal-storage/" target="_blank">Multi-source heat pump test bench explores coupling with solar, thermal storage</a></div>
+  <div class="article-summary">A Chinese company, Micronewton, has equipped a university lab with a test bench that can compare air-, water-, and ground-source heat pumps, crucially integrating solar power and thermal storage. This advanced setup allows for crucial real-world testing of how to efficiently combine renewable energy sources for heating and cooling, a vital step in decarbonizing building energy use.</div>
+  <div class="article-meta">Sep 04, 2026  11:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/04/delayed-inverter-startup-can-reduce-a-solar-plants-annual-energy-yield-by-1-88/" target="_blank">Delayed inverter startup can reduce a solar plant’s annual energy yield by 1.88%.</a></div>
+  <div class="article-summary">Brazilian researchers have developed a method to quantify energy losses caused by delayed PV inverter startup, finding annual losses of 1.88% at a utility-scale solar plant in São Paulo state. More than 55% of the losses occurred within the first 90…</div>
+  <div class="article-meta">Sep 04, 2026  10:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04092026/farmed-salmon-losing-healthy-fatty-acids/" target="_blank">Farmed Salmon May Not Be as Nutritious as It Once Was, New Research Suggests</a></div>
+  <div class="article-summary">New research indicates farmed salmon, now comprising 70% of global consumption, is less nutritious than in the past due to intensified farming practices. This decline in nutritional value is concerning as the world increasingly relies on this fish for healthy omega-3 fatty acids.</div>
+  <div class="article-meta">Sep 04, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/04/study-reveals-high-altitude-limitations-in-solar-irradiance-models/" target="_blank">Study reveals high-altitude limitations in solar irradiance models</a></div>
+  <div class="article-summary">New research in southern Peru reveals that standard solar irradiance models overestimate sunlight in high-altitude Andean regions. This discrepancy, particularly significant at higher elevations, means current photovoltaic yield assessments for these areas may be inaccurate, impacting the reliability of solar energy projections.</div>
+  <div class="article-meta">Sep 04, 2026  10:34 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/04/australian-ski-resorts-to-close-up-to-a-month-early-due-to-global-heating-and-el-nino" target="_blank">Australian ski resorts to close up to a month early due to global heating and El Niño</a></div>
+  <div class="article-summary">‘Challenging’ weather conditions and lack of snowfall are being blamed after a winter that broke multiple heat recordsSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereMajor Australian alpine resorts are closing t…</div>
+  <div class="article-meta">Sep 04, 2026  09:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/commentisfree/2026/sep/04/beetaloo-carbon-bomb-labor-cant-say-it-wasnt-warned" target="_blank">Albanese’s resources minister celebrating the Beetaloo carbon bomb is a hell of a choice. Labor can’t say it wasn’t warned | Clear Air</a></div>
+  <div class="article-summary">Scientists will be able to estimate the amount of heating and destruction caused by the gas ultimately drawn from the BeetalooGet ourbreaking news email,free appordaily news podcastA giant chunk of glacier-covered mountain has collapsed with catastro…</div>
+  <div class="article-meta">Sep 04, 2026  05:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/03/angela-eagle-uk-stock-up-supplies-el-nino-warning" target="_blank">Minister tells Brits to stock up on days of supplies after ‘supersize’ El Niño warning</a></div>
+  <div class="article-summary">Exclusive: Angela Eagle urges UK citizens to be ‘a bit more resilient’ as they plan for national emergenciesBritish people have been urged to have enough food and water on hand to survive a few days without power or water, as the UN said the El Niño…</div>
+  <div class="article-meta">Sep 03, 2026  22:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03092026/judge-blocks-epa-from-challenging-californias-emissions-standards/" target="_blank">Court Stalls EPA Plan to Override California’s Vehicle Pollution Standards</a></div>
+  <div class="article-summary">A federal judge has temporarily blocked the Environmental Protection Agency from challenging California’s longstanding authority to set vehicle pollution standards stricter than federal requirements. The legal dispute stems from a decision announced…</div>
+  <div class="article-meta">Sep 03, 2026  22:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/sep/04/bom-forecasts-strongest-el-nino-on-record-as-research-points-to-alarming-climate-change-influence" target="_blank">BoM forecasts strongest El Niño on record as research points to ‘alarming’ climate change influence</a></div>
+  <div class="article-summary">Bureau of Meteorology suggests El Niño has already broken records, with Pacific Ocean temperature change exceeding 2C in six monthsFollow our Australia news live blog for latest updatesSign up for climate and environment editor Adam Morton’s free Cle…</div>
+  <div class="article-meta">Sep 03, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, September 04, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
