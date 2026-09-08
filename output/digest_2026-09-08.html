@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, September 08, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">35</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:57%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 27 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/liberia-renews-suspension-of-import-tariffs-on-off-grid-solar-products/" target="_blank">Liberia renews suspension of import tariffs on off-grid solar products</a></div>
+  <div class="article-summary">Liberia has extended its suspension of import tariffs on off-grid solar products, a move designed to slash costs and boost private investment in clean energy access. This initiative is crucial for accelerating rural electrification and supporting sustainable economic growth in Liberia, a nation actively working to expand its renewable energy footprint.</div>
+  <div class="article-meta">Sep 08, 2026  12:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/lebanon-extends-deadline-for-350-mw-solar-tender/" target="_blank">Lebanon extends deadline for 350 MW solar tender</a></div>
+  <div class="article-summary">Lebanon's solar tender, aiming for 350 MW of solar capacity and 1 GWh of battery storage, has been extended to September 30, 2026, giving developers more time to prepare. This significant push for renewable energy is crucial for Lebanon, which has seen its solar capacity grow substantially, as it seeks to bolster its grid stability and reduce reliance on fossil fuels.</div>
+  <div class="article-meta">Sep 08, 2026  10:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/jordan-issues-first-200-renewables-approvals-under-new-grid-connection-rules/" target="_blank">Jordan issues first 200 renewables approvals under new grid-connection rules</a></div>
+  <div class="article-summary">Jordan just greenlit 200 new renewable energy systems, marking a significant step in streamlining grid connections under new regulations. This move is crucial for accelerating the country's transition away from fossil fuels and meeting its climate goals.</div>
+  <div class="article-meta">Sep 08, 2026  10:48 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/great-power-successfully-completes-full-scale-fire-test/" target="_blank">Great Power successfully completes full-scale fire test</a></div>
+  <div class="article-summary">Great Power's 5 MWh energy storage system passed a full-scale fire test, demonstrating no fire spread, structural collapse, or thermal runaway. This successful test is crucial for scaling up renewable energy storage, addressing the critical need for safe and reliable grid-scale battery solutions as we transition away from fossil fuels.</div>
+  <div class="article-meta">Sep 08, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/hoymiles-releases-bidirectional-ev-charger/" target="_blank">Hoymiles releases bidirectional EV charger</a></div>
+  <div class="article-summary">Hoymiles has launched a new bidirectional EV charger, the V2X DC Charger, enabling electric vehicles to power homes during outages and participate in grid stabilization programs. This innovation allows EVs to act as mobile batteries, directly integrating with solar PV and storage systems for enhanced energy resilience and efficiency.</div>
+  <div class="article-meta">Sep 08, 2026  11:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/european-markets-set-daily-solar-records-for-september/" target="_blank">European markets set daily solar records for September</a></div>
+  <div class="article-summary">Southern Europe's solar power output surged to record highs last week, with Italy, Spain, and Portugal all achieving new September daily generation milestones. This surge in renewable energy occurred simultaneously with a sharp spike in gas prices, underscoring solar's growing role in stabilizing energy markets and mitigating reliance on volatile fossil fuels.</div>
+  <div class="article-meta">Sep 08, 2026  10:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/new-optimization-method-improves-heat-pump-sizing-by-accounting-for-part-load-efficiency/" target="_blank">New optimization method improves heat pump sizing by accounting for part-load efficiency</a></div>
+  <div class="article-summary">Austrian researchers have developed a new optimization method for heat pumps that significantly improves sizing by factoring in part-load efficiency, a crucial but often overlooked aspect. This breakthrough, demonstrated in Innsbruck, promises to slash electricity consumption by 4.5% and annual costs by 2.9%, making a substantial impact on the decarbonization of heating systems.</div>
+  <div class="article-meta">Sep 08, 2026  08:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/08/europes-storage-market-to-hit-57-gwh-in-2026-says-eupd-research/" target="_blank">Europe’s storage market to hit 57 GWh in 2026, says EUPD Research</a></div>
+  <div class="article-summary">Europe’s battery storage market is set to surge 78% to 57 GWh in 2026, led by Germany, Bulgaria, Italy, the UK, and Spain, as falling costs and supportive policies accelerate deployment. Residential storage remains the key growth engine, with Chinese…</div>
+  <div class="article-meta">Sep 08, 2026  08:23 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08092026/georgia-power-electricity-disconnections/" target="_blank">The Cost of Keeping Cool: Georgia Power Customers Struggle With Summer Bills</a></div>
+  <div class="article-summary">Georgia Power customers are facing soaring summer electricity bills, with some struggling to keep their air conditioning running. This reliance on energy-intensive cooling, driven by rising temperatures, directly fuels increased carbon emissions and exacerbates the climate crisis.</div>
+  <div class="article-meta">Sep 08, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/sep/08/nepal-floods-climate-compensation" target="_blank">Nepal says big polluters must ‘wake up’ as it calls for climate compensation over flood disaster</a></div>
+  <div class="article-summary">Foreign minister Shisir Khanal tells the Guardian the world’s biggest economies need to help Nepal, which contributes less than 0.1% of global greenhouse gas emissionsNepal is demanding $20m in climate compensation for the recent devastating floods,…</div>
+  <div class="article-meta">Sep 08, 2026  03:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/08/global-move-away-from-oil-could-lead-to-conflict-and-migration-experts-say" target="_blank">Global move away from oil could lead to conflict and migration, experts say</a></div>
+  <div class="article-summary">Researchers urge governments to help worst afflicted countries, such as Nigeria and Algeria, which rely on oil revenues for public servicesConflict, migration and economic upheaval will accompany the global move away from oil, unless governments act…</div>
+  <div class="article-meta">Sep 08, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/08/cities-great-britain-most-vulnerable-extreme-heat-revealed" target="_blank">Cities in Great Britain most vulnerable to extreme heat revealed</a></div>
+  <div class="article-summary">OS index examines which ‘urban heat islands’ suffer the most – and which cope the best with rising temperaturesPortsmouth, Leicester, Exeter, Bristol and Nottingham will be among the cities that warm the most by the end of this century as global heat…</div>
+  <div class="article-meta">Sep 08, 2026  02:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/sep/07/french-winemakers-forecast-30-year-low-harvest-after-severe-drought-and-heat" target="_blank">French winemakers forecast 30-year low harvest after severe drought and heat</a></div>
+  <div class="article-summary">Estimates suggest drop in production with vineyards also concerned ‘smoke taint’ from wildfires may affect qualityFrench vineyards hit by severe drought and heatwaves are expected to report a 30-year low in wine production after the country’s hottest…</div>
+  <div class="article-meta">Sep 07, 2026  18:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/sep/08/record-strength-el-nino-could-mean-bigger-supermarket-bills-for-australians-experts-warn" target="_blank">Record strength El Niño could mean bigger supermarket bills for Australians, experts warn</a></div>
+  <div class="article-summary">Predicted hot and dry weather in growing areas in eastern Australia identified as ‘one of the key issues’ that will affect food prices over next 12 monthsFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily…</div>
+  <div class="article-meta">Sep 07, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, September 08, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
