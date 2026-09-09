@@ -1,0 +1,127 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Wednesday, September 09, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (3 articles)
+============================================================
+
+▸ NOAA Fisheries Takes A ‘Sharp Turn Away From Science’
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/09092026/noaa-commercial-interests-threatens-fisheries/
+  Date   : Sep 09, 2026  11:55 EAT
+  Summary: The Trump administration is sidelining scientific expertise at NOAA Fisheries, prioritizing resource extraction over the protection of endangered species like leatherback turtles and whales. This shift away from science-based conservation directly threatens marine ecosystems and their ability to mitigate climate change.
+
+
+▸ Sri Lanka proposes BESS-inclusive feed-in tariffs, draws pricing pushback
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/09/sri-lanka-proposes-bess-inclusive-feed-in-tariffs-draws-pricing-pushback/
+  Date   : Sep 09, 2026  11:30 EAT
+  Summary: Sri Lanka's proposed feed-in tariffs for battery energy storage systems (BESS) are facing pushback from the national grid operator, which argues the rates are significantly higher than current market prices. This pricing dispute could slow the integration of crucial battery storage needed to stabilize the grid and accommodate more renewable energy, a vital step for the nation's climate goals.
+
+
+▸ Q&A: What can – and cannot – be said about global warming’s role in the 2026 Himalayan floods
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/qa-what-can-and-cannot-be-said-about-global-warmings-role-in-the-2026-himalayan-floods
+  Date   : Sep 08, 2026  19:03 EAT
+  Summary: On the morning of 26 August, flash floods surged through a Himalayan border region of Nepal and the Chinese region of Tibet, killing more than 1,300 people, with thousands still missing.
+
+In the days since the floods, scientists have examined satelli…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Sodium-ion storage powers fully off-grid solar home in Germany
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/09/sodium-ion-storage-powers-fully-off-grid-solar-home-in-germany/
+  Date   : Sep 09, 2026  12:00 EAT
+  Summary: A German homeowner in Augsburg is now fully off-grid, powering their residence with a 49 kWp solar array and a substantial 270 kWh BIWATT sodium-ion battery system. This breakthrough demonstrates the growing viability of advanced battery chemistries like sodium-ion for reliable, independent renewable energy storage, a crucial step in decarbonizing our energy supply.
+
+
+▸ Reliability risks emerge across BIPV, floating PV and agrivoltaics
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/09/reliability-risks-emerge-across-bipv-floating-pv-and-agrivoltaics/
+  Date   : Sep 09, 2026  11:56 EAT
+  Summary: New research from the IEA PVPS Task 13 highlights significant reliability challenges for building-integrated, floating, and agrivoltaic solar installations, citing issues like heat, shading, wave action, and ammonia exposure. These application-specific stresses mean current PV qualification standards are insufficient, potentially impacting the long-term performance and climate benefits of these innovative solar technologies.
+
+
+▸ Netherlands installs 1.4 GW of solar in 2025
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/09/the-netherlands-installs-1-4-gw-of-solar-in-2025/
+  Date   : Sep 09, 2026  11:42 EAT
+  Summary: The Netherlands added a disappointing 1.4 GW of solar in 2025, a significant drop from previous years and below expectations, driven by grid congestion and the looming end of net metering. This slowdown in solar deployment, which now accounts for 19.7% of Dutch electricity, highlights the urgent need for grid upgrades and energy storage solutions to maintain climate progress.
+
+
+▸ Whspr launches 4 kW propane heat pump for space-constrained homes
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/09/whspr-launches-4-kw-propane-heat-pump-for-space-constrained-homes/
+  Date   : Sep 09, 2026  11:11 EAT
+  Summary: Dutch startup Whspr has released a compact 4 kW propane heat pump specifically for space-limited homes like terraced houses, achieving a SCOP of 4.51. This innovation offers a more accessible, efficient, and lower-carbon heating solution for a significant segment of the housing market, accelerating the transition away from fossil fuels.
+
+
+▸ AI predicts wind-uplift resistance of solar PV piles
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/09/ai-predicts-wind-uplift-resistance-of-solar-pv-piles/
+  Date   : Sep 09, 2026  10:20 EAT
+  Summary: Iranian researchers have created an AI that accurately predicts the wind-uplift resistance of solar panel foundations, with a low error rate of 7.63%. This breakthrough is crucial for the climate transition, as it will help ensure the structural integrity of massive solar farms against extreme weather, accelerating the deployment of clean energy.
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ For Many New Yorkers, Home Is No Escape From the Heat
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/09092026/new-york-indoor-heat-stress/
+  Date   : Sep 09, 2026  12:00 EAT
+  Summary: New York City is experiencing increasingly severe heat waves, with Mayor Zohran Mamdani declaring multiple heat emergencies this summer, leading to an estimated 500 premature deaths annually. This escalating heat crisis underscores the urgent need for climate adaptation strategies to protect vulnerable urban populations from life-threatening temperatures.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Polanski calls for report on ecosystem collapse to be published in full
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/politics/2026/sep/09/zack-polanski-calls-report-ecosystem-collapse-published-greens
+  Date   : Sep 09, 2026  09:00 EAT
+  Summary: Green leader says ministers must stop ‘hiding the truth’ about threat to UK security from climate and nature crisisZack Polanski will challenge Andy Burnham’s government to publish an unredacted version of an explosive report by the UK’s spy chiefs t…
+
+
+▸ Reclaiming the streets: the architects clawing back Europe’s car-centric spaces
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/artanddesign/2026/sep/09/european-prize-urban-public-space-climate-crisis-architects
+  Date   : Sep 09, 2026  07:00 EAT
+  Summary: The European Prize for Urban Public Space’s shortlist highlights projects helping people cope with climate crisisIn the words of Joni Mitchell, the planners of many urban centres around the world “paved paradise and put up a parking lot”. The Europea…
+
+
+▸ As Hostilities Flare and Oil Prices Spike, U.S. Consumers Pay at the Pump
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/08092026/oil-prices-spike-amid-trump-climate-rollbacks/
+  Date   : Sep 09, 2026  03:08 EAT
+  Summary: Hours after President Donald Trump predicted on Truth Social that oil prices would fall precipitously once the United States wins its war with Iran, strikes on Saudi Arabia’s oil infrastructure by Iranian-backed Houthis Tuesday caused global oil pric…
+
+
+▸ Many People Aren’t Connecting the Dots Between Climate Change and Extreme Weather
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/08092026/todays-climate-extreme-weather-attribution-disconnect/
+  Date   : Sep 09, 2026  02:13 EAT
+  Summary: At the end of August, devastating floods and a debris flow triggered by a glacier collapse crashed through the valleys of Nepal, killing more than 1,300 people. Earlier this summer, deadly heat waves plagued much of the United States and Europe. Mean…
+
+
+▸ China’s industrial engine starts to break its fossil fuel habit
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/09/08/chinas-industrial-engine-starts-to-break-its-fossil-fuel-habit/
+  Date   : Sep 08, 2026  18:30 EAT
+  Summary: Chinese industry is beginning to shift from fossil fuels to clean electricity, with wind, solar and batteries progressively displacing coal, oil and gas across the industrial sectors that made the country the world’s factory and largest carbon emitte…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 38  |  Sources: 7  |  Topics: 4

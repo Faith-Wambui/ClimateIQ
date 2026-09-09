@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, September 09, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">38</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:50%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 32 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09092026/noaa-commercial-interests-threatens-fisheries/" target="_blank">NOAA Fisheries Takes A ‘Sharp Turn Away From Science’</a></div>
+  <div class="article-summary">The Trump administration is sidelining scientific expertise at NOAA Fisheries, prioritizing resource extraction over the protection of endangered species like leatherback turtles and whales. This shift away from science-based conservation directly threatens marine ecosystems and their ability to mitigate climate change.</div>
+  <div class="article-meta">Sep 09, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/09/sri-lanka-proposes-bess-inclusive-feed-in-tariffs-draws-pricing-pushback/" target="_blank">Sri Lanka proposes BESS-inclusive feed-in tariffs, draws pricing pushback</a></div>
+  <div class="article-summary">Sri Lanka's proposed feed-in tariffs for battery energy storage systems (BESS) are facing pushback from the national grid operator, which argues the rates are significantly higher than current market prices. This pricing dispute could slow the integration of crucial battery storage needed to stabilize the grid and accommodate more renewable energy, a vital step for the nation's climate goals.</div>
+  <div class="article-meta">Sep 09, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-can-and-cannot-be-said-about-global-warmings-role-in-the-2026-himalayan-floods" target="_blank">Q&A: What can – and cannot – be said about global warming’s role in the 2026 Himalayan floods</a></div>
+  <div class="article-summary">On the morning of 26 August, flash floods surged through a Himalayan border region of Nepal and the Chinese region of Tibet, killing more than 1,300 people, with thousands still missing.
+
+In the days since the floods, scientists have examined satelli…</div>
+  <div class="article-meta">Sep 08, 2026  19:03 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/09/sodium-ion-storage-powers-fully-off-grid-solar-home-in-germany/" target="_blank">Sodium-ion storage powers fully off-grid solar home in Germany</a></div>
+  <div class="article-summary">A German homeowner in Augsburg is now fully off-grid, powering their residence with a 49 kWp solar array and a substantial 270 kWh BIWATT sodium-ion battery system. This breakthrough demonstrates the growing viability of advanced battery chemistries like sodium-ion for reliable, independent renewable energy storage, a crucial step in decarbonizing our energy supply.</div>
+  <div class="article-meta">Sep 09, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/09/reliability-risks-emerge-across-bipv-floating-pv-and-agrivoltaics/" target="_blank">Reliability risks emerge across BIPV, floating PV and agrivoltaics</a></div>
+  <div class="article-summary">New research from the IEA PVPS Task 13 highlights significant reliability challenges for building-integrated, floating, and agrivoltaic solar installations, citing issues like heat, shading, wave action, and ammonia exposure. These application-specific stresses mean current PV qualification standards are insufficient, potentially impacting the long-term performance and climate benefits of these innovative solar technologies.</div>
+  <div class="article-meta">Sep 09, 2026  11:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/09/the-netherlands-installs-1-4-gw-of-solar-in-2025/" target="_blank">Netherlands installs 1.4 GW of solar in 2025</a></div>
+  <div class="article-summary">The Netherlands added a disappointing 1.4 GW of solar in 2025, a significant drop from previous years and below expectations, driven by grid congestion and the looming end of net metering. This slowdown in solar deployment, which now accounts for 19.7% of Dutch electricity, highlights the urgent need for grid upgrades and energy storage solutions to maintain climate progress.</div>
+  <div class="article-meta">Sep 09, 2026  11:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/09/whspr-launches-4-kw-propane-heat-pump-for-space-constrained-homes/" target="_blank">Whspr launches 4 kW propane heat pump for space-constrained homes</a></div>
+  <div class="article-summary">Dutch startup Whspr has released a compact 4 kW propane heat pump specifically for space-limited homes like terraced houses, achieving a SCOP of 4.51. This innovation offers a more accessible, efficient, and lower-carbon heating solution for a significant segment of the housing market, accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Sep 09, 2026  11:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/09/ai-predicts-wind-uplift-resistance-of-solar-pv-piles/" target="_blank">AI predicts wind-uplift resistance of solar PV piles</a></div>
+  <div class="article-summary">Iranian researchers have created an AI that accurately predicts the wind-uplift resistance of solar panel foundations, with a low error rate of 7.63%. This breakthrough is crucial for the climate transition, as it will help ensure the structural integrity of massive solar farms against extreme weather, accelerating the deployment of clean energy.</div>
+  <div class="article-meta">Sep 09, 2026  10:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09092026/new-york-indoor-heat-stress/" target="_blank">For Many New Yorkers, Home Is No Escape From the Heat</a></div>
+  <div class="article-summary">New York City is experiencing increasingly severe heat waves, with Mayor Zohran Mamdani declaring multiple heat emergencies this summer, leading to an estimated 500 premature deaths annually. This escalating heat crisis underscores the urgent need for climate adaptation strategies to protect vulnerable urban populations from life-threatening temperatures.</div>
+  <div class="article-meta">Sep 09, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/politics/2026/sep/09/zack-polanski-calls-report-ecosystem-collapse-published-greens" target="_blank">Polanski calls for report on ecosystem collapse to be published in full</a></div>
+  <div class="article-summary">Green leader says ministers must stop ‘hiding the truth’ about threat to UK security from climate and nature crisisZack Polanski will challenge Andy Burnham’s government to publish an unredacted version of an explosive report by the UK’s spy chiefs t…</div>
+  <div class="article-meta">Sep 09, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/artanddesign/2026/sep/09/european-prize-urban-public-space-climate-crisis-architects" target="_blank">Reclaiming the streets: the architects clawing back Europe’s car-centric spaces</a></div>
+  <div class="article-summary">The European Prize for Urban Public Space’s shortlist highlights projects helping people cope with climate crisisIn the words of Joni Mitchell, the planners of many urban centres around the world “paved paradise and put up a parking lot”. The Europea…</div>
+  <div class="article-meta">Sep 09, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08092026/oil-prices-spike-amid-trump-climate-rollbacks/" target="_blank">As Hostilities Flare and Oil Prices Spike, U.S. Consumers Pay at the Pump</a></div>
+  <div class="article-summary">Hours after President Donald Trump predicted on Truth Social that oil prices would fall precipitously once the United States wins its war with Iran, strikes on Saudi Arabia’s oil infrastructure by Iranian-backed Houthis Tuesday caused global oil pric…</div>
+  <div class="article-meta">Sep 09, 2026  03:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08092026/todays-climate-extreme-weather-attribution-disconnect/" target="_blank">Many People Aren’t Connecting the Dots Between Climate Change and Extreme Weather</a></div>
+  <div class="article-summary">At the end of August, devastating floods and a debris flow triggered by a glacier collapse crashed through the valleys of Nepal, killing more than 1,300 people. Earlier this summer, deadly heat waves plagued much of the United States and Europe. Mean…</div>
+  <div class="article-meta">Sep 09, 2026  02:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/08/chinas-industrial-engine-starts-to-break-its-fossil-fuel-habit/" target="_blank">China’s industrial engine starts to break its fossil fuel habit</a></div>
+  <div class="article-summary">Chinese industry is beginning to shift from fossil fuels to clean electricity, with wind, solar and batteries progressively displacing coal, oil and gas across the industrial sectors that made the country the world’s factory and largest carbon emitte…</div>
+  <div class="article-meta">Sep 08, 2026  18:30 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, September 09, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
