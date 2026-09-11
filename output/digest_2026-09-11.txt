@@ -1,0 +1,149 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Friday, September 11, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (4 articles)
+============================================================
+
+▸ EU policymakers move to streamline cross-border energy infrastructure
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/11/eu-policymakers-move-to-streamline-cross-border-energy-infrastructure/
+  Date   : Sep 11, 2026  11:37 EAT
+  Summary: EU policymakers are streamlining cross-border energy infrastructure rules, prioritizing data-driven decisions and identifying grid gaps for electricity and hydrogen. This move is critical for accelerating the EU's climate neutrality goals by enabling more efficient energy markets and potentially lowering prices.
+
+
+▸ RGGI Is Funding Lower Household Bills as Data Centers Spike Prices
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/09/10/rggi-is-funding-lower-household-bills-as-data-centers-spike-prices/
+  Date   : Sep 11, 2026  01:33 EAT
+  Summary: States are investing in clean energy and lowering electricity bills through the Regional Greenhouse Gas Initiative. Demand for energy is growing in the Northeast and mid-Atlantic, spiking electricity bills and pollution in some states. A recent repor…
+
+
+▸ Guest post: How extreme heat is ‘creeping’ from summer into autumn and spring
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/guest-post-how-extreme-heat-is-creeping-from-summer-into-autumn-and-spring
+  Date   : Sep 10, 2026  16:00 EAT
+  Summary: Dr Casey Ivanovich
+
+postdoctoral associate at New York University
+
+Extreme heat is one of the deadliest climate hazards, but no two heatwaves are the same.
+
+Heat extremes that happen outside of the peak summer months are often more dangerous because…
+
+
+▸ UK aviation emissions to be 50% higher than thought by 2050, government admits
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/uk-aviation-emissions-to-be-50-higher-than-thought-by-2050-government-admits
+  Date   : Sep 10, 2026  13:42 EAT
+  Summary: By:
+
+The UK government has slashed its hopes for electric planes and “sustainable aviation fuels” (SAFs), ahead of giving the green light to a third runway at Heathrow.
+
+An “ambitious” rollout of new technologies and efficiency upgrades will only cut…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Chinese scientists achieve record-breaking 27.35% efficiency for perovskite-organic tandem solar cell
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/11/chinese-scientists-achieve-record-breaking-27-35-efficiency-for-perovskite-organic-tandem-solar-cell/
+  Date   : Sep 11, 2026  11:53 EAT
+  Summary: Nanjing University scientists have shattered solar cell efficiency records, achieving 27.35% with a new perovskite-organic tandem design that better captures near-infrared light. This breakthrough is critical for accelerating the transition to renewable energy by making solar power significantly more potent and cost-effective.
+
+
+▸ Why German energy provider Rabot Energy is selling a 2 kWh AC-only battery, no solar required
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/11/why-german-energy-provider-rabot-energy-is-selling-a-2-kwh-ac-only-battery-no-solar-required/
+  Date   : Sep 11, 2026  10:27 EAT
+  Summary: German energy provider Rabot Energy is rolling out a 2.12 kWh AC-only home battery, Rabot Flow, for apartment renters, leveraging dynamic tariffs to charge during low-cost periods and discharge during peaks. This innovative, electrician-free solution offers renters an estimated €120-€130 annual saving and crucially, by shifting demand away from peak hours, it contributes to grid stability and reduces reliance on fossil fuel peaker plants, thereby lowering overall carbon emissions.
+
+
+▸ AI-enabled commercial-scale energy project supports hotel and events venue operations
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/11/ai-enabled-commercial-scale-energy-project-supports-hotel-and-events-venue-operations/
+  Date   : Sep 11, 2026  09:03 EAT
+  Summary: In Australia's Southern Highlands, a 78-room hotel and event venue is now powered by an AI-managed solar and battery storage system from Sungrow, optimizing energy use and resilience. This project showcases how intelligent energy solutions can boost renewable self-consumption and contribute to broader community energy goals by autonomously managing charge-discharge cycles.
+
+
+▸ GoSun unveils solar-chargeable electric tractor
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/11/gosun-unveils-solar-chargeable-electric-tractor/
+  Date   : Sep 11, 2026  09:00 EAT
+  Summary: GoSun and Moonrider have launched a 27 hp electric tractor powered by a 24 kWh LFP battery, with optional 1.1 kW solar charging. The four-wheel-drive tractor offers about five hours of runtime and features a 750 kg hitch lift capacity, rear PTO and c…
+
+
+▸ Iron-mediated cathode enables 206 Wh/kg sodium-ion pouch cell
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/11/iron-mediated-cathode-enables-206-wh-kg-sodium-ion-pouch-cell/
+  Date   : Sep 11, 2026  08:52 EAT
+  Summary: Chinese researchers have developed an iron-mediated strategy that improves the reversibility and stability of lattice-oxygen redox reactions in sodium-ion battery cathodes. A 15.8 Ah pouch cell using the cathode achieved an energy density of 206 Wh/k…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (2 articles)
+============================================================
+
+▸ Hurricanes Routinely Threaten the Texas Coast. But Mass Evacuations Pose Risks of Their Own.
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11092026/texas-hurricanes-mass-evacuations-risks/
+  Date   : Sep 11, 2026  11:45 EAT
+  Summary: Mass evacuations from Texas coastal cities like Galveston during routine hurricane threats are increasingly exposing vulnerable populations, particularly those with pre-existing health conditions, to significant risks. This exodus, driven by the climate-fueled intensification of storms, highlights a critical gap in disaster preparedness, where the act of fleeing can be as perilous as the storm itself.
+
+
+▸ Revealed: More than 1,000 NHS operations cancelled due to record UK heatwaves
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/revealed-more-than-1000-nhs-operations-cancelled-due-to-record-uk-heatwaves
+  Date   : Sep 11, 2026  10:00 EAT
+  Summary: Record UK heatwaves forced the cancellation of over 1,000 NHS operations, including critical procedures, due to overheating surgical theatres and failing ventilation systems. This starkly illustrates how escalating climate change impacts essential services, threatening patient safety and revealing a healthcare system unprepared for extreme weather events.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ How Grassroots Opposition to a New Asphalt Plant Was Infiltrated by an Outside Operative
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11092026/nc-asphalt-plant-opposition-infiltrated-by-outside-operative/
+  Date   : Sep 11, 2026  11:50 EAT
+  Summary: Residents of Clemmons, NC, successfully mobilized against a proposed asphalt plant in their Rolling Green Village neighborhood, only to discover their grassroots opposition was infiltrated by an outside operative named Chris Sanderson. This victory, while local, highlights the growing threat of industrial pollution and the tactics used to undermine community environmental efforts.
+
+
+▸ Florida Proposes Stronger Protections for Sloths After Dozens Died at a Tourism Attraction
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/10092026/florida-proposes-stronger-sloth-protections/
+  Date   : Sep 11, 2026  00:42 EAT
+  Summary: Florida’s wildlife agency has proposed new rules to strengthen protections for sloths imported into the state, four months after an Inside Climate News investigation revealed dozens of wild sloths from South America died at a planned Orlando tourism…
+
+
+▸ Chemours to Pay $455 Million for Fayetteville Works Contamination
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/10092026/chemours-fayetteville-pfas-contamination-settlement/
+  Date   : Sep 10, 2026  22:31 EAT
+  Summary: This story is a collaboration between Inside Climate News and CityView NC, part of The Assembly Local Network. North Carolina and a handful of local governments agreed to settle with Chemours over its pollution in the eastern part of the state, the p…
+
+
+▸ NHS reports busiest ever summer as heatwaves drive up hospital admissions
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/society/2026/sep/10/nhs-busiest-ever-summer-heatwaves-hospital-admissions
+  Date   : Sep 10, 2026  17:32 EAT
+  Summary: Record demand for A&E units, ambulance services and NHS 111 shows extreme heat having unprecedented impact on health, experts sayThe NHS came under its most intense strain ever as a result of the summer’s five heatwaves, amid warnings that extreme he…
+
+
+▸ English winemakers expect ‘vintage year’ after record-breaking summer heat
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/uk-news/2026/sep/10/english-winemakers-vintage-grapes-harvest-heatwave
+  Date   : Sep 10, 2026  17:00 EAT
+  Summary: English vineyards are anticipating a "vintage year" with an exceptionally early grape harvest thanks to a record-breaking summer heatwave. Conversely, the same extreme heat and drought have decimated barley yields, threatening beer availability and potentially impacting the beverage industry beyond wine.
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 40  |  Sources: 6  |  Topics: 4

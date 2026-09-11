@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, September 11, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/11/eu-policymakers-move-to-streamline-cross-border-energy-infrastructure/" target="_blank">EU policymakers move to streamline cross-border energy infrastructure</a></div>
+  <div class="article-summary">EU policymakers are streamlining cross-border energy infrastructure rules, prioritizing data-driven decisions and identifying grid gaps for electricity and hydrogen. This move is critical for accelerating the EU's climate neutrality goals by enabling more efficient energy markets and potentially lowering prices.</div>
+  <div class="article-meta">Sep 11, 2026  11:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/10/rggi-is-funding-lower-household-bills-as-data-centers-spike-prices/" target="_blank">RGGI Is Funding Lower Household Bills as Data Centers Spike Prices</a></div>
+  <div class="article-summary">States are investing in clean energy and lowering electricity bills through the Regional Greenhouse Gas Initiative. Demand for energy is growing in the Northeast and mid-Atlantic, spiking electricity bills and pollution in some states. A recent repor…</div>
+  <div class="article-meta">Sep 11, 2026  01:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/guest-post-how-extreme-heat-is-creeping-from-summer-into-autumn-and-spring" target="_blank">Guest post: How extreme heat is ‘creeping’ from summer into autumn and spring</a></div>
+  <div class="article-summary">Dr Casey Ivanovich
+
+postdoctoral associate at New York University
+
+Extreme heat is one of the deadliest climate hazards, but no two heatwaves are the same.
+
+Heat extremes that happen outside of the peak summer months are often more dangerous because…</div>
+  <div class="article-meta">Sep 10, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/uk-aviation-emissions-to-be-50-higher-than-thought-by-2050-government-admits" target="_blank">UK aviation emissions to be 50% higher than thought by 2050, government admits</a></div>
+  <div class="article-summary">By:
+
+The UK government has slashed its hopes for electric planes and “sustainable aviation fuels” (SAFs), ahead of giving the green light to a third runway at Heathrow.
+
+An “ambitious” rollout of new technologies and efficiency upgrades will only cut…</div>
+  <div class="article-meta">Sep 10, 2026  13:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/11/chinese-scientists-achieve-record-breaking-27-35-efficiency-for-perovskite-organic-tandem-solar-cell/" target="_blank">Chinese scientists achieve record-breaking 27.35% efficiency for perovskite-organic tandem solar cell</a></div>
+  <div class="article-summary">Nanjing University scientists have shattered solar cell efficiency records, achieving 27.35% with a new perovskite-organic tandem design that better captures near-infrared light. This breakthrough is critical for accelerating the transition to renewable energy by making solar power significantly more potent and cost-effective.</div>
+  <div class="article-meta">Sep 11, 2026  11:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/11/why-german-energy-provider-rabot-energy-is-selling-a-2-kwh-ac-only-battery-no-solar-required/" target="_blank">Why German energy provider Rabot Energy is selling a 2 kWh AC-only battery, no solar required</a></div>
+  <div class="article-summary">German energy provider Rabot Energy is rolling out a 2.12 kWh AC-only home battery, Rabot Flow, for apartment renters, leveraging dynamic tariffs to charge during low-cost periods and discharge during peaks. This innovative, electrician-free solution offers renters an estimated €120-€130 annual saving and crucially, by shifting demand away from peak hours, it contributes to grid stability and reduces reliance on fossil fuel peaker plants, thereby lowering overall carbon emissions.</div>
+  <div class="article-meta">Sep 11, 2026  10:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/11/ai-enabled-commercial-scale-energy-project-supports-hotel-and-events-venue-operations/" target="_blank">AI-enabled commercial-scale energy project supports hotel and events venue operations</a></div>
+  <div class="article-summary">In Australia's Southern Highlands, a 78-room hotel and event venue is now powered by an AI-managed solar and battery storage system from Sungrow, optimizing energy use and resilience. This project showcases how intelligent energy solutions can boost renewable self-consumption and contribute to broader community energy goals by autonomously managing charge-discharge cycles.</div>
+  <div class="article-meta">Sep 11, 2026  09:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/11/gosun-unveils-solar-chargeable-electric-tractor/" target="_blank">GoSun unveils solar-chargeable electric tractor</a></div>
+  <div class="article-summary">GoSun and Moonrider have launched a 27 hp electric tractor powered by a 24 kWh LFP battery, with optional 1.1 kW solar charging. The four-wheel-drive tractor offers about five hours of runtime and features a 750 kg hitch lift capacity, rear PTO and c…</div>
+  <div class="article-meta">Sep 11, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/11/iron-mediated-cathode-enables-206-wh-kg-sodium-ion-pouch-cell/" target="_blank">Iron-mediated cathode enables 206 Wh/kg sodium-ion pouch cell</a></div>
+  <div class="article-summary">Chinese researchers have developed an iron-mediated strategy that improves the reversibility and stability of lattice-oxygen redox reactions in sodium-ion battery cathodes. A 15.8 Ah pouch cell using the cathode achieved an energy density of 206 Wh/k…</div>
+  <div class="article-meta">Sep 11, 2026  08:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11092026/texas-hurricanes-mass-evacuations-risks/" target="_blank">Hurricanes Routinely Threaten the Texas Coast. But Mass Evacuations Pose Risks of Their Own.</a></div>
+  <div class="article-summary">Mass evacuations from Texas coastal cities like Galveston during routine hurricane threats are increasingly exposing vulnerable populations, particularly those with pre-existing health conditions, to significant risks. This exodus, driven by the climate-fueled intensification of storms, highlights a critical gap in disaster preparedness, where the act of fleeing can be as perilous as the storm itself.</div>
+  <div class="article-meta">Sep 11, 2026  11:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/revealed-more-than-1000-nhs-operations-cancelled-due-to-record-uk-heatwaves" target="_blank">Revealed: More than 1,000 NHS operations cancelled due to record UK heatwaves</a></div>
+  <div class="article-summary">Record UK heatwaves forced the cancellation of over 1,000 NHS operations, including critical procedures, due to overheating surgical theatres and failing ventilation systems. This starkly illustrates how escalating climate change impacts essential services, threatening patient safety and revealing a healthcare system unprepared for extreme weather events.</div>
+  <div class="article-meta">Sep 11, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11092026/nc-asphalt-plant-opposition-infiltrated-by-outside-operative/" target="_blank">How Grassroots Opposition to a New Asphalt Plant Was Infiltrated by an Outside Operative</a></div>
+  <div class="article-summary">Residents of Clemmons, NC, successfully mobilized against a proposed asphalt plant in their Rolling Green Village neighborhood, only to discover their grassroots opposition was infiltrated by an outside operative named Chris Sanderson. This victory, while local, highlights the growing threat of industrial pollution and the tactics used to undermine community environmental efforts.</div>
+  <div class="article-meta">Sep 11, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10092026/florida-proposes-stronger-sloth-protections/" target="_blank">Florida Proposes Stronger Protections for Sloths After Dozens Died at a Tourism Attraction</a></div>
+  <div class="article-summary">Florida’s wildlife agency has proposed new rules to strengthen protections for sloths imported into the state, four months after an Inside Climate News investigation revealed dozens of wild sloths from South America died at a planned Orlando tourism…</div>
+  <div class="article-meta">Sep 11, 2026  00:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10092026/chemours-fayetteville-pfas-contamination-settlement/" target="_blank">Chemours to Pay $455 Million for Fayetteville Works Contamination</a></div>
+  <div class="article-summary">This story is a collaboration between Inside Climate News and CityView NC, part of The Assembly Local Network. North Carolina and a handful of local governments agreed to settle with Chemours over its pollution in the eastern part of the state, the p…</div>
+  <div class="article-meta">Sep 10, 2026  22:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/society/2026/sep/10/nhs-busiest-ever-summer-heatwaves-hospital-admissions" target="_blank">NHS reports busiest ever summer as heatwaves drive up hospital admissions</a></div>
+  <div class="article-summary">Record demand for A&E units, ambulance services and NHS 111 shows extreme heat having unprecedented impact on health, experts sayThe NHS came under its most intense strain ever as a result of the summer’s five heatwaves, amid warnings that extreme he…</div>
+  <div class="article-meta">Sep 10, 2026  17:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/uk-news/2026/sep/10/english-winemakers-vintage-grapes-harvest-heatwave" target="_blank">English winemakers expect ‘vintage year’ after record-breaking summer heat</a></div>
+  <div class="article-summary">English vineyards are anticipating a "vintage year" with an exceptionally early grape harvest thanks to a record-breaking summer heatwave. Conversely, the same extreme heat and drought have decimated barley yields, threatening beer availability and potentially impacting the beverage industry beyond wine.</div>
+  <div class="article-meta">Sep 10, 2026  17:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, September 11, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
