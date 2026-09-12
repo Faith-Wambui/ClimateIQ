@@ -1,0 +1,138 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Saturday, September 12, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (4 articles)
+============================================================
+
+▸ Maryland Under Pressure as Local Moratoriums Supercharge Opposition to Data Centers
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12092026/maryland-data-center-opposition-supercharged-as-election-approaches/
+  Date   : Sep 12, 2026  11:55 EAT
+  Summary: Maryland faces mounting pressure from over 60 advocacy groups calling for a moratorium on new data center projects, citing concerns over environmental and community impacts. This widespread local opposition highlights the urgent need to understand and regulate the significant energy and water demands of these facilities, which are rapidly expanding across the state.
+
+
+▸ Section 232 and US module prices
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/12/section-232-and-us-module-prices/
+  Date   : Sep 12, 2026  07:00 EAT
+  Summary: The US government's imposition of tariffs and minimum import prices on polysilicon derivatives, effective August 6th, will likely drive up US solar module prices. This move aims to bolster domestic manufacturing but could significantly impact the cost competitiveness of solar installations nationwide.
+
+
+▸ El Niño: Indonesia fire emissions in 2026 ‘on track’ to match record for this century
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/el-nino-indonesia-fire-emissions-in-2026-on-track-to-match-record-for-this-century
+  Date   : Sep 11, 2026  17:06 EAT
+  Summary: By:
+
+Wildfires currently burning large swathes of land in Indonesia are on track to produce emissions on a par with the country’s most-intense fire season this century, according to experts.
+
+Data from the Global Fire Emissions Database reveals that,…
+
+
+▸ Factcheck: Reform UK’s 45 false or misleading claims about climate and energy
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/factcheck-reform-uks-45-false-or-misleading-claims-about-climate-and-energy
+  Date   : Sep 11, 2026  13:12 EAT
+  Summary: Reform UK, led by Nigel Farage, has emerged as a major force in UK politics in recent years – pushing anti-net-zero policies, alongside vehement opposition to immigration.
+
+The hard-right populist party is currently mired in a funding controversy and…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ The race for space solar
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/12/the-race-for-space-solar/
+  Date   : Sep 12, 2026  12:00 EAT
+  Summary: The burgeoning space economy, projected to reach $2 trillion by 2040, is driving a critical need for advanced orbital solar technology. This surge in demand highlights the indispensable role of photovoltaic power in enabling future space ventures, from cisLunar operations to broader extraterrestrial ambitions.
+
+
+▸ U.S. DOE seeks ‘mass, radiation tolerance, and durability’ in space solar cell manufacturing
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/12/doe-seeks-mass-radiation-tolerance-and-durability-in-space-solar-cell-manufacturing/
+  Date   : Sep 12, 2026  11:30 EAT
+  Summary: The U.S. Department of Energy is funding seven to eleven research projects to boost the resilience and efficiency of solar cells for space applications, focusing on materials like III-V compounds, silicon, and perovskites. This initiative is crucial for ensuring the long-term functionality of satellites and space infrastructure, which are increasingly vital for climate monitoring and data collection.
+
+
+▸ How competitive is BESS for data centers, really?
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/12/how-competitive-is-bess-for-data-centers-really/
+  Date   : Sep 12, 2026  11:00 EAT
+  Summary: A new report from Volta Foundation highlights that battery energy storage systems (BESS) are currently winning in only two data center applications, while competing in four and losing out in two. This limited competitive edge for BESS means that while it's emerging as a viable solution for specific data center needs, it's not yet a universal replacement for existing power infrastructure, impacting the speed and scale of decarbonization efforts in this energy-intensive sector.
+
+
+▸ The Electric Vehicles Leading Their Categories in California
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/09/11/the-electric-vehicles-leading-their-categories-in-california/
+  Date   : Sep 12, 2026  06:50 EAT
+  Summary: EV sales are slowing nationwide, even in California, the dominant US market. This slowdown, despite EVs previously topping sales charts, signals a critical juncture for the transition away from fossil fuels in transportation.
+
+
+▸ Aberdeen Paid £556k Per Hydrogen Bus. Five Years Later, First Bus Is Paying £30k
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/09/11/aberdeen-hydrogen-buses-30000-residual-value/
+  Date   : Sep 12, 2026  04:07 EAT
+  Summary: Aberdeen's initial £556,000 per hydrogen bus investment has dramatically fallen, with First Bus now acquiring similar vehicles for just £30,000 each. This steep price drop demonstrates significant progress in making hydrogen bus technology more economically viable, a crucial development for decarbonizing public transport and accelerating the transition away from fossil fuels.
+
+
+============================================================
+💰  CLIMATE FINANCE  (1 articles)
+============================================================
+
+▸ Finance Beyond the COP: How India Is Rebuilding the Case for Global Climate Finance
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/09/11/finance-beyond-the-cop-how-india-is-rebuilding-the-case-for-global-climate-finance/
+  Date   : Sep 12, 2026  04:03 EAT
+  Summary: As India hosts the BRICS leaders’ summit in September and the world heads to Antalya, Turkey, for COP31, India is making the case for why international climate finance must flow differently. By Dr. Vyoma Jha, India Clean Energy Senior Advocate, Inter…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ How Marmots, OnlyFans and a Meme Coin Generated Big Bucks for Wildlife Biology
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12092026/fat-marmot-week-raises-big-money-for-wildlife-biology/
+  Date   : Sep 12, 2026  11:50 EAT
+  Summary: The Marmot Project, a wildlife conservation initiative, leveraged a viral Fat Bear Week meme and an OnlyFans campaign to raise significant funds for their research. This innovative approach highlights how creative digital engagement can translate into tangible financial support for crucial wildlife biology efforts.
+
+
+▸ Court Rules Against Trump Order to Keep Costly Michigan Coal Plant Running
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11092026/court-rules-against-trump-order-to-keep-costly-michigan-coal-plant-running/
+  Date   : Sep 12, 2026  01:14 EAT
+  Summary: A federal appeals court has struck down the Trump administration’s use of emergency powers to require a coal-fired power plant in Michigan to remain open, ruling that the U.S. Department of Energy exceeded its authority. The 3-0 decision in the U.S.…
+
+
+▸ 25 Years After 9/11, the Health Toll Is Still Unfolding
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11092026/9-11-health-toll-still-unfolding/
+  Date   : Sep 12, 2026  01:04 EAT
+  Summary: New York City Mayor Zohran Mamdani released a trove of documents this week that shed new light on the air quality around the World Trade Center after the September 11 terrorist attacks. Some of these documents suggest, contrary to statements by forme…
+
+
+▸ The Trump Administration Wants to Fast-Track Arctic Drilling
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11092026/the-trump-administration-wants-to-fast-track-arctic-drilling/
+  Date   : Sep 11, 2026  23:52 EAT
+  Summary: The Trump administration is moving to accelerate oil and gas drilling across the Western Arctic with a new proposal that would slash environmental review and public input.  The proposal could bring industrial activity to wide areas of wilderness and…
+
+
+▸ A Texas LNG Plant Pumps Out Chronic, Unpermitted Pollution, a Watchdog Finds
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/11092026/texas-freeport-lng-unpermitted-pollution/
+  Date   : Sep 11, 2026  22:31 EAT
+  Summary: A gas export terminal on the Gulf Coast of Texas has routinely violated air pollution permits for years with little consequences from state regulators, according to a report released this week by Oilfield Witness, an environmental watchdog.  The Texa…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 43  |  Sources: 7  |  Topics: 4
