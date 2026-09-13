@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Sunday, September 13, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">19</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:43%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 1 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 13 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13092026/alabama-power-bill-to-cap-profits-collapsed-in-the-legislature/" target="_blank">The Alabama Legislature Was on a Collision Course With Alabama Power. Then Came Spring Break.</a></div>
+  <div class="article-summary">Alabama lawmakers were poised to curb Alabama Power's profits and push for more renewables, but a legislative pause for spring break derailed this critical climate action. This delay jeopardizes progress on cleaner energy and potentially locks in higher costs for consumers, impacting the state's transition away from fossil fuels.</div>
+  <div class="article-meta">Sep 13, 2026  12:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13092026/how-alabama-power-escaped-tighter-regulation/" target="_blank">How Alabama Power Escaped a Push for Tighter Regulation With Record Profits Intact</a></div>
+  <div class="article-summary">Despite a push for stricter oversight, Alabama Power secured record profits and avoided tighter regulation, a move that sidelines crucial climate action. This outcome signals a continued reliance on fossil fuels, hindering the state's progress towards cleaner energy and exacerbating climate change impacts.</div>
+  <div class="article-meta">Sep 13, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/12/us-district-court-strips-away-insane-jh-campbell-fake-emergency-order/" target="_blank">US District Court Strips Away Insane JH Campbell Fake Emergency Order</a></div>
+  <div class="article-summary">A US District Court has overturned an emergency order that allowed the J.H. Campbell coal-fired power plant in West Olive, Michigan, to continue operating. This ruling halts the plant's continued generation of 1,420 MW of coal-fired electricity, a significant step towards reducing emissions from a facility that has been a major source of pollution.</div>
+  <div class="article-meta">Sep 12, 2026  22:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/12/tesla-unsupervised-fsd-full-self-driving-videos/" target="_blank">Rush To Promote Unsupervised Tesla FSD Videos Raises More Questions</a></div>
+  <div class="article-summary">Elon Musk's aggressive promotion of Tesla's unsupervised Full Self-Driving (FSD) system is facing scrutiny after NBC News flagged dozens of videos showing drivers, some appearing asleep, misusing the technology. This raises significant safety concerns and has prompted a congressional demand for investigation, highlighting the tension between rapid technological advancement and regulatory oversight.</div>
+  <div class="article-meta">Sep 13, 2026  04:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/12/ifa-berlin-recap-part-2-more-diverse-sustainability-approaches/" target="_blank">IFA Berlin Recap Part 2: More Diverse Sustainability Approaches</a></div>
+  <div class="article-summary">At IFA Berlin, the consumer electronics show highlighted a spectrum of sustainability strategies, moving beyond a single definition of "green." This diverse approach, exemplified by innovations already commonplace in Germany, signifies a broader industry commitment to climate action, even if specific impacts vary.</div>
+  <div class="article-meta">Sep 13, 2026  00:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/09/12/tesla-roadster-october-1-reveal-teaser/" target="_blank">Tesla teases new Roadster reveal for October 1: ‘Go for launch’</a></div>
+  <div class="article-summary">Tesla is teasing an October 1 reveal for the new Tesla Roadster, nine years after it first showed the prototype.
+
+The company posted a “Go for launch” teaser image Friday showing the electric hypercar bathed in rocket-launch lighting, with the date “…</div>
+  <div class="article-meta">Sep 12, 2026  22:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/09/12/last-year-byd-bought-the-worlds-largest-car-carrier-they-just-ordered-10-more/" target="_blank">Last year, BYD bought the world’s largest car carrier – they just ordered 10 more</a></div>
+  <div class="article-summary">Last year, the BYD “Shenzhen” set sail on its first voyage with 9,200 parking spots – or enough space to fill 20 football fields, making BYD’s transport ship easily the world’s largest. Now, as the Chinese car brand sets its sights on Europe and Nort…</div>
+  <div class="article-meta">Sep 12, 2026  20:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/09/12/e-quipment-highlight-wreck-stuff-anywhere-with-case-tl100ev-video/" target="_blank">E-quipment highlight: wreck stuff anywhere with CASE TL100EV [video]</a></div>
+  <div class="article-summary">CASE’s new TL100EV mini track loader is finally reaching real-world customers, and they’re putting it to work in some of the industry’s most demanding applications – from low-emission zones and no-drip job sites and noise-sensitive locations. Even in…</div>
+  <div class="article-meta">Sep 12, 2026  18:46 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13092026/florida-most-vulnerable-homes-arent-ready-for-super-el-nino/" target="_blank">A Super El Niño Is Building. Florida’s Most Vulnerable Homes Aren’t Ready.</a></div>
+  <div class="article-summary">A powerful El Niño is forming, threatening to unleash extreme weather like the deadly 1998 tornado outbreak that devastated Florida's mobile home communities. This surge in extreme events, amplified by climate change, puts vulnerable populations and their homes at significant risk.</div>
+  <div class="article-meta">Sep 13, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/13/extreme-weather-unprecedented-feel-normal" target="_blank">Think of the parable of a frog in boiling water. That’s us dithering as the ‘unprecedented‘ weather becomes more extreme | Helen Pilcher</a></div>
+  <div class="article-summary">We're normalizing extreme weather events, treating "unprecedented" heatwaves and floods as just another part of life, much like the devaluation of words like "awesome" and "fantastic." This complacency is dangerous, as it masks the urgent reality of our planet's escalating climate crisis.</div>
+  <div class="article-meta">Sep 13, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/sep/13/france-confronts-arson-problem-after-devastating-summer-of-wildfires" target="_blank">Who are the 514 people accused of starting French wildfires and what motivates them?</a></div>
+  <div class="article-summary">Arsonists, including nearly 200 minors, are suspected of deliberately starting a third of France's wildfires, with 514 individuals arrested amid a record-breaking 115,000 hectares burned this summer. This intentional destruction exacerbates climate change impacts by releasing stored carbon and destroying vital ecosystems already stressed by rising temperatures and drought.</div>
+  <div class="article-meta">Sep 13, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/12/heatwaves-hit-sunday-roast-rhs-cauliflower-off-menu" target="_blank">Heatwaves hit the Sunday roast: why the RHS says cauliflower is off the menu</a></div>
+  <div class="article-summary">Charity urges gardeners in England to swap thirsty brassicas for drought-tolerant cropsThey are an integral part of the British Sunday roast – but cauliflowers are now going to be off the menu, according to the Royal Horticultural Society.England’s c…</div>
+  <div class="article-meta">Sep 12, 2026  14:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Sunday, September 13, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
