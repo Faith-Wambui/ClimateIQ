@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, September 15, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">41</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15092026/usaid-cancellation-weakened-global-environmental-protections/" target="_blank">How the End of USAID Eroded Global Environmental Goals</a></div>
+  <div class="article-summary">The U.S. Agency for International Development, a major global funder of environmental programs, was dismantled last year, halting critical initiatives like tropical deforestation reduction and clean energy development. This abrupt cutback significantly undermines international efforts to combat climate change and build resilience in vulnerable regions.</div>
+  <div class="article-meta">Sep 15, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/15/lithuania-moves-to-support-residential-pv/" target="_blank">Lithuania moves to support residential PV</a></div>
+  <div class="article-summary">Lithuania is streamlining regulations to enable solar panel installations on apartment balconies, a move that will unlock significant rooftop potential for distributed renewable energy. This initiative is crucial for accelerating the country's transition to clean energy and reducing its reliance on fossil fuels.</div>
+  <div class="article-meta">Sep 15, 2026  10:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15092026/maine-wind-energy-transmission-winning-proposals/" target="_blank">New England Affirms Faith in Wind Energy’s Future</a></div>
+  <div class="article-summary">Maine's Public Utilities Commission just greenlit an 800-megawatt onshore wind project, a significant step in harnessing the region's wind power. This decision bolsters New England's commitment to renewable energy, directly contributing to decarbonization goals and reducing reliance on fossil fuels.</div>
+  <div class="article-meta">Sep 15, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/15/uganda-switches-on-24-mw-solar-project/" target="_blank">Uganda switches on 24 MW solar project</a></div>
+  <div class="article-summary">Dubai-based Amea Power has launched its 24 MW Ituka solar project in Uganda's West Nile region, set to power over 192,000 homes annually. This significant addition to Uganda's grid, generating nearly 54 GWh of clean energy, marks a crucial step towards the country's ambitious goal of reaching 5 GW of solar power by 2040 and underscores the growing momentum of renewable energy development across Africa.</div>
+  <div class="article-meta">Sep 15, 2026  11:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/15/rheem-launches-air-to-water-heat-pumps-for-multifamily-houses/" target="_blank">Rheem launches air-to-water heat pumps for multifamily houses</a></div>
+  <div class="article-summary">Rheem has launched its Torin commercial heat pumps, designed for multifamily buildings and other large commercial applications, offering efficient heating and hot water solutions. These Energy Star-certified units utilize R-454B refrigerant and can operate in extreme temperatures, significantly reducing the carbon footprint of large-scale building operations.</div>
+  <div class="article-meta">Sep 15, 2026  10:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/15/gamechange-countersues-nextpower-in-expanding-solar-tracker-patent-war/" target="_blank">GameChange sues Nextpower in expanding solar tracker patent war</a></div>
+  <div class="article-summary">The intellectual property dispute between the world’s leading solar tracking manufacturers has escalated into a full-scale legal battle. On September 9, GameChange Solar Corp., a subsidiary of GameChange Energy, filed a patent infringement lawsuit ag…</div>
+  <div class="article-meta">Sep 15, 2026  08:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/15/a-modern-economy-runs-on-electricity/" target="_blank">‘A modern economy runs on electricity’</a></div>
+  <div class="article-summary">Renewable energy, 24/7. Many still associate this with terms like “mammoth task,” “challenge,” and “radical change.” While these are not entirely inaccurate in describing the energy transition, they obscure the essential point that renewable energy a…</div>
+  <div class="article-meta">Sep 15, 2026  07:02 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/15/international-trade-global-emissions-study-europe-china-us-imports/" target="_blank">International trade linked to 20% of global emissions – but imports ignored</a></div>
+  <div class="article-summary">International trade is responsible for a staggering 20% of global greenhouse gas emissions, yet these "imported emissions" are largely ignored by consuming nations under current UN climate accounting. This oversight means countries like Austria and Sweden, where imported emissions match their domestic footprint, are not fully accounting for their climate impact, demanding a new approach to global climate responsibility.</div>
+  <div class="article-meta">Sep 15, 2026  11:19 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15092026/latino-conservation-week-ironwood-forest-national-monument/" target="_blank">Latino Conservation Week Kicks Off at Threatened Arizona National Monument</a></div>
+  <div class="article-summary">Latino Conservation Week launched at Arizona's Ironwood Forest National Monument, a site facing threats from development and resource extraction. This initiative highlights the critical role of diverse communities in protecting public lands, which are vital for climate resilience and biodiversity.</div>
+  <div class="article-meta">Sep 15, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/15/conservation-gateway-drug-farmers-embrace-ancient-craft-of-hedge-laying" target="_blank">Conservation ‘gateway drug’: farmers embrace ancient craft of hedge laying</a></div>
+  <div class="article-summary">Grant applications in England surge as interest grows in habitat that captures carbon and helps reduce flood riskThe ancient craft of hedge laying is experiencing a strong revival as farmers use techniques that peaked in the 18th and 19th centuries t…</div>
+  <div class="article-meta">Sep 15, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/15/rise-global-temperatures-super-el-nino" target="_blank">The incoming ‘super’ El Niño will create chaos around the world. And we are far from ready for it | Bill McGuire</a></div>
+  <div class="article-summary">One of the biggest upheavals in a millennium is on its way, strengthened by the climate crisis. We need leaders who make things better not worseIf you think you have heard enough about the growing “super” El Niño, trust me, you are going to hear a lo…</div>
+  <div class="article-meta">Sep 15, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/culture/2026/sep/15/benedict-cumberbatch-how-to-live-on-earth-obama-venison" target="_blank">Benedict Cumberbatch on his Earth-saving eco film: ‘We are in the last grab of the extraction era’</a></div>
+  <div class="article-summary">From Obama’s chef to a big cat obsessive, the actor has gathered experts from Alaska, the Amazon and beyond for a film about how to heal our besieged planet. He talks about naysayers, elephant tusks – and the wonders of venisonBenedict Cumberbatch is…</div>
+  <div class="article-meta">Sep 15, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/15/europes-summer-emergency-was-a-dire-warning-for-australia-what-can-be-learned-before-its-too-late" target="_blank">Europe’s summer emergency was a dire warning for Australia. What can be learned before it’s too late? | Nick Rowley</a></div>
+  <div class="article-summary">Between 2000 and 2018, extreme heat caused more deaths in Australia than all our bushfires, floods, storms and cyclones combinedFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastBack in April…</div>
+  <div class="article-meta">Sep 15, 2026  04:36 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, September 15, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
