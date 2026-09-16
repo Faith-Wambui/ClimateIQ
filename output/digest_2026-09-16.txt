@@ -1,0 +1,111 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Wednesday, September 16, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (2 articles)
+============================================================
+
+▸ CCC: Heathrow expansion could push flights to ‘80% of UK emissions by 2050’
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/ccc-heathrow-expansion-could-push-flights-to-80-of-uk-emissions-by-2050
+  Date   : Sep 16, 2026  02:01 EAT
+  Summary: By:
+
+Aviation is on track to be responsible for 80% of the UK’s carbon dioxide (CO2) emissions by 2050, according to the Climate Change Committee (CCC).
+
+Emissions from flying have more than doubled since 1990 – driven by rising passenger numbers – e…
+
+
+▸ IMO More Positive on a Shipping Net Zero Framework but Just Transitions are Central for Africa
+  Source : African Climate Wire
+  Link   : https://africanclimatewire.org/2026/09/imo-net-zero-framework-for-shipping/
+  Date   : Sep 15, 2026  17:04 EAT
+  Summary: Last year governments provisionally agreed to develop a Net Zero Framework to manage GHG emissions from the world’s shipping sector. However the talks on the framework hit choppy waters in October last year when the US pushed back on the notion, and…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ BYD launches 62 MWh GC Block for gigawatt-scale battery storage plants
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/16/byd-launches-62-mwh-gc-block-for-gigawatt-scale-battery-storage-plants/
+  Date   : Sep 16, 2026  12:26 EAT
+  Summary: BYD has launched its 62 MWh GC Block, a standardized station-level unit designed for gigawatt-scale battery storage plants, aiming to simplify deployment and reduce costs for massive grid-scale energy storage. This innovation matters for the climate by enabling more efficient and cost-effective integration of renewable energy sources into the grid, accelerating the transition to a zero-carbon future.
+
+
+▸ Zambia inks PPA for 500 MW solar project
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/16/zambia-inks-ppa-for-500-mw-solar-project/
+  Date   : Sep 16, 2026  12:12 EAT
+  Summary: Zambia has signed a 25-year power purchase agreement with EnerSynk Group for a massive 500 MW solar project, clearing a major hurdle for its development. This significant renewable energy expansion is a crucial step in Zambia's transition away from fossil fuels, bolstering its climate commitments and energy security.
+
+
+▸ Overcapacity in modules, underdeveloped upstream: The next challenge for Indian PV manufacturing
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/16/overcapacity-in-modules-underdeveloped-upstream-the-next-challenge-for-solar-manufacturing/
+  Date   : Sep 16, 2026  11:41 EAT
+  Summary: India's solar industry faces a critical bottleneck: while module assembly capacity is booming, the upstream manufacturing of solar cells, a more complex and capital-intensive process, lags significantly, leaving the nation reliant on imports. This dependency, compounded by geopolitical risks impacting equipment sourcing, threatens to delay crucial cell capacity expansions and hinder India's ambitious renewable energy targets.
+
+
+▸ Symmetry-breaking molecular strategy pushes inverted perovskite solar cell efficiency to 26.32%
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/16/symmetry-breaking-molecular-strategy-pushes-inverted-perovskite-solar-cell-efficiency-to-26-32/
+  Date   : Sep 16, 2026  11:36 EAT
+  Summary: Scientists have boosted inverted perovskite solar cell efficiency to a record 26.32% using a novel symmetry-breaking molecular strategy, a significant leap for a technology crucial to decarbonization. This breakthrough not only sets a new benchmark for solar power generation but also demonstrates remarkable stability, retaining 93% efficiency after 1,150 hours, paving the way for more durable and powerful renewable energy solutions.
+
+
+▸ Hithium launches 4 MWh sodium-ion BESS with new 785Ah cell
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/16/hithium-launches-4-mwh-sodium-ion-bess-with-new-785ah-cell/
+  Date   : Sep 16, 2026  11:36 EAT
+  Summary: Hithium has launched a 4 MWh sodium-ion battery energy storage system (BESS) boasting a 785Ah cell and an impressive 20,000-cycle life, aiming for utility-scale deployment by 2027. This development is crucial for the climate as it offers a potentially lower-cost, more sustainable alternative to lithium-ion for grid-scale storage, accelerating the transition to renewable energy.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ In Tampa, Community Gardeners Say They Need More Funding, Not More Information, to Feed Neighbors in Need
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/16092026/tampa-community-gardens-need-funding-not-more-info/
+  Date   : Sep 16, 2026  12:00 EAT
+  Summary: East Tampa residents, lacking a supermarket for a decade, are highlighting that community gardens, not just information, are key to addressing food insecurity. This missed opportunity underscores the potential for local food production to significantly impact community well-being and climate resilience.
+
+
+▸ Airlines should pay for CO2 removal if Heathrow expands, say climate advisers
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/sep/16/heathrow-airport-should-pay-co2-removal-expand-climate-advisers
+  Date   : Sep 16, 2026  07:00 EAT
+  Summary: Climate Change Committee says government cannot expand airport without requiring aviation industry to clean up its emissionsHeathrow airport should be allowed to expand only if airlines pay for the removal of carbon dioxide from the atmosphere, the g…
+
+
+▸ Expect even more potholes on UK roads after summer heatwaves, says RAC
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/uk-news/2026/sep/16/expect-more-potholes-uk-roads-summer-heatwaves-rac
+  Date   : Sep 16, 2026  07:00 EAT
+  Summary: Extreme weather has made brittle road surfaces more likely to crack, increasing strain on infrastructureThe UK’s dilapidated roads are expected to get even worse, with motorists warned to expect a jump in the number of potholes as result ofthe countr…
+
+
+▸ Congressional Republicans Aim to Shield Fossil Fuel Companies From Climate Lawsuits
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/15092026/congress-republicans-introduce-bills-protecting-fossil-fuel-industry/
+  Date   : Sep 16, 2026  02:22 EAT
+  Summary: Republicans in Congress are continuing their efforts to shield the fossil fuel industry from legal liability for its role in unleashing the heat-trapping gases linked to a cascade of deadly, record-setting disasters across the globe.  On Wednesday, t…
+
+
+▸ An Environmental Defender Is Murdered Every Three Days
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/15092026/at-least-124-environmental-defenders-killed-in-2025/
+  Date   : Sep 16, 2026  02:01 EAT
+  Summary: Every three days someone is killed for defending nature.  In 2025, watchdog group Global Witness documented 124 such deaths worldwide, a toll researchers say is likely only a fraction of the total number because repression and armed conflict make man…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 40  |  Sources: 7  |  Topics: 3
