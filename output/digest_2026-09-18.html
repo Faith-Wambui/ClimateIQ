@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, September 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 34 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18092026/california-dairy-manure-groundwater-regulation/" target="_blank">California Adopts New Limits to Rein in Dairy Manure Pollution and Its ‘Outsized’ Groundwater Impacts</a></div>
+  <div class="article-summary">California's Central Valley, home to the state's densest dairy operations, is now subject to stricter regulations on manure pollution after a unanimous vote by the State Water Resources Control Board. These new rules aim to curb nitrogen runoff from dairy farms, a significant contributor to groundwater contamination, addressing long-standing environmental concerns.</div>
+  <div class="article-meta">Sep 18, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/18/bangladesh-cuts-solar-equipment-import-taxes-to-1/" target="_blank">Bangladesh cuts solar equipment import taxes to 1%</a></div>
+  <div class="article-summary">Bangladesh slashed import taxes on solar equipment from 17% to a mere 1% for six months, a move designed to slash project costs. This aggressive policy shift is critical for accelerating the nation's ambitious goal of deploying 4 GW of rooftop solar by next summer, directly boosting clean energy adoption.</div>
+  <div class="article-meta">Sep 18, 2026  09:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/09/southern-africa-prepares-for-the-super-el-nino/" target="_blank">Southern Africa Prepares for the Super El Niño</a></div>
+  <div class="article-summary">This current Super El Niño is predicted to profoundly affect Southern and Eastern Africa, especially the Sahel. It is not the first Super El Niño, but this year it is different. Oluwole (Wole) Hammond, Programme Officer for Adaptation and Resilience…</div>
+  <div class="article-meta">Sep 17, 2026  17:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17092026/inside-clean-energy-key-state-elections/" target="_blank">These State Elections Could Reshape Climate and Energy Policy</a></div>
+  <div class="article-summary">Democrats are poised to achieve trifectas—control of the governor’s office and both legislative chambers—in at least three states in this year’s midterm elections, and maybe even more. This matters because states play an outsize role in climate and e…</div>
+  <div class="article-meta">Sep 17, 2026  16:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/18/china-topcon-solar-cell-prices-fall-for-third-week-as-export-buying-fades-and-wafer-costs-ease/" target="_blank">China TOPCon solar cell prices fall for third week as export buying fades and wafer costs ease</a></div>
+  <div class="article-summary">Chinese TOPCon solar cell prices have dropped for a third straight week, now around 12% below August peaks, as export demand cools and wafer costs ease. This price decline, driven by fading pre-tariff buying and subdued domestic demand, signals potential further cost reductions for solar projects globally.</div>
+  <div class="article-meta">Sep 18, 2026  12:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/18/2026-09-18-sma-opens-60-gw-factory-in-germany-for-high-power-applications/" target="_blank">SMA opens 60 GW inverter factory for high-power applications in Germany</a></div>
+  <div class="article-summary">German solar giant SMA has launched a massive 60 GW inverter factory near Kassel, specifically targeting large-scale solar, battery storage, and green hydrogen projects. This significant expansion in manufacturing capacity underscores the accelerating global demand for grid-scale clean energy solutions, crucial for meeting ambitious climate targets.</div>
+  <div class="article-meta">Sep 18, 2026  11:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/18/after-30-years-in-hot-arid-climate-arco-solar-modules-still-deliver-about-half-their-original-power/" target="_blank">After 30 years in hot-arid climate, Arco solar modules still deliver about half their original power</a></div>
+  <div class="article-summary">Algerian researchers found that 64 aged Arco Solar modules retained an average of 53% of their original 43 W rated power after three decades of outdoor exposure. The assessment revealed substantial power variation, widespread discoloration and browni…</div>
+  <div class="article-meta">Sep 18, 2026  10:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/18/ausgrid-trials-ci-rooftop-solar-initiative-to-share-energy-benefits-with-renters/" target="_blank">Australian grid operator trials C&I rooftop solar initiative to share energy benefits with renters</a></div>
+  <div class="article-summary">Ausgrid is piloting a program to redirect excess energy from commercial and industrial rooftop solar installations to renters and apartment dwellers, who typically lack direct solar access. This initiative aims to democratize solar benefits, potentially reducing energy costs for a wider segment of the population and accelerating the transition to cleaner energy by maximizing the use of existing renewable infrastructure.</div>
+  <div class="article-meta">Sep 18, 2026  09:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/18/taking-system-responsibility/" target="_blank">Taking system responsibility</a></div>
+  <div class="article-summary">A consortium in Germany is testing the use of grid-forming inverters to connect large-scale battery storage systems at the distribution grid level. Such systems can and must provide this capability at scale if renewables are to become the backbone of…</div>
+  <div class="article-meta">Sep 18, 2026  07:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/17/down-to-earth-our-rivers-project" target="_blank">The world’s rivers are at breaking point. Can we save them before it is too late?</a></div>
+  <div class="article-summary">Global rivers are facing an unprecedented crisis, with 2025 marking one of the driest years in over three decades, according to the World Meteorological Organization. This widespread water scarcity, exacerbated by climate change, threatens vital ecosystems, global trade, and the very communities that depend on these waterways for survival.</div>
+  <div class="article-meta">Sep 18, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/sep/18/el-nino-is-supersizing-are-governments-taking-climate-change-seriously" target="_blank">El Niño is supersizing! Are governments finally taking climate change seriously? No! | First Dog on the Moon</a></div>
+  <div class="article-summary">Your government will NOT come to save you – we have to do that for each other now
+
+Sign up here to get an email whenever First Dog cartoons are published
+
+Get all your needs met at the First Dog shop if what you need is First Dog merchandise and prin…</div>
+  <div class="article-meta">Sep 18, 2026  09:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/17/the-guardian-view-on-the-nepal-tibet-floods-a-spur-to-action-on-climate" target="_blank">The Guardian view on the Nepal-Tibet floods: a spur to action on climate | Editorial</a></div>
+  <div class="article-summary">New research links last month’s disaster to fossil fuel pollution. Supporting disaster-hit countries must be at the centre of climate politicsFollowing a familiar pattern, coverage of theglacier collapse on the Nepal-Tibet borderthree weeks ago has s…</div>
+  <div class="article-meta">Sep 17, 2026  20:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/18/australia-summer-40c-heat-fills-me-with-dread" target="_blank">Australia’s approaching summer fills me with dread. I’m not equipped to battle 40C | Rebecca Shaw</a></div>
+  <div class="article-summary">When people say they love the heat, I presume they either have air conditioning or are lyingAs a cultured citizen of the globe (social media), I am witness to a lot of different opinions about the weather throughout the year. I will soon be sharing m…</div>
+  <div class="article-meta">Sep 17, 2026  18:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/17/andy-burnham-uk-must-fully-commit-to-reaching-net-zero-by-2050" target="_blank">Andy Burnham: UK must fully commit to reaching net zero by 2050</a></div>
+  <div class="article-summary">Exclusive: PM, who is facing pressure over whether to approve North Sea oil and gasfields, makes strongest comments yet on issueBritish people understand the climate crisis threat. Today I’m empowering them to tackle itThe UK must fully commit to rea…</div>
+  <div class="article-meta">Sep 17, 2026  15:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/sep/17/andy-burnham-climate-crisis-funding-peoples-power-projects" target="_blank">British people understand the climate crisis threat. Today I’m empowering them to tackle it | Andy Burnham</a></div>
+  <div class="article-summary">With nearly £30m of funding, I’m giving communities power over local energy. They know the gravity of global heating, and they want to be part of the solutionAndy Burnham: UK must fully commit to reaching net zero by 2050On the day I became prime min…</div>
+  <div class="article-meta">Sep 17, 2026  15:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, September 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
