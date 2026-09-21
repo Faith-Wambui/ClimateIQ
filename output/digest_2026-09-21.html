@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, September 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">26</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 19 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/21/slovakia-slashes-residential-solar-subsidy-shifts-support-toward-heat-pumps/" target="_blank">Slovakia slashes residential solar subsidy, shifts support toward heat pumps</a></div>
+  <div class="article-summary">Slovakia is drastically cutting its rooftop solar subsidies by over 70%, shifting focus to heat pumps and biomass boilers. This significant policy change signals a potential slowdown in residential solar adoption in the region, impacting the pace of decarbonizing household energy use.</div>
+  <div class="article-meta">Sep 21, 2026  12:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/21/poland-to-subsidise-renewable-energy-projects-for-farmers/" target="_blank">Poland to subsidise renewable energy projects for farmers</a></div>
+  <div class="article-summary">Poland’s Agency for Restructuring and Modernisation of Agriculture has announced that farmers will be able to apply for subsidies for renewable energy investments from October 5.
+
+The scheme is divided into three categories, one of which will cover i…</div>
+  <div class="article-meta">Sep 21, 2026  11:44 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/21/french-startup-repurposes-ev-batteries-for-solar-energy-storage/" target="_blank">French startup repurposes EV batteries for solar energy storage</a></div>
+  <div class="article-summary">French startup Battwoo is giving retired EV batteries a second life, repurposing them for stationary solar energy storage solutions that cost 30% less than new systems. This innovative approach significantly extends battery lifespan, bolstering the economic viability and environmental benefits of renewable energy adoption for businesses.</div>
+  <div class="article-meta">Sep 21, 2026  12:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/21/predictive-control-cuts-costs-in-buildings-combining-pv-heat-pumps-evs-thermal-storage/" target="_blank">Predictive control cuts costs in buildings combining PV, heat pumps, EVs, thermal storage</a></div>
+  <div class="article-summary">New research reveals a smart control system for buildings integrating solar, heat pumps, and EVs can slash operating costs by mimicking advanced predictive performance with simpler computation. This innovation is critical for maximizing the efficiency of renewable energy integration in buildings, a key step in decarbonizing the built environment.</div>
+  <div class="article-meta">Sep 21, 2026  12:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/21/study-finds-potential-for-150-gw-of-additional-pv-at-substations-in-germany/" target="_blank">Study finds potential for 150 GW of additional PV at substations in Germany</a></div>
+  <div class="article-summary">German substations could unlock 150 GW of new solar power by integrating battery storage, according to Fraunhofer IEE. This innovation allows for greater grid absorption of peak generation, minimizing curtailment and maximizing the use of existing infrastructure.</div>
+  <div class="article-meta">Sep 21, 2026  12:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/21/how-grid-forming-and-ai-technologies-are-helping-overcome-barriers-to-renewable-growth/" target="_blank">How grid-forming and AI technologies are helping overcome barriers to renewable growth</a></div>
+  <div class="article-summary">Rapid renewable energy growth is straining the grid, creating security and economic challenges, but new grid-forming and AI technologies from companies like Huawei offer solutions. These innovations are crucial for integrating more clean energy, ensuring grid stability, and unlocking the full potential of renewables.</div>
+  <div class="article-meta">Sep 21, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/21/linuo-ritter-launches-24-32-kw-propane-heat-pumps-for-commercial-large-residential-buildings/" target="_blank">Linuo Ritter launches 24-32 kW propane heat pumps for commercial, large residential buildings</a></div>
+  <div class="article-summary">The Chinese manufacturer has introduced three air-to-water propane heat pumps for commercial and large residential applications. The new units have nominal heating capacities of 24 kW, 28 kW and 32 kW, with a maximum leaving water temperature of 75 C…</div>
+  <div class="article-meta">Sep 21, 2026  11:51 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/sep/21/babies-extreme-fire-weather-europe-great-grandparents" target="_blank">Babies ‘will face almost twice as much’ extreme fire weather in Europe than great-grandparents</a></div>
+  <div class="article-summary">New research reveals European babies born after 2025 will endure nearly double the extreme fire weather experienced by their great-grandparents, facing three additional years of fire-conducive conditions over their lifetimes due to escalating global heating. This stark projection underscores the urgent need for accelerated climate action to mitigate the intensifying risks of wildfires for future generations.</div>
+  <div class="article-meta">Sep 21, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02748-0" target="_blank">Increasing LGBTQIA+ inclusion in climate science</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 21 September 2026;doi:10.1038/s41558-026-02748-0LGBTQIA+ climate scientists have long encountered oppression and discrimination across society and in the workplace. We suggest specific actions, which need to b…</div>
+  <div class="article-meta">Sep 21, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02760-4" target="_blank">Flash energy droughts strain grids</a></div>
+  <div class="article-summary">Thank you for visiting nature.com. You are using a browser version with limited support for CSS. To obtain the best experience, we recommend you use a more up to date browser (or turn off compatibility mode in Internet Explorer). In the meantime, to…</div>
+  <div class="article-meta">Sep 21, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02753-3" target="_blank">Flash energy droughts in solar and wind resources under climate change</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 21 September 2026;doi:10.1038/s41558-026-02753-3Flash energy droughts, rapid drops followed by sustained low wind and solar production, could pose potential challenges to power system operations. Here research…</div>
+  <div class="article-meta">Sep 21, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02754-2" target="_blank">Simple logic warnings improve climate argument evaluation across beliefs and partisanship</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 21 September 2026;doi:10.1038/s41558-026-02754-2Climate discourse is often misjudged, yet the mechanisms remain unclear. Using orthogonally manipulated experiments, this study isolates the effects of prior bel…</div>
+  <div class="article-meta">Sep 21, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/21/why-the-global-electrification-agenda-misses-the-point-on-africas-energy-crisis/" target="_blank">Why the global electrification agenda misses the point on Africa’s energy crisis</a></div>
+  <div class="article-summary">Africa's energy crisis, leaving hundreds of millions without power, demands electrification strategies that prioritize development alongside grid expansion. Current global agendas often overlook the continent's specific needs, risking missed opportunities for sustainable growth and climate progress.</div>
+  <div class="article-meta">Sep 21, 2026  11:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/21/saudi-arabia-aramco-oil-scientists-ipcc-climate-reports" target="_blank">How Saudi oil scientists ended up working on the world’s most important climate reports</a></div>
+  <div class="article-summary">Guardian investigation reveals fossil fuel links of IPCC authors, with experts declaring the body’s conflict of interest policy ‘not fit for purpose’On her first day as an expert author on the world’s most important climate reports, Prof Julia Steinb…</div>
+  <div class="article-meta">Sep 21, 2026  08:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, September 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Monday, September 21, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (2 articles)
+============================================================
+
+▸ Slovakia slashes residential solar subsidy, shifts support toward heat pumps
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/21/slovakia-slashes-residential-solar-subsidy-shifts-support-toward-heat-pumps/
+  Date   : Sep 21, 2026  12:45 EAT
+  Summary: Slovakia is drastically cutting its rooftop solar subsidies by over 70%, shifting focus to heat pumps and biomass boilers. This significant policy change signals a potential slowdown in residential solar adoption in the region, impacting the pace of decarbonizing household energy use.
+
+
+▸ Poland to subsidise renewable energy projects for farmers
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/21/poland-to-subsidise-renewable-energy-projects-for-farmers/
+  Date   : Sep 21, 2026  11:44 EAT
+  Summary: Poland’s Agency for Restructuring and Modernisation of Agriculture has announced that farmers will be able to apply for subsidies for renewable energy investments from October 5.
+
+The scheme is divided into three categories, one of which will cover i…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ French startup repurposes EV batteries for solar energy storage
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/21/french-startup-repurposes-ev-batteries-for-solar-energy-storage/
+  Date   : Sep 21, 2026  12:41 EAT
+  Summary: French startup Battwoo is giving retired EV batteries a second life, repurposing them for stationary solar energy storage solutions that cost 30% less than new systems. This innovative approach significantly extends battery lifespan, bolstering the economic viability and environmental benefits of renewable energy adoption for businesses.
+
+
+▸ Predictive control cuts costs in buildings combining PV, heat pumps, EVs, thermal storage
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/21/predictive-control-cuts-costs-in-buildings-combining-pv-heat-pumps-evs-thermal-storage/
+  Date   : Sep 21, 2026  12:28 EAT
+  Summary: New research reveals a smart control system for buildings integrating solar, heat pumps, and EVs can slash operating costs by mimicking advanced predictive performance with simpler computation. This innovation is critical for maximizing the efficiency of renewable energy integration in buildings, a key step in decarbonizing the built environment.
+
+
+▸ Study finds potential for 150 GW of additional PV at substations in Germany
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/21/study-finds-potential-for-150-gw-of-additional-pv-at-substations-in-germany/
+  Date   : Sep 21, 2026  12:20 EAT
+  Summary: German substations could unlock 150 GW of new solar power by integrating battery storage, according to Fraunhofer IEE. This innovation allows for greater grid absorption of peak generation, minimizing curtailment and maximizing the use of existing infrastructure.
+
+
+▸ How grid-forming and AI technologies are helping overcome barriers to renewable growth
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/21/how-grid-forming-and-ai-technologies-are-helping-overcome-barriers-to-renewable-growth/
+  Date   : Sep 21, 2026  12:00 EAT
+  Summary: Rapid renewable energy growth is straining the grid, creating security and economic challenges, but new grid-forming and AI technologies from companies like Huawei offer solutions. These innovations are crucial for integrating more clean energy, ensuring grid stability, and unlocking the full potential of renewables.
+
+
+▸ Linuo Ritter launches 24-32 kW propane heat pumps for commercial, large residential buildings
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/21/linuo-ritter-launches-24-32-kw-propane-heat-pumps-for-commercial-large-residential-buildings/
+  Date   : Sep 21, 2026  11:51 EAT
+  Summary: The Chinese manufacturer has introduced three air-to-water propane heat pumps for commercial and large residential applications. The new units have nominal heating capacities of 24 kW, 28 kW and 32 kW, with a maximum leaving water temperature of 75 C…
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ Babies ‘will face almost twice as much’ extreme fire weather in Europe than great-grandparents
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/2026/sep/21/babies-extreme-fire-weather-europe-great-grandparents
+  Date   : Sep 21, 2026  12:00 EAT
+  Summary: New research reveals European babies born after 2025 will endure nearly double the extreme fire weather experienced by their great-grandparents, facing three additional years of fire-conducive conditions over their lifetimes due to escalating global heating. This stark projection underscores the urgent need for accelerated climate action to mitigate the intensifying risks of wildfires for future generations.
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (4 articles)
+============================================================
+
+▸ Increasing LGBTQIA+ inclusion in climate science
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02748-0
+  Date   : Sep 21, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 21 September 2026;doi:10.1038/s41558-026-02748-0LGBTQIA+ climate scientists have long encountered oppression and discrimination across society and in the workplace. We suggest specific actions, which need to b…
+
+
+▸ Flash energy droughts strain grids
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02760-4
+  Date   : Sep 21, 2026  03:00 EAT
+  Summary: Thank you for visiting nature.com. You are using a browser version with limited support for CSS. To obtain the best experience, we recommend you use a more up to date browser (or turn off compatibility mode in Internet Explorer). In the meantime, to…
+
+
+▸ Flash energy droughts in solar and wind resources under climate change
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02753-3
+  Date   : Sep 21, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 21 September 2026;doi:10.1038/s41558-026-02753-3Flash energy droughts, rapid drops followed by sustained low wind and solar production, could pose potential challenges to power system operations. Here research…
+
+
+▸ Simple logic warnings improve climate argument evaluation across beliefs and partisanship
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02754-2
+  Date   : Sep 21, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 21 September 2026;doi:10.1038/s41558-026-02754-2Climate discourse is often misjudged, yet the mechanisms remain unclear. Using orthogonally manipulated experiments, this study isolates the effects of prior bel…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (2 articles)
+============================================================
+
+▸ Why the global electrification agenda misses the point on Africa’s energy crisis
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/09/21/why-the-global-electrification-agenda-misses-the-point-on-africas-energy-crisis/
+  Date   : Sep 21, 2026  11:53 EAT
+  Summary: Africa's energy crisis, leaving hundreds of millions without power, demands electrification strategies that prioritize development alongside grid expansion. Current global agendas often overlook the continent's specific needs, risking missed opportunities for sustainable growth and climate progress.
+
+
+▸ How Saudi oil scientists ended up working on the world’s most important climate reports
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/sep/21/saudi-arabia-aramco-oil-scientists-ipcc-climate-reports
+  Date   : Sep 21, 2026  08:00 EAT
+  Summary: Guardian investigation reveals fossil fuel links of IPCC authors, with experts declaring the body’s conflict of interest policy ‘not fit for purpose’On her first day as an expert author on the world’s most important climate reports, Prof Julia Steinb…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 26  |  Sources: 6  |  Topics: 5
