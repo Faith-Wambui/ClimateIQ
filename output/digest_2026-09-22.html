@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, September 22, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">45</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/22/vietnam-pushes-provinces-to-accelerate-rooftop-solar-rollout/" target="_blank">Vietnam pushes provinces to accelerate rooftop solar rollout</a></div>
+  <div class="article-summary">Vietnam is now pushing provinces to speed up rooftop solar adoption after most missed a national deadline, despite a lack of actual surplus power sales under new rules. This acceleration is critical for Vietnam to meet its ambitious renewable energy targets and reduce reliance on fossil fuels.</div>
+  <div class="article-meta">Sep 22, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/22/sri-lanka-replaces-net-metering-with-feed-in-tariffs-for-rooftop-solar/" target="_blank">Sri Lanka replaces net metering with feed-in tariffs for rooftop solar</a></div>
+  <div class="article-summary">Sri Lanka has discontinued net metering for new rooftop solar systems, requiring new installations to operate under its Net Plus feed-in tariff scheme with agreements capped at 12 years. The change comes as the country’s rooftop PV capacity reached 1…</div>
+  <div class="article-meta">Sep 22, 2026  12:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/22/how-to-make-renewables-auctions-resilient-to-supply-chain-shocks/" target="_blank">How to make renewables auctions resilient to supply chain shocks</a></div>
+  <div class="article-summary">IRENA's latest analysis reveals that renewable energy auctions can be fortified against supply chain disruptions, but this requires careful calibration of local content rules and procurement preferences. Strategic application of these measures, rather than blanket implementation, is key to ensuring auction resilience without hindering cost-competitiveness, a critical factor for accelerating the global clean energy transition.</div>
+  <div class="article-meta">Sep 22, 2026  11:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/21/after-court-rules-against-coal-orders-in-michigan-trump-administration-renews-illegal-operation-extension-in-indiana-for-a-fourth-time/" target="_blank">After Court Rules Against Coal Orders in Michigan, Trump Administration Renews Illegal Operation Extension in Indiana for a Fourth Time</a></div>
+  <div class="article-summary">Governor Braun celebrated the illegal extension, which will raise costs for Hoosiers INDIANA — The Trump Administration and Department of Energy (DOE) has announced its fourth illegal extension for the Culley and Schahfer coal-fired power plants. Fir…</div>
+  <div class="article-meta">Sep 22, 2026  03:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-super-el-nino-reaches-remarkable-all-time-record" target="_blank">Analysis: ‘Super El Niño’ reaches ‘remarkable’ all-time record</a></div>
+  <div class="article-summary">Analysis: ‘Super El Niño’ reaches ‘remarkable’ all-time record
+
+This year’s so-called “super El Niño” is entering into record-breaking territory.
+
+Sea surface temperatures in the tropical Pacific now equal the previous daily record set in 2015 and wi…</div>
+  <div class="article-meta">Sep 21, 2026  18:41 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/22/philippine-president-pushes-local-production-of-electric-tricycles-jeepneys/" target="_blank">Philippine President Pushes Local Production of Electric Tricycles, Jeepneys</a></div>
+  <div class="article-summary">President Marcos is championing local manufacturing of electric tricycles and jeepneys, aiming to integrate Philippine university-developed EV tech into these iconic vehicles. This initiative is a significant step towards decarbonizing the Philippines' transportation sector, a major contributor to greenhouse gas emissions.</div>
+  <div class="article-meta">Sep 22, 2026  12:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/22/grids-grids-grids-and-more-eupvsec-2026/" target="_blank">Grids, grids, grids, and more: EUPVSEC 2026</a></div>
+  <div class="article-summary">Rotterdam's EUPVSEC 2026 conference reveals the European solar industry is prioritizing grid integration and broader energy system connections. This focus is crucial as solar power scales up, ensuring reliable electricity supply and maximizing its climate impact.</div>
+  <div class="article-meta">Sep 22, 2026  12:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/22092026/building-data-centers-on-pennsylvania-abandoned-mines/" target="_blank">Could Abandoned Mines House Pennsylvania’s Unwanted Data Centers?</a></div>
+  <div class="article-summary">Pennsylvania's abandoned mines could offer a solution to the growing NIMBY problem surrounding data centers, potentially housing these energy-intensive facilities underground. This innovative approach could mitigate community concerns about noise, pollution, and land use while addressing the significant energy and water demands of the tech sector.</div>
+  <div class="article-meta">Sep 22, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/22/ghanas-pv-capacity-tops-276-mw/" target="_blank">Ghana’s PV capacity tops 276 MW</a></div>
+  <div class="article-summary">Ghana has surpassed 276 MW in installed solar PV capacity, a significant step towards decarbonizing its energy sector. This expansion, driven by both utility-scale and distributed solar, is crucial for Ghana to meet its climate targets and reduce reliance on fossil fuels.</div>
+  <div class="article-meta">Sep 22, 2026  11:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/22/nsw-opens-consultation-on-mandatory-solar-panel-recycling-scheme/" target="_blank">Australian state opens consultation on mandatory solar panel recycling scheme</a></div>
+  <div class="article-summary">The New South Wales government has opened consultation on a proposal to introduce a mandatory solar panel recycling scheme that would require brand owners to take financial responsibility for end-of-life solar waste.The postAustralian state opens con…</div>
+  <div class="article-meta">Sep 22, 2026  07:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/22/next2sun-seeks-urgent-funding-to-avoid-insolvency/" target="_blank">Next2Sun seeks urgent funding to avoid insolvency</a></div>
+  <div class="article-summary">German solar innovator Next2Sun is on the brink of insolvency, facing a September 25 deadline to secure urgent funding after a disappointing share issue. This potential collapse of a company developing groundbreaking agrivoltaic technology, which integrates solar panels with agriculture, jeopardizes crucial advancements in sustainable land use and renewable energy deployment.</div>
+  <div class="article-meta">Sep 22, 2026  11:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/sep/22/intergenerational-report-underplays-effect-climate-crisis-on-australia-future-2066" target="_blank">‘Negligent’ to talk about long term risks to Australia without examining cost of climate crisis, experts say</a></div>
+  <div class="article-summary">One academic says federal government’s intergenerational report, a snapshot of life in 2066, ignores the economic damage on the horizonFollow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastAn Aus…</div>
+  <div class="article-meta">Sep 22, 2026  09:32 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/22/after-hormuz-nepal-and-wildfires-people-demand-action-to-make-polluters-pay/" target="_blank">After Hormuz, Nepal and wildfires, people want action to make polluters pay</a></div>
+  <div class="article-summary">Anne Jellema is executive director of 350.org; Mads Christensen is executive director of Greenpeace International; and Amitabh Behar is executive director of Oxfam International.
+
+On Monday, global petitions with a collective total of more than 2 mil…</div>
+  <div class="article-meta">Sep 22, 2026  05:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/sep/21/no-avoiding-the-cost-of-inaction-on-climate-anthony-albanese-says-in-new-york" target="_blank">‘Short on substance’: Albanese urges climate action on world stage – but advocates say Australia failing on fossil fuels</a></div>
+  <div class="article-summary">Prime minister says ‘climate security is the new national security’ in keynote speech in New YorkFollow our Australia news live blog for latest updatesSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereAustralia un…</div>
+  <div class="article-meta">Sep 22, 2026  03:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/22/new-york-climate-week-energy-transition-security-leaders/" target="_blank">Climate change and energy transition rise up national security agenda</a></div>
+  <div class="article-summary">Governments need to start addressing climate change impacts and nature loss as a threat to national security and manage shocks before they hit rather than picking up the pieces afterwards, Britain’s foreign minister and other leaders told the opening…</div>
+  <div class="article-meta">Sep 22, 2026  02:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21092026/judge-rules-solar-for-all-grant-termination-unlawful/" target="_blank">Federal Judge Rules Against Trump Administration Over Canceled Clean Energy Grants</a></div>
+  <div class="article-summary">A federal judge has declared that the Trump administration unlawfully terminated $7 billion in grant funding for clean energy programs in disadvantaged communities. The Solar for All program, established during the Biden administration as part of the…</div>
+  <div class="article-meta">Sep 22, 2026  01:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21092026/new-york-bison-puppet-march/" target="_blank">In New York, Life-sized American Bison Puppets Inspire Hope for Restoration Efforts</a></div>
+  <div class="article-summary">Standing on Manhattan’s High Line, Jason Baldes watched pedestrians, cyclists, cars and trucks braid their way through New York City. The executive director of the Wind River Tribal Buffalo Initiative in Wyoming was in town for New York’s first-ever…</div>
+  <div class="article-meta">Sep 22, 2026  01:30 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, September 22, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
