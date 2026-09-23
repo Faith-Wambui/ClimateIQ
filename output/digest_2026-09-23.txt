@@ -1,0 +1,149 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Wednesday, September 23, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (4 articles)
+============================================================
+
+▸ Canadian province announces PV panel recycling fee
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/23/canadian-province-announces-pv-panel-recycling-fee/
+  Date   : Sep 23, 2026  12:27 EAT
+  Summary: Alberta is now charging a $14 fee on new solar panels to fund end-of-life recycling, a move that will divert an estimated 1.5 million panels from landfills by 2030. This proactive measure addresses the growing challenge of solar waste, ensuring valuable materials are recovered and reducing the climate impact of a rapidly expanding renewable energy sector.
+
+
+▸ Albania moves closer to renewable energy communities
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/23/albania-moves-closer-to-renewable-energy-communities/
+  Date   : Sep 23, 2026  11:12 EAT
+  Summary: Albania's Energy Regulatory Authority has published draft rules enabling renewable energy communities to generate, store, and share power, a critical step to unlock local investment in solar and storage. This move is vital for Albania's energy transition, offering a new model to boost distributed renewable generation and enhance grid flexibility as the country increases its reliance on variable sources.
+
+
+▸ Explainer: How sea level rise poses an ‘existential threat’ to humans, heritage and nature
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/explainer-how-sea-level-rise-poses-an-existential-threat-to-humans-heritage-and-nature
+  Date   : Sep 22, 2026  18:14 EAT
+  Summary: For millions of people around the world, rising sea levels are already reshaping economies, livelihoods and cultures.
+
+The world’s oceans are currently rising at a faster rate than at any time in at least the past three millennia, with human influenc…
+
+
+▸ Analysis: Nepal’s $20m ‘loss-and-damage’ claim only covers 0.7% of flood costs
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/analysis-nepals-20m-loss-and-damage-claim-only-covers-0-7-of-flood-costs
+  Date   : Sep 22, 2026  17:43 EAT
+  Summary: Analysis: Nepal’s $20m ‘loss-and-damage’ claim only covers 0.7% of flood costs
+
+The Nepali government has requested $20m from the UN fund for “loss and damage”, following the devastating floods that hit the country in late August.
+
+This amounts to ju…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ ACEN relinquishes Philippine solar projects over land, access issues
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/23/acen-relinquishes-philippine-solar-projects-over-land-access-issues/
+  Date   : Sep 23, 2026  12:30 EAT
+  Summary: ACEN has abandoned two major Philippine solar projects in Quezon and Zambales, totaling over 450 MW, due to insurmountable land and access issues. This setback highlights the critical infrastructure and permitting hurdles that continue to impede the rapid deployment of renewable energy needed to meet climate goals.
+
+
+▸ Negative electricity prices could favor thermal storage over industrial heat pumps
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/23/negative-electricity-prices-could-favor-thermal-storage-over-industrial-heat-pumps/
+  Date   : Sep 23, 2026  12:16 EAT
+  Summary: When electricity prices turn negative, as they increasingly do with renewable energy surges, industrial facilities face a choice for heat generation: thermal storage or industrial heat pumps. New research suggests that for high-temperature needs like steam production, thermal storage becomes the more economically advantageous option, potentially impacting how industries decarbonize.
+
+
+▸ Sungrow brings PowerHarbor to Benelux homes for more value, less complexity
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/23/sungrow-brings-powerharbor-to-benelux-homes-for-more-value-less-complexity/
+  Date   : Sep 23, 2026  12:00 EAT
+  Summary: The Netherlands is phasing out net metering in 2027, forcing homeowners with solar panels to find new ways to utilize their generated electricity. Sungrow's new PowerHarbor home battery system offers a solution, enabling households to store and use their own solar power, thereby maximizing value and reducing reliance on the grid as climate policies shift.
+
+
+▸ Australia’s first grid-connected sodium-sulfur battery goes online
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/23/australias-first-grid-connected-sodium-sulfur-battery-goes-online/
+  Date   : Sep 23, 2026  11:31 EAT
+  Summary: Queensland just activated Australia's inaugural grid-connected sodium-sulfur battery, a significant step for long-duration energy storage. This 100-megawatt system will bolster power for a critical minerals facility, showcasing a promising new tool for grid stability and decarbonization.
+
+
+▸ Siltrax launches 2–6 kW air-cooled fuel cell system for off-grid applications
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/23/siltrax-launches-2-6-kw-air-cooled-fuel-cell-system-for-off-grid-applications/
+  Date   : Sep 23, 2026  11:22 EAT
+  Summary: Siltrax's new C2 Series fuel cell offers 2-6 kW of power for off-grid needs, leveraging an air-cooled, lightweight design. This innovation directly supports the transition away from fossil fuels in critical applications like drones and remote power, accelerating decarbonization efforts.
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ In Rural Pennsylvania, Doctors Confront the Hidden Health Impacts of Environmental Disasters
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/23092026/rural-pennsylvania-extreme-weather-public-health-effects/
+  Date   : Sep 23, 2026  12:00 EAT
+  Summary: The East Palestine, Ohio train derailment in February 2023 released toxic chemicals and smoke, impacting residents across the state line in rural Pennsylvania. Doctors there are now confronting the hidden, long-term health consequences for their patients, highlighting the critical need to address the health fallout from such environmental disasters.
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (1 articles)
+============================================================
+
+▸ Earlier and faster heatwave onset on land under a warming climate
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02762-2
+  Date   : Sep 23, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 23 September 2026;doi:10.1038/s41558-026-02762-2Heatwaves are expected to become more frequent and intense with global warming. Here the authors assess changes in their timing, finding that the heatwave season…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Angus Taylor pledges to repeal swathe of climate policies, saying ‘Australia has done its bit’
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/australia-news/2026/sep/23/angus-taylor-pledges-to-repeal-swathe-of-climate-policies-saying-australia-has-done-its-bit
+  Date   : Sep 23, 2026  09:45 EAT
+  Summary: Several measures were previously introduced or supported by Coalition, prompting claim Liberals and Nationals would ‘let climate change rip’Follow our Australia news live blog for latest updatesGet ourbreaking news email,free appordaily news podcastA…
+
+
+▸ Fears mount that next UN chief will downgrade climate action
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/2026/sep/23/fears-mount-that-next-un-chief-will-downgrade-climate-action
+  Date   : Sep 23, 2026  09:00 EAT
+  Summary: Experts say some of António Guterres’s possible successors could be ‘disastrous’ for efforts to tackle crisisFears are mounting that the next UN secretary general will downgrade the priority of the climate crisis, according to climate and civil socie…
+
+
+▸ Huge El Niño projected to cause 450,000 deaths in next six months
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/sep/23/el-nino-450000-extra-deaths-six-months
+  Date   : Sep 23, 2026  07:00 EAT
+  Summary: New report predicts a heavy toll from Nigeria to the US – and comes on top of existing impacts of the climate crisisMore than 450,000 people are projected to die from the additional heat brought by the super El Niño in the next six months, according…
+
+
+▸ Competing Climate Visions Clash at UN General Assembly
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/22092026/un-general-assembly-opens-with-clashing-climate-views/
+  Date   : Sep 23, 2026  02:41 EAT
+  Summary: Two divergent worldviews emerged from the first two national addresses on the opening day of the United Nations General Assembly’s 81st session in New York.  Brazil’s president, Luiz Inácio Lula da Silva called for decarbonizing economies, protecting…
+
+
+▸ Trump invades the UN with a brutish speech | Ted Widmer
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/commentisfree/2026/sep/22/trump-un-speech
+  Date   : Sep 23, 2026  00:30 EAT
+  Summary: Gone was any shred of US idealism. It was a spectacle of raw power – a power that is likely to only diminish in the years aheadExpectations were low for Donald Trump’s address to the UN on Tuesday, and yet somehow it was even worse than expected. He…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 47  |  Sources: 8  |  Topics: 5
