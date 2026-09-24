@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, September 24, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">49</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 39 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/24/spain-plans-to-allocated-11-gw-of-grid-capacity-for-renewables-storage/" target="_blank">Spain plans to allocated 11 GW of grid capacity for renewables, storage</a></div>
+  <div class="article-summary">Spain is unlocking 11 GW of grid capacity for renewables and storage, signaling a significant push for clean energy infrastructure. This move, with specific interest in pumped-hydro at Guardo and Velilla, will accelerate the transition away from fossil fuels and bolster the nation's climate goals.</div>
+  <div class="article-meta">Sep 24, 2026  12:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24092026/corpus-christi-desalination-plant-loan-defeasement/" target="_blank">Corpus Christi Could Owe Texas $235M for Failed Desalination Plant</a></div>
+  <div class="article-summary">Corpus Christi has once again rejected a $235 million state grant intended for a seawater desalination plant, leaving the city with a significant sum and no project. This decision highlights the ongoing challenges in securing reliable water sources, a critical issue as climate change intensifies drought risks and strains existing infrastructure.</div>
+  <div class="article-meta">Sep 24, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/09/23/leaked-eu-hydrogen-draft-moves-from-quotas-to-credits/" target="_blank">Leaked EU Hydrogen Draft Moves From Quotas To Credits</a></div>
+  <div class="article-summary">Europe’s current Renewable Energy Directive requires renewable fuels of non-biological origin, or RFNBOs, to account for at least 42% of relevant industrial hydrogen use by 2030 and 60% by 2035, subject to exclusions and flexibilities. Those provisio…</div>
+  <div class="article-meta">Sep 23, 2026  17:52 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/24/pylontech-starts-mass-production-of-588-ah-601-ah-storage-cells/" target="_blank">Pylontech starts mass production of 588 Ah, 601 Ah storage cells</a></div>
+  <div class="article-summary">Pylontech has launched mass production of high-capacity 588 Ah and 601 Ah LFP battery cells in Hefei, China, already producing over 100 MWh. This advancement in energy storage technology, boasting superior energy density and cycle life, is crucial for scaling renewable energy grids and accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Sep 24, 2026  12:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/24/longi-sets-28-29-world-record-for-single-junction-silicon-solar-cell-efficiency/" target="_blank">Longi sets 28.29% world record for single-junction silicon solar cell efficiency</a></div>
+  <div class="article-summary">Chinese manufacturer Longi has shattered the world record for single-junction silicon solar cell efficiency, reaching 28.29% with its new hybrid interdigitated-back-contact (HIBC) technology. This breakthrough is critical for climate action as it pushes solar power closer to its theoretical limits, promising more energy generation from less space and accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Sep 24, 2026  12:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/24/turkish-utility-tenders-solar-project/" target="_blank">Turkish utility tenders solar project</a></div>
+  <div class="article-summary">Southeastern Türkiye's Şanlıurfa municipality is tendering a 23.9 MW solar plant, a key component of a World Bank-backed initiative to boost self-consumption renewables across public facilities. This project directly contributes to Türkiye's broader climate goals by increasing clean energy generation and reducing reliance on fossil fuels for public services.</div>
+  <div class="article-meta">Sep 24, 2026  12:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/24/midea-energy-debuts-broad-storage-portfolio-at-solar-storage-live-uk/" target="_blank">Midea Energy debuts broad storage portfolio at Solar & Storage Live UK</a></div>
+  <div class="article-summary">Midea Energy has launched a comprehensive suite of energy storage solutions, including all-in-one and standalone systems, in the UK market, partnering with Project Better Energy for exclusive distribution. This move signals a significant expansion of grid-scale and residential battery storage capacity, crucial for integrating intermittent renewable energy sources and achieving ambitious decarbonization targets.</div>
+  <div class="article-meta">Sep 24, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/24/solar-parks-provide-refuge-and-hunting-grounds-for-birds-of-prey/" target="_blank">Solar parks provide refuge and hunting grounds for birds of prey</a></div>
+  <div class="article-summary">Researchers in Spain recorded six raptor species using a 150 MW solar PV plant for perching, hunting, flying and soaring over a two-and-a-half-year study. No collisions or related mortality were observed, but the researchers say longer-term studies a…</div>
+  <div class="article-meta">Sep 24, 2026  10:39 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/23/britain-to-join-eu-global-ocean-monitoring-system-oceaneye" target="_blank">UK to join EU ocean science scheme to better predict extreme weather events</a></div>
+  <div class="article-summary">Cooperation on OceanEye, which aims to create ‘real-time’ model of world’s oceans, comes amid efforts to boost EU tiesBritain is to join a major new ocean science programme, led by the EU, to better forecast extreme weather and climate events, the en…</div>
+  <div class="article-meta">Sep 23, 2026  17:24 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24092026/foreign-fishing-fleets-plundering-west-african-waters/" target="_blank">Foreign Fishing Fleets Are Robbing West African Countries of Key Nutrients</a></div>
+  <div class="article-summary">Foreign trawlers are stripping West African waters of an estimated $2.3 billion worth of fish annually, a haul that deprives local populations of crucial nutrients vital for health and development. This unchecked exploitation not only decimates fish stocks but also undermines food security and economic stability in vulnerable coastal nations.</div>
+  <div class="article-meta">Sep 24, 2026  11:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/24/world-warms-up-insects-moving-northwards-uk" target="_blank">A bumper year for bugs: as the world warms up, insects are moving northwards</a></div>
+  <div class="article-summary">Britain has seen an explosion of migrating insects – in some cases from as far as northern AfricaIt was a stifling evening in July and Matt Phelps was out for a stroll, when a piercing, whirring noise stopped him in his tracks. As an ecologist, Phelp…</div>
+  <div class="article-meta">Sep 24, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/sep/23/sea-turtle-nesting-california-beaches" target="_blank">In historic first, tropical turtles spotted nesting on California beaches</a></div>
+  <div class="article-summary">What caused the turtles to begin nesting farther north than usual is the ‘million dollar question’A sea turtle crawled out of the surf in southern California last weekend around sunset and started laying eggs in the sand.People on Huntington Beach wh…</div>
+  <div class="article-meta">Sep 24, 2026  03:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/commentisfree/2026/sep/24/the-coalition-says-it-wants-cheaper-power-not-ideology-but-its-evidence-free-plan-is-ideology" target="_blank">The Coalition says it wants cheaper power, not ideology. But its evidence-free plan is all ideology | Adam Morton</a></div>
+  <div class="article-summary">The reheated plans to scrap renewable schemes, boost fossil fuels and revive nuclear are transparently TrumpianWant to get this in your inbox when it publishes?Sign up for the Clear Air Australia newsletter hereGive the Coalition points for chutzpah,…</div>
+  <div class="article-meta">Sep 24, 2026  03:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/23/germany-plan-end-fossil-fuel-phase-out-energy-2045-new-york/" target="_blank">Germany unveils plan to end use of fossil fuels in energy sector by 2045</a></div>
+  <div class="article-summary">Germany wants to stop using fossil fuels in its energy sector by 2045 at the latest, with plans for how to do that set out in the country’s transition roadmap published on Wednesday on the sidelines of the UN General Assembly in New York.
+
+The bluepr…</div>
+  <div class="article-meta">Sep 24, 2026  00:49 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, September 24, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
