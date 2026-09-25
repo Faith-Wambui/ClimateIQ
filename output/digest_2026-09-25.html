@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, September 25, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">43</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/25/cop31-attendees-told-not-to-interfere-in-turkiyes-internal-affairs/" target="_blank">COP31 attendees told not to interfere in Türkiye’s “internal affairs”</a></div>
+  <div class="article-summary">Türkiye's hosting deal for COP31 in Antalya includes a clause requiring attendees not to interfere in the country's "internal affairs," a move human rights groups warn could stifle criticism and put activists at risk. This provision, previously absent in Brazil's COP30 agreement, reintroduces concerns about freedom of expression and assembly in a nation facing scrutiny for its human rights record, potentially impacting the effectiveness of climate advocacy.</div>
+  <div class="article-meta">Sep 25, 2026  10:22 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://interactive.carbonbrief.org/china-plan-tracker/index.html" target="_blank">Interactive: What China’s dozens of ‘five-year plans’ say about climate and energy</a></div>
+  <div class="article-summary">Design and development:
+
+Almost three-quarters of the 72 five-year plans published by China this year include policies or targets related to climate change and energy, according to Carbon Brief analysis.
+
+Five-year plans are an important part of Chin…</div>
+  <div class="article-meta">Sep 24, 2026  17:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-evs-are-now-nine-times-cheaper-than-petrol-or-diesel-to-drive-in-the-uk" target="_blank">Analysis: EVs are now nine times cheaper than petrol or diesel to drive in the UK</a></div>
+  <div class="article-summary">The latest surge in fossil-fuel prices means it is now up to nine times cheaper in the UK to drive an electric vehicle (EV) than a petrol or diesel car, shows Carbon Brief analysis.
+
+Since February, when the US first attacked Iran, the average price…</div>
+  <div class="article-meta">Sep 24, 2026  14:49 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/25/german-developer-tests-roe-deer-passages-at-solar-park/" target="_blank">German developer tests roe deer passages at solar park</a></div>
+  <div class="article-summary">German solar developer Südwerk is proactively incorporating roe deer passages into its 20 MW Memmelsdorf solar park, preserving vital wildlife corridors. This innovative approach at the Bavarian site demonstrates a commitment to minimizing the climate impact of renewable energy infrastructure by ensuring biodiversity can thrive alongside solar development.</div>
+  <div class="article-meta">Sep 25, 2026  12:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/25/decommissioning-to-drive-23-of-solar-buildout-in-the-2040s-says-wood-mackenzie/" target="_blank">Decommissioning to drive 23% of solar buildout in the 2040s, says Wood Mackenzie</a></div>
+  <div class="article-summary">By the 2040s, Wood Mackenzie projects that decommissioning and repowering will fuel 23% of global solar installations, replacing over 2.5 TW of aging equipment. This "energy renewal" is critical, ensuring continued renewable energy growth and investment as older projects reach end-of-life, preventing a potential decline in installations without it.</div>
+  <div class="article-meta">Sep 25, 2026  12:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/25/denmark-takes-first-steps-toward-marine-floating-pv/" target="_blank">Denmark takes first steps toward marine floating PV</a></div>
+  <div class="article-summary">Denmark is piloting 115 kW of floating solar in Roskilde Fjord to test performance and environmental impact. This initiative marks a significant step in exploring offshore renewable energy solutions for colder, harsher marine climates.</div>
+  <div class="article-meta">Sep 25, 2026  11:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/25/us-team-claims-stability-record-for-16-19-efficient-2d-3d-tin-perovskite-solar-cell/" target="_blank">US team claims stability record for 16.19%-efficient 2D/3D tin perovskite solar cell</a></div>
+  <div class="article-summary">US researchers have achieved a breakthrough in lead-free solar technology, developing a 2D/3D tin perovskite cell that maintains over 95% of its 16.19% efficiency after 1,600 hours of testing. This significant stability improvement, particularly against oxygen and moisture, paves the way for more durable and environmentally friendly solar panels, reducing reliance on toxic lead-based materials.</div>
+  <div class="article-meta">Sep 25, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/25/the-impact-of-phase-change-material-on-rear-side-pv-heat-transfer/" target="_blank">The impact of phase change material on rear-side PV heat transfer</a></div>
+  <div class="article-summary">A year-long Milan experiment revealed that Phase Change Material (PCM) backing slashed rear-side heat flux in PV modules by 45.2%, demonstrating its potential to improve solar panel efficiency. This breakthrough matters for climate action by offering a tangible way to boost renewable energy output and reduce waste heat from solar installations.</div>
+  <div class="article-meta">Sep 25, 2026  10:38 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25092026/germany-computing-center-hosts-us-climate-data/" target="_blank">Why Germany Is Building an Ark for U.S. Climate Data</a></div>
+  <div class="article-summary">Germany is building a robust data sanctuary in Hamburg, housing a significant portion of U.S. climate data to safeguard it from potential disruptions. This move is critical for ensuring the continuity of vital climate modeling and research, which are essential for understanding and addressing the escalating climate crisis.</div>
+  <div class="article-meta">Sep 25, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02759-x" target="_blank">Generative artifical intelligence for climate dialogue justice</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 25 September 2026;doi:10.1038/s41558-026-02759-xClimate action requires inclusive dialogue among diverse stakeholders to help inform decision-making for governance and planning. We examine how generative artif…</div>
+  <div class="article-meta">Sep 25, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25092026/new-york-indian-point-nuclear-future/" target="_blank">Indian Point Energy Center’s Uncertain Future</a></div>
+  <div class="article-summary">The Indian Point Energy Center, a nuclear facility 40 miles north of New York City, faces an uncertain future as local opposition, exemplified by activist Nancy Vann, intensifies. This facility's potential closure or continued operation carries significant implications for the region's carbon-free energy supply and New York's climate goals.</div>
+  <div class="article-meta">Sep 25, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/24/down-to-earth-can-you-bet-on-the-future-of-the-climate" target="_blank">Would you bet on the future of our planet?</a></div>
+  <div class="article-summary">Prediction markets are exploding, with wagers on climate events like extreme weather and ice melt surging 500% to a $1.1 billion market. This growing financial interest in climate outcomes highlights a tangible shift in how the market perceives and quantifies climate risk, potentially driving investment and action.</div>
+  <div class="article-meta">Sep 25, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/sep/25/friday-briefing-how-a-grassroots-film-is-turning-climate-anxiety-into-action" target="_blank">Friday briefing: How a ​grassroots ​film ​is ​turning ​climate anxiety ​into ​action</a></div>
+  <div class="article-summary">In today’s newsletter: The People’s Emergency Briefing delivers a stark warning about ​o​ur future in a warming world. ​B​ut sharing difficult truths collectively​ shows us that there is still hope to be foundGood morning. Here we are, stumbling into…</div>
+  <div class="article-meta">Sep 25, 2026  08:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24092026/el-paso-electric-only-considered-gas-to-power-meta-data-center/" target="_blank">Texas Electric Utility Only Considered Gas to Power $10 Billion Meta Data Center</a></div>
+  <div class="article-summary">EL PASO—While Texas officials have hit pause on data center permitting, one project that is still moving ahead is Meta’s $10 billion, 1-gigawatt data center in northeast El Paso. Meta had already signed tax abatement agreements with El Paso, jumped t…</div>
+  <div class="article-meta">Sep 25, 2026  01:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/24/submerged-rising-seas-small-islands-statehood-new-york-unga/" target="_blank">Threatened by rising seas, small islands secure right to keep their statehood</a></div>
+  <div class="article-summary">As rising seas submerge growing swathes of land, countries that lose territory should still keep their national boundaries, sovereign rights and UN membership, according to a political declaration adopted at the UN General Assembly in New York on Thu…</div>
+  <div class="article-meta">Sep 25, 2026  00:41 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, September 25, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
