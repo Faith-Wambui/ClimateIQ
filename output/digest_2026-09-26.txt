@@ -1,0 +1,142 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Saturday, September 26, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (4 articles)
+============================================================
+
+▸ Chinese province moves grid-side batteries into spot market
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/26/chinese-province-moves-grid-side-batteries-into-spot-market/
+  Date   : Sep 26, 2026  12:00 EAT
+  Summary: China's Zhejiang province is integrating 2.54 GW of grid-side battery storage into its electricity spot market, allowing these assets to directly compete and earn revenue. This move signals a significant step towards valuing and deploying flexible clean energy resources, crucial for stabilizing grids as renewable energy penetration increases.
+
+
+▸ ‘Crown Jewel’ of Everglades Restoration Is Too Small, Report Says
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/26092026/everglades-restoration-reservoir-too-small/
+  Date   : Sep 26, 2026  11:55 EAT
+  Summary: A critical reservoir intended to be the centerpiece of Everglades restoration is too small to achieve its goals, according to a new report from Friends of the Everglades. This under-delivery means Florida's vital "river of grass" will continue to suffer from harmful nutrient pollution and water imbalances, jeopardizing a crucial ecosystem.
+
+
+▸ Coordination can bring value to Brazil
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/26/coordination-can-bring-value-to-brazil/
+  Date   : Sep 26, 2026  07:00 EAT
+  Summary: More curtailment and steeper ramp rates are proving costly in Brazil, but a lack of regulation for virtual power plants (VPPs) is limiting the potential for distributed assets to smooth out the demand curve. Henrique Ribeiro from S&P Global explains…
+
+
+▸ ‘Concerning’ low sea ice persists as Antarctic hits third-lowest winter peak
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/concerning-low-sea-ice-persists-as-antarctic-hits-third-lowest-winter-peak
+  Date   : Sep 25, 2026  15:45 EAT
+  Summary: ‘Concerning’ low sea ice persists as Antarctic hits third-lowest winter peak
+
+By:
+
+Antarctic sea ice has recorded its third-smallest winter peak extent since satellite records began 48 years ago, new data reveals.
+
+Provisional data from the US Nation…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Green SM Starts Amsterdam Taxi Pilot, Bringing the Green EV to Europe
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/09/26/green-sm-starts-amsterdam-taxi-pilot-bringing-the-green-ev-to-europe/
+  Date   : Sep 26, 2026  12:19 EAT
+  Summary: Vietnamese electric mobility company Green SM has launched a pilot electric taxi service in Amsterdam, marking its second European market. This expansion brings VinFast vehicles to a key European city, accelerating the adoption of electric transport and reducing emissions in urban areas.
+
+
+▸ New Colorado Neighborhood Could Offer Glimpse into the Future of Home Energy Use
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/26092026/colorado-neighborhood-shows-geothermal-potential-future/
+  Date   : Sep 26, 2026  12:00 EAT
+  Summary: Dandelion Energy and Lennar have partnered to build nearly 100 geothermal-powered homes south of Denver, showcasing a scalable model for decarbonizing residential heating and cooling. This collaboration signals a significant step towards widespread adoption of clean energy in new home construction, directly impacting the building sector's substantial carbon footprint.
+
+
+▸ Anza expects at least a 40% spike in U.S. solar module prices after Section 232
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/26/anza-expects-at-least-a-40-spike-in-solar-module-prices-after-section-232/
+  Date   : Sep 26, 2026  11:00 EAT
+  Summary: The challenge for developers is to move quickly to secure lower costs before the minimum pricing takes effect, with the options being to secure modules already in the U.S., accelerate imports or shift procurement strategies to preserve project econom…
+
+
+▸ Free software calculates how many solar modules fit on a rooftop from a photo
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/26/free-software-calculates-how-many-solar-modules-fit-on-a-rooftop-from-a-photo/
+  Date   : Sep 26, 2026  10:00 EAT
+  Summary: Tegrona has launched free software that uses photographs to calculate how many PV modules can fit on a rooftop. Tegrona Lite corrects image perspective, determines roof dimensions and automatically generates module layouts without requiring CAD tools…
+
+
+▸ XPENG Grows in Malaysia, & Readies G9L for Global Launch
+  Source : CleanTechnica
+  Link   : https://cleantechnica.com/2026/09/25/xpeng-grows-in-malaysia-readies-g9l-for-global-launch/
+  Date   : Sep 26, 2026  06:57 EAT
+  Summary: XPENG is aggressively expanding its electric vehicle presence in Malaysia and preparing to launch its G9L model in 64 global markets. This significant international push by a major EV manufacturer signals accelerating adoption and competition in the clean transportation sector worldwide.
+
+
+============================================================
+💰  CLIMATE FINANCE  (1 articles)
+============================================================
+
+▸ PV system costs increase by 7% in Brazil in H1
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/09/26/pv-system-costs-increase-7-percent-brazil-h1/
+  Date   : Sep 26, 2026  11:30 EAT
+  Summary: In the first half of 2026, Brazil saw a 7% surge in PV system costs, primarily due to escalating equipment expenses, impacting distributed generation growth. This price hike, coupled with a decline in financing and a shift towards smaller residential installations, signals a more expensive transition to solar power for Brazilian consumers and businesses.
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (2 articles)
+============================================================
+
+▸ The Specter of ‘Forever Chemicals’ Looms Over Pennsylvania’s Rural Communities
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/26092026/pfas-contaminated-drinking-water-in-pennsylvania-rural-communities/
+  Date   : Sep 26, 2026  11:50 EAT
+  Summary: Pennsylvania's North Centre Township is grappling with widespread PFAS contamination, detected at levels far exceeding federal advisory limits in private wells. This "forever chemical" pollution, originating from a nearby industrial site, poses a significant threat to the health of rural residents and highlights the urgent need for stricter regulation and remediation of these persistent environmental hazards.
+
+
+▸ After a Deadly Flood, What Does Climate Justice for Nepal Look Like?
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/26092026/nepal-flood-climate-justice/
+  Date   : Sep 26, 2026  11:45 EAT
+  Summary: Nepal's devastating August glacier collapse and floods, exacerbated by climate change, underscore the urgent need for climate justice. This event highlights how vulnerable nations bear the brunt of a crisis they did little to create, demanding global action and equitable solutions.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (3 articles)
+============================================================
+
+▸ Climate Crisis Is No Longer a ‘Distant Warning,’ UN Leader Says
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/25092026/climate-crisis-top-concern-at-un-general-assembly/
+  Date   : Sep 25, 2026  23:05 EAT
+  Summary: This week’s United Nations General Assembly in New York featured pleas for urgent action on climate change, with heads of state and Secretary-General António Guterres warning that the window for action is narrowing. Yet climate was a footnote amid th…
+
+
+▸ Why a supercharged El Niño is putting Hawaii in the bullseye of more storms
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/sep/25/el-nino-hawaii-hurricane-nolo
+  Date   : Sep 25, 2026  20:59 EAT
+  Summary: Hurricane Nolo is the latest storm to menace the islands as sees warming ocean temperatures fuel more severe weatherWith Hurricane Nolo, the islands of Hawaii are grappling with the third major tropical storm in recent months.Hurricanes Lala in Augus…
+
+
+▸ ‘Robust little’ vessel begins treacherous 22,000km journey around Antarctica in the name of climate science
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/sep/26/saildrone-unmanned-hurricane-proof-ship-antarctica-climate-hobart
+  Date   : Sep 25, 2026  18:00 EAT
+  Summary: Powered by sun and wind, the uncrewed vehicle will collect data to help Australian scientists better understand how oceans absorb emissionsGet ourbreaking news email,free appordaily news podcastA small uncrewed vessel has embarked on a lap around Ant…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 38  |  Sources: 6  |  Topics: 5
