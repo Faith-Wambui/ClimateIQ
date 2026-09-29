@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, September 29, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 32 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/29/cop31-must-aim-higher-to-cut-emissions-from-the-use-of-materials/" target="_blank">COP31 must aim higher to cut emissions from the use of materials</a></div>
+  <div class="article-summary">COP31 host Türkiye has proposed increasing recycled product share to 15% and halving waste by 2035, but these targets fall short of the significant emissions cuts needed. Embracing circularity, which can slash emissions by up to 52% across sectors, is crucial for meeting Paris Agreement goals beyond cleaner electricity.</div>
+  <div class="article-meta">Sep 29, 2026  13:37 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/29/abb-returns-to-utility-scale-market-with-gamesa-electric-integration/" target="_blank">ABB returns to utility-scale market with Gamesa Electric integration</a></div>
+  <div class="article-summary">ABB is re-entering the utility-scale energy storage market by integrating Gamesa Electric, bolstering its power electronics capabilities. This move signifies a significant expansion for ABB, leveraging combined industrial strength and technology to tap into new global markets for renewable energy solutions.</div>
+  <div class="article-meta">Sep 29, 2026  12:28 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/29/the-case-for-vertical-bipv/" target="_blank">The case for vertical BIPV</a></div>
+  <div class="article-summary">A new IEA PVPS study reveals vertical building-integrated photovoltaics (BIPV) can significantly boost solar generation by smoothing output throughout the day, even with minimal yield penalties compared to rooftop installations. This innovation matters for the climate by offering greater design flexibility and improving economics when factoring in avoided building material costs, paving the way for more widespread and integrated renewable energy solutions.</div>
+  <div class="article-meta">Sep 29, 2026  12:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29092026/drones-wildfire-response-ai-future/" target="_blank">Drones Are Already on the Front Lines of Wildfire Response. Robots and AI Could Be Next.</a></div>
+  <div class="article-summary">Drones are actively assisting in wildfire containment, as seen during the Sand Creek Fire in Montana, by navigating hazardous terrain to detect hidden embers. This technology, alongside emerging robots and AI, is crucial for improving the speed and safety of wildfire response, directly impacting our ability to manage and mitigate climate-driven fire events.</div>
+  <div class="article-meta">Sep 29, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/29/scientists-propose-solar-cell-taxonomy-based-on-absorber-integration/" target="_blank">Scientists propose solar cell taxonomy based on absorber integration</a></div>
+  <div class="article-summary">Scientists in Spain have developed a new way to categorize solar cell technologies, moving beyond simple generation-based labels to focus on how the light-absorbing materials are integrated. This shift is crucial for understanding and accelerating the development of next-generation solar power, which is essential for meeting global climate targets.</div>
+  <div class="article-meta">Sep 29, 2026  11:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/29/greece-can-install-8-6-gw-of-batteries-by-2030/" target="_blank">Greece can install 8.6 GW of batteries by 2030</a></div>
+  <div class="article-summary">Greece’s solar association, HELAPCO, says the country could install 8.6 GW of battery storage by 2030. Aurora Energy Research, a global consultancy with an office in Greece, offers a more conservative outlook, forecasting up to 5 GW by the end of the…</div>
+  <div class="article-meta">Sep 29, 2026  10:31 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29092026/maui-wildfire-longterm-health-impacts-study/" target="_blank">Long After Wildfire Smoke Is Gone, Heavy Metals Could Still Be Harming Survivors’ Lungs</a></div>
+  <div class="article-summary">Maui wildfire survivors are showing elevated levels of heavy metals in their bodies years after the fires, a concerning finding from the University of Hawai'i's Maui Wildfire Exposure Study. This persistent presence of toxins, long after smoke clears, poses a significant ongoing threat to lung health, highlighting the long-term, insidious impacts of severe wildfires on human health.</div>
+  <div class="article-meta">Sep 29, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/29/charity-appeal-sends-solar-equipment-to-flood-affected-nepal/" target="_blank">Charity appeal sends solar equipment to flood-affected Nepal</a></div>
+  <div class="article-summary">A UK charity has dispatched its first shipment of solar equipment to flood-ravaged districts in Nepal, providing a crucial, rapid power solution for approximately 500 households and essential services. This initiative highlights the vulnerability of traditional energy grids to extreme weather and underscores solar's role in climate resilience by offering independent power in disaster zones.</div>
+  <div class="article-meta">Sep 29, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29092026/record-breaking-el-nino-grows-in-pacific/" target="_blank">Incoming El Niño Is so Extreme It Doesn’t Have a Scientific Name</a></div>
+  <div class="article-summary">A brewing El Niño event is so exceptionally strong it's being dubbed "The Big One," a phenomenon even veteran climate scientist Daniel Swain at UCLA finds unprecedented. This extreme El Niño is poised to significantly amplify global warming impacts, potentially triggering widespread extreme weather events and pushing global temperatures to new, concerning highs.</div>
+  <div class="article-meta">Sep 29, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02736-4" target="_blank">Governments must reconcile dissonant climate assessment approaches</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 29 September 2026;doi:10.1038/s41558-026-02736-4Security analysts and government economists increasingly present policymakers with different pictures of the same climate and nature risk. We argue that governme…</div>
+  <div class="article-meta">Sep 29, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28092026/alitos-recusal-from-climate-case-too-little-too-late/" target="_blank">Alito’s Recusal From Climate Case: Too Little, Too Late?</a></div>
+  <div class="article-summary">Justice Samuel Alito decided Monday to sit out one of the most consequential climate change cases to reach the Supreme Court, but legal experts expected continuing ramifications due to his ownership of individual corporate stocks, including in the fo…</div>
+  <div class="article-meta">Sep 29, 2026  04:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28092026/trump-slashes-fuel-economy-standards/" target="_blank">Trump Slashes Fuel-Economy Standards in Blow to Climate, Health, EV Market</a></div>
+  <div class="article-summary">The Trump administration Monday finalized the rollback of a major fuel economy standard for cars and trucks, a move critics say will cause more climate-warming pollution, human health problems and higher fuel costs for consumers.  The National Highwa…</div>
+  <div class="article-meta">Sep 29, 2026  02:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/sep/28/samuel-alito-supreme-court-oil-climate-case" target="_blank">Samuel Alito steps aside in a major climate case amid scrutiny over oil stock holdings</a></div>
+  <div class="article-summary">Decision from conservative justice comes before court hears case on whether fossil-fuel firms deceived US publicSupreme court justice Samuel Alito recused himself on Monday from a major climate-change case after facing calls to step aside due to stoc…</div>
+  <div class="article-meta">Sep 29, 2026  00:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/sep/28/trump-administration-slashes-clean-car-rules" target="_blank">Trump administration to slash clean car rules aimed at cutting climate emissions</a></div>
+  <div class="article-summary">Environmentalists decry move that relaxes requirements on automakers to control pollution from gas-powered carsThe Trump administration on Monday announced it was slashing clean car rules that had been aimed at reducing planet-heating emissions and b…</div>
+  <div class="article-meta">Sep 28, 2026  18:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/sep/28/fossil-fuel-industry-climate-research-universities-study" target="_blank">Decades of fossil fuel influence paved way for Trump’s assault on university research, study says</a></div>
+  <div class="article-summary">Fossil fuel firms have spent years trying to regulate climate research by donating to US universities, study authors argueRecent attacks on US universities by the Trump administration have built on decades of efforts by libertarian donor networks, fo…</div>
+  <div class="article-meta">Sep 28, 2026  15:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, September 29, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
