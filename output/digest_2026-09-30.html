@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, September 30, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 31 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/30/ireland-introduces-e600-residential-battery-grant-expands-pv-support/" target="_blank">Ireland introduces €600 residential battery grant, expands PV support</a></div>
+  <div class="article-summary">Ireland is launching a €600 grant for residential battery installations, alongside expanded solar PV support and significant aid for low-income households, to accelerate renewable energy adoption. This move is critical for bolstering grid stability and increasing renewable energy penetration, directly contributing to Ireland's climate targets by enabling greater solar power utilization and storage.</div>
+  <div class="article-meta">Sep 30, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/30/fox-ess-launches-modular-ci-battery-system-scalable-to-96-mwh/" target="_blank">Fox ESS launches modular C&I battery system scalable to 96 MWh</a></div>
+  <div class="article-summary">Chinese firm Fox ESS has unveiled its modular "Power Beast" battery system, capable of scaling up to a massive 96 MWh for commercial and industrial clients. This significant expansion in grid-scale energy storage directly addresses the growing need to integrate renewable energy sources and stabilize power grids, crucial steps in decarbonizing the global economy.</div>
+  <div class="article-meta">Sep 30, 2026  13:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/30/belgium-reveals-results-of-pv-cable-assessment/" target="_blank">Belgium reveals results of PV cable assessment</a></div>
+  <div class="article-summary">Belgium's recent assessment of photovoltaic (PV) cables revealed that 90% failed to meet their declared fire-reaction class, a critical safety metric. While authorities initially flagged these discrepancies, manufacturers' subsequent provision of accredited lab tests led to the closure of investigations, leaving potential safety concerns unaddressed.</div>
+  <div class="article-meta">Sep 30, 2026  13:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/30/researchers-test-laminated-bamboo-structures-for-floating-pv-platforms/" target="_blank">Researchers test laminated bamboo structures for floating PV platforms</a></div>
+  <div class="article-summary">Chinese researchers tested thin-plate glued laminated bamboo (glubam) assemblies for use in floating PV platforms, assessing their flexural behavior under different plate and bolt configurations. The results show that plate configuration, bolt spacin…</div>
+  <div class="article-meta">Sep 30, 2026  11:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/30/panasonic-deploys-fuel-cell-heat-pump-at-pv-powered-hydrogen-house/" target="_blank">Panasonic deploys fuel cell, heat pump at PV-powered hydrogen house</a></div>
+  <div class="article-summary">Panasonic has deployed a 10 kW pure hydrogen fuel cell and a 9 kW air-to-water heat pump at Finland’s Hydrogen House, which features rooftop PV and up to 90 kg of hydrogen storage. The integrated system uses solar-generated hydrogen to provide electr…</div>
+  <div class="article-meta">Sep 30, 2026  10:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/30/cubas-pv-capacity-tops-1-4-gw/" target="_blank">Cuba’s PV capacity tops 1.4 GW</a></div>
+  <div class="article-summary">Cuba has installed 1.42 GW of solar capacity across 144 photovoltaic plants and expects to exceed 1.5 GW by the end of 2026. Renewables now account for 21.4% of electricity generation, while the country is also expanding energy storage and solar-powe…</div>
+  <div class="article-meta">Sep 30, 2026  09:05 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/09/30/eus-largest-solar-project-reaches-financial-close/" target="_blank">EU’s largest solar project reaches financial close</a></div>
+  <div class="article-summary">Rezolv Energy has secured over €561 million in financing for its 1.3 GW Dama solar project in Romania, the EU's largest onshore renewable energy development. This massive project, set to power over 280,000 households, signifies a significant step in the EU's transition to cleaner energy sources and will contribute substantially to reducing regional carbon emissions.</div>
+  <div class="article-meta">Sep 30, 2026  13:47 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/09/30/nepals-disaster-has-laid-bare-the-worlds-adaptation-accountability-gap/" target="_blank">Nepal’s disaster has laid bare the world’s adaptation accountability gap</a></div>
+  <div class="article-summary">Nepal's recent deadly flash flood, triggered by glacial melt, highlights a critical "adaptation accountability gap" where warnings about accelerating glacier melt and its risks, known for over a decade, have not translated into sufficient preventative action. This failure to invest in adaptation measures, despite clear evidence of escalating climate impacts and their economic costs, leaves vulnerable communities exposed as the world hurtles towards exceeding 1.5C warming.</div>
+  <div class="article-meta">Sep 30, 2026  13:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30092026/europe-heat-wave-deaths/" target="_blank">Mass Heat Wave Deaths in Europe Show Climate Extremes Are Outpacing Adaptation Efforts</a></div>
+  <div class="article-summary">Germany experienced an unprecedented 16,000 heat-related deaths this summer, a stark indicator that climate extremes are now outpacing even advanced adaptation strategies. This devastating toll underscores the urgent need for accelerated global action to mitigate rising temperatures and protect vulnerable populations from increasingly severe heat events.</div>
+  <div class="article-meta">Sep 30, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30092026/pennsylvania-fracking-groundwater-pollution/" target="_blank">Study of Groundwater Near Fracking Sites Finds Low Radium Levels, but Raises Concerns About Increased Salinity</a></div>
+  <div class="article-summary">New research near fracking sites in southwestern Pennsylvania reveals low radium levels in shallow groundwater, but the limited sampling size prevents broad conclusions. While radium isn't the immediate concern, the study flags rising salinity as a potential climate-related issue, impacting water quality and availability.</div>
+  <div class="article-meta">Sep 30, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/30/half-million-trees-planted-england-three-years-angela-eagle" target="_blank">Half a million trees to be planted in England in three years, says government</a></div>
+  <div class="article-summary">England plans to plant half a million trees over the next three years, a move by Environment Secretary Angela Eagle to bolster natural defenses against extreme weather. This initiative, which includes funding for local groups to restore wetlands and riverbanks, aims to enhance flood management and drought resilience across the nation.</div>
+  <div class="article-meta">Sep 30, 2026  09:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/30/worlds-seas-warmed-23-zettajoules-2025" target="_blank">World’s oceans absorbed record heat equal to 40 times annual global energy use</a></div>
+  <div class="article-summary">The injection of thermal energy comes amid an increasing rise in sea levels and continuing acidificationA record-breaking 23 zettajoules of heat was sunk into the world’s seas last year, leaving ocean waters hotter, higher and less hospitable, a repo…</div>
+  <div class="article-meta">Sep 30, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/sep/30/country-diary-the-land-here-is-scarred-from-a-year-of-hard-weather-now-what-will-winter-hold" target="_blank">Country diary: The land here is scarred from a year of hard weather – now what will winter hold? | Alexandra Pearce-Broomhead</a></div>
+  <div class="article-summary">Camborne, Cornwall:There will be more storms like Goretti and more fires next summer, but we can make the landscape more resilientA grey wagtail flits at the stream’s edge, its flaxen underbelly matching the woodland’s autumn swatch. A few months ago…</div>
+  <div class="article-meta">Sep 30, 2026  07:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/sep/30/antarctic-winter-sea-ice-falls-to-third-lowest-level-on-record-as-scientists-warn-of-now-problem" target="_blank">Antarctic winter sea ice falls to third-lowest level on record as scientists warn of ‘now problem’</a></div>
+  <div class="article-summary">Coverage levels fall a million square kilometres short of the long-term average, with global heating likely driving lossesAntarctica’s winter sea ice has peaked at its third-lowest level on record, falling a million square kilometres – or almost 400,…</div>
+  <div class="article-meta">Sep 30, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29092026/federal-fast-tracked-south32-mine-lawsuit/" target="_blank">Environmentalists Sue Federal Agencies Over Nation’s First Fast-Tracked Critical Minerals Mine</a></div>
+  <div class="article-summary">In the foothills of southern Arizona’s Patagonia Mountains, atop so-called critical minerals such as zinc, is South32’s Hermosa project. The first mine added to a federal program designed to speed up permitting, it “set the standard for what the mode…</div>
+  <div class="article-meta">Sep 30, 2026  01:17 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, September 30, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
