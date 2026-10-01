@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, October 01, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01102026/north-carolina-roanoke-river-paper-plant-pollution/" target="_blank">Regulators Release a Plan to Help Repair the Contaminated Roanoke River</a></div>
+  <div class="article-summary">PLYMOUTH, N.C.—Fall had just arrived when a nor’easter began stewing in the Atlantic Ocean, its gale-force winds carrying the pungent smell of chlorine westward, away from downtown. Against the backdrop of dingy stratus clouds, the Domtar pulp mill l…</div>
+  <div class="article-meta">Oct 01, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-wind-and-solar-save-uk-from-gas-imports-worth-5-9bn-during-hormuz-crisis" target="_blank">Analysis: Wind and solar save UK from gas imports worth £5.9bn during Hormuz crisis</a></div>
+  <div class="article-summary">The UK has avoided the need for gas imports worth £5.9bn since the start of the Hormuz crisis as a result of record generation from wind and solar, reveals Carbon Brief analysis.
+
+While gas prices are surging to levels not seen since the 2022 energy…</div>
+  <div class="article-meta">Sep 30, 2026  17:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/09/at-unga-81-who-moves-first-who-pays-and-who-keeps-the-lights-on/" target="_blank">At UNGA 81: Who Moves First, Who Pays and Who Keeps the Lights On</a></div>
+  <div class="article-summary">The climate finance gap isn’t the gap: the US$1trillion alone is the wrong fight
+
+Despite the absence of the leaders of the three largest economies in Africa, South Africa, Nigeria and Egypt, from the high level meetings at the just ended 81st United…</div>
+  <div class="article-meta">Sep 30, 2026  16:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/09/climate-finance-talks-may-end/" target="_blank">Climate Finance Talks Could End Before they Begin</a></div>
+  <div class="article-summary">After decades of being scattered across the winds of the COP agenda, climate finance discussions finally found a formal home last year when the Climate Finance Work Programme was created. Established as a two year programme, it is designed to address…</div>
+  <div class="article-meta">Sep 30, 2026  16:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/09/a-climate-reparations-case-for-africa/" target="_blank">A Climate Reparations Case for Africa</a></div>
+  <div class="article-summary">An upcoming symposium on climate reparations for African countries from the Global North could breathe new life into this long debated but, as yet, largely untested legal remedy. The African Symposium on Climate Reparations will take place from 30 Se…</div>
+  <div class="article-meta">Sep 30, 2026  16:20 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/01/spanish-researchers-validate-10000-cycles-for-iron-lead-flow-battery/" target="_blank">Spanish researchers validate 10,000 cycles for iron-lead flow battery</a></div>
+  <div class="article-summary">Spanish researchers have validated an innovative iron-lead flow battery capable of 10,000 charge cycles, a significant leap for grid-scale energy storage. This breakthrough, using a fluorine-free membrane and a single electrolyte loop, dramatically reduces costs and dependence on rare earth minerals, paving the way for more affordable and sustainable renewable energy integration.</div>
+  <div class="article-meta">Oct 01, 2026  14:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/01/ireland-energizes-first-sress-solar-farm-opening-new-revenue-opportunities-for-farmers-and-landowners/" target="_blank">Ireland energizes first SRESS solar farm, opening new revenue opportunities for farmers and landowners</a></div>
+  <div class="article-summary">Ireland's first Small-Scale Renewable Energy Scheme (SRESS) solar farm, the 650 kW Meadhill Solar, has gone live, marking a significant shift in rural energy generation. This project, developed by Cork farmer Sean Keating and supported by Flogas Energy, unlocks new income streams for landowners and signals a broader trend of community-led renewable development across the country.</div>
+  <div class="article-meta">Oct 01, 2026  14:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/10/01/e-quipment-highlight-hyundai-160b-x-battery-electric-forklift/" target="_blank">E-quipment highlight: 16-tonne Hyundai 160B-X battery-electric forklift</a></div>
+  <div class="article-summary">Hyundai has launched a new 16-tonne battery-electric forklift, completing their heavy-duty electric range and offering a powerful alternative to diesel-powered machinery. This expansion into larger capacities significantly reduces emissions in industrial settings previously reliant on fossil fuels.</div>
+  <div class="article-meta">Oct 01, 2026  14:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/01/a-closer-look-at-marsteks-5-kwh-plug-in-battery/" target="_blank">A closer look at Marstek’s 5 kWh plug-in battery</a></div>
+  <div class="article-summary">Chinese manufacturer Marstek is launching its scalable Venus plug-in battery system, capable of up to 9kW/15kWh, into European markets, with UK integration underway to optimize home energy use. This move signals a growing trend in accessible battery storage solutions, crucial for stabilizing grids and integrating intermittent renewable energy sources as Europe accelerates its clean energy transition.</div>
+  <div class="article-meta">Oct 01, 2026  13:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/01/germany-could-generate-over-600000-tonnes-of-pv-module-waste-by-2030/" target="_blank">Germany could generate over 600,000 tonnes of PV module waste by 2030</a></div>
+  <div class="article-summary">Germany faces a looming challenge with over 600,000 tonnes of solar panel waste expected by 2030, presenting both an environmental burden and a significant material recovery opportunity. This surge in end-of-life modules underscores the urgent need for robust recycling infrastructure to manage this growing stream and reclaim valuable resources.</div>
+  <div class="article-meta">Oct 01, 2026  12:13 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/01/adani-group-backed-vishakha-renewables-files-for-ipo/" target="_blank">Indian PV manufacturer Vishakha Renewables files for IPO</a></div>
+  <div class="article-summary">Indian solar component giant Vishakha Renewables, a joint venture of Vishakha Group and Adani Group, is launching an IPO. This move signals significant investment and expansion in India's solar manufacturing sector, a critical step for scaling up clean energy production to meet climate goals.</div>
+  <div class="article-meta">Oct 01, 2026  13:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/01102026/europe-mega-industrial-trawlers-threaten-ocean/" target="_blank">‘Mega-Industrial’ Trawlers Threaten Europe’s Ocean Health</a></div>
+  <div class="article-summary">A new report reveals that a mere 638 "mega-industrial" trawlers, all over 108 feet long, are responsible for the majority of damage to Europe's ocean health. These massive vessels are decimating fish stocks and threatening marine ecosystems, with significant implications for food security and the economic viability of smaller fishing communities.</div>
+  <div class="article-meta">Oct 01, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/2026/oct/01/rivers-water-rain-study" target="_blank">Think more rain means more river water? Not necessarily</a></div>
+  <div class="article-summary">Some rivers are receiving more rain than before but have lower water flow, according to a studyMore rain and snow equals more water in rivers, right? Not necessarily. A new study shows that, despite receiving more rainfall than they used to, river wa…</div>
+  <div class="article-meta">Oct 01, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/01/switzerland-glacier-loss-fossil-fuel-pollution-europe" target="_blank">‘Explosion of melt rates’: 20% of Swiss glaciers lost in five years</a></div>
+  <div class="article-summary">Alpine regions in Europe experiencing extreme glacier collapse due to heat-trapping effects of fossil fuel pollutionSwitzerland has lost almost one-fifth of its ice in just five years, research has found, in a dramatic reshaping of the Alpine country…</div>
+  <div class="article-meta">Oct 01, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/oct/01/nsw-coalmine-approval-hunter-valley-climate-crisis-lock-the-gate" target="_blank">The green light for the largest coalmine in NSW history is shocking proof that our governance systems are betraying Australians | Georgina Woods</a></div>
+  <div class="article-summary">There is no greater treachery than this failure to face up to the climate crisis. How can we now fend off despair?The Independent Planning Commission’s published reasons forapproving the largest coalmine in New South Wales historyin the context of mo…</div>
+  <div class="article-meta">Oct 01, 2026  06:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/01/el-nino-orangutans-indonesia-wildlife-destruction-aoe" target="_blank">‘The toll is huge’: El Niño-driven wildfires overwhelm Indonesia’s orangutan population</a></div>
+  <div class="article-summary">The global climate phenomenon has triggered devastating infernos in the ape’s Indonesian heartlands, with long-term effects on the animals still unknownThe mother’s hands were peeling from walking on the torched ground. Her eight-month-old baby, whic…</div>
+  <div class="article-meta">Oct 01, 2026  06:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30092026/european-commission-plans-to-delay-methane-rules/" target="_blank">EU Weighs Delaying Methane Rules as Energy Prices Rise</a></div>
+  <div class="article-summary">Amid political pressure and rising energy prices, the European Commission is considering pausing a part of its landmark methane regulation, which is set to take effect in January. The move comes after French President Emmanuel Macron urged the Commis…</div>
+  <div class="article-meta">Oct 01, 2026  02:06 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, October 01, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
