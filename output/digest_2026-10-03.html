@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, October 03, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 32 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03102026/sec-shareholder-proposals-rule-change-climate-action/" target="_blank">SEC Move Would Make it Harder for Shareholders to Push Companies on Climate Action</a></div>
+  <div class="article-summary">The SEC is proposing to eliminate Rule 14a-8, a critical mechanism allowing shareholders to submit climate and sustainability proposals for a vote. This rollback would significantly weaken investor power to hold corporations accountable for their environmental impact, potentially slowing progress on vital climate initiatives.</div>
+  <div class="article-meta">Oct 03, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/oct/03/heathrow-third-runway-climate-warnings-economic-reality" target="_blank">The expansion of Heathrow would be an expensive disaster for Britain and the world. Burnham needs to block it | George Monbiot</a></div>
+  <div class="article-summary">Building a third runway at Heathrow, despite claims of economic benefit, will cost Britain billions and deliver negligible GDP growth, according to the Department for Transport. This expansion directly contradicts climate goals by encouraging more air travel, while also imposing significant health and wellbeing costs on millions of local residents.</div>
+  <div class="article-meta">Oct 03, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/03/battery-storage-paired-with-37-of-new-u-s-residential-solar-systems-in-2025/" target="_blank">Battery storage paired with 37% of new U.S. residential solar systems in 2025</a></div>
+  <div class="article-summary">Nearly 40% of new U.S. homes installing solar panels in 2025 will also include battery storage, a significant jump from last year and a trend accelerating nationwide, not just in California. This rapid integration of home battery systems is crucial for grid stability and maximizing renewable energy use, paving the way for a more resilient and decarbonized power sector.</div>
+  <div class="article-meta">Oct 03, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/03/brazil-hits-56-gw-of-connection-headroom-for-battery-auctions/" target="_blank">Brazil hits 56 GW of connection headroom for battery auctions</a></div>
+  <div class="article-summary">Brazil has secured a substantial 56 GW of grid connection capacity for battery storage systems in upcoming auctions, far exceeding projected power shortfalls for 2028-2030. This ample headroom, particularly in key regions like Bahia and Piauí, signals Brazil's readiness to integrate significant renewable energy and bolster grid stability, reducing reliance on fossil-fuel-based backup power.</div>
+  <div class="article-meta">Oct 03, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/03/the-case-for-railway-integrated-solar-in-south-korea/" target="_blank">The case for railway-integrated solar in South Korea</a></div>
+  <div class="article-summary">South Korea's railway corridors offer a surprising solution to its land scarcity for solar, with research identifying potential for over 8.5 MW of capacity on just five surface lines. This innovative approach could significantly boost renewable energy generation in densely populated areas, directly contributing to the nation's decarbonization goals.</div>
+  <div class="article-meta">Oct 03, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/03/middle-market-momentum/" target="_blank">Middle market momentum</a></div>
+  <div class="article-summary">Renewable energy policy rollbacks in the US are fueling an energy affordability crisis, warns Clean Capital president Jon Powers. This trend underscores the urgent need to accelerate solar deployment advocacy as elections approach, making energy prices a critical bipartisan concern.</div>
+  <div class="article-meta">Oct 03, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/10/02/byd-bev-sales-up-33-in-september/" target="_blank">BYD BEV Sales Up 33% in September</a></div>
+  <div class="article-summary">BYD sales started out slow this year, but they’re picking up steam … or electricity. The company had 456,713 passenger vehicle deliveries in September. That’s 5.4% more than in August 2026 and 16.2% more than in September 2025. The better news is tha…</div>
+  <div class="article-meta">Oct 03, 2026  06:57 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03102026/nature-protections-could-drive-down-home-insurance-costs/" target="_blank">‘Nature-Based’ Solutions Could Save Insurers and Policyholders Billions</a></div>
+  <div class="article-summary">Insurance giants like State Farm and Allstate are realizing that investing in coastal wetlands, like those around San Francisco Bay, can drastically cut their payouts from extreme weather events. Protecting these natural buffers could save insurers and policyholders billions by reducing flood damage and the need for costly disaster relief.</div>
+  <div class="article-meta">Oct 03, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/oct/03/bangkok-thailand-floods-breaking-point-stagnant-lakes" target="_blank">Bangkok at breaking point as floods turn streets into stagnant lakes</a></div>
+  <div class="article-summary">With 40 dead and a disaster declared across all 50 city districts, experts warn extreme flooding will only worsen across south-east AsiaBangkok is used to absorbing the sudden afternoon downpours that inundate the city during the rainy season. Even s…</div>
+  <div class="article-meta">Oct 03, 2026  05:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03102026/dark-sky-future/" target="_blank">Our Future Might Be Darker—and That’s a Good Thing</a></div>
+  <div class="article-summary">Light pollution is rapidly obscuring our view of the night sky, with the Milky Way now invisible to over 80% of the world's population. This dimming of the stars, while a loss of natural wonder, offers a surprising climate benefit: reduced energy consumption and associated greenhouse gas emissions from excessive artificial lighting.</div>
+  <div class="article-meta">Oct 03, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/03/bluetongue-hits-british-farmers" target="_blank">Worst ever outbreak of bluetongue hits British farms</a></div>
+  <div class="article-summary">Britain is facing its worst-ever bluetongue outbreak, with cases now confirmed as far north as Aberdeenshire, a dramatic expansion attributed to the climate crisis. This African-originating virus, which causes severe illness and death in livestock like sheep and cattle, is now a significant threat to the UK's agricultural sector due to warming temperatures enabling its spread.</div>
+  <div class="article-meta">Oct 03, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/oct/03/we-want-action-fijian-climate-activist-sends-message-ahead-of-un-talks-in-pacific" target="_blank">‘We want action’: Fijian climate activist sends message ahead of UN talks in Pacific</a></div>
+  <div class="article-summary">Lavenia Naivalu has seen the impact of the climate crisis first-hand and is determined to amplify Pacific voices at this year’s pre-Cop summit in FijiFrom her wooden veranda in Fiji’s remote Yasawa islands, climate activist Lavenia Naivalu remembers…</div>
+  <div class="article-meta">Oct 03, 2026  02:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02102026/federal-judge-halts-big-bend-border-wall-construction/" target="_blank">Federal Judge Slams the Brakes on Big Bend Border Wall Construction</a></div>
+  <div class="article-summary">EL PASO—Federal Judge Kathleen Cardone granted a preliminary injunction Friday to halt construction on the border wall in Texas’ expansive Big Bend sector, including the national and state parks. Cardone read a brief order from the bench after hearin…</div>
+  <div class="article-meta">Oct 03, 2026  01:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/02102026/europe-record-heat-climate-shocks/" target="_blank">Europe’s Extreme Summer Triggered Cascading Climate Shocks</a></div>
+  <div class="article-summary">During this past summer of climate extremes, more than half of Europe experienced dangerous levels of heat stress, the combined effect of temperature, humidity, wind and sunshine on the body’s ability to cool itself. In some places, that amounted to…</div>
+  <div class="article-meta">Oct 03, 2026  00:11 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, October 03, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
