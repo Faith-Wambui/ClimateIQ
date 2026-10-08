@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, October 08, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">33</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 28 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/10/08/pre-cop-draws-attention-to-pacifics-climate-plight-and-1-5c-goal/" target="_blank">Pre-COP draws attention to Pacific’s climate plight and 1.5C goal</a></div>
+  <div class="article-summary">Senior climate officials, moved by firsthand accounts from vulnerable Pacific island nations like Tuvalu, have reaffirmed their commitment to limiting global warming to 1.5°C, acknowledging an inevitable overshoot but stressing the target's critical importance for survival. This renewed focus on the 1.5°C goal, a cornerstone of the Paris Agreement, underscores the urgent need for accelerated climate action as rising seas and extreme weather threaten island cultures and livelihoods.</div>
+  <div class="article-meta">Oct 08, 2026  14:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/08/hungary-extends-deadline-for-troubled-eu-funded-residential-solar-scheme/" target="_blank">Hungary extends deadline for troubled EU-funded residential solar scheme</a></div>
+  <div class="article-summary">Hungary has extended its deadline for a troubled EU-funded residential solar program to October 31st, allowing complex installations to proceed once two components are finished. This move signals ongoing challenges in scaling up renewable energy projects, potentially impacting the EU's broader climate targets for decarbonizing its building sector.</div>
+  <div class="article-meta">Oct 08, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/08/inside-bess-manufacturing-maxxens-utility-scale-storage-factory-in-europe/" target="_blank">Inside BESS manufacturing: Maxxen’s utility-scale storage factory in Europe</a></div>
+  <div class="article-summary">Maxxen Energy has opened a 20,000-square-meter, highly automated battery manufacturing facility in Aydın, Türkiye, producing utility-scale storage solutions like their 5 MWh DC Box. This expansion is crucial for accelerating the deployment of renewable energy by providing the necessary grid-scale battery capacity to stabilize power grids as fossil fuels are phased out.</div>
+  <div class="article-meta">Oct 08, 2026  14:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/08/italian-startup-offers-535-w-pvt-solar-module-with-1-4-kw-thermal-output/" target="_blank">Italian startup offers 535 W PVT solar module with 1.4 kW thermal output</a></div>
+  <div class="article-summary">Italian startup Syntropia is launching a 535W hybrid solar module that simultaneously generates electricity and captures heat, boasting an impressive 66.8% combined energy conversion efficiency. This innovation is crucial as it significantly boosts the energy output from a single footprint, accelerating the transition to cleaner energy by maximizing the utility of solar installations.</div>
+  <div class="article-meta">Oct 08, 2026  13:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/08/tata-power-to-pilot-membrane-based-floating-solar-with-norways-ocean-sun/" target="_blank">Tata Power to pilot membrane-based floating solar with Norway’s Ocean Sun</a></div>
+  <div class="article-summary">Tata Power is piloting a 300 kWp floating solar project in India using Ocean Sun's innovative membrane technology. This collaboration brings a novel, potentially more efficient approach to harnessing solar power on water, crucial for expanding renewable energy capacity in a country facing significant energy demands and climate challenges.</div>
+  <div class="article-meta">Oct 08, 2026  12:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/08/global-pv-oversupply-accelerates-consolidation-regional-price-divergence/" target="_blank">Global PV oversupply accelerates consolidation, regional price divergence</a></div>
+  <div class="article-summary">Global solar panel oversupply, driven by China's manufacturing boom, is forcing companies to consolidate and leading to significant price differences across regions. This overcapacity, while potentially lowering costs in some markets, risks hindering the rapid deployment of clean energy needed to meet climate goals.</div>
+  <div class="article-meta">Oct 08, 2026  12:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/08/an-energy-first-cybersecurity-platform-for-solar-storage-and-the-grid/" target="_blank">An energy-first cybersecurity platform for solar, storage and the grid</a></div>
+  <div class="article-summary">Specialised cybersecurity platform SentryOT, created by Romanian energy engineering company Enevo, is designed as “an end-to-end resilience platform for the energy sector”, its developers have said.
+
+Enevo is a leading engineering, procurement and co…</div>
+  <div class="article-meta">Oct 08, 2026  11:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/oct/08/july-record-wildfires-england-data-shows" target="_blank">July 2026 was worst on record for wildfires in England, data shows</a></div>
+  <div class="article-summary">England experienced a record 624 wildfires in July 2026, including a significant blaze near the Sizewell B nuclear power station, underscoring the UK's increasing vulnerability to climate breakdown. This surge in fires, fueled by extreme heat and dry conditions, highlights the tangible and escalating risks posed by a warming planet to critical infrastructure and national landscapes.</div>
+  <div class="article-meta">Oct 08, 2026  13:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08102026/joint-base-andrews-fuel-leak-into-piscataway-creek/" target="_blank">Maryland Demands Answers as Fuel Leak Persists From Joint Base Andrews</a></div>
+  <div class="article-summary">Jet fuel continues to contaminate Piscataway Creek from Joint Base Andrews, six months after the initial spill, despite assurances the leak was contained. This persistent contamination poses a significant threat to the local ecosystem and water quality, highlighting ongoing challenges in environmental remediation at military installations.</div>
+  <div class="article-meta">Oct 08, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/08102026/pennsylvania-natural-gas-well-buffers-data-centers/" target="_blank">In Harrisburg, Advocates Rally for Tougher Rules on Fracking</a></div>
+  <div class="article-summary">Environmental groups and citizens are urging Pennsylvania regulators to increase the minimum amount of protective buffer space between gas wells and homes, schools and water sources. The issue has taken on new urgency as the AI data center buildout s…</div>
+  <div class="article-meta">Oct 08, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/08/britons-kept-in-dark-scale-of-climate-crisis-first-of-its-kind-emergency-briefing" target="_blank">Britons kept in dark about scale of climate crisis, say viewers of ‘first-of-its-kind’ emergency briefing</a></div>
+  <div class="article-summary">Nine out of 10 people felt motivated to act after watching film outlining threats to food security, economy and public healthThe British government must be honest about the scale of the threat posed by climate and nature breakdown, researchers have s…</div>
+  <div class="article-meta">Oct 08, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07102026/heat-drought-and-fire-emissions-devastate-rainforests/" target="_blank">Compounding Climate Impacts Drive Tropical Forest Decline</a></div>
+  <div class="article-summary">Ozone pollution from fires, along with extreme heat and drought, is further weakening the Amazon rainforest’s ability to absorb carbon dioxide, new research shows.  The Amazon and other forests absorb more than a quarter of human-caused CO2 emissions…</div>
+  <div class="article-meta">Oct 07, 2026  23:20 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07102026/livestock-industry-lobby-group-downplayed-greenhouse-gas-emissions/" target="_blank">The American Livestock Industry’s Main Lobbying Group Treated Climate Change as a PR Problem</a></div>
+  <div class="article-summary">In 1991, Random House published a picture book called “Teenage Mutant Ninja Turtles: ABC’s for a Better Planet,” in which the masked cartoon turtles trade in their signature nunchucks for signs bearing environmental slogans. For “A,” the turtles expl…</div>
+  <div class="article-meta">Oct 07, 2026  23:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/oct/07/flavio-bolsonaro-advance-brazil-election-jolt-climate-campaigners" target="_blank">Flávio Bolsonaro’s advance in Brazil’s election is grim jolt for climate campaigners</a></div>
+  <div class="article-summary">Inquest under way into why President Lula’s success in curbing Amazon deforestation has not led to success at pollsMore fire, more ash, more crime, more death. And a globally important ecosystem driven ever more rapidly towards a point of no return.…</div>
+  <div class="article-meta">Oct 07, 2026  22:23 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, October 08, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
