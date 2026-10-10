@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, October 10, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">31</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:48%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 25 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/10/austria-43300-applications-for-solar-subsidies-submitted-in-just-ten-minutes/" target="_blank">Austria: 43,300 applications for solar subsidies submitted in just ten minutes</a></div>
+  <div class="article-summary">Austria's latest solar subsidy round saw an overwhelming 43,300 applications in just ten minutes, demonstrating immense public appetite for renewable energy. This surge highlights the urgent need for accelerated solar deployment and signals a strategic shift by the Austrian government towards battery storage and smart grid solutions to maximize clean energy integration.</div>
+  <div class="article-meta">Oct 10, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10102026/susan-collins-election-environmental-issues/" target="_blank">Unpacking the Environmental Issues in Susan Collins’ Tough Race in Maine</a></div>
+  <div class="article-summary">Maine's closely watched Senate race features two candidates with surprisingly aligned environmental platforms, highlighting the growing bipartisan recognition of climate concerns. This shared focus underscores the increasing political weight of climate action, even in competitive elections, signaling potential shifts in policy regardless of the outcome.</div>
+  <div class="article-meta">Oct 10, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09102026/bay-area-community-seeks-stronger-refinery-oversight/" target="_blank">Northern California Community Wants Stronger Oversight of Dangerous Refineries Nearby</a></div>
+  <div class="article-summary">Residents of Martinez, California, are demanding increased oversight of the Marathon Martinez Renewables and Martinez Refining Co. facilities after these refineries accumulated hundreds of air quality violations. This situation highlights the urgent need for stricter regulation to mitigate the significant local and broader climate impacts of industrial pollution from such facilities.</div>
+  <div class="article-meta">Oct 10, 2026  02:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/10/sunbooster-secures-european-patent-for-bifacial-photovoltaic-fences/" target="_blank">Sunbooster secures European patent for bifacial photovoltaic fences</a></div>
+  <div class="article-summary">Austrian firm Sunbooster has patented its innovative bifacial solar fence technology across 18 EU nations, recently deploying a 3.7 kW installation in France. This breakthrough allows for efficient energy generation from both sides of the panels, offering a significant new avenue for distributed solar power.</div>
+  <div class="article-meta">Oct 10, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/10/beyond-gigawatts-why-leadership-decides-italys-energy-security/" target="_blank">Why leadership decides Italy’s energy security</a></div>
+  <div class="article-summary">At Solar & Storage Live Italia, panels organised by Women in Solar+ Europe (WiSEu) and Solar+ Leaders argued that decisions made in a project's first months, and the inclusive teams built to make them, matter as much to energy security as megawatts a…</div>
+  <div class="article-meta">Oct 10, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/10/more-than-70-of-announced-u-s-solar-manufacturing-expansion-plans-yet-to-be-financed/" target="_blank">More than 70% of announced U.S. solar manufacturing expansion plans yet to be financed</a></div>
+  <div class="article-summary">Forecasted capital expenditure for new U.S. solar manufacturing expansions for 2027 reflects a hesitant financing climate, with Tesla’s Texas plans having the potential to rocket boost the entire sector’s spending outlook.The postMore than 70% of ann…</div>
+  <div class="article-meta">Oct 10, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/10/beyond-gigawatts-why-indias-clean-energy-future-depends-on-storage-intelligence/" target="_blank">Beyond gigawatts: Why India’s clean energy future depends on storage intelligence</a></div>
+  <div class="article-summary">The battery creates flexibility. The intelligence behind it determines how much of that flexibility the grid can harness. The next clean energy benchmark for India, therefore, might not just be a new number of gigawatts. It might be the ability to ge…</div>
+  <div class="article-meta">Oct 10, 2026  09:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/10/the-shape-of-ppas-is-changing-from-volume-to-value-are-you-positioned-to-capture-the-premium-in-emerging-nem-value-pools/" target="_blank">The shape of PPAs is changing – from volume to value</a></div>
+  <div class="article-summary">Australia’s renewable energy market is entering a new phase where the value of electricity is increasingly determined not by energy alone, but by the ability to deliver energy when and where it is needed.The postThe shape of PPAs is changing – from v…</div>
+  <div class="article-meta">Oct 10, 2026  09:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/10/brazils-retail-electricity-market-opening-raises-credit-and-liquidity-concerns-study-finds/" target="_blank">Brazil’s retail electricity market opening raises credit and liquidity concerns, study finds</a></div>
+  <div class="article-summary">Brazil's move to open its free electricity market to low-voltage consumers faces significant headwinds, with a recent study revealing a 17% average monthly payment delinquency rate and 4% customer churn in subscription-based solar schemes. These figures signal substantial credit and liquidity risks that could destabilize the market and hinder the transition to cleaner energy sources.</div>
+  <div class="article-meta">Oct 10, 2026  12:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/oct/10/tornado-hit-marsala-sicily-injuries-damage" target="_blank">Dozens injured and buildings damaged as tornadoes hit Sicily</a></div>
+  <div class="article-summary">Two powerful tornadoes tore through Marsala, Sicily, injuring dozens and causing significant structural damage, including to a school. This extreme weather event, originating from the Mediterranean, highlights the increasing vulnerability of coastal regions to escalating climate-driven storm intensity.</div>
+  <div class="article-meta">Oct 10, 2026  13:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10102026/florida-black-community-contaminated-drinking-water/" target="_blank">In One Historically Black Florida Community, the Drinking Water Is Brown</a></div>
+  <div class="article-summary">In Whitted, Florida, residents like Ann Jones are experiencing brown, tea-colored drinking water, a stark reality for this historically Black community. This contamination highlights the disproportionate impact of aging infrastructure and potentially climate-driven water quality issues on vulnerable populations.</div>
+  <div class="article-meta">Oct 10, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10102026/greece-seafood-problem-global-impact/" target="_blank">Greece’s Seafood Problem Starts Elsewhere</a></div>
+  <div class="article-summary">Greek aquaculture, touted as sustainable, is actually a major contributor to ocean pollution and biodiversity loss, with fish farms in the Aegean Sea releasing significant amounts of waste. This pollution is driving a decline in wild fish populations, undermining the very sustainability claims the industry promotes.</div>
+  <div class="article-meta">Oct 10, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/10/climate-crisis-putting-world-best-surf-breaks-at-risk" target="_blank">Climate crisis is coming to crush many of world’s best surf breaks, study warns</a></div>
+  <div class="article-summary">Changing tide levels, shifting sands and hardened shorelines put waves at risk, affecting more than just surfersThe climate crisis is coming for some of the world’s greatest surf breaks, submerging some as sea level rises and wiping out others as cla…</div>
+  <div class="article-meta">Oct 10, 2026  06:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09102026/bureau-of-land-management-accelerates-arctic-oil-exploration-permit/" target="_blank">Looking for Oil in Alaska, No Environmental Strings Attached</a></div>
+  <div class="article-summary">Oil companies will no longer be required to conduct environmental reviews before exploring for fossil fuel reservoirs in the Western Arctic, the largest tract of federally managed public land in the United States. The Bureau of Land Management announ…</div>
+  <div class="article-meta">Oct 10, 2026  01:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09102026/energy-transfer-pipeline-spill-prompts-federal-investigation/" target="_blank">Michigan Spill Prompts Federal Probe of Energy Transfer Pipelines’ Safety</a></div>
+  <div class="article-summary">A crude oil pipeline spill last month in the Detroit suburbs has prompted federal authorities to open an investigation into the safety of all 20,000 miles of hazardous liquids pipelines operated by Energy Transfer. The 600-gallon spill at a commercia…</div>
+  <div class="article-meta">Oct 10, 2026  01:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/09102026/sec-warns-investment-firms-that-challenged-exxon/" target="_blank">SEC Issues Warning to Investment Firms That Challenged ExxonMobil</a></div>
+  <div class="article-summary">The U.S. Securities and Exchange Commission issued an unusual warning this week to the country’s largest asset managers and a climate-focused investor group over their roles in a 2021 campaign that replaced board directors at ExxonMobil. The commissi…</div>
+  <div class="article-meta">Oct 09, 2026  20:42 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, October 10, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
