@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, October 12, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">27</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:56%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 19 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/12/france-defines-terms-for-long-term-capacity-auction/" target="_blank">France defines terms for long-term capacity auction</a></div>
+  <div class="article-summary">France is setting the stage for its first long-term capacity auction, targeting 82 GW for winter 2030-31 to secure its electricity grid. This move is crucial for maintaining reliable power as the nation transitions to cleaner energy sources, ensuring stability without undue cost burdens on consumers.</div>
+  <div class="article-meta">Oct 12, 2026  14:47 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/10/12/autonomous-military-6x6-packs-electric-drive-and-go-anywhere-grit-video/" target="_blank">Autonomous military 6×6 packs electric drive and go-anywhere grit [video]</a></div>
+  <div class="article-summary">The US Army's Infantry Last Tactical Mile initiative has selected the autonomous Hunter WOLF robot, a 6x6 electric vehicle designed for rugged terrain and logistics support. This development signals a shift towards electric-powered military hardware, potentially reducing reliance on fossil fuels in combat zones.</div>
+  <div class="article-meta">Oct 12, 2026  14:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/12/eskom-kicks-off-tender-for-6-gw-of-renewables-plus-storage/" target="_blank">Eskom kicks off tender for 6 GW of renewables-plus-storage</a></div>
+  <div class="article-summary">South Africa's Eskom is launching a massive 6 GW tender for renewable energy and battery storage, including at least 2 GW of solar and 1 GW/4 GWh of storage. This significant move signals a crucial step in the nation's transition away from coal, directly addressing its substantial carbon emissions and bolstering grid stability with clean power.</div>
+  <div class="article-meta">Oct 12, 2026  14:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/10/12/this-electric-motorcycle-company-just-hit-10-million-battery-swaps-and-its-profitable/" target="_blank">This electric motorcycle company just hit 10 million battery swaps – and it’s profitable</a></div>
+  <div class="article-summary">Brazilian electric motorcycle company Vammo has surpassed 10 million battery swaps and achieved EBITDA profitability, demonstrating a scalable, rapid-swap model for two-wheelers in a massive market. This success in São Paulo, with over 10,000 riders, signals a viable path for electrifying transportation in densely populated urban areas, significantly reducing emissions from a sector that currently sees electric models making up less than 1% of sales.</div>
+  <div class="article-meta">Oct 12, 2026  14:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/12/multiple-grounding-points-cut-lightning-induced-overvoltage-in-solar-panels-by-up-to-55/" target="_blank">Multiple grounding points cut lightning-induced overvoltage in solar panels by up to 55%</a></div>
+  <div class="article-summary">New research from Indonesia reveals that implementing multiple grounding points and strategically placing them closer to potential lightning strike zones can slash damaging overvoltage in solar panels by up to 55%. This breakthrough is critical for the long-term reliability and economic viability of solar installations, especially in regions with high soil resistivity, directly impacting the global transition to renewable energy.</div>
+  <div class="article-meta">Oct 12, 2026  14:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/12/energy-dome-opens-co2-battery-manufacturing-plant-in-italy/" target="_blank">Energy Dome opens CO2 battery manufacturing plant in Italy</a></div>
+  <div class="article-summary">Energy Dome has launched a new manufacturing plant in Piacenza, Italy, to produce its innovative CO2 Battery technology, already slated for projects in India, the US, and Ireland. This expansion is crucial for scaling up long-duration energy storage, a vital component for integrating renewable energy sources and decarbonizing the grid.</div>
+  <div class="article-meta">Oct 12, 2026  13:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/12/study-identifies-new-pid-degradation-mechanism-in-medium-voltage-pv-modules/" target="_blank">Study identifies new PID degradation mechanism in medium-voltage PV modules</a></div>
+  <div class="article-summary">French researchers have discovered that higher PV system voltages accelerate potential-induced degradation (PID), with a new mechanism involving partial discharges and electrical treeing identified as a significant reliability risk for medium-voltage modules. This finding directly impacts the long-term performance and economic viability of larger solar installations, demanding updated design considerations to mitigate these newly understood degradation pathways.</div>
+  <div class="article-meta">Oct 12, 2026  12:59 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02771-1" target="_blank">Selecting climate solutions creates new institutional authority</a></div>
+  <div class="article-summary">Ahead of COP31, the Global Implementation Accelerator (GIA) is adding a selection layer to the Global Climate Action Agenda. The agenda coordinates a broad implementation ecosystem built around initiatives and multi-stakeholder Plans to Accelerate So…</div>
+  <div class="article-meta">Oct 12, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12102026/inside-climate-podcast-fish-farming-impacts/" target="_blank">Food for Feed</a></div>
+  <div class="article-summary">The booming $300 billion global fish farming industry, aquaculture, is facing increased scrutiny for its significant environmental impact. This expansion is contributing to habitat destruction and pollution, posing a threat to marine ecosystems and the climate.</div>
+  <div class="article-meta">Oct 12, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12102026/corpus-christi-desalination-plant-financial-political-quagmire/" target="_blank">How a Bid to Beat Drought Drove Corpus Christi to the Brink of Disaster</a></div>
+  <div class="article-summary">This story is a partnership between Dylan Baddour of Inside Climate News and Neena Satija of The Texas Newsroom. Eight years ago, at the height of the shale-oil boom, a committee of industry giants and public officials unveiled a bold plan to make Co…</div>
+  <div class="article-meta">Oct 12, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/12102026/search-for-fishmeal-sustainable-alternatives-goes-nowhere/" target="_blank">The Fishfeed Trap</a></div>
+  <div class="article-summary">This story is part of an investigation conducted by an international team of journalists based at The Outlaw Ocean Project. Read the other stories here. Inside a sprawling warehouse in northern France, millions of brown, inch-long mealworm larvae wri…</div>
+  <div class="article-meta">Oct 12, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/10/12/governments-that-support-climate-science-must-stand-firm-against-naysayers/" target="_blank">Governments that support climate science must stand firm against naysayers</a></div>
+  <div class="article-summary">Piers Forster is Professor of Physical Climate Change and Director of the Priestley Centre for Climate Futures at the University of Leeds. He has previously served as a lead author on several IPCC assessment reports.
+
+Evidence of a rapidly changing c…</div>
+  <div class="article-meta">Oct 12, 2026  11:53 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/oct/12/total-fire-ban-sydney-extreme-weather-temperature-37c" target="_blank">Total fire ban for Sydney, with high temperatures and risk of bushfires from ‘dry lightning’</a></div>
+  <div class="article-summary">Olympic Park records high of 35.2C after Rural Fire Service warned of high fire danger across cityFollow our Australia politics live blog for latest updatesGet ournew political email,free appordaily news podcastA total fire ban was in place across gr…</div>
+  <div class="article-meta">Oct 12, 2026  05:53 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, October 12, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

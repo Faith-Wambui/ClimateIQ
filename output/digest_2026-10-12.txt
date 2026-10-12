@@ -1,0 +1,120 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Monday, October 12, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ France defines terms for long-term capacity auction
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/12/france-defines-terms-for-long-term-capacity-auction/
+  Date   : Oct 12, 2026  14:47 EAT
+  Summary: France is setting the stage for its first long-term capacity auction, targeting 82 GW for winter 2030-31 to secure its electricity grid. This move is crucial for maintaining reliable power as the nation transitions to cleaner energy sources, ensuring stability without undue cost burdens on consumers.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Autonomous military 6×6 packs electric drive and go-anywhere grit [video]
+  Source : Electrek
+  Link   : https://electrek.co/2026/10/12/autonomous-military-6x6-packs-electric-drive-and-go-anywhere-grit-video/
+  Date   : Oct 12, 2026  14:48 EAT
+  Summary: The US Army's Infantry Last Tactical Mile initiative has selected the autonomous Hunter WOLF robot, a 6x6 electric vehicle designed for rugged terrain and logistics support. This development signals a shift towards electric-powered military hardware, potentially reducing reliance on fossil fuels in combat zones.
+
+
+▸ Eskom kicks off tender for 6 GW of renewables-plus-storage
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/12/eskom-kicks-off-tender-for-6-gw-of-renewables-plus-storage/
+  Date   : Oct 12, 2026  14:38 EAT
+  Summary: South Africa's Eskom is launching a massive 6 GW tender for renewable energy and battery storage, including at least 2 GW of solar and 1 GW/4 GWh of storage. This significant move signals a crucial step in the nation's transition away from coal, directly addressing its substantial carbon emissions and bolstering grid stability with clean power.
+
+
+▸ This electric motorcycle company just hit 10 million battery swaps – and it’s profitable
+  Source : Electrek
+  Link   : https://electrek.co/2026/10/12/this-electric-motorcycle-company-just-hit-10-million-battery-swaps-and-its-profitable/
+  Date   : Oct 12, 2026  14:30 EAT
+  Summary: Brazilian electric motorcycle company Vammo has surpassed 10 million battery swaps and achieved EBITDA profitability, demonstrating a scalable, rapid-swap model for two-wheelers in a massive market. This success in São Paulo, with over 10,000 riders, signals a viable path for electrifying transportation in densely populated urban areas, significantly reducing emissions from a sector that currently sees electric models making up less than 1% of sales.
+
+
+▸ Multiple grounding points cut lightning-induced overvoltage in solar panels by up to 55%
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/12/multiple-grounding-points-cut-lightning-induced-overvoltage-in-solar-panels-by-up-to-55/
+  Date   : Oct 12, 2026  14:10 EAT
+  Summary: New research from Indonesia reveals that implementing multiple grounding points and strategically placing them closer to potential lightning strike zones can slash damaging overvoltage in solar panels by up to 55%. This breakthrough is critical for the long-term reliability and economic viability of solar installations, especially in regions with high soil resistivity, directly impacting the global transition to renewable energy.
+
+
+▸ Energy Dome opens CO2 battery manufacturing plant in Italy
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/12/energy-dome-opens-co2-battery-manufacturing-plant-in-italy/
+  Date   : Oct 12, 2026  13:08 EAT
+  Summary: Energy Dome has launched a new manufacturing plant in Piacenza, Italy, to produce its innovative CO2 Battery technology, already slated for projects in India, the US, and Ireland. This expansion is crucial for scaling up long-duration energy storage, a vital component for integrating renewable energy sources and decarbonizing the grid.
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (2 articles)
+============================================================
+
+▸ Study identifies new PID degradation mechanism in medium-voltage PV modules
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/12/study-identifies-new-pid-degradation-mechanism-in-medium-voltage-pv-modules/
+  Date   : Oct 12, 2026  12:59 EAT
+  Summary: French researchers have discovered that higher PV system voltages accelerate potential-induced degradation (PID), with a new mechanism involving partial discharges and electrical treeing identified as a significant reliability risk for medium-voltage modules. This finding directly impacts the long-term performance and economic viability of larger solar installations, demanding updated design considerations to mitigate these newly understood degradation pathways.
+
+
+▸ Selecting climate solutions creates new institutional authority
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02771-1
+  Date   : Oct 12, 2026  03:00 EAT
+  Summary: Ahead of COP31, the Global Implementation Accelerator (GIA) is adding a selection layer to the Global Climate Action Agenda. The agenda coordinates a broad implementation ecosystem built around initiatives and multi-stakeholder Plans to Accelerate So…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Food for Feed
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12102026/inside-climate-podcast-fish-farming-impacts/
+  Date   : Oct 12, 2026  12:30 EAT
+  Summary: The booming $300 billion global fish farming industry, aquaculture, is facing increased scrutiny for its significant environmental impact. This expansion is contributing to habitat destruction and pollution, posing a threat to marine ecosystems and the climate.
+
+
+▸ How a Bid to Beat Drought Drove Corpus Christi to the Brink of Disaster
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12102026/corpus-christi-desalination-plant-financial-political-quagmire/
+  Date   : Oct 12, 2026  12:00 EAT
+  Summary: This story is a partnership between Dylan Baddour of Inside Climate News and Neena Satija of The Texas Newsroom. Eight years ago, at the height of the shale-oil boom, a committee of industry giants and public officials unveiled a bold plan to make Co…
+
+
+▸ The Fishfeed Trap
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12102026/search-for-fishmeal-sustainable-alternatives-goes-nowhere/
+  Date   : Oct 12, 2026  11:55 EAT
+  Summary: This story is part of an investigation conducted by an international team of journalists based at The Outlaw Ocean Project. Read the other stories here. Inside a sprawling warehouse in northern France, millions of brown, inch-long mealworm larvae wri…
+
+
+▸ Governments that support climate science must stand firm against naysayers
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/10/12/governments-that-support-climate-science-must-stand-firm-against-naysayers/
+  Date   : Oct 12, 2026  11:53 EAT
+  Summary: Piers Forster is Professor of Physical Climate Change and Director of the Priestley Centre for Climate Futures at the University of Leeds. He has previously served as a lead author on several IPCC assessment reports.
+
+Evidence of a rapidly changing c…
+
+
+▸ Total fire ban for Sydney, with high temperatures and risk of bushfires from ‘dry lightning’
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/australia-news/2026/oct/12/total-fire-ban-sydney-extreme-weather-temperature-37c
+  Date   : Oct 12, 2026  05:53 EAT
+  Summary: Olympic Park records high of 35.2C after Rural Fire Service warned of high fire danger across cityFollow our Australia politics live blog for latest updatesGet ournew political email,free appordaily news podcastA total fire ban was in place across gr…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 27  |  Sources: 7  |  Topics: 4
