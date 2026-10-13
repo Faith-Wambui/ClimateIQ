@@ -1,0 +1,124 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Tuesday, October 13, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ Interactive: Tracking negotiating texts at the COP17 biodiversity summit
+  Source : Carbon Brief
+  Link   : https://www.carbonbrief.org/interactive-tracking-negotiating-texts-at-the-cop17-biodiversity-summit
+  Date   : Oct 12, 2026  17:31 EAT
+  Summary: Next week, diplomats from around the world will descend on Yerevan, Armenia, to negotiate a series of decisions under the UN Convention on Biological Diversity (CBD).
+
+Between 19 and 30 October, 196 parties will gather to hammer out the precise wordi…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Exide launches modular 125 kW/261 kWh battery for C&I applications
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/13/exide-launches-modular-125-kw-261-kwh-battery-for-ci-applications/
+  Date   : Oct 13, 2026  15:01 EAT
+  Summary: Exide's new modular 125 kW/261 kWh battery, utilizing LFP technology, offers a significant boost for commercial and industrial energy storage. This launch provides businesses with a robust solution to integrate renewable energy and enhance grid resilience, directly contributing to decarbonization efforts.
+
+
+▸ Tesla still leads US fast-charger growth – but it’s raised its prices
+  Source : Electrek
+  Link   : https://electrek.co/2026/10/13/tesla-still-leads-us-supercharger-growth-but-its-raised-prices/
+  Date   : Oct 13, 2026  15:00 EAT
+  Summary: The US now boasts over 80,000 public EV fast-charging ports, with new stations averaging more powerful chargers and more stalls, though Tesla has increased its Supercharger prices. This expansion is crucial for accelerating EV adoption and reducing transportation emissions, despite a slight slowdown in new station openings compared to last year.
+
+
+▸ Three-molecule blend boosts inverted perovskite solar cell efficiency to 27.5%
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/13/three-molecule-blend-boosts-inverted-perovskite-solar-cell-efficiency-to-27-5/
+  Date   : Oct 13, 2026  14:52 EAT
+  Summary: Chinese scientists have achieved a record 27.31% efficiency in inverted perovskite solar cells using a novel three-molecule blend for molecular contacts. This breakthrough not only boosts power generation but also enhances thermal stability, paving the way for more durable and efficient solar technology essential for accelerating the transition to clean energy.
+
+
+▸ Stationary, moving, flexible: Batteries are the low-cost backbone of the future energy system
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/13/stationary-moving-flexible-batteries-are-the-low-cost-backbone-of-the-future-energy-system/
+  Date   : Oct 13, 2026  14:05 EAT
+  Summary: Sodium-ion batteries are emerging as a game-changer, offering a low-cost, raw-material-independent alternative to lithium-ion for grid-scale storage and electric vehicle integration. This technological leap is crucial for a future powered by solar PV, enabling greater grid flexibility and accelerating the transition to a decarbonized energy system.
+
+
+▸ Lectric launches lighter, lower-cost version of its bestselling urban e-bike: Lectric XPress Lite
+  Source : Electrek
+  Link   : https://electrek.co/2026/10/13/lectric-launches-lighter-lower-cost-version-of-its-bestselling-urban-e-bike-lectric-xpress-lite/
+  Date   : Oct 13, 2026  13:58 EAT
+  Summary: Lectric eBikes just unveiled the XPress Lite, a more affordable and lighter urban e-bike designed to make electric commuting accessible to a wider audience. This move democratizes sustainable transportation, potentially accelerating the shift away from carbon-intensive personal vehicles in cities.
+
+
+============================================================
+💰  CLIMATE FINANCE  (1 articles)
+============================================================
+
+▸ European PPA prices rise 5% in September
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/13/european-ppa-prices-rise-5-in-september/
+  Date   : Oct 13, 2026  13:42 EAT
+  Summary: European Power Purchase Agreement (PPA) prices climbed 5% in September, a trend fueled by escalating forward electricity and gas costs, despite price dips in Spain and Portugal. This uptick in contracting activity, with 25 deals totaling 1.2 GW, signals continued investment in renewables, though the underlying price volatility highlights the ongoing challenges in securing stable, long-term clean energy contracts.
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (2 articles)
+============================================================
+
+▸ Scientists deploy a 24-armed secret weapon to save California’s kelp forests
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/oct/13/sunflower-sea-star-california-kelp-forests
+  Date   : Oct 13, 2026  15:00 EAT
+  Summary: Scientists are deploying a "24-armed secret weapon" – the sunflower sea star – to combat the devastating loss of California's kelp forests, which have seen 95% decimation along the Pacific coast in the last decade. This restoration effort is critical because these sea stars are a keystone species, vital for maintaining the health and biodiversity of these underwater ecosystems, which in turn play a significant role in carbon sequestration.
+
+
+▸ Enhancing fairness in climate action through policy packages
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02751-5
+  Date   : Oct 13, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 13 October 2026;doi:10.1038/s41558-026-02751-5Achieving climate neutrality requires policies perceived as fair, with equity both between and within income groups. Here researchers evaluate the equity implicati…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (4 articles)
+============================================================
+
+▸ Inside Ohio’s Revolt Against Data Centers
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/13102026/ohio-data-center-moratoriums/
+  Date   : Oct 13, 2026  12:00 EAT
+  Summary: COLUMBUS, Ohio—A four-hour legislative committee hearing in June, punctuated by applause and anger, offered a window into the growing backlash against data centers. The prospect of unchecked development has galvanized a cross-section of Ohioans, urba…
+
+
+▸ What Happened to Pennsylvania’s Hydrogen Hubs?
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/13102026/pennsylvania-hydrogen-hubs-in-limbo/
+  Date   : Oct 13, 2026  11:55 EAT
+  Summary: Three years ago, hydrogen seemed poised for a long-awaited breakthrough. The Biden administration announced $7 billion in federal funding for seven hubs to produce the fuel across the country, and Pennsylvania was set to be a major player in the emer…
+
+
+▸ Coastal erosion in England has claimed at least 183 homes in past 16 years
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/oct/13/coastal-erosion-england-homes-demolished
+  Date   : Oct 13, 2026  09:00 EAT
+  Summary: Exclusive: Homes demolished along east coast after being deemed too vulnerable to live in, figures revealSeaside communities along the east coast of England have lost at least183 homes to coastalerosion and landslides over the past 16 years, figures…
+
+
+▸ UN carbon market forces cookstove projects to protect against forest loss
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/10/12/un-carbon-market-forces-cookstove-projects-protect-forest-loss-credits/
+  Date   : Oct 12, 2026  20:53 EAT
+  Summary: Cleaner cooking projects in the UN carbon market will have to set aside a share of their credits to insure against the risk that the trees they save are lost to fire, drought or logging, after the market’s regulator rejected calls to exempt the secto…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 36  |  Sources: 8  |  Topics: 5
