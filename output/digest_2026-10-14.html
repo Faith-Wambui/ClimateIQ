@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, October 14, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">35</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">2</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:57%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 26 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/14/oswal-pumps-to-set-up-1-2-gw-topcon-solar-cell-manufacturing-facility/" target="_blank">Oswal Pumps to set up 1.2 GW TOPCon solar cell factory in India</a></div>
+  <div class="article-summary">Oswal Pumps is investing $48 million to build a 1.2 GW TOPCon solar cell factory in Karnal, India, slated for commercial production by April 2028. This move significantly boosts India's domestic solar manufacturing capacity, a crucial step in reducing reliance on imports and accelerating the nation's renewable energy transition.</div>
+  <div class="article-meta">Oct 14, 2026  12:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/14/heliup-offers-lightweight-rooftop-pv-modules-with-waterproofing-membrane/" target="_blank">Heliup offers lightweight rooftop PV modules with waterproofing membrane</a></div>
+  <div class="article-summary">Heliup and Holcim's Elevate brand have launched Solar Light TPO, a lightweight rooftop solar system integrated with a waterproofing membrane, specifically for structures with limited load-bearing capacity. This innovation expands the potential for solar energy generation on a wider range of buildings, including older or less robust structures, thereby increasing renewable energy deployment.</div>
+  <div class="article-meta">Oct 14, 2026  12:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/14/trina-solar-researchers-propose-new-classification-of-ultraviolet-induced-degradation-in-topcon-solar-cells/" target="_blank">Trina Solar researchers propose new classification of ultraviolet-induced degradation in TOPCon solar cells</a></div>
+  <div class="article-summary">Trina Solar researchers have developed a new classification system for ultraviolet-induced degradation in TOPCon solar cells, differentiating between reversible and irreversible performance losses. This breakthrough is critical for improving the accuracy of long-term solar module reliability testing and ensuring more predictable energy generation in real-world conditions.</div>
+  <div class="article-meta">Oct 14, 2026  11:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/14/early-backsheet-removal-cuts-dust-from-thermal-pv-recycling/" target="_blank">Early backsheet removal cuts dust from thermal PV recycling</a></div>
+  <div class="article-summary">Italian researchers found that removing PV module backsheets *before* thermal recycling significantly reduces particulate emissions by over 30%, preventing titanium dioxide from contaminating recovered materials. While this method increases propane usage by approximately 20%, it offers a cleaner pathway for photovoltaic waste management, crucial for scaling up solar panel recycling efforts.</div>
+  <div class="article-meta">Oct 14, 2026  11:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/10/14/the-world-record-for-the-longest-electric-motorcycle-ride-has-just-been-obliterated/" target="_blank">The world record for the longest electric motorcycle ride has just been obliterated</a></div>
+  <div class="article-summary">Belgian rider Jelle Verstaen shattered the electric motorcycle range record, traveling 436.5 km (271.2 miles) on a single charge of a production Zero DS. This demonstration proves that two-wheeled EVs can achieve impressive distances, challenging the perception of limited electric motorcycle range and signaling growing efficiency in the sector.</div>
+  <div class="article-meta">Oct 14, 2026  11:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14102026/ethoxyquin-fire-retardant-in-seafood-chain/" target="_blank">The Fire Retardant in the Seafood Chain</a></div>
+  <div class="article-summary">A devastating fire aboard a South African ship in 1966 released a massive amount of fire retardant into the ocean, a chemical now found in the seafood we consume. This persistent pollutant, identified as Tris(2-chloroethyl) phosphate (TCEP), poses a significant risk to marine ecosystems and human health, highlighting the long-lasting environmental consequences of industrial accidents.</div>
+  <div class="article-meta">Oct 14, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/10/14/world-bank-and-imf-should-lead-the-financial-system-in-responding-to-the-climate-crisis/" target="_blank">World Bank and IMF should lead the financial system in responding to the climate crisis</a></div>
+  <div class="article-summary">Sandra Guzmán is director at the Climate Finance Group for Latin America and the Caribbean (GFLAC), and Raju Pandit Chhetri is lead climate finance negotiator for the least-developed countries at the UNFCCC.
+
+Recent catastrophic floods in Nepal stark…</div>
+  <div class="article-meta">Oct 14, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13102026/wyoming-colorado-river-measuring/" target="_blank">Momentum for Measuring Water Lost in Wyoming’s Portion of the Colorado River Dries Up</a></div>
+  <div class="article-summary">Wyoming has shelved a state-funded project to measure water use in the Green River and Little Snake River basins after it could not get enough data to create a basin-wide estimate of water lost during irrigation. At a meeting in the Cowboy State capi…</div>
+  <div class="article-meta">Oct 14, 2026  01:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/oct/13/indonesia-wildfire-el-nino-razes-300-homes-bankga-belitung" target="_blank">Indonesia wildfire fuelled by El Niño razes almost 300 homes</a></div>
+  <div class="article-summary">Hundreds of people displaced in Bangka Belitung with conditions described as worst in a decade with wildlife also badly hitA forest fire on Indonesia’s Sumatra island fuelled by El Niño has razed nearly 300 homes, forcing hundreds of people to evacua…</div>
+  <div class="article-meta">Oct 13, 2026  19:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/10/13/se-asia-speeds-up-plan-for-connected-clean-power-grid-after-oil-shock/" target="_blank">SE Asia speeds up plan for connected clean power grid after oil shock</a></div>
+  <div class="article-summary">When oil and gas shipments stopped flowing through the Strait of Hormuz at the start of the Iran war, Southeast Asian nations were left reeling as the supply crunch laid bare their acute reliance on fossil fuel imports. As prices soared, governments…</div>
+  <div class="article-meta">Oct 13, 2026  18:34 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, October 14, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
