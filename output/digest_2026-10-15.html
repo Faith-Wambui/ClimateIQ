@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, October 15, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 38 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/15/finland-demands-grid-forming-support-for-new-wind-solar-in-weak-grids/" target="_blank">Finland demands grid-forming support for new wind, solar in weak grids</a></div>
+  <div class="article-summary">Finland's grid operator, Fingrid, is mandating that new wind and solar projects in vulnerable areas must offer grid-forming capabilities, achievable through co-located batteries up to 30% of their output. This move is crucial for maintaining grid stability as renewable energy penetration increases, preventing potential blackouts and ensuring reliable power supply.</div>
+  <div class="article-meta">Oct 15, 2026  10:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/15/brazils-presidential-election-lula-and-bolsonaros-proposals-for-solar-energy/" target="_blank">Brazil’s presidential election: Lula and Bolsonaro’s proposals for solar energy</a></div>
+  <div class="article-summary">Brazil's upcoming presidential runoff pits Lula and Bolsonaro against each other with competing energy visions, both aiming to boost solar and storage while lowering costs. This election is critical as Brazil's energy policy will significantly impact global renewable energy expansion and the fight against climate change.</div>
+  <div class="article-meta">Oct 15, 2026  08:47 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/15/mova-launches-residential-battery-with-integrated-ev-charging-management/" target="_blank">Mova launches residential battery with integrated EV charging management</a></div>
+  <div class="article-summary">Mova has launched the LumeGret S5000, a residential battery system integrating solar power management with up to 4.8 kW input and a 7 kW EV charger. This innovation streamlines home energy use, enabling homeowners to maximize solar power for their homes and electric vehicles, thereby accelerating the transition to cleaner transportation and reducing reliance on the grid.</div>
+  <div class="article-meta">Oct 15, 2026  09:13 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/15/scientists-develop-moth-eye-inspired-antireflective-surfaces-for-pv-modules/" target="_blank">Scientists develop moth-eye-inspired antireflective surfaces for PV modules</a></div>
+  <div class="article-summary">Portuguese researchers found that while moth-eye inspired antireflective surfaces boost solar panel efficiency, repeated physical contact causes nanopillar damage and wear, potentially compromising their long-term effectiveness. This discovery is crucial for the widespread adoption of next-generation solar technology, as it highlights the need for robust designs that can withstand real-world conditions to maximize clean energy generation.</div>
+  <div class="article-meta">Oct 15, 2026  08:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/15/mexico-reports-6-86-gw-of-solar-pv-projects-in-development-pipeline/" target="_blank">Mexico reports 6.86 GW of solar PV projects in development pipeline</a></div>
+  <div class="article-summary">Mexico is advancing a significant 6.86 GW of solar PV projects, alongside 4.03 GW of wind, with an additional 4.45 GW of solar awaiting allocation by the end of 2026. This substantial build-out of renewable capacity is crucial for Mexico to meet its climate targets and reduce its reliance on fossil fuels.</div>
+  <div class="article-meta">Oct 15, 2026  08:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/15/el-salvador-announces-400-mw-solar-1-gwh-battery-storage-push/" target="_blank">El Salvador announces 400 MW solar, 1 GWh battery storage push</a></div>
+  <div class="article-summary">Cox plans to develop up to 400 MW of solar capacity and 1 GWh of battery storage in El Salvador under an investment agreement that also covers natural gas infrastructure and water management. The government will participate as a partner in the energy…</div>
+  <div class="article-meta">Oct 15, 2026  08:26 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/15/solar-repowering-guide-shows-installers-how-to-tap-into-the-aging-rooftop-market/" target="_blank">Solar repowering guide shows installers how to tap into the aging rooftop market</a></div>
+  <div class="article-summary">To help residential contractors capitalize on the growing wave of aging photovoltaic systems, Tigo Energy has released a comprehensive guide titled the Repowering Business Playbook. Designed as a step-by-step manual, the document outlines practical s…</div>
+  <div class="article-meta">Oct 15, 2026  08:17 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15102026/texas-land-commissioner-big-bend-border-wall/" target="_blank">Texas Land Commissioner Treads Carefully as Trump Border Wall Advances on State Property</a></div>
+  <div class="article-summary">Texas Land Commissioner Dawn Buckingham faces pressure as Donald Trump's border wall construction encroaches on state-managed land in the Big Bend region. This development highlights a critical conflict between supporting a political agenda and protecting vast state resources, potentially impacting sensitive ecosystems and land use in a significant portion of West Texas.</div>
+  <div class="article-meta">Oct 15, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/15102026/florida-regenerative-agriculture/" target="_blank">Regenerative Growers in Florida Aim to Improve Soil for Health of Food, Environment, Consumers and Workers</a></div>
+  <div class="article-summary">Florida's regenerative farmers are actively working to improve soil health, recognizing it as the bedrock of our food system. This focus is crucial because healthy soil sequesters carbon, enhances water retention, and ultimately produces more nutritious food, benefiting both the environment and consumers.</div>
+  <div class="article-meta">Oct 15, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/oct/15/afghanistan-drought-hunger-displaced-families-girls-child-marriage-poverty" target="_blank">‘I am still a child, it cannot be good to be married’: how drought forces Afghan families to sell girls as brides</a></div>
+  <div class="article-summary">As climate breakdown pushes families to starvation, many feel forced to ‘sacrifice’ daughters to save siblings. Photographer Elise Blanchard travelled the country speaking to girls as young as eight, 10 and 14 who have been engaged or married to repa…</div>
+  <div class="article-meta">Oct 15, 2026  07:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14102026/hurricane-isaias-alabama-death/" target="_blank">Isaias Made It to Birmingham. The Consequences Were Deadly.</a></div>
+  <div class="article-summary">BIRMINGHAM, Ala.—It’s hard to forget Uncle Bobo.  And on this humid October day, his nephew says it’s hard to remember him, too.  Devolin “Bobo” Webster, 66, died unexpectedly in his home Saturday morning as the remnants of Hurricane Isaias passed th…</div>
+  <div class="article-meta">Oct 15, 2026  01:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14102026/new-york-governor-debate/" target="_blank">New York Candidates for Governor Clash Over Energy Policy</a></div>
+  <div class="article-summary">Incumbent New York Gov. Kathy Hochul and Republican challenger Bruce Blakeman clashed over high energy costs in the state’s only gubernatorial debate, offering sharply different visions for how to keep electricity affordable as demand rises. Average…</div>
+  <div class="article-meta">Oct 14, 2026  23:17 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, October 15, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
