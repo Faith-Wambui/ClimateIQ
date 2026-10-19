@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, October 19, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">24</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 15 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/19/indonesian-president-instructs-transformation-of-power-utility/" target="_blank">Indonesian president instructs transformation of power utility</a></div>
+  <div class="article-summary">Indonesia's President Prabowo Subianto is pushing a major overhaul of state utility PT PLN, aiming for an accelerated 100 GW solar rollout within three years. This strategic shift is critical for Indonesia's energy transition, as it seeks to boost efficiency, reduce subsidies, and modernize its electricity system to handle the influx of renewables and evolving energy demands.</div>
+  <div class="article-meta">Oct 19, 2026  12:07 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/19/bangladesh-plans-70-mw-solar-plant-at-coal-power-station/" target="_blank">Bangladesh plans 70 MW solar plant at coal power station</a></div>
+  <div class="article-summary">Bangladesh is building a 70 MW solar farm on land adjacent to its Matarbari coal plant, aiming to boost renewable energy and reduce fossil fuel dependence by 2028. This move is part of a broader national strategy to significantly increase clean energy in its power mix, directly contributing to lower greenhouse gas emissions.</div>
+  <div class="article-meta">Oct 19, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/19/longi-researchers-reveals-how-edge-masking-reduces-recombination-losses-in-solar-cells/" target="_blank">Longi researchers reveals how edge masking reduces recombination losses in solar cells</a></div>
+  <div class="article-summary">Longi's breakthrough in solar cell technology, using a 5mm edge mask, significantly reduces energy loss by suppressing recombination, boosting measured efficiency. This innovation, which could push theoretical maximums to 27.39%, is a crucial step in maximizing the output of solar panels, directly accelerating the transition to cleaner energy.</div>
+  <div class="article-meta">Oct 19, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/19/jinkosolar-unveils-28-efficient-back-contact-topcon-solar-cell-with-amorphous-silicon-heterojunction-passivation/" target="_blank">JinkoSolar unveils 28%-efficient back-contact TOPCon solar cell with amorphous silicon heterojunction passivation</a></div>
+  <div class="article-summary">JinkoSolar has achieved a breakthrough in solar technology, unveiling a new back-contact cell with a 28% conversion efficiency. This advancement, leveraging TOPCon and heterojunction passivation, means more power can be generated from the same surface area, accelerating the transition to renewable energy.</div>
+  <div class="article-meta">Oct 19, 2026  10:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/19/sri-lanka-asks-pv-system-owners-to-disconnect-after-nationwide-blackout/" target="_blank">Sri Lanka asks PV system owners to disconnect after nationwide blackout</a></div>
+  <div class="article-summary">Sri Lanka has mandated solar PV owners to disconnect from the grid after a nationwide blackout on October 17th, a repeat of a similar incident in February 2025 where high solar penetration was cited as a key cause. This move highlights the growing challenge of grid stability as renewable energy sources like solar become more prevalent, underscoring the urgent need for advanced grid management solutions to integrate clean energy without compromising reliability.</div>
+  <div class="article-meta">Oct 19, 2026  10:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/19/100-renewables-is-doable-even-in-oil-countries/" target="_blank">100% renewables is doable, even in oil countries</a></div>
+  <div class="article-summary">Norway demonstrates that oil and gas nations can boost their economies by rapidly deploying domestic renewables alongside continued fossil fuel exports, maximizing resource value. Professor Christian Breyer highlights this strategy, contrasting it with Russia's missed opportunities due to political decisions, proving 100% renewables are achievable even for petrostates.</div>
+  <div class="article-meta">Oct 19, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/10/19/protecting-nature-is-a-public-duty-not-a-wall-street-profit-opportunity/" target="_blank">Protecting nature is a public duty, not a Wall Street profit opportunity</a></div>
+  <div class="article-summary">Governments must shift subsidies away from environmentally destructive practices and combat cross-border tax evasion to fund nature protection. This public duty, not a private profit motive, is crucial for reversing the alarming drain of natural wealth.</div>
+  <div class="article-meta">Oct 19, 2026  11:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/oct/19/us-disaster-survivor-payouts-fema" target="_blank">US disaster survivors still await at least $10bn in federal aid: ‘It’s devastating’</a></div>
+  <div class="article-summary">Survivors of recent extreme weather events, like the EF3 tornado in St. Louis and damage in Los Angeles County, are still waiting for over $10 billion in federal aid to rebuild. This significant delay in recovery funds, with the last major allocation for Hurricane Milton in 2024, highlights a critical gap in our response to increasingly frequent and severe climate-driven disasters.</div>
+  <div class="article-meta">Oct 19, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19102026/ohio-data-centers-us-senate-race/" target="_blank">‘Pitchfork Populism’ Over Data Centers Rattles Ohio’s U.S. Senate Race</a></div>
+  <div class="article-summary">A proposed massive data center in Sunbury, Ohio, has ignited local opposition, creating a political firestorm that could impact Senator Jon Husted's upcoming race. This "pitchfork populism" highlights growing concerns over the energy demands of expanding tech infrastructure, a critical issue as the U.S. grapples with meeting its climate goals.</div>
+  <div class="article-meta">Oct 19, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/19/tap-water-no-longer-drinkable-norwegian-town-climate-related-thawing-heavy-metals-arctic-longyearbyen-svalbard" target="_blank">Tap water no longer drinkable in Norwegian town as climate-related thawing releases heavy metals</a></div>
+  <div class="article-summary">Warning for other Arctic communities as residents told not to use water in Longyearbyen in Svalbard, one of the fastest-warming places in the worldResidents of a remote town in Norway that is in one of thefastest-warming places in the worldhave been…</div>
+  <div class="article-meta">Oct 19, 2026  08:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, October 19, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Monday, October 19, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ Indonesian president instructs transformation of power utility
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/19/indonesian-president-instructs-transformation-of-power-utility/
+  Date   : Oct 19, 2026  12:07 EAT
+  Summary: Indonesia's President Prabowo Subianto is pushing a major overhaul of state utility PT PLN, aiming for an accelerated 100 GW solar rollout within three years. This strategic shift is critical for Indonesia's energy transition, as it seeks to boost efficiency, reduce subsidies, and modernize its electricity system to handle the influx of renewables and evolving energy demands.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Bangladesh plans 70 MW solar plant at coal power station
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/19/bangladesh-plans-70-mw-solar-plant-at-coal-power-station/
+  Date   : Oct 19, 2026  12:30 EAT
+  Summary: Bangladesh is building a 70 MW solar farm on land adjacent to its Matarbari coal plant, aiming to boost renewable energy and reduce fossil fuel dependence by 2028. This move is part of a broader national strategy to significantly increase clean energy in its power mix, directly contributing to lower greenhouse gas emissions.
+
+
+▸ Longi researchers reveals how edge masking reduces recombination losses in solar cells
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/19/longi-researchers-reveals-how-edge-masking-reduces-recombination-losses-in-solar-cells/
+  Date   : Oct 19, 2026  11:00 EAT
+  Summary: Longi's breakthrough in solar cell technology, using a 5mm edge mask, significantly reduces energy loss by suppressing recombination, boosting measured efficiency. This innovation, which could push theoretical maximums to 27.39%, is a crucial step in maximizing the output of solar panels, directly accelerating the transition to cleaner energy.
+
+
+▸ JinkoSolar unveils 28%-efficient back-contact TOPCon solar cell with amorphous silicon heterojunction passivation
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/19/jinkosolar-unveils-28-efficient-back-contact-topcon-solar-cell-with-amorphous-silicon-heterojunction-passivation/
+  Date   : Oct 19, 2026  10:54 EAT
+  Summary: JinkoSolar has achieved a breakthrough in solar technology, unveiling a new back-contact cell with a 28% conversion efficiency. This advancement, leveraging TOPCon and heterojunction passivation, means more power can be generated from the same surface area, accelerating the transition to renewable energy.
+
+
+▸ Sri Lanka asks PV system owners to disconnect after nationwide blackout
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/19/sri-lanka-asks-pv-system-owners-to-disconnect-after-nationwide-blackout/
+  Date   : Oct 19, 2026  10:44 EAT
+  Summary: Sri Lanka has mandated solar PV owners to disconnect from the grid after a nationwide blackout on October 17th, a repeat of a similar incident in February 2025 where high solar penetration was cited as a key cause. This move highlights the growing challenge of grid stability as renewable energy sources like solar become more prevalent, underscoring the urgent need for advanced grid management solutions to integrate clean energy without compromising reliability.
+
+
+▸ 100% renewables is doable, even in oil countries
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/10/19/100-renewables-is-doable-even-in-oil-countries/
+  Date   : Oct 19, 2026  10:00 EAT
+  Summary: Norway demonstrates that oil and gas nations can boost their economies by rapidly deploying domestic renewables alongside continued fossil fuel exports, maximizing resource value. Professor Christian Breyer highlights this strategy, contrasting it with Russia's missed opportunities due to political decisions, proving 100% renewables are achievable even for petrostates.
+
+
+============================================================
+💰  CLIMATE FINANCE  (1 articles)
+============================================================
+
+▸ Protecting nature is a public duty, not a Wall Street profit opportunity
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/10/19/protecting-nature-is-a-public-duty-not-a-wall-street-profit-opportunity/
+  Date   : Oct 19, 2026  11:09 EAT
+  Summary: Governments must shift subsidies away from environmentally destructive practices and combat cross-border tax evasion to fund nature protection. This public duty, not a private profit motive, is crucial for reversing the alarming drain of natural wealth.
+
+
+============================================================
+🌪️  DISASTERS & EXTREME WEATHER  (1 articles)
+============================================================
+
+▸ US disaster survivors still await at least $10bn in federal aid: ‘It’s devastating’
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/us-news/2026/oct/19/us-disaster-survivor-payouts-fema
+  Date   : Oct 19, 2026  13:00 EAT
+  Summary: Survivors of recent extreme weather events, like the EF3 tornado in St. Louis and damage in Los Angeles County, are still waiting for over $10 billion in federal aid to rebuild. This significant delay in recovery funds, with the last major allocation for Hurricane Milton in 2024, highlights a critical gap in our response to increasingly frequent and severe climate-driven disasters.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (2 articles)
+============================================================
+
+▸ ‘Pitchfork Populism’ Over Data Centers Rattles Ohio’s U.S. Senate Race
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/19102026/ohio-data-centers-us-senate-race/
+  Date   : Oct 19, 2026  12:00 EAT
+  Summary: A proposed massive data center in Sunbury, Ohio, has ignited local opposition, creating a political firestorm that could impact Senator Jon Husted's upcoming race. This "pitchfork populism" highlights growing concerns over the energy demands of expanding tech infrastructure, a critical issue as the U.S. grapples with meeting its climate goals.
+
+
+▸ Tap water no longer drinkable in Norwegian town as climate-related thawing releases heavy metals
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/oct/19/tap-water-no-longer-drinkable-norwegian-town-climate-related-thawing-heavy-metals-arctic-longyearbyen-svalbard
+  Date   : Oct 19, 2026  08:00 EAT
+  Summary: Warning for other Arctic communities as residents told not to use water in Longyearbyen in Svalbard, one of the fastest-warming places in the worldResidents of a remote town in Norway that is in one of thefastest-warming places in the worldhave been…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 24  |  Sources: 6  |  Topics: 5
