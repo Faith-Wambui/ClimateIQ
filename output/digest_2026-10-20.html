@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, October 20, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">39</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 31 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20102026/federal-bill-proposal-to-ban-wild-sloth-imports/" target="_blank">Federal Lawmakers Introduce Bipartisan Bill to Ban Wild Sloth Imports</a></div>
+  <div class="article-summary">Florida lawmakers are introducing a bipartisan bill to ban wild sloth imports, a move that could significantly impact global conservation efforts for these vulnerable animals. This legislation aims to curb illegal trafficking and protect sloth populations, which are crucial to their rainforest ecosystems.</div>
+  <div class="article-meta">Oct 20, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20102026/trump-administration-promises-new-methane-rules/" target="_blank">After a Decade of Efforts to Regulate Methane, the Trump Administration Promises New Rules</a></div>
+  <div class="article-summary">The Trump administration is poised to roll back Obama-era regulations on methane emissions from oil and gas operations, a move that could significantly increase the release of this potent greenhouse gas from key production areas like the Permian Basin. This decision directly undermines efforts to curb climate change, as methane traps over 80 times more heat than carbon dioxide over a 20-year period.</div>
+  <div class="article-meta">Oct 20, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20102026/pennsylvania-democrat-trifecta-energy-reform-data-centers/" target="_blank">With a Trifecta, Pennsylvania Democrats Would Pass Energy Reforms and Rein in Data Centers</a></div>
+  <div class="article-summary">Pennsylvania Democrats are poised to enact significant energy reforms and curb energy-intensive data center growth if they secure a trifecta in upcoming elections. This potential shift, unprecedented in over 30 years, could reshape the state's energy landscape and its contribution to climate goals.</div>
+  <div class="article-meta">Oct 20, 2026  11:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/20/german-dso-cuts-residential-solar-grid-connection-approval-time-to-5-minutes/" target="_blank">German DSO cuts residential solar grid connection approval time to 5 minutes</a></div>
+  <div class="article-summary">German grid operator Netze BW is now approving rooftop solar installations up to 15 kW in just five minutes, a drastic reduction from 12 days, by automating grid capacity checks. This rapid approval process significantly accelerates the deployment of residential solar power, a critical step in Germany's transition away from fossil fuels and towards its ambitious climate goals.</div>
+  <div class="article-meta">Oct 20, 2026  12:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/20/saft-opens-solid-state-battery-production-line-in-france/" target="_blank">Saft opens solid-state battery production line in France</a></div>
+  <div class="article-summary">TotalEnergies subsidiary Saft has launched a solid-state battery production line in Bordeaux, France, promising up to 50% higher energy density for aviation and space applications. This advancement is crucial for decarbonizing hard-to-abate sectors by enabling lighter, more powerful batteries for electric flight and space missions.</div>
+  <div class="article-meta">Oct 20, 2026  10:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/20/uruguay-plans-99-mw-solar-tender-with-20-year-ppas/" target="_blank">Uruguay plans 99 MW solar tender with 20-year PPAs</a></div>
+  <div class="article-summary">Uruguay's state utility, UTE, is launching a 99 MW solar tender with 20-year power purchase agreements, signaling continued investment in renewable energy. This move will bolster Uruguay's clean energy portfolio, contributing to its climate goals by displacing fossil fuel generation.</div>
+  <div class="article-meta">Oct 20, 2026  10:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/20/solar-module-manufacturing-in-europe-ideal-factory-capacity-ranges-from-1-gw-to-3-gw/" target="_blank">Solar module manufacturing in Europe: Ideal factory capacity ranges from 1 GW to 3 GW</a></div>
+  <div class="article-summary">Laura Sartore, CEO of Ecoprogetti, spoke withpv magazineabout the evolution of solar supply chains, addressing protectionism, industrial policy and economies of scale. While the United States and India are focusing on strengthening domestic supply ch…</div>
+  <div class="article-meta">Oct 20, 2026  10:16 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/20/italy-allocates-e770-million-for-505-mw-of-agricultural-rooftop-solar/" target="_blank">Italy allocates €770 million for 505 MW of agricultural rooftop solar</a></div>
+  <div class="article-summary">Italy has allocated all available funding under the latest round of its Agrisolare scheme, awarding €770.4 million in grants to 7,409 projects for approximately 505 MW of rooftop solar capacity on agricultural, livestock and agro-industrial buildings…</div>
+  <div class="article-meta">Oct 20, 2026  10:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/20/dutch-bank-finances-50-mw-of-solar-in-ivory-coast/" target="_blank">Dutch development bank finances 50 MW of solar in Ivory Coast</a></div>
+  <div class="article-summary">Dutch development bank FMO is backing the 50 MW Kong solar project in Ivory Coast with €55.5 million in financing, set to power 240,000 people by 2028. This investment signals growing confidence in the region's renewable energy potential and directly contributes to Ivory Coast's ambitious goal of reaching 46.3% renewables by 2035, crucial for its climate targets.</div>
+  <div class="article-meta">Oct 20, 2026  10:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/20/do-not-be-distracted-by-other-global-crises-nature-cannot-wait-for-a-better-year-we-must-act-now" target="_blank">Do not be distracted by global crises. Nature cannot wait for a better year – we must act now | Steven Guilbeault</a></div>
+  <div class="article-summary">In 2022, I helped push through the international agreement to protect biodiversity. Wars and economic pressures can make nature seem like a ‘nice-to-have’. But it is a critical asset, and Cop17 must deliver real actionWhen I was five, property develo…</div>
+  <div class="article-meta">Oct 20, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/10/19/donald-trump-approval-at-record-low-disastrous-economy-inflation-might-play-a-part/" target="_blank">Donald Trump Approval At Record Low — Disastrous Economy & Inflation Might Play A Part</a></div>
+  <div class="article-summary">What has Donald Trump done for the country in his second term in office? He has bombed Iran and started another long war in the Middle East, leading to high gas prices and a ton of gas price volatility. He has added a bunch of tariffs to imported goo…</div>
+  <div class="article-meta">Oct 20, 2026  05:07 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19102026/texas-continued-permitting-data-centers-after-moratorium/" target="_blank">Texas Continued Permitting Data Centers After Abbott’s Pause, Report Finds</a></div>
+  <div class="article-summary">Regulators in Texas did not stop processing permits for data center projects when Gov. Greg Abbott ordered a pause last month, according to an analysis of public records released Monday by the oil and gas watchdog group FracTracker.  Amid an upswell…</div>
+  <div class="article-meta">Oct 20, 2026  00:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19102026/wyoming-data-center-growth-management/" target="_blank">Wyoming Environmental Groups Debate Best Way to Manage Data Center Growth in the State</a></div>
+  <div class="article-summary">CODY, Wyo.—On a warm October evening at a bar in downtown Cody, Wyomingites gathered to ponder the future of what some hope will be the Cowboy State’s next booming industry: data centers. This summer, outgoing Gov. Mark Gordon signed an executive ord…</div>
+  <div class="article-meta">Oct 19, 2026  23:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/19102026/deepwater-horizon-spill-recovery/" target="_blank">Deep-Sea Species Struggle to Recover After Deepwater Horizon Spill</a></div>
+  <div class="article-summary">Across hundreds of miles of the northern Gulf of Mexico, a deep-water ecosystem collapsed after the massive 2011 Deepwater Horizon oil and gas spill, and recovery is uncertain, new research concludes. The study, published Monday in the Proceedings of…</div>
+  <div class="article-meta">Oct 19, 2026  22:32 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, October 20, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
