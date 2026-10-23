@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, October 23, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:49%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 3 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 40 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/experts-how-are-climate-scientists-using-artificial-intelligence" target="_blank">Experts: How are climate scientists using artificial intelligence?</a></div>
+  <div class="article-summary">By:
+
+Artificial intelligence (AI) is developing at a rapid pace and is increasingly being used by scientists to better understand climate change.
+
+AI is perhaps best-known for its use in “large language models”, such as ChatGPT, Claude and Gemini.
+
+H…</div>
+  <div class="article-meta">Oct 22, 2026  13:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/23/chinese-pv-industry-brief-polysilicon-inventories-remain-high/" target="_blank">Chinese PV Industry Brief: Polysilicon inventories remain high</a></div>
+  <div class="article-summary">China's polysilicon inventories are stubbornly high, exceeding 560,000 metric tons, signaling a persistent oversupply that's depressing prices. This glut, driven by weak downstream demand, directly impacts the cost-effectiveness and speed of global solar panel production, a key tool in decarbonization efforts.</div>
+  <div class="article-meta">Oct 23, 2026  12:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/23/south-koreas-renewable-energy-capacity-overtakes-coal-for-first-time/" target="_blank">South Korea’s renewable energy capacity overtakes coal for first time</a></div>
+  <div class="article-summary">South Korea's renewable energy capacity has now surpassed coal for the first time, reaching 41,040 MW and signaling a significant shift away from fossil fuels. This milestone, driven by aggressive expansion and grid upgrades, positions renewables as the nation's second-largest power source and puts them on track to overtake LNG within a few years, a crucial step in global decarbonization efforts.</div>
+  <div class="article-meta">Oct 23, 2026  12:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/23/sodium-ion-storage-maker-peak-energy-raises-108-million-in-gm-led-round/" target="_blank">Sodium-ion storage maker Peak Energy raises $108 million in GM-led round</a></div>
+  <div class="article-summary">General Motors' venture arm has led a $108 million investment in Peak Energy, a US company poised to begin producing 4 GWh of sodium-ion battery storage in California. This significant funding will accelerate the deployment of a more affordable and sustainable battery technology, crucial for decarbonizing the grid and powering energy-intensive sectors like data centers.</div>
+  <div class="article-meta">Oct 23, 2026  11:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/23/transaera-tests-its-heat-pump-with-metal-organic-framework-dehumidification-in-apartment-building/" target="_blank">Transaera tests its heat pump with metal-organic framework dehumidification in apartment building</a></div>
+  <div class="article-summary">U.S. startup Transaera is piloting an all-electric heat pump in a Washington, D.C. apartment building, leveraging metal-organic frameworks to cut energy use by an estimated 40%. This innovation is crucial for decarbonizing residential buildings, a major source of greenhouse gas emissions, by offering a significantly more efficient alternative to traditional HVAC systems.</div>
+  <div class="article-meta">Oct 23, 2026  11:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/23/european-solar-bess-marketplace-expands-to-romania/" target="_blank">European solar, BESS marketplace expands to Romania</a></div>
+  <div class="article-summary">Solmeria, a European marketplace for solar and battery storage projects, has launched in Romania, listing two agrivoltaic installations and a 55 MW hybrid park with significant storage capacity. This expansion fuels Romania's renewable energy transition by streamlining project sales and attracting investment, crucial for meeting climate goals.</div>
+  <div class="article-meta">Oct 23, 2026  11:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23102026/researchers-find-widespread-pfas-contamination-in-florida-waterways/" target="_blank">Researchers Find Widespread PFAs Contamination in Florida Waterways</a></div>
+  <div class="article-summary">Nearly all Florida waterways tested between 2022 and 2024 are contaminated with PFAS, commonly known as "forever chemicals," with 96% showing traces of 43 different types. This widespread pollution of persistent, toxic chemicals poses a significant threat to both human health and aquatic ecosystems, underscoring a national environmental crisis.</div>
+  <div class="article-meta">Oct 23, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23102026/a-warming-climate-is-all-over-alaskas-senate-race-the-candidates-hardly-mention-it/" target="_blank">A Warming Climate Is All Over Alaska’s Senate Race. The Candidates Hardly Mention It.</a></div>
+  <div class="article-summary">Alaska's Senate candidates are prioritizing fisheries and fossil fuels, overlooking the undeniable impact of a warming climate on these very industries. This silence is critical because rising temperatures are already decimating Alaskan fisheries and exacerbating the economic vulnerabilities tied to oil and gas.</div>
+  <div class="article-meta">Oct 23, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23102026/pennsylvania-data-centers-congressional-elections/" target="_blank">Data Centers Are ‘Front and Center’ in Pennsylvania’s Competitive Congressional Elections</a></div>
+  <div class="article-summary">A proposed massive data center in Pennsylvania's Lehigh Valley is igniting local opposition, highlighting a growing tension between economic development and environmental concerns. This battle over the 400-acre facility underscores the significant climate implications of the booming data center industry, which demands vast amounts of energy and water.</div>
+  <div class="article-meta">Oct 23, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/23/cop17-deal-that-could-end-the-destruction-of-nature-deadline-armenia" target="_blank">At Cop17, the pressure is on to rescue a deal that could end the destruction of nature</a></div>
+  <div class="article-summary">​As world leaders struggle to meet deadlines to halt nature loss set four years ago, a rare leopard in host country Armenia offers a symbol of what is at stakeDon’t get Down to Earth delivered to your inbox? Sign up hereThe Armenian capital Yerevan i…</div>
+  <div class="article-meta">Oct 23, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/23/heat-killed-staggering-50000-people-european-cities-this-summer-experts" target="_blank">Heat killed ‘staggering’ 50,000 people in Europe’s cities this summer, scientists warn</a></div>
+  <div class="article-summary">People succumbed to heat at highest rates in Malta, Italy and Hungary, with health issues, loneliness and poverty exacerbating tollHeat killed a record 50,000 people in European cities this summer, newresearchsuggests, with scientists blaming climate…</div>
+  <div class="article-meta">Oct 23, 2026  07:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/commentisfree/2026/oct/23/chris-minns-coal-expansion-laws-will-hurt-us-all-climate-mount-pleasant" target="_blank">In allowing coal expansion in the Hunter, Chris Minns is pouring fuel on the climate fire. His decision will come back to hurt us all | Jack Egan</a></div>
+  <div class="article-summary">The high court found NSW is responsible for emissions from burning exported coal. What message does it send when the government can step in and bypass the law?Sign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereAs s…</div>
+  <div class="article-meta">Oct 23, 2026  04:08 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, October 23, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
