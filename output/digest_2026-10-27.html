@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, October 27, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">40</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 34 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27102026/florida-governor-election-everglades/" target="_blank">In Florida’s Gubernatorial Race, a Choice Between New Climate Policy or the Status Quo</a></div>
+  <div class="article-summary">Florida's gubernatorial candidates offer a stark choice: one champions continuing current climate policies, while the other proposes a renewed focus on clean energy and climate change adaptation. This election will determine whether Florida embraces proactive climate solutions or sticks with its current, less ambitious approach to environmental challenges.</div>
+  <div class="article-meta">Oct 27, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/27/sigenergy-launches-the-sigencube-ci-bess/" target="_blank">Sigenergy launches the SigenCube C&I BESS</a></div>
+  <div class="article-summary">Sigenergy has unveiled its new SigenCube Commercial & Industrial Battery Energy Storage System (BESS), offering a 30% smaller footprint and robust power delivery for industrial machinery. This innovation is crucial for accelerating the adoption of renewable energy in heavy industry by providing reliable grid support and mitigating the intermittency of clean power sources.</div>
+  <div class="article-meta">Oct 27, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/27/jetson-unveils-heat-pump-water-heater-with-efficiency-factor-of-up-to-4-0/" target="_blank">Jetson unveils heat pump water heater with efficiency factor of up to 4.0</a></div>
+  <div class="article-summary">Jetson Home is launching a new heat pump water heater boasting an impressive energy factor of up to 4.0, promising a 75% energy reduction over standard electric models. This innovation is crucial for decarbonizing residential energy use, significantly cutting greenhouse gas emissions from a major source of household power consumption.</div>
+  <div class="article-meta">Oct 27, 2026  12:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/27/korean-researchers-seek-to-improve-perovskite-solar-cell-stability-with-lithium-removal-process/" target="_blank">Researchers improve perovskite cell stability with lithium-removal process</a></div>
+  <div class="article-summary">KIER researchers have boosted perovskite solar cell stability by over 90% after 500 hours of operation using a novel nickel oxide process to remove lithium ions, achieving a 25.24% efficiency. This breakthrough is critical for making perovskite solar technology, a promising next-generation renewable energy source, commercially viable and competitive with silicon.</div>
+  <div class="article-meta">Oct 27, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/27/creating-value-in-the-turmoil-electric-mobility-supporting-solar-and-storage/" target="_blank">Creating value in the turmoil: Electric mobility supporting solar and storage</a></div>
+  <div class="article-summary">Europe's energy transition is seeing electric vehicles increasingly integrate with solar and battery storage, offering crucial grid flexibility via vehicle-to-grid technology. This convergence is essential for unlocking new revenue streams and ensuring the profitability of renewable energy projects amidst market volatility.</div>
+  <div class="article-meta">Oct 27, 2026  12:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/27/indonesian-utility-unit-uses-local-trina-modules-for-bali-solar-project/" target="_blank">Indonesian utility unit uses local Trina modules for Bali solar project</a></div>
+  <div class="article-summary">A subsidiary of Indonesia’s state utility is developing a solar project on Nusa Penida, off Bali, with modules from a local Trina Solar joint venture, but it has not disclosed its size.The postIndonesian utility unit uses local Trina modules for Bali…</div>
+  <div class="article-meta">Oct 27, 2026  11:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/27/ever-heard-of-anticipatory-solastalgia-it-could-affect-agrivoltaics-acceptance/" target="_blank">Ever heard of anticipatory solastalgia? It could affect agrivoltaics acceptance</a></div>
+  <div class="article-summary">New research reveals that distress over anticipated landscape changes, termed "anticipatory solastalgia," is a significant barrier to public acceptance of agrivoltaics. This psychological impact, particularly concerning familiar rural vistas, can overshadow the perceived environmental and economic upsides of solar-plus-farming projects.</div>
+  <div class="article-meta">Oct 27, 2026  12:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/27102026/new-york-17-key-house-race-data-centers-nuclear-power/" target="_blank">As Election Day Nears, a Key House Race Remains in Flux</a></div>
+  <div class="article-summary">In New York's 17th Congressional District, a fiercely contested House race is unfolding with significant environmental implications. The outcome of this election will directly impact climate policy decisions, as candidates' stances on issues like renewable energy and conservation will shape the region's environmental future.</div>
+  <div class="article-meta">Oct 27, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/27/burnham-sleepwalking-climate-disaster-campaigners" target="_blank">Burnham in danger of sleepwalking into climate disaster, say campaigners</a></div>
+  <div class="article-summary">Letter to PM argues series of wrong choices on North Sea oil, Heathrow, EVs and heat pumps will scupper net zero plansAndy Burnham will “sleepwalk” into climate disaster if he fails to get a grip on a series of important policies whose combined impac…</div>
+  <div class="article-meta">Oct 27, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/oct/27/melting-glaciers-dolomites-first-world-war-munitions-italy" target="_blank">Melting glaciers in Dolomites reveal cache of first world war munitions</a></div>
+  <div class="article-summary">Italian army removes and defuses 250 explosives encased in ice for more than 100 years after hikers’ sightingsA significant cache of unexploded bombs from the first world war emerged this summer from rapidly retreating glaciers in the Dolomites, the…</div>
+  <div class="article-meta">Oct 27, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/27/super-rich-double-dividend-climate-crisis-oxfam" target="_blank">Super-rich get ‘double dividend’ from causes and costs of climate crisis, report finds</a></div>
+  <div class="article-summary">Oxfam says investing by rich in disaster recovery widens inequality and gives incentive to delay climate actionThe world’s wealthiest people are not just profiting from the polluting causes of climate breakdown, they are also increasingly cashing in…</div>
+  <div class="article-meta">Oct 27, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/26102026/brazil-presidential-election-environmental-victory/" target="_blank">Climate Activists Celebrate Lula’s Win in Brazil, but Warn the Fight Is Far From Over</a></div>
+  <div class="article-summary">Environmentalists worldwide are celebrating the re-election of Brazilian President Luiz Inácio Lula da Silva as a win for the Amazon’s future and global climate policy.  The three-term incumbent narrowly defeated right-wing Senator Flávio Bolsonaro,…</div>
+  <div class="article-meta">Oct 27, 2026  01:35 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, October 27, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
