@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, October 29, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">43</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 35 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/29/western-australia-moves-to-legalize-plug-in-solar-on-german-model/" target="_blank">Western Australia moves to legalize plug-in solar on German model</a></div>
+  <div class="article-summary">Western Australia is set to legalize plug-in solar and battery systems, following Germany's lead by treating them as standard appliances. This move will finally grant renters and apartment dwellers access to affordable clean energy, potentially reducing peak demand and lowering household electricity bills across the state.</div>
+  <div class="article-meta">Oct 29, 2026  14:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29102026/new-york-gas-pipeline-gubernatorial-election/" target="_blank">As Trump Backs a Gas Pipeline, New York’s Climate Priorities Face a Test</a></div>
+  <div class="article-summary">Former President Trump is pushing for the revival of the Constitution natural gas pipeline, a project New York State rejected in 2016 over water quality concerns. This renewed push directly challenges Governor Hochul's climate agenda, threatening to lock in decades of fossil fuel infrastructure and undermine the state's emissions reduction goals.</div>
+  <div class="article-meta">Oct 29, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29102026/texas-9th-congressional-race-fossil-fuels/" target="_blank">In Texas’ 9th Congressional District, Candidates Spar Over Fossil Fuels</a></div>
+  <div class="article-summary">In Texas' 9th Congressional District, Democratic candidate Leticia Gutierrez is facing scrutiny over her proximity to a Petrobras refinery, highlighting the ongoing debate about fossil fuel's role in the region. This local contest underscores the national challenge of balancing energy production with critical air quality concerns, directly impacting communities near industrial sites.</div>
+  <div class="article-meta">Oct 29, 2026  11:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-chinas-clean-tech-exports-in-2026-to-avoid-as-much-co2-as-brazil-emits-in-a-year" target="_blank">Analysis: China’s clean-tech exports in 2026 to avoid as much CO2 as Brazil emits in a year</a></div>
+  <div class="article-summary">Analysis: China’s clean-tech exports in 2026 to avoid as much CO2 as Brazil emits in a year
+
+China’s exports in 2026 of clean-energy technologies, such as solar panels, batteries and electric vehicles, are on track to cut emissions beyond its borders…</div>
+  <div class="article-meta">Oct 29, 2026  10:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/uk-budget-2026-key-climate-and-energy-announcements" target="_blank">UK budget 2026: Key climate and energy announcements</a></div>
+  <div class="article-summary">Chancellor John Healey has announced a “new course on energy” for the UK, focused on keeping bills low amid the global crisis triggered by war in the Middle East.
+
+As he laid out his first budget, Healey said the Labour government would still priorit…</div>
+  <div class="article-meta">Oct 28, 2026  21:16 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/29/botswana-kicks-off-floating-solar-tender/" target="_blank">Botswana kicks off floating solar tender</a></div>
+  <div class="article-summary">Botswana's Water Utilities Corporation is launching a tender for floating solar projects on its major dams, including Dikgatlhong and Gaborone, signaling a significant push to integrate renewable energy into its water infrastructure. This move is crucial for reducing the carbon footprint of water management and bolstering the nation's clean energy capacity, which currently stands at 190.5 MW of operational solar.</div>
+  <div class="article-meta">Oct 29, 2026  13:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/29/spain-solar-ppa-prices-fall-to-e30-93-mwh-as-bess-gains-ground/" target="_blank">Spain solar PPA prices fall to €30.93/MWh as BESS gains ground</a></div>
+  <div class="article-summary">Spanish solar PPA prices dropped to €30.93/MWh in Q3 2026, driven by increased interest in battery storage solutions to combat rising development costs and renewable energy curtailment. This trend signifies a crucial shift towards more resilient and integrated renewable energy systems, essential for achieving ambitious climate targets.</div>
+  <div class="article-meta">Oct 29, 2026  13:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/29/heat-pump-grant-survives-new-loans-for-solar-and-battery-storage-in-uk-budget/" target="_blank">Heat pump grant survives, new loans for solar and battery storage in UK Budget</a></div>
+  <div class="article-summary">Heat pump grants subsidy retained, but future budget is reduced, while Warm Home Loans program promises to cut the cost of financing residential solar. End of zero VAT rating for energy saving materials.The postHeat pump grant survives, new loans for…</div>
+  <div class="article-meta">Oct 29, 2026  11:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/29/researchers-improve-heating-uniformity-in-pv-module-laminators/" target="_blank">Researchers improve heating uniformity in PV module laminators</a></div>
+  <div class="article-summary">Scientists combined aluminum magnetic shielding with zone-specific current control to reduce uneven heating in an induction-powered PV laminator. A full-scale prototype achieved a temperature spread of approximately 3.1 C across 13 monitored location…</div>
+  <div class="article-meta">Oct 29, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/29/renault-edf-plan-vehicle-to-grid-charging-offer-for-2027/" target="_blank">Renault, EDF plan vehicle-to-grid charging offer for 2027</a></div>
+  <div class="article-summary">Renault Group and EDF will launch a home charging service in France in summer 2027, combining electric vehicles, bidirectional charging stations and smart charging management for private customers buying Renault, Alpine and Dacia models.The postRenau…</div>
+  <div class="article-meta">Oct 29, 2026  10:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/29/scatec-secures-217-million-for-egypt-smelter-solar-plus-storage-plant/" target="_blank">Scatec secures $217 million for Egypt smelter solar-plus-storage plant</a></div>
+  <div class="article-summary">Norwegian developer Scatec is financing a $217 million solar-plus-storage plant in Egypt to power the state-owned Egypt Aluminium smelter. This 25-year deal, backed by the Egyptian government, is crucial for the smelter to meet international environmental standards, directly reducing its carbon footprint.</div>
+  <div class="article-meta">Oct 29, 2026  12:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29102026/europe-warming-water-invasive-fish/" target="_blank">Europe’s Warming Waters Are Attracting Unwanted Marine Life</a></div>
+  <div class="article-summary">Europe's waters are warming at an alarming rate, leading to an influx of invasive species like the silver-cheeked toadfish in the Aegean and an unusual surge of common octopuses in the English Channel. This dramatic shift in marine ecosystems signals a significant disruption to biodiversity and fisheries, with profound implications for ocean health and food security.</div>
+  <div class="article-meta">Oct 29, 2026  11:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/29102026/maine-forest-offsets-greenhouse-emissions/" target="_blank">Maine Looks to Its Forests to Reach Climate Goals</a></div>
+  <div class="article-summary">As the most heavily forested state in the country, about 94 percent of Maine’s forests are privately owned, so focusing on their carbon benefits has both immediate ecological and economic effects.  By creating specific programs and collaborations, th…</div>
+  <div class="article-meta">Oct 29, 2026  11:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/10/29/from-australia-to-chile-our-cities-are-driving-a-green-investment-boom/" target="_blank">From Australia to Chile, our cities are driving a green investment boom</a></div>
+  <div class="article-summary">Cities like Melbourne and Renca are driving a massive green investment boom, with annual spending on key climate products projected to surge from $293 billion in 2025 to $2.78 trillion by 2050 across 151 cities. This exponential growth, fueled by local climate commitments, signals a reliable and unprecedented market opportunity for businesses and investors seeking to capitalize on the transition to a sustainable future.</div>
+  <div class="article-meta">Oct 29, 2026  11:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28102026/california-prop-45-aims-to-weaken-environmental-law/" target="_blank">Powerful Interests Aim to Weaken California’s Landmark Environmental Law</a></div>
+  <div class="article-summary">Political action committees funded by technology companies, the state’s major utilities and other corporate interests have spent nearly twice as much to pass a ballot measure that would greenlight major development projects with minimal environmental…</div>
+  <div class="article-meta">Oct 29, 2026  01:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28102026/grand-canyon-uranium-mine-high-arsenic-levels/" target="_blank">Most Wells Around the Grand Canyon With High Arsenic Levels Are at Uranium Mine, New Analysis Shows</a></div>
+  <div class="article-summary">Three of four wells across the Grand Canyon region that have average arsenic levels above the Environmental Protection Agency’s standard for safe drinking water are at the site of a controversial uranium mine, a new analysis of groundwater sampling s…</div>
+  <div class="article-meta">Oct 28, 2026  23:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/28102026/in-north-carolina-a-mountain-democrat-vies-for-residents-still-hurting-from-helene/" target="_blank">In North Carolina, a ‘Mountain Democrat’ Vies for Residents Still Hurting From Helene</a></div>
+  <div class="article-summary">This article was originally published by The Assembly. It is republished with permission. It’s an hour before Big Ivy’s food bank officially opens, but over a dozen families have congregated around the picnic tables outside the metal building. Childr…</div>
+  <div class="article-meta">Oct 28, 2026  21:59 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, October 29, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
