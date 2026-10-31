@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, October 31, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">41</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:47%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 2 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 34 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/oct/31/cop17-reforms-fails-to-deliver-targets" target="_blank">‘Bunch of baloney’: calls grow for Cop summit reforms as countries on track to fail nature targets</a></div>
+  <div class="article-summary">Biodiversity Cop17 in Yerevan, Armenia, concluded with delegates vowing to redouble efforts, yet countries remain on track to miss crucial targets like protecting 30% of the planet by 2030. This failure to deliver on nature protection, a pattern seen for 34 years, highlights systemic issues where a single nation can derail global progress, jeopardizing efforts to restore degraded ecosystems and reform harmful subsidies.</div>
+  <div class="article-meta">Oct 31, 2026  13:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/31102026/colorado-river-basin-gubernatorial-water-politics/" target="_blank">Colorado River Basin Candidates Wade Into Water Politics, but Winners Are Unlikely to Make Big Changes</a></div>
+  <div class="article-summary">Nevada and Arizona gubernatorial candidates are aggressively criticizing their opponents' handling of Colorado River water negotiations, accusing them of mismanagement and costly decisions. This political sparring highlights the critical, yet politically fraught, challenge of securing water resources for millions in the arid West, a struggle that will increasingly define climate adaptation and regional stability.</div>
+  <div class="article-meta">Oct 31, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/31102026/pennsylvania-oil-gas-wastewater-disposal-loophole/" target="_blank">Pennsylvania Opens a New Loophole for Oil and Gas Wastewater Disposal</a></div>
+  <div class="article-summary">Pennsylvania's Department of Environmental Protection is now allowing oil and gas companies to dispose of wastewater, potentially containing toxic substances, in landfills. This decision opens a significant loophole, undermining existing regulations designed to protect public health and the environment from hazardous waste.</div>
+  <div class="article-meta">Oct 31, 2026  11:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/10/no-just-in-the-just-transition-zimbabwes-lithium-boom-and-local-beneficiation/" target="_blank">No Just in the Just Transition: Zimbabwe’s Lithium Boom and Local Beneficiation</a></div>
+  <div class="article-summary">Zimbabwe’s raw minerals export ban is meant to boost local processing and take advantage of global demand for transition minerals. Local mining communities are paying a heavy price, raising questions about who the beneficiaries of localisation polici…</div>
+  <div class="article-meta">Oct 30, 2026  14:42 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/10/31/indian-pv-at-a-turning-point/" target="_blank">Indian PV at a turning point</a></div>
+  <div class="article-summary">India's solar module manufacturing capacity now exceeds domestic demand, signaling a crucial shift for the industry. This oversupply necessitates vertical integration and disciplined investment to sustain growth, directly impacting the pace of solar deployment and India's ability to meet its climate targets.</div>
+  <div class="article-meta">Oct 31, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/10/30/hyundai-ioniq-3-named-european-car-of-the-year-2027-finalist/" target="_blank">Hyundai IONIQ 3 Named European Car of the Year 2027 Finalist</a></div>
+  <div class="article-summary">Hyundai's new IONIQ 3, designed and built in Europe, has been named a finalist for European Car of the Year 2027. This recognition highlights the growing momentum of electric vehicles in the European market, signaling a significant shift away from fossil fuel-powered transportation.</div>
+  <div class="article-meta">Oct 31, 2026  06:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/10/30/toyota-waymo-advance-autonomous-driving-collaboration-for-safer-streets-and-freedom-of-movement-for-all/" target="_blank">Toyota & Waymo Advance Autonomous Driving Collaboration for Safer Streets and Freedom of Movement for All</a></div>
+  <div class="article-summary">Toyota and Waymo are deepening their autonomous driving partnership, building on a 2025 agreement to test and validate the technology. This collaboration aims to enhance road safety and expand mobility options, potentially accelerating the transition to cleaner, more efficient transportation systems.</div>
+  <div class="article-meta">Oct 31, 2026  06:08 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/10/30/the-share-of-solar-generation-with-co-located-battery-storage-is-increasing/" target="_blank">The Share of Solar Generation with Co-located Battery Storage Is Increasing</a></div>
+  <div class="article-summary">Utility-scale solar developers are increasingly co-locating battery storage with new solar photovoltaic capacity. As of September 2026, over 16% of new utility-scale solar capacity added this year is co-located with operable battery storage, compared…</div>
+  <div class="article-meta">Oct 31, 2026  05:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/10/30/homepower-1000-plus-v2-portable-power-put-to-use/" target="_blank">HomePower 1000 Plus v2: Portable Power Put To Use</a></div>
+  <div class="article-summary">I have been using the Jackery HomePower 1000 Plus v2 in a wide range of applications over the past few months around my apartment in Queens, NY. The flexibility and portability make it especially useful for people living in apartments. I had previous…</div>
+  <div class="article-meta">Oct 31, 2026  04:27 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/31102026/alaska-village-typhoon-halong-recovery/" target="_blank">A Year After Floodwaters Swept Away an Alaskan Native Village, Residents Remain in Limbo</a></div>
+  <div class="article-summary">Typhoon Halong's devastating floodwaters in October 2025 forced the evacuation of Kwigillingok, Alaska, a Yup'ik village now facing an uncertain future a year later. This event highlights the accelerating climate-driven risks to coastal communities, particularly Indigenous populations, as rising sea levels and intensified storms threaten their ancestral homes and cultural survival.</div>
+  <div class="article-meta">Oct 31, 2026  11:55 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/31102026/microplastics-human-health-dangers/" target="_blank">Why Microplastics Are So Dangerous for Human Health</a></div>
+  <div class="article-summary">A recent interview highlights the pervasive danger of microplastics, tiny plastic particles now found in everything from food packaging to medical devices. Their widespread presence is alarming because these once-thought-inert materials are now understood to pose significant risks to human health, underscoring a critical, yet often overlooked, dimension of the climate crisis.</div>
+  <div class="article-meta">Oct 31, 2026  11:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30102026/maryland-continues-to-press-for-answers-joint-base-andrews-fuel-spill/" target="_blank">Lawmakers and Regulators Press Air Force Over Continuing Pollution From Joint Base Andrews Fuel Spill</a></div>
+  <div class="article-summary">Congressional leaders and Maryland regulators continue to pressure the Trump administration for information about the ongoing jet fuel leak at Joint Base Andrews. Both want immediate action that will stop the contamination that continues to threaten…</div>
+  <div class="article-meta">Oct 31, 2026  02:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30102026/wyoming-teams-with-trump-administration-to-expedite-energy-industrial-projects/" target="_blank">Wyoming Teams With Trump Administration to Expedite Energy, Industrial Projects</a></div>
+  <div class="article-summary">Wyoming will partner with the Trump administration on an initiative to streamline and expedite permitting for large energy and other industrial projects such as data centers, representatives from both groups announced Monday. Gov. Mark Gordon joined…</div>
+  <div class="article-meta">Oct 30, 2026  23:41 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30102026/texas-data-center-pushback/" target="_blank">Texas Used to Be ‘the Best Place’ to Build Data Centers—But Not Anymore</a></div>
+  <div class="article-summary">When BaRupOn LLC, a California-based developer, bought land in East Texas for a 700-acre industrial campus in 2023, the company received a warm welcome from the state. The developer set out to build numerous data centers and rare-earth manufacturing…</div>
+  <div class="article-meta">Oct 30, 2026  22:11 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/30102026/maui-prosecutor-to-hire-investigator-focused-on-post-wildfire-contractor-fraud/" target="_blank">Maui Prosecutor to Hire Investigator Focused On Post-Wildfire Contractor Fraud</a></div>
+  <div class="article-summary">This story was originally published by Civil Beat. The Maui Department of the Prosecuting Attorney is expected to soon have an investigator working full-time on contractor fraud cases targeting survivors of the deadly 2023 Lahaina wildfire, county of…</div>
+  <div class="article-meta">Oct 30, 2026  20:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/thefilter/2026/oct/30/expert-guide-prepare-stockpile-emergency-uk" target="_blank">Buy a wind-up radio – and don’t forget the chocolate: survival experts on how to prepare for an emergency</a></div>
+  <div class="article-summary">UK government guidance says we should be ready for the unexpected, but what’s actually helpful to have at home? We ask the specialists•The best power banks – testedHow prepared are you for an emergency? Do you have a few extra tins of beans in the cu…</div>
+  <div class="article-meta">Oct 30, 2026  18:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, October 31, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
