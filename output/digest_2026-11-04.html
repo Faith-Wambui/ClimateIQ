@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, November 04, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">47</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/04/singapore-reveals-five-year-energy-plan-to-feed-data-center-semicon-progress/" target="_blank">Singapore Reveals Five-Year Energy Plan to Feed Data Center, Semicon Progress</a></div>
+  <div class="article-summary">Singapore is investing heavily in a five-year energy overhaul, including generation, transmission, and storage upgrades, to power its booming data center and semiconductor industries. This strategic move acknowledges the significant, and growing, energy demands of these critical sectors, underscoring the global challenge of balancing economic growth with climate goals.</div>
+  <div class="article-meta">Nov 04, 2026  15:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/04/danish-tso-proposes-limited-grid-access-scheme/" target="_blank">Danish TSO proposes limited grid access scheme</a></div>
+  <div class="article-summary">Denmark's Energinet is proposing a new limited grid access scheme for renewable energy producers, allowing them to connect faster by accepting potential production curtailment. This move is crucial for integrating more variable clean energy onto the grid, as it incentivizes flexibility and better manages transmission constraints.</div>
+  <div class="article-meta">Nov 04, 2026  15:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cb-live-carbon-briefs-team-at-cop17-on-the-nature-talks-key-outcomes" target="_blank">CB Live: Carbon Brief’s team at COP17 on the nature talks’ key outcomes</a></div>
+  <div class="article-summary">COP17 in Yerevan, Armenia, concluded with a critical "global review" of progress on reversing nature loss, highlighting the urgent need for biodiversity finance. This outcome matters because it signals a renewed focus on tangible action and funding mechanisms to combat the accelerating biodiversity crisis, crucial for climate stability.</div>
+  <div class="article-meta">Nov 04, 2026  13:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04112026/federal-plan-to-elevate-miami-homes-meets-skepticism/" target="_blank">Federal Plan to Elevate Miami Homes Meets Skepticism</a></div>
+  <div class="article-summary">Just in time for Halloween, floodwaters washed into South Florida businesses and submerged roads, forcing residents to drive and walk through shin-high water in what officials called the most intense king tide event ever.  The federal government has…</div>
+  <div class="article-meta">Nov 04, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/uk-climate-minister-katie-white-cop31-must-respond-to-really-scary-science" target="_blank">UK climate minister Katie White: COP31 must respond to ‘really scary’ science</a></div>
+  <div class="article-summary">The upcoming COP31 climate talks in Antalya, Turkey need to respond to the latest science on global warming, which is “really scary”, says UK climate minister Katie White.
+
+In an interview with Carbon Brief setting out the UK’s priorities for the sum…</div>
+  <div class="article-meta">Nov 03, 2026  19:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/04/malaysias-data-center-industry-gets-500-mw-solar-1-gwh-battery-storage-boost/" target="_blank">Malaysia’s data center industry gets 500 MW solar, 1 GWh battery storage boost</a></div>
+  <div class="article-summary">Malaysia's burgeoning data center sector is set to receive a significant clean energy upgrade with a planned 500 MW solar farm and 1 GWh battery storage system, backed by major players IOI Corporation and Tenaga Nasional Berhad. This substantial renewable power injection directly addresses the industry's massive energy demands, a critical step in decarbonizing the rapidly growing digital infrastructure and mitigating its climate footprint.</div>
+  <div class="article-meta">Nov 04, 2026  14:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/04/dutch-grid-operator-reports-ongoing-connection-bottlenecks/" target="_blank">Dutch grid operator reports ongoing connection bottlenecks</a></div>
+  <div class="article-summary">Dutch grid operator Liander is placing customers in 16 municipalities in eastern Gelderland on a waiting list for high-voltage grid connections until at least July 2027 due to insufficient capacity. This bottleneck, impacting electricity consumption, highlights a growing challenge for the Netherlands' energy transition, potentially slowing the rollout of new projects and the integration of renewable energy sources.</div>
+  <div class="article-meta">Nov 04, 2026  13:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/04/vietnam-approves-452-mw-floating-solar-project/" target="_blank">Vietnam approves 452 MW floating solar project</a></div>
+  <div class="article-summary">Vietnam's Dak Lak province has greenlit a massive 452 MW floating solar farm on the Ea Sup Thuong reservoir, a significant step in the nation's renewable energy expansion. This project, slated for completion by 2028, underscores Vietnam's commitment to decarbonization by leveraging its vast water resources for clean power generation.</div>
+  <div class="article-meta">Nov 04, 2026  13:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/04/poweroad-flex-261-series-passes-dual-standard-large-scale-fire-testing/" target="_blank">Poweroad FLEX-261 series passes dual-standard large-scale fire testing</a></div>
+  <div class="article-summary">POWEROAD's FLEX-261 energy storage system has successfully passed rigorous dual-standard fire safety tests (UL 9540A and CSA C800), demonstrating its ability to prevent thermal runaway in large-scale commercial and industrial installations. This crucial certification provides confidence in the safety of deploying significant battery storage capacity, a vital component for grid stability and the integration of renewable energy sources.</div>
+  <div class="article-meta">Nov 04, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/04/lithuania-moves-to-revive-renewables-growth-with-sweeping-reforms/" target="_blank">Lithuania moves to revive renewables growth with sweeping reforms</a></div>
+  <div class="article-summary">Lithuania is fast-tracking renewable energy expansion with sweeping reforms, including extended project timelines and halved developer guarantees. These measures are crucial for bolstering the nation's clean energy capacity and reducing its reliance on fossil fuels.</div>
+  <div class="article-meta">Nov 04, 2026  12:59 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/nov/04/funding-poorer-countries-climate-crisis-adaptation-un-report" target="_blank">Funding to help poorer countries cope with climate crisis has stalled, says UN</a></div>
+  <div class="article-summary">Rich nations are failing to deliver on climate adaptation funding promises, with financial support for poorer countries stalling or falling since 2022. This shortfall directly hinders essential measures like flood defenses and drought-resistant farming, leaving vulnerable populations exposed as climate impacts intensify.</div>
+  <div class="article-meta">Nov 04, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/business/2026/nov/04/rogue-energy-bosses-and-brokers-face-crackdown-on-mis-selling" target="_blank">Rogue UK energy bosses and brokers face crackdown on mis-selling</a></div>
+  <div class="article-summary">Exclusive: Ofgem to be given powers to issue fines and rein in bonuses for executives who ‘reward themselves while customers suffer’Energy bosses in the UK will have their bonuses curtailed when suppliers and brokers break the rules under a crackdown…</div>
+  <div class="article-meta">Nov 04, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/04/how-penguin-poo-is-making-antarctic-snow-melt-faster" target="_blank">How penguin poo is making Antarctic snow melt faster</a></div>
+  <div class="article-summary">Researchers find the birds’ guano feeds algal blooms that absorb significantly more solar energyPenguin poo is making the Antarctic snow melt faster, a study shows. As temperatures rise, penguins are waddling closer to the south pole, with potential…</div>
+  <div class="article-meta">Nov 04, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04112026/democrats-seize-congress-statehouses-in-referendum-on-the-economy/" target="_blank">Democrats Seize Congress, Statehouses in Referendum on the Economy</a></div>
+  <div class="article-summary">Democrats on Tuesday won control of both houses of Congress and a decisive mandate to put a check on Donald Trump’s tumultuous presidency, a victory propelled by voter anger over high prices, corruption and the unchecked spread of data centers. Some…</div>
+  <div class="article-meta">Nov 04, 2026  08:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/04/kashmir-potato-pits-vanishing-indigenous-knowledge-buried-aoe" target="_blank">Kashmir’s potato pits are vanishing – and generations of knowledge could be buried for ever</a></div>
+  <div class="article-summary">Farmers in Gurez store their harvests underground to last the Himalayan winter. As the practice fades, local varieties and handed-down skills are disappearing tooHajra Begum rolls a potato in her hands, checking its skin for cuts, soft spots and sign…</div>
+  <div class="article-meta">Nov 04, 2026  06:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/03112026/satellite-imagery-tracks-us-forest-loss/" target="_blank">US Loses a Football Field of Forest Every 2 Minutes</a></div>
+  <div class="article-summary">A new satellite tracking system finds that the United States has lost 350,000 acres of forest land per year—a rate of approximately one football field every two minutes—which is the equivalent of 2.3 billion metric tons of carbon dioxide emissions th…</div>
+  <div class="article-meta">Nov 04, 2026  01:51 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, November 04, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
