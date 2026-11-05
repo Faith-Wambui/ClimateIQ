@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Thursday, November 05, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">49</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/05/governments-colombia-vanuatu-fossil-free-zone-cop31-antalya-turkiye-australia/" target="_blank">Governments must embrace Fossil Free Zones as they head to COP31</a></div>
+  <div class="article-summary">As governments convene for COP31, former ministers from Colombia and Vanuatu propose "Fossil Free Zones" to translate the Dubai agreement into concrete action. Colombia's recent declaration of nearly 500,000 square kilometers of the Amazon as off-limits to new fossil fuel extraction demonstrates a tangible commitment to protecting vital ecosystems, underscoring the urgent need to move beyond fossil fuel reliance amidst global energy shocks.</div>
+  <div class="article-meta">Nov 05, 2026  14:19 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-is-the-brazil-led-deforestation-roadmap" target="_blank">Q&A: What is the Brazil-led ‘deforestation roadmap’?</a></div>
+  <div class="article-summary">Q&A: What is the Brazil-led ‘deforestation roadmap’?
+
+On 3 November, the Brazilian presidency of the COP30 climate talks released its long-awaited “roadmap” on ending deforestation.
+
+Ahead of the Belém summit, Brazilian president Luiz Inácio Lula da…</div>
+  <div class="article-meta">Nov 04, 2026  18:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/qa-what-is-in-the-global-roadmap-for-transitioning-away-from-fossil-fuels" target="_blank">Q&A: What is in the global ‘roadmap’ for transitioning away from fossil fuels?</a></div>
+  <div class="article-summary">By:
+
+Transitioning away from fossil fuels is “urgent, inevitable and, yet, possible”, according to a first-of-its-kind global “roadmap” produced by Brazil.
+
+The host of last year’s climate summit, COP30, has set out a voluntary plan for how countries…</div>
+  <div class="article-meta">Nov 04, 2026  18:23 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/11/africas-mineral-export-bans-cbam-trade-rules-and-the-fight-for-a-fair-green-transition/" target="_blank">Africa’s Mineral Export Bans, CBAM, Trade Rules and the Fight for a Fair Green Transition</a></div>
+  <div class="article-summary">Africa’s COP31 position on trade should not be that every export ban is justified or that every climate-related trade measure is unfair. It should be that the rules governing the green economy must allow resource-producing countries to pursue legitim…</div>
+  <div class="article-meta">Nov 04, 2026  16:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/05/hoymiles-plans-to-establish-inverter-factory-in-oman/" target="_blank">Hoymiles plans to establish inverter factory in Oman</a></div>
+  <div class="article-summary">Chinese inverter giant Hoymiles is investing $100 million in Oman to build a solar inverter factory and a renewable energy fund, aiming to capture Middle Eastern and North African markets. This move signals significant investment in clean energy infrastructure for a region increasingly prioritizing decarbonization.</div>
+  <div class="article-meta">Nov 05, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/05/deepway-electric-semi-arrives-in-new-zealand-and-gets-a-new-name/" target="_blank">DeepWay electric semi arrives in New Zealand, and gets a new name</a></div>
+  <div class="article-summary">Foodstuffs North Island's new Chinese-built electric semi, now named "Evie," has already traveled nearly 45,000 km, cutting over 81,000 kg of carbon emissions. This deployment signifies a tangible step towards decarbonizing heavy-duty transport, crucial for meeting climate goals.</div>
+  <div class="article-meta">Nov 05, 2026  15:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/05/aniioki-a9-pro-max-review-basically-an-electric-motorcycle-that-you-can-pedal/" target="_blank">Aniioki A9 Pro Max review: Basically an electric motorcycle that you can pedal</a></div>
+  <div class="article-summary">The Aniioki A9 Pro Max, a powerful electric two-wheeler with dual 6,000W motors and a 4.8 kWh battery capable of 45 mph, blurs the lines between e-bike and electric motorcycle. This machine's significant power and battery capacity, while offering impressive range and performance, highlight the growing trend of high-wattage electric vehicles that demand careful consideration of regulatory classifications and their potential impact on energy consumption.</div>
+  <div class="article-meta">Nov 05, 2026  14:25 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/05/revolta-installs-first-10-kwh-sodium-ion-home-battery-in-germany/" target="_blank">Revolta installs first 10 kWh sodium-ion home battery in Germany</a></div>
+  <div class="article-summary">Revolta has deployed Germany's first 10 kWh sodium-ion home battery near Aschaffenburg, marking a significant step in commercializing this alternative energy storage technology. This move is crucial for the climate as sodium-ion batteries offer a more sustainable and potentially cheaper path to grid decarbonization and increased renewable energy adoption, especially as Revolta is already sold out for 2026.</div>
+  <div class="article-meta">Nov 05, 2026  13:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/05/lebanon-issues-solar-tender/" target="_blank">Lebanon issues solar tender</a></div>
+  <div class="article-summary">Lebanon's state-owned electricity company, EDL, is launching a tender for solar energy operations on the Beirut River, signaling continued investment in renewable power. This move is crucial for Lebanon as it aims to boost its solar capacity, which already reached over 1,500 MW in 2025, to address its energy crisis and reduce reliance on fossil fuels.</div>
+  <div class="article-meta">Nov 05, 2026  13:38 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/05/the-us-midterm-election-results-remind-us-to-focus-on-the-foundation-of-our-democracy/" target="_blank">The US Midterm Election Results Remind Us To Focus On The “Foundation Of Our Democracy”</a></div>
+  <div class="article-summary">Despite a strong Democratic showing in the US midterm elections, with a projected 13-point national popular vote advantage in House races, the results underscore a critical need to address the foundational issues that influence voter priorities, including the urgency of climate action. This election cycle highlights that while electoral outcomes shift, the underlying climate crisis demands sustained focus and policy solutions to ensure long-term stability and prosperity.</div>
+  <div class="article-meta">Nov 05, 2026  15:03 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05112026/pennsylvania-hickory-nut-cooking-oil-replacement/" target="_blank">Hunting for a Cooking Oil Replacement in Pennsylvania’s Forests</a></div>
+  <div class="article-summary">If you’ve ever looked for a homegrown replacement for the imported olive, canola and palm oils that typically fill grocery store aisles and home kitchens, there’s a small but growing alternative. A network of sustainability enthusiasts is now making…</div>
+  <div class="article-meta">Nov 05, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/05/warming-uk-seas-could-fundamentally-reshape-marine-ecosystems-report" target="_blank">Warming UK seas could ‘fundamentally reshape marine ecosystems’ – report</a></div>
+  <div class="article-summary">Four-year study warns destabilised marine food webs could jeopardise food security by 2050Warming seas around the UK and the wider north-east Atlantic could destabilise marine food webs, weaken ocean health and jeopardise food security by 2050, accor…</div>
+  <div class="article-meta">Nov 05, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/news/2026/nov/05/worlds-wettest-rainstorms-getting-worse-flood-drought-risk" target="_blank">World’s wettest rainstorms are getting wetter, affecting flood and drought risk</a></div>
+  <div class="article-summary">Events that deliver about half of global rainfall are getting shorter but more intense, with wide-ranging implicationsThe world’s wettest rainstorms produce about half of the global annual rainfall. Now a study shows that these intense downpours have…</div>
+  <div class="article-meta">Nov 05, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/04112026/california-voters-reject-industry-energy-measures/" target="_blank">Voters Reject Industry-Backed Ballot Measures With Big Environmental Stakes</a></div>
+  <div class="article-summary">As a blue wave washed over Election Day, ballot measures across the country showed voters strongly support environmental protection, with notable early outcomes in California and Colorado.  Democrats swept Congress on Tuesday, winning control of both…</div>
+  <div class="article-meta">Nov 05, 2026  04:33 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Thursday, November 05, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
