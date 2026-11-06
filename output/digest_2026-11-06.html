@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Friday, November 06, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/06/european-nations-uk-fossil-fuel-roadmaps-brazil-cop30-president/" target="_blank">European nations signal support for fossil fuels roadmap, says COP30 president</a></div>
+  <div class="article-summary">Some European governments are backing Brazil's voluntary roadmaps on fossil fuels and deforestation to inform the next UN global climate stocktake concluding in 2028. This move could significantly influence international climate policy by integrating specific national transition plans into the broader assessment of global progress.</div>
+  <div class="article-meta">Nov 06, 2026  15:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/nov/06/europeans-want-action-climate-crisis-yougov-poll" target="_blank">Most Europeans want action to tackle climate crisis but not at any cost, poll shows</a></div>
+  <div class="article-summary">A new YouGov poll reveals that while a strong majority of Europeans (69-80% across six countries) acknowledge human-caused climate change and want urgent action, they are hesitant to accept significant personal sacrifices. This sentiment suggests a critical challenge for policymakers: balancing public demand for climate solutions with economic and lifestyle concerns, particularly around measures like air travel or fuel taxes.</div>
+  <div class="article-meta">Nov 06, 2026  15:27 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/simply-staggering-rapidly-developing-super-el-nino-on-track-to-peak-in-december" target="_blank">‘Simply staggering’: Rapidly developing ‘super El Niño’ on track to peak in December</a></div>
+  <div class="article-summary">By:
+
+The ongoing “super El Niño” is likely to peak at the end of 2026 and push average global temperatures to record levels next year.
+
+That is according to Carbon Brief’s latest “state of the climate” update, which analyses El Niño forecasts from mo…</div>
+  <div class="article-meta">Nov 06, 2026  12:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-chinas-quarterly-co2-falls-3-in-largest-drop-since-covid" target="_blank">Analysis: China’s quarterly CO2 falls 3% in largest drop since Covid</a></div>
+  <div class="article-summary">By:
+
+China’s carbon dioxide (CO2) emissions fell by 3.1% in the third quarter of 2026, as the Hormuz crisis continued to hit oil demand and coal use also dropped.
+
+This was the largest quarterly reduction since the 2022 Covid lockdowns and means that…</div>
+  <div class="article-meta">Nov 06, 2026  03:01 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/interactive-tracking-negotiating-texts-at-the-cop31-climate-summit" target="_blank">Interactive: Tracking negotiating texts at the COP31 climate summit</a></div>
+  <div class="article-summary">The centrepiece of every UN climate summit is for countries to negotiate the wording of a large number of legal agreements – and COP31 in the Turkish city of Antalya is no different.
+
+These texts are hashed out behind closed doors in the “blue zone”…</div>
+  <div class="article-meta">Nov 05, 2026  17:13 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/06/sodium-ion-batteries-approach-cost-parity-with-lfp-with-70-gwh-covered-by-supply-agreements/" target="_blank">Sodium-ion batteries approach cost parity with LFP, with 70 GWh covered by supply agreements</a></div>
+  <div class="article-summary">Sodium-ion batteries are nearing cost parity with established LFP technology, with global supply agreements already covering 70 GWh. This breakthrough is significant as it promises a 21% lower total cost of ownership over two decades, potentially accelerating the transition to cleaner energy by offering a more affordable and sustainable battery solution.</div>
+  <div class="article-meta">Nov 06, 2026  15:34 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/06/the-hydrogen-stream-h2-turbines-can-push-lcohs-to-around-0-62-kg/" target="_blank">The Hydrogen Stream: H2 turbines can push LCOHS to around $0.62/kg</a></div>
+  <div class="article-summary">Australian research reveals hydrogen turbines can deliver backup power at a competitive $0.62/kg, making them a more cost-effective solution than fuel cells when solar energy dips. This breakthrough in underground hydrogen storage technology is crucial for ensuring grid stability as renewable energy sources become more prevalent.</div>
+  <div class="article-meta">Nov 06, 2026  15:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/06/soluxtec-resumes-topcon-solar-module-production-in-germany/" target="_blank">Soluxtec resumes TOPCon solar module production in Germany</a></div>
+  <div class="article-summary">Soluxtec has restarted production of advanced G12-format TOPCon solar modules at its Trier-Föhren facility in Germany following a manufacturing line upgrade. This move signals a renewed push for domestic, high-efficiency solar manufacturing in Europe, crucial for reducing reliance on fossil fuels and accelerating the continent's clean energy transition.</div>
+  <div class="article-meta">Nov 06, 2026  15:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/06/zoomlion-says-its-new-1600-hp-hybrid-tractor-is-the-worlds-most-powerful/" target="_blank">Zoomlion says its new, 1,600 hp hybrid tractor is the world’s most powerful</a></div>
+  <div class="article-summary">Chinese manufacturer Zoomlion has unveiled the 9DX, a 1,600 hp hybrid tractor that combines diesel power with electric drive, promising significant reductions in fuel consumption and emissions. This powerful new machine, featuring an 800V hybrid electric powertrain and advanced track system, signifies a major step forward in agricultural machinery efficiency and could lead to substantial climate benefits by lowering the carbon footprint of large-scale farming operations.</div>
+  <div class="article-meta">Nov 06, 2026  14:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/06/byd-yangwang-u9-xtreme-first-production-car-500-km-h/" target="_blank">BYD’s electric hypercar hits 312 mph, first production car over 500 km/h</a></div>
+  <div class="article-summary">BYD’s Yangwang U9 Xtreme just reached 503.17 km/h (312.66 mph) on a closed highway in Abu Dhabi, making it the first production car ever to go faster than 500 km/h.The FIA and Guinness World Records both recognized the run. It’s the all-electric hype…</div>
+  <div class="article-meta">Nov 06, 2026  14:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/06/chinese-pv-industry-brief-ja-longi-tongwei-report-widening-losses/" target="_blank">Chinese PV Industry Brief: JA, Longi, Tongwei report widening losses</a></div>
+  <div class="article-summary">China's leading solar manufacturers, including JA, Longi, and Tongwei, are reporting significant revenue declines and widening losses for the first nine months of 2026, signaling a challenging market despite increased module shipments. This downturn, coupled with a 16.7% drop in the mechanism price for distributed solar projects in Guangdong, suggests that the rapid expansion of solar capacity may be outstripping demand and profitability, potentially impacting future investment and the pace of the global clean energy transition.</div>
+  <div class="article-meta">Nov 06, 2026  15:16 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02786-8" target="_blank">Managing risk in carbon portfolios</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 06 November 2026;doi:10.1038/s41558-026-02786-8Carbon removal methodologies have different risks of stored CO2 leaking back to the atmosphere. Now a study provides a quantitative framework for comparison, a ne…</div>
+  <div class="article-meta">Nov 06, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02785-9" target="_blank">The carbon at risk measure for managing carbon removal risk and guiding portfolio construction</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 06 November 2026;doi:10.1038/s41558-026-02785-9Carbon removal markets lack a standard metric for assessing permanence risk, limiting effective risk management and product development. Here researchers propose…</div>
+  <div class="article-meta">Nov 06, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/06/uk-trees-early-spring-mild-autumn" target="_blank">‘Everything is so out of whack’: UK trees experience spring six months early</a></div>
+  <div class="article-summary">Mild autumn temperatures causing premature flowering and raising concerns for pollinators, say expertsTrees are experiencing an “early spring” because of mild UK temperatures this autumn, with experts warning this could cause long-term harm to pollin…</div>
+  <div class="article-meta">Nov 06, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06112026/bipartisan-permitting-reform-outlook-after-election-shakeup/" target="_blank">Election Shakeup Threatens Bipartisan Deal to Speed Energy Projects</a></div>
+  <div class="article-summary">Democrats’ electoral sweep has shaken the ground beneath a permitting reform bill in Congress, raising doubts about whether the measure has enough support to advance in an initial Senate vote scheduled for Monday. House Minority Leader Hakeem Jeffrie…</div>
+  <div class="article-meta">Nov 06, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06112026/iowa-residents-fight-proposed-gas-plant-for-data-centers/" target="_blank">As Data Centers Move In, Iowa Residents Fight Plans For a New Gas Plant</a></div>
+  <div class="article-summary">FAIRFAX, Iowa—Nearly 50 people gathered at the American Legion Post on a July evening to learn about a proposed natural gas plant less than three miles from town. Seated in folding chairs, they pulled out their phones and typed responses to a simple…</div>
+  <div class="article-meta">Nov 06, 2026  12:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05112026/republicans-maintain-weaker-grip-on-florida/" target="_blank">After Democrats’ National Sweep, Republicans Maintain a Weaker Grip on Florida</a></div>
+  <div class="article-summary">Republicans in Florida narrowly held off a nationwide repudiation Tuesday of their party and President Donald Trump, eking out slim victories in statewide races. But the GOP failed to flip congressional seats Democrats held and lost seats in the Legi…</div>
+  <div class="article-meta">Nov 06, 2026  03:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/05112026/arizona-democrats-victory-energy-water-issues/" target="_blank">Energy and Water Issues Propel Democrats to Victory in Arizona</a></div>
+  <div class="article-summary">PHOENIX—Two years after President Donald Trump won Arizona with 52 percent of the vote, Democrats are poised to win a trifecta in the state House, Senate and governor’s office, and could potentially win every statewide elected position. The battlegro…</div>
+  <div class="article-meta">Nov 05, 2026  23:30 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Friday, November 06, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
