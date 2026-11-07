@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, November 07, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">38</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 31 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/07/u-s-solar-developers-navigate-policy-stack-as-section-232-deadline-nears/" target="_blank">U.S. solar developers navigate policy stack as Section 232 deadline nears</a></div>
+  <div class="article-summary">U.S. solar developers are scrambling to adapt procurement strategies as a surge in inventory, up 126% in Q2 2026, collides with looming trade policy changes like Section 232. This regulatory uncertainty threatens to disrupt the rapid expansion of utility-scale solar, a critical component in the nation's clean energy transition.</div>
+  <div class="article-meta">Nov 07, 2026  13:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07112026/rep-jared-huffman-natural-resources-committee/" target="_blank">Democrats Vow to Reset “Values and Agenda” for House Natural Resources Committee</a></div>
+  <div class="article-summary">House Democrats are signaling a significant shift in focus for the Natural Resources Committee, with Rep. Jared Huffman poised to lead a renewed emphasis on climate action and environmental justice. This change matters because the committee's new direction will directly influence legislation and oversight impacting fossil fuel extraction and conservation efforts across the nation.</div>
+  <div class="article-meta">Nov 07, 2026  12:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07112026/un-ipcc-funding-crunch-ahead-of-cop31/" target="_blank">Global Science Panel Hits Roadblocks Ahead of COP31 Climate Summit</a></div>
+  <div class="article-summary">The Intergovernmental Panel on Climate Change (IPCC), the UN's leading climate science body, faces significant funding shortages and internal roadblocks just as it prepares crucial reports for COP31. This disarray jeopardizes the timely delivery of the scientific consensus needed to inform critical climate policy decisions by global leaders.</div>
+  <div class="article-meta">Nov 07, 2026  12:50 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/07/how-the-solar-industries-can-make-better-decisions-for-the-energy-transition/" target="_blank">How the Solar+ industries can make better decisions for the energy transition</a></div>
+  <div class="article-summary">Women in Solar+ Europe's recent tour highlights that a lack of open dialogue is jeopardizing crucial energy transition projects. Their findings emphasize that fostering an environment where diverse voices can challenge assumptions and drive innovation is essential for effective decision-making in the rapidly evolving solar and storage sectors.</div>
+  <div class="article-meta">Nov 07, 2026  13:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/07/ecuadors-largest-pv-plant-goes-online/" target="_blank">Ecuador’s largest PV plant goes online</a></div>
+  <div class="article-summary">Ecuador's largest privately owned solar plant, the 82 MW Faro de San Marcos facility in Santa Elena province, has come online, adding 106 GWh of clean energy annually. This significant private investment in renewables signals Ecuador's accelerated push to bolster its grid and reduce reliance on fossil fuels following recent blackouts.</div>
+  <div class="article-meta">Nov 07, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/07/maintaining-trust-in-new-tech/" target="_blank">Maintaining trust in new tech</a></div>
+  <div class="article-summary">Global standards bodies are grappling with the rapid rise of AI, a challenge that could impact the safety and reliability of new technologies. This is critical as these standards are essential for ensuring that innovative products, like those in the burgeoning renewable energy sector, can be trusted and deployed effectively.</div>
+  <div class="article-meta">Nov 07, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/07/portable-solar-powered-system-produces-1-64-liters-of-drinking-water-in-8-hours/" target="_blank">Portable solar-powered system produces 1.64 liters of drinking water in 8 hours</a></div>
+  <div class="article-summary">Researchers at Soochow University in China have developed a portable solar-powered system that converts saline, turbid and contaminated water into drinking water using an electrothermal evaporator and concentrated sunlight. The device produced 1.64 l…</div>
+  <div class="article-meta">Nov 07, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/07/researchers-unveil-10-56-kw-solar-powered-pleasure-boat/" target="_blank">Researchers develop 10.56 kW solar-powered pleasure boat</a></div>
+  <div class="article-summary">Canadian researchers have unveiled a 10.56 kW solar-powered pleasure boat, capable of meeting propulsion needs and generating a 39.8% energy surplus under simulated Cypriot sun. This innovation demonstrates a viable pathway for decarbonizing recreational marine transport, significantly reducing reliance on fossil fuels in a sector often overlooked in climate solutions.</div>
+  <div class="article-meta">Nov 07, 2026  11:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/07112026/nepal-himalayas-dengue-fever/" target="_blank">Climate Change Is Bringing Dengue Fever to the High Himalayas</a></div>
+  <div class="article-summary">Warming temperatures in Nepal's Himalayas are allowing dengue-carrying mosquitoes to ascend to previously uninhabitable altitudes, posing a new health threat. This expansion of vector-borne diseases into high-altitude regions signals a significant and concerning consequence of climate change, impacting human health far beyond tropical zones.</div>
+  <div class="article-meta">Nov 07, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/ng-interactive/2026/nov/07/whats-the-point-ten-years-after-the-paris-treaty-are-climate-talks-getting-anywhere" target="_blank">What’s the point? Ten years after the Paris treaty, are climate talks getting anywhere?</a></div>
+  <div class="article-summary">Its key temperature goal has been missed but experts say the agreement is still proving a vital moral compass for progressIt was a curious way of conducting negotiations. Ahead of the 2025 climate summit, in the Amazonian port of Belém last year, the…</div>
+  <div class="article-meta">Nov 07, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06112026/sen-alan-armstrong-bipartisan-permitting-bill-pipelines/" target="_blank">A US Senator’s Push to Fast-Track Pipelines Would Benefit His Former Company</a></div>
+  <div class="article-summary">Alan Armstrong of Oklahoma entered the U.S. Senate to fill a vacancy in March with a clear priority: pass permitting reform that he argued was necessary based on his experience leading a major natural gas pipeline company. Now, as he prepares to leav…</div>
+  <div class="article-meta">Nov 07, 2026  03:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06112026/germany-launches-global-sf6-pledge-china-emissions/" target="_blank">Global Campaign Seeks to Curb Emissions of World’s Most Potent Greenhouse Gas</a></div>
+  <div class="article-summary">The German government has launched an international initiative to curb emissions of sulfur hexafluoride, an exceptionally potent greenhouse gas that it says has long been overlooked in efforts to address climate change. Announced this week at a Unite…</div>
+  <div class="article-meta">Nov 07, 2026  02:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/06112026/raw-sewage-chicago-river-deep-tunnel-storms-climate-change/" target="_blank">Billions of Gallons of Raw Sewage Are Pouring Into the Chicago River After Storms</a></div>
+  <div class="article-summary">This article originally appeared in the Chicago Sun-Times. It has been republished with permission. Joe Gamble knows what to expect when he arrives at work at the Bridgeport Art Center after days of heavy rain. “There was raw sewage floating in the c…</div>
+  <div class="article-meta">Nov 06, 2026  22:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/06/blue-cop31-antalya-ocean-protections-record-heat-climate-finance/" target="_blank">‘Blue COP31’ set to spotlight need for ocean protections amid record heat</a></div>
+  <div class="article-summary">Nepal seeks stronger recognition of mountain issues in UN climate process
+
+Flood-hit Nepal wants COP31 to adopt a new agenda item formalising work on mountains and climate change and boosting the response to rising risks
+
+European nations signal supp…</div>
+  <div class="article-meta">Nov 06, 2026  20:16 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, November 07, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
