@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, November 10, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 0 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 41 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/10/cop31-will-involve-lots-of-talking-about-talking-but-there-are-wins-to-be-had" target="_blank">Cop31 may involve lots of talking about talking – but there are wins to be had</a></div>
+  <div class="article-summary">COP31 in Antalya, Turkey, faces a familiar, worsening climate challenge with nearly all nations present. While the conference may involve extensive discussions, it presents an opportunity to secure crucial wins in confronting humanity's greatest threat.</div>
+  <div class="article-meta">Nov 10, 2026  15:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/10/cop31-bulletin-day-2-energy-day-off-to-slow-start-amid-transport-chaos/" target="_blank">COP31 Bulletin Day 2: Energy Day off to slow start amid transport chaos</a></div>
+  <div class="article-summary">COP31's Energy Day kicked off with ambitious goals to electrify the global economy, aiming for electricity to reach 35% of final energy consumption by 2035, but faced initial logistical hurdles. This push for electrification, crucial for boosting energy security and cutting emissions, is now at risk of being diluted by fossil fuel-producing nations and faces a significant gap between current policies and the stated targets.</div>
+  <div class="article-meta">Nov 10, 2026  15:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/analysis-fossil-fuel-co2-emissions-set-to-dip-in-2026-as-iran-conflict-hits-oil-use" target="_blank">Analysis: Fossil-fuel CO2 emissions set to dip in 2026 as Iran conflict hits oil use</a></div>
+  <div class="article-summary">Analysis: Fossil-fuel CO2 emissions set to dip in 2026 as Iran conflict hits oil use
+
+Carbon dioxide (CO2) emissions from fossil fuels and cement are projected to fall by around 0.4% in 2026 to 38.2bn tonnes of CO2 (GtCO2), according to new figures f…</div>
+  <div class="article-meta">Nov 10, 2026  04:01 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/10/romanias-renewable-project-pipeline-surpasses-114-gw/" target="_blank">Romania’s renewable project pipeline surpasses 114 GW</a></div>
+  <div class="article-summary">Romania's energy regulator reports a staggering 114 GW of renewable energy projects are in the pipeline, with 16.2 GW already securing crucial permits for export capacity. This massive build-out signals a significant shift in Europe's energy landscape, potentially bolstering grid stability and accelerating the continent's transition away from fossil fuels.</div>
+  <div class="article-meta">Nov 10, 2026  15:49 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/10/japan-to-assess-renewable-storage-technologies-beyond-pv-and-wind/" target="_blank">Japan to assess renewable, storage technologies beyond PV and wind</a></div>
+  <div class="article-summary">Japan's NEDO is launching a JPY 20 million review to identify promising, yet underutilized, renewable and storage technologies beyond solar and wind. This strategic move aims to unlock new pathways for decarbonization, ensuring Japan meets its 2050 carbon neutrality goals by supporting innovations tailored to diverse regional needs.</div>
+  <div class="article-meta">Nov 10, 2026  15:35 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/10/raana-semiconductors-to-supply-cz12-ingot-growers-to-swelect-hhv-solar/" target="_blank">Swelect HHV secures ingot growers for 1 GW factory in India</a></div>
+  <div class="article-summary">Swelect HHV Solar Photovoltaics is set to build a 1 GW ingot and wafer manufacturing facility in India, securing crucial CZ12 silicon ingot growers from Raana Semiconductors. This significant expansion of domestic solar manufacturing capacity is a key step in India's ambitious renewable energy targets, directly impacting the global supply chain for solar panels and accelerating the transition away from fossil fuels.</div>
+  <div class="article-meta">Nov 10, 2026  15:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/10/cat-puts-century-old-train-tech-to-work-in-its-biggest-underground-machine-yet/" target="_blank">CAT puts century-old train tech to work in its biggest underground machine yet</a></div>
+  <div class="article-summary">Caterpillar is adapting proven diesel-electric locomotive technology for its largest underground mining machine, the R3200 XE LHD. This innovation leverages a century-old, efficient design to power heavy-duty underground operations, potentially reducing reliance on less efficient or more polluting alternatives in a critical industrial sector.</div>
+  <div class="article-meta">Nov 10, 2026  15:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/10/italian-startup-plans-offshore-gravity-storage-projects/" target="_blank">Italian startup plans offshore gravity storage projects</a></div>
+  <div class="article-summary">Italian startup Sizable Energy is pioneering offshore gravity storage, using deep-sea brine reservoirs to store electricity, with initial projects slated for Calabria and Sicily and a Naples data center demonstrator by 2027. This innovative approach offers a scalable, long-duration solution crucial for integrating intermittent renewables and ensuring grid stability as the world transitions to a low-carbon economy.</div>
+  <div class="article-meta">Nov 10, 2026  14:43 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/10/slight-fall-in-carbon-emissions-from-fossil-fuels-as-iran-war-drives-renewables-push" target="_blank">Slight fall in carbon emissions from fossil fuels as Iran war drives renewables push</a></div>
+  <div class="article-summary">Soaring oil and gas prices, exacerbated by the Iran war, are driving a 2% drop in oil emissions this year as consumers shift to electric vehicles, offering a temporary respite from climate-damaging carbon output. While this easing is a positive signal, scientists caution against premature declarations of a global turnaround, emphasizing the need for sustained action beyond short-term market fluctuations.</div>
+  <div class="article-meta">Nov 10, 2026  14:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02769-9" target="_blank">Coal power lives longer next to data centres</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 10 November 2026;doi:10.1038/s41558-026-02769-9Data centres are among the world’s fastest growing electricity consumers. An analysis of more than 9,000 facilities worldwide links the artificial intelligence-er…</div>
+  <div class="article-meta">Nov 10, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02789-5" target="_blank">Higher warming leads to a larger zero-emissions commitment</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 10 November 2026;doi:10.1038/s41558-026-02789-5Scientific grounds for a net-zero policy assume near-zero committed warming over a few decades after CO2 emissions cease. A modelling study suggests that if prior…</div>
+  <div class="article-meta">Nov 10, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02821-8" target="_blank">A further acceleration of clean energy is needed for global CO<sub>2</sub> emissions to peak and decline</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 10 November 2026;doi:10.1038/s41558-026-02821-8This work projects a decline in global emissions in 2026 as a result of clean energy and in response to conflicts. Energy demand has increased, and will continue…</div>
+  <div class="article-meta">Nov 10, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02794-8" target="_blank">Early evidence links data centre exposure to coal power retirement timelines</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 10 November 2026;doi:10.1038/s41558-026-02794-8Data centre expansion may slow the coal-fired power plants phase-out, complicating decarbonization pathways. This study finds that coal units exposed to post-2020…</div>
+  <div class="article-meta">Nov 10, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/10112026/30-years-of-climate-talks-lack-of-progress/" target="_blank">Why the World Is Still Running on Fossil Fuels After 30 Years of Climate Talks</a></div>
+  <div class="article-summary">ANTALYA, Turkey—The stench of fossil fuels has become a hallmark of the United Nations “Conference of the Parties” climate talks, starting with the airplanes and buses carrying delegates to the conferences. Two annual meetings have been held in Polan…</div>
+  <div class="article-meta">Nov 10, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/10/cop31-outcome-needs-to-prioritise-transition-away-from-fossil-fuels/" target="_blank">COP31 outcome needs to prioritise transition away from fossil fuels</a></div>
+  <div class="article-summary">Stientje van Veldhoven is Minister of Climate and Green Growth for the Netherlands.
+
+When we co-hosted the first-ever conference on transitioning away from fossil fuels (TAFF) this April, the world was reeling from the volatility in oil and gas price…</div>
+  <div class="article-meta">Nov 10, 2026  12:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/nov/10/tuesday-briefing-the-world-is-falling-short-on-climate-action-can-cop31-change-that" target="_blank">Tuesday briefing: The world is falling short on climate action. Can Cop31 change that?</a></div>
+  <div class="article-summary">In today’s newsletter: As global leaders gather in Turkey for the UN climate summit, both doubts and hope surround what the annual talks can achieveGood morning. After another year of unprecedented droughts, floods and wildfires driven by human-cause…</div>
+  <div class="article-meta">Nov 10, 2026  09:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/10/developing-countries-face-climate-finance-deficit-as-loan-repayments-soar/" target="_blank">Developing countries face climate finance deficit as loan payments soar</a></div>
+  <div class="article-summary">COP31 Bulletin Day 2: Energy Day off to slow start amid transport chaos
+
+Momentum starts to build around the COP31 presidency’s electrification pledge, while the UN chief calls on all countries to plan their transition away from fossil fuels
+
+COP31 o…</div>
+  <div class="article-meta">Nov 10, 2026  08:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/video/2026/nov/10/australias-chris-bowen-tells-cop31-the-world-can-still-limit-global-heating-to-15c-video" target="_blank">Australia's Chris Bowen tells Cop31 the world can still limit global heating to 1.5C – video</a></div>
+  <div class="article-summary">At the opening of Cop31 in Turkey, president of negotiations and Australia’s climate change minister, Chris Bowen, acknowledged the world would overshoot the Paris Agreement’s 1.5C warming limit but said 'we can return' if countries acted with urgenc…</div>
+  <div class="article-meta">Nov 10, 2026  05:23 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, November 10, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
