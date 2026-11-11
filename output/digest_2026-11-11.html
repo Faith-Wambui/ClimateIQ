@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, November 11, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 4 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 8 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 34 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/live/2026/nov/11/climate-crisis-talks-turkey-latest-news-updates" target="_blank">Cop31 live: ‘Fossil fuels must go the way of the dinosaurs’ - UN chief hits out at industry lobbying</a></div>
+  <div class="article-summary">UN Secretary-General António Guterres declared at COP31 that fossil fuels must become extinct, directly challenging the industry's lobbying efforts. This urgent call underscores the critical need to accelerate the transition away from fossil fuels to avert further climate breakdown.</div>
+  <div class="article-meta">Nov 11, 2026  15:15 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/11/finance-and-just-transitions-front-and-centre-for-the-agn-at-cop31/" target="_blank">Finance and Just Transitions Front and Centre for the AGN at COP31</a></div>
+  <div class="article-summary">African negotiators at COP31 are demanding equitable climate finance, highlighting the stark contrast between rapid funding for military and energy security and the slow trickle for climate action. This urgent call underscores that without substantial financial commitment, vulnerable nations face dire consequences, jeopardizing global climate goals.</div>
+  <div class="article-meta">Nov 11, 2026  14:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/11/cop31-bulletin-day-3-with-the-people-stuck-outside-world-leaders-jet-in/" target="_blank">COP31 Bulletin Day 3: With the people stuck outside, world leaders jet in</a></div>
+  <div class="article-summary">Confusion reigned in Antalya on Wednesday morning as some delegates heeded the Turkish organisers’ warning to get to the COP31 venue before 7am today. Others saw a later UN clarification that this wasn't necessary, and many more decided not to chance…</div>
+  <div class="article-meta">Nov 11, 2026  13:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11112026/georgia-alta-refrigeration-suing-epa-over-greenhouse-gas-rules/" target="_blank">The Trump Administration Praised a Georgia Manufacturer. Now the Company Is Suing the EPA.</a></div>
+  <div class="article-summary">In August 2025, Vice President JD Vance and Environmental Protection Agency administrator Lee Zeldin visited cold storage equipment manufacturer Alta Refrigeration to announce plans to roll back regulations the company opposed. The EPA followed throu…</div>
+  <div class="article-meta">Nov 11, 2026  12:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/11/ed-miliband-national-security-climate-crisis-cop31" target="_blank">National security of all countries at risk due to climate crisis, UK foreign secretary warns</a></div>
+  <div class="article-summary">UK Foreign Secretary Ed Miliband is warning global leaders at COP31 that the climate crisis poses a direct threat to national security, with "science fiction" destruction now a reality. This escalating climate emergency is driving food shortages, economic instability, and conflict, fundamentally reshaping global security landscapes.</div>
+  <div class="article-meta">Nov 11, 2026  12:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/11/agrivoltaics-can-increase-profitability-of-indoor-farming-agrotunnels/" target="_blank">Agrivoltaics can increase profitability of indoor farming agrotunnels</a></div>
+  <div class="article-summary">Canadian researchers reveal agrotunnels integrated with solar panels can deliver returns as high as 499% with payback under three years, boosting indoor farming profitability. This breakthrough offers a compelling pathway to scale up climate-resilient food production by leveraging renewable energy.</div>
+  <div class="article-meta">Nov 11, 2026  15:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/11/paris-leads-eu-capitals-for-rooftop-solar-generation-potential/" target="_blank">Paris leads EU capitals for rooftop solar generation potential</a></div>
+  <div class="article-summary">Paris, Budapest, and Warsaw boast the greatest rooftop solar generation potential among EU capitals, according to new Greek research. This finding is critical as it pinpoints key urban areas where maximizing solar capacity could significantly offset fossil fuel reliance and contribute to ambitious climate goals.</div>
+  <div class="article-meta">Nov 11, 2026  15:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/11/its-that-time-again-honda-needs-to-roll-out-an-electric-super-cub/" target="_blank">It’s that time again – Honda needs to roll out an electric Super Cub</a></div>
+  <div class="article-summary">Honda is missing a massive opportunity by not releasing an electric version of its iconic Super Cub, a vehicle with over 100 million units produced since 1958. This simple, approachable design is perfectly suited for electrification, offering a natural, unintimidating next step for the growing e-bike market and a significant win for urban emissions reduction.</div>
+  <div class="article-meta">Nov 11, 2026  14:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/11/singulus-signs-spacex-deal-for-heterojunction-solar-cell-line/" target="_blank">Singulus signs SpaceX deal for heterojunction solar cell line</a></div>
+  <div class="article-summary">Singulus Technologies has signed a contract with SpaceX for a turnkey HJT solar cell production line, with delivery scheduled for the first half of 2027. The Germany-based company said the contract is part of a strategic partnership under which it pl…</div>
+  <div class="article-meta">Nov 11, 2026  13:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/11/over-90-of-chinas-solar-supply-chain-is-reporting-losses-says-iea/" target="_blank">Over 90% of China’s solar supply chain is reporting losses, says IEA</a></div>
+  <div class="article-summary">International Energy Agency says that despite consolidation and manufacturing growth in other regions, solar supply chains will remain highly concentrated in China through 2031, particularly for polysilicon and wafer production.The postOver 90% of Ch…</div>
+  <div class="article-meta">Nov 11, 2026  12:36 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/ng-interactive/2026/nov/11/the-temperature-was-building-and-it-was-getting-more-and-more-frightening-this-is-climate-breakdown" target="_blank">‘My classroom was 30C. No one was learning. Then I started to feel dizzy’ – This is climate breakdown</a></div>
+  <div class="article-summary">A London teacher suffered a seizure during a 2026 heatwave, with classroom temperatures hitting 30°C, highlighting the direct human cost of escalating climate breakdown. This incident underscores how rising global temperatures are not just abstract data points but are actively disrupting daily life and essential services like education.</div>
+  <div class="article-meta">Nov 11, 2026  15:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/11112026/everglades-restoration-effectiveness-report/" target="_blank">The Pace of Everglades Restoration Has Accelerated. But Is It Working?</a></div>
+  <div class="article-summary">A historic restoration of Florida’s Everglades is proceeding at an unprecedented pace, although more scientific analysis is needed to understand how the fragile watershed is responding to the multi-billion-dollar effort, according to a new report. Th…</div>
+  <div class="article-meta">Nov 11, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/11/turkiye-pushes-zero-waste-at-cop31-but-is-it-delivering-at-home/" target="_blank">Türkiye pushes “zero waste” at COP31, but is it delivering at home?</a></div>
+  <div class="article-summary">In the shadow of Ankara’s new international football stadium, a group of visiting journalists - including Climate Home News - perched on tiny chairs watched over by mannequins dressed in old mobile phones, newspapers and bottle tops.
+
+As they sipped…</div>
+  <div class="article-meta">Nov 11, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/11/developing-countries-climate-finance-delay" target="_blank">Developing countries in limbo as rich nations delay new climate finance plans</a></div>
+  <div class="article-summary">Many governments are yet to set targets, leaving recipient countries struggling to plan and attract private investmentDeveloping countries have been left in limbo by the failure of some of the world’s biggest economies to flesh out their plans for ne…</div>
+  <div class="article-meta">Nov 11, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/nov/11/britain-streets-polluted-car-industry-electric-vehicles-transition" target="_blank">Why are Britain's streets still so polluted? Because the car industry dinosaurs do what they like, and politicians let them | George Monbiot</a></div>
+  <div class="article-summary">The transition to electric vehicles should be moving apace, but it is not. And why? Incompetence, expedience and cowardiceThis is how it works. An industry puts tremendous effort into resisting change: lobbying governments, mobilising the media, pour…</div>
+  <div class="article-meta">Nov 11, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/11/one-flowered-wintergreen-rescue-eroding-coast-scotland" target="_blank">Thousands of rare wildflowers rescued from eroding Scottish coast</a></div>
+  <div class="article-summary">Conservationists relocate 3,400 one-flowered wintergreens, a species estimated to have lost more than half its UK population in the past 50 yearsThousands of one of Britain’s rarest wildflowers have been moved to safety from an eroding Scottish shore…</div>
+  <div class="article-meta">Nov 11, 2026  08:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, November 11, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
