@@ -1,0 +1,121 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Thursday, November 12, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (4 articles)
+============================================================
+
+▸ Latest Canadian budget packs funding for 55,000 new EV chargers
+  Source : Electrek
+  Link   : https://electrek.co/2026/11/12/latest-canadian-budget-packs-funding-for-55000-new-ev-chargers/
+  Date   : Nov 12, 2026  15:53 EAT
+  Summary: Canada is investing over $4 billion in grid modernization and 55,000 new EV chargers, with a significant portion dedicated to renewing the Zero-Emission Vehicle Infrastructure Program. This move bolsters the nation's transition to cleaner transportation and leverages its predominantly renewable electricity grid, directly addressing transportation emissions.
+
+
+▸ COP31’s electrification pledge wins support, with caveats on clean power and finance
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/11/12/cop31s-electrification-pledge-wins-support-with-caveats-on-clean-power-and-finance/
+  Date   : Nov 12, 2026  15:08 EAT
+  Summary: Over a dozen nations, including Germany and South Korea, have backed the COP31 pledge to boost global electricity's share in energy consumption to 35% by 2035. This ambitious goal matters because it signals a significant shift towards cleaner energy sources, though concerns remain about ensuring this electricity is generated cleanly and adequately financed.
+
+
+▸ Dutch Parliament backs legal framework for balcony PV
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/12/dutch-parliament-backs-legal-framework-for-balcony-pv/
+  Date   : Nov 12, 2026  14:30 EAT
+  Summary: The Dutch Parliament has mandated the government to establish a legal framework for balcony solar power by next spring, aiming to expand solar adoption beyond rooftops. This move is crucial for climate action as it unlocks clean energy generation for an estimated 65% of Dutch households currently unable to install rooftop panels, mirroring successful initiatives in Germany and the UK.
+
+
+▸ Japan enters final months of new ground-mounted solar certifications
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/12/japan-enters-final-months-of-new-ground-mounted-solar-certifications/
+  Date   : Nov 12, 2026  13:45 EAT
+  Summary: Japan’s Agency for Natural Resources and Energy (ANRE) has set Dec. 11 as the deadline for new and amended FIT and FIP certification applications for solar of 10 kW and above, wind, hydro, and geothermal projects seeking approval in fiscal 2026, whic…
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Predicting power output from artistic BIPV pixel by pixel
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/12/predicting-power-output-and-hot-spot-risk-in-artistic-bipv/
+  Date   : Nov 12, 2026  16:30 EAT
+  Summary: Scientists can now predict the energy output of artistic Building-Integrated Photovoltaics (BIPV) by analyzing the colors of the artwork pixel by pixel. This breakthrough, demonstrated through simulations of 50 masterpieces, reveals that strategically darkening bright pixels can significantly boost electrical performance, offering a new avenue for optimizing solar energy generation in aesthetically integrated designs.
+
+
+▸ Sweden plans new inverter and battery database
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/12/sweden-plans-new-inverter-and-battery-database/
+  Date   : Nov 12, 2026  15:47 EAT
+  Summary: Sweden is launching a voluntary database in 2027 for solar inverters and battery storage, streamlining grid connection assessments. This initiative will standardize technical data, crucial for integrating more renewable energy and facilitating bidirectional EV charging, ultimately bolstering grid stability and decarbonization efforts.
+
+
+▸ Honda’s $2,000 electric moped is a winner. So why can’t Americans buy it?
+  Source : Electrek
+  Link   : https://electrek.co/2026/11/12/hondas-2000-electric-moped-is-a-winner-so-why-cant-americans-buy-it/
+  Date   : Nov 12, 2026  15:28 EAT
+  Summary: Honda's $2,000 electric moped, the UC3, is a compellingly affordable option that's already a hit in local markets. Its widespread availability could significantly accelerate the adoption of electric mobility, offering a practical and accessible pathway to reducing transportation emissions for a broad consumer base.
+
+
+▸ Chasing the sun: Feasible CO₂ supply as a gateway to low-cost e-fuel production
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/12/chasing-the-sun-feasible-co2-supply-as-a-gateway-to-low-cost-e-fuel-production/
+  Date   : Nov 12, 2026  15:18 EAT
+  Summary: Shipping captured CO₂ to prime solar locations, rather than transmitting renewable power long distances, offers a more cost-effective path to producing synthetic e-fuels. This approach, which also favors transporting biomass to these sunny sites for carbon capture, is crucial for scaling up e-fuel production and accelerating the decarbonization of hard-to-abate sectors.
+
+
+▸ Viessmann launches propane ground-source heat pump compatible with PVT systems
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/12/viessmann-launches-propane-ground-source-heat-pump-compatible-with-pvt-systems/
+  Date   : Nov 12, 2026  14:57 EAT
+  Summary: Viessmann has unveiled its new Vitocal 300-G ground-source heat pump, utilizing propane (R290) refrigerant and achieving impressive heating capacities up to 16 kW with a SCOP of 5.5. This innovation is significant because it directly integrates with PVT (photovoltaic thermal) systems, offering a more efficient and sustainable pathway to decarbonize building heating, reducing reliance on fossil fuels.
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ Trump the ‘biggest loser’ for scrapping climate action, John Kerry says at Cop31
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/nov/12/trump-loser-john-kerry-cop31
+  Date   : Nov 12, 2026  14:00 EAT
+  Summary: Kerry decries president for ceding clean-energy dominance to China and says climate crisis still a key issue for votersDonald Trump is the “biggest loser we’ve seen in a long time” for scrapping action on the climate crisis and ceding the clean energ…
+
+
+▸ First guidelines on attempts to manipulate the ocean put spotlight on geoengineering industry
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/nov/12/canada-climate-geoengineering-marine-carbon-credits-biology-ocean-alkalinity-enhancement
+  Date   : Nov 12, 2026  14:00 EAT
+  Summary: Proponents argue ocean carbon removal is necessary to counteract the effects of the climate crisis but critics say more research is neededA cluster of candy cane-striped smoke stacks dots the horizon of Tufts Cove in Nova Scotia, Canada. Deep in the…
+
+
+▸ In Pennsylvania, Democratic Lawmakers Want to ‘Act Quickly’ on Clean Energy and Affordability
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/12112026/pennsylvania-democrat-trifecta-clean-energy-affordability/
+  Date   : Nov 12, 2026  13:00 EAT
+  Summary: The Democrats’ sweeping success at the national level in last week’s midterms was mirrored in major swings at the state level as well. In Pennsylvania, where Democrats flipped the state Senate, the party will control both chambers of the legislature…
+
+
+▸ COP31 Bulletin Day 4: Burnham praises electrification while Greta rails at “detached” leaders
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/11/12/cop31-bulletin-day-4-burnham-speaks-with-uk-climate-policy-under-fire/
+  Date   : Nov 12, 2026  11:33 EAT
+  Summary: A second set of world leaders give their speeches on Thursday before heading out of town and leaving their negotiators to it. After around 40 leaders spoke on Wednesday, today there will be just 25 or so including the UK’s Andy Burnham, Venezuela’s D…
+
+
+▸ World heading for ‘irrevocable overshoot’ of global temperature thresholds, analysis warns
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/nov/12/world-heading-for-irrevocable-overshoot-of-global-temperature-thresholds-analysis-warns
+  Date   : Nov 12, 2026  06:00 EAT
+  Summary: Failure to cut emissions will ‘consign humanity to disasters they are unable to adapt to’, report saysThe world is heading for an “irrecoverable overshoot” of global temperature thresholds that will plunge billions of people into disastrous climate i…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 41  |  Sources: 6  |  Topics: 3
