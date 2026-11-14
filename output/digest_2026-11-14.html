@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, November 14, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">42</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:53%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 33 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">4</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/14/cop31-bulletin-day-6-limited-progress-as-ministers-arrive-in-antalya/" target="_blank">COP31 Bulletin Day 6: Limited progress as ministers arrive in Antalya</a></div>
+  <div class="article-summary">COP31 talks in Antalya are stalled, with developing nations pushing back on a key cover decision and sectoral targets like a 35% electrification goal by 2035. This lack of progress on emissions cuts and adaptation finance, particularly Africa's push for $120 billion annually by 2035, jeopardizes crucial climate action needed to meet global targets.</div>
+  <div class="article-meta">Nov 14, 2026  14:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14112026/sam-forstag-ends-montana-democrat-us-rep-drought/" target="_blank">A Wildland Firefighter Ends Montana Democrats’ Three-Decade Drought in the US House</a></div>
+  <div class="article-summary">Montana's 1st Congressional District has flipped blue for the first time in 30 years, with former wildland firefighter Sam Forstag unseating the Republican incumbent. This shift signals a potential change in how climate-related issues, like wildfire management and the transition to clean energy, are addressed in Congress, impacting national climate policy.</div>
+  <div class="article-meta">Nov 14, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14112026/georgia-power-grid-expansion-gas/" target="_blank">An Obscure Utility Calculation Is Putting a Thumb on the Scale for Gas in Georgia</a></div>
+  <div class="article-summary">The growth of data centers and rapid electrification is driving Georgia Power toward another major expansion of its electric grid. The state’s largest utility is preparing to add between 2,000 and 6,000 megawatts of new capacity to its grid for 2032…</div>
+  <div class="article-meta">Nov 14, 2026  12:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14112026/a-clean-air-advocate-will-represent-part-of-americas-oil-capital-in-congress/" target="_blank">A Clean Air Advocate Will Represent Part of America’s Oil Capital in Congress</a></div>
+  <div class="article-summary">Leticia Gutierrez, a seasoned clean air advocate, has won a congressional seat representing a Houston-area district, a significant win for environmental justice in the heart of America's oil capital. Her election signals a potential shift towards prioritizing communities historically burdened by petrochemical pollution, offering a new voice for climate action and public health in a key energy hub.</div>
+  <div class="article-meta">Nov 14, 2026  12:45 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/14/first-attempt-to-address-screen-printing-induced-degradation-in-copper-plated-heterojunction-solar-cells/" target="_blank">First attempt to address screen printing-induced degradation in copper-plated heterojunction solar cells</a></div>
+  <div class="article-summary">Chinese researchers have identified and mitigated a critical degradation issue in copper-plated heterojunction solar cells caused by screen printing, where mesh wear damages passivation layers and cuts efficiency. Their breakthrough involves an optimized emulsion buffer layer that successfully prevented this degradation over 40,000 printing cycles, a vital step for improving the long-term reliability and performance of these increasingly important solar technologies.</div>
+  <div class="article-meta">Nov 14, 2026  13:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/14/great-lakes-irradiance-surges-as-wet-weather-weighs-on-southwest-solar-resource/" target="_blank">Great Lakes irradiance surges as wet weather weighs on Southwest solar resource</a></div>
+  <div class="article-summary">North American solar irradiance saw a slight 0.8% surplus in October 2026, driven by a significant 14% surge in the Great Lakes region, with Buffalo and Cleveland hitting record highs. Conversely, the Southwest experienced a 9% deficit due to heavy rainfall and cloud cover, impacting solar generation in key areas like Phoenix. This regional divergence highlights the growing vulnerability of solar power to localized weather patterns, underscoring the need for diversified renewable energy portfolios.</div>
+  <div class="article-meta">Nov 14, 2026  13:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/14/unsw-develops-three-minute-lithium-ion-battery-health-test/" target="_blank">UNSW develops three-minute lithium-ion battery health test</a></div>
+  <div class="article-summary">UNSW researchers have unveiled a rapid, three-minute test to assess lithium-ion battery health, a breakthrough that could significantly streamline the sorting of retired batteries for reuse or recycling. This innovation is crucial for scaling up the circular economy for batteries, a vital step in reducing the climate impact of electric vehicles and renewable energy storage.</div>
+  <div class="article-meta">Nov 14, 2026  13:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/14/masdar-completes-950-million-solar-and-battery-storage-project-in-california/" target="_blank">Masdar completes $950 million solar and battery storage project in California</a></div>
+  <div class="article-summary">The Abu Dhabi clean energy developer and its joint venture partner Terra-Gen have brought the Lockhart complex online, adding 365 MW of solar generation and 173.7 MW of energy storage to the California grid.The postMasdar completes $950 million solar…</div>
+  <div class="article-meta">Nov 14, 2026  12:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/14/clarifying-the-catl-tener-sodium-with-new-specifications-and-availability/" target="_blank">Clarifying the CATL Tener Sodium, with new specifications and availability</a></div>
+  <div class="article-summary">New specs for CATL’s four-hour sodium-ion battery reveal how the company will market the product for cost benefits over LFP-based batteries. International deliveries are due to begin in summer 2027.The postClarifying the CATL Tener Sodium, with new s…</div>
+  <div class="article-meta">Nov 14, 2026  11:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/14112026/a-new-top-priority-for-house-democrats-restoring-science/" target="_blank">A New Top Priority for House Democrats? Restoring Science</a></div>
+  <div class="article-summary">From our collaborating partner “Living on Earth,” public radio’s environmental news magazine, an interview by host Steve Curwood and Jenni Doering with U.S. Rep. Zoe Lofgren.  As Democrats prepare to take control of the House in January, they’re gear…</div>
+  <div class="article-meta">Nov 14, 2026  12:40 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/14/the-times-i-regret-are-the-ones-when-i-didnt-value-myself-enough-to-speak-up/" target="_blank">‘The times I regret are the ones when I didn’t value myself enough to speak up’</a></div>
+  <div class="article-summary">Tracey Elliott of Eden Sustainable Power highlights the critical need for more female leadership in the solar industry, emphasizing that empowering women to speak up is key to driving innovation. Increased representation and inclusive environments will accelerate the transition to clean energy by bringing diverse perspectives to the forefront.</div>
+  <div class="article-meta">Nov 14, 2026  13:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13112026/fisheries-commission-lowers-chesapeake-bay-menhaden-cap/" target="_blank">Fisheries Commission Lowers Chesapeake Bay Menhaden Cap But Advocates Remain Worried</a></div>
+  <div class="article-summary">Atlantic fisheries managers this week agreed to lower the cap on industrial menhaden fishing in Chesapeake Bay but stopped well short of imposing deeper coastwide cuts. At its annual meeting, held from Nov. 9–12 in Newport, Rhode Island, the Atlantic…</div>
+  <div class="article-meta">Nov 14, 2026  03:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13112026/mishandled-data-california-pesticide-regulation/" target="_blank">Mishandled Data Means No One Knows if California’s New Pesticide Regulation Protects Workers</a></div>
+  <div class="article-summary">Just before 5 p.m. on the last day of September, Jane Sellen and her colleagues at Californians for Pesticide Reform learned that regulators had to toss out nearly nine months’ worth of air-monitoring data for two deadly fumigants. California’s Depar…</div>
+  <div class="article-meta">Nov 14, 2026  02:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13112026/top-aide-for-a-senator-pushing-a-permitting-bill-was-also-on-staff-at-a-pipeline-company/" target="_blank">Top Aide for a Senator Pushing a Permitting Bill Was Also on Staff at a Pipeline Company</a></div>
+  <div class="article-summary">When U.S. Sen. Alan Armstrong of Oklahoma started work this year on legislation to speed approval for infrastructure projects, he hired the chief lawyer at one of the nation’s largest gas pipeline developers to lead his Senate office.  Armstrong had…</div>
+  <div class="article-meta">Nov 14, 2026  01:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/13112026/trump-administration-stalling-protections-for-imperiled-fish-near-massive-alabama-data-center-groups-say/" target="_blank">Trump Administration Stalling Protections for Imperiled Fish Near Massive Alabama Data Center, Groups Say</a></div>
+  <div class="article-summary">The Birmingham darter, though only recently discovered by science, is a survivor.  The roughly two-inch long fish, adorned with red spots and stripes along translucent fins, has survived 100 years of coal mining, steel-making, quarrying and suburban…</div>
+  <div class="article-meta">Nov 13, 2026  23:28 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, November 14, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
