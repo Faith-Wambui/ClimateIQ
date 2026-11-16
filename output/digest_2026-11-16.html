@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, November 16, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">28</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:58%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 21 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/live/2026/nov/16/cop31-climate-crisis-talks-turkey-latest-news-updates" target="_blank">Cop31 live: draft climate deal calls for faster shift away from fossil fuels</a></div>
+  <div class="article-summary">A draft COP31 deal urges a quicker transition away from fossil fuels, a critical step as global leaders grapple with a "polycrisis" of climate change, AI, and economic instability. This accelerated shift is vital to avert further climate tipping points and demonstrate the effectiveness of international cooperation in tackling urgent global threats.</div>
+  <div class="article-meta">Nov 16, 2026  15:51 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/16/denmark-allocates-41-5-million-to-heat-pump-subsidies-for-2027/" target="_blank">Denmark allocates $41.5 million to heat pump subsidies for 2027</a></div>
+  <div class="article-summary">Denmark is investing $41.5 million to boost residential heat pump adoption through 2027, a move that will also fund gas network disconnections and ban new fossil fuel boiler installations from 2028. This significant financial commitment signals a decisive shift away from fossil fuels in Danish homes, directly accelerating the transition to cleaner heating and reducing greenhouse gas emissions.</div>
+  <div class="article-meta">Nov 16, 2026  15:39 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/16/pv-and-batteries-could-help-cut-global-power-costs-by-40-in-2030s/" target="_blank">PV and batteries could help cut global power costs by 40% in 2030s</a></div>
+  <div class="article-summary">A new analysis reveals that integrating distributed solar and battery storage, alongside electrified demand, could slash global electricity system costs by 40% in the 2030s. This significant reduction hinges on continued technological advancements and coordinated investment, offering a clear pathway to cheaper, cleaner energy.</div>
+  <div class="article-meta">Nov 16, 2026  15:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/16/philippines-approves-solar-cell-factory-from-undisclosed-investor/" target="_blank">Philippines approves solar cell factory from undisclosed investor</a></div>
+  <div class="article-summary">The Philippines has greenlit a $1.46 billion solar cell factory north of Manila, marking a significant surge in investment for the nation's clean energy manufacturing sector. This substantial project, alongside other renewable energy initiatives, signals a strong commitment to decarbonization and positions the Philippines as a growing hub for climate-friendly industrial development.</div>
+  <div class="article-meta">Nov 16, 2026  15:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/16/can-ai-data-centres-help-power-underserved-african-communities/" target="_blank">Can AI data centres help power underserved African communities?</a></div>
+  <div class="article-summary">A new initiative is piloting AI data centers powered by solar mini-grids in African villages, aiming to expand electricity access for millions. While this could unlock AI's climate solutions, concerns remain about the growing energy demands of data centers straining existing power systems.</div>
+  <div class="article-meta">Nov 16, 2026  15:09 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/16/solar-wind-and-batteries-can-deliver-firm-power-at-e78-mwh-says-ember/" target="_blank">Solar, wind and batteries can deliver firm power at $0.086/kWh, says Ember</a></div>
+  <div class="article-summary">Combining solar, wind, and battery storage can provide reliable electricity for as little as $0.086 per kilowatt-hour, a significant cost reduction from previous estimates. This breakthrough demonstrates that a 90% renewable grid is not only achievable but also economically competitive, paving the way for accelerated decarbonization of the power sector.</div>
+  <div class="article-meta">Nov 16, 2026  15:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/16/silver-prices-find-50-floor-as-solar-industry-seeks-to-accelerate-shift-toward-copper/" target="_blank">Silver prices find $50 floor as solar industry seeks to accelerate shift toward copper</a></div>
+  <div class="article-summary">Silver prices are holding steady around $50 an ounce as the solar industry accelerates a push to replace it with copper. This strategic shift, driven by cost pressures and the potential for renewed price hikes, signals a significant, albeit gradual, move away from silver in a key clean energy sector.</div>
+  <div class="article-meta">Nov 16, 2026  14:37 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/ng-interactive/2026/nov/16/when-the-sun-came-out-it-felt-like-it-opened-a-scar-this-is-climate-breakdown" target="_blank">‘When the sun came out it felt like it opened a scar’ – This is climate breakdown</a></div>
+  <div class="article-summary">Intense monsoon rains, amplified by climate change, submerged provinces across Pakistan, including Dera Ghazi Khan, forcing even climate experts like Imran Lodhi to confront the devastating reality of climate breakdown firsthand. This event underscores the escalating and widespread impacts of a warming planet on vulnerable communities.</div>
+  <div class="article-meta">Nov 16, 2026  15:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02796-6" target="_blank">Hazardous glacial lakes need reservoir governance</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 16 November 2026;doi:10.1038/s41558-026-02796-6Climate warming is expanding thousands of glacial lakes with unstable natural dams, yet high-risk lakes remain outside formal safety oversight despite their poten…</div>
+  <div class="article-meta">Nov 16, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/16/cop31-bulletin-day-7-sharp-divisions-lower-expectations-for-cop-outcome/" target="_blank">COP31 Bulletin Day 7: Sharp divisions lower expectations for COP outcome</a></div>
+  <div class="article-summary">Big emerging economies reject putting a voluntary electrification pledge and fossil fuel roadmap in the cover decision, while rich nations have little new finance to offer as a sweetenerThe postCOP31 Bulletin Day 7: Sharp divisions lower expectations…</div>
+  <div class="article-meta">Nov 16, 2026  13:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/global-development/2026/nov/16/malawi-hunger-food-foraging-nyika-shire-river-crocodiles" target="_blank">‘Crocodiles are possible, but hunger is certain’: Malawi’s foragers forced into infested waters</a></div>
+  <div class="article-summary">Once ‘famine food’, empty granaries have forced people along the Shire River to harvest water-lilyroots in waters full of the reptilesThe mid-morning heat in Malawi’s lower Shire River basin is already suffocating, but Beatrice Maseko cannot afford t…</div>
+  <div class="article-meta">Nov 16, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/16112026/wildfire-legal-actions-against-utilities/" target="_blank">Wildfire Lawsuits Against Utilities Fuel a Debate Over Who Should Pay</a></div>
+  <div class="article-summary">Trial by Fire: Second in a series about the impacts of wildfire litigation. A week before Christmas 2025, 100-mile-per-hour wind gusts punished the foothills of Boulder, Colorado. An unusually dry summer and fall had parched trees and tall grasses. S…</div>
+  <div class="article-meta">Nov 16, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/society/2026/nov/16/uk-exposed-to-polycrisis-of-threats-amid-government-complacency" target="_blank">UK exposed to polycrisis of threats amid government ‘complacency’</a></div>
+  <div class="article-summary">Lords report calls for urgent new approach to resilience planning in face of cyber-attacks, sabotage and climate crisisMinisters are complacent in the face of fast-changing and increasingly interconnected threats to the UK, and must act quickly to in…</div>
+  <div class="article-meta">Nov 16, 2026  09:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/nov/15/the-guardian-view-on-cop31-the-green-transition-must-not-be-derailed" target="_blank">The Guardian view on Cop31: the green transition must not be derailed | Editorial</a></div>
+  <div class="article-summary">Renewed commitments to electrification and climate science are vital outcomes from the latest round of UN talksThe Cop31 climate talks have acquired something their delegates scarcely expected: a little political breathing space. Thecomeback by Luiz…</div>
+  <div class="article-meta">Nov 15, 2026  20:30 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, November 16, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
