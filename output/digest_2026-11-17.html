@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, November 17, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">49</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:54%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 7 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 40 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/live/2026/nov/17/cop31-live-first-draft-of-agreement-under-pressure-as-negotiations-enter-final-days" target="_blank">Cop31 live: first draft of agreement under pressure as climate negotiations enter final days</a></div>
+  <div class="article-summary">Negotiations at COP31 are facing significant pressure as a draft agreement reveals thorny divisions on crucial issues like climate finance and carbon capture, drawing sharp criticism from the EU. This impasse risks derailing the conference's stated goal of focusing on implementing existing climate commitments, potentially hindering global progress on emissions reduction.</div>
+  <div class="article-meta">Nov 17, 2026  17:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/17/rich-countries-must-step-up-to-replenish-green-climate-fund-duarte-says/" target="_blank">Rich countries must step up to replenish Green Climate Fund, Duarte says</a></div>
+  <div class="article-summary">Green Climate Fund Executive Director Mafalda Duarte insists wealthy nations must replenish the fund, despite efforts to leverage its balance sheet and attract new donors. This is critical to ensure developing countries have the financial resources needed to adapt to climate impacts and transition to clean energy.</div>
+  <div class="article-meta">Nov 17, 2026  16:33 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/nov/17/britain-climate-action-plan-working-cop31-voters-jobs-home-prices" target="_blank">Where do people want to see Britain’s climate action plan working? On their own doorstep | Miatta Fahnbulleh</a></div>
+  <div class="article-summary">Britain's hottest summer on record, with 2027 predicted to be the hottest year globally, highlights the urgent need for sustained climate action. While some political factions advocate for abandoning net-zero goals, the reality of the climate crisis demands continued investment in green initiatives to secure jobs and affordable energy for citizens.</div>
+  <div class="article-meta">Nov 17, 2026  16:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/football/2026/nov/17/fifa-accused-climate-record-failure-aramco-deal-tournament-expansion" target="_blank">Fifa accused of climate ‘record of failure’ due to Aramco deal and tournament expansion</a></div>
+  <div class="article-summary">Groups question ‘sincerity’ to meet emissions pledgesOil giant is a major sponsor of football governing bodyThe United Nations has been asked to review Fifa’s status as a signatory to a key environmental initiative, with complainants arguing football…</div>
+  <div class="article-meta">Nov 17, 2026  09:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/revealed-russia-saudi-arabia-and-australia-are-largest-co2-exporters-of-all-time" target="_blank">Revealed: Russia, Saudi Arabia and Australia are largest CO2 exporters of all time</a></div>
+  <div class="article-summary">Russia, Saudi Arabia and COP31 co-president Australia are the largest exporters of carbon dioxide (CO2) emissions in history, reveals Carbon Brief analysis.
+
+Since 1850, the three nations – and other major fossil-fuel exporters – have exported hundre…</div>
+  <div class="article-meta">Nov 17, 2026  08:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/17/italy-surpasses-1-million-renewable-linked-battery-storage-systems/" target="_blank">Italy surpasses 1 million renewable-linked battery storage systems</a></div>
+  <div class="article-summary">Italy has now deployed over 1 million battery storage systems connected to its renewable energy grid, totaling 12.84 GWh of capacity. This significant milestone underscores Italy's commitment to grid stability and the integration of clean energy, crucial for decarbonizing its power sector.</div>
+  <div class="article-meta">Nov 17, 2026  16:48 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/17/amazon-to-invest-7-billion-in-renewable-energy-in-india-by-2030/" target="_blank">Amazon to invest $7 billion in renewable energy in India by 2030</a></div>
+  <div class="article-summary">Amazon is doubling down on its climate commitment by investing an additional $7 billion in renewable energy in India by 2030, adding 934 MW of new wind and solar capacity to its existing portfolio. This significant expansion underscores the growing corporate imperative to decarbonize operations and signals a substantial shift in energy sourcing for one of the world's largest companies.</div>
+  <div class="article-meta">Nov 17, 2026  15:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/17/german-companies-develop-safety-concept-for-inverter-free-plug-in-battery-storage/" target="_blank">German companies develop safety concept for inverter-free plug-in battery storage</a></div>
+  <div class="article-summary">German firms have unveiled a novel plug-in battery storage system that eliminates the need for a separate inverter, integrating cell-level power electronics and real-time monitoring to prevent overheating. This innovation is crucial for scaling household battery adoption, as it enhances safety and simplifies installation, paving the way for more widespread renewable energy integration and reduced reliance on fossil fuels.</div>
+  <div class="article-meta">Nov 17, 2026  15:04 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/17/sunkean-unveils-ul-certified-2000-vdc-trunk-ttm-system-at-re/" target="_blank">Sunkean unveils ETL-certified 2000 VDC TRUNK-TTM system at RE+</a></div>
+  <div class="article-summary">The manufacturer’s trunk system and factory-assembled PV wire harnesses are designed to simplify DC cable routing and reduce field wiring, offering configurable power collection options for different module arrangements and utility-scale solar plant…</div>
+  <div class="article-meta">Nov 17, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/17/chilean-pv-plant-hit-by-cyberattack-remains-disconnected/" target="_blank">Chilean PV plant hit by cyberattack remains disconnected</a></div>
+  <div class="article-summary">A sophisticated cyberattack has crippled the 103 MW Huatacondo solar plant and its associated battery storage in Chile, leaving it offline for nearly three months. This prolonged outage highlights the growing vulnerability of critical renewable energy infrastructure to digital threats, posing a significant risk to grid stability and the ongoing transition to clean energy.</div>
+  <div class="article-meta">Nov 17, 2026  12:58 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">2</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/17/building-coastal-resilience-for-local-communities-in-honduras/" target="_blank">Building coastal resilience for local communities in Honduras</a></div>
+  <div class="article-summary">In Honduras's remote Gracias a Dios department, Indigenous communities are leveraging a $4 million Adaptation Fund grant to build resilience against escalating climate threats like flooding and erosion. By restoring vital mangrove forests and strengthening infrastructure, these communities are directly addressing the impacts of rising sea levels and extreme weather events that threaten their livelihoods and way of life.</div>
+  <div class="article-meta">Nov 17, 2026  14:02 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17112026/wildfire-litigation-complicating-prescribed-burns/" target="_blank">Are Multibillion-Dollar Wildfire Payouts Undermining Efforts to Make Forests Less Flammable?</a></div>
+  <div class="article-summary">A recent wildfire in New Mexico's Sangre de Cristo Mountains, though small, has ignited a debate over multibillion-dollar payouts from wildfire litigation. These substantial settlements, while intended to compensate for damages, may inadvertently disincentivize crucial forest management practices aimed at reducing flammability. This raises concerns that the financial burden of past fires could hinder proactive measures needed to prevent future, more devastating blazes.</div>
+  <div class="article-meta">Nov 17, 2026  13:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/17112026/colorado-roan-plateau-public-land-oil/" target="_blank">A Landmark Deal Saved Colorado’s Roan Plateau. Now It’s Headed Back to the Auction Block.</a></div>
+  <div class="article-summary">Almost a decade after a compromise between the Bureau of Land Management, conservationists and local governments safeguarded about 90 percent of the Roan Plateau in Western Colorado from gas drilling, those federal protections are being unraveled in…</div>
+  <div class="article-meta">Nov 17, 2026  12:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/17/cop31-bulletin-day-8-arab-group-russia-reject-cover-text-over-fossil-fuels-and-electrification-goal/" target="_blank">COP31 Bulletin Day 8: EU dubs draft cover text “a shopping list” and endorses electrification goal</a></div>
+  <div class="article-summary">Ministers are in the building and embarking on the tricky task of refining the mammoth draft cover text down to something that can be agreed upon by the end of the week.
+
+If the reactions heard so far at COP are anything to go by, this will be a big…</div>
+  <div class="article-meta">Nov 17, 2026  12:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/17/cop31-cant-deliver-for-islands-without-delivering-for-the-ocean/" target="_blank">COP31 can’t deliver for islands without delivering for the ocean</a></div>
+  <div class="article-summary">Dr Sivendra Michael is Fiji's permanent secretary for environment and climate change.
+
+In Fiji, the ocean is our connection to one another, our source of food, our livelihood and an inheritance passed down through generations. It shapes where we live…</div>
+  <div class="article-meta">Nov 17, 2026  12:24 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/17/farming-apple-growers-climate-breakdown-thatchers-cider-wildflowers-soil-water-insects-aoe" target="_blank">Can this experimental orchard save the UK’s cider industry?</a></div>
+  <div class="article-summary">Farmers are utilising science and nature to help orchards adapt and thrive in the face of shifting temperatures, rainfall and pestsOn Myrtle Farm in Somerset, there are thousands of apple trees laid out in rows of 100. Over the past year, each has en…</div>
+  <div class="article-meta">Nov 17, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/17/russia-saudi-arabia-and-australia-named-as-biggest-co2-exporters-in-history" target="_blank">Russia, Saudi Arabia and Australia named as biggest CO2 exporters in history</a></div>
+  <div class="article-summary">Analysis of fossil fuel exports since 1850 differs from most assessments – which look at countries where CO2is releasedRussia, Saudi Arabia and Australia are the three biggest exporters of carbon dioxide in history, according to analysis of fossil fu…</div>
+  <div class="article-meta">Nov 17, 2026  08:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, November 17, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
