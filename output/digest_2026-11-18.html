@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, November 18, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">44</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 9 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:48%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 29 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/live/2026/nov/18/cop31-climate-crisis-talks-turkey-latest-news-updates" target="_blank">Cop31 live: rich world offering ‘crumbs’ to help poor countries adapt to climate breakdown, campaigners say</a></div>
+  <div class="article-summary">Wealthy nations pledged a mere $50 million for climate adaptation, a fraction of previous commitments, drawing criticism from campaigners who call the offer "crumbs." This insufficient funding, particularly from major emitters like the US, jeopardizes the ability of vulnerable nations to cope with escalating climate impacts, undermining global efforts to address the crisis.</div>
+  <div class="article-meta">Nov 18, 2026  16:36 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/nov/18/big-oil-immunity-bill-climate" target="_blank">Republicans could expedite bill to make big oil immune to lawsuits, warn experts</a></div>
+  <div class="article-summary">Republicans are pushing a bill to grant fossil fuel companies immunity from climate liability lawsuits before Democrats take office. This move risks derailing efforts to hold major polluters accountable for the climate crisis and could significantly hinder climate action.</div>
+  <div class="article-meta">Nov 18, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/18/plastics-harm-is-happening-in-plain-sight/" target="_blank">The Harm From Plastic Is Happening In Plain Sight</a></div>
+  <div class="article-summary">A new briefing from the Environmental Justice Foundation, released during COP31 in Türkiye, highlights that governments are still largely ignoring the significant climate harm caused by plastic production. This oversight is critical as escalating plastic manufacturing directly undermines global efforts to limit warming to 1.5°C.</div>
+  <div class="article-meta">Nov 18, 2026  15:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/18/taiwan-introduces-bidding-framework-for-storage-deployment-at-existing-pv-plants/" target="_blank">Taiwan introduces bidding framework for storage deployment at existing PV plants</a></div>
+  <div class="article-summary">Taiwan is launching a new bidding framework to integrate battery storage systems into its existing solar farms, a move designed to boost grid stability and unlock new revenue streams for renewable energy developers. This strategic initiative is crucial for enhancing the reliability of its renewable energy supply and accelerating its transition away from fossil fuels.</div>
+  <div class="article-meta">Nov 18, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/18/france-unveils-bidding-terms-for-500-mw-technology-neutral-renewables-tender/" target="_blank">France unveils bidding terms for 500 MW technology-neutral renewables tender</a></div>
+  <div class="article-summary">France’s energy regulator has outlined the terms for a 500 MW technology-neutral renewables tender covering solar, wind and hydropower. The proposed rules introduce an unweighted reference price, raising concerns over market risks, financing costs an…</div>
+  <div class="article-meta">Nov 18, 2026  11:29 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/18/european-solar-module-prices-face-additional-pressure-from-surplus-stock-cancelled-projects/" target="_blank">European solar module prices face additional pressure from surplus stock, cancelled projects</a></div>
+  <div class="article-summary">European solar module prices are plummeting due to a glut of surplus stock from cancelled projects and high inventory levels, exacerbated by Chinese manufacturing reforms. This oversupply, which industry leaders like Bart Wansink of Search4Solar predict could persist until 2027, signals a potential slowdown in the pace of solar deployment and a challenge to meeting ambitious climate targets.</div>
+  <div class="article-meta">Nov 18, 2026  16:40 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/18/current-classics-lord-mayor-of-londons-limo-latest-to-go-electric/" target="_blank">Current classics: Lord mayor of London’s limo latest to go electric</a></div>
+  <div class="article-summary">London's Lord Mayor is now cruising in a 1973 Rolls-Royce Phantom VI, retrofitted with electric power by Electrogenic. This iconic vehicle's conversion to zero-emission technology signals a significant shift towards electrifying even the most traditional and luxurious fleets, demonstrating that sustainability can be integrated without sacrificing heritage or prestige.</div>
+  <div class="article-meta">Nov 18, 2026  15:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/18/why-ai-data-centers-need-storage-beyond-conventional-backup-power/" target="_blank">Why AI data centers need storage beyond conventional backup power</a></div>
+  <div class="article-summary">AI's insatiable demand for computing power is causing unprecedented power fluctuations, forcing companies like EVE Energy to integrate advanced battery storage directly into data centers, from grid-scale systems to rack-level solutions. This shift is critical for ensuring the stability of the grid and enabling the continued, reliable operation of energy-intensive AI infrastructure, which is essential for driving climate solutions.</div>
+  <div class="article-meta">Nov 18, 2026  13:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/18/adb-supports-1-gw-solar-storage-pipeline-in-bangladesh/" target="_blank">ADB supports 1 GW solar, storage pipeline in Bangladesh</a></div>
+  <div class="article-summary">The Asian Development Bank (ADB) is expanding its support for solar and battery energy storage projects in Bangladesh through a three-phase programme covering more than 1 GW of planned capacity.
+
+The bank has agreed to provide transaction advisory se…</div>
+  <div class="article-meta">Nov 18, 2026  11:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/18/eu-reaches-provisional-deal-to-accelerate-renewable-energy-permitting/" target="_blank">EU reaches provisional deal to accelerate renewable energy permitting</a></div>
+  <div class="article-summary">The Council of the European Union and the European Parliament have reached a provisional agreement on new rules designed to accelerate permitting and grid connections for renewable energy projects across the bloc. EU member states will have 18 months…</div>
+  <div class="article-meta">Nov 18, 2026  11:54 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/18/phantom-forests-in-australian-arid-outback-used-to-create-carbon-credits-meant-to-offset-emissions-report-claims" target="_blank">‘Phantom forests’ in Australia’s arid outback used to create carbon credits meant to offset emissions, report claims</a></div>
+  <div class="article-summary">Carbon credit companies reject research that found only small increase in forest and canopy cover in regeneration areas despite wet conditionsGet ourdaily political email,free appordaily news podcastA fight over the legitimacy of Australia’s climate…</div>
+  <div class="article-meta">Nov 18, 2026  12:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/ng-interactive/2026/nov/18/el-bosque-mexico-displaced-sea-level-this-is-climate-breakdown" target="_blank">‘The sea washed away trees, then a whole row of houses. I knew it was time to get out’ – This is climate breakdown</a></div>
+  <div class="article-summary">In El Bosque, Mexico, a fishing village was officially recognized as climate-displaced in 2023 after relentless sea encroachment washed away homes and forced residents to relocate. This stark reality underscores the accelerating impact of climate breakdown, where rising sea levels and coastal erosion are now displacing entire communities.</div>
+  <div class="article-meta">Nov 18, 2026  15:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/nov/18/nasa-voyager-1-pale-blue-dot" target="_blank">After 49 years, Nasa’s Voyager 1 is one light-day away from us. Can we save this ‘pale blue dot’? |</a></div>
+  <div class="article-summary">After 49 years and traveling one light-day from Earth, NASA's Voyager 1 spacecraft now offers a stark perspective on humanity's impact. Launched in 1977, its enduring journey underscores the significant environmental damage inflicted on our "pale blue dot" during its operational lifespan.</div>
+  <div class="article-meta">Nov 18, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/18/cop31-bulletin-day-9-crunch-ministerial-talks-planned-for-wednesday-evening/" target="_blank">COP31 Bulletin Day 9: Crunch ministerial talks planned for Wednesday evening</a></div>
+  <div class="article-summary">COP31 negotiations are intensifying as ministers convene for "Divan" talks to break deadlock on the cover decision, with developing nations frustrated by insufficient climate finance pledges, particularly for adaptation, which saw only $50 million contributed against a $300 million target. This critical juncture highlights the challenge of achieving consensus among 192 nations on climate action, as Panama's environment minister warns the current system is "doomed to failure" without individual accountability from leading nations.</div>
+  <div class="article-meta">Nov 18, 2026  12:10 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18112026/western-pennsylvania-residents-unplugged-oil-wells/" target="_blank">In Western Pennsylvania, You Might Live Next to—or on Top of—an Unplugged Well</a></div>
+  <div class="article-summary">Dozens of unplugged, aging oil and gas wells are scattered across Western Pennsylvania, posing an unseen risk to residents like the Mahoney family in The Berkshires. These forgotten wells can leak methane, a potent greenhouse gas, directly into the atmosphere, contributing to climate change.</div>
+  <div class="article-meta">Nov 18, 2026  12:05 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18112026/how-we-mapped-pennsylvania-abandoned-wells/" target="_blank">How and Why We Mapped Pennsylvania’s Forgotten Oil and Gas Wells</a></div>
+  <div class="article-summary">Abandoned: The aging oil and gas wells haunting Pennsylvania. This project is a collaboration between Inside Climate News and the Pittsburgh Post-Gazette. Thanks to its long history of oil and gas exploration, the geology of Western Pennsylvania rese…</div>
+  <div class="article-meta">Nov 18, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/18112026/pennsylvania-aging-unplugged-oil-wells/" target="_blank">What the World’s First Oil Boom Left Behind</a></div>
+  <div class="article-summary">Abandoned: The aging oil and gas wells haunting Pennsylvania. This project is a collaboration between Inside Climate News and the Pittsburgh Post-Gazette. The property that became the Pittsburgh Botanic Garden has led many lives: coal mine, farmland,…</div>
+  <div class="article-meta">Nov 18, 2026  11:55 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, November 18, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
