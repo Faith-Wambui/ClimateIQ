@@ -1,0 +1,127 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Friday, November 20, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (2 articles)
+============================================================
+
+▸ Cop31 live: ‘We didn’t come here to beg’, African ministers say as climate talks enter final day
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/world/live/2026/nov/20/cop31-climate-crisis-talks-turkey-latest-news-updates
+  Date   : Nov 20, 2026  16:32 EAT
+  Summary: African ministers declared at COP31 that they are not there to beg for climate finance, highlighting deep divisions between wealthy polluters and developing nations as the summit nears its close. This impasse threatens progress on crucial climate action, potentially jeopardizing the agreed-upon target of Antalya 2026 for significant emission reductions.
+
+
+▸ Vietnam sets rooftop solar monitoring and control acceptance procedure
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/20/vietnam-sets-rooftop-solar-monitoring-and-control-acceptance-procedure/
+  Date   : Nov 20, 2026  13:10 EAT
+  Summary: Vietnam's state utility, EVN, has finalized new technical standards for rooftop solar, mandating remote control and five-minute data transmission for systems exporting power. This move is crucial for integrating Vietnam's rapidly expanding solar capacity into the grid, enabling better management of renewable energy fluctuations and supporting the country's ambitious clean energy goals.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ Enphase highlights new batteries, bidirectional charging
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/20/enphase-highlights-new-batteries-bidirectional-charging-and-800-vdc-sst-gear/
+  Date   : Nov 20, 2026  16:49 EAT
+  Summary: Enphase Energy is launching new, higher-capacity home batteries (up to 100 kWh) and bidirectional EV chargers, alongside a robust 2 MWh commercial battery system and solid-state transformers for AI data centers. These advancements are crucial for grid stability and scaling renewable energy adoption, enabling more efficient storage and utilization of solar power across residential, commercial, and critical infrastructure sectors.
+
+
+▸ Black Friday 2026 Green Deals Hub: e-bikes, EVs, power stations, tools, appliances, and more
+  Source : Electrek
+  Link   : https://electrek.co/2026/11/20/black-friday-2026-green-deals-hub-e-bikes-evs-power-stations-tools-appliances-and-more/
+  Date   : Nov 20, 2026  15:41 EAT
+  Summary: Amazon's Black Friday sale is offering significant discounts on green products like EVs and power stations, presenting a prime opportunity for consumers to invest in sustainable technology. These deals, despite rising tariffs, signal a growing market for climate-friendly purchases, potentially accelerating the transition to a lower-carbon economy.
+
+
+▸ The Hydrogen Stream: China starts operating 195 km hydrogen pipeline
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/20/the-hydrogen-stream-china-starts-operating-195-km-hydrogen-pipeline/
+  Date   : Nov 20, 2026  14:55 EAT
+  Summary: China has launched a 195-kilometer hydrogen pipeline, the world's longest, to transport green hydrogen from its renewable energy sources. This significant infrastructure development signals China's commitment to decarbonizing its industrial sector and advancing the global hydrogen economy.
+
+
+▸ Double guns: ultra-class haul truck packs dual-gun MCS charging, 4 MWh battery
+  Source : Electrek
+  Link   : https://electrek.co/2026/11/20/double-guns-ultra-class-haul-truck-packs-dual-gun-mcs-charging-4-mwh-battery/
+  Date   : Nov 20, 2026  14:55 EAT
+  Summary: Chinese manufacturer NHL has unveiled the NTE240E, an all-electric haul truck boasting a 240-ton payload and a groundbreaking dual-gun MCS charging system that replenishes its massive 4.1 MWh battery in under an hour. This innovation is critical for decarbonizing mining operations, as each truck is projected to slash annual carbon emissions by over 2,000 tons while cutting operating costs by more than 60% compared to diesel alternatives.
+
+
+▸ Proper Voltage, Unigrid unveil sodium-ion storage solution for data centers
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/20/proper-voltage-unigrid-unveil-sodium-ion-storage-solution-for-data-centers/
+  Date   : Nov 20, 2026  14:11 EAT
+  Summary: Proper Voltage and Unigrid have launched the Salt Vault High Power cabinet, a sodium-ion battery storage solution specifically for data centers. This innovation is significant because sodium-ion batteries may offer superior durability for the rapid, repeated power demands of data centers compared to lithium-ion and lead-acid alternatives, potentially leading to more sustainable and resilient energy infrastructure.
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (2 articles)
+============================================================
+
+▸ Concurrent atmospheric phenomena amplify precipitation extremes under anthropogenic climate change
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02805-8
+  Date   : Nov 20, 2026  03:00 EAT
+  Summary: Thackeray, C. W., Hall, A., Norris, J. & Chen, D. Constraining the increased frequency of global precipitation extremes under warming. Nat. Clim. Change 12, 441–448 (2022).
+
+Gründemann, G. J., van de Giesen, N., Brunner, L. & van der Ent, R. Rarest r…
+
+
+▸ Climate and glacier geometry dominate global glacier–lake interactions
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02808-5
+  Date   : Nov 20, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 20 November 2026;doi:10.1038/s41558-026-02808-5The contribution of glacial lakes to glacier mass loss is unclear. This work maps global glacial lakes in 2000 and 2020 to quantify changes in number, volume and…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ COP31 Bulletin Day 11: Countries decry cover text for omitting fossil fuels
+  Source : Climate Home News
+  Link   : https://www.climatechangenews.com/2026/11/20/cop31-bulletin-day-11-best-cop-worst-cop-weary-negotiators-seek-to-strengthen-outcome/
+  Date   : Nov 20, 2026  13:08 EAT
+  Summary: Developing nations and island states are calling out the COP31 draft text for conspicuously omitting any mention of phasing out fossil fuels, a critical omission that undermines global climate goals. This failure to address the primary driver of emissions jeopardizes efforts to limit warming to 1.5°C and protect vulnerable populations.
+
+
+▸ Blue Wave Trickled Down to Little-Known Utility Commissions
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/20112026/utility-commissions-democrat-election-victories/
+  Date   : Nov 20, 2026  13:00 EAT
+  Summary: Data centers and increased energy costs brought attention to typically low-profile utility commission races in states across the country during this year’s midterms.  Nine states, all historically Republican, held elections for their utility regulato…
+
+
+▸ What’s left to do as Cop31 enters its frantic final days
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/nov/19/whats-left-to-do-as-cop31-enters-its-frantic-final-days
+  Date   : Nov 20, 2026  10:00 EAT
+  Summary: The diplomatic battles shaping the future of climate action•Don’t get Down to Earth delivered to your inbox? Sign up hereThe end is in sight. If all goes as planned, countries as diverse as wealthy petrostates erecting new oil rigs and low-lying isla…
+
+
+▸ How the Bipartisan Permitting Bill Could Drive Up Natural Gas Exports
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/19112026/bipartisan-permitting-bill-natural-gas-exports/
+  Date   : Nov 20, 2026  03:09 EAT
+  Summary: U.S. exports of natural gas are surging, and legislation moving through Congress could boost them even higher.  A bill that would overhaul federal permitting for a range of projects across energy, technology and other sectors is expected to unleash a…
+
+
+▸ Public Officials in Alabama Say a Huge, Chemically-Fueled Blaze Won’t Harm Residents. CDC and EPA Advise Otherwise.
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/19112026/alabama-chemical-fire-resident-health/
+  Date   : Nov 20, 2026  03:00 EAT
+  Summary: ATTALLA, Ala.—April Phillips is worried about her brother Bubba.  The 46-year-old has cerebral palsy and epilepsy and sometimes suffers from difficulty breathing. So when her two-year-old grandson’s preschool messaged to tell her the facility was clo…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 42  |  Sources: 7  |  Topics: 4
