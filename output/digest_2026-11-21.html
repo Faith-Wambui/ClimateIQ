@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Saturday, November 21, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">37</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 5 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 26 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/live/2026/nov/21/cop31-climate-deal-latest-news-updates" target="_blank">Cop31 live: world urged to avoid one of ‘most disappointing Cops ever’ as talks stretch past deadline</a></div>
+  <div class="article-summary">COP31 talks have officially run past their deadline without a final agreement, sparking urgent warnings from NGOs that this summit risks being one of the most disappointing yet. This failure to secure a deal means crucial climate action commitments are stalled, directly jeopardizing global efforts to limit warming.</div>
+  <div class="article-meta">Nov 21, 2026  15:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/21/cop31-is-shaping-up-to-be-a-disaster-not-only-because-its-weak-on-fossil-fuels/" target="_blank">COP31 is shaping up to be a disaster – not only because it’s weak on fossil fuels</a></div>
+  <div class="article-summary">COP31 is poised for failure, not just due to weak fossil fuel commitments, but critically, because of EU and Global North nations reneging on crucial climate finance and just transition pledges. This betrayal of trust undermines the very foundations of global climate action and jeopardizes progress for vulnerable nations.</div>
+  <div class="article-meta">Nov 21, 2026  13:18 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21112026/texas-wont-enforce-plastic-discharge-ban/" target="_blank">He Sacrificed Everything to Stop Industrial Water Pollution. Authorities in Texas Don’t Care.</a></div>
+  <div class="article-summary">Texas regulators are poised to grant Formosa Plastics a new permit for its Lavaca Bay operations, despite ongoing plastic pollution and opposition from local allies like environmentalist Diane Wilson. This decision ignores the urgent need to halt industrial discharges that contaminate vital coastal ecosystems.</div>
+  <div class="article-meta">Nov 21, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/21112026/midterms-environmental-voters/" target="_blank">What Democrats Can Learn About Environmental Voters From the Midterms</a></div>
+  <div class="article-summary">Democrats gained a Senate majority in the midterms, largely driven by voters prioritizing climate-adjacent issues, demonstrating a clear mandate for climate action. This outcome underscores that environmental concerns are a potent force in elections, influencing outcomes beyond direct climate policy debates.</div>
+  <div class="article-meta">Nov 21, 2026  12:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/21/catl-byd-acwa-among-co-initiators-of-storage-alliance-unveiled-at-cop31/" target="_blank">CATL, BYD, ACWA among co-initiators of storage alliance unveiled at COP31</a></div>
+  <div class="article-summary">A new Global Energy Storage Alliance (GESA), co-founded by giants like CATL, BYD, and ACWA Power at COP31 in Turkey, is set to accelerate energy storage deployment worldwide. This initiative directly addresses critical barriers to renewable energy integration, aiming to mobilize investment and standardize technologies, which is crucial for meeting the global goal of tripling renewable capacity by 2030.</div>
+  <div class="article-meta">Nov 21, 2026  12:30 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/21/unigrid-looks-to-fill-gaps-in-lithium-ion-storage-with-effective-sodium-ion-alternatives/" target="_blank">Unigrid looks to fill gaps in lithium-ion storage with effective sodium-ion alternatives</a></div>
+  <div class="article-summary">San Diego-based Unigrid is challenging lithium-ion's dominance in energy storage with its new sodium-ion batteries, offering superior safety, extreme temperature tolerance, and longer lifespans for applications like hospitals and multi-unit housing. This innovation is crucial for grid resilience, especially as AI-driven demand surges require more flexible and robust short-duration storage solutions.</div>
+  <div class="article-meta">Nov 21, 2026  11:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/21/spain-approves-new-data-center-rules-requiring-80-renewable-electricity/" target="_blank">Spain approves new data center rules requiring 80% renewable electricity</a></div>
+  <div class="article-summary">The new framework introduces energy and water efficiency standards, renewable electricity procurement obligations, and grid flexibility requirements for data centers. A €17.14 billion transmission network plan will support 47.4 GW of new electricity…</div>
+  <div class="article-meta">Nov 21, 2026  11:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/21/the-us-solar-manufacturing-landscape-in-2026-2/" target="_blank">The U.S. solar manufacturing landscape in 2026</a></div>
+  <div class="article-summary">The U.S. is rapidly building out domestic solar manufacturing, aiming to meet its soaring demand with American-made components by 2026. This strategic shift is crucial for reducing reliance on global supply chains and accelerating the transition to clean energy.</div>
+  <div class="article-meta">Nov 21, 2026  10:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/21/battery-patents-solid-state-filings-surpass-lithium-ion-to-hit-record-high/" target="_blank">Battery patents: Solid-state filings surpass lithium-ion to hit record high</a></div>
+  <div class="article-summary">Global solid-state battery patent filings hit a record 2,230 in 2024, up 16%, with South Korea overtaking Japan, driven by Samsung SDI’s rapid growth. Meanwhile, lithium-ion patent filings fell nearly 15% to 2,092, while sodium-ion filings dropped 29…</div>
+  <div class="article-meta">Nov 21, 2026  10:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/21/waymo-pulls-robotaxis-from-highways/" target="_blank">Waymo Pulls Robotaxis from Highways</a></div>
+  <div class="article-summary">Waymo has apparently run into some issues with its robotaxis on highways in California, and it has pulled its robotaxis off of highways across the United States as a result. The main issue is that Waymo robotaxis have entered active construction zone…</div>
+  <div class="article-meta">Nov 21, 2026  08:21 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/21/alaska-bering-sea-heatwave-snow-tanner-hybrid-crabs-fishing-quotas" target="_blank">‘Legally, they don’t exist’: the hybrid crabs puzzling biologists and fishers</a></div>
+  <div class="article-summary">A severe Bering Sea heatwave decimating the snow crab population has unexpectedly spawned a hybrid crab species, leaving regulators scrambling as these new creatures lack existing fishing quotas. This emergence highlights the profound and unpredictable impacts of climate change on marine ecosystems, creating both biological puzzles and immediate economic and management challenges for fisheries.</div>
+  <div class="article-meta">Nov 21, 2026  14:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/21/celebrating-men-challenging-stereotypes-building-a-stronger-energy-future-together/" target="_blank">Celebrating men, challenging stereotypes, building a stronger energy future together</a></div>
+  <div class="article-summary">Women in Solar+ Europe and Solar+ Leaders are highlighting the crucial role men play in fostering gender equality within the solar and energy transition sectors. This initiative underscores that true progress towards a sustainable energy future hinges on creating inclusive environments where all professionals, regardless of gender, can contribute their full potential.</div>
+  <div class="article-meta">Nov 21, 2026  12:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/21/cop31-bulletin-day-12-dont-ignore-us-panama-warns-as-cop31-runs-into-overtime/" target="_blank">COP31 Bulletin Day 12: “Good deal or no deal,” warns EU climate chief</a></div>
+  <div class="article-summary">COP31 is shaping up to be a disaster – not only because it’s weak on fossil fuels
+
+A singular focus on the lack of fossil fuel outcomes – which weren’t actually on the agenda – obscures the story of EU and Global North bad faith on finance and just t…</div>
+  <div class="article-meta">Nov 21, 2026  10:46 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20112026/alabama-power-rate-decrease/" target="_blank">Alabama Power Announces $160 Million Rate Decrease for 2027 After Pushback on High Energy Costs</a></div>
+  <div class="article-summary">Alabama Power announced Friday its electric rates would decrease across the board next year, saving its 1.5 million customers approximately $160 million on their energy bills.  The company attributed the savings to projected increases in revenue from…</div>
+  <div class="article-meta">Nov 21, 2026  02:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/20112026/iowa-toxic-lead-explosives-detonation-delayed/" target="_blank">Court Delays Plan to Detonate Toxic Explosives in Iowa</a></div>
+  <div class="article-summary">Plans to detonate nearly 10,000 pounds of degraded lead azide at an Eastern Iowa ammunition plant are on hold after the Army postponed the operation and a federal appeals court temporarily halted an emergency permit from the Environmental Protection…</div>
+  <div class="article-meta">Nov 21, 2026  01:31 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/20/cop31-talks-overtime-fossil-fuels-vanish-from-draft-deal" target="_blank">Cop31 talks go into overtime as debate rages over lack of fossil fuels in draft deal</a></div>
+  <div class="article-summary">African ministers say they ‘didn’t come here to beg’, with civil society groups calling it the ‘worst Cop ever’Crucial climate talks headed into overtime on the last official day of the Cop31 UN summit as countries continued to argue over a draft dea…</div>
+  <div class="article-meta">Nov 20, 2026  23:04 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Saturday, November 21, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
