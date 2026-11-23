@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Monday, November 23, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">30</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 2 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:55%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 6 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 22 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/23/australia-and-south-koreas-clean-energy-deal-could-boost-low-carbon-trade/" target="_blank">Australia and South Korea’s clean energy deal could boost low-carbon trade</a></div>
+  <div class="article-summary">COP31 talks in Antalya are faltering, with key blocs like the EU and developing nations rejecting weak draft deals that omit fossil fuel phase-outs and adequate climate finance. This diplomatic deadlock risks undermining global climate action, especially as countries like Uganda prepare for new oil exports, highlighting the urgent need for stronger commitments on clean energy trade and adaptation funding.</div>
+  <div class="article-meta">Nov 23, 2026  16:58 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/23/after-cop31-our-chance-to-save-climate-diplomacy-lies-in-global-shipping/" target="_blank">After COP31, our chance to save climate diplomacy lies in global shipping</a></div>
+  <div class="article-summary">COP31 talks in Antalya faltered, with key blocs like the EU and LDCs rejecting a weak draft deal that omitted fossil fuel phase-outs and crucial adaptation finance. This diplomatic failure underscores the urgent need to shift focus to sectors like global shipping, where initiatives like the Australia-South Korea clean energy deal offer a tangible pathway to decarbonization and low-carbon trade, vital for meeting climate goals.</div>
+  <div class="article-meta">Nov 23, 2026  16:56 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/23/lebanon-looks-to-ramp-up-solar-storage-deployments/" target="_blank">Lebanon looks to ramp up solar, storage deployments</a></div>
+  <div class="article-summary">Lebanon’s Cabinet of Ministers has approved a plan to increase the country’s electricity generation capacity by at least 3 GW to 3.5 GW over the coming years, including a focus on deploying solar, wind and battery storage installations.
+
+The plan was…</div>
+  <div class="article-meta">Nov 23, 2026  15:09 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/23/bmws-ix4-promises-428-miles-range-and-ultra-fast-charging/" target="_blank">BMW’s new iX4 is almost here, with 428 miles of range and seriously fast charging</a></div>
+  <div class="article-summary">BMW's new iX4, launching March 2027 with an impressive 428 miles of EPA range and charging speeds that add 184 miles in just 10 minutes, signals a significant leap in electric vehicle practicality. This advancement directly addresses range anxiety and charging bottlenecks, accelerating the transition to EVs by making them a more viable and convenient option for consumers and businesses alike.</div>
+  <div class="article-meta">Nov 23, 2026  18:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/23/pondering-the-potential-of-plug-in-vpp/" target="_blank">Pondering The Potential Of Plug-In VPP</a></div>
+  <div class="article-summary">Jackery and Every Electric's plug-in Virtual Power Plant (VPP) program, showcased at RE+, offers a glimpse into a future where urban energy storage can be significantly enhanced. This innovative approach leverages portable power stations to create a distributed grid resource, potentially stabilizing energy supply and accelerating the transition to cleaner grids.</div>
+  <div class="article-meta">Nov 23, 2026  16:54 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/23/green-hydrogen-us-energy-policy-plug-power-powercell/" target="_blank">Three Green Hydrogen Projects Slip Through The Trump Chopper</a></div>
+  <div class="article-summary">Despite initial setbacks under the Trump administration, Plug Power has successfully launched its new GenEco™ Scale green hydrogen electrolyzer system in the U.S. This move is significant as its first customer, Arcadia eFuels in Texas, will use the technology to produce nearly 23.2 million gallons of fossil-free aviation fuel annually, directly contributing to decarbonization efforts in a key industrial sector.</div>
+  <div class="article-meta">Nov 23, 2026  16:37 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/23/if-you-cant-beat-em-vw-to-export-300000-chinese-built-cars-per-year-by-2030/" target="_blank">If you can’t beat ’em: VW to export 300,000 Chinese-built cars per year by 2030</a></div>
+  <div class="article-summary">With declining sales, annual capacity cuts approaching a million units, and a wave of affordable Chinese competitors entering Western markets, Volkswagen is facing down its own mortality. Rather than fighting it, the company is leaning in and announc…</div>
+  <div class="article-meta">Nov 23, 2026  15:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/23/elon-musk-interview-at-the-dealbook-summit-starlink-is-revolutionary-and-saves-lives/" target="_blank">Elon Musk Interview At The DealBook Summit: Starlink Is Revolutionary And Saves Lives</a></div>
+  <div class="article-summary">Elon Musk, the chief executive of SpaceX and Tesla, said at the DealBook Summit recently that “the number of lives that have been saved” by Starlink connectivity “may be hundreds.” Want to get the correct numbers? Musk asked host Andrew Ross Sorkin,…</div>
+  <div class="article-meta">Nov 23, 2026  15:08 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌪️  Disasters & Extreme Weather</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/us-news/2026/nov/23/cranberry-growing-climate-crisis" target="_blank">Cranberry jam: warming winters and extreme weather threaten an iconic holiday fruit</a></div>
+  <div class="article-summary">Warming winters and unpredictable weather are jeopardizing Wisconsin's cranberry harvest, which supplies over 60% of the U.S. supply. This iconic holiday fruit is struggling to adapt to the changing climate, highlighting the growing vulnerability of key agricultural sectors.</div>
+  <div class="article-meta">Nov 23, 2026  18:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/23/plant-based-lunches-could-cut-australia-emissions-by-15m-tonnes-new-research-shows" target="_blank">Plant-based lunches could cut Australia’s emissions by 15m tonnes, new research shows</a></div>
+  <div class="article-summary">Shifting Australian lunches to plant-based options could slash food-related emissions by 15.4 million tonnes annually, a reduction exceeding the impact of grounding all domestic flights. This dietary change offers a significant, achievable pathway to climate mitigation while also providing substantial household savings.</div>
+  <div class="article-meta">Nov 23, 2026  16:58 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/23/failure-cop31-calls-urgent-reform-un-climate-summits" target="_blank">Failure of Cop31 prompts calls for urgent reform of UN climate summits</a></div>
+  <div class="article-summary">The COP31 summit in Antalya, co-chaired by Turkey and Australia, collapsed without a critical agreement, sparking urgent calls for reform from leaders like Al Gore. This failure highlights the paralysis caused by the UN's consensus rule, jeopardizing the momentum needed for global climate action and support for vulnerable nations.</div>
+  <div class="article-meta">Nov 23, 2026  15:21 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/23/tiny-rare-frog-warning-sign-madagascar-illegal-gold-mining-aoe" target="_blank">How a tiny rare frog became an ecological warning sign for Madagascar</a></div>
+  <div class="article-summary">The golden mantella is said to be found wherever gold is, making its habitat a target for illegal mining, which is destroying fragile ecosystems across the countryAs Albert Rakotoarisoa emerges from the forest into a clearing in Mangabe reserve in th…</div>
+  <div class="article-meta">Nov 23, 2026  14:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23112026/inside-climate-podcast-glimmers-of-hope/" target="_blank">Climate Hope</a></div>
+  <div class="article-summary">Welcome to Inside Climate, a podcast from the staff of Inside Climate News. Climate change and the environmental stress it can generate have made plenty of headlines this year. Our newsroom has covered floods, wildfires and heatwaves that have devast…</div>
+  <div class="article-meta">Nov 23, 2026  13:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/23112026/indiana-magnesium-recycler-stopped-releasing-super-pollutant/" target="_blank">A Midwest Manufacturer Ditched a Potent Greenhouse Gas. Will Others Follow?</a></div>
+  <div class="article-summary">ANDERSON, Ind.—Inside a cavernous former General Motors plant, furnaces melt scrap metal into high-purity metal ingots at one of the world’s largest magnesium recyclers. Until recently, Advanced Magnesium Alloys Corp. was also the country’s largest e…</div>
+  <div class="article-meta">Nov 23, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/nov/23/difficult-geopolitical-times-albanese-defends-bowen-after-cop31-deal-failure" target="_blank">‘Difficult geopolitical times’: Albanese defends Bowen after Cop31 deal failure</a></div>
+  <div class="article-summary">Coalition calls for climate change minister to resign immediately or be sacked over ‘catastrophic diplomatic disaster’, despite offering no alternatives on reducing emissionsSign up for climate and environment editor Adam Morton’s free Clear Air news…</div>
+  <div class="article-meta">Nov 23, 2026  07:21 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Monday, November 23, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
