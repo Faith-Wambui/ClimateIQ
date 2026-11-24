@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Tuesday, November 24, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">42</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">8</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 1 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:52%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 4 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 37 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/11/finance-talks-failed-at-antalya-africas-cop32-will-pay-the-price/" target="_blank">Finance Talks Failed at Antalya. Africa’s COP32 Will Pay the Price</a></div>
+  <div class="article-summary">The Antalya climate summit failed to secure an overarching finance deal, dropping a key target of at least $120 billion annually for adaptation finance by 2035, leaving Africa facing unfulfilled climate commitments. This failure directly impacts the continent's ability to fund critical infrastructure like irrigation systems and exacerbates its existing $70 billion annual adaptation financing gap, with COP32 in Addis Ababa now tasked with demanding concrete delivery.</div>
+  <div class="article-meta">Nov 24, 2026  17:47 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24112026/the-climate-generation-at-cop31/" target="_blank">The Climate Generation at COP31</a></div>
+  <div class="article-summary">The youth of this era, both Gen Z and Gen Alpha, are often described as the “climate generation,” in part because climate change is already shaping how this generation (which also happens to be my generation) lives and what our futures will look like…</div>
+  <div class="article-meta">Nov 24, 2026  16:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cop31-key-outcomes-agreed-at-the-un-climate-talks-in-antalya" target="_blank">COP31: Key outcomes agreed at the UN climate talks in Antalya</a></div>
+  <div class="article-summary">The COP31 climate talks in Antalya, Turkey, have failed to reach agreement on a “pact” that lacked clear references to curbing fossil fuels or scaling up climate finance.
+
+The “Antalya pact”, proposed by the joint Turkish-Australian presidency, was r…</div>
+  <div class="article-meta">Nov 23, 2026  19:15 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/24/nuro-lucid-gravity-uber-robotaxi-driverless-testing-bay-area/" target="_blank">Nuro pulls safety drivers from Lucid Gravity Uber robotaxis in Bay Area</a></div>
+  <div class="article-summary">Nuro is now testing Lucid Gravity robotaxis on public roads in the San Francisco Bay Area with nobody in the driver’s seat. The driverless testing starts in four Peninsula and South Bay cities, with a fleet of more than 100 Gravity SUVs delivered by…</div>
+  <div class="article-meta">Nov 24, 2026  18:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/24/france-may-tie-5-5-solar-vat-rate-to-rg5-hail-resistance/" target="_blank">France may tie 5.5% solar VAT rate to RG5 hail resistance</a></div>
+  <div class="article-summary">France is tightening eligibility for its reduced 5.5% solar VAT rate, mandating RG5 hail resistance for modules and professional installation. This move, driven by increasing hail events and insurer reluctance, aims to ensure the durability and long-term viability of solar installations, directly supporting climate resilience and investment security in renewable energy.</div>
+  <div class="article-meta">Nov 24, 2026  17:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/24/algerias-solar-capacity-surpasses-1-gw/" target="_blank">Algeria’s solar capacity surpasses 1 GW</a></div>
+  <div class="article-summary">Algeria has now surpassed 1 GW of solar capacity, adding 760 MW this year alone through three major project completions. This significant expansion is a crucial step towards the nation's ambitious 15 GW renewables target by 2035, signaling a growing commitment to decarbonization in a region vital to global energy markets.</div>
+  <div class="article-meta">Nov 24, 2026  16:45 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/24/gorkin-solar-launches-510-w-all-black-bc-panel-with-25-0-efficiency/" target="_blank">Gokin Solar launches 510 W all-black BC panel with 25.0% efficiency</a></div>
+  <div class="article-summary">Gokin Solar has unveiled a new 510W all-black solar panel boasting a leading 25.0% efficiency, specifically targeting high-end European rooftops. This advancement in panel technology means more solar power can be generated from limited space, accelerating the transition to renewable energy and reducing reliance on fossil fuels.</div>
+  <div class="article-meta">Nov 24, 2026  16:30 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/24/autonomou-electric-railcars-federal-grant-us-energy-policy/" target="_blank">If You Thought The Cybertruck Was Ugly, Get A Load Of This EV On Rails</a></div>
+  <div class="article-summary">The US startup Intramotev has ditched aesethetic appeal in favor of an EV model that gets the job done, namely, replacing diesel-powered locomotives with rail cars retrofitted for zero-emission propulsion and autonomous operation.The postIf You Thoug…</div>
+  <div class="article-meta">Nov 24, 2026  16:12 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/24/tesla-spacex-merger-year-end-deadline-new-congress/" target="_blank">Tesla (TSLA), SpaceX race for year-end merger deal before new Congress</a></div>
+  <div class="article-summary">Tesla and SpaceX are pushing for a year-end merger deal, a move that could preempt scrutiny from a new Democratic-controlled Congress set to take office in January. This consolidation is significant as it aims to finalize before potential regulatory investigations into Elon Musk's companies, potentially impacting the future of electric vehicles and space exploration.</div>
+  <div class="article-meta">Nov 24, 2026  17:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/24/summer-heat-deaths-record-high-england" target="_blank">Summer heat deaths in 2026 reached record high of 5,258 in England</a></div>
+  <div class="article-summary">Figure for May to September is far higher than previous peak of 2,985 since records began a decade agoMore than 5,200 deaths in England in 2026 were linked to summer heat, the highest provisional annual total since records began a decade ago, accordi…</div>
+  <div class="article-meta">Nov 24, 2026  15:39 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/24112026/montana-wildfire-insurance-costs/" target="_blank">As Wildfires Stress Montana’s Insurance Market, the State is Getting Harder to Call Home</a></div>
+  <div class="article-summary">Montana’s snow-capped mountains, vast forests and open valleys have long attracted people seeking a life close to nature. But that lifestyle is becoming increasingly difficult to afford, or even attain, as the state’s growing wildfire risk spikes hom…</div>
+  <div class="article-meta">Nov 24, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/australia-news/2026/nov/24/campaigners-urge-albanese-government-to-reject-climate-bomb-coalmine-expansion-after-cop31" target="_blank">Campaigners urge Albanese government to reject ‘climate bomb’ coalmine expansion after Cop31</a></div>
+  <div class="article-summary">Hunter Valley Operations expansion in New South Wales would allow additional 430m tonnes of coal to be extracted and burnedSign up for climate and environment editor Adam Morton’s free Clear Air newsletter hereClimate campaigners are urging the Alban…</div>
+  <div class="article-meta">Nov 24, 2026  10:42 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/2026/nov/24/deadly-floods-fires-cop31-collapsed-climate-crisis" target="_blank">A year of deadly floods and fires – and yet Cop31 still collapsed. When will our leaders grasp the scale of this crisis? | Bill McGuire</a></div>
+  <div class="article-summary">Fossil fuel producers are choking off progress while we reap the whirlwind of our inaction. This is what sleepwalking to disaster looks likeIt’s sometimes said that we are sleepwalking into climate catastrophe. But the reality is that we are walking…</div>
+  <div class="article-meta">Nov 24, 2026  09:00 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Tuesday, November 24, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
