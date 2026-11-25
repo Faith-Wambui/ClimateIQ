@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="static/Climate IQ.png"/>
+  <title>🌍 Daily Climate News Digest</title>
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #f0ede6;
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* Wrapper */
+    .wrapper {
+      max-width: 680px;
+      margin: 32px auto;
+      background: #fffcf7;
+      border: 1px solid #d9d3c7;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* Header */
+    .header {
+      background: #1a3a2a;
+      padding: 40px 48px 32px;
+      text-align: center;
+    }
+    .header .logo {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7aaa88;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #f5f2ec;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: #8aaa96;
+      letter-spacing: 1px;
+    }
+
+    /* Intro band */
+    .intro-band {
+      background: #eef7f0;
+      border-bottom: 3px solid #2d6a4f;
+      padding: 24px 48px;
+    }
+    .day-headline {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a2a;
+      margin-bottom: 10px;
+    }
+    .intro-band p {
+      font-size: 14.5px;
+      color: #3a5a48;
+      line-height: 1.7;
+    }
+    .logo-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
+    }
+    .logo-img-footer {
+    height: 36px;
+    /* Footer logos often look better with a brightness boost on dark bg */
+    filter: brightness(1.1);
+
+    }
+    /* Stats bar */
+    .stats {
+      display: flex;
+      border-bottom: 1px solid #e0dbd0;
+      background: #f7f4ee;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-right: 1px solid #e0dbd0;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6a4f;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    /* Category section */
+    .category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e8e3da;
+    }
+    .category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d6a4f;
+    }
+    .category-header h2 {
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2d6a4f;
+      font-weight: 700;
+    }
+    .category-count {
+      font-size: 11px;
+      background: #2d6a4f;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Article card */
+    .article {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #faf8f3;
+      border: 1px solid #e8e3da;
+      border-left: 3px solid #2d6a4f;
+      border-radius: 2px;
+    }
+    .article:last-child { margin-bottom: 0; }
+    .article-source {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .article-title a {
+      color: #1a3a2a;
+      text-decoration: none;
+    }
+    .article-title a:hover { text-decoration: underline; }
+    .article-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a3a2a;
+      padding: 24px 48px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #6a9478;
+      margin-bottom: 6px;
+    }
+    .footer a { color: #7aaa88; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/Faith-Wambui/ClimateIQ/main/logo.png" alt="Logo" class="logo-img" style="width:64px;height:64px;border-radius:8px"/>
+    </div>
+    <h1>🌍 Daily Climate News Digest</h1>
+    <div class="date">Wednesday, November 25, 2026</div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-band">
+    <div class="day-headline">🌍 Today's Climate News Digest</div>
+    <p>Here is your curated selection of today's most important climate stories.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">46</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Sources</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+
+  
+    <div style="background:#f0f7f4;padding:16px 48px;border-bottom:1px solid #e0dbd0">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;
+                  color:#888;margin-bottom:8px">Climate Mood-o-meter 😐</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="color:#e74c3c;font-size:12px">😟 3 negative</span>
+        <div style="flex:1;height:8px;background:#e0dbd0;border-radius:4px;overflow:hidden">
+          <div style="width:51%;height:100%;
+                      background:linear-gradient(90deg,#e74c3c,#f39c12,#27ae60);
+                      border-radius:4px"></div>
+        </div>
+        <span style="color:#27ae60;font-size:12px">😊 5 positive</span>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#666;margin-top:6px">
+        Mixed Signals — 38 neutral articles
+      </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="body">
+    <div class="category">
+  <div class="category-header">
+    <h2>🏛️  Policy & Regulation</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25112026/a-disappointing-un-climate-summit-concludes-with-little-action-on-food-systems/" target="_blank">A Disappointing UN Climate Summit Concludes With Little Action on Food Systems</a></div>
+  <div class="article-summary">COP31 in Turkey, despite initial optimism, concluded with a stark lack of concrete action on transforming global food systems, a critical sector responsible for a significant portion of greenhouse gas emissions. This failure to address agriculture's climate impact leaves the world dangerously off track for meeting its climate goals.</div>
+  <div class="article-meta">Nov 25, 2026  17:12 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Climate Home News</div>
+  <div class="article-title"><a href="https://www.climatechangenews.com/2026/11/25/four-ways-ethiopia-can-ensure-cop32-is-not-like-cop31/" target="_blank">Four ways Ethiopia can ensure COP32 is not like COP31</a></div>
+  <div class="article-summary">COP31 talks faltered, with key agreements on fossil fuels, finance, and adaptation proving elusive due to significant divisions, notably the rejection of the "Antalya Pact" by the EU and other nations. This failure to advance critical climate action, particularly on finance and a just transition, jeopardizes future diplomatic efforts and the global push to decarbonize.</div>
+  <div class="article-meta">Nov 25, 2026  16:32 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">African Climate Wire</div>
+  <div class="article-title"><a href="https://africanclimatewire.org/2026/11/cop31-a-bitter-pill-for-ethiopias-cop32-presidency/" target="_blank">COP31 a Bitter Pill for Ethiopia’s COP32 Presidency</a></div>
+  <div class="article-summary">COP31 left behind a number of  issues for COP32 to resolve, not least of which is how to fix a seemingly insurmountable impasse on fossil fuels. We dissect the outcome, the challenges the Ethiopian COP32 Presidency faces, and what might help.The post…</div>
+  <div class="article-meta">Nov 25, 2026  15:44 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cb-live-carbon-brief-journalists-discuss-key-cop31-outcomes" target="_blank">CB Live: Carbon Brief journalists discuss key COP31 outcomes</a></div>
+  <div class="article-summary">Following the close of COP31 in Antalya, Turkey, Carbon Brief’s journalists answered a range of questions in a CB Live panel discussion.
+
+COP31 came to a dramatic conclusion nearly 50 hours after its scheduled close – making it the longest COP in his…</div>
+  <div class="article-meta">Nov 24, 2026  20:06 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Carbon Brief</div>
+  <div class="article-title"><a href="https://www.carbonbrief.org/cop31-key-outcomes-for-food-forests-oceans-and-nature-at-the-un-climate-talks-in-antalya" target="_blank">COP31: Key outcomes for food, forests, oceans and nature at the UN climate talks in Antalya</a></div>
+  <div class="article-summary">The COP31 climate talks in Antalya, Turkey, failed to agree on a “pact” that – despite making no clear reference to fossil fuels or adaptation finance – had contained strong signals for oceans.
+
+The “Antalya pact” took up much of the two weeks of neg…</div>
+  <div class="article-meta">Nov 24, 2026  19:33 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>⚡  Clean Technology</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/25/nio-10000-battery-swap-stations-52-billion-batteries-2030/" target="_blank">NIO targets 10,000 battery swap stations and $52B in batteries by 2030</a></div>
+  <div class="article-summary">Electric vehicle maker NIO plans to deploy over 10,000 battery swap stations and manage $52 billion in battery packs by 2030, significantly expanding its existing network. This ambitious push signals a major investment in battery-swapping infrastructure, aiming to accelerate EV adoption and reduce reliance on fossil fuels by offering a faster, more convenient alternative to traditional charging.</div>
+  <div class="article-meta">Nov 25, 2026  17:43 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Electrek</div>
+  <div class="article-title"><a href="https://electrek.co/2026/11/25/black-friday-2026-green-deals-hub-e-bikes-evs-power-stations-tools-appliances-and-more/" target="_blank">Black Friday 2026 Green Deals Hub: e-bikes, EVs, power stations, tools, appliances, and more</a></div>
+  <div class="article-summary">Amazon's Black Friday sale is featuring significant discounts on green products like EVs and power stations, offering consumers a chance to invest in climate-friendly technology. This surge in accessible green tech purchasing, despite rising tariffs, presents a crucial opportunity to accelerate the adoption of sustainable solutions.</div>
+  <div class="article-meta">Nov 25, 2026  17:38 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">CleanTechnica</div>
+  <div class="article-title"><a href="https://cleantechnica.com/2026/11/25/ford-revolution-space-race-satellites-investors-investing/" target="_blank">Tesla Is Not The Only Automaker To Join The Space Race</a></div>
+  <div class="article-summary">Ford Motor Company is investing in Revolution Space, a startup focused on spacecraft propulsion, to leverage its manufacturing expertise for scaled satellite production. This move signals automakers' growing interest in the booming space economy, projected to reach $1.8 trillion by 2035, as a diversification strategy and a potential new revenue stream.</div>
+  <div class="article-meta">Nov 25, 2026  17:17 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/25/utmolight-unsw-achieve-19-6-efficiency-for-2-81-m%c2%b2-perovskite-solar-module/" target="_blank">UtmoLight, UNSW achieve 19.6% efficiency for 2.81 m² perovskite solar module</a></div>
+  <div class="article-summary">UtmoLight and UNSW have achieved a significant breakthrough, reaching 19.6% efficiency with a large 2.81 m² perovskite solar module, translating to 551 W of power output. This 15% efficiency jump, validated at Germany's Fraunhofer ISE, signals a critical step towards making perovskite solar technology a more viable and powerful contributor to the global renewable energy transition.</div>
+  <div class="article-meta">Nov 25, 2026  16:29 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/25/poweroad-unveils-modular-lfp-battery-system-with-up-to-245-76-kwh-of-storage/" target="_blank">Poweroad unveils modular LFP battery system with up to 245.76 kWh of storage</a></div>
+  <div class="article-summary">Poweroad's new battery storage system is available in high- and low-voltage configurations and features 5.12 kWh lithium iron phosphate (LFP) battery modules based on CATL cells. The high-voltage version can also be equipped with a 20 kW electric veh…</div>
+  <div class="article-meta">Nov 25, 2026  16:22 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>💰  Climate Finance</h2>
+    <span class="category-count">1</span>
+  </div>
+  <div class="article">
+  <div class="article-source">PV Magazine</div>
+  <div class="article-title"><a href="https://www.pv-magazine.com/2026/11/25/greenvolt-power-breaks-ground-at-its-biggest-us-solar-and-battery-storage-project-to-date/" target="_blank">Greenvolt Power breaks ground at its biggest US solar and battery storage project to date</a></div>
+  <div class="article-summary">The Alamogordo project represents an investment of more than $120 million according to Greenvolt Power. Financing for the co-located project consists of a $190 million package structured with MUFG Bank, Ltd. And ING Capital LLC. The agreement compris…</div>
+  <div class="article-meta">Nov 25, 2026  15:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🔬  Science & Research</h2>
+    <span class="category-count">3</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/environment/2026/nov/25/world-six-consecutive-days-2c-above-preindustrial-levels-first-time" target="_blank">World has six consecutive days 2C above preindustrial levels for first time</a></div>
+  <div class="article-summary">The planet just endured its first-ever six-day streak of global temperatures exceeding 2°C above preindustrial levels, hitting a peak of 2.24°C on Monday. This alarming milestone, though not yet a breach of the Paris Agreement's upper limit, serves as a stark warning of escalating climate impacts if fossil fuel emissions aren't drastically cut.</div>
+  <div class="article-meta">Nov 25, 2026  17:52 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02801-y" target="_blank">A research agenda for integrating artificial intelligence in mitigation scenario workflows</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 25 November 2026;doi:10.1038/s41558-026-02801-yThe integration of artificial intelligence into mitigation scenarios development could reduce the current bottlenecks. This Perspective proposes a research agenda…</div>
+  <div class="article-meta">Nov 25, 2026  03:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Nature Climate Change</div>
+  <div class="article-title"><a href="https://www.nature.com/articles/s41558-026-02804-9" target="_blank">Adapting minds to live with climate change</a></div>
+  <div class="article-summary">Nature Climate Change, Published online: 25 November 2026;doi:10.1038/s41558-026-02804-9Climate adaptation psychology is fragmented across psychology’s subfields and neighbouring social sciences. This Perspective consolidates the scattered research i…</div>
+  <div class="article-meta">Nov 25, 2026  03:00 EAT</div>
+</div>
+
+</div>
+<div class="category">
+  <div class="category-header">
+    <h2>🌐  General Climate News</h2>
+    <span class="category-count">5</span>
+  </div>
+  <div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/world/2026/nov/25/spain-election-climate-crisis" target="_blank">Spain has been hit hard by the climate crisis. Why are politicians saying so little about it before the election?</a></div>
+  <div class="article-summary">Wildfires and floods can do little to move climate change up voters’ list of priorities, experts sayBeneath the blackened branches of a pine tree that rises high above a landscape of scorched hillsides and the odd charred and ruined house, two older…</div>
+  <div class="article-meta">Nov 25, 2026  16:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25112026/maine-storms-power-bill-costs/" target="_blank">Storm Costs Are Sending Maine’s Power Bills Soaring</a></div>
+  <div class="article-summary">Squeezing blood from a stone. That’s how Seth Berry describes rising electricity prices in Maine. As executive director of Our Power, a coalition focused on clean energy and utility regulation, Berry talks with people all over the state who are no lo…</div>
+  <div class="article-meta">Nov 25, 2026  13:00 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25112026/joint-base-andrews-jet-fuel-spill-cleanup-golf-course-renovation/" target="_blank">Maryland Regulators, Air Force Squabble Over Fuel Spill and Golf Course at Joint Base Andrews</a></div>
+  <div class="article-summary">Recent testing at Joint Base Andrews found a thick layer of jet fuel beneath the airfield, eight months after a spill was detected near Piscataway Creek. But the Air Force and Maryland environmental regulators remain at odds over basic facts of the s…</div>
+  <div class="article-meta">Nov 25, 2026  12:55 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">Inside Climate News</div>
+  <div class="article-title"><a href="https://insideclimatenews.org/news/25112026/agriculture-animal-cruelty-exemptions/" target="_blank">New Paper Challenges Cruelty Exemptions for Food-Producing Animals</a></div>
+  <div class="article-summary">A new paper reveals widespread, painful practices in U.S. animal agriculture, including beak-clipping without anesthesia and gestation crates that prevent sows from turning. These exemptions from animal cruelty laws significantly contribute to the sector's substantial greenhouse gas emissions, exacerbating the climate crisis.</div>
+  <div class="article-meta">Nov 25, 2026  12:50 EAT</div>
+</div>
+<div class="article">
+  <div class="article-source">The Guardian – Climate</div>
+  <div class="article-title"><a href="https://www.theguardian.com/commentisfree/picture/2026/nov/25/what-real-or-imagined-horrors-are-waking-you-up-at-4am" target="_blank">What real or imagined horrors are waking you up at 4am? | First Dog on the Moon</a></div>
+  <div class="article-summary">What real or imagined horrors are waking you up at 4am?
+
+We are in the most globally anxious period since WW2. I made this up but it sounds true
+
+Sign up here to get an email whenever First Dog cartoons are published
+
+Get all your needs met at the Fi…</div>
+  <div class="article-meta">Nov 25, 2026  08:28 EAT</div>
+</div>
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Climate IQ - AI Climate News Aggregator · Powered by Google Gemini</p>
+    <p>Generated on Wednesday, November 25, 2026. Data sourced from public RSS feeds.</p>
+  </div>
+
+</div>
+</body>
+</html>
