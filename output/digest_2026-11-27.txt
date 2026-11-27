@@ -1,0 +1,125 @@
+============================================================
+DAILY CLIMATE NEWS DIGEST — Friday, November 27, 2026
+============================================================
+
+🌍 Today's Climate News Digest
+
+Here is your curated selection of today's most important climate stories.
+
+============================================================
+🏛️  POLICY & REGULATION  (1 articles)
+============================================================
+
+▸ Bangladesh makes solar equipment recycling mandatory
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/27/bangladesh-makes-solar-equipment-recycling-mandatory/
+  Date   : Nov 27, 2026  15:31 EAT
+  Summary: Bangladesh's new Special Solar Power Installation Act mandates that all solar industry players establish take-back programs for retired equipment, tackling the growing challenge of photovoltaic waste. This proactive measure is crucial for preventing toxic materials from entering landfills and ensuring valuable resources are recovered, supporting a truly circular economy for renewable energy.
+
+
+============================================================
+⚡  CLEAN TECHNOLOGY  (5 articles)
+============================================================
+
+▸ This might be the real reason Elon Musk says Tesla’s AI5 chip is going to Optimus
+  Source : Electrek
+  Link   : https://electrek.co/2026/11/27/tesla-ai5-optimus-real-reason-tsmc-3nm/
+  Date   : Nov 27, 2026  17:48 EAT
+  Summary: Tesla's next-gen AI5 chip will prioritize Optimus over cars because chipmaker TSMC's limited 3nm capacity in 2027 is being allocated to Google and Microsoft data centers first, leaving Tesla with insufficient chips for its vehicles until 2028. This delay highlights the intense competition for advanced semiconductor manufacturing, a critical bottleneck for scaling AI technologies across industries, including the automotive and robotics sectors.
+
+
+▸ Japan’s 30th solar auction allocates 27.7 MW of PV capacity
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/27/japans-30th-solar-auction-allocates-27-7-mw-of-pv-capacity/
+  Date   : Nov 27, 2026  17:24 EAT
+  Summary: Japan just awarded 27.7 MW of new solar power capacity through its 30th auction, with bids as low as JPY 5.00/kWh. This move signals continued, competitive growth in Japanese solar, a crucial step for the nation to meet its decarbonization targets and contribute to global climate goals.
+
+
+▸ Wheel-E Podcast: Juiced Scrambler Mini, ALSO pauses e-bikes, more
+  Source : Electrek
+  Link   : https://electrek.co/2026/11/27/wheel-e-podcast-juiced-scrambler-mini-also-pauses-e-bikes-more/
+  Date   : Nov 27, 2026  16:56 EAT
+  Summary: Juiced and Amflow are launching new e-bikes, while ALSO has paused TM-B deliveries due to issues, and Congress just passed an e-bike battery safety law. These developments highlight the rapid growth and evolving safety concerns in the e-bike sector, a crucial component of the transition to cleaner personal transportation.
+
+
+▸ Greenhushing, PV prices, battery prices and the shifting bottleneck
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/27/greenhushing-pv-prices-battery-prices-and-the-shifting-bottleneck/
+  Date   : Nov 27, 2026  16:45 EAT
+  Summary: Companies are increasingly prioritizing actual climate action over public pronouncements, driven by the plummeting costs of solar PV and battery technology. This shift means the next hurdle for renewable energy growth isn't affordability, but rather grid infrastructure and integration challenges.
+
+
+▸ The Hydrogen Stream: BP, Iberdrola start operations at Spain’s largest green hydrogen plant
+  Source : PV Magazine
+  Link   : https://www.pv-magazine.com/2026/11/27/the-hydrogen-stream-bp-iberdrola-start-operations-at-spains-largest-green-hydrogen-plant/
+  Date   : Nov 27, 2026  16:38 EAT
+  Summary: BP and Iberdrola have launched Spain's largest green hydrogen plant, a significant step in decarbonizing industrial processes. This 400 MW facility, located in Spain, will produce hydrogen using renewable energy, paving the way for cleaner steelmaking and potentially aviation fuels.
+
+
+============================================================
+🔬  SCIENCE & RESEARCH  (3 articles)
+============================================================
+
+▸ Frequent co-occurring atmospheric phenomena amplify precipitation extremes
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02806-7
+  Date   : Nov 27, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 27 November 2026;doi:10.1038/s41558-026-02806-7Observations and simulations show that concurrent atmospheric phenomena (CAP) dominate the greenhouse gas-driven amplification of extreme precipitation from 1980…
+
+
+▸ Climate change signals for adaptation action
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02814-7
+  Date   : Nov 27, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 27 November 2026;doi:10.1038/s41558-026-02814-7Signals of climate change measured in physical and ecological systems are salient for adaptation, but are not currently directly usable. This Perspective aims to…
+
+
+▸ Tyre wear particles as important contributors to cryosphere darkening
+  Source : Nature Climate Change
+  Link   : https://www.nature.com/articles/s41558-026-02800-z
+  Date   : Nov 27, 2026  03:00 EAT
+  Summary: Nature Climate Change, Published online: 27 November 2026;doi:10.1038/s41558-026-02800-zThe abrasion of tyres leads to the emission of particulate matter to the atmosphere. Here the authors quantify the effect that these tyre wear particles have on s…
+
+
+============================================================
+🌐  GENERAL CLIMATE NEWS  (5 articles)
+============================================================
+
+▸ The Scientist Who Kickstarted Pennsylvania’s Fracking Boom Thought Gas Would Be a ‘Bridge Fuel’
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/27112026/marcellus-shale-geoscientist-pennsylvania-fracking-boom/
+  Date   : Nov 27, 2026  13:00 EAT
+  Summary: Almost 20 years ago, a Penn State University geoscientist named Terry Engelder published an eye-popping estimate of the volume of gas sitting beneath Pennsylvania. That calculation helped trigger the state’s fracking boom. It’s now the second-biggest…
+
+
+▸ How the EPA Let a Key Chemical-Detection Program Unravel
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/27112026/how-the-epa-let-a-key-chemical-detection-program-unravel/
+  Date   : Nov 27, 2026  12:55 EAT
+  Summary: This story is from Floodlight, a nonprofit newsroom that investigates the powers stalling climate action. Sign up for Floodlight’s newsletter here. When an ammonia leak outside a hotel in Weatherford, Okla., injured 74 people last November, the feder…
+
+
+▸ Southern California Endures Historic Coastal Flooding and Devastating Waves Over Thanksgiving
+  Source : Inside Climate News
+  Link   : https://insideclimatenews.org/news/26112026/california-endures-historic-coastal-flooding-waves-thanksgiving/
+  Date   : Nov 27, 2026  06:25 EAT
+  Summary: SUNSET BEACH, Calif.—Lara Mitry was prepared to host her first Thanksgiving in the beachside home she recently purchased. Then the combo of historically-high king tides, and a surge in sea levels driven by a super El Niño pummeled California. “We did…
+
+
+▸ Southern and central Australia face summer of heightened bushfire risk and heatwaves
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/nov/27/southern-and-central-australia-face-summer-of-heightened-bushfire-risk-and-heatwaves
+  Date   : Nov 27, 2026  00:33 EAT
+  Summary: Fire chiefs say large swathes of the country are at risk from fires driven by high fuel loads, dry soil and hot weatherGet ourbreaking news email,free appordaily news podcastLarge parts of southern and central Australia face elevated fire risk this s…
+
+
+▸ Water levels fell sharply in world’s rivers and lakes in two hottest years on record, study finds
+  Source : The Guardian – Climate
+  Link   : https://www.theguardian.com/environment/2026/nov/26/water-levels-fall-rivers-lakes-reservoirs-global-study
+  Date   : Nov 26, 2026  22:00 EAT
+  Summary: Researchers say effects particularly felt in South America where levels plunged even as some areas had extreme rainExtreme global heat caused an unprecedented decline in the water levels of lakes, rivers and reservoirs around the world in 2023 and 20…
+
+
+============================================================
+Generated by AI Climate News Aggregator
+Articles: 33  |  Sources: 6  |  Topics: 4
